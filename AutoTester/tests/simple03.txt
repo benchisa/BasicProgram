@@ -1,0 +1,7 @@
+procedure Code4{
+while a{
+c = c + a;
+d = x + y + z;
+while b{
+y = a;
+b = q+1;}}}

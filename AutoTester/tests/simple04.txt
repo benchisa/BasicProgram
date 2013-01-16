@@ -1,0 +1,10 @@
+procedure Code5{
+while a{
+a = a+1;}}
+procedure Code5a{
+b = 1;
+c = 1;}
+procedure Code5b{
+while z{
+a = a+1;}
+}

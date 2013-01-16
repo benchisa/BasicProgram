@@ -1,0 +1,4 @@
+procedure Code1{
+a=b+1;
+c=c+a;
+d=x+y+z;}

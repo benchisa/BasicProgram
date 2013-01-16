@@ -1,0 +1,22 @@
+2
+cat: Test for mixture of such that and pattern
+1 - Pattern and modifies, Typed :: Which is the assignment that modifies c?
+assign a;
+select a such that Modifies(a,"c") pattern a("c",_);
+2, 3, 6, 7
+5000
+2 - Pattern and uses, Typed :: Which is the assignment that modifies c and uses a?
+assign a;
+select a such that Uses(a,"a") pattern a("c",_);
+2
+5000
+3 - pattern and Follows, Typed :: Which is the assignment that modifeis c and followed by other statements?
+assign a;
+select a such that Follows(a,_) pattern a("c",_);
+2, 3
+5000
+4 - pattern and parent, Typed :: Which is the assignment that modifeis c and nested in a container?
+assign a;
+select a such that Parent(_,a) pattern a("c",_);
+2, 3, 6, 7
+5000
