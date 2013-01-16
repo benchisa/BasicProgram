@@ -1,0 +1,187 @@
+37
+cat: Test for Follows(*), Parent(*), Modifies, Uses,pattern
+1 - Parent, Typed :: Which parent does statement 4 belongs to?
+stmt s; 
+select s such that Parent(s,4);
+3
+5000
+2 - Parent, Typed :: Does statement 2 has child?
+stmt s; 
+select s such that Parent (2,s);
+
+5000
+3 - Parent, Typed :: Select all the statements which are a child of another statement.
+stmt s1,s2; 
+select s2 such that Parent (s1,s2);
+4, 5, 6, 7, 8, 9, 10, 11, 12, 13
+5000
+4 - Parent, Typed :: Select all the parents.
+stmt s1; 
+select s1 such that Parent (s1,_);
+3, 6, 10
+5000
+5 - Parent, Placeholder :: Select all the while if there exists a parent relationship
+while w; 
+select w such that Parent (_,_);
+3, 6, 10
+5000
+6 - Parent, Placeholder :: Select all the child statements if it exists
+stmt s1; 
+select s1 such that Parent (_,s1);
+4, 5, 6, 7, 8, 9, 10, 11, 12, 13 
+5000
+7 - Parent, Typed :: Is there any nested while loop?
+while w1,w2;
+select w2 such that Parent (w1,w2);
+6, 10
+5000
+8 - Parent, Typed :: Select assignments nested in a while loop?
+while w;assign a;
+select a such that Parent (w,a);
+4, 5, 7, 8, 9, 11, 12, 13
+5000
+9 - Parent*, Typed :: Select all the parents of statement 5.
+stmt s; 
+select s such that Parent*(s,5);
+3
+5000
+10 - Parent*, Typed :: Select all the while loop which is/are a child of another while loop.
+while w1,w2;
+select w2 such that Parent* (w1,w2);
+6, 10
+5000
+11 - Parent*, Typed :: Select all the assignments nested directly/indrectly in a while loop.
+while w;assign a;
+select a such that Parent* (w,a);
+4, 5, 7, 8, 9, 11, 12, 13
+5000
+12 - Follows, Typed :: Which statement does statement 3 follow?
+stmt s; 
+select s such that Follows(s,3);
+2
+5000
+13 - Follows, Typed :: Select statement directly follow statement 5 ?
+stmt s; 
+select s such that Follows (5,s);
+6
+5000
+14 - Follows*, Typed :: Select all the statements which follows a while statement.
+stmt s;while w; 
+select s such that Follows* (w,s);
+9, 10, 13
+5000
+15 - Follows*, Typed :: Select all the statements that are followed by assignment statement.
+stmt s1; assign a;
+select s1 such that Follows* (s1,a);
+1, 4, 5, 6, 7, 9, 10, 11
+5000
+16 - Follows*, Placeholder :: Select all the while if there exists a follows* relationship
+while w; 
+select w such that Follows* (_,_);
+3, 6, 10
+5000
+17 - Follows*, Placeholder :: Select all the statements if it follows some statements.
+stmt s; 
+select s such that Follows* (_,s);
+2, 3, 5, 6, 8, 9, 10, 12, 13
+5000
+18 - Follows*, Typed :: Select while loops that are followed by some statements?
+while w;
+select w such that Follows* (w,_);
+6, 10
+5000
+19 - Follows*, Typed :: Select assignments that follow while loops?
+while w;assign a;
+select a such that Follows* (w,a);
+9, 13
+5000
+20 - parent*, pattern :: Select boolean if there exists a nested while and has control variable b.
+while w;
+select boolean such that Parent*(_,w) pattern w("b",_);
+true
+5000
+21 - Uses, pattern :: Select assignment a1 that uses a while assignment a2 modifies i.
+assign a1,a2;
+select a1 such that Uses(a1,"a") pattern a2("i",_);
+4, 7
+5000
+22 - parent*, Typed :: Select boolean if there exists a Uses relationship.
+while w;
+select w such that Parent*(w,1) pattern w("f",_);
+
+5000
+23 - Modifies, pattern :: Select boolean if there exists an assignment Uses variable y and modifies c?
+assign a;
+select boolean such that Modifies(a,"c") pattern a("c",_"y"_);
+true
+2000
+24 - Modifies, pattern :: Select boolean if there exists an assignment modifies variable d and another asisgnmenent that y =a?
+assign a1,a2;
+select boolean such that Modifies(a1,"d") pattern a2("y","a");
+false
+2000
+25 - Modifies, pattern :: Select boolean if there exists an assignment modifies variable d and another asisgnmenent that uses b?
+assign a1,a2;
+select boolean such that Modifies(a1,"d") pattern a2("y",_"b"_);
+false
+2000
+26 - Modifeis,Pattern :: Which is the assigment modifies c uses q?
+assign a;
+select a such that Modifies(a,"c") pattern a("c",_"q"_);
+8
+5000
+27 - Uses,Pattern:: Which is the assignment modifies c uses x and z?
+assign a;
+select a such that Uses(a,"x") pattern a("c",_"z"_);
+5
+5000
+28 - follows*,Pattern:: Which is the assignment modifies c and follows some statements?
+assign a;
+select a such that Follows*(_,a) pattern a("c",_);
+5, 8, 13
+5000
+29 - parent,Pattern:: Which is the assignment modifies c and follows some statements?
+while w;assign a;
+select w such that Parent(w,a) pattern w("b",_);
+6
+5000
+30 - pattern : which variable is modified in assignment a and uses a?
+assign a;variable v;
+Select v  pattern a(v,_"a"_);
+c, d
+5000
+31 - pattern : which variable is modified in assignment a and uses a?
+assign a;variable v;
+Select v  such that such that Uses(a,v) pattern a(v,_"a"_);
+c, d
+5000
+32 - Parent, Typed :: Which statment is the parent of itself?
+stmt s; 
+select s such that Parent(s,s);
+
+5000
+33 - Parent, Typed :: Which statment if the parent* of itself?
+stmt s; 
+select s such that Parent*(s,s);
+
+5000
+34 - Parent, Typed :: Which while is the parent of itself?
+while w; 
+select w such that Parent(w,w);
+
+5000
+35 - Follows, Typed :: Which while follows itself?
+while w; 
+select w such that Follows(w,w);
+
+5000
+36 - Follows, Typed :: Which statement follows itself?
+assign s; 
+select s such that Follows(s,s);
+
+5000
+37 - Follows*, Typed :: Which statement follows* itself?
+assign s; 
+select s such that Follows*(s,s);
+
+5000

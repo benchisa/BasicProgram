@@ -1,0 +1,24 @@
+procedure Code9{
+z = 7;
+x = z+5;
+while a{
+c = c+a;
+c = x+y+z;
+while b{
+d = a;
+c = q+1;}
+e = y+z;
+while f{
+i = i+1;
+d = 10;
+z = x+z;}
+i = z+2;}
+g = y+z+i;
+while k{
+e = i+1;
+y = x+z;
+while x{
+l = 9;
+l = l+9;}}
+f = z+2;
+}

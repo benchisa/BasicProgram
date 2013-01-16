@@ -1,0 +1,105 @@
+﻿Build started 11/14/2012 7:17:17 PM.
+Project "C:\cs3201g01\SPAUserInterface\SPAUserInterface.vcxproj" on node 2 (build target(s)).
+InitializeBuildStatus:
+  Creating "Release\SPAUserInterface.unsuccessfulbuild" because "AlwaysCreate" was specified.
+GenerateTargetFrameworkMonikerAttribute:
+Skipping target "GenerateTargetFrameworkMonikerAttribute" because all output files are up-to-date with respect to the input files.
+ClCompile:
+  C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr:pure /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Release\SPAUserInterface.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /TP /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt stdafx.cpp /clr:nostdlib 
+  stdafx.cpp
+  C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /AI"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /Zi /clr:pure /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /TP /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt ..\SPA\AST.cpp ..\SPA\Follows.cpp ..\SPA\FrontEndController.cpp ..\SPA\GrammarTable.cpp ..\SPA\Modifies.cpp ..\SPA\Parent.cpp ..\SPA\Parser.cpp ..\SPA\Pattern.cpp ..\SPA\PKB.cpp ..\SPA\PQLController.cpp ..\SPA\Procedure.cpp ..\SPA\ProcTable.cpp ..\SPA\QTREE.cpp ..\SPA\QueryEvaluator.cpp ..\SPA\QueryFormatter.cpp ..\SPA\QueryPreprocessor.cpp ..\SPA\SPAController.cpp ..\SPA\SuchThat.cpp ..\SPA\Uses.cpp ..\SPA\VarTable.cpp AssemblyInfo.cpp SPAUserInterface.cpp /clr:nostdlib 
+  AST.cpp
+  Follows.cpp
+  FrontEndController.cpp
+c:\cs3201g01\spa\Parser.h(99): warning C4018: '<' : signed/unsigned mismatch
+  GrammarTable.cpp
+..\SPA\GrammarTable.cpp(201): warning C4018: '<' : signed/unsigned mismatch
+..\SPA\GrammarTable.cpp(204): warning C4018: '<' : signed/unsigned mismatch
+  Modifies.cpp
+  Parent.cpp
+  Parser.cpp
+c:\cs3201g01\spa\Parser.h(99): warning C4018: '<' : signed/unsigned mismatch
+..\SPA\Parser.cpp(63): warning C4018: '<' : signed/unsigned mismatch
+..\SPA\Parser.cpp(78): warning C4018: '<' : signed/unsigned mismatch
+  Pattern.cpp
+  PKB.cpp
+  PQLController.cpp
+c:\cs3201g01\spa\QueryPreprocessor.h(119): warning C4129: 's' : unrecognized character escape sequence
+c:\cs3201g01\spa\QueryPreprocessor.h(135): warning C4018: '<' : signed/unsigned mismatch
+  Procedure.cpp
+  ProcTable.cpp
+..\SPA\ProcTable.cpp(35): warning C4018: '>' : signed/unsigned mismatch
+  QTREE.cpp
+  QueryEvaluator.cpp
+  QueryFormatter.cpp
+  QueryPreprocessor.cpp
+c:\cs3201g01\spa\QueryPreprocessor.h(119): warning C4129: 's' : unrecognized character escape sequence
+c:\cs3201g01\spa\QueryPreprocessor.h(135): warning C4018: '<' : signed/unsigned mismatch
+..\SPA\QueryPreprocessor.cpp(90): warning C4018: '<' : signed/unsigned mismatch
+..\SPA\QueryPreprocessor.cpp(132): warning C4018: '<' : signed/unsigned mismatch
+..\SPA\QueryPreprocessor.cpp(227): warning C4018: '<' : signed/unsigned mismatch
+..\SPA\QueryPreprocessor.cpp(424): warning C4129: 's' : unrecognized character escape sequence
+..\SPA\QueryPreprocessor.cpp(520): warning C4018: '<' : signed/unsigned mismatch
+..\SPA\QueryPreprocessor.cpp(565): warning C4018: '<' : signed/unsigned mismatch
+..\SPA\QueryPreprocessor.cpp(628): warning C4018: '<' : signed/unsigned mismatch
+  SPAController.cpp
+c:\cs3201g01\spa\QueryPreprocessor.h(119): warning C4129: 's' : unrecognized character escape sequence
+c:\cs3201g01\spa\QueryPreprocessor.h(135): warning C4018: '<' : signed/unsigned mismatch
+  SuchThat.cpp
+  Uses.cpp
+  VarTable.cpp
+..\SPA\VarTable.cpp(35): warning C4018: '>' : signed/unsigned mismatch
+  Generating Code...
+c:\cs3201g01\spa\vartable.cpp(47): warning C4715: 'VarTable::getVarName' : not all control paths return a value
+c:\cs3201g01\spa\querypreprocessor.cpp(413): warning C4715: 'QueryPreprocessor::getQVarType' : not all control paths return a value
+c:\cs3201g01\spa\querypreprocessor.cpp(405): warning C4715: 'QueryPreprocessor::getQVarType' : not all control paths return a value
+c:\cs3201g01\spa\queryevaluator.cpp(311): warning C4715: 'QueryEvaluator::getResult' : not all control paths return a value
+c:\cs3201g01\spa\proctable.cpp(46): warning C4715: 'ProcTable::getProcedure' : not all control paths return a value
+  Compiling...
+  AssemblyInfo.cpp
+  SPAUserInterface.cpp
+  Generating Code...
+  C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /clr:pure /nologo /W3 /WX- /O2 /Oy- /D WIN32 /D NDEBUG /D _UNICODE /D UNICODE /EHa /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /TP /analyze- /errorReport:prompt "C:\Users\Lim Seok Min\AppData\Local\Temp\.NETFramework,Version=v4.0.AssemblyAttributes.cpp"
+  .NETFramework,Version=v4.0.AssemblyAttributes.cpp
+CoreResGen:
+  "C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\NETFX 4.0 Tools\resgen.exe" /useSourcePath /r:"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Core.dll" /r:"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /r:"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /r:"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /r:"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /r:"C:\Program Files\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /compile Form1.resX,Release\SPAUserInterface.Form1.resources
+  Processing resource file "Form1.resX" into "Release\SPAUserInterface.Form1.resources".
+ResourceCompile:
+  C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /D _UNICODE /D UNICODE /l"0x0409" /nologo /fo"Release\app.res" app.rc 
+Link:
+  C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\cs3201g01\Release\SPAUserInterface.exe" /INCREMENTAL:NO /NOLOGO /ASSEMBLYRESOURCE:Release\SPAUserInterface.Form1.resources /MANIFEST /ManifestFile:"Release\SPAUserInterface.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\cs3201g01\Release\SPAUserInterface.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 Release\app.res
+  Release\AST.obj
+  Release\Follows.obj
+  Release\FrontEndController.obj
+  Release\GrammarTable.obj
+  Release\Modifies.obj
+  Release\Parent.obj
+  Release\Parser.obj
+  Release\Pattern.obj
+  Release\PKB.obj
+  Release\PQLController.obj
+  Release\Procedure.obj
+  Release\ProcTable.obj
+  Release\QTREE.obj
+  Release\QueryEvaluator.obj
+  Release\QueryFormatter.obj
+  Release\QueryPreprocessor.obj
+  Release\SPAController.obj
+  Release\SuchThat.obj
+  Release\Uses.obj
+  Release\VarTable.obj
+  Release\AssemblyInfo.obj
+  Release\SPAUserInterface.obj
+  Release\stdafx.obj
+  "Release\.NETFramework,Version=v4.0.AssemblyAttributes.obj"
+  SPAUserInterface.vcxproj -> C:\cs3201g01\Release\SPAUserInterface.exe
+Manifest:
+  C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\cs3201g01\Release\SPAUserInterface.exe;#1" /manifest Release\SPAUserInterface.exe.intermediate.manifest
+FinalizeBuildStatus:
+  Deleting file "Release\SPAUserInterface.unsuccessfulbuild".
+  Touching "Release\SPAUserInterface.lastbuildstate".
+Done Building Project "C:\cs3201g01\SPAUserInterface\SPAUserInterface.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:01:00.43

@@ -1,0 +1,54 @@
+﻿Build started 11/14/2012 7:16:10 PM.
+Project "C:\cs3201g01\UnitTesting\UnitTesting.vcxproj" on node 2 (build target(s)).
+InitializeBuildStatus:
+  Creating "Release\UnitTesting.unsuccessfulbuild" because "AlwaysCreate" was specified.
+ClCompile:
+  C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:\cs3201g01\source /IC:\cs3201g01\include /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ASTTest.cpp FollowsTest.cpp ModifiesTest.cpp ParentTest.cpp ParserTest.cpp PatternTest.cpp PKBTest.cpp ProcedureTest.cpp ProcTableTest.cpp QueryPreprocessorTest.cpp source\UnitTest.cpp SuchThatTest.cpp UsesTest.cpp VarTableTest.cpp
+  ASTTest.cpp
+  FollowsTest.cpp
+  ModifiesTest.cpp
+  ParentTest.cpp
+  ParserTest.cpp
+  PatternTest.cpp
+  PKBTest.cpp
+  ProcedureTest.cpp
+  ProcTableTest.cpp
+  QueryPreprocessorTest.cpp
+C:\cs3201g01\source\../SPA/QueryPreprocessor.h(119): warning C4129: 's' : unrecognized character escape sequence
+C:\cs3201g01\source\../SPA/QueryPreprocessor.h(135): warning C4018: '<' : signed/unsigned mismatch
+  UnitTest.cpp
+  SuchThatTest.cpp
+  UsesTest.cpp
+  VarTableTest.cpp
+Link:
+  C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\cs3201g01\Release\UnitTesting.exe" /NOLOGO C:\cs3201g01\lib\cppunit.lib C:\cs3201g01\Release\SPA.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\UnitTesting.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\cs3201g01\Release\UnitTesting.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\cs3201g01\Release\UnitTesting.lib" /MACHINE:X86 Release\ASTTest.obj
+  Release\FollowsTest.obj
+  Release\ModifiesTest.obj
+  Release\ParentTest.obj
+  Release\ParserTest.obj
+  Release\PatternTest.obj
+  Release\PKBTest.obj
+  Release\ProcedureTest.obj
+  Release\ProcTableTest.obj
+  Release\QueryPreprocessorTest.obj
+  Release\UnitTest.obj
+  Release\SuchThatTest.obj
+  Release\UsesTest.obj
+  Release\VarTableTest.obj
+  Generating code
+c:\cs3201g01\spa\querypreprocessor.cpp(413): warning C4715: 'QueryPreprocessor::getQVarType' : not all control paths return a value
+c:\cs3201g01\spa\proctable.cpp(46): warning C4715: 'ProcTable::getProcedure' : not all control paths return a value
+c:\cs3201g01\spa\vartable.cpp(47): warning C4715: 'VarTable::getVarName' : not all control paths return a value
+c:\cs3201g01\spa\querypreprocessor.cpp(405): warning C4715: 'QueryPreprocessor::getQVarType' : not all control paths return a value
+  Finished generating code
+  UnitTesting.vcxproj -> C:\cs3201g01\Release\UnitTesting.exe
+Manifest:
+  C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"C:\cs3201g01\Release\UnitTesting.exe;#1" /manifest Release\UnitTesting.exe.intermediate.manifest
+FinalizeBuildStatus:
+  Deleting file "Release\UnitTesting.unsuccessfulbuild".
+  Touching "Release\UnitTesting.lastbuildstate".
+Done Building Project "C:\cs3201g01\UnitTesting\UnitTesting.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:37.06

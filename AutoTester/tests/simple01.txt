@@ -1,0 +1,4 @@
+procedure Code2{
+while q{
+c=c+a;
+d=x+y+z;}}
