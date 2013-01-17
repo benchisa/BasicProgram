@@ -38,7 +38,8 @@ enum TYPE{
 	PARENTST,
 	MODIFIES,
 	USES,
-	ANY
+	ANY,
+	PARAM
 };
 enum CONTENT{
 	EMPTY,
@@ -53,16 +54,18 @@ typedef list<pair<int, int>> PARENT_LIST;
 typedef list<pair<int, int>> RELATION_LIST;
 typedef list<int> STATEMENT_LIST;
 typedef list<int> INDEX_LIST;
+typedef std::list<int> CONSTANT_LIST;
 typedef list<string> FINAL_RESULT;
 typedef std::list<string> VAR_LIST;
 typedef std::list<Procedure> PROC_LIST;
 typedef std::list<AST*> AST_LIST;
 typedef hash_map<int,TYPE> QUERYTABLE;
 typedef pair<TYPE,list<int> *> RAWDATA;
+typedef list<pair<string,string>> CALL_LIST;
 
 
 
-typedef int STATEMENT_NUM,VAR_INDEX,SIZE, PROC_INDEX,PROG_LINE,USES_INDEX,MODIFIES_INDEX,INDEX;
+typedef int STATEMENT_NUM,VAR_INDEX,SIZE, PROC_INDEX,PROG_LINE,USES_INDEX,MODIFIES_INDEX,INDEX,CONSTANT_INDEX,CALL_INDEX;
 typedef std::string EXPRESSION,VAR_NAME,PROC_NAME;
 typedef std::string REPORT_MSG, QUERY, SOURCE, ERROR_MSG, TOKEN;
 

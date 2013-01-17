@@ -24,11 +24,13 @@ class PKB
 		bool setRootAST(AST* currentAST);
 		bool setFirstDescendant(AST * currentAST, AST* firstDescendant);
 		bool setAncestor(AST* currentAST, AST* ancestor);
+		bool setTail(AST* currentAST, AST* tail);
 		bool addSibling(AST*  currentAST,AST* newSibling);
 		AST* getFirstDescendant(AST* currentAST);
 		AST* getRightSibling(AST* currentAST);
 		AST* getLeftSibling(AST* currentAST);
 		AST* getAncestor(AST* currentAST);
+		AST* getTail(AST* currentAST);
 		AST_LIST* getASTBy(STATEMENT_NUM statementNo);
 		ASTNODE_TYPE getType(AST* currentAST);
 		PROG_LINE getStatementNum(AST* currentAST);
