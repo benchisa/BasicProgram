@@ -1,17 +1,17 @@
-﻿Build started 11/20/2012 12:57:45 PM.
-     1>Project "C:\Users\Xi\Documents\NUS\Yr2Sem1\CS3201\v1.1\IntegrationTesting\IntegrationTesting.vcxproj" on node 2 (build target(s)).
+﻿Build started 1/17/2013 2:57:06 PM.
+     1>Project "C:\Users\Xi\Documents\GitHub\CS3202\IntegrationTesting\IntegrationTesting.vcxproj" on node 3 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\IntegrationTesting.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
          All outputs are up-to-date.
        Link:
          All outputs are up-to-date.
-         IntegrationTesting.vcxproj -> C:\Users\Xi\Documents\NUS\Yr2Sem1\CS3201\v1.1\Debug\IntegrationTesting.exe
+         IntegrationTesting.vcxproj -> C:\Users\Xi\Documents\GitHub\CS3202\Debug\IntegrationTesting.exe
        FinalizeBuildStatus:
          Deleting file "Debug\IntegrationTesting.unsuccessfulbuild".
          Touching "Debug\IntegrationTesting.lastbuildstate".
-     1>Done Building Project "C:\Users\Xi\Documents\NUS\Yr2Sem1\CS3201\v1.1\IntegrationTesting\IntegrationTesting.vcxproj" (build target(s)).
+     1>Done Building Project "C:\Users\Xi\Documents\GitHub\CS3202\IntegrationTesting\IntegrationTesting.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.15
+Time Elapsed 00:00:00.05

@@ -1,17 +1,17 @@
-﻿Build started 11/20/2012 12:57:45 PM.
-     1>Project "C:\Users\Xi\Documents\NUS\Yr2Sem1\CS3201\v1.1\SPA\SPA.vcxproj" on node 2 (build target(s)).
+﻿Build started 1/17/2013 2:57:06 PM.
+     1>Project "C:\Users\Xi\Documents\GitHub\CS3202\SPA\SPA.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\SPA.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
          All outputs are up-to-date.
        Lib:
          All outputs are up-to-date.
-         SPA.vcxproj -> C:\Users\Xi\Documents\NUS\Yr2Sem1\CS3201\v1.1\Debug\SPA.lib
+         SPA.vcxproj -> C:\Users\Xi\Documents\GitHub\CS3202\Debug\SPA.lib
        FinalizeBuildStatus:
          Deleting file "Debug\SPA.unsuccessfulbuild".
          Touching "Debug\SPA.lastbuildstate".
-     1>Done Building Project "C:\Users\Xi\Documents\NUS\Yr2Sem1\CS3201\v1.1\SPA\SPA.vcxproj" (build target(s)).
+     1>Done Building Project "C:\Users\Xi\Documents\GitHub\CS3202\SPA\SPA.vcxproj" (build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.10
+Time Elapsed 00:00:00.07
