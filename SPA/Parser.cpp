@@ -35,6 +35,8 @@ PKB* Parser::getPKB(){
 int Parser::startParse(){
 	// initialize everything
 	tokens = ParserTokenizer::tokenize(this->src);
+	//ParserTokenizer t;
+	//t.printAll(tokens);
 	curToken = tokens.at(0);
 	prevToken = "";
 	tokenIndex = 0;
@@ -382,72 +384,109 @@ bool Parser::stmt_assign(){
 }
 
 bool Parser::expr(){
-	// expr: expr '+' factor | factor
-	if(factor()){
-		if(matchToken("+")){
-			if(operators.empty())
+	// expr: expr '+' term | expr '-' term | term
+	if(term())
+	{
+		if(matchToken("+"))
+		{
+			if(operators.empty()) 
 				operators.push(pkb->createAST(PLUS, progLine, -1));
 			else
 			{
-				// if got more than 1 operator
-				AST *plusNode = pkb->createAST(PLUS, progLine, -1);
-
-				AST *rightNode = operands.top();
-				if(!operands.empty()) operands.pop();
-				AST *leftNode = operands.top();
-				if(!operands.empty()) operands.pop();
-				AST *o_plusNode = operators.top();
-				if(!operators.empty()) operators.pop();
-
-				pkb->setFirstDescendant(o_plusNode, leftNode);
-				pkb->addSibling(leftNode, rightNode);
-
-				operands.push(o_plusNode);
-				operators.push(plusNode);
-
+				if(pkb->getType(operators.top()) == MULTIPLY)
+				{
+					createExprTree();
+				}
+				else
+				{
+					operators.push(pkb->createAST(PLUS, progLine, -1));
+				}
+				
 			}
-			if(expr()){
-				return true;
+
+			if(expr())
+			{
+				createExprTree();
 			}
-			else {
+			else
+			{
 				return false;
 			}
 		}
-		else
+		else if(matchToken("-"))
 		{
-			//end of expression
-			if(!operators.empty()){
-
-				AST *plusNode = operators.top();
-				if(!operators.empty()) operators.pop();
-
-				AST *rightNode = operands.top();
-				if(!operands.empty()) operands.pop();
-				AST *leftNode = operands.top();
-				if(!operands.empty()) operands.pop();
-
-				pkb->setFirstDescendant(plusNode, leftNode);
-				pkb->addSibling(leftNode, rightNode);
-
-				operands.push(plusNode);
+			if(operators.empty()) 
+				operators.push(pkb->createAST(MINUS, progLine, -1));
+			else
+			{
+				if(pkb->getType(operators.top()) == MULTIPLY)
+				{
+					createExprTree();
+				}
+				else
+				{
+					operators.push(pkb->createAST(MINUS, progLine, -1));
+				}
 			}
-			else{
-				//cout << operands.top() << "\n";
-				AST *rightNode = operands.top();
-				operands.push(rightNode);
+
+			if(term())
+			{
+				createExprTree();
 			}
-			return true;
+			else
+			{
+				return false;
+			}
 		}
+		else{
+			
+		}
+
+		return true;
 	}
-	else{
-		//error return by factor()	
+	else
+	{
+		return false;
+	}
+}
+
+bool Parser::term(){
+	// term: term "*" factor | factor
+	if(factor())
+	{
+		if(matchToken("*"))
+		{
+			if(operators.empty())
+				operators.push(pkb->createAST(MULTIPLY, progLine, -1));
+			else
+			{
+				operators.push(pkb->createAST(MULTIPLY, progLine, -1));
+
+			}
+
+			if(factor())
+			{
+				createExprTree();
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+	else
+	{
 		return false;
 	}
 }
 
 bool Parser::factor(){
-	// factor: var_name | const_value
-	if(name()){
+	// factor: var_name | const_value | "(" expr ")"
+	if(name())
+	{
 		curVarIndex = pkb->insertVar(prevToken);
 		pkb->insertUses(PROCEDURE, curProcIndex, curVarIndex);
 		pkb->insertUses(ASSIGNMENT, progLine, curVarIndex);
@@ -464,17 +503,44 @@ bool Parser::factor(){
 		operands.push(pkb->createAST(VARIABLE, progLine, curVarIndex));
 		return true;
 	}
-
-	else if(const_value()){
+	else if(const_value())
+	{
 		operands.push(pkb->createAST(CONSTANT, progLine, atoi(prevToken.c_str())));
 		return true;
 	}
-	else 
+	else if(openBracket())
 	{
-		error(INVALID_EXPR);
-		return false;
+		operators.push(pkb->createAST(BRACKET, progLine, -1));
+		if(expr())
+		{
+			if(closeBracket())
+			{
+				// remove open bracket from operands stack
+				if(!operators.empty()) operators.pop();
+			}
+		}
 	}
+	
 }
+
+bool Parser::openBracket(){
+	// const_value: INTEGER
+	if(matchToken("(")){
+		return true;
+	}
+
+	return false;
+}
+
+bool Parser::closeBracket(){
+	// const_value: INTEGER
+	if(matchToken(")")){
+		return true;
+	}
+
+	return false;
+}
+
 
 bool Parser::const_value(){
 	// const_value: INTEGER
@@ -492,6 +558,20 @@ bool Parser::name(){
 	}
 
 	return false;
+}
+
+void Parser::createExprTree(){
+	AST *rightNode = operands.top();
+	if(!operands.empty()) operands.pop();
+	AST *leftNode = operands.top();
+	if(!operands.empty()) operands.pop();
+	AST *oNode = operators.top();
+	if(!operators.empty()) operators.pop();
+
+	pkb->setFirstDescendant(oNode, leftNode);
+	pkb->addSibling(leftNode, rightNode);
+
+	operands.push(oNode);
 }
 
 bool Parser::isSameProc(PROG_LINE p1, PROG_LINE p2){

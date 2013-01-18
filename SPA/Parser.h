@@ -67,14 +67,18 @@ private:
 	bool stmt_assign(void);
 	bool factor(void); 
 	bool expr(void);
+	bool term(void);
 	bool var_name(void);
 	bool const_value(void);
 	bool name(void);
-
+	bool openBracket(void);
+	bool closeBracket(void);
+	
 	// Helper for inserting relationship
 	bool isSameProc(PROG_LINE, PROG_LINE);
 	void insertFollows(PROG_LINE, PROG_LINE);
-
+	void createExprTree();
+	
 	// BONUS
 	bool stmt_if(void);
 };
@@ -83,7 +87,7 @@ class ParserTokenizer{
 public:
 	static vector<TOKEN> tokenize(SOURCE src){
 		vector<TOKEN> tokens;
-		regex rx("while|procedure|if|\\{|\\}|\\=|\\;|\\+|[^\\s\\n\\{\\}\\+\\;\\=]+");
+		regex rx("call|while|procedure|if|else|\\(|\\)|\\{|\\}|\\=|\\;|\\-|\\*|\\+|[^\\s\\n\\{\\}\\-\\*\\+\\;\\=\\(\\)]+");
 		sregex_iterator rxItr(src.begin(), src.end(), rx), rxend;
 
 		for (rxItr; rxItr != rxend; ++rxItr)
@@ -97,7 +101,7 @@ public:
 	void printAll(vector<TOKEN> tmp){
 		int i = 0;
 		for(i = 0; i < tmp.size(); i++){
-			//cout << "token " << i << ": " << tmp.at(i) + "\n";
+			cout << "token " << i << ": " << tmp.at(i) + "\n";
 		}
 	}
 };
