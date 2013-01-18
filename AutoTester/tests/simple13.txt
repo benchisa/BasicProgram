@@ -1,0 +1,32 @@
+procedure xylo{
+	apple=1;
+	banana=apple+1;
+	carrot=apple;
+	banana=carrot+1;
+	donut=0;
+	egg=1;
+	fish=egg;
+	while apple{
+		while egg{
+			innard = 0;
+			while donut{
+				gummy=egg+1;
+			}
+			while fish{
+				gummy=0;
+				while innard{
+					fish=innard;
+				}
+				if gummy then{
+					innard=99;
+				}
+				else{
+					innard=1;
+				}
+			}
+			ham=gummy;
+		}
+		gummy=apple+9;
+	}
+	apple=11;
+}
