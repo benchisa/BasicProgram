@@ -29,21 +29,20 @@ VAR_INDEX VarTable::insertVar(VAR_NAME varName){
 SIZE VarTable::getVarTableSize(){
 	return (*varTable).size();
 }
- VAR_NAME * VarTable::getVarName(VAR_INDEX index){
+ VAR_NAME  VarTable::getVarName(VAR_INDEX index){
 	//if invalid index, return NULL
 	//else return the variable name with index "index"
-	if(index<1||index>(*varTable).size()){
+/*	if(1||index>(*varTable).size()){
 		return NULL;
 	}else{
-		;
+	*/	;
 
-		for(varItr1=(*varTable).begin();varItr1!=(*varTable).end();varItr1++){
-			if(varItr1->second == index){
-				return new string(varItr1->first);
-			}
+	for(varItr1=(*varTable).begin();varItr1!=(*varTable).end();varItr1++){
+		if(varItr1->second == index){
+			return varItr1->first;
 		}
-		
 	}
+		
 }
 VAR_INDEX VarTable::getVarIndex(VAR_NAME varName){
 	//find the index with variable name "varName"

@@ -14,6 +14,7 @@
     <ClCompile Include="AST.cpp" />
     <ClCompile Include="CallTable.cpp" />
     <ClCompile Include="ConstantTable.cpp" />
+    <ClCompile Include="DesignExtractor.cpp" />
     <ClCompile Include="FrontEndController.cpp" />
     <ClCompile Include="GrammarTable.cpp" />
     <ClCompile Include="Modifies.cpp" />
@@ -41,6 +42,7 @@
   <ItemGroup>
     <ClInclude Include="CallTable.h" />
     <ClInclude Include="ConstantTable.h" />
+    <ClInclude Include="DesignExtractor.h" />
     <ClInclude Include="FrontEndController.h" />
     <ClInclude Include="GrammarTable.h" />
     <ClInclude Include="Parser.h" />

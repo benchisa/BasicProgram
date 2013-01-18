@@ -2,6 +2,7 @@
 #include "SuchThat.h"
 #include <iostream>
 
+
 PKB * SuchThat::pkb;
 QueryEvaluator::QueryEvaluator(PKB * p){
 	this->pkb = p;

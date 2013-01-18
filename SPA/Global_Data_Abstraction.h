@@ -9,6 +9,7 @@
 #include <list>
 #include <map>
 #include <hash_map>
+
 using namespace std;
 
 class Procedure;
@@ -39,7 +40,9 @@ enum TYPE{
 	MODIFIES,
 	USES,
 	ANY,
-	PARAM
+	PARAM,
+	CALL,
+	PROGLINE
 };
 enum CONTENT{
 	EMPTY,
@@ -51,7 +54,7 @@ typedef list<pair<int, int>> MODIFIES_LIST;
 typedef list<pair<int, int>> USES_LIST;
 typedef list<pair<int, int>> FOLLOWS_LIST;
 typedef list<pair<int, int>> PARENT_LIST;
-typedef list<pair<int, int>> RELATION_LIST;
+typedef multimap<pair<int,int>,pair<int,int>> RELATION_LIST;
 typedef list<int> STATEMENT_LIST;
 typedef list<int> INDEX_LIST;
 typedef std::list<int> CONSTANT_LIST;
@@ -62,10 +65,10 @@ typedef std::list<AST*> AST_LIST;
 typedef hash_map<int,TYPE> QUERYTABLE;
 typedef pair<TYPE,list<int> *> RAWDATA;
 typedef list<pair<string,string>> CALL_LIST;
-
+typedef pair<Procedure*,Procedure*> CALL_PAIR;
 
 
 typedef int STATEMENT_NUM,VAR_INDEX,SIZE, PROC_INDEX,PROG_LINE,USES_INDEX,MODIFIES_INDEX,INDEX,CONSTANT_INDEX,CALL_INDEX;
-typedef std::string EXPRESSION,VAR_NAME,PROC_NAME;
-typedef std::string REPORT_MSG, QUERY, SOURCE, ERROR_MSG, TOKEN;
+typedef string EXPRESSION,VAR_NAME,PROC_NAME;
+typedef string REPORT_MSG, QUERY, SOURCE, ERROR_MSG, TOKEN;
 

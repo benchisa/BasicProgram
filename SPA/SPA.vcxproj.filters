@@ -120,6 +120,9 @@
     <ClCompile Include="ConstantTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DesignExtractor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Follows.h">
@@ -199,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="ConstantTable.h">
       <Filter>Header Files\PKB</Filter>
+    </ClInclude>
+    <ClInclude Include="DesignExtractor.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

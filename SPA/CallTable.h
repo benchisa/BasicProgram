@@ -14,6 +14,7 @@ public:
 	Procedure * getCall(PROC_NAME caller,PROC_NAME callee);
 
 	CALL_INDEX getCallPairIndex(PROC_NAME caller,PROC_NAME callee);
+	CALL_PAIR getCALLPair(CALL_INDEX index);
 	bool isExistsCall(PROC_NAME caller,PROC_NAME callee);
 	CALL_LIST *  getAllCalls();
 };

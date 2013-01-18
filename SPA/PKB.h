@@ -40,7 +40,7 @@ class PKB
 		//Functions of VarTable
 		VAR_INDEX insertVar(VAR_NAME varName);
 		SIZE getVarTableSize();
-		VAR_NAME* getVarName(VAR_INDEX index);
+		VAR_NAME getVarName(VAR_INDEX index);
 		VAR_INDEX getVarIndex(VAR_NAME varName);
 		bool isVarExists(VAR_NAME varName);
 		VAR_LIST* getAllVar();
@@ -84,7 +84,32 @@ class PKB
 		USES_LIST getUses(USES_TYPE type, USES_INDEX index, VAR_INDEX varIndex);
 		bool isUses(USES_TYPE type, USES_INDEX index, VAR_INDEX varIndex);
 
+	/*
+	* To be implemented
+	*/
+		//Functions of Call Table
+		CALL_INDEX insertCall(Procedure * caller, Procedure* callee);
+		SIZE getCallTableSize();
 
+		//if caller is empty, return callee procedure
+		//if callee is empty, return caller procedure
+		Procedure * getCall(PROC_NAME caller,PROC_NAME callee);
+		CALL_PAIR getCALLPair(CALL_INDEX index);
+		CALL_INDEX getCallPairIndex(PROC_NAME caller,PROC_NAME callee);
+		bool isExistsCall(PROC_NAME caller,PROC_NAME callee);
+		CALL_LIST *  getAllCalls();
+
+		//Functions of constant table
+		CONSTANT_INDEX insertVar(int constantValue);
+		SIZE getConstantTableSize();
+		int getConstantValue(CONSTANT_INDEX index);
+		CONSTANT_INDEX getConstantIndex(int constantValue);
+		bool isExists(int constantValue);
+		CONSTANT_LIST *  getAllConstant();
+
+		//Other functions
+		PROG_LINE getMaxProgLine();
+		STATEMENT_NUM getMaxStatementNum();
 private:
 		//Abastract Data Types stored in PKB
 		AST* rootAST;
