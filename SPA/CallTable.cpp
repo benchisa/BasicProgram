@@ -51,15 +51,15 @@ CALL_INDEX CallTable::insertCall(PROC_NAME caller, PROC_NAME callee)
 CALL_PAIR CallTable::getCallPair(CALL_INDEX index)
 {
 	callItr c_itr;
-	int counter=1;
+	int internalCounter=1;
 	CALL_PAIR answer=make_pair("", "");
 	for (c_itr=callDictionary->begin(); c_itr!=callDictionary->end(); c_itr++)
 	{
-		if (counter==index)
+		if (internalCounter==index)
 		{
 			answer=make_pair(c_itr->first, c_itr->second);
 		}
-		counter++;
+		internalCounter++;
 	}
 	return answer;
 }
@@ -69,15 +69,15 @@ CALL_INDEX CallTable::getCallPairIndex(PROC_NAME caller,PROC_NAME callee)
 	if (caller!=" " && callee!= " ")
 	{
 		callItr c_itr;
-		int counter=1;
+		int internalCounter=1;
 		for (c_itr=callDictionary->begin(); c_itr!=callDictionary->end(); c_itr++)
 		{
 
 			if (c_itr->first==caller && c_itr->second==callee)
 			{
-			return counter;
+			return internalCounter;
 			}
-			counter++;
+			internalCounter++;
 		}
 	}
 	
@@ -91,7 +91,7 @@ bool CallTable::isExistsCall(PROC_NAME caller,PROC_NAME callee)
 	if (caller!=" " && callee!= " ")
 	{
 		callItr c_itr;
-		int counter=1;
+		int internalCounter=1;
 		for (c_itr=callDictionary->begin(); c_itr!=callDictionary->end(); c_itr++)
 		{
 
