@@ -15,6 +15,223 @@ void ParserTest::tearDown()
 
 // Registers the fixture into the 'registry'
 CPPUNIT_TEST_SUITE_REGISTRATION( ParserTest ); // Note 4 
+void ParserTest::testCall(){
+	Parser p;
+	std::string src;
+
+	src = "procedure test1{\n"
+	/*1*/	"a = c;"
+	/*2*/	"call test2;"
+	/*3*/	"a = d;}"
+	/**/	"procedure test2{\n"
+	/*4*/	"b = 1;}";
+
+	p.setSource(src);
+	CPPUNIT_ASSERT_EQUAL(1, p.startParse());
+	PKB *pkb = p.getPKB();
+	AST *ast = pkb->getRootAST();
+	CPPUNIT_ASSERT(ast->getRootData() == 1);
+	CPPUNIT_ASSERT(pkb->getType(ast->getRightSibling()) == PROCEDURE);
+	CPPUNIT_ASSERT(pkb->getType(ast->getRightSibling()->getFirstDescendant()->getFirstDescendant()) == ASSIGNMENT);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()) == STMT_LIST);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()) == ASSIGNMENT);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == CALL);
+}
+void ParserTest::testIf()
+{
+	Parser p;
+	std::string src;
+	
+	// Follows(2, 3), Follows(4, 5)
+	src = "procedure test1{\n"
+	/*1*/	"if b then {"
+	/*2*/	"a = c;"
+	/*3*/	"a = d;}"
+	/**/	"else{"
+	/*4*/	"c = d;"
+	/*5*/	"e = d;}}";
+	p.setSource(src);
+	CPPUNIT_ASSERT_EQUAL(1, p.startParse());
+	PKB *pkb = p.getPKB();
+	CPPUNIT_ASSERT(pkb->isFollows(1, 2) == false);
+	CPPUNIT_ASSERT(pkb->isFollows(1, 3) == false);
+	CPPUNIT_ASSERT(pkb->isFollows(2, 3) == true);
+	CPPUNIT_ASSERT(pkb->isFollows(4, 5) == true);
+	CPPUNIT_ASSERT(pkb->isFollows(2, 4) == false);
+	CPPUNIT_ASSERT(pkb->isFollows(2, 5) == false);
+	CPPUNIT_ASSERT(pkb->isFollows(2, 6) == false);
+	CPPUNIT_ASSERT(pkb->isFollows(3, 4) == false);
+	CPPUNIT_ASSERT(pkb->isFollows(4, 6) == false);
+
+	// Test Uses and Modifies for if
+	MODIFIES_LIST modifiesList = pkb->getModifies(IF, 1, 0);
+	MODIFIES_LIST::iterator modifiesListItr = modifiesList.begin();
+	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "a");
+	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "c");
+	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "e");
+	
+	USES_LIST useList = pkb->getUses(IF, 1, 0);
+	USES_LIST::iterator usesListItr = useList.begin();
+	CPPUNIT_ASSERT( *pkb->getVarName((usesListItr++->second)) == "b");
+	CPPUNIT_ASSERT( *pkb->getVarName((usesListItr++->second)) == "c");
+	CPPUNIT_ASSERT( *pkb->getVarName((usesListItr++->second)) == "d");
+
+	// Follows(2, 3), Follows(3, 4), Follows(7, 8), Follows(1, 9)
+	// Parent(1, 2) (1, 3), (1, 4), (4, 5), (4, 6), (1, 7), (1, 8)
+	src = "procedure test2{\n"
+	/*1*/	"if b then {"
+	/*2*/	"a = c;"
+	/*3*/	"a = d;"
+	/*4*/	"if b then{"
+	/*5*/	"a = 1;}"
+	/**/	"else{"
+	/*6*/	"b = 1;}}"
+	/**/	"else{"
+	/*7*/	"c = d;"
+	/*8*/	"e = d;}"
+	/*9*/	"z = y;}";
+	p.setSource(src);
+	CPPUNIT_ASSERT_EQUAL(1, p.startParse());
+	pkb = p.getPKB();
+	CPPUNIT_ASSERT(pkb->isFollows(2, 3) == true);
+	CPPUNIT_ASSERT(pkb->isFollows(3, 4) == true);
+	CPPUNIT_ASSERT(pkb->isFollows(7, 8) == true);
+	CPPUNIT_ASSERT(pkb->isFollows(1, 9) == true);
+	CPPUNIT_ASSERT(pkb->isFollows(1, 8) == false);
+	CPPUNIT_ASSERT(pkb->isFollows(1, 2) == false);
+	CPPUNIT_ASSERT(pkb->isFollows(1, 4) == false);
+
+	CPPUNIT_ASSERT(pkb->isParent(1, 2) == true);
+	CPPUNIT_ASSERT(pkb->isParent(1, 3) == true);
+	CPPUNIT_ASSERT(pkb->isParent(1, 4) == true);
+	CPPUNIT_ASSERT(pkb->isParent(4, 5) == true);
+	CPPUNIT_ASSERT(pkb->isParent(4, 6) == true);
+	CPPUNIT_ASSERT(pkb->isParent(1, 7) == true);
+	CPPUNIT_ASSERT(pkb->isParent(1, 8) == true);
+	CPPUNIT_ASSERT(pkb->isParent(1, 9) == false);
+
+	// Test Uses and Modifies for if
+	modifiesList = pkb->getModifies(IF, 1, 0);
+	modifiesListItr = modifiesList.begin();
+	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "b");
+	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "a");
+	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "c");
+	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "e");
+	
+	modifiesList = pkb->getModifies(IF, 4, 0);
+	modifiesListItr = modifiesList.begin();
+	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "b");
+	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "a");
+
+	useList = pkb->getUses(IF, 1, 0);
+	usesListItr = useList.begin();
+	CPPUNIT_ASSERT( *pkb->getVarName((usesListItr++->second)) == "b");
+	CPPUNIT_ASSERT( *pkb->getVarName((usesListItr++->second)) == "c");
+	CPPUNIT_ASSERT( *pkb->getVarName((usesListItr++->second)) == "d");
+	// varindex 7 is variable y
+	CPPUNIT_ASSERT(pkb->isUses(IF, 1, 7) == false);
+
+	// Follows(1, 2), Follows(3, 4), Follows(5, 6), Follows(2, 7)
+	src = "procedure test3{\n"
+		"a = y;"
+		"if b then {"
+		"a = c;"
+		"a = d;}"
+		"else{"
+		"c = d;"
+		"e = d;}"
+		"a = 1;}";
+	p.setSource(src);
+	CPPUNIT_ASSERT_EQUAL(1, p.startParse());
+	pkb = p.getPKB();
+
+	// Test Follows, Parent
+	CPPUNIT_ASSERT(pkb->isFollows(1, 2) == true);
+	CPPUNIT_ASSERT(pkb->isFollows(3, 4) == true);
+	CPPUNIT_ASSERT(pkb->isFollows(5, 6) == true);
+	CPPUNIT_ASSERT(pkb->isFollows(2, 7) == true);
+
+	CPPUNIT_ASSERT(pkb->isFollows(1, 3) == false);
+	CPPUNIT_ASSERT(pkb->isFollows(1, 4) == false);
+	CPPUNIT_ASSERT(pkb->isFollows(1, 5) == false);
+	CPPUNIT_ASSERT(pkb->isFollows(1, 6) == false);
+
+	CPPUNIT_ASSERT(pkb->isParent(2, 3) == true);
+	CPPUNIT_ASSERT(pkb->isParent(2, 4) == true);
+	CPPUNIT_ASSERT(pkb->isParent(2, 5) == true);
+	CPPUNIT_ASSERT(pkb->isParent(2, 6) == true);
+	CPPUNIT_ASSERT(pkb->isParent(2, 7) == false);
+
+	// Test AST
+	AST *ast = pkb->getRootAST();
+	CPPUNIT_ASSERT(ast->getRootData() == 1);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()) == STMT_LIST);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()) == ASSIGNMENT);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == IF);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()) == VARIABLE);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()) == STMT_LIST);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()->getFirstDescendant()) == ASSIGNMENT);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()->getRightSibling()) == STMT_LIST);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()->getRightSibling()->getFirstDescendant()) == ASSIGNMENT);
+}
+
+void ParserTest::testMultipleProcedures()
+{
+	Parser p;
+	std::string src;
+
+	src = "procedure main{\n"
+	/*1*/	"a = y;}\n"
+	/**/	"procedure test1{\n"
+	/*2*/	"b = x + y;\n"
+	/*3*/	"if b then{\n"
+	/*4*/	"a = b;}"
+	/**/		"else{"
+	/*5*/	"a = c;}}"
+	/**/	"procedure test2{\n"
+	/*6*/	"c = a + b;\n"
+	/*7*/	"b = 1;\n"
+	/*8*/	"while a{\n"
+	/*9*/	"c = 2;\n"
+	/*10*/	"a = a - 1 * (c + d);}}";
+	p.setSource(src);
+	CPPUNIT_ASSERT_EQUAL(1, p.startParse());
+	PKB *pkb = p.getPKB();
+	
+	// Test for AST
+	AST *ast = pkb->getRootAST();
+	CPPUNIT_ASSERT(ast->getRootData() == 1);
+	CPPUNIT_ASSERT(pkb->getType(ast->getRightSibling()) == PROCEDURE);
+	CPPUNIT_ASSERT(pkb->getData(ast->getRightSibling()) == 2);
+	CPPUNIT_ASSERT(pkb->getType(ast->getRightSibling()->getFirstDescendant()->getFirstDescendant()) == ASSIGNMENT);
+	CPPUNIT_ASSERT(pkb->getType(ast->getRightSibling()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == IF);
+
+	CPPUNIT_ASSERT(pkb->getType(ast->getRightSibling()->getRightSibling()) == PROCEDURE);
+	CPPUNIT_ASSERT(pkb->getData(ast->getRightSibling()->getRightSibling()) == 3);
+
+	// Test for Follows
+	CPPUNIT_ASSERT(pkb->isFollows(1, 2) == false);
+	CPPUNIT_ASSERT(pkb->isFollows(2, 3) == true);
+	CPPUNIT_ASSERT(pkb->isFollows(3, 4) == false);
+	CPPUNIT_ASSERT(pkb->isFollows(4, 5) == false);
+	CPPUNIT_ASSERT(pkb->isFollows(5, 6) == false);
+	CPPUNIT_ASSERT(pkb->isFollows(3, 6) == false);
+	CPPUNIT_ASSERT(pkb->isFollows(6, 7) == true);
+	CPPUNIT_ASSERT(pkb->isFollows(7, 8) == true);
+	CPPUNIT_ASSERT(pkb->isFollows(8, 9) == false);
+	CPPUNIT_ASSERT(pkb->isFollows(9, 10) == true);
+	
+	// Test for Parent
+	CPPUNIT_ASSERT(pkb->isParent(3, 4) == true);
+	CPPUNIT_ASSERT(pkb->isParent(3, 5) == true);
+	CPPUNIT_ASSERT(pkb->isParent(3, 6) == false);
+	CPPUNIT_ASSERT(pkb->isParent(3, 9) == false);
+	CPPUNIT_ASSERT(pkb->isParent(7, 9) == false);
+	CPPUNIT_ASSERT(pkb->isParent(8, 9) == true);
+	CPPUNIT_ASSERT(pkb->isParent(8, 10) == true);
+
+
+}
 
 void ParserTest::testOperators(){
 	Parser p;

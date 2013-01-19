@@ -112,6 +112,7 @@ bool Parser::program(){
 
 bool Parser::procedure(){
 	if(matchToken("procedure")){
+		AST* prevProc;
 		if(name()) 
 		{
 			Procedure *cProc = pkb->createProc(prevToken, progLine+1);
@@ -124,6 +125,13 @@ bool Parser::procedure(){
 					return false;
 				}
 			}
+			// next procedure
+			else
+			{
+				AST *newProc = pkb->createAST(PROCEDURE, progLine+1, curProcIndex);
+				pkb->addSibling(curAST, newProc);
+				curAST = newProc;
+			}
 		}
 		else
 		{
@@ -131,13 +139,14 @@ bool Parser::procedure(){
 			return false;
 		}
 		if(matchToken("{")){
-			prevAST = curAST;
+			prevProc = curAST;
 			curAST = pkb->createAST(STMT_LIST, 0, -1);
-			if(!pkb->setFirstDescendant(prevAST, curAST))
-				pkb->setAncestor(curAST, prevAST);
+			if(!pkb->setFirstDescendant(prevProc, curAST))
+				pkb->setAncestor(curAST, prevProc);
 
 			if(stmtlst()) 
 			{
+				curAST = prevProc; // set back pointer to procedure
 				return true;
 			}else{
 				return false;
@@ -165,12 +174,17 @@ bool Parser::stmtlst(){
 	if(matchToken("}")) {
 		if(!containerIndex.empty())
 		{
-			// can only add if it is not end of procedure
-			if(curToken.compare("}") != 0) {
+			if(curToken.compare("}") != 0 && curToken.compare("else") != 0) {
+				//cout << "insertFollows1: " << containerIndex.back().first << "," << progLine+1 << "\n";
 				insertFollows(containerIndex.back().first, progLine+1);
 			}
 			
-			containerIndex.pop_back(); // remove the last container.
+			// dont pop if it's else
+			if(curToken.compare("else") != 0) 
+			{
+				//cout << "curtoken: " << curToken << "\n";
+				containerIndex.pop_back(); // remove the last container.
+			}
 		}
 		return true;
 	}
@@ -182,12 +196,16 @@ bool Parser::stmtlst(){
 }
 
 bool Parser::stmt(){
-	// stmt: assign | while | if (bonus)
+	// stmt: assign | while | if | call
 	if(stmt_while()){
 		return true;
 	}
 	else if(stmt_if()){
 
+		return true;
+	}
+	else if(stmt_call())
+	{
 		return true;
 	}
 	else
@@ -200,9 +218,130 @@ bool Parser::stmt(){
 	}
 }
 
+bool Parser::stmt_call(){
+	// call: call proc_name
+	if(matchToken("call")){
+		if(name()){
+			
+			
+			// add to call table
+			// create AST
+			AST *callNode = pkb->createAST(CALL, progLine, pkb->getProcIndex(prevToken));
+			if(!pkb->setFirstDescendant(curAST, callNode))
+			{
+				pkb->addSibling(curAST, callNode);
+				pkb->setAncestor(callNode, curAST->getAncestor());
+			}
+
+			curAST = callNode;
+
+			// create follows, parent
+			insertFollowsParentForStmt(progLine-1, progLine);
+
+			if(!matchToken(";")) {
+				error(MISSING_COLON);
+				return false;
+			}
+		}
+		else
+		{
+			error(INVALID_CALL_NAME);
+			return false;
+		}
+	}
+	else
+	{
+		error(INVALID_CALL_NAME);
+		return false;
+	}
+
+	return true;
+}
+
 bool Parser::stmt_if(){
+	// if: if var_name then '{' stmtlst '}' else '{' stmtlst '}'
+	TOKEN tmpToken = prevToken;
+
 	if(matchToken("if")){
 		progLine++;
+		nesting = progLine;
+
+		AST *ifNode = pkb->createAST(IF, progLine, -1);
+		AST *leftNode, *thenNode, *elseNode;
+
+		if(!pkb->setFirstDescendant(curAST, ifNode))
+		{
+			pkb->addSibling(curAST, ifNode);
+			pkb->setAncestor(ifNode, curAST->getAncestor());
+		}
+
+		curAST = ifNode;
+
+		if(name()){
+			// add var_name to Use
+			curVarIndex = pkb->insertVar(prevToken);
+			pkb->insertUses(PROCEDURE, curProcIndex, curVarIndex);
+			pkb->insertUses(IF, progLine, curVarIndex);
+
+			leftNode = pkb->createAST(VARIABLE, progLine, curVarIndex);
+		
+			if(matchToken("then") && matchToken("{"))
+			{
+				thenNode = pkb->createAST(STMT_LIST, progLine, -1); // then node
+				
+				pkb->setFirstDescendant(ifNode, leftNode);
+				pkb->setAncestor(thenNode, ifNode);
+				pkb->addSibling(leftNode, thenNode);
+				curAST = thenNode;
+
+				insertFollowsParentForCon(tmpToken, progLine-1, progLine);
+
+				containerInfo.first = progLine;
+				containerInfo.second = IF;
+				containerIndex.push_back(containerInfo);
+
+				if(stmtlst())
+				{
+					if(matchToken("else") && matchToken("{"))
+					{
+						//progLine++;
+						elseNode = pkb->createAST(STMT_LIST, progLine, -1); // then node
+						pkb->setAncestor(elseNode, ifNode);
+						pkb->addSibling(thenNode, elseNode);
+						
+						curAST = elseNode;
+
+						if(stmtlst())
+						{
+							curAST = ifNode; // move to pointer back to ifNode
+						}else
+						{
+							error(INVALID_STMTLST);
+							return false;
+						}
+					}
+					else
+					{
+						error(INVALID_IF_FORMAT);
+						return false;
+					}
+				}
+				else
+				{
+					error(INVALID_STMTLST);
+					return false;
+				}
+			}
+			else
+			{
+				error(INVALID_IF_FORMAT);
+				return false;
+			}
+		}
+		else{
+			error(INVALID_IF_NAME);
+			return false;
+		}
 
 		return true;
 	}
@@ -238,30 +377,8 @@ bool Parser::stmt_while(){
 
 			if(!pkb->setFirstDescendant(whileNode, leftNode))
 				pkb->setAncestor(leftNode, whileNode);
-
-			if(!containerIndex.empty())
-			{
-				if(progLine-1 != containerIndex.back().first){
-					//cout << "Insertfollows241: " << progLine-1 << ", " << progLine << "\n";
-					insertFollows(progLine-1, progLine);
-				}
-
-				pkb->insertParent(containerIndex.back().first, progLine);
-				//cout << "InsertParent1: Parent(" << containerIndex.back().first << "," << progLine << ")\n";
-					
-				vector<pair<PROG_LINE, TYPE>>::iterator itr = containerIndex.begin();
-				while(itr != containerIndex.end()){
-					pkb->insertUses(itr->second, itr->first, curVarIndex);
-					itr++;
-				}
-			}
-			else
-			{
-				if(tmpToken != "}")
-				{
-					insertFollows(progLine-1, progLine);
-				}
-			}
+			
+			insertFollowsParentForCon(tmpToken, progLine-1, progLine);
 
 			containerInfo.first = progLine;
 			containerInfo.second = WHILE;
@@ -317,22 +434,7 @@ bool Parser::stmt_assign(){
 
 	curAST = assignNode;
 
-	if(!containerIndex.empty() && progLine != 1){
-		// not first line, and previous line not a container
-		pkb->insertParent(containerIndex.back().first, progLine);
-	
-		// while {} a=b; a=b;
-		if(progLine-1 != containerIndex.back().first && prevToken.compare("}") != 0)
-		{	
-			insertFollows(progLine-1, progLine);
-		}
-	}
-	else
-	{
-		if(prevToken.compare("}") != 0) {
-			insertFollows(progLine-1, progLine);
-		}
-	}
+	insertFollowsParentForStmt(progLine-1, progLine);
 
 	if(name()){
 		curVarIndex = pkb->insertVar(prevToken);
@@ -343,7 +445,7 @@ bool Parser::stmt_assign(){
 		{
 			vector<pair<PROG_LINE, TYPE>>::iterator itr = containerIndex.begin();
 			while(itr != containerIndex.end()){
-				//cout << "insertmodifies1: " << itr->first << ", " << curVarIndex << "\n";
+				//cout << "insertmodifies1: type->" << itr->second << ",Modifies_Index: " << itr->first << ", varindex: " << curVarIndex << "\n";
 				pkb->insertModifies(itr->second, itr->first, curVarIndex);
 				itr++;
 			}
@@ -559,6 +661,53 @@ bool Parser::name(){
 
 	return false;
 }
+void Parser::insertFollowsParentForStmt(PROG_LINE p1, PROG_LINE p2){
+	if(!containerIndex.empty() && p2 != 1){
+		// not first line, and previous line not a container
+		pkb->insertParent(containerIndex.back().first, p2);
+	
+		// while {} a=b; a=b;
+		if(p1 != containerIndex.back().first && prevToken.compare("{") != 0 && prevToken.compare("}") != 0)
+		{	
+			//cout << "assign's insertfollow: " << curToken << "\n";
+			//cout << "assign's insertFollows: " << progLine-1 << "," << progLine << "\n";
+			insertFollows(p1, p2);
+		}
+	}
+	else
+	{
+		if(prevToken.compare("{") != 0 && prevToken.compare("}") != 0) {
+			//cout << "assign's insertFollows2: " << progLine-1 << "," << progLine << "\n";
+			insertFollows(p1, p2);
+		}
+	}
+}
+
+void Parser::insertFollowsParentForCon(TOKEN tmpToken, PROG_LINE p1, PROG_LINE p2){
+	if(!containerIndex.empty())
+	{
+		if(p1 != containerIndex.back().first){
+			//cout << "Insertfollows241: " << progLine-1 << ", " << progLine << "\n";
+			insertFollows(p1, p2);
+		}
+
+		pkb->insertParent(containerIndex.back().first, p2);
+		//cout << "InsertParent1: Parent(" << containerIndex.back().first << "," << progLine << ")\n";
+					
+		vector<pair<PROG_LINE, TYPE>>::iterator itr = containerIndex.begin();
+		while(itr != containerIndex.end()){
+			pkb->insertUses(itr->second, itr->first, curVarIndex);
+			itr++;
+		}
+	}
+	else
+	{
+		if(tmpToken != "}")
+		{
+			insertFollows(p1, p2);
+		}
+	}
+}
 
 void Parser::createExprTree(){
 	AST *rightNode = operands.top();
@@ -611,11 +760,20 @@ void Parser::error(int errorCode){
 		case INVALID_WHILE_NAME:
 			errorMsg = "Source Code Error(): invalid while var_name";
 			break;
+		case INVALID_IF_NAME:
+			errorMsg = "Source Code Error(): invalid if var_name";
+			break;
+		case INVALID_IF_FORMAT:
+			errorMsg = "Source Code Error(): invalid if format. missing then or else.";
+			break;
 		case MISSING_BRACKET:
 			errorMsg = "Source Code Error(): missing bracket";
 			break;
 		case MISSING_COLON:
 			errorMsg = "Source Code Error(): missing colon";
+			break;
+		case INVALID_CALL_NAME:
+			errorMsg = "Source Code Error(): invalid call proc_name";
 			break;
 		default:
 			errorMsg  = "Source Code Error(): unknown error";
