@@ -6,12 +6,11 @@ public:
 	CallTable(void);
 	~CallTable(void);
 
-	CALL_INDEX insertCall(Procedure * caller, Procedure* callee);
+	CALL_INDEX insertCall(PROC_NAME caller, PROC_NAME callee);
 	SIZE getCallTableSize();
 
 	//if caller is empty, return callee procedure
 	//if callee is empty, return caller procedure
-	//if both empty, return all
 	list<CALL_PAIR> getCall(PROC_NAME caller,PROC_NAME callee);
 
 	CALL_INDEX getCallPairIndex(PROC_NAME caller,PROC_NAME callee);
@@ -21,6 +20,6 @@ public:
 
 private:
 	int counter;
-	unordered_multimap<Procedure*,Procedure*> *callDictionary;
-	typedef unordered_multimap<Procedure*,Procedure*>::iterator callItr;
+	unordered_multimap<PROC_NAME,PROC_NAME> *callDictionary;
+	typedef unordered_multimap<PROC_NAME,PROC_NAME>::iterator callItr;
 };
