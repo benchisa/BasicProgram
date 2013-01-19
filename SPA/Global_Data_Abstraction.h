@@ -20,7 +20,6 @@ enum TYPE{
 	STMT_LIST,
 	ASSIGNMENT,
 	IF,
-	CALL,
 	INTEGER,
 	WHILE,
 	PROCEDURE,
@@ -70,10 +69,11 @@ typedef std::list<AST*> AST_LIST;
 typedef hash_map<int,TYPE> QUERYTABLE;
 typedef pair<TYPE,list<int> *> RAWDATA;
 typedef list<pair<string,string>> CALL_LIST;
-typedef pair<Procedure*,Procedure*> CALL_PAIR;
+typedef pair<string,string> CALL_PAIR;
 
 
 typedef int STATEMENT_NUM,VAR_INDEX,SIZE, PROC_INDEX,PROG_LINE,USES_INDEX,MODIFIES_INDEX,INDEX,CONSTANT_INDEX,CALL_INDEX;
 typedef string EXPRESSION,VAR_NAME,PROC_NAME;
 typedef string REPORT_MSG, QUERY, SOURCE, ERROR_MSG, TOKEN;
+
 
