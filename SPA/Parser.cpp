@@ -116,6 +116,7 @@ bool Parser::procedure(){
 		if(name()) 
 		{
 			Procedure *cProc = pkb->createProc(prevToken, progLine+1);
+			curProc = prevToken;
 			curProcIndex = pkb->insertProc(cProc);
 			if(progLine == 0){
 				curAST = pkb->createAST(PROCEDURE, 0, curProcIndex);
@@ -222,9 +223,11 @@ bool Parser::stmt_call(){
 	// call: call proc_name
 	if(matchToken("call")){
 		if(name()){
-			
-			
 			// add to call table
+			//Procedure* tProc = pkb->createProc(prevToken, -1);
+			//pkb->insertCall(cProc, tProc);
+			pkb->insertCall(curProc, prevToken);
+
 			// create AST
 			AST *callNode = pkb->createAST(CALL, progLine, pkb->getProcIndex(prevToken));
 			if(!pkb->setFirstDescendant(curAST, callNode))
@@ -607,6 +610,7 @@ bool Parser::factor(){
 	}
 	else if(const_value())
 	{
+		pkb->insertConst(atoi(prevToken.c_str()));
 		operands.push(pkb->createAST(CONSTANT, progLine, atoi(prevToken.c_str())));
 		return true;
 	}

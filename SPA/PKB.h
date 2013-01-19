@@ -88,7 +88,7 @@ class PKB
 	* To be implemented
 	*/
 		//Functions of Call Table
-		CALL_INDEX insertCall(Procedure * caller, Procedure* callee);
+		CALL_INDEX insertCall(PROC_NAME caller, PROC_NAME callee);
 		SIZE getCallTableSize();
 
 		//if caller is empty, return callee procedure
@@ -100,7 +100,7 @@ class PKB
 		CALL_LIST *  getAllCalls();
 
 		//Functions of constant table
-		CONSTANT_INDEX insertVar(int constantValue);
+		CONSTANT_INDEX insertConst(int constantValue);
 		SIZE getConstantTableSize();
 		int getConstantValue(CONSTANT_INDEX index);
 		CONSTANT_INDEX getConstantIndex(int constantValue);
