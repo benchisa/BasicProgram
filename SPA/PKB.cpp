@@ -11,6 +11,8 @@ PKB::PKB(void){
 	varTable = new 	VarTable;
 	procTable = new ProcTable;
 	treeMap = new hash_map<STATEMENT_NUM,AST_LIST>;
+	callTable=new CallTable;
+	constantTable=new ConstantTable;
 }
 PKB::~PKB(void){
 	delete rootAST;
@@ -233,4 +235,68 @@ bool PKB::isVarExists(VAR_NAME varName)
 VAR_LIST* PKB::getAllVar()
 {
 	return (*varTable).getAllVar();
+}
+
+//Function of CallTable
+
+CALL_INDEX PKB::insertCall(PROC_NAME caller, PROC_NAME callee)
+{
+	return callTable->insertCall(caller, callee);
+}
+
+SIZE PKB::getCallTableSize()
+{
+	return callTable->getCallTableSize();
+}
+
+list<CALL_PAIR> * PKB::getCall(PROC_NAME caller,PROC_NAME callee)
+{
+	return callTable->getCall(caller, callee);
+}
+CALL_PAIR PKB::getCALLPair(CALL_INDEX index)
+{
+	return callTable->getCallPair(index);
+}
+
+CALL_INDEX PKB::getCallPairIndex(PROC_NAME caller,PROC_NAME callee)
+{
+	return callTable->getCallPairIndex(caller, callee);
+}
+
+bool PKB::isExistsCall(PROC_NAME caller,PROC_NAME callee)
+{
+	return callTable->isExistsCall(caller, callee);
+}
+
+CALL_LIST * PKB::getAllCalls()
+{
+	return callTable->getAllCalls();
+}
+
+//Functions of constant table
+CONSTANT_INDEX PKB::insertConst(int constantValue)
+{
+	return constantTable->insertConst(constantValue);
+}
+SIZE PKB::getConstantTableSize()
+{
+	return constantTable->getConstantTableSize();
+}
+int PKB::getConstantValue(CONSTANT_INDEX index)
+{
+	return constantTable->getConstantValue(index);
+
+}
+CONSTANT_INDEX PKB::getConstantIndex(int constantValue)
+{
+	return constantTable->getConstantIndex(constantValue);
+}
+
+bool PKB::isExists(int constantValue)
+{
+	return constantTable->isExists(constantValue);
+}
+CONSTANT_LIST *  PKB::getAllConstant()
+{
+	return constantTable->getAllConstant();
 }
