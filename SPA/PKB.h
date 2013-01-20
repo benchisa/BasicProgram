@@ -118,8 +118,11 @@ private:
 		Uses* uses;
 		VarTable* varTable;
 		ProcTable* procTable;
-
+		CallTable* callTable;
+		ConstantTable* constantTable;
 		hash_map<STATEMENT_NUM,AST_LIST>* treeMap;
+
+	
 		
 };
 
