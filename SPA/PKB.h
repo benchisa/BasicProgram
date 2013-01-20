@@ -84,9 +84,7 @@ class PKB
 		USES_LIST getUses(USES_TYPE type, USES_INDEX index, VAR_INDEX varIndex);
 		bool isUses(USES_TYPE type, USES_INDEX index, VAR_INDEX varIndex);
 
-	/*
-	* To be implemented
-	*/
+
 		//Functions of Call Table
 		CALL_INDEX insertCall(PROC_NAME caller, PROC_NAME callee);
 		SIZE getCallTableSize();
