@@ -108,9 +108,9 @@ bool CallTable::isExistsCall(PROC_NAME caller,PROC_NAME callee)
 	
 }
 
-list<CALL_PAIR> CallTable::getCall(PROC_NAME caller,PROC_NAME callee)
+list<CALL_PAIR> * CallTable::getCall(PROC_NAME caller,PROC_NAME callee)
 {
-	list<CALL_PAIR> answer;
+	list<CALL_PAIR> * answer;
 	callItr c_itr;
 	if (caller!=" " || callee!=" ")
 	{
@@ -122,14 +122,14 @@ list<CALL_PAIR> CallTable::getCall(PROC_NAME caller,PROC_NAME callee)
 			{
 				if (c_itr->first==caller)
 				{
-					answer.push_back(CALL_PAIR(c_itr->first, c_itr->second));
+					answer->push_back(CALL_PAIR(c_itr->first, c_itr->second));
 				}
 			}
 			else if (caller==" "  && callee!=" ")
 			{
 				if (c_itr->second==callee)
 				{
-					answer.push_back(CALL_PAIR(c_itr->first, c_itr->second));
+					answer->push_back(CALL_PAIR(c_itr->first, c_itr->second));
 				}
 			} 
 		}
@@ -138,7 +138,7 @@ list<CALL_PAIR> CallTable::getCall(PROC_NAME caller,PROC_NAME callee)
 	{
 		for (c_itr=callDictionary->begin(); c_itr!=callDictionary->end(); c_itr++)
 		{
-			answer.push_back(CALL_PAIR(c_itr->first, c_itr->second));
+			answer->push_back(CALL_PAIR(c_itr->first, c_itr->second));
 		}
 	}
 	
