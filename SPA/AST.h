@@ -10,11 +10,14 @@ class AST
 		bool setFirstDescendant( AST* firstDescendant);
 		bool setAncestor(AST* ancestor);
 		bool addSibling(AST* rightSibling);
+		bool setTail(AST* tail);
+
 		//AST* getRoot();
 		AST* getFirstDescendant();
 		AST* getRightSibling();
 		AST* getLeftSibling();
 		AST* getAncestor();
+		AST* getTail();
 
 		ASTNODE_TYPE getRootType();
 		PROG_LINE getRootStatementNum();
@@ -30,5 +33,6 @@ private:
 	AST* ancestor;
 	AST* firstDescendant;
 	AST* root;
+	AST* tail;
 };
 
