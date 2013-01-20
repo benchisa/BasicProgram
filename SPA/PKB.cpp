@@ -4,6 +4,7 @@
 
 PKB::PKB(void){
 	rootAST=NULL;
+	tailAST=NULL;
 	follows = new Follows;
 	parent = new Parent;
 	modifies = new Modifies;
@@ -61,8 +62,12 @@ bool PKB::setFirstDescendant(AST * currentAST, AST* firstDescendant){
 bool PKB::setAncestor(AST* currentAST, AST* ancestor){
 	return (*currentAST).setAncestor(ancestor);
 }
-bool PKB::setTail(AST* currentAST,AST* tail){
-	return (*currentAST).setTail(tail);
+bool PKB::setTail(AST* tailNode){
+	if(tailAST==NULL){
+		tailAST = tailNode;
+		return true;
+	}
+	return false;
 }
 bool PKB::addSibling(AST*  currentAST,AST* newSibling){
 	return (*currentAST).addSibling(newSibling);
@@ -78,9 +83,6 @@ AST* PKB::getRightSibling(AST* currentAST){
 }
 AST* PKB::getLeftSibling(AST* currentAST){
 	return (*currentAST).getLeftSibling();
-}
-AST* PKB::getTail(AST* currentAST){
-	return (*currentAST).getTail();
 }
 ASTNODE_TYPE PKB::getType(AST* currentAST){
 	return (*currentAST).getRootType();
@@ -102,7 +104,9 @@ AST_LIST* PKB::getASTBy(STATEMENT_NUM statementNo){
 }
 AST* PKB::getRootAST(){
 	return rootAST;
-	
+}
+AST* PKB::getTail(){
+	return tailAST;
 }
 		
 

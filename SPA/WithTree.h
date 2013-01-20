@@ -7,7 +7,7 @@
 class WithTree
 {
 public:
-	WithTree(void);
+	WithTree(PKB * pkb);
 	~WithTree(void);
 	
 	typedef hash_map<int,string> QUERYVALUE; //to be changed

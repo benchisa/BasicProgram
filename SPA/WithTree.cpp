@@ -1,15 +1,26 @@
 #include "WithTree.h"
 
 
-WithTree::WithTree(void)
+WithTree::WithTree(PKB* pkb)
 {
+	this->pkb = pkb;
 }
 
 
 WithTree::~WithTree(void)
 {
 }
-
+RELATION_LIST* WithTree::evaluateWithTree(QTREE* qrTree,QUERYTABLE* qrTable, QUERYVALUE* qrValue){
+	WithTree::setQueryTable(qrTable);
+	WithTree::setQueryValue(qrValue);
+	return WithTree::evaluateWith(qrTree);
+}
+void WithTree::setQueryTable(QUERYTABLE* qrTable){
+	this->qrTable = qrTable;
+}
+void WithTree::setQueryValue(QUERYVALUE* qrValue){
+	this->qrValue = qrValue;
+}
 RELATION_LIST* WithTree::evaluateWith(QTREE* withTree){
 	
 	RELATION_LIST * returnList;
@@ -72,22 +83,33 @@ RELATION_LIST* WithTree::findLeftString(){
 	
 	switch(leftAttributeType){
 	case PROCEDURE:
-		int procIndex = pkb->getProcIndex(rightAttributeValue);
+		{int procIndex = pkb->getProcIndex(rightAttributeValue);
 		if(procIndex!=NULL) 
-			returnList->insert(pair<pair<int,int>,pair<int,int>>(pair<int,int>(PROCEDURE,procIndex),pair<int,int>(PARAM,rightAttributeIndex)));
+			returnList->push_back(pair<int,int>(procIndex,rightAttributeIndex));
+		}
 		break;
 	case VARIABLE:
-		int varIndex = pkb->getVarIndex(rightAttributeValue);
+		{int varIndex = pkb->getVarIndex(rightAttributeValue);
 		if(varIndex!=NULL)
-			returnList->insert(pair<pair<int,int>,pair<int,int>>(pair<int,int>(VARIABLE,varIndex),pair<int,int>(PARAM,rightAttributeIndex)));
+			returnList->push_back(pair<int,int>(varIndex,rightAttributeIndex));
+		}
 		break;
 	case CALL:
-		Procedure * caller;
-		caller = pkb->getCall(NULL,rightAttributeValue);
+		{CALLPAIR_LIST callList;
+		callList = pkb->getCall(NULL,rightAttributeValue);
 
-		if(caller!=NULL){
-			int callerIndex = pkb->getProcIndex(caller->getProcName());
-			returnList->insert(pair<pair<int,int>,pair<int,int>>(pair<int,int>(CALL,callerIndex),pair<int,int>(PARAM,rightAttributeIndex)));
+		if(callList.size()>0){
+			CALLPAIR_LIST::iterator itr;
+			for(itr = callList.begin();itr!=callList.end();itr++){
+				string callerName = itr->first;
+				string calleeName = itr->second;
+
+				if(calleeName == rightAttributeValue){
+					int callerIndex = pkb->getProcIndex(callerName);
+					returnList->push_back(pair<int,int>(callerIndex,rightAttributeIndex));
+				}
+			}
+		}
 		}
 		break;
 	}
@@ -110,23 +132,26 @@ RELATION_LIST* WithTree::findLeftInteger(){
 	
 	switch(leftAttributeType){
 	case CONSTANT:
-		int constantIndex = pkb->getConstantIndex(rightAttributeValue);
+		{int constantIndex = pkb->getConstantIndex(rightAttributeValue);
 		if(constantIndex!=NULL) 
-			returnList->insert(pair<pair<int,int>,pair<int,int>>(pair<int,int>(CONSTANT,constantIndex),pair<int,int>(INTEGER,rightAttributeValue)));
+			returnList->push_back(pair<int,int>(constantIndex,rightAttributeValue));
+		}
 		break;
 	case PROGLINE:
-		int maxProgLine = pkb->getMaxProgLine();
+		{int maxProgLine = pkb->getMaxProgLine();
 		int queryProgLine = rightAttributeValue;
 
 		if( queryProgLine <= maxProgLine)
-			returnList->insert(pair<pair<int,int>,pair<int,int>>(pair<int,int>(PROGLINE,rightAttributeValue),pair<int,int>(INTEGER,rightAttributeValue)));
+			returnList->push_back(pair<int,int>(rightAttributeValue,rightAttributeValue));
+		}
 		break;
 	case STATEMENT:
-		int maxStatementNum = pkb->getMaxStatementNum();
+		{int maxStatementNum = pkb->getMaxStatementNum();
 		int queryStatementNum = rightAttributeValue;
 
 		if(queryStatementNum <= maxStatementNum){
-			returnList->insert(pair<pair<int,int>,pair<int,int>>(pair<int,int>(STATEMENT,rightAttributeValue),pair<int,int>(INTEGER,rightAttributeValue)));
+			returnList->push_back(pair<int,int>(rightAttributeValue,rightAttributeValue));
+		}
 		}
 		break;
 	}
@@ -156,45 +181,247 @@ RELATION_LIST* WithTree::findMatchedPairs(){
 	
 	switch(leftVariableType){
 	case PROCEDURE:
-		SIZE procTableSize = pkb->getProceTableSize();
-
+		{SIZE procTableSize = pkb->getProceTableSize();
+		//inner switch
 		switch(rightVariableType){
 		case PROCEDURE:
-			for(int i=1;i<=procTableSize;i++){
-				returnList->insert(pair<pair<int,int>,pair<int,int>>(pair<int,int>(PROCEDURE,i),pair<int,int>(PROCEDURE,i)));
+			{for(int i=1;i<=procTableSize;i++){
+				returnList->push_back(pair<int,int>(i,i));
 			}
+			}
+			break;
 		case VARIABLE:
-			SIZE varTableSize = pkb->getVarTableSize();
+			{SIZE varTableSize = pkb->getVarTableSize();
 			for(int i=1;i<=procTableSize;i++){
 				for(int j=1;j<=varTableSize;j++){
 					string currentProcName = pkb->getProcedure(i)->getProcName();
 					string currentVarName = pkb->getVarName(j);
 
 					if(currentProcName==currentVarName)
-						returnList->insert(pair<pair<int,int>,pair<int,int>>(pair<int,int>(PROCEDURE,i),pair<int,int>(VARIABLE,j)));
+						returnList->push_back(pair<int,int>(i,j));
 				}
 			}
+			}
+			break;
 		case CALL:
-			SIZE callTableSize = pkb->getCallTableSize();
+			{SIZE callTableSize = pkb->getCallTableSize();
 			for(int i=1;i<=procTableSize;i++){
 				for(int j=1;j<=callTableSize;j++){
 					string currentProcName = pkb->getProcedure(i)->getProcName();
-					string currentCallerName = pkb->getCALLPair(j).first->getProcName();
+					string currentCalleeName = pkb->getCALLPair(j).second;
 
-					if(currentProcName==currentCallerName){
+					if(currentProcName==currentCalleeName){
+						string currentCallerName = pkb->getCALLPair(j).first;
 						int callerProcIndex= pkb->getProcIndex(currentCallerName);
-						returnList->insert(pair<pair<int,int>,pair<int,int>>(pair<int,int>(PROCEDURE,i),pair<int,int>(CALL,callerProcIndex)));
+						returnList->push_back(pair<int,int>(i,callerProcIndex));
 					}
 				}
 			}
+			}
+			break;
 		}
+		}
+		break;
 	case VARIABLE:
+		{SIZE varTableSize = pkb->getVarTableSize();
+		//inner switch
+		switch(rightVariableType){
+		case VARIABLE:
+			{for(int i=1;i<=varTableSize;i++){
+				returnList->push_back(pair<int,int>(i,i));
+			}
+			}
+			break;
+		case PROCEDURE:
+			{SIZE procTableSize = pkb->getProceTableSize();
+			for(int i=1;i<=varTableSize;i++){
+				for(int j=1;j<=procTableSize;j++){
+					string currentProcName = pkb->getProcedure(j)->getProcName();
+					string currentVarName = pkb->getVarName(i);
 
+					if(currentProcName==currentVarName)
+						returnList->push_back(pair<int,int>(i,j));
+				}
+			}
+			}
+			break;
+		case CALL:
+			{SIZE callTableSize = pkb->getCallTableSize();
+			for(int i=1;i<=varTableSize;i++){
+				for(int j=1;j<=callTableSize;j++){
+					string currentVarName = pkb->getVarName(i);
+					string currentCalleeName = pkb->getCALLPair(j).second;
+
+					if(currentVarName==currentCalleeName){
+						PROC_NAME currentCallerName = pkb->getCALLPair(j).first;
+						int callerProcIndex= pkb->getProcIndex(currentCallerName);
+						returnList->push_back(pair<int,int>(i,callerProcIndex));
+					}
+				}
+			}
+			}
+			break;
+		}
+		}
+		break;
 	case CALL:
+		{SIZE callTableSize = pkb->getCallTableSize();
+		//inner switch
+		switch(rightVariableType){
+		case CALL:
+			{list<string> callerList;
+			for(int i=1;i<=callTableSize;i++){
+				PROC_NAME callerName = pkb->getCALLPair(i).first;
+				callerList.push_back(callerName);
+			}
+			if(callerList.size()>0){
+				callerList.sort();
+				callerList.unique();
+
+				list<string>::iterator callerListItr;
+				for(callerListItr=callerList.begin();callerListItr != callerList.end();callerListItr++){
+					PROC_INDEX callerProcIndex = pkb->getProcIndex(*callerListItr);
+					returnList->push_back(pair<int,int>(callerProcIndex,callerProcIndex));
+				}
+
+			}	
+			}
+			break;
+		case VARIABLE:
+			{SIZE varTableSize = pkb->getVarTableSize();
+			for(int i=1;i<=callTableSize;i++){
+				for(int j=1;j<=varTableSize;j++){
+					PROC_NAME currentCalleeName = pkb->getCALLPair(i).second;
+					string currentVarName = pkb->getVarName(j);
+
+					if(currentCalleeName==currentVarName){
+						PROC_NAME callerName = pkb->getCALLPair(i).first;
+						PROC_INDEX callerIndex = pkb->getProcIndex(callerName);
+						returnList->push_back(pair<int,int>(callerIndex,j));
+				
+					}
+				}
+			}
+			}
+			break;
+		case PROCEDURE:
+			{SIZE procTableSize = pkb->getProceTableSize();
+			for(int i=1;i<=procTableSize;i++){
+				for(int j=1;j<=callTableSize;j++){
+					string currentProcName = pkb->getProcedure(i)->getProcName();
+					string currentCalleeName = pkb->getCALLPair(j).second;
+
+					if(currentProcName==currentCalleeName){
+						PROC_NAME currentCallerName = pkb->getCALLPair(j).first;
+						int callerProcIndex= pkb->getProcIndex(currentCallerName);
+						returnList->push_back(pair<int,int>(callerProcIndex,i));
+					}
+				}
+			}
+			}
+			break;
+		}
+		}
+		break;
 
 	case CONSTANT:
+		{int constantTableSize = pkb->getConstantTableSize();
+		//inner switch
+		switch(rightVariableType){
+		case CONSTANT:
+			{if (constantTableSize!=0){
+				for(int i =1;i<=constantTableSize;i++){
+					returnList->push_back(pair<int,int>(i,i));
+				}
+			}
+			}
+			break;
+		case PROGLINE:
+			{int maxProgLine = pkb->getMaxProgLine();
+			if (constantTableSize!=0){
+				for(int i =1;i<=constantTableSize;i++){
+					int currentConstantValue = pkb->getConstantValue(i);
+					if(currentConstantValue<=maxProgLine);
+					returnList->push_back(pair<int,int>(i,currentConstantValue));
+				}
+			}
+			}
+			break;
+		case STATEMENT:
+			{int maxStatementNum = pkb->getMaxStatementNum();
+			if (constantTableSize!=0){
+				for(int i =1;i<=constantTableSize;i++){
+					int currentConstantValue = pkb->getConstantValue(i);
+					if(currentConstantValue<=maxStatementNum);
+					returnList->push_back(pair<int,int>(i,currentConstantValue));
+				}
+			}
+			}
+			break;
+		}
+		}
+		break;
 	case PROGLINE:
+		{int maxProgLine = pkb->getMaxProgLine();
+		//inner switch
+		switch(rightVariableType){
+		case PROGLINE:
+			{for(int i =1;i<=maxProgLine;i++){
+				returnList->push_back(pair<int,int>(i,i));	
+			}
+			}
+			break;
+		case CONSTANT:
+			{SIZE constantTableSize = pkb->getConstantTableSize();
+			if (constantTableSize!=0){
+				for(int i =1;i<=constantTableSize;i++){
+					int currentConstantValue = pkb->getConstantValue(i);
+					if(currentConstantValue<=maxProgLine);
+					returnList->push_back(pair<int,int>(currentConstantValue,i));
+				}
+			}
+			}
+			break;
+		case STATEMENT:
+			{for(int i =1;i<=maxProgLine;i++){
+				returnList->push_back(pair<int,int>(i,i));
+				}
+			}
+			break;
+		}
+		}
+		break;
 	case STATEMENT:
+		{int maxStatementNum = pkb->getMaxStatementNum();
+		//inner switch
+		switch(rightVariableType){
+		case STATEMENT:
+			{for(int i =1;i<=maxStatementNum;i++){
+				returnList->push_back(pair<int,int>(i,i));	
+			}
+			}
+			break;
+		case CONSTANT:
+			{SIZE constantTableSize = pkb->getConstantTableSize();
+			if (constantTableSize!=0){
+				for(int i =1;i<=constantTableSize;i++){
+					int currentConstantValue = pkb->getConstantValue(i);
+					if(currentConstantValue<=maxStatementNum);
+					returnList->push_back(pair<int,int>(currentConstantValue,i));
+				}
+			}
+			}
+			break;
+		case PROGLINE:
+			{int maxProgLine =pkb->getMaxProgLine();
+			for(int i =1;i<=maxProgLine;i++){
+				returnList->push_back(pair<int,int>(i,i));
+				}
+			}
+			break;
+		}
+		}
+		break;
 	}
 	return returnList;
 }

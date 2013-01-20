@@ -8,6 +8,8 @@
 #include "Parent.h"
 #include "Modifies.h"
 #include "Uses.h"
+#include "CallTable.h"
+#include "ConstantTable.h"
 #include <hash_map>
 
 
@@ -24,18 +26,18 @@ class PKB
 		bool setRootAST(AST* currentAST);
 		bool setFirstDescendant(AST * currentAST, AST* firstDescendant);
 		bool setAncestor(AST* currentAST, AST* ancestor);
-		bool setTail(AST* currentAST, AST* tail);
+		bool setTail(AST* tailNode);
 		bool addSibling(AST*  currentAST,AST* newSibling);
 		AST* getFirstDescendant(AST* currentAST);
 		AST* getRightSibling(AST* currentAST);
 		AST* getLeftSibling(AST* currentAST);
 		AST* getAncestor(AST* currentAST);
-		AST* getTail(AST* currentAST);
 		AST_LIST* getASTBy(STATEMENT_NUM statementNo);
 		ASTNODE_TYPE getType(AST* currentAST);
 		PROG_LINE getStatementNum(AST* currentAST);
 		INDEX getData(AST* currentAST);
 		AST* getRootAST();
+		AST* getTail();
 
 		//Functions of VarTable
 		VAR_INDEX insertVar(VAR_NAME varName);
@@ -112,6 +114,7 @@ class PKB
 private:
 		//Abastract Data Types stored in PKB
 		AST* rootAST;
+		AST* tailAST;
 		Follows* follows;
 		Parent* parent;
 		Modifies* modifies;
