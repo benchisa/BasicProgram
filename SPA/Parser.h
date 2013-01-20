@@ -47,7 +47,7 @@ private:
 	int lastProcEndLine;
 	pair<PROG_LINE, TYPE> containerInfo;
 	PKB *pkb;
-	AST *ast,*curAST, *prevAST;
+	AST *ast,*curAST, *prevAST, *lastAST;
 	PROC_NAME curProc;
 	//int procLine;
 	
