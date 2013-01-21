@@ -96,7 +96,6 @@ bool Parser::program(){
 	else{
 		pkb->getProcedure(curProcIndex)->setEndProgLine(progLine);
 		if(matchToken(" ")){
-			pkb->setTail(curAST);
 			return true;
 		}
 		else
@@ -239,8 +238,7 @@ bool Parser::stmt_call(){
 			}
 
 			curAST = callNode;
-			lastAST = callNode;
-
+			
 			// create follows, parent
 			insertFollowsParentForStmt(progLine-1, progLine);
 
@@ -726,9 +724,6 @@ void Parser::createExprTree(){
 
 	pkb->setFirstDescendant(oNode, leftNode);
 	pkb->addSibling(leftNode, rightNode);
-
-	// not yet tested most probably nt working.
-	lastAST = rightNode;
 
 	operands.push(oNode);
 }
