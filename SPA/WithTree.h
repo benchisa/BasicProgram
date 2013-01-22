@@ -7,24 +7,25 @@
 class WithTree
 {
 public:
-	WithTree(PKB * pkb);
+	WithTree(PKB * pkb,DesignExtractor* extractor);
 	~WithTree(void);
 	
-	typedef hash_map<int,string> QUERYVALUE; //to be changed
+	//typedef hash_map<int,string> QUERYVALUE; //to be changed
 
-	RELATION_LIST* evaluateWithTree(QTREE* qrTree,QUERYTABLE* qrTable,QUERYVALUE* qrValue);
+	RELATION_LIST* evaluateWithTree(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrParam);
 
 private:
 	PKB* pkb;
+	DesignExtractor* extractor;
 	QUERYTABLE* qrTable;
-	QUERYVALUE* qrValue;
+	QUERYPARAM* qrParam;
 	QTREE* withTree;
 	QTREE* leftVariable;
 	QTREE* rightVariable;
 	QTREE* rightAttribute;
 
 	void setQueryTable(QUERYTABLE* qrTable);
-	void setQueryValue(QUERYVALUE* qrValue);
+	void setQueryValue(QUERYPARAM* qrParam);
 	RELATION_LIST* evaluateWith(QTREE* withTree);
 	
 	RELATION_LIST* findLeftVariable();

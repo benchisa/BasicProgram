@@ -1,25 +1,26 @@
 #include "WithTree.h"
 
 
-WithTree::WithTree(PKB* pkb)
+WithTree::WithTree(PKB* pkb, DesignExtractor* extractor)
 {
 	this->pkb = pkb;
+	this->extractor = extractor;
 }
 
 
 WithTree::~WithTree(void)
 {
 }
-RELATION_LIST* WithTree::evaluateWithTree(QTREE* qrTree,QUERYTABLE* qrTable, QUERYVALUE* qrValue){
+RELATION_LIST* WithTree::evaluateWithTree(QTREE* qrTree,QUERYTABLE* qrTable, QUERYPARAM* qrParam){
 	WithTree::setQueryTable(qrTable);
-	WithTree::setQueryValue(qrValue);
+	WithTree::setQueryValue(qrParam);
 	return WithTree::evaluateWith(qrTree);
 }
 void WithTree::setQueryTable(QUERYTABLE* qrTable){
 	this->qrTable = qrTable;
 }
-void WithTree::setQueryValue(QUERYVALUE* qrValue){
-	this->qrValue = qrValue;
+void WithTree::setQueryValue(QUERYPARAM* qrParam){
+	this->qrParam = qrParam;
 }
 RELATION_LIST* WithTree::evaluateWith(QTREE* withTree){
 	
@@ -71,8 +72,8 @@ RELATION_LIST* WithTree::findLeftString(){
 
 	//To get the string value of right attribute from Query parameter table
 	int rightAttributeIndex = rightAttribute->getData();
-	QUERYVALUE::iterator itr1;
-	itr1 = qrValue->find(rightAttributeIndex);
+	QUERYPARAM::iterator itr1;
+	itr1 = qrParam->find(rightAttributeIndex);
 	string rightAttributeValue = itr1->second;
 
 	//To detect the type of left variable
@@ -96,7 +97,7 @@ RELATION_LIST* WithTree::findLeftString(){
 		break;
 	case CALL:
 		{CALLPAIR_LIST callList;
-		callList = pkb->getCall(NULL,rightAttributeValue);
+		callList = *pkb->getCall("",rightAttributeValue);
 
 		if(callList.size()>0){
 			CALLPAIR_LIST::iterator itr;
@@ -154,6 +155,42 @@ RELATION_LIST* WithTree::findLeftInteger(){
 		}
 		}
 		break;
+	case ASSIGNMENT:
+		{int maxStmtNum = pkb->getMaxStatementNum();
+		int queryStmtNum = rightAttributeValue;
+
+		if(queryStmtNum <= maxStmtNum&&extractor->isStatementTypeOf(ASSIGNMENT,queryStmtNum)){
+				returnList->push_back(pair<int,int>(queryStmtNum,queryStmtNum));
+			}
+		}
+		break;
+	case CALL:
+		{int maxStmtNum = pkb->getMaxStatementNum();
+		int queryStmtNum = rightAttributeValue;
+
+		if(queryStmtNum <= maxStmtNum&&extractor->isStatementTypeOf(CALL,queryStmtNum)){
+				returnList->push_back(pair<int,int>(queryStmtNum,queryStmtNum));
+			}
+		}
+		break;
+	case WHILE:
+		{int maxStmtNum = pkb->getMaxStatementNum();
+		int queryStmtNum = rightAttributeValue;
+
+		if(queryStmtNum <= maxStmtNum&&extractor->isStatementTypeOf(WHILE,queryStmtNum)){
+				returnList->push_back(pair<int,int>(queryStmtNum,queryStmtNum));
+			}
+		}
+		break;
+	case IF:
+		{int maxStmtNum = pkb->getMaxStatementNum();
+		int queryStmtNum = rightAttributeValue;
+
+		if(queryStmtNum <= maxStmtNum&&extractor->isStatementTypeOf(IF,queryStmtNum)){
+				returnList->push_back(pair<int,int>(queryStmtNum,queryStmtNum));
+			}
+		}
+		break;
 	}
 
 	return returnList;
@@ -180,6 +217,7 @@ RELATION_LIST* WithTree::findMatchedPairs(){
 	returnList = NULL;
 	
 	switch(leftVariableType){
+	//p.ProcName = 
 	case PROCEDURE:
 		{SIZE procTableSize = pkb->getProceTableSize();
 		//inner switch
@@ -222,6 +260,7 @@ RELATION_LIST* WithTree::findMatchedPairs(){
 		}
 		}
 		break;
+	//var.VarName = 
 	case VARIABLE:
 		{SIZE varTableSize = pkb->getVarTableSize();
 		//inner switch
@@ -264,6 +303,7 @@ RELATION_LIST* WithTree::findMatchedPairs(){
 		}
 		}
 		break;
+	//c.callName = or c.stmt#=
 	case CALL:
 		{SIZE callTableSize = pkb->getCallTableSize();
 		//inner switch
@@ -320,10 +360,45 @@ RELATION_LIST* WithTree::findMatchedPairs(){
 			}
 			}
 			break;
+		case STATEMENT:
+			{STATEMENT_LIST * callStmts;
+			callStmts = extractor->getAllCallStmts();
+
+			if(callStmts!=NULL){
+				STATEMENT_LIST::iterator itr;
+				for(itr= callStmts->begin();itr!=callStmts->end();itr++){
+					returnList->push_back(pair<int,int>(*itr,*itr));
+				}
+			}
+			}
+			break;
+		case CONSTANT:
+			{SIZE consTableSize = pkb->getConstantTableSize();
+
+			if(consTableSize>0){
+				for(int i =1;i<=consTableSize;i++){
+					int currentConst = pkb->getConstantValue(i);
+					if(extractor->isStatementTypeOf(CALL,currentConst)){
+						returnList->push_back(pair<int,int>(currentConst,currentConst));
+					}
+				}
+			}
+			}
+			break;
+		case PROGLINE:
+			{int maxProgLine = pkb->getMaxProgLine();
+
+			for(int i =1;i<=maxProgLine;i++){
+				if(extractor->isStatementTypeOf(CALL,i)){
+					returnList->push_back(pair<int,int>(i,i));
+				}
+			}
+			}
+			break;
 		}
 		}
 		break;
-
+	//c.Value = 
 	case CONSTANT:
 		{int constantTableSize = pkb->getConstantTableSize();
 		//inner switch
@@ -358,9 +433,50 @@ RELATION_LIST* WithTree::findMatchedPairs(){
 			}
 			}
 			break;
+		case ASSIGNMENT:
+			if(constantTableSize!=0){
+				for(int i =1;i<=constantTableSize;i++){
+					int currentConstantValue = pkb->getConstantValue(i);
+					if(extractor->isStatementTypeOf(ASSIGNMENT,currentConstantValue)){
+						returnList->push_back(pair<int,int>(i,currentConstantValue));
+					}
+				}
+			}
+			break;
+		case WHILE:
+			if(constantTableSize!=0){
+				for(int i =1;i<=constantTableSize;i++){
+					int currentConstantValue = pkb->getConstantValue(i);
+					if(extractor->isStatementTypeOf(WHILE,currentConstantValue)){
+						returnList->push_back(pair<int,int>(i,currentConstantValue));
+					}
+				}
+			}
+			break;
+		case IF:
+			if(constantTableSize!=0){
+				for(int i =1;i<=constantTableSize;i++){
+					int currentConstantValue = pkb->getConstantValue(i);
+					if(extractor->isStatementTypeOf(IF,currentConstantValue)){
+						returnList->push_back(pair<int,int>(i,currentConstantValue));
+					}
+				}
+			}
+			break;
+		case CALL:
+			if(constantTableSize!=0){
+				for(int i =1;i<=constantTableSize;i++){
+					int currentConstantValue = pkb->getConstantValue(i);
+					if(extractor->isStatementTypeOf(CALL,currentConstantValue)){
+						returnList->push_back(pair<int,int>(i,currentConstantValue));
+					}
+				}
+			}
+			break;
 		}
 		}
 		break;
+	//n.progLine# = 
 	case PROGLINE:
 		{int maxProgLine = pkb->getMaxProgLine();
 		//inner switch
@@ -388,9 +504,46 @@ RELATION_LIST* WithTree::findMatchedPairs(){
 				}
 			}
 			break;
+		case ASSIGNMENT:	
+			if(maxProgLine!=0){
+				for(int i =1;i<=maxProgLine;i++){
+					if(extractor->isStatementTypeOf(ASSIGNMENT,i)){
+						returnList->push_back(pair<int,int>(i,i));
+					}
+				}
+			}
+			break;
+		case WHILE:
+			if(maxProgLine!=0){
+				for(int i =1;i<=maxProgLine;i++){
+					if(extractor->isStatementTypeOf(WHILE,i)){
+						returnList->push_back(pair<int,int>(i,i));
+					}
+				}
+			}
+			break;
+		case IF:
+			if(maxProgLine!=0){
+				for(int i =1;i<=maxProgLine;i++){
+					if(extractor->isStatementTypeOf(IF,i)){
+						returnList->push_back(pair<int,int>(i,i));
+					}
+				}
+			}
+			break;
+		case CALL:
+			if(maxProgLine!=0){
+				for(int i =1;i<=maxProgLine;i++){
+					if(extractor->isStatementTypeOf(CALL,i)){
+						returnList->push_back(pair<int,int>(i,i));
+					}
+				}
+			}
+			break;
 		}
 		}
 		break;
+	//stmt.stmt# = 
 	case STATEMENT:
 		{int maxStatementNum = pkb->getMaxStatementNum();
 		//inner switch
@@ -416,6 +569,218 @@ RELATION_LIST* WithTree::findMatchedPairs(){
 			{int maxProgLine =pkb->getMaxProgLine();
 			for(int i =1;i<=maxProgLine;i++){
 				returnList->push_back(pair<int,int>(i,i));
+				}
+			}
+			break;
+		case ASSIGNMENT:
+			{
+				STATEMENT_LIST * assignList;
+				assignList = extractor->getAllAssigns();
+				if(assignList != NULL){
+					STATEMENT_LIST::iterator itr;
+					for(itr = assignList->begin();itr!=assignList->end();itr++){
+						returnList->push_back(pair<int,int>(*itr,*itr));
+					}
+				}
+			}
+			break;
+		case WHILE:
+			{
+				STATEMENT_LIST * whileList;
+				whileList = extractor->getAllWhiles();
+				if(whileList != NULL){
+					STATEMENT_LIST::iterator itr;
+					for(itr = whileList->begin();itr!=whileList->end();itr++){
+						returnList->push_back(pair<int,int>(*itr,*itr));
+					}
+				}
+			}
+			break;
+		case IF:
+			{
+				STATEMENT_LIST * ifList;
+				ifList = extractor->getAllIfs();
+				if(ifList != NULL){
+					STATEMENT_LIST::iterator itr;
+					for(itr = ifList->begin();itr!=ifList->end();itr++){
+						returnList->push_back(pair<int,int>(*itr,*itr));
+					}
+				}
+			}
+			break;
+		case CALL:
+			{
+				STATEMENT_LIST * callList;
+				callList = extractor->getAllCallStmts();
+				if(callList != NULL){
+					STATEMENT_LIST::iterator itr;
+					for(itr = callList->begin();itr!=callList->end();itr++){
+						returnList->push_back(pair<int,int>(*itr,*itr));
+					}
+				}
+			}
+			break;
+		}
+		}
+		break;
+	//a.stmt# = 
+	case ASSIGNMENT:
+		{
+		//inner switch
+		switch(rightVariableType){
+		case STATEMENT:
+			{
+				STATEMENT_LIST * assignList;
+				assignList = extractor->getAllAssigns();
+				if(assignList != NULL){
+					STATEMENT_LIST::iterator itr;
+					for(itr = assignList->begin();itr!=assignList->end();itr++){
+						returnList->push_back(pair<int,int>(*itr,*itr));
+					}
+				}
+			}
+			break;
+		case CONSTANT:
+			{SIZE constantTableSize = pkb->getConstantTableSize();
+			if(constantTableSize!=0){
+				for(int i =1;i<=constantTableSize;i++){
+					int currentConstantValue = pkb->getConstantValue(i);
+					if(extractor->isStatementTypeOf(ASSIGNMENT,currentConstantValue)){
+						returnList->push_back(pair<int,int>(currentConstantValue,i));
+					}
+				}
+			}
+			}
+			break;
+		case PROGLINE:
+		{int maxProgLine = pkb->getMaxProgLine();
+			if(maxProgLine!=0){
+				for(int i =1;i<=maxProgLine;i++){
+					if(extractor->isStatementTypeOf(ASSIGNMENT,i))
+						returnList->push_back(pair<int,int>(i,i));	
+				}
+			}
+		}
+			break;
+		case ASSIGNMENT:
+			{
+				STATEMENT_LIST * assignList;
+				assignList = extractor->getAllAssigns();
+				if(assignList != NULL){
+					STATEMENT_LIST::iterator itr;
+					for(itr = assignList->begin();itr!=assignList->end();itr++){
+						returnList->push_back(pair<int,int>(*itr,*itr));
+					}
+				}
+			}
+			break;
+		}
+		}
+		break;
+	//w.stmt# = 
+	case WHILE:
+		{
+		//inner switch
+		switch(rightVariableType){
+		case STATEMENT:
+			{
+				STATEMENT_LIST * whileList;
+				whileList = extractor->getAllWhiles();
+				if(whileList != NULL){
+					STATEMENT_LIST::iterator itr;
+					for(itr = whileList->begin();itr!=whileList->end();itr++){
+						returnList->push_back(pair<int,int>(*itr,*itr));
+					}
+				}
+			}
+			break;
+		case CONSTANT:
+			{SIZE constantTableSize = pkb->getConstantTableSize();
+			if(constantTableSize!=0){
+				for(int i =1;i<=constantTableSize;i++){
+					int currentConstantValue = pkb->getConstantValue(i);
+					if(extractor->isStatementTypeOf(WHILE,currentConstantValue)){
+						returnList->push_back(pair<int,int>(currentConstantValue,i));
+					}
+				}
+			}
+			}
+			break;
+		case PROGLINE:
+		{int maxProgLine = pkb->getMaxProgLine();
+			if(maxProgLine!=0){
+				for(int i =1;i<=maxProgLine;i++){
+					if(extractor->isStatementTypeOf(WHILE,i)){
+						returnList->push_back(pair<int,int>(i,i));
+					}
+				}
+			}
+		}
+			break;
+		case WHILE:
+			{
+				STATEMENT_LIST * whileList;
+				whileList = extractor->getAllWhiles();
+				if(whileList != NULL){
+					STATEMENT_LIST::iterator itr;
+					for(itr = whileList->begin();itr!=whileList->end();itr++){
+						returnList->push_back(pair<int,int>(*itr,*itr));
+					}
+				}
+			}
+			break;
+		}
+		}
+		break;
+	//if.stmt# = 
+	case IF:
+		{
+		//inner switch
+		switch(rightVariableType){
+		case STATEMENT:
+			{
+				STATEMENT_LIST * ifList;
+				ifList = extractor->getAllIfs();
+				if(ifList != NULL){
+					STATEMENT_LIST::iterator itr;
+					for(itr = ifList->begin();itr!=ifList->end();itr++){
+						returnList->push_back(pair<int,int>(*itr,*itr));
+					}
+				}
+			}
+			break;
+		case CONSTANT:
+			{SIZE constantTableSize = pkb->getConstantTableSize();
+			if(constantTableSize!=0){
+				for(int i =1;i<=constantTableSize;i++){
+					int currentConstantValue = pkb->getConstantValue(i);
+					if(extractor->isStatementTypeOf(IF,currentConstantValue)){
+						returnList->push_back(pair<int,int>(currentConstantValue,i));
+					}
+				}
+			}
+			}
+			break;
+		case PROGLINE:
+		{int maxProgLine = pkb->getMaxProgLine();
+			if(maxProgLine!=0){
+				for(int i =1;i<=maxProgLine;i++){
+					if(extractor->isStatementTypeOf(IF,i)){
+						returnList->push_back(pair<int,int>(i,i));
+					}
+				}
+			}
+		}
+			break;
+		case ASSIGNMENT:
+			{
+				STATEMENT_LIST * ifList;
+				ifList = extractor->getAllIfs();
+				if(ifList != NULL){
+					STATEMENT_LIST::iterator itr;
+					for(itr = ifList->begin();itr!=ifList->end();itr++){
+						returnList->push_back(pair<int,int>(*itr,*itr));
+					}
 				}
 			}
 			break;

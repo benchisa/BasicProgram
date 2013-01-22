@@ -61,10 +61,3 @@ INDEX AST::getRootData(){
 	return myData;
 }
 
-	
-bool AST::setTail(AST* tail){
-	this->tail = tail;
-}
-AST * AST::getTail(){
-	return tail;
-}

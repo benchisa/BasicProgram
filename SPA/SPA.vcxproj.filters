@@ -99,9 +99,6 @@
     <ClCompile Include="QueryFormatter.cpp">
       <Filter>Source Files\PQL</Filter>
     </ClCompile>
-    <ClCompile Include="QueryEvaluator.cpp">
-      <Filter>Source Files\PQL</Filter>
-    </ClCompile>
     <ClCompile Include="GrammarTable.cpp">
       <Filter>Source Files\PQL</Filter>
     </ClCompile>
@@ -114,14 +111,14 @@
     <ClCompile Include="SuchThatTree.cpp">
       <Filter>Source Files\PQL</Filter>
     </ClCompile>
-    <ClCompile Include="CallTable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ConstantTable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DesignExtractor.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CallTable.cpp">
+      <Filter>Source Files\PKB</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantTable.cpp">
+      <Filter>Source Files\PKB</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -181,9 +178,6 @@
     </ClInclude>
     <ClInclude Include="AST.h">
       <Filter>Header Files\PKB</Filter>
-    </ClInclude>
-    <ClInclude Include="QueryEvaluator.h">
-      <Filter>Header Files\PQL</Filter>
     </ClInclude>
     <ClInclude Include="GrammarTable.h">
       <Filter>Header Files\PQL</Filter>

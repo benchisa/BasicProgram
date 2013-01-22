@@ -17,7 +17,6 @@ class AST
 		AST* getRightSibling();
 		AST* getLeftSibling();
 		AST* getAncestor();
-		AST* getTail();
 
 		ASTNODE_TYPE getRootType();
 		PROG_LINE getRootStatementNum();
@@ -33,6 +32,5 @@ private:
 	AST* ancestor;
 	AST* firstDescendant;
 	AST* root;
-	AST* tail;
 };
 

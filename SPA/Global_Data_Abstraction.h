@@ -67,6 +67,7 @@ typedef std::list<string> VAR_LIST;
 typedef std::list<Procedure> PROC_LIST;
 typedef std::list<AST*> AST_LIST;
 typedef hash_map<int,TYPE> QUERYTABLE;
+typedef hash_map<int,string> QUERYPARAM;
 typedef pair<TYPE,list<int> *> RAWDATA;
 typedef list<pair<string,string>> CALL_LIST;
 typedef pair<string,string> CALL_PAIR;

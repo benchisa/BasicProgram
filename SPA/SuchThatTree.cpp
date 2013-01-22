@@ -27,6 +27,8 @@ void SuchThatTree::iterateAndStore(RELATION_LIST *result, RELATION_LIST list){
 RELATION_LIST* SuchThatTree::evaluateSuchThatTree(QTREE* suchThatTree,QUERYTABLE* qrTable){
 	this->suchThatTree = suchThatTree;
 	this->qrTable = qrTable;
+
+	return SuchThatTree::evaluateSuchThat();
 }
 RELATION_LIST* SuchThatTree::evaluateSuchThat(){
 	

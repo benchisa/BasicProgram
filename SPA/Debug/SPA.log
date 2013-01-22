@@ -1,11 +1,35 @@
-﻿Build started 1/17/2013 2:57:06 PM.
+﻿Build started 1/22/2013 8:32:33 PM.
      1>Project "C:\Users\Xi\Documents\GitHub\CS3202\SPA\SPA.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\SPA.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
          All outputs are up-to-date.
        Lib:
-         All outputs are up-to-date.
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"C:\Users\Xi\Documents\GitHub\CS3202\Debug\SPA.lib" /NOLOGO Debug\AST.obj
+         Debug\CallTable.obj
+         Debug\ConstantTable.obj
+         Debug\DesignExtractor.obj
+         Debug\FrontEndController.obj
+         Debug\GrammarTable.obj
+         Debug\Modifies.obj
+         Debug\Parent.obj
+         Debug\Parser.obj
+         Debug\Pattern.obj
+         Debug\PatternTree.obj
+         Debug\PKB.obj
+         Debug\PQLController.obj
+         Debug\Procedure.obj
+         Debug\ProcTable.obj
+         Debug\QTREE.obj
+         Debug\QueryFormatter.obj
+         Debug\QueryPreprocessor.obj
+         Debug\SPAController.obj
+         Debug\SuchThat.obj
+         Debug\SuchThatTree.obj
+         Debug\Uses.obj
+         Debug\VarTable.obj
+         Debug\WithTree.obj
+         Debug\Follows.obj
          SPA.vcxproj -> C:\Users\Xi\Documents\GitHub\CS3202\Debug\SPA.lib
        FinalizeBuildStatus:
          Deleting file "Debug\SPA.unsuccessfulbuild".
@@ -14,4 +38,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.07
+Time Elapsed 00:00:00.21

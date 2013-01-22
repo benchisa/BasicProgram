@@ -27,7 +27,6 @@
     <ClCompile Include="Procedure.cpp" />
     <ClCompile Include="ProcTable.cpp" />
     <ClCompile Include="QTREE.cpp" />
-    <ClCompile Include="QueryEvaluator.cpp" />
     <ClCompile Include="QueryFormatter.cpp" />
     <ClCompile Include="QueryPreprocessor.cpp" />
     <ClCompile Include="SPAController.cpp" />
@@ -51,7 +50,6 @@
     <ClInclude Include="PQLController.h" />
     <ClInclude Include="ProcTable.h" />
     <ClInclude Include="QTREE.h" />
-    <ClInclude Include="QueryEvaluator.h" />
     <ClInclude Include="QueryFormatter.h" />
     <ClInclude Include="QueryPreprocessor.h" />
     <ClInclude Include="SPAController.h" />
