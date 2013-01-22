@@ -107,6 +107,7 @@ bool Parser::program(){
 		}
 	}
 
+	
 	return true;
 }
 
@@ -237,7 +238,7 @@ bool Parser::stmt_call(){
 			}
 
 			curAST = callNode;
-
+			
 			// create follows, parent
 			insertFollowsParentForStmt(progLine-1, progLine);
 
