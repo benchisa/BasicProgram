@@ -49,6 +49,32 @@ AST* PKB::createAST(ASTNODE_TYPE type,STATEMENT_NUM stmt,int data){
 
 	return newASTP;
 }
+
+AST* PKB::createAST(ASTNODE_TYPE type,ProgLine * progLine,int data){
+	
+	AST newAST(type, progLine,data);
+	AST * newASTP = new AST(newAST);
+	//return the newAST without add into AST map, if the statement number is less than 1
+	if(progLine->statementNum<1) return newASTP;
+
+	hash_map<STATEMENT_NUM,AST_LIST>::iterator itr;
+	itr = (*treeMap).find(progLine->statementNum);
+
+	//add the new AST into AST map with stmt NO.
+	AST_LIST currentList;
+
+	if(itr!=(*treeMap).end()){
+		//stmt exists in the AST map
+		itr->second.push_back(newASTP);
+	}else{
+		//stmt does not exists in the AST map
+		currentList.push_back(newASTP);
+		(*treeMap)[progLine->statementNum]=currentList;
+	}
+
+	return newASTP;
+}
+
 bool PKB::setRootAST(AST * currentAST){
 	if(rootAST==NULL){
 		rootAST = currentAST;
@@ -108,7 +134,16 @@ AST* PKB::getRootAST(){
 AST* PKB::getTail(){
 	return tailAST;
 }
-		
+
+STATEMENT_NUM PKB::getStmtNum(AST* currentAST)
+{
+	return currentAST->getRootStmtNum();
+}
+
+PROG_LINE PKB::getProgLine(AST* currentAST)
+{
+	return currentAST->getRootProgLineNum();
+}
 
 //Functions of Procedure Table
 Procedure * PKB::createProc(PROC_NAME procName, PROG_LINE startProgLine){
