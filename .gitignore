@@ -10,3 +10,6 @@ Thumbs.db
 
 # ignoring obj files
 *.obj
+*.sdf
+*.suo
+*.ipch
