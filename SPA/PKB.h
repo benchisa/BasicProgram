@@ -38,6 +38,11 @@ class PKB
 		INDEX getData(AST* currentAST);
 		AST* getRootAST();
 		AST* getTail();
+		
+		//this is for new progline
+		AST* createAST(ASTNODE_TYPE type,ProgLine * progLine,INDEX data);
+		STATEMENT_NUM getStmtNum(AST* currentAST);
+		PROG_LINE getProgLine(AST* currentAST);
 
 		//Functions of VarTable
 		VAR_INDEX insertVar(VAR_NAME varName);
