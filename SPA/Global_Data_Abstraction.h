@@ -78,4 +78,10 @@ typedef int STATEMENT_NUM,VAR_INDEX,SIZE, PROC_INDEX,PROG_LINE,USES_INDEX,MODIFI
 typedef string EXPRESSION,VAR_NAME,PROC_NAME;
 typedef string REPORT_MSG, QUERY, SOURCE, ERROR_MSG, TOKEN;
 
+//for new prog line
+struct ProgLine
+{
+	int progLineNum;
+	int statementNum;
+};
 
