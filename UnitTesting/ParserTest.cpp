@@ -66,15 +66,15 @@ void ParserTest::testIf()
 	// Test Uses and Modifies for if
 	MODIFIES_LIST modifiesList = pkb->getModifies(IF, 1, 0);
 	MODIFIES_LIST::iterator modifiesListItr = modifiesList.begin();
-	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "a");
-	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "c");
-	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "e");
+	CPPUNIT_ASSERT( pkb->getVarName((modifiesListItr++->second)) == "a");
+	CPPUNIT_ASSERT( pkb->getVarName((modifiesListItr++->second)) == "c");
+	CPPUNIT_ASSERT( pkb->getVarName((modifiesListItr++->second)) == "e");
 	
 	USES_LIST useList = pkb->getUses(IF, 1, 0);
 	USES_LIST::iterator usesListItr = useList.begin();
-	CPPUNIT_ASSERT( *pkb->getVarName((usesListItr++->second)) == "b");
-	CPPUNIT_ASSERT( *pkb->getVarName((usesListItr++->second)) == "c");
-	CPPUNIT_ASSERT( *pkb->getVarName((usesListItr++->second)) == "d");
+	CPPUNIT_ASSERT( pkb->getVarName((usesListItr++->second)) == "b");
+	CPPUNIT_ASSERT( pkb->getVarName((usesListItr++->second)) == "c");
+	CPPUNIT_ASSERT( pkb->getVarName((usesListItr++->second)) == "d");
 
 	// Follows(2, 3), Follows(3, 4), Follows(7, 8), Follows(1, 9)
 	// Parent(1, 2) (1, 3), (1, 4), (4, 5), (4, 6), (1, 7), (1, 8)
@@ -113,21 +113,21 @@ void ParserTest::testIf()
 	// Test Uses and Modifies for if
 	modifiesList = pkb->getModifies(IF, 1, 0);
 	modifiesListItr = modifiesList.begin();
-	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "b");
-	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "a");
-	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "c");
-	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "e");
+	CPPUNIT_ASSERT( pkb->getVarName((modifiesListItr++->second)) == "b");
+	CPPUNIT_ASSERT( pkb->getVarName((modifiesListItr++->second)) == "a");
+	CPPUNIT_ASSERT( pkb->getVarName((modifiesListItr++->second)) == "c");
+	CPPUNIT_ASSERT( pkb->getVarName((modifiesListItr++->second)) == "e");
 	
 	modifiesList = pkb->getModifies(IF, 4, 0);
 	modifiesListItr = modifiesList.begin();
-	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "b");
-	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "a");
+	CPPUNIT_ASSERT( pkb->getVarName((modifiesListItr++->second)) == "b");
+	CPPUNIT_ASSERT( pkb->getVarName((modifiesListItr++->second)) == "a");
 
 	useList = pkb->getUses(IF, 1, 0);
 	usesListItr = useList.begin();
-	CPPUNIT_ASSERT( *pkb->getVarName((usesListItr++->second)) == "b");
-	CPPUNIT_ASSERT( *pkb->getVarName((usesListItr++->second)) == "c");
-	CPPUNIT_ASSERT( *pkb->getVarName((usesListItr++->second)) == "d");
+	CPPUNIT_ASSERT( pkb->getVarName((usesListItr++->second)) == "b");
+	CPPUNIT_ASSERT( pkb->getVarName((usesListItr++->second)) == "c");
+	CPPUNIT_ASSERT( pkb->getVarName((usesListItr++->second)) == "d");
 	// varindex 7 is variable y
 	CPPUNIT_ASSERT(pkb->isUses(IF, 1, 7) == false);
 
@@ -347,12 +347,12 @@ void ParserTest::testOperators(){
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == PLUS);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()) == VARIABLE);
-	CPPUNIT_ASSERT(*pkb->getVarName(pkb->getData(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()))=="b");
+	CPPUNIT_ASSERT(pkb->getVarName(pkb->getData(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()))=="b");
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()) == MULTIPLY);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()->getFirstDescendant()) == VARIABLE);
-	CPPUNIT_ASSERT(*pkb->getVarName(pkb->getData(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()->getFirstDescendant()))=="c");
+	CPPUNIT_ASSERT(pkb->getVarName(pkb->getData(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()->getFirstDescendant()))=="c");
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()) == VARIABLE);
-	CPPUNIT_ASSERT(*pkb->getVarName(pkb->getData(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()))=="d");
+	CPPUNIT_ASSERT(pkb->getVarName(pkb->getData(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()))=="d");
 	
 	src = "procedure main{\n"
 		"a = b - c * d;}\n";
@@ -402,6 +402,7 @@ void ParserTest::testOperators(){
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == VARIABLE);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()) == VARIABLE);
+
 
 	src = "procedure main{\n"
 		"a = b + c + d;}\n";

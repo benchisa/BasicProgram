@@ -225,8 +225,6 @@ bool Parser::stmt_call(){
 	if(matchToken("call")){
 		if(name()){
 			// add to call table
-			//Procedure* tProc = pkb->createProc(prevToken, -1);
-			//pkb->insertCall(cProc, tProc);
 			pkb->insertCall(curProc, prevToken);
 
 			// create AST
@@ -778,7 +776,7 @@ void Parser::error(int errorCode){
 			errorMsg = "Source Code Error(): missing colon";
 			break;
 		case INVALID_CALL_NAME:
-			errorMsg = "Source Code Error(): invalid call proc_name";
+			//errorMsg = "Source Code Error(): invalid call proc_name";
 			break;
 		default:
 			errorMsg  = "Source Code Error(): unknown error";
