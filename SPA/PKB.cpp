@@ -14,6 +14,7 @@ PKB::PKB(void){
 	treeMap = new hash_map<STATEMENT_NUM,AST_LIST>;
 	callTable=new CallTable;
 	constantTable=new ConstantTable;
+	progLineTable=new unordered_multimap<PROG_LINE, STATEMENT_NUM>;
 }
 PKB::~PKB(void){
 	delete rootAST;
@@ -25,33 +26,35 @@ PKB::~PKB(void){
 	delete procTable;
 	delete treeMap;
 }
-AST* PKB::createAST(ASTNODE_TYPE type,STATEMENT_NUM stmt,int data){
-	
-	AST newAST(type, stmt,data);
-	AST * newASTP = new AST(newAST);
-	//return the newAST without add into AST map, if the statement number is less than 1
-	if(stmt<1) return newASTP;
-
-	hash_map<STATEMENT_NUM,AST_LIST>::iterator itr;
-	itr = (*treeMap).find(stmt);
-
-	//add the new AST into AST map with stmt NO.
-	AST_LIST currentList;
-
-	if(itr!=(*treeMap).end()){
-		//stmt exists in the AST map
-		itr->second.push_back(newASTP);
-	}else{
-		//stmt does not exists in the AST map
-		currentList.push_back(newASTP);
-		(*treeMap)[stmt]=currentList;
-	}
-
-	return newASTP;
-}
-
 AST* PKB::createAST(ASTNODE_TYPE type,ProgLine * progLine,int data){
 	
+	//for prog line table.
+	unordered_map<PROG_LINE, STATEMENT_NUM>::iterator p_itr;
+	p_itr=progLineTable->find(progLine->progLineNum);
+	if (p_itr==progLineTable->end())
+	{
+		progLineTable->insert(make_pair(progLine->progLineNum, progLine->statementNum));
+	}
+	else
+	{
+		bool exist=false;
+			
+		for (p_itr=progLineTable->begin(); p_itr!=progLineTable->end(); p_itr++)
+			{
+			
+				if (p_itr->first==progLine->progLineNum &&p_itr->second==progLine->statementNum)
+				{	
+					exist=true;
+					break;
+				}
+			}
+			if (!exist)
+			{
+				progLineTable->insert(make_pair(progLine->progLineNum, progLine->statementNum));
+				
+			}
+	}
+
 	AST newAST(type, progLine,data);
 	AST * newASTP = new AST(newAST);
 	//return the newAST without add into AST map, if the statement number is less than 1
@@ -74,7 +77,6 @@ AST* PKB::createAST(ASTNODE_TYPE type,ProgLine * progLine,int data){
 
 	return newASTP;
 }
-
 bool PKB::setRootAST(AST * currentAST){
 	if(rootAST==NULL){
 		rootAST = currentAST;
@@ -145,6 +147,35 @@ PROG_LINE PKB::getProgLine(AST* currentAST)
 	return currentAST->getRootProgLineNum();
 }
 
+STATEMENT_LIST * PKB::getStmtList(PROG_LINE progLine)
+{   
+	if (progLine==NULL)
+	{
+		return nullptr;
+	}
+	STATEMENT_LIST * stmtList=new STATEMENT_LIST;
+
+	unordered_multimap<int, int>::iterator p_itr;
+	p_itr=progLineTable->find(progLine);
+	
+	if (p_itr!=progLineTable->end())
+	{
+		for (p_itr; p_itr!=progLineTable->end(); p_itr++)
+		{
+			if (p_itr->first==progLine)
+			{
+				stmtList->push_back(p_itr->second);
+			}
+		}
+		return stmtList;
+	}
+	else
+	{
+		return nullptr;
+	}
+	
+
+}
 //Functions of Procedure Table
 Procedure * PKB::createProc(PROC_NAME procName, PROG_LINE startProgLine){
 	return new Procedure(Procedure(procName,startProgLine));
