@@ -43,6 +43,7 @@ class PKB
 		AST* createAST(ASTNODE_TYPE type,ProgLine * progLine,INDEX data);
 		STATEMENT_NUM getStmtNum(AST* currentAST);
 		PROG_LINE getProgLine(AST* currentAST);
+		STATEMENT_LIST * getStmtList(PROG_LINE progLine);
 
 		//Functions of VarTable
 		VAR_INDEX insertVar(VAR_NAME varName);
@@ -129,6 +130,7 @@ private:
 		CallTable* callTable;
 		ConstantTable* constantTable;
 		hash_map<STATEMENT_NUM,AST_LIST>* treeMap;
+		unordered_multimap<PROG_LINE, STATEMENT_NUM> * progLineTable;
 
 	
 		
