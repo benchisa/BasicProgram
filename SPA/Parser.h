@@ -49,6 +49,7 @@ private:
 	PKB *pkb;
 	AST *ast,*curAST, *prevAST;
 	PROC_NAME curProc;
+	PROG_LINE prevProgLine, curProgLine;
 	//int procLine;
 	
 	bool parse();

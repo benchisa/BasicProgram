@@ -35,10 +35,11 @@ PKB* Parser::getPKB(){
 int Parser::startParse(){
 	// initialize everything
 	tokens = ParserTokenizer::tokenize(this->src);
-	ParserTokenizer t;
-	t.printAll(tokens);
+	//ParserTokenizer t;
+	//t.printAll(tokens);
 	curToken = tokens.at(0).first;
 	prevToken = "";
+	curProgLine = tokens.at(0).second;
 	tokenIndex = 0;
 	stmt_num = 0;
 	nesting = 0;
@@ -62,8 +63,11 @@ bool Parser::parse(){
 bool Parser::matchToken(TOKEN token){
 	if(curToken.compare(token) == 0){
 		prevToken = curToken;
-		if(tokenIndex < tokens.size()-1) 
-			curToken = tokens.at(++tokenIndex).first;
+		prevProgLine = curProgLine;
+		if(tokenIndex < tokens.size()-1) {
+			curToken = tokens.at(tokenIndex).first;
+			curProgLine = tokens.at(++tokenIndex).second;
+		}
 		else
 			curToken = " ";
 		return true;
@@ -77,8 +81,11 @@ bool Parser::matchToken(TOKEN token){
 bool Parser::matchToken(regex reg){
 	if(regex_match(curToken, reg)){
 		prevToken = curToken;
-		if(tokenIndex < tokens.size()-1) 
-			curToken = tokens.at(++tokenIndex).first;
+		prevProgLine = curProgLine;
+		if(tokenIndex < tokens.size()-1) {
+			curToken = tokens.at(tokenIndex).first;
+			curProgLine = tokens.at(++tokenIndex).second;
+		}
 		else
 			curToken = " ";
 		return true;
@@ -120,7 +127,7 @@ bool Parser::procedure(){
 			curProc = prevToken;
 			curProcIndex = pkb->insertProc(cProc);
 			if(stmt_num == 0){
-				curAST = pkb->createAST(PROCEDURE, 0, curProcIndex);
+				curAST = pkb->createAST(PROCEDURE , prevProgLine, 0, curProcIndex);
 				if(pkb->setRootAST(curAST));
 				else
 				{
@@ -130,7 +137,7 @@ bool Parser::procedure(){
 			// next procedure
 			else
 			{
-				AST *newProc = pkb->createAST(PROCEDURE, stmt_num+1, curProcIndex);
+				AST *newProc = pkb->createAST(PROCEDURE, prevProgLine, stmt_num+1, curProcIndex);
 				pkb->addSibling(curAST, newProc);
 				curAST = newProc;
 			}
@@ -142,7 +149,7 @@ bool Parser::procedure(){
 		}
 		if(matchToken("{")){
 			prevProc = curAST;
-			curAST = pkb->createAST(STMT_LIST, 0, -1);
+			curAST = pkb->createAST(STMT_LIST, prevProgLine, 0, -1);
 			if(!pkb->setFirstDescendant(prevProc, curAST))
 				pkb->setAncestor(curAST, prevProc);
 
@@ -228,7 +235,7 @@ bool Parser::stmt_call(){
 			pkb->insertCall(curProc, prevToken);
 
 			// create AST
-			AST *callNode = pkb->createAST(CALL, stmt_num, pkb->getProcIndex(prevToken));
+			AST *callNode = pkb->createAST(CALL, prevProgLine, pkb->getProcIndex(prevToken));
 			if(!pkb->setFirstDescendant(curAST, callNode))
 			{
 				pkb->addSibling(curAST, callNode);
@@ -268,7 +275,7 @@ bool Parser::stmt_if(){
 		stmt_num++;
 		nesting = stmt_num;
 
-		AST *ifNode = pkb->createAST(IF, stmt_num, -1);
+		AST *ifNode = pkb->createAST(IF, prevProgLine, stmt_num, -1);
 		AST *leftNode, *thenNode, *elseNode;
 
 		if(!pkb->setFirstDescendant(curAST, ifNode))
@@ -285,11 +292,11 @@ bool Parser::stmt_if(){
 			pkb->insertUses(PROCEDURE, curProcIndex, curVarIndex);
 			pkb->insertUses(IF, stmt_num, curVarIndex);
 
-			leftNode = pkb->createAST(VARIABLE, stmt_num, curVarIndex);
+			leftNode = pkb->createAST(VARIABLE, prevProgLine, stmt_num, curVarIndex);
 		
 			if(matchToken("then") && matchToken("{"))
 			{
-				thenNode = pkb->createAST(STMT_LIST, stmt_num, -1); // then node
+				thenNode = pkb->createAST(STMT_LIST, prevProgLine, stmt_num, -1); // then node
 				
 				pkb->setFirstDescendant(ifNode, leftNode);
 				pkb->setAncestor(thenNode, ifNode);
@@ -307,7 +314,8 @@ bool Parser::stmt_if(){
 					if(matchToken("else") && matchToken("{"))
 					{
 						//progLine++;
-						elseNode = pkb->createAST(STMT_LIST, stmt_num, -1); // then node
+						//??? do we need a progline, no right.
+						elseNode = pkb->createAST(STMT_LIST, 0, stmt_num, -1); // then node
 						pkb->setAncestor(elseNode, ifNode);
 						pkb->addSibling(thenNode, elseNode);
 						
@@ -359,7 +367,7 @@ bool Parser::stmt_while(){
 		stmt_num++;
 		nesting = stmt_num;
 
-		AST *whileNode = pkb->createAST(WHILE, stmt_num, -1);
+		AST *whileNode = pkb->createAST(WHILE, prevProgLine, stmt_num, -1);
 		AST *leftNode, *rightNode;
 
 		if(!pkb->setFirstDescendant(curAST, whileNode))
@@ -375,7 +383,7 @@ bool Parser::stmt_while(){
 			pkb->insertUses(PROCEDURE, curProcIndex, curVarIndex);
 			pkb->insertUses(WHILE, stmt_num, curVarIndex);
 
-			leftNode = pkb->createAST(VARIABLE, stmt_num, curVarIndex);
+			leftNode = pkb->createAST(VARIABLE, prevProgLine,stmt_num, curVarIndex);
 
 			if(!pkb->setFirstDescendant(whileNode, leftNode))
 				pkb->setAncestor(leftNode, whileNode);
@@ -387,7 +395,7 @@ bool Parser::stmt_while(){
 			containerIndex.push_back(containerInfo);
 
 			if(matchToken("{")){
-				rightNode = pkb->createAST(STMT_LIST, stmt_num, -1);
+				rightNode = pkb->createAST(STMT_LIST,prevProgLine, stmt_num, -1);
 				pkb->setAncestor(rightNode, whileNode);
 				pkb->addSibling(leftNode, rightNode);
 
@@ -425,7 +433,7 @@ bool Parser::stmt_assign(){
 	//assign: var_name '=' expr
 	stmt_num++;
 
-	AST *assignNode = pkb->createAST(ASSIGNMENT, stmt_num, -1);
+	AST *assignNode = pkb->createAST(ASSIGNMENT, curProgLine, stmt_num, -1);
 	AST *leftNode, *rightNode;
 
 	if(!pkb->setFirstDescendant(curAST, assignNode))
@@ -453,7 +461,7 @@ bool Parser::stmt_assign(){
 			}
 		}
 
-		leftNode = pkb->createAST(VARIABLE, stmt_num, curVarIndex);
+		leftNode = pkb->createAST(VARIABLE, prevProgLine, stmt_num, curVarIndex);
 		pkb->setFirstDescendant(assignNode, leftNode);
 
 		if(matchToken("=")){
@@ -494,7 +502,7 @@ bool Parser::expr(){
 		if(matchToken("+"))
 		{
 			if(operators.empty()) 
-				operators.push(pkb->createAST(PLUS, stmt_num, -1));
+				operators.push(pkb->createAST(PLUS, prevProgLine, stmt_num, -1));
 			else
 			{
 				if(pkb->getType(operators.top()) == MULTIPLY)
@@ -503,7 +511,7 @@ bool Parser::expr(){
 				}
 				else
 				{
-					operators.push(pkb->createAST(PLUS, stmt_num, -1));
+					operators.push(pkb->createAST(PLUS, prevProgLine, stmt_num, -1));
 				}
 				
 			}
@@ -520,7 +528,7 @@ bool Parser::expr(){
 		else if(matchToken("-"))
 		{
 			if(operators.empty()) 
-				operators.push(pkb->createAST(MINUS, stmt_num, -1));
+				operators.push(pkb->createAST(MINUS, prevProgLine, stmt_num, -1));
 			else
 			{
 				if(pkb->getType(operators.top()) == MULTIPLY)
@@ -529,7 +537,7 @@ bool Parser::expr(){
 				}
 				else
 				{
-					operators.push(pkb->createAST(MINUS, stmt_num, -1));
+					operators.push(pkb->createAST(MINUS,prevProgLine, stmt_num, -1));
 				}
 			}
 
@@ -561,10 +569,10 @@ bool Parser::term(){
 		if(matchToken("*"))
 		{
 			if(operators.empty())
-				operators.push(pkb->createAST(MULTIPLY, stmt_num, -1));
+				operators.push(pkb->createAST(MULTIPLY, prevProgLine,stmt_num, -1));
 			else
 			{
-				operators.push(pkb->createAST(MULTIPLY, stmt_num, -1));
+				operators.push(pkb->createAST(MULTIPLY, prevProgLine,stmt_num, -1));
 
 			}
 
@@ -604,18 +612,18 @@ bool Parser::factor(){
 			}
 		}
 
-		operands.push(pkb->createAST(VARIABLE, stmt_num, curVarIndex));
+		operands.push(pkb->createAST(VARIABLE, prevProgLine,stmt_num, curVarIndex));
 		return true;
 	}
 	else if(const_value())
 	{
 		pkb->insertConst(atoi(prevToken.c_str()));
-		operands.push(pkb->createAST(CONSTANT, stmt_num, atoi(prevToken.c_str())));
+		operands.push(pkb->createAST(CONSTANT, prevProgLine,stmt_num, atoi(prevToken.c_str())));
 		return true;
 	}
 	else if(openBracket())
 	{
-		operators.push(pkb->createAST(BRACKET, stmt_num, -1));
+		operators.push(pkb->createAST(BRACKET,prevProgLine, stmt_num, -1));
 		if(expr())
 		{
 			if(closeBracket())
