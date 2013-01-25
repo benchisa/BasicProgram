@@ -8,7 +8,7 @@ class AST
 		~AST(void);
 		AST(ASTNODE_TYPE type,STATEMENT_NUM stmt,INDEX data);
 		//this is for new prog Line
-		AST(ASTNODE_TYPE type,ProgLine * progLine,INDEX data);
+	 	AST(ASTNODE_TYPE type,PROG_LINE progLine,STATEMENT_NUM stmt, INDEX data);
 		
 		bool setFirstDescendant( AST* firstDescendant);
 		bool setAncestor(AST* ancestor);
