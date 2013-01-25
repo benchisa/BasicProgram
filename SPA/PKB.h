@@ -40,8 +40,8 @@ class PKB
 		AST* getTail();
 		
 		//this is for new progline
-		AST* createAST(ASTNODE_TYPE type,ProgLine * progLine,INDEX data);
-		STATEMENT_NUM getStmtNum(AST* currentAST);
+		AST* createAST(ASTNODE_TYPE type,PROG_LINE progLine,STATEMENT_NUM stmt,INDEX data);
+	
 		PROG_LINE getProgLine(AST* currentAST);
 		STATEMENT_LIST * getStmtList(PROG_LINE progLine);
 
