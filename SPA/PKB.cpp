@@ -25,15 +25,18 @@ PKB::~PKB(void){
 	delete varTable;
 	delete procTable;
 	delete treeMap;
+	delete callTable;
+	delete constantTable;
+	delete progLineTable
 }
-AST* PKB::createAST(ASTNODE_TYPE type,ProgLine * progLine,int data){
+AST* PKB::createAST(ASTNODE_TYPE type,PROG_LINE progLine,STATEMENT_NUM stmt, int data){
 	
 	//for prog line table.
 	unordered_map<PROG_LINE, STATEMENT_NUM>::iterator p_itr;
-	p_itr=progLineTable->find(progLine->progLineNum);
+	p_itr=progLineTable->find(progLine);
 	if (p_itr==progLineTable->end())
 	{
-		progLineTable->insert(make_pair(progLine->progLineNum, progLine->statementNum));
+		progLineTable->insert(make_pair(progLine, stmt));
 	}
 	else
 	{
@@ -42,7 +45,7 @@ AST* PKB::createAST(ASTNODE_TYPE type,ProgLine * progLine,int data){
 		for (p_itr=progLineTable->begin(); p_itr!=progLineTable->end(); p_itr++)
 			{
 			
-				if (p_itr->first==progLine->progLineNum &&p_itr->second==progLine->statementNum)
+				if (p_itr->first==progLine &&p_itr->second==stmt)
 				{	
 					exist=true;
 					break;
@@ -50,18 +53,18 @@ AST* PKB::createAST(ASTNODE_TYPE type,ProgLine * progLine,int data){
 			}
 			if (!exist)
 			{
-				progLineTable->insert(make_pair(progLine->progLineNum, progLine->statementNum));
+				progLineTable->insert(make_pair(progLine, stmt));
 				
 			}
 	}
 
-	AST newAST(type, progLine,data);
+	AST newAST(type, progLine, stmt,data);
 	AST * newASTP = new AST(newAST);
 	//return the newAST without add into AST map, if the statement number is less than 1
-	if(progLine->statementNum<1) return newASTP;
+	if(stmt<1) return newASTP;
 
 	hash_map<STATEMENT_NUM,AST_LIST>::iterator itr;
-	itr = (*treeMap).find(progLine->statementNum);
+	itr = (*treeMap).find(stmt);
 
 	//add the new AST into AST map with stmt NO.
 	AST_LIST currentList;
@@ -72,7 +75,7 @@ AST* PKB::createAST(ASTNODE_TYPE type,ProgLine * progLine,int data){
 	}else{
 		//stmt does not exists in the AST map
 		currentList.push_back(newASTP);
-		(*treeMap)[progLine->statementNum]=currentList;
+		(*treeMap)[stmt]=currentList;
 	}
 
 	return newASTP;
@@ -115,7 +118,7 @@ AST* PKB::getLeftSibling(AST* currentAST){
 ASTNODE_TYPE PKB::getType(AST* currentAST){
 	return (*currentAST).getRootType();
 }
-PROG_LINE PKB::getStatementNum(AST* currentAST){
+STATEMENT_NUM PKB::getStatementNum(AST* currentAST){
 	return (*currentAST).getRootStatementNum();
 }
 INDEX PKB::getData(AST* currentAST){
