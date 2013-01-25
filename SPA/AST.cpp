@@ -14,12 +14,13 @@ AST::AST(ASTNODE_TYPE type,STATEMENT_NUM stmt,INDEX data){
 	root = NULL;
 }
 
-AST::AST(ASTNODE_TYPE type,ProgLine * progLine,INDEX data)
+AST::AST(ASTNODE_TYPE type,PROG_LINE progLine,STATEMENT_NUM stmt,INDEX data)
 {
 	this->myProgLine=progLine;
+	this->myStmt = stmt;
 	this->myType=type;
 	this->myData=data;
-	
+
 	leftSibling = NULL;
 	rightSibling = NULL;
 	ancestor = NULL;
@@ -67,19 +68,15 @@ AST* AST::getAncestor(){
 ASTNODE_TYPE AST::getRootType(){
 	return myType;
 }
-PROG_LINE AST::getRootStatementNum(){
+STATEMENT_NUM AST::getRootStatementNum(){
 	return myStmt;
 }
 
 
-STATEMENT_NUM AST::getRootStmtNum()
-{
-	return myProgLine->statementNum;
-}
 
 PROG_LINE AST::getRootProgLineNum()
 {
-	return myProgLine->progLineNum;
+	return myProgLine;
 }
 INDEX AST::getRootData(){
 	return myData;
