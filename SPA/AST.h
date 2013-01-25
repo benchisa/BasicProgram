@@ -32,7 +32,7 @@ private:
 
 	ASTNODE_TYPE myType;
 	STATEMENT_NUM myStmt;
-	ProgLine * myProgLine;
+	PROG_LINE myProgLine;
 	int myData;
 
 	AST* leftSibling;
