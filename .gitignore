@@ -12,4 +12,5 @@ Thumbs.db
 *.obj
 *.sdf
 *.suo
-*.ipch
+ipch\*\*.ipch
+*.cache
