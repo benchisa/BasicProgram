@@ -324,49 +324,49 @@ prog pg; call cl;
 select cl with s.stmtNo="100";
 
 5000
-66 - with conditioning :: Return all programs when there is call to procedure dinosaur
+66 - with conditioning :: Return all programs when there is call to procedure yello
 prog pg;
-select pg with cl.procName="dinosaur";
+select pg with cl.procName="yello";
 
 5000
-67 - with conditioning :: Return all assignments when there is call to procedure dinosaur
+67 - with conditioning :: Return all assignments when there is call to procedure yello
 prog pg; assign a;
-select a with cl.procName="dinosaur";
+select a with cl.procName="yello";
 
 5000
-68 - with conditioning :: Return all statement when there is a call to procedure dinosaur
+68 - with conditioning :: Return all statement when there is a call to procedure yello
 prog pg; stmt s;
-select s with cl.procName="dinosaur";
+select s with cl.procName="yello";
 
 5000
-69 - with conditioning :: Return all while when there is call to procedure dinosaur
+69 - with conditioning :: Return all while when there is call to procedure yello
 prog pg; while w;
-select w with cl.procName="dinosaur";
+select w with cl.procName="yello";
 
 5000
-70 - with conditioning :: Return all if when there is call to procedure dinosaur
+70 - with conditioning :: Return all if when there is call to procedure yello
 prog pg; if i;
-select i with cl.procName="dinosaur";
+select i with cl.procName="yello";
 
 5000
-71 - with conditioning :: Return all variable when there is call to procedure dinosaur
+71 - with conditioning :: Return all variable when there is call to procedure yello
 prog pg; var v;
-select v with cl.procName="dinosaur";
+select v with cl.procName="yello";
 
 5000
-72 - with conditioning :: Return all proc when there is call to procedure dinosaur
+72 - with conditioning :: Return all proc when there is call to procedure yello
 prog pg; proc p;
-select p with cl.procName="dinosaur";
+select p with cl.procName="yello";
 
 5000
-73 - with conditioning :: Return all constants when there is call to procedure dinosaur
+73 - with conditioning :: Return all constants when there is call to procedure yello
 prog pg; constant c;
-select c with cl.procName="dinosaur";
+select c with cl.procName="yello";
 
 5000
-74 - with conditioning :: Return call to procedure dinosaur
+74 - with conditioning :: Return call to procedure yello
 prog pg; call cl;
-select cl with cl.procName="dinosaur";
+select cl with cl.procName="yello";
 
 5000
 75 - with conditioning :: Return all programs when there is variable name "apple"
@@ -3858,3 +3858,5 @@ assign a; if i; while w; stmt s; var v;
 select v and Modifies(c,v)
 
 5000
+
+testing
