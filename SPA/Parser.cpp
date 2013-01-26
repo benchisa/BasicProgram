@@ -235,7 +235,7 @@ bool Parser::stmt_call(){
 			pkb->insertCall(curProc, prevToken);
 
 			// create AST
-			AST *callNode = pkb->createAST(CALL, prevProgLine, pkb->getProcIndex(prevToken));
+			AST *callNode = pkb->createAST(CALL, prevProgLine, stmt_num, pkb->getProcIndex(prevToken));
 			if(!pkb->setFirstDescendant(curAST, callNode))
 			{
 				pkb->addSibling(curAST, callNode);
