@@ -178,17 +178,20 @@ MODIFIES_LIST SuchThat::getModifiesResult(TYPE type, int arg1, VAR_INDEX v1){
 	AST_LIST::iterator astItr;
 	TYPE getStatementType;
 	//cout << "TYPE: " << type << "\n";
-	if((type == WHILE || type == PROCEDURE || type == ASSIGNMENT)){
+
+	if((type == WHILE || type == PROCEDURE || type == ASSIGNMENT||type == IF)){
 		//cout << "v1: " << pkb->getVarName(v1) << "\n";
 		result = pkb->getModifies(type, arg1, v1);
 	}
+
+	// Modifies(_, "x"), Modifies(1, "x")
 	else if((type == STATEMENT && arg1 != 0 && v1 == 0
 		|| type == ANY && arg1 != 0 && v1 == 0)){
 		// Find the type first
 		astLst = pkb->getASTBy(arg1);
 		astItr = astLst->begin();
 		while(astItr != astLst->end()){
-			if(pkb->getType(*astItr) == WHILE || pkb->getType(*astItr) == ASSIGNMENT)
+			if(pkb->getType(*astItr) == WHILE || pkb->getType(*astItr) == ASSIGNMENT||pkb->getType(*astItr)==IF)
 			{
 				getStatementType = pkb->getType(*astItr);
 				result = pkb->getModifies(getStatementType, arg1, v1);
@@ -202,10 +205,13 @@ MODIFIES_LIST SuchThat::getModifiesResult(TYPE type, int arg1, VAR_INDEX v1){
 		tmpLst = pkb->getModifies(WHILE, 0, 0);
 		iterateAndStore(result, tmpLst, v1);
 
-		//tmpLst = pkb->getModifies(PROCEDURE, 0, 0);
-		//iterateAndStore(result, tmpLst, v1);
+		tmpLst = pkb->getModifies(PROCEDURE, 0, 0);
+		iterateAndStore(result, tmpLst, v1);
 
 		tmpLst = pkb->getModifies(ASSIGNMENT, 0, 0);
+		iterateAndStore(result, tmpLst, v1);
+
+		tmpLst = pkb->getModifies(IF, 0, 0);
 		iterateAndStore(result, tmpLst, v1);
 	}
 
@@ -222,12 +228,13 @@ bool SuchThat::getIsModifiesResult(TYPE type, int arg1, VAR_INDEX v1){
 	AST_LIST::iterator astItr;
 	TYPE getStatementType;
 
+	//WHY dont consider assignment?
 	if(type == STATEMENT && arg1 != 0 && v1 != 0){
 		// Find the type of first argument
 		astLst = pkb->getASTBy(arg1);
 		astItr = astLst->begin();
 		while(astItr != astLst->end()){
-			if(pkb->getType(*astItr) == WHILE)
+			if(pkb->getType(*astItr) == WHILE||pkb->getType(*astItr) == IF||pkb->getType(*astItr) == ASSIGNMENT)
 			{
 				getStatementType = pkb->getType(*astItr);
 				result = pkb->isModifies(getStatementType, arg1, v1);
@@ -251,7 +258,7 @@ USES_LIST SuchThat::getUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 	TYPE getStatementType;
 
 	//Uses(w, "b")
-	if((type == WHILE || type == PROCEDURE || type == ASSIGNMENT)){
+	if((type == WHILE || type == PROCEDURE || type == ASSIGNMENT || type == IF)){
 		result = pkb->getUses(type, arg1, v1);
 	}
 	// Uses(1, a)
@@ -260,7 +267,7 @@ USES_LIST SuchThat::getUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 		astLst = pkb->getASTBy(arg1);
 		astItr = astLst->begin();
 		while(astItr != astLst->end()){
-			if(pkb->getType(*astItr) == WHILE || pkb->getType(*astItr) == ASSIGNMENT)
+			if(pkb->getType(*astItr) == WHILE || pkb->getType(*astItr) == ASSIGNMENT ||pkb->getType(*astItr) == IF)
 			{
 				getStatementType = pkb->getType(*astItr);
 				result = pkb->getUses(getStatementType, arg1, v1);
@@ -274,8 +281,11 @@ USES_LIST SuchThat::getUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 		tmpLst = pkb->getUses(WHILE, 0, 0);
 		iterateAndStore(result, tmpLst, v1);
 		
-		//tmpLst = pkb->getModifies(PROCEDURE, 0, 0);
-		//iterateAndStore(result, tmpLst, v1);
+		tmpLst = pkb->getUses(IF, 0, 0);
+		iterateAndStore(result, tmpLst, v1);
+
+		tmpLst = pkb->getModifies(PROCEDURE, 0, 0);
+		iterateAndStore(result, tmpLst, v1);
 		
 		tmpLst = pkb->getUses(ASSIGNMENT, 0, 0);
 		iterateAndStore(result, tmpLst, v1);
@@ -297,7 +307,7 @@ bool SuchThat::getIsUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 		astLst = pkb->getASTBy(arg1);
 		astItr = astLst->begin();
 		while(astItr != astLst->end()){
-			if(pkb->getType(*astItr) == WHILE || pkb->getType(*astItr) == ASSIGNMENT)
+			if(pkb->getType(*astItr) == WHILE || pkb->getType(*astItr) == ASSIGNMENT || pkb->getType(*astItr) == IF)
 			{
 				getStatementType = pkb->getType(*astItr);
 				result = pkb->isUses(getStatementType, arg1, v1);
@@ -465,7 +475,7 @@ FOLLOWS_LIST SuchThat::getFollowsStar(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 				}
 		}
 
-		else if(type1 == WHILE || type1 == ASSIGNMENT){
+		else if(type1 == WHILE || type1 == ASSIGNMENT || type1 == IF){
 
 			tmpItr = tmpLst.begin();
 			while(tmpItr != tmpLst.end()){
@@ -499,11 +509,10 @@ FOLLOWS_LIST SuchThat::getFollowsStar(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 
 		if(!tmpLst.empty()){
 			// Check TYPE for WHILE or ASSIGNMENT
-			if(type == WHILE || type == ASSIGNMENT){
+			if(type == WHILE || type == ASSIGNMENT || type == IF){
 				tmpItr = tmpLst.begin(); // should have only 1 pair
 				// Deciding which is empty
 
-				
 				if(s1 == 0) astLst = pkb->getASTBy(tmpItr->first);
 				else astLst = pkb->getASTBy(tmpItr->second);
 				
@@ -540,7 +549,7 @@ FOLLOWS_LIST SuchThat::getFollowsStar(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 		if(!tmp.empty()){
 
 			// Check TYPE for WHILE or ASSIGNMENT
-			if(type == WHILE || type == ASSIGNMENT){
+			if(type == WHILE || type == ASSIGNMENT || type == IF){
 				followItr = tmp.begin(); 
 				while (followItr!=tmp.end())
 				{

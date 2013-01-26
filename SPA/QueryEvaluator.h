@@ -12,7 +12,7 @@ public:
 	QueryEvaluator(PKB* pkb);
 	~QueryEvaluator(void);
 
-	void evaluate(QTREE* qrTree,QUERYTABLE* qrTable);
+	void evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrParam);
 	RAWDATA* getResult();
 //	ERROR_MSG getLastError();
 	

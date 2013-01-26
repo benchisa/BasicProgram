@@ -8,6 +8,8 @@
 #include "Parent.h"
 #include "Modifies.h"
 #include "Uses.h"
+#include "CallTable.h"
+#include "ConstantTable.h"
 #include <hash_map>
 
 
@@ -24,18 +26,24 @@ class PKB
 		bool setRootAST(AST* currentAST);
 		bool setFirstDescendant(AST * currentAST, AST* firstDescendant);
 		bool setAncestor(AST* currentAST, AST* ancestor);
-		bool setTail(AST* currentAST, AST* tail);
+		bool setTail(AST* tailNode);
 		bool addSibling(AST*  currentAST,AST* newSibling);
 		AST* getFirstDescendant(AST* currentAST);
 		AST* getRightSibling(AST* currentAST);
 		AST* getLeftSibling(AST* currentAST);
 		AST* getAncestor(AST* currentAST);
-		AST* getTail(AST* currentAST);
 		AST_LIST* getASTBy(STATEMENT_NUM statementNo);
 		ASTNODE_TYPE getType(AST* currentAST);
 		PROG_LINE getStatementNum(AST* currentAST);
 		INDEX getData(AST* currentAST);
 		AST* getRootAST();
+		AST* getTail();
+		
+		//this is for new progline
+		AST* createAST(ASTNODE_TYPE type,PROG_LINE progLine,STATEMENT_NUM stmt,INDEX data);
+	
+		PROG_LINE getProgLine(AST* currentAST);
+		STATEMENT_LIST * getStmtList(PROG_LINE progLine);
 
 		//Functions of VarTable
 		VAR_INDEX insertVar(VAR_NAME varName);
@@ -84,16 +92,14 @@ class PKB
 		USES_LIST getUses(USES_TYPE type, USES_INDEX index, VAR_INDEX varIndex);
 		bool isUses(USES_TYPE type, USES_INDEX index, VAR_INDEX varIndex);
 
-	/*
-	* To be implemented
-	*/
+
 		//Functions of Call Table
 		CALL_INDEX insertCall(PROC_NAME caller, PROC_NAME callee);
 		SIZE getCallTableSize();
 
 		//if caller is empty, return callee procedure
 		//if callee is empty, return caller procedure
-		Procedure * getCall(PROC_NAME caller,PROC_NAME callee);
+		list<CALL_PAIR> * getCall(PROC_NAME caller,PROC_NAME callee);
 		CALL_PAIR getCALLPair(CALL_INDEX index);
 		CALL_INDEX getCallPairIndex(PROC_NAME caller,PROC_NAME callee);
 		bool isExistsCall(PROC_NAME caller,PROC_NAME callee);
@@ -107,20 +113,26 @@ class PKB
 		bool isExists(int constantValue);
 		CONSTANT_LIST *  getAllConstant();
 
+
 		//Other functions
 		PROG_LINE getMaxProgLine();
 		STATEMENT_NUM getMaxStatementNum();
 private:
 		//Abastract Data Types stored in PKB
 		AST* rootAST;
+		AST* tailAST;
 		Follows* follows;
 		Parent* parent;
 		Modifies* modifies;
 		Uses* uses;
 		VarTable* varTable;
 		ProcTable* procTable;
-
+		CallTable* callTable;
+		ConstantTable* constantTable;
 		hash_map<STATEMENT_NUM,AST_LIST>* treeMap;
+		unordered_multimap<PROG_LINE, STATEMENT_NUM> * progLineTable;
+
+	
 		
 };
 

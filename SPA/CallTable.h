@@ -11,7 +11,7 @@ public:
 
 	//if caller is empty, return callee procedure
 	//if callee is empty, return caller procedure
-	list<CALL_PAIR> getCall(PROC_NAME caller,PROC_NAME callee);
+	CALLPAIR_LIST * getCall(PROC_NAME caller,PROC_NAME callee);
 
 	CALL_INDEX getCallPairIndex(PROC_NAME caller,PROC_NAME callee);
 	CALL_PAIR getCallPair(CALL_INDEX index);

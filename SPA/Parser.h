@@ -34,8 +34,8 @@ public:
 private:
 	SOURCE src;
 	TOKEN curToken, prevToken;
-	PROG_LINE progLine;
-	vector<TOKEN> tokens;
+	STATEMENT_NUM stmt_num;
+	vector<pair<TOKEN, PROG_LINE>> tokens;
 	Parser::ERROR_MSG errorMsg;
 	int tokenIndex;
 	int nesting;
@@ -43,12 +43,13 @@ private:
 	// PKB related helper
 	PROC_INDEX curProcIndex;
 	VAR_INDEX curVarIndex;
-	vector<pair<PROG_LINE, TYPE>> containerIndex;
+	vector<pair<STATEMENT_NUM, TYPE>> containerIndex;
 	int lastProcEndLine;
 	pair<PROG_LINE, TYPE> containerInfo;
 	PKB *pkb;
 	AST *ast,*curAST, *prevAST;
 	PROC_NAME curProc;
+	PROG_LINE prevProgLine, curProgLine;
 	//int procLine;
 	
 	bool parse();
@@ -80,32 +81,43 @@ private:
 	
 	// Helper for inserting relationship
 	bool isSameProc(PROG_LINE, PROG_LINE);
-	void insertFollows(PROG_LINE, PROG_LINE);
-	void insertFollowsParentForStmt(PROG_LINE, PROG_LINE);
-	void insertFollowsParentForCon(TOKEN, PROG_LINE, PROG_LINE);
+	void insertFollows(STATEMENT_NUM, STATEMENT_NUM);
+	void insertFollowsParentForStmt(STATEMENT_NUM, STATEMENT_NUM);
+	void insertFollowsParentForCon(TOKEN, STATEMENT_NUM, STATEMENT_NUM);
 	void createExprTree();
 	void createASTLink(AST*);
 };
 
 class ParserTokenizer{
 public:
-	static vector<TOKEN> tokenize(SOURCE src){
-		vector<TOKEN> tokens;
-		regex rx("call|while|procedure|if|then|else|\\(|\\)|\\{|\\}|\\=|\\;|\\-|\\*|\\+|[^\\s\\n\\{\\}\\-\\*\\+\\;\\=\\(\\)]+");
+	static vector<pair<TOKEN, PROG_LINE>> tokenize(SOURCE src){
+		vector<pair<TOKEN, PROG_LINE>> tokens;
+		pair<TOKEN, PROG_LINE> tmp;
+		int progline = 1;
+		regex rx("call|while|procedure|if|then|else|\\n|\\(|\\)|\\{|\\}|\\=|\\;|\\-|\\*|\\+|[^\\s\\n\\{\\}\\-\\*\\+\\;\\=\\(\\)]+");
 		sregex_iterator rxItr(src.begin(), src.end(), rx), rxend;
 
 		for (rxItr; rxItr != rxend; ++rxItr)
 		{
-			tokens.push_back(rxItr->str());
+			if(rxItr->str() != "\n")
+			{
+				tmp.first = rxItr->str();
+				tmp.second = progline;
+				tokens.push_back(tmp);
+			}
+			else
+			{
+				progline++;
+			}
 		}
 		return tokens;
 	}
 	
 	//debug
-	void printAll(vector<TOKEN> tmp){
+	void printAll(vector<pair<TOKEN, PROG_LINE>> tmp){
 		int i = 0;
 		for(i = 0; i < tmp.size(); i++){
-			cout << "token " << i << ": " << tmp.at(i) + "\n";
+			//cout << "prog_line: " << tmp.at(i).second << ",token " << i << ": " << tmp.at(i).first + "\n";
 		}
 	}
 };

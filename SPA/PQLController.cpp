@@ -21,10 +21,10 @@ FINAL_RESULT PQLController::getQueryResult(QUERY newQuery){
 	if(queryProcessor->preProcess()==true){
 		//get query tree and query table from preprocessor, pass them to query evaluator
 		
-		queryEval->evaluate(queryProcessor->getQTree(),queryProcessor->getQVarTable());
+	//	queryEval->evaluate(queryProcessor->getQTree(),queryProcessor->getQVarTable());
 		//print the result
 		
-		returnResult= queryFormatter->formatString(queryEval->getResult());
+	//	returnResult= queryFormatter->formatString(queryEval->getResult());
 		//cout << "returnResult: " << returnResult.size() << "\n";
 		return returnResult;
 	}
@@ -36,7 +36,7 @@ FINAL_RESULT PQLController::getQueryResult(QUERY newQuery){
 }
 void PQLController::setPKB(PKB* pkb){
 	queryProcessor = new QueryPreprocessor(pkb);
-	queryEval = new QueryEvaluator(pkb);
+//	queryEval = new QueryEvaluator(pkb);
 	queryFormatter = new QueryFormatter();
 	queryFormatter->setPKB(pkb);
 

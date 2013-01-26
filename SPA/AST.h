@@ -7,6 +7,9 @@ class AST
 		AST(void);
 		~AST(void);
 		AST(ASTNODE_TYPE type,STATEMENT_NUM stmt,INDEX data);
+		//this is for new prog Line
+	 	AST(ASTNODE_TYPE type,PROG_LINE progLine,STATEMENT_NUM stmt, INDEX data);
+		
 		bool setFirstDescendant( AST* firstDescendant);
 		bool setAncestor(AST* ancestor);
 		bool addSibling(AST* rightSibling);
@@ -17,15 +20,19 @@ class AST
 		AST* getRightSibling();
 		AST* getLeftSibling();
 		AST* getAncestor();
-		AST* getTail();
 
 		ASTNODE_TYPE getRootType();
 		PROG_LINE getRootStatementNum();
 		INDEX getRootData();
+		
+		//this is for new prog line
+		STATEMENT_NUM  getRootStmtNum();
+		PROG_LINE getRootProgLineNum();
 private:
 
 	ASTNODE_TYPE myType;
 	STATEMENT_NUM myStmt;
+	PROG_LINE myProgLine;
 	int myData;
 
 	AST* leftSibling;
@@ -33,6 +40,5 @@ private:
 	AST* ancestor;
 	AST* firstDescendant;
 	AST* root;
-	AST* tail;
 };
 

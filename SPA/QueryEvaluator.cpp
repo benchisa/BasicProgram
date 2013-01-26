@@ -2,7 +2,7 @@
 #include "SuchThat.h"
 #include <iostream>
 
-
+/*
 PKB * SuchThat::pkb;
 QueryEvaluator::QueryEvaluator(PKB * p){
 	this->pkb = p;
@@ -233,7 +233,7 @@ void QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qTable){
 					}
 					return;
 				}
-			}*/
+			}
 
 		}
 
@@ -283,7 +283,7 @@ void QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qTable){
 							//cout<<"returnInex:"<<*itr;
 							returnList->push_back(*itr);
 						}
-					}*/
+					} comment
  				//	cout<<"returnList size: "<<(*returnList).size();
 				}
 
@@ -352,7 +352,7 @@ void QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qTable){
 				for(int i=1; i<=stmtNo;i++){
 				returnList->push_back(i);
 				}
-				}*/
+				}comment
 			}
 		}
 	}else{
@@ -786,3 +786,4 @@ INDEX_LIST* QueryEvaluator::patternNode(QTREE* patternTree){
 
 }
 
+*/
