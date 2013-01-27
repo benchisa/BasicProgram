@@ -1,44 +1,67 @@
 #pragma
-#include "Global_Data_Abstraction.h"
+#include "Global_Data_Abstraction.h";
+
 
 class GrammarTable{
 
 public:
 
 	typedef std::string ENTITY;
-	typedef pair<string,TYPE> entPair;
-
 	typedef std::string RELATIONSHIP;
-	typedef pair<TYPE,string> relSubPair;
-	typedef pair<string,pair<TYPE,string>> relPair; 
-
 	typedef std::string PATTERN;
-	typedef int PATT_INDEX;
-	typedef pair<TYPE,string> pattPair;
 
-	typedef pair<vector<TYPE>,vector<TYPE>> argSubPair;
-	typedef pair<TYPE,argSubPair> argPair;
+	struct entTable{
+		ENTITY entName;
+		TYPE type;
+	};
+	
+	struct syntaxTable{
+		RELATIONSHIP relName;
+		PATTERN pattName;
+		int numArg;
+		TYPE type;
+		string arg1;
+		string arg2;
+		string arg3;
+	};
+
+	struct argTable{
+		TYPE type;
+		vector<TYPE> arg1;
+		vector<TYPE> arg2;
+	};
+
+	struct entTable eTable[9];
+	struct syntaxTable rTable[14];
+	struct syntaxTable pTable[3];
+	struct argTable aTable[10];
+
+	string compulsoryOne,optional,or,plus,minus,times,invComma,letter,digit,underscore,hash,ident,synonym,integer,op;
+	string stmtRef,entRef,lineRef,varRef,expr,wildexpr,expr_spec;
 
 	GrammarTable(void);
 	~GrammarTable(void);
 
 	void createEntTable();
-	TYPE getEntType(ENTITY ent);
-	bool isEntExists(ENTITY ent);
+	TYPE getEntType(ENTITY);
+	bool isEntExists(ENTITY);
 	void printAllEnt();
 
 	void createRelTable();
-	string getRelGrammar(RELATIONSHIP rel);
-	TYPE getRelType(RELATIONSHIP rel);
-	bool isRelExists(RELATIONSHIP rel);
+	int getRelArgCount(RELATIONSHIP);
+	string getRelArg(RELATIONSHIP, int);
+	TYPE getRelType(RELATIONSHIP);
+	bool isRelExists(RELATIONSHIP);
 	void printAllRel();
 
 	void createPattTable();
-	string getPattGrammar(TYPE patt);
-	bool isPattExists(TYPE patt);
+	int getPattArgCount(PATTERN);
+	string getPattArg(PATTERN, int);
+	TYPE getPattType(PATTERN);
+	bool isPattExists(PATTERN);
 	void printAllPatt();
 
 	void createArgTable();
-	vector<TYPE> getArgument(TYPE rel,int arg);
+	vector<TYPE> getArgument(TYPE,int);
 	void printAllArg();
 };
