@@ -46,7 +46,8 @@ enum TYPE{
 	ANY,
 	PARAM,
 	CALL,
-	PROGLINE
+	PROGLINE,
+	WITH
 };
 enum CONTENT{
 	EMPTY,
@@ -72,6 +73,8 @@ typedef pair<TYPE,list<int> *> RAWDATA;
 typedef list<pair<string,string>> CALL_LIST;
 typedef pair<string,string> CALL_PAIR;
 typedef list<CALL_PAIR> CALLPAIR_LIST;
+typedef pair<TYPE,int> RELATION_PAIR;
+
 
 
 typedef int STATEMENT_NUM,VAR_INDEX,SIZE, PROC_INDEX,PROG_LINE,USES_INDEX,MODIFIES_INDEX,INDEX,CONSTANT_INDEX,CALL_INDEX;

@@ -2,6 +2,116 @@
 #include "SuchThat.h"
 #include <iostream>
 
+//methods
+QueryEvaluator::QueryEvaluator(PKB* pkb){
+	this->pkb = pkb;
+}
+QueryEvaluator::~QueryEvaluator(void){
+
+}	
+
+bool QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrParam){
+	this->qrTree = qrTree;
+	this->qrTable = qrTable;
+	this->qrParam = qrParam;
+	bool nonEmptyResult;
+
+	//Compute the intermediate result
+	QTREE* relationTree;
+	relationTree = qrTree->getFirstDescendant()->getRightSibling();
+	IntermediateResultTable * resultTable;
+
+	resultTable = QueryEvaluator::computeIntermediateResult(relationTree);
+
+	//find the result from resultTable
+	QTREE* resultNode;
+	resultNode = qrTree->getFirstDescendant();
+
+	//can not find the result in the table,include the following cases:
+	//a. one of the condition is false, select nonBoolean value
+	//b. after taking intersection, the table is empty, select nonBoolean value
+	if(!QueryEvaluator::findResult(resultNode, resultTable)){
+		return false; 
+	}
+	//result is found in the table, include the following cases:
+	//a. one of the condition is false, select Boolean value
+	//b. after taking intersection, the table is empty, select Boolean value
+	//c. the resultTable is not empty, return the corresponding results
+	return true;
+}	
+
+IntermediateResultTable * QueryEvaluator::computeIntermediateResult(QTREE* relationTree){
+	
+	QTREE* currentClause = relationTree;
+	IntermediateResultTable * resultTable;
+	resultTable = new IntermediateResultTable(qrTable->size());
+
+	do{
+		TYPE clauseType = currentClause->getType();
+
+		if(clauseType == SUCHTHAT){
+			if(!QueryEvaluator::executeSuchThat(resultTable, currentClause))
+				return NULL;
+		}
+		if(clauseType == PATTERN){
+		}
+		if(clauseType == WITH){
+		}
+		currentClause = currentClause->getRightSibling();
+	}while(currentClause!=NULL);
+
+	return resultTable;
+}
+bool QueryEvaluator::executeSuchThat(IntermediateResultTable * resultTable, QTREE* suchThatTree){
+	QTREE* firstRel;
+	QTREE* secondRel;
+	RELATION_LIST* currentResultList;
+	SuchThatClause suchThatClause(pkb, qrTable);
+
+	firstRel = suchThatTree->getFirstDescendant()->getFirstDescendant();
+	secondRel = firstRel->getRightSibling();
+
+	RELATION_PAIR firstRelPair (firstRel->getType(),firstRel->getData());
+	RELATION_PAIR secondRelPair (secondRel->getType(),secondRel->getData());
+
+	if(firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR){
+
+				
+	}else if(firstRel->getType()==QUERYVAR){
+
+		int qrVarIndex = firstRel->getData();
+
+		if(!resultTable->isQrVarExists(qrVarIndex)){
+			//evaluate the tree
+			currentResultList = suchThatClause.evaluateSuchThatTree(suchThatTree);
+			//no result found, the execution is false
+			if(currentResultList==NULL){
+				return false; 
+			}else{
+			//result is found, add into resultTable
+				resultTable->addResultList(firstRelPair,secondRelPair,currentResultList);
+			}
+		}else{
+		// current qrVar is evaluated in the previous steps
+		/*algo:
+			get the evaluated resultList of this qrVar from result table
+		*/
+		}
+	}else if(secondRel->getType()==QUERYVAR){
+		
+	}else{
+		currentResultList = suchThatClause.evaluateSuchThatTree(suchThatTree);
+		if(currentResultList==NULL) return false;
+		}
+
+	return true;
+}
+bool QueryEvaluator::findResult(QTREE* resultNode,IntermediateResultTable* resultTable){
+
+}
+RAWDATA* QueryEvaluator::getResult(){
+	
+}
 /*
 PKB * SuchThat::pkb;
 QueryEvaluator::QueryEvaluator(PKB * p){

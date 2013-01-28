@@ -3,6 +3,8 @@
 #include "QTREE.h"
 #include "Pattern.h"
 #include <hash_map>
+#include "IntermediateResultTable.h"
+#include "SuchThatClause.h"
 
 
 class QueryEvaluator{
@@ -12,7 +14,7 @@ public:
 	QueryEvaluator(PKB* pkb);
 	~QueryEvaluator(void);
 
-	void evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrParam);
+	bool evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrParam);
 	RAWDATA* getResult();
 //	ERROR_MSG getLastError();
 	
@@ -20,6 +22,7 @@ public:
 private:
 	QUERYTABLE * qrTable;
 	QTREE* qrTree;
+	QUERYPARAM * qrParam;
 	QTREE* resultNode;
 	PKB * pkb;
 	TYPE resultType;
@@ -29,19 +32,9 @@ private:
     INDEX_LIST * returnList;
 	RAWDATA* rawData;
 	
-	RELATION_LIST* suchThat(QTREE* suchThatTree);
-	INDEX_LIST* patternRel(QTREE* suchThatTree);
-	INDEX_LIST* patternNode(QTREE* suchThatTree);
+	IntermediateResultTable * computeIntermediateResult(QTREE* relationTree);
+	bool executeSuchThat(IntermediateResultTable * resultTable,QTREE* suchThatTree);
+	bool findResult(QTREE * resultNode,IntermediateResultTable * resultTable);
 
-	void iterateAndStore(RELATION_LIST *result, RELATION_LIST list){
-		if(list.empty()){
-			result=NULL;
-		}else{
-			    RELATION_LIST::iterator itr = list.begin();
-				while(itr!=list.end()){
-					result->push_back(*itr);
-					itr++;
-				}	
-		};
-	}
+	    
 };
