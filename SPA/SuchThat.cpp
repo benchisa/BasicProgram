@@ -205,14 +205,21 @@ MODIFIES_LIST SuchThat::getModifiesResult(TYPE type, int arg1, VAR_INDEX v1){
 		tmpLst = pkb->getModifies(WHILE, 0, 0);
 		iterateAndStore(result, tmpLst, v1);
 
-		//tmpLst = pkb->getModifies(PROCEDURE, 0, 0);
-		//iterateAndStore(result, tmpLst, v1);
+		if(tmpLst.size() == 0){
+			tmpLst = pkb->getModifies(PROCEDURE, 0, 0);
+			iterateAndStore(result, tmpLst, v1);
+		}
 
-		tmpLst = pkb->getModifies(ASSIGNMENT, 0, 0);
-		iterateAndStore(result, tmpLst, v1);
+		if(tmpLst.size() == 0){
+			tmpLst = pkb->getModifies(ASSIGNMENT, 0, 0);
+			iterateAndStore(result, tmpLst, v1);
+		}
 
-		tmpLst = pkb->getModifies(IF, 0, 0);
-		iterateAndStore(result, tmpLst, v1);
+
+		if(tmpLst.size() == 0){
+			tmpLst = pkb->getModifies(IF, 0, 0);
+			iterateAndStore(result, tmpLst, v1);
+		}
 	}
 
 
@@ -281,14 +288,20 @@ USES_LIST SuchThat::getUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 		tmpLst = pkb->getUses(WHILE, 0, 0);
 		iterateAndStore(result, tmpLst, v1);
 		
-		tmpLst = pkb->getUses(IF, 0, 0);
-		iterateAndStore(result, tmpLst, v1);
+		if(tmpLst.size() == 0){
+			tmpLst = pkb->getUses(IF, 0, 0);
+			iterateAndStore(result, tmpLst, v1);
+		}
 
-		//tmpLst = pkb->getModifies(PROCEDURE, 0, 0);
-		//iterateAndStore(result, tmpLst, v1);
-		
-		tmpLst = pkb->getUses(ASSIGNMENT, 0, 0);
-		iterateAndStore(result, tmpLst, v1);
+		if(tmpLst.size() == 0){
+			tmpLst = pkb->getUses(PROCEDURE, 0, 0);
+			iterateAndStore(result, tmpLst, v1);
+		}
+
+		if(tmpLst.size() == 0){		
+			tmpLst = pkb->getUses(ASSIGNMENT, 0, 0);
+			iterateAndStore(result, tmpLst, v1);
+		}
 	}
 
 	//cout << "SIZE OF RESULT (USES): " << result.size() << "\n";
@@ -583,10 +596,14 @@ FOLLOWS_LIST SuchThat::getFollowsStar(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 			itr = tmpLst.begin();
 
 			while(itr != tmpLst.end()){
-				if(v1 != 0 && itr->second == v1)
+				if(v1 != 0 && itr->second == v1){
 					result.push_back(*itr);
-				else if(v1 == 0)
+					break;
+				}
+				else if(v1 == 0){
 					result.push_back(*itr);
+					break;
+				}
 				itr++;
 			}	
 		}
