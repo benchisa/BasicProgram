@@ -205,8 +205,8 @@ MODIFIES_LIST SuchThat::getModifiesResult(TYPE type, int arg1, VAR_INDEX v1){
 		tmpLst = pkb->getModifies(WHILE, 0, 0);
 		iterateAndStore(result, tmpLst, v1);
 
-		tmpLst = pkb->getModifies(PROCEDURE, 0, 0);
-		iterateAndStore(result, tmpLst, v1);
+		//tmpLst = pkb->getModifies(PROCEDURE, 0, 0);
+		//iterateAndStore(result, tmpLst, v1);
 
 		tmpLst = pkb->getModifies(ASSIGNMENT, 0, 0);
 		iterateAndStore(result, tmpLst, v1);
@@ -284,8 +284,8 @@ USES_LIST SuchThat::getUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 		tmpLst = pkb->getUses(IF, 0, 0);
 		iterateAndStore(result, tmpLst, v1);
 
-		tmpLst = pkb->getModifies(PROCEDURE, 0, 0);
-		iterateAndStore(result, tmpLst, v1);
+		//tmpLst = pkb->getModifies(PROCEDURE, 0, 0);
+		//iterateAndStore(result, tmpLst, v1);
 		
 		tmpLst = pkb->getUses(ASSIGNMENT, 0, 0);
 		iterateAndStore(result, tmpLst, v1);
