@@ -33,8 +33,10 @@ private:
 	RAWDATA* rawData;
 	
 	IntermediateResultTable * computeIntermediateResult(QTREE* relationTree);
+	IntermediateResultTable * evaluateClause(IntermediateResultTable * resultTable, QTREE* clause);
 	bool executeSuchThat(IntermediateResultTable * resultTable,QTREE* suchThatTree);
 	bool findResult(QTREE * resultNode,IntermediateResultTable * resultTable);
+	RELATION_LIST * appendRelationLists(RELATION_LIST* list1,RELATION_LIST* list2);
 
 	    
 };

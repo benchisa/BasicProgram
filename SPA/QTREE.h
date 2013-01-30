@@ -10,6 +10,8 @@ public:
 	bool setFirstDescendant(QTREE* firstDescendant);
 	bool setAncestor(QTREE* ancestor);
 	bool setSibling(QTREE* rightSibling);
+	bool setType(QTREENODE_TYPE type);
+	bool setData(int data);
 
 	int getData();
 	QTREENODE_TYPE getType();
