@@ -14,7 +14,13 @@ public:
 	STATEMENT_LIST * getAllWhiles();
 	STATEMENT_LIST * getAllIfs();
 
-	//from such that 
+	//createCFG and store in PKB
+	void createCFG();
+	bool isNext(PROG_LINE, PROG_LINE);
+	NEXT_LIST getNext(PROG_LINE, PROG_LINE);
+	NEXT_LIST getNextStar(PROG_LINE, PROG_LINE);
+
+	//from such that, need revamp
 	FOLLOWS_LIST getFollowsResult(TYPE type, STATEMENT_NUM s1, STATEMENT_NUM s2);
 	 FOLLOWS_LIST getFollowsStarResult(TYPE type, STATEMENT_NUM s1, STATEMENT_NUM s2);
 	 FOLLOWS_LIST getFollowsResult(TYPE type1, TYPE type2);

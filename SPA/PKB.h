@@ -1,6 +1,8 @@
 #pragma once
 #include "Global_Data_Abstraction.h"
 #include "AST.h"
+#include "CFG.h"
+#include "PKB.h"
 #include "VarTable.h"
 #include "ProcTable.h"
 #include "Procedure.h"
@@ -113,6 +115,10 @@ class PKB
 		bool isExists(int constantValue);
 		CONSTANT_LIST *  getAllConstant();
 
+		//Functions of CFG
+		void createCFG(int size);
+		bool isConnected(PROG_LINE p1, PROG_LINE p2);
+		bool addEdge(PROG_LINE p1, PROG_LINE p2);
 
 		//Other functions
 		PROG_LINE getMaxProgLine();
@@ -120,6 +126,7 @@ class PKB
 private:
 		//Abastract Data Types stored in PKB
 		AST* rootAST;
+		CFG* cfg;
 		AST* tailAST;
 		Follows* follows;
 		Parent* parent;

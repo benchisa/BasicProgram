@@ -27,7 +27,7 @@ PKB::~PKB(void){
 	delete treeMap;
 	delete callTable;
 	delete constantTable;
-	delete progLineTable
+	delete progLineTable;
 }
 AST* PKB::createAST(ASTNODE_TYPE type,PROG_LINE progLine,STATEMENT_NUM stmt, int data){
 	
@@ -138,11 +138,6 @@ AST* PKB::getRootAST(){
 }
 AST* PKB::getTail(){
 	return tailAST;
-}
-
-STATEMENT_NUM PKB::getStmtNum(AST* currentAST)
-{
-	return currentAST->getRootStmtNum();
 }
 
 PROG_LINE PKB::getProgLine(AST* currentAST)
@@ -372,4 +367,20 @@ bool PKB::isExists(int constantValue)
 CONSTANT_LIST *  PKB::getAllConstant()
 {
 	return constantTable->getAllConstant();
+}
+
+// function for CFG
+void PKB::createCFG(int size)
+{
+	cfg = new CFG(size);
+}
+
+bool PKB::addEdge(PROG_LINE p1, PROG_LINE p2)
+{
+	return cfg->addEdge(p1, p2);
+}
+
+bool PKB::isConnected(PROG_LINE p1, PROG_LINE p2)
+{
+	return cfg->isConnected(p1, p2);
 }

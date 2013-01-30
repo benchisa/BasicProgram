@@ -21,6 +21,39 @@ bool DesignExtractor::isStatementTypeOf(TYPE typeName,STATEMENT_NUM stmtNum){
 	return false;
 }
 
+void DesignExtractor::createCFG()
+{
+	SIZE procSize = pkb->getProceTableSize();
+	int size = pkb->getProcedure(procSize)->getEndProgLine();
+
+	// create CFG of progline_size
+	pkb->createCFG(size);
+
+	// traverse AST and create the CFG
+	AST* cAST = pkb->getRootAST()->getFirstDescendant();
+	AST *tmp;
+
+}
+
+bool DesignExtractor::isNext(PROG_LINE p1, PROG_LINE p2)
+{
+	return pkb->isConnected(p1, p2);
+}
+
+// already stored in CFG
+NEXT_LIST DesignExtractor::getNext(PROG_LINE p1, PROG_LINE p2)
+{
+	NEXT_LIST tmp;
+	return tmp;
+}
+
+// on demand
+NEXT_LIST DesignExtractor::getNextStar(PROG_LINE p1, PROG_LINE p2)
+{
+	NEXT_LIST tmp;
+	return tmp;
+}
+
 FOLLOWS_LIST DesignExtractor::getFollowsResult(TYPE type1, TYPE type2){
 
 	FOLLOWS_LIST result, followLst;
