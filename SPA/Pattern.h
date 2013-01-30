@@ -14,11 +14,12 @@ public:
 	
 	void setPKB(PKB* p);
 	//type can be while or assign
-	bool isPattern(TYPE type,VAR_INDEX index,QTREE* expression);
-	STATEMENT_LIST* getPatternStmt(TYPE type,VAR_INDEX index,QTREE* expression);
+	bool isPattern(hash_map<int, TYPE>* qvartable, QTREE* expression);
+	hash_map<int, TYPE>* getPatternStmt(hash_map<int, TYPE>*qVarTable,QTREE* expression);
 private:
 	STATEMENT_LIST* getPatternAssign(VAR_INDEX index,QTREE* Expression);
 	STATEMENT_LIST* getPatternWhile(VAR_INDEX index);
+	STATEMENT_LIST* getPatternIf(VAR_INDEX index);
 	bool isPatternAssign(VAR_INDEX index,QTREE* expression);
 	bool isPatternWhile(VAR_INDEX index);
 	bool isSubTree(AST* rootTree, QTREE* subTree);

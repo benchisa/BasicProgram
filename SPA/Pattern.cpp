@@ -17,38 +17,65 @@ void Pattern::setPKB(PKB* p){
 	
 }
 //done
-bool Pattern::isPattern(TYPE type,VAR_INDEX varIndex,QTREE* astExpression){
+bool Pattern::isPattern(hash_map<int, TYPE>* qVarTable, QTREE* astExpression){
 	//return true if the returnList is not empty, otherwise return false
-	if(type==ASSIGNMENT){
+	hash_map<int,TYPE>::const_iterator qVarIter;
+	for(qVarIter=(*qVarTable).begin();qVarIter!=(*qVarTable).end();qVarIter++){
+		switch(qVarIter->second){
+			case ASSIGNMENT: return Pattern::isPatternAssign(qVarIter->first, astExpression);
+							 break;
+			case WHILE:		 return Pattern::isPatternWhile(qVarIter->first);
+							 break;
+			case IF:		 //return Pattern::isPattern(qVarIter);
+
+		}
+	}
+	/*if(type==ASSIGNMENT){
 		//cout<<Pattern::isPatternAssign(varIndex,astExpression);
 		return Pattern::isPatternAssign(varIndex,astExpression);
 	}
 	if(type==WHILE){
 		return Pattern::isPatternWhile(varIndex);
-	}
+	}*/
 
 	//ivalid types return false
 	return false;
 	
 }
 //done
-STATEMENT_LIST* Pattern::getPatternStmt(TYPE type,VAR_INDEX index,QTREE* astExpression){
-	STATEMENT_LIST *returnList;
+hash_map<int, TYPE>* Pattern::getPatternStmt(hash_map<int, TYPE>*qVarTable, QTREE* astExpression){
+	hash_map<int, TYPE> *returnList;
+	hash_map<int,TYPE>::const_iterator qVarIter;
+	INDEX varIndex = astExpression->getFirstDescendant()->getData();
+	TYPE type = astExpression->getFirstDescendant()->getType();
+	for(qVarIter=(*qVarTable).begin();qVarIter!=(*qVarTable).end();qVarIter++){
+		if(type != ANY || type != NULL) {
+			varIndex == NULL;
+		}else {
 
+			switch(qVarIter->second){
+					case VARIABLE:   Pattern::getPatternAssign(varIndex, astExpression));
+									 break;
+					case WHILE:		 Pattern::getPatternWhile(varIndex));
+									 break;
+					case IF:		 Pattern::getPatternIf(varIndex));
+									 break;
+
+			}
+		}
+
+	}
 
 	//return true if the returnList is not empty, otherwise return false
-	if(type==ASSIGNMENT){
+	/*if(type==ASSIGNMENT){
 		returnList = Pattern::getPatternAssign(index, astExpression);
-		//if(returnList ==NULL) return NULL;
 		return returnList;
 	}
 	if(type==WHILE){
 		returnList = Pattern::getPatternWhile(index);
-	//	if(returnList ==NULL) return NULL;
-		return returnList;
-	}
+	}*/
 
-	return NULL;
+	return returnList;
 	
 }
 
@@ -169,16 +196,13 @@ bool Pattern::isPatternWhile(VAR_INDEX varIndex){
 	return false;
 }
 
-STATEMENT_LIST* Pattern::getPatternAssign(VAR_INDEX varIndex,QTREE * astExpression){
-	STATEMENT_LIST * returnList;
-	returnList = new STATEMENT_LIST;
+hash_map<int, TYPE>* Pattern::getPatternAssign(VAR_INDEX varIndex,QTREE * astExpression){
+	hash_map<int, TYPE>* returnList;
 	AST_LIST * treeList;
 	AST * rootTree;
 
 	if(varIndex!=NULL){
 		MODIFIES_LIST stmtList = pkb->getModifies(ASSIGNMENT,NULL,varIndex);
-
-	//	cout<<stmtList.size();
 		if(stmtList.size()<1) return NULL;
 
 		MODIFIES_LIST::iterator itr1;
@@ -191,10 +215,8 @@ STATEMENT_LIST* Pattern::getPatternAssign(VAR_INDEX varIndex,QTREE * astExpressi
 			itr2=treeList->begin();
 			bool found = false;
 
-		//	cout<<"stmtNO: " <<stmtNo;
-			//ast is empty
 			if(astExpression==NULL){
-				returnList->push_back(stmtNo);
+				//returnList->push_back(<stmtNo, STATEMENT>);
 			}else{//ast is not "_"
 				do{
 					if((*itr2)->getRootType()==ASSIGNMENT){
@@ -323,6 +345,69 @@ STATEMENT_LIST* Pattern::getPatternWhile(VAR_INDEX varIndex){
 	}
 	return NULL;
 }
+
+STATEMENT_LIST* Pattern::getPatternIf(VAR_INDEX varIndex){
+	STATEMENT_LIST * returnList;
+	returnList = new STATEMENT_LIST;
+	AST_LIST * treeList;
+
+	if(varIndex!=NULL){
+		USES_LIST stmtList = pkb->getUses(WHILE,NULL,varIndex);
+
+		if(stmtList.size()<1) return NULL;
+
+		USES_LIST::iterator itr1;
+		for(itr1=stmtList.begin();itr1!=stmtList.end();itr1++){
+
+			int stmtNo = itr1->first;
+			treeList = pkb->getASTBy(stmtNo);
+		//	cout<<"stmtNo: "<<stmtNo;
+			AST_LIST::iterator itr2;
+			itr2 = treeList->begin();
+			bool found = false;
+
+			do{
+				//get the node with WHILE
+				if((*itr2)->getRootType()==IF){
+				    if((*itr2)->getFirstDescendant()->getRootData()== varIndex)
+						found = true;
+				}
+				itr2++;
+			}while(itr2!=treeList->end()&&!found);
+			
+			if(found){
+				returnList->push_back(itr1->first);
+			}
+		}
+		if((*returnList).size()>0){
+			(*returnList).sort();
+			(*returnList).unique();
+			return returnList;
+		}
+	}else{//varIndex ==NULL
+		//TODO
+	
+		//get all variables that are used
+		USES_LIST* usesList;
+		USES_LIST::iterator itr1;
+		usesList = new USES_LIST(pkb->getUses(WHILE,EMPTY,EMPTY));
+		
+		if((*usesList).size()<1) return NULL;
+
+		for(itr1=(*usesList).begin();itr1!=(*usesList).end();itr1++){
+	
+			returnList->push_back(itr1->first);
+		}
+
+		if((*returnList).size()>0){
+			(*returnList).sort();
+			(*returnList).unique();
+			return returnList;
+		}
+	}
+	return NULL;
+}
+
 //done
 bool Pattern::isSubTree(AST* rootTree, QTREE* subTree){
 
