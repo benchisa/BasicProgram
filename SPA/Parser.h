@@ -102,8 +102,33 @@ public:
 			if(rxItr->str() != "\n")
 			{
 				tmp.first = rxItr->str();
-				tmp.second = progline;
+				if(rxItr->str() != "else" && rxItr->str() != "procedure")
+					tmp.second = progline;
+				else
+					tmp.second = 0;
 				tokens.push_back(tmp);
+
+				if(rxItr->str() == "procedure")
+				{
+					rxItr++;
+					tmp.first = rxItr->str();
+					tmp.second = 0;
+					tokens.push_back(tmp);
+					rxItr++;
+					tmp.first = rxItr->str();
+					tmp.second = 0;
+					tokens.push_back(tmp);
+					rxItr++; // skip "\n"
+				}
+
+				if(rxItr->str() == "else")
+				{
+					rxItr++;
+					tmp.first = rxItr->str();
+					tmp.second = 0;
+					tokens.push_back(tmp);
+					rxItr++; // skip "\n"
+				}
 			}
 			else
 			{
@@ -117,7 +142,7 @@ public:
 	void printAll(vector<pair<TOKEN, PROG_LINE>> tmp){
 		int i = 0;
 		for(i = 0; i < tmp.size(); i++){
-			//cout << "prog_line: " << tmp.at(i).second << ",token " << i << ": " << tmp.at(i).first + "\n";
+			cout << "index: " << i << ", prog_line: " << tmp.at(i).second << ",token " << i << ": " << tmp.at(i).first + "\n";
 		}
 	}
 };

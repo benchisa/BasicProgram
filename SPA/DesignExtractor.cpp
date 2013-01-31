@@ -25,14 +25,90 @@ void DesignExtractor::createCFG()
 {
 	SIZE procSize = pkb->getProceTableSize();
 	int size = pkb->getProcedure(procSize)->getEndProgLine();
-
+	
 	// create CFG of progline_size
 	pkb->createCFG(size);
 
 	// traverse AST and create the CFG
-	AST* cAST = pkb->getRootAST()->getFirstDescendant();
-	AST *tmp;
+	AST* cAST = pkb->getRootAST();
+	AST* tmp = cAST;
+	buildCFG(tmp);
+}
 
+AST* DesignExtractor::buildCFG(AST * node)
+{
+	AST* tmp = node;
+	AST* containerTmp, *lastNode;
+
+	while(tmp)
+	{
+		switch(pkb->getType(tmp)){
+		
+		case ASSIGNMENT:
+			if(tmp->getRightSibling()){
+				//cout << "1. Add edge: (" << pkb->getProgLine(tmp) << "," << pkb->getProgLine(tmp->getRightSibling()) << ")\n";
+				pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getRightSibling()));
+			}
+
+			lastNode = tmp;
+			tmp = tmp->getRightSibling();
+			break;
+		
+		case WHILE:
+			cfgWhileKeepers.push_back(pkb->getProgLine(tmp));
+
+
+			if(tmp->getRightSibling()){
+				//cout << "2. Add edge: (" << pkb->getProgLine(tmp->getRightSibling()) << "," << pkb->getProgLine(tmp) << ")\n";
+				pkb->addEdge(pkb->getProgLine(tmp->getRightSibling()), pkb->getProgLine(tmp));
+			}
+			
+			//cout << "2a. Add edge: (" << pkb->getProgLine(tmp) << "," << pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()) << ")\n";
+			pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()));
+
+			lastNode = buildCFG(tmp->getFirstDescendant()->getRightSibling());
+			
+			cfgWhileKeepers.pop_back();
+			tmp = tmp->getRightSibling();
+			break;
+		case IF:
+			lastNode = buildCFG(tmp->getFirstDescendant()->getRightSibling());
+			//cout << "3a Add edge: (" << pkb->getProgLine(lastNode) << "," << cfgWhileKeepers.back() << ")\n";
+			pkb->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
+
+			//cout << "3b Add edge: (" << pkb->getProgLine(tmp) << "," << pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()) << ")\n";
+			pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()));
+
+			lastNode = buildCFG(tmp->getFirstDescendant()->getRightSibling()->getRightSibling());
+			//cout << "3c Add edge: (" << pkb->getProgLine(lastNode) << "," << cfgWhileKeepers.back() << ")\n";
+			pkb->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
+			
+			//cout << "3d Add edge: (" << pkb->getProgLine(tmp) << "," << pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getRightSibling()->getFirstDescendant()) << ")\n";
+			pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getRightSibling()->getFirstDescendant()));
+			
+			lastNode = tmp;
+			tmp = tmp->getRightSibling();
+			break;
+		case CALL:
+			if(tmp->getRightSibling()){
+				//cout << "1. Add edge: (" << pkb->getProgLine(tmp) << "," << pkb->getProgLine(tmp->getRightSibling()) << ")\n";
+				pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getRightSibling()));
+			}
+
+			lastNode = tmp;
+			tmp = tmp->getFirstDescendant();
+			break;
+		case PROCEDURE:
+			lastNode = buildCFG(tmp->getFirstDescendant());
+			tmp = tmp->getRightSibling();
+			break;
+		case STMT_LIST:
+			tmp = tmp->getFirstDescendant();
+			break;
+		}
+	}
+
+	return lastNode;
 }
 
 bool DesignExtractor::isNext(PROG_LINE p1, PROG_LINE p2)

@@ -45,6 +45,8 @@ public:
 
 private:
 	PKB* pkb;
+	AST* buildCFG(AST *);
+	vector<PROG_LINE> cfgWhileKeepers;
 	 void computeTypeOnly(list<pair<int, int>> &result, list<pair<int, int>> &listLst, TYPE type1, TYPE type2);
 	 void computeParent(PARENT_LIST &result, PARENT_LIST tmp, TYPE type, STATEMENT_NUM s1, STATEMENT_NUM s2);
 	 void computeFollows(FOLLOWS_LIST &result, FOLLOWS_LIST tmp, TYPE type, STATEMENT_NUM s1, STATEMENT_NUM s2);
