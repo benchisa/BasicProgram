@@ -120,6 +120,47 @@ bool DesignExtractor::isNext(PROG_LINE p1, PROG_LINE p2)
 NEXT_LIST DesignExtractor::getNext(PROG_LINE p1, PROG_LINE p2)
 {
 	NEXT_LIST tmp;
+	int size = pkb->getProcedure(pkb->getAllProc()->size())->getEndProgLine();
+
+	// Next(n1, n2)
+	if(p1 == 0 && p2 == 0){
+		for(int i = 1; i < size; i++)
+		{
+			for(int j = 1; j < size; j++)
+			{
+				if(isNext(i, j)){
+					pair<PROG_LINE, PROG_LINE> tPair;
+					tPair.first = i;
+					tPair.second = j;
+					tmp.push_back(tPair);
+				}
+			}
+		}
+	}
+	// Next(1, n1)
+	else if (p1 != 0 && p2 == 0){
+		for(int i = 1; i < size; i++)
+		{
+			if(isNext(p1, i)){
+				pair<PROG_LINE, PROG_LINE> tPair;
+				tPair.first = p1;
+				tPair.second = i;
+				tmp.push_back(tPair);
+			}
+		}
+	}
+	// Next(n1, 2)
+	else if (p1 == 0 && p2 != 0){
+		for(int i = 1; i < size; i++)
+		{
+			if(isNext(i, p2)){
+				pair<PROG_LINE, PROG_LINE> tPair;
+				tPair.first = i;
+				tPair.second = p2;
+				tmp.push_back(tPair);
+			}
+		}
+	}
 	return tmp;
 }
 
@@ -127,6 +168,22 @@ NEXT_LIST DesignExtractor::getNext(PROG_LINE p1, PROG_LINE p2)
 NEXT_LIST DesignExtractor::getNextStar(PROG_LINE p1, PROG_LINE p2)
 {
 	NEXT_LIST tmp;
+	// Next*(n1, n2) --> BFS
+	if(p1 == 0 && p2 == 0){
+		
+	}
+	//Next*(n,n) --> Find cycles
+	else if(p1 == p2){
+	
+	}
+	//Next*(1,n1) --> BFS
+	else if(p1 != 0 && p2 == 0){
+	
+	}
+	//Next*(n1,2) --> BFS
+	else if(p1 == 0 && p2 == 1){
+	
+	}
 	return tmp;
 }
 

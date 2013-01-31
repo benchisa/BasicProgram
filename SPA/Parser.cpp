@@ -101,7 +101,7 @@ bool Parser::program(){
 		return false;	
 	}
 	else{
-		pkb->getProcedure(curProcIndex)->setEndProgLine(stmt_num);
+		pkb->getProcedure(curProcIndex)->setEndProgLine(curProgLine);
 		if(matchToken(" ")){
 			return true;
 		}
