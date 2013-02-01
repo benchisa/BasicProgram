@@ -39,6 +39,9 @@ bool CFG::addEdge(PROG_LINE p1, PROG_LINE p2)
 	if(p1 > size || p2 > size)
 		return false;
 
+	if(p1 <= 0 && p2 <= 0)
+		return false;
+
 	cfg[p1-1][p2-1] = 1;
 	//cfg[p2-1][p1-1] = 1;
 
@@ -47,20 +50,23 @@ bool CFG::addEdge(PROG_LINE p1, PROG_LINE p2)
 
 list<int> CFG::findAll(PROG_LINE p1, PROG_LINE p2)
 {
-	BFS(p1, p2, 0);
+	if((p1 != 0 && p2 == 0) || (p1 == 0 && p2 == 0) || (p1 != 0 && p2 != 0))
+		BFS(p1, p2, 0);
+	else
+		BFS(p1, p2, 1);
 	return this->paths;
 }
 
-list<int> CFG::findAllReverse(PROG_LINE p1, PROG_LINE p2)
-{
-	BFS(p1, p2, 1);
-	return this->paths;
-}
-
-// can get all path from p1 to p2
-// need to store in a list of list of pair?
+//return the PROG_LINEs that connects between p1 and p2
+//return the PROG_LINEs that connects from p1 to any other possibilities
+//return the PROG_LINEs that connects to p2 from any other possibilities
 void CFG::BFS(PROG_LINE p1, PROG_LINE p2, int reverse)
 {
+	// save time strategy
+	if(p1 > size || p2 > size) return; // invalid case
+	if(p1 <= 0 && p2 <= 0) return; // invalid case
+	
+
 	if(paths.size() != 0)
 		paths.clear();
 
@@ -68,64 +74,48 @@ void CFG::BFS(PROG_LINE p1, PROG_LINE p2, int reverse)
 	for(int i = 0; i <= size; ++i)
 		visited[i] = false;
 
-	q.push(p1);
-	
 	PROG_LINE prev, last;
-	if(p1 == p2){
-		prev = p2;
-		p2 = p2 - 1;	
+	if(!reverse){
+		q.push(p1);
+		visited[p1] = true;
 	}
 	else{
-		prev = p2;
+		q.push(p2);
+		visited[p2] = true;
 	}
-	visited[p1] = true;
-	
 
 	while(!q.empty())
 	{
 		int tmpProg = q.front();
+		
 		if(!q.empty()) 
 			q.pop();
 
-		if(tmpProg == p2){
-			if(p1 == p2 && p2 != 0 && CFG::isConnected(p2, prev)){
-				paths.push_back(prev);
-			}
-			if(!q.empty()) q.pop();
-			if(q.empty()) break;
-			tmpProg = q.front();
-		}
-		
-		findPaths(tmpProg, visited, reverse);
-	}
-	
-	paths.sort();
-	paths.unique();
-	delete [] visited;
-}
-
-void CFG::findPaths(PROG_LINE tmpProg, bool *visited, int reverse){
-	for(int j = 1; j<=size; j++)
+		for(int j = 1; j<=size; j++)
 		{
 			if(reverse){
-				if(CFG::isConnected(j, tmpProg) &&!visited[j])
+				if(isConnected(j, tmpProg) && (j==p2||!visited[j]))
 				{
-					//cout << "(" << tmpProg << "," << j << ")\n";
+					//cout << "(" << j << "," << tmpProg << ")\n";
 					paths.push_back(j);
-					//cout << "push: " << j << "\n";
 					q.push(j);
+					visited[j] = true;
 				}
 			}
 			else
 			{
-				if(CFG::isConnected(tmpProg, j) &&!visited[j])
+				if(isConnected(tmpProg, j) && (j==p1 || !visited[j]) )
 				{
 					//cout << "(" << tmpProg << "," << j << ")\n";
 					paths.push_back(j);
-					//cout << "push: " << j << "\n";
 					q.push(j);
 					visited[j] = true;
 				}
 			}
 		}
+	}
+
+	paths.sort();
+	paths.unique();
+	delete [] visited;
 }

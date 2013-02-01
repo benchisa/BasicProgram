@@ -16,10 +16,10 @@ public:
 
 	//createCFG and store in PKB
 	void createCFG();
-	bool isNext(PROG_LINE, PROG_LINE);
-	bool isNextStar(PROG_LINE, PROG_LINE);
-	NEXT_LIST getNext(PROG_LINE, PROG_LINE);
-	NEXT_LIST getNextStar(PROG_LINE, PROG_LINE);
+	bool isNextResult(PROG_LINE, PROG_LINE);
+	bool isNextStarResult(PROG_LINE, PROG_LINE);
+	NEXT_LIST getNextResult(PROG_LINE, PROG_LINE);
+	NEXT_LIST getNextStarResult(PROG_LINE, PROG_LINE);
 
 	//from such that, need revamp
 	FOLLOWS_LIST getFollowsResult(TYPE type, STATEMENT_NUM s1, STATEMENT_NUM s2);

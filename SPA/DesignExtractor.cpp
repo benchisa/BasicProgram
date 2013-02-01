@@ -126,13 +126,15 @@ AST* DesignExtractor::buildCFG(AST * node)
 	return lastNode;
 }
 
-bool DesignExtractor::isNext(PROG_LINE p1, PROG_LINE p2)
+bool DesignExtractor::isNextResult(PROG_LINE p1, PROG_LINE p2)
 {
+	int size = pkb->getProcedure(pkb->getAllProc()->size())->getEndProgLine();
+	if(p1 > size || p2 > size || p1 <= 0 || p2 <=0) return false;
 	return pkb->isConnected(p1, p2);
 }
 
 // already stored in CFG
-NEXT_LIST DesignExtractor::getNext(PROG_LINE p1, PROG_LINE p2)
+NEXT_LIST DesignExtractor::getNextResult(PROG_LINE p1, PROG_LINE p2)
 {
 	NEXT_LIST tmp;
 	int size = pkb->getProcedure(pkb->getAllProc()->size())->getEndProgLine();
@@ -176,32 +178,34 @@ NEXT_LIST DesignExtractor::getNext(PROG_LINE p1, PROG_LINE p2)
 			}
 		}
 	}
+	// this case shld never happen.. but for sake of error checking
+	else if(p1 != 0 && p2 != 0){
+		pair<PROG_LINE, PROG_LINE> tPair;
+		tPair.first = p1;
+		tPair.second = p2;
+		tmp.push_back(tPair);
+	}
 	return tmp;
 }
 
 // on demand
-bool DesignExtractor::isNextStar(PROG_LINE p1, PROG_LINE p2)
+bool DesignExtractor::isNextStarResult(PROG_LINE p1, PROG_LINE p2)
 {
 	int size = pkb->getProcedure(pkb->getAllProc()->size())->getEndProgLine();
 
-	if(p1 > size || p2 > size) return false;
+	if(p1 > size || p2 > size || p1 <= 0 || p2 <=0) return false;
+	if(pkb->isConnected(p1,p2)) return true;
 
-	list<int> tmp = pkb->bfs(p1, p2, 0);
+	list<int> tmp = pkb->bfs(p1, p2);
 	if(tmp.size() != 0){
-		list<int>::iterator itr = tmp.begin();
-		while(itr!=tmp.end())
-		{
-			if(*itr == p2) return true;
-			itr++;
-		}
-
+		return true;
 	}
 	return false;
 }
 
 
 // on demand
-NEXT_LIST DesignExtractor::getNextStar(PROG_LINE p1, PROG_LINE p2)
+NEXT_LIST DesignExtractor::getNextStarResult(PROG_LINE p1, PROG_LINE p2)
 {
 	NEXT_LIST result;
 	int size = pkb->getProcedure(pkb->getAllProc()->size())->getEndProgLine();
@@ -209,7 +213,7 @@ NEXT_LIST DesignExtractor::getNextStar(PROG_LINE p1, PROG_LINE p2)
 	// Next*(n1, n2) --> BFS
 	if(p1 == 0 && p2 == 0){
 		for(int i = 1; i <=size; i++){
-			list<int> tmp = pkb->bfs(i, i, 0);
+			list<int> tmp = pkb->bfs(i, i);
 			list<int>::iterator itr = tmp.begin();
 			while(itr!=tmp.end())
 			{
@@ -221,28 +225,21 @@ NEXT_LIST DesignExtractor::getNextStar(PROG_LINE p1, PROG_LINE p2)
 			}
 		}
 	}
-	//Next*(n, n), Next*(1,n1) --> Is the same as finding Next*(1, 1)
-	else if(p1 == p2 || (p1 != 0 && p2 == 0)){
-		list<int> tmp = pkb->bfs(p1, p1, 0);
+	//Next*(n, n), Next*(1,n1), Next*(n1,2) --> BFS
+	else if(p1 == p2 || (p1 != 0 && p2 == 0) || (p1 == 0 && p2 != 0) || (p1 != 0 && p2 != 0)){
+		list<int> tmp = pkb->bfs(p1, p2);
 		list<int>::iterator itr = tmp.begin();
 		while(itr!=tmp.end())
 		{
 			pair<PROG_LINE, PROG_LINE> tPair;
-			tPair.first = p1;
-			tPair.second = *itr;
-			result.push_back(tPair);
-			itr++;
-		}
-	}
-	//Next*(n1,2) --> BFS
-	else if(p1 == 0 && p2 != 0){
-		list<int> tmp = pkb->bfs(p2, p2, 1);
-		list<int>::iterator itr = tmp.begin();
-		while(itr!=tmp.end())
-		{
-			pair<PROG_LINE, PROG_LINE> tPair;
-			tPair.first = *itr;
-			tPair.second = p2;
+			if(p1 != 0) {
+				tPair.first = p1;
+				tPair.second = *itr;
+			}
+			else if(p1 == 0) {
+				tPair.first = *itr;
+				tPair.second = p2;
+			}
 			result.push_back(tPair);
 			itr++;
 		}

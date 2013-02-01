@@ -116,11 +116,10 @@ class PKB
 		CONSTANT_LIST *  getAllConstant();
 
 		//Functions of CFG
-		//Functions of CFG
 		void createCFG(int size);
 		bool isConnected(PROG_LINE p1, PROG_LINE p2);
 		bool addEdge(PROG_LINE p1, PROG_LINE p2);
-		list<int> bfs(PROG_LINE p1, PROG_LINE p2, int reverse);
+		list<int> bfs(PROG_LINE p1, PROG_LINE p2);
 
 		//Other functions
 		PROG_LINE getMaxProgLine();
