@@ -75,6 +75,9 @@ void CFG::BFS(PROG_LINE p1, PROG_LINE p2, int reverse)
 		prev = p2;
 		p2 = p2 - 1;	
 	}
+	else{
+		prev = p2;
+	}
 	visited[p1] = true;
 	
 
@@ -85,7 +88,7 @@ void CFG::BFS(PROG_LINE p1, PROG_LINE p2, int reverse)
 			q.pop();
 
 		if(tmpProg == p2){
-			if(p2!=0 && CFG::isConnected(p2, prev)){
+			if(p1 == p2 && p2 != 0 && CFG::isConnected(p2, prev)){
 				paths.push_back(prev);
 			}
 			if(!q.empty()) q.pop();

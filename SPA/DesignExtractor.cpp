@@ -182,7 +182,21 @@ NEXT_LIST DesignExtractor::getNext(PROG_LINE p1, PROG_LINE p2)
 // on demand
 bool DesignExtractor::isNextStar(PROG_LINE p1, PROG_LINE p2)
 {
-	return true;
+	int size = pkb->getProcedure(pkb->getAllProc()->size())->getEndProgLine();
+
+	if(p1 > size || p2 > size) return false;
+
+	list<int> tmp = pkb->bfs(p1, p2, 0);
+	if(tmp.size() != 0){
+		list<int>::iterator itr = tmp.begin();
+		while(itr!=tmp.end())
+		{
+			if(*itr == p2) return true;
+			itr++;
+		}
+
+	}
+	return false;
 }
 
 
