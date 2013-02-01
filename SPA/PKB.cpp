@@ -384,3 +384,12 @@ bool PKB::isConnected(PROG_LINE p1, PROG_LINE p2)
 {
 	return cfg->isConnected(p1, p2);
 }
+
+list<int> PKB::bfs(PROG_LINE p1, PROG_LINE p2,int reverse)
+{
+	if(reverse)
+		return cfg->findAllReverse(p1, p2);
+	else
+		return cfg->findAll(p1, p2);
+
+}

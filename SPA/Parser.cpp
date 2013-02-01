@@ -441,11 +441,12 @@ bool Parser::stmt_assign(){
 	AST *assignNode = pkb->createAST(ASSIGNMENT, curProgLine, stmt_num, -1);
 	AST *leftNode, *rightNode;
 
-	if(!pkb->setFirstDescendant(curAST, assignNode))
+	if(pkb->getType(curAST) == CALL || !pkb->setFirstDescendant(curAST, assignNode))
 	{
 		pkb->addSibling(curAST, assignNode);
 		pkb->setAncestor(assignNode, curAST->getAncestor());
 	}
+
 
 	curAST = assignNode;
 

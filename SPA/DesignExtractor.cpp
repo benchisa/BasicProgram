@@ -49,7 +49,6 @@ AST* DesignExtractor::buildCFG(AST * node)
 				//cout << "1. Add edge: (" << pkb->getProgLine(tmp) << "," << pkb->getProgLine(tmp->getRightSibling()) << ")\n";
 				pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getRightSibling()));
 			}
-
 			lastNode = tmp;
 			tmp = tmp->getRightSibling();
 			break;
@@ -57,32 +56,47 @@ AST* DesignExtractor::buildCFG(AST * node)
 		case WHILE:
 			cfgWhileKeepers.push_back(pkb->getProgLine(tmp));
 
-
 			if(tmp->getRightSibling()){
-				//cout << "2. Add edge: (" << pkb->getProgLine(tmp->getRightSibling()) << "," << pkb->getProgLine(tmp) << ")\n";
-				pkb->addEdge(pkb->getProgLine(tmp->getRightSibling()), pkb->getProgLine(tmp));
+				//cout << "2. Add edge: (" << pkb->getProgLine(tmp) << "," << pkb->getProgLine(tmp->getRightSibling()) << ")\n";
+				pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getRightSibling()));
 			}
 			
 			//cout << "2a. Add edge: (" << pkb->getProgLine(tmp) << "," << pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()) << ")\n";
 			pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()));
 
 			lastNode = buildCFG(tmp->getFirstDescendant()->getRightSibling());
-			
+			//cout << "2b Add edge: (" << pkb->getProgLine(lastNode) << "," << cfgWhileKeepers.back() << ")\n";
+			if(pkb->getType(lastNode) != IF)
+				pkb->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
+
 			cfgWhileKeepers.pop_back();
 			tmp = tmp->getRightSibling();
 			break;
 		case IF:
+
 			lastNode = buildCFG(tmp->getFirstDescendant()->getRightSibling());
 			//cout << "3a Add edge: (" << pkb->getProgLine(lastNode) << "," << cfgWhileKeepers.back() << ")\n";
-			pkb->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
+			if(cfgWhileKeepers.size()!= 0)
+				pkb->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
+
+			if(tmp->getRightSibling()){
+				//cout << "3a Add edge: (" << pkb->getProgLine(lastNode) << "," << pkb->getProgLine(tmp->getRightSibling()) << ")\n";
+				pkb->addEdge(pkb->getProgLine(lastNode), pkb->getProgLine(tmp->getRightSibling()));
+			}
 
 			//cout << "3b Add edge: (" << pkb->getProgLine(tmp) << "," << pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()) << ")\n";
 			pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()));
 
 			lastNode = buildCFG(tmp->getFirstDescendant()->getRightSibling()->getRightSibling());
 			//cout << "3c Add edge: (" << pkb->getProgLine(lastNode) << "," << cfgWhileKeepers.back() << ")\n";
-			pkb->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
+			if(cfgWhileKeepers.size() != 0)
+				pkb->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
 			
+			
+			if(tmp->getRightSibling()){
+				pkb->addEdge(pkb->getProgLine(lastNode), pkb->getProgLine(tmp->getRightSibling()));
+			}
+
 			//cout << "3d Add edge: (" << pkb->getProgLine(tmp) << "," << pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getRightSibling()->getFirstDescendant()) << ")\n";
 			pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getRightSibling()->getFirstDescendant()));
 			
@@ -96,7 +110,8 @@ AST* DesignExtractor::buildCFG(AST * node)
 			}
 
 			lastNode = tmp;
-			tmp = tmp->getFirstDescendant();
+			//cout << pkb->getType(tmp->getFirstDescendant()) << "\n";
+			tmp = tmp->getRightSibling();
 			break;
 		case PROCEDURE:
 			lastNode = buildCFG(tmp->getFirstDescendant());
@@ -124,9 +139,9 @@ NEXT_LIST DesignExtractor::getNext(PROG_LINE p1, PROG_LINE p2)
 
 	// Next(n1, n2)
 	if(p1 == 0 && p2 == 0){
-		for(int i = 1; i < size; i++)
+		for(int i = 1; i <= size; i++)
 		{
-			for(int j = 1; j < size; j++)
+			for(int j = 1; j <= size; j++)
 			{
 				if(isNext(i, j)){
 					pair<PROG_LINE, PROG_LINE> tPair;
@@ -139,7 +154,7 @@ NEXT_LIST DesignExtractor::getNext(PROG_LINE p1, PROG_LINE p2)
 	}
 	// Next(1, n1)
 	else if (p1 != 0 && p2 == 0){
-		for(int i = 1; i < size; i++)
+		for(int i = 1; i <= size; i++)
 		{
 			if(isNext(p1, i)){
 				pair<PROG_LINE, PROG_LINE> tPair;
@@ -151,7 +166,7 @@ NEXT_LIST DesignExtractor::getNext(PROG_LINE p1, PROG_LINE p2)
 	}
 	// Next(n1, 2)
 	else if (p1 == 0 && p2 != 0){
-		for(int i = 1; i < size; i++)
+		for(int i = 1; i <= size; i++)
 		{
 			if(isNext(i, p2)){
 				pair<PROG_LINE, PROG_LINE> tPair;
@@ -165,26 +180,60 @@ NEXT_LIST DesignExtractor::getNext(PROG_LINE p1, PROG_LINE p2)
 }
 
 // on demand
+bool DesignExtractor::isNextStar(PROG_LINE p1, PROG_LINE p2)
+{
+	return true;
+}
+
+
+// on demand
 NEXT_LIST DesignExtractor::getNextStar(PROG_LINE p1, PROG_LINE p2)
 {
-	NEXT_LIST tmp;
+	NEXT_LIST result;
+	int size = pkb->getProcedure(pkb->getAllProc()->size())->getEndProgLine();
+
 	// Next*(n1, n2) --> BFS
 	if(p1 == 0 && p2 == 0){
-		
+		for(int i = 1; i <=size; i++){
+			list<int> tmp = pkb->bfs(i, i, 0);
+			list<int>::iterator itr = tmp.begin();
+			while(itr!=tmp.end())
+			{
+				pair<PROG_LINE, PROG_LINE> tPair;
+				tPair.first = i;
+				tPair.second = *itr;
+				result.push_back(tPair);
+				itr++;
+			}
+		}
 	}
-	//Next*(n,n) --> Find cycles
-	else if(p1 == p2){
-	
-	}
-	//Next*(1,n1) --> BFS
-	else if(p1 != 0 && p2 == 0){
-	
+	//Next*(n, n), Next*(1,n1) --> Is the same as finding Next*(1, 1)
+	else if(p1 == p2 || (p1 != 0 && p2 == 0)){
+		list<int> tmp = pkb->bfs(p1, p1, 0);
+		list<int>::iterator itr = tmp.begin();
+		while(itr!=tmp.end())
+		{
+			pair<PROG_LINE, PROG_LINE> tPair;
+			tPair.first = p1;
+			tPair.second = *itr;
+			result.push_back(tPair);
+			itr++;
+		}
 	}
 	//Next*(n1,2) --> BFS
-	else if(p1 == 0 && p2 == 1){
-	
+	else if(p1 == 0 && p2 != 0){
+		list<int> tmp = pkb->bfs(p2, p2, 1);
+		list<int>::iterator itr = tmp.begin();
+		while(itr!=tmp.end())
+		{
+			pair<PROG_LINE, PROG_LINE> tPair;
+			tPair.first = *itr;
+			tPair.second = p2;
+			result.push_back(tPair);
+			itr++;
+		}
 	}
-	return tmp;
+	return result;
 }
 
 FOLLOWS_LIST DesignExtractor::getFollowsResult(TYPE type1, TYPE type2){

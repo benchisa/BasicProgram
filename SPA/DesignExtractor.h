@@ -17,6 +17,7 @@ public:
 	//createCFG and store in PKB
 	void createCFG();
 	bool isNext(PROG_LINE, PROG_LINE);
+	bool isNextStar(PROG_LINE, PROG_LINE);
 	NEXT_LIST getNext(PROG_LINE, PROG_LINE);
 	NEXT_LIST getNextStar(PROG_LINE, PROG_LINE);
 
