@@ -158,3 +158,8 @@ CALL_LIST *  CallTable::getAllCalls()
 
 	return answer;
 }
+SIZE::CallTable::getCallTableSize()
+{
+return counter;	
+}
+}
