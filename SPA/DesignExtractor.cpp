@@ -145,7 +145,7 @@ NEXT_LIST DesignExtractor::getNextResult(PROG_LINE p1, PROG_LINE p2)
 		{
 			for(int j = 1; j <= size; j++)
 			{
-				if(isNext(i, j)){
+				if(isNextResult(i, j)){
 					pair<PROG_LINE, PROG_LINE> tPair;
 					tPair.first = i;
 					tPair.second = j;
@@ -158,7 +158,7 @@ NEXT_LIST DesignExtractor::getNextResult(PROG_LINE p1, PROG_LINE p2)
 	else if (p1 != 0 && p2 == 0){
 		for(int i = 1; i <= size; i++)
 		{
-			if(isNext(p1, i)){
+			if(isNextResult(p1, i)){
 				pair<PROG_LINE, PROG_LINE> tPair;
 				tPair.first = p1;
 				tPair.second = i;
@@ -170,7 +170,7 @@ NEXT_LIST DesignExtractor::getNextResult(PROG_LINE p1, PROG_LINE p2)
 	else if (p1 == 0 && p2 != 0){
 		for(int i = 1; i <= size; i++)
 		{
-			if(isNext(i, p2)){
+			if(isNextResult(i, p2)){
 				pair<PROG_LINE, PROG_LINE> tPair;
 				tPair.first = i;
 				tPair.second = p2;
