@@ -11,6 +11,65 @@ DesignExtractor::~DesignExtractor(void)
 {
 }
 
+//calltable
+
+CALL_LIST DesignExtractor::getCallResult(PROC_NAME caller, PROC_NAME callee)
+{
+	return pkb->getCall(caller, callee);
+}
+bool DesignExtractor::getIsCallResult(PROC_NAME caller, PROC_NAME callee)
+{
+	return pkb->isExistsCall(caller, callee);
+}
+
+CALL_LIST  DesignExtractor::getCallStarResult(PROC_NAME caller, PROC_NAME callee)
+{
+	list<pair<string,string>> finalResult;
+	list<string> firstResult;
+	DesignExtractor::computeCallStar(caller, callee, firstResult);
+	if (firstResult.size()>0)
+	{
+		list<string>::iterator itr;
+		for (itr=firstResult.begin(); itr!=firstResult.end(); itr++)
+		{
+			if (caller!=" " && callee==" ")
+			{
+
+				finalResult.push_back(make_pair(caller, *itr));
+			}
+			else if (callee!=" " && caller==" ")
+			{
+
+				finalResult.push_back(make_pair(*itr, callee));
+			}
+		}
+	}
+	return finalResult;
+
+}
+
+bool DesignExtractor::getIsCallStarResult(PROC_NAME caller, PROC_NAME callee)
+{
+	if (caller!=" " && callee!=" ")
+	{
+		CALL_LIST result=DesignExtractor::getCallStarResult(caller," ");
+		CALL_LIST::iterator itr;
+		if (!result.empty())
+		{
+			for (itr=result.begin(); itr!=result.end(); itr++)
+			{
+				if (caller==itr->first && callee==itr->second)
+				{
+					return true;
+				}
+			}
+		}
+
+	}
+	return false;
+}
+
+
 bool DesignExtractor::isStatementTypeOf(TYPE typeName,STATEMENT_NUM stmtNum){
 	//find the type of statement
 	AST_LIST* currentAST = pkb->getASTBy(stmtNum);
@@ -260,7 +319,7 @@ bool DesignExtractor::getIsFollowsResult(STATEMENT_NUM s1, STATEMENT_NUM s2){
 bool DesignExtractor::getIsFollowsStarResult(STATEMENT_NUM s1, STATEMENT_NUM s2){
 	if (s1!=NULL && s2!=NULL)
 	{
-		FOLLOWS_LIST result=DesignExtractor::getFollowsStar(s1,s2);
+		FOLLOWS_LIST result=DesignExtractor::getFollowsStar(s1,NULL);
 		FOLLOWS_LIST::iterator itr;
 		if (!result.empty())
 		{
@@ -347,7 +406,7 @@ bool DesignExtractor::getIsParentStarResult(STATEMENT_NUM s1, STATEMENT_NUM s2)
 {
 	if (s1!=NULL && s2!=NULL)
 	{
-		PARENT_LIST result=DesignExtractor::getParentStar(s1,s2);
+		PARENT_LIST result=DesignExtractor::getParentStar(s1,NULL);
 		PARENT_LIST::iterator itr;
 		if (!result.empty())
 		{
@@ -800,3 +859,32 @@ FOLLOWS_LIST DesignExtractor::getFollowsStar(STATEMENT_NUM stmt1, STATEMENT_NUM 
 			}	
 		}
 	}
+	
+	void  DesignExtractor::computeCallStar(PROC_NAME caller, PROC_NAME callee,list<string> &result)
+{
+	if (caller!=" " || callee!=" ")
+	{
+		CALL_LIST calls=pkb->getCall(caller, callee);
+		if (calls.size()>0)
+		{
+			CALL_LIST::iterator itr;
+
+			for (itr=calls.begin(); itr!=calls.end(); itr++)
+			{
+
+				if (caller!=" " && callee==" ")
+				{	
+					result.push_back(itr->second);
+					DesignExtractor::computeCallStar(itr->second, " ",result);
+				}
+				else if (caller==" " && callee!=" ")
+				{
+					result.push_back(itr->first);
+					DesignExtractor::computeCallStar(" ",itr->first,result);
+				}
+			}
+
+
+		}
+	}
+}
