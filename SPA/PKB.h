@@ -117,9 +117,11 @@ class PKB
 
 		//Functions of CFG
 		void createCFG(int size);
-		bool isConnected(PROG_LINE p1, PROG_LINE p2);
 		bool addEdge(PROG_LINE p1, PROG_LINE p2);
-		list<int> bfs(PROG_LINE p1, PROG_LINE p2);
+		bool isNext(PROG_LINE p1, PROG_LINE p2);
+		NEXT_LIST getNext(PROG_LINE p1, PROG_LINE p2);
+		list<int> findAll(PROG_LINE p1, PROG_LINE p2);
+
 
 		//Other functions
 		PROG_LINE getMaxProgLine();

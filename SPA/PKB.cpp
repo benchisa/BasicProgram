@@ -380,13 +380,20 @@ bool PKB::addEdge(PROG_LINE p1, PROG_LINE p2)
 	return cfg->addEdge(p1, p2);
 }
 
-bool PKB::isConnected(PROG_LINE p1, PROG_LINE p2)
+bool PKB::isNext(PROG_LINE p1, PROG_LINE p2)
 {
-	return cfg->isConnected(p1, p2);
+	return cfg->isNext(p1, p2);
+}
+
+NEXT_LIST PKB::getNext(PROG_LINE p1, PROG_LINE p2)
+{
+	return cfg->getNext(p1, p2);
 }
 
 
-list<int> PKB::bfs(PROG_LINE p1, PROG_LINE p2)
+list<int> PKB::findAll(PROG_LINE p1, PROG_LINE p2)
 {
 	return cfg->findAll(p1, p2);
 }
+
+

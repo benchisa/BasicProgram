@@ -128,75 +128,21 @@ AST* DesignExtractor::buildCFG(AST * node)
 
 bool DesignExtractor::isNextResult(PROG_LINE p1, PROG_LINE p2)
 {
-	int size = pkb->getProcedure(pkb->getAllProc()->size())->getEndProgLine();
-	if(p1 > size || p2 > size || p1 <= 0 || p2 <=0) return false;
-	return pkb->isConnected(p1, p2);
+	return pkb->isNext(p1, p2);
 }
 
 // already stored in CFG
 NEXT_LIST DesignExtractor::getNextResult(PROG_LINE p1, PROG_LINE p2)
 {
-	NEXT_LIST tmp;
-	int size = pkb->getProcedure(pkb->getAllProc()->size())->getEndProgLine();
-
-	// Next(n1, n2)
-	if(p1 == 0 && p2 == 0){
-		for(int i = 1; i <= size; i++)
-		{
-			for(int j = 1; j <= size; j++)
-			{
-				if(isNextResult(i, j)){
-					pair<PROG_LINE, PROG_LINE> tPair;
-					tPair.first = i;
-					tPair.second = j;
-					tmp.push_back(tPair);
-				}
-			}
-		}
-	}
-	// Next(1, n1)
-	else if (p1 != 0 && p2 == 0){
-		for(int i = 1; i <= size; i++)
-		{
-			if(isNextResult(p1, i)){
-				pair<PROG_LINE, PROG_LINE> tPair;
-				tPair.first = p1;
-				tPair.second = i;
-				tmp.push_back(tPair);
-			}
-		}
-	}
-	// Next(n1, 2)
-	else if (p1 == 0 && p2 != 0){
-		for(int i = 1; i <= size; i++)
-		{
-			if(isNextResult(i, p2)){
-				pair<PROG_LINE, PROG_LINE> tPair;
-				tPair.first = i;
-				tPair.second = p2;
-				tmp.push_back(tPair);
-			}
-		}
-	}
-	// this case shld never happen.. but for sake of error checking
-	else if(p1 != 0 && p2 != 0){
-		pair<PROG_LINE, PROG_LINE> tPair;
-		tPair.first = p1;
-		tPair.second = p2;
-		tmp.push_back(tPair);
-	}
-	return tmp;
+	return pkb->getNext(p1, p2);
 }
 
 // on demand
 bool DesignExtractor::isNextStarResult(PROG_LINE p1, PROG_LINE p2)
 {
-	int size = pkb->getProcedure(pkb->getAllProc()->size())->getEndProgLine();
+	int size = pkb->getMaxProgLine();
 
-	if(p1 > size || p2 > size || p1 <= 0 || p2 <=0) return false;
-	if(pkb->isConnected(p1,p2)) return true;
-
-	list<int> tmp = pkb->bfs(p1, p2);
+	list<int> tmp = pkb->findAll(p1, p2);
 	if(tmp.size() != 0){
 		return true;
 	}
@@ -208,12 +154,12 @@ bool DesignExtractor::isNextStarResult(PROG_LINE p1, PROG_LINE p2)
 NEXT_LIST DesignExtractor::getNextStarResult(PROG_LINE p1, PROG_LINE p2)
 {
 	NEXT_LIST result;
-	int size = pkb->getProcedure(pkb->getAllProc()->size())->getEndProgLine();
+	int size = pkb->getMaxProgLine();
 
-	// Next*(n1, n2) --> BFS
+	// Next*(n1, n2) --> findAll
 	if(p1 == 0 && p2 == 0){
 		for(int i = 1; i <=size; i++){
-			list<int> tmp = pkb->bfs(i, i);
+			list<int> tmp = pkb->findAll(i, i);
 			list<int>::iterator itr = tmp.begin();
 			while(itr!=tmp.end())
 			{
@@ -225,9 +171,9 @@ NEXT_LIST DesignExtractor::getNextStarResult(PROG_LINE p1, PROG_LINE p2)
 			}
 		}
 	}
-	//Next*(n, n), Next*(1,n1), Next*(n1,2) --> BFS
+	//Next*(n, n), Next*(1,n1), Next*(n1,2) --> findAll
 	else if(p1 == p2 || (p1 != 0 && p2 == 0) || (p1 == 0 && p2 != 0) || (p1 != 0 && p2 != 0)){
-		list<int> tmp = pkb->bfs(p1, p2);
+		list<int> tmp = pkb->findAll(p1, p2);
 		list<int>::iterator itr = tmp.begin();
 		while(itr!=tmp.end())
 		{

@@ -8,8 +8,9 @@ class CFG
 public:
 	CFG(int size);
 	~CFG(void);
-	bool isConnected(PROG_LINE p1, PROG_LINE p2);
 	bool addEdge(PROG_LINE p1, PROG_LINE p2);
+	bool isNext(PROG_LINE p1, PROG_LINE p2);
+	NEXT_LIST getNext(PROG_LINE p1, PROG_LINE p2);
 	list<int> findAll(PROG_LINE p1, PROG_LINE p2);
 
 private:
@@ -18,6 +19,7 @@ private:
 	int size;
 	list<int> paths;
 	queue<PROG_LINE> q;
+	bool isConnected(PROG_LINE p1, PROG_LINE p2);
 	void BFS(PROG_LINE p1, PROG_LINE p2, int reverse);
 };
 

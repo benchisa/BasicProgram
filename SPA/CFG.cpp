@@ -29,11 +29,6 @@ CFG::~CFG(void)
 	delete [] cfg;
 }
 
-bool CFG::isConnected(PROG_LINE p1, PROG_LINE p2)
-{
-	return (cfg[p1-1][p2-1] == 1);
-}
-
 bool CFG::addEdge(PROG_LINE p1, PROG_LINE p2)
 {
 	if(p1 > size || p2 > size)
@@ -55,6 +50,69 @@ list<int> CFG::findAll(PROG_LINE p1, PROG_LINE p2)
 	else
 		BFS(p1, p2, 1);
 	return this->paths;
+}
+
+bool CFG::isNext(PROG_LINE p1, PROG_LINE p2)
+{
+	if(p1 > size || p2 > size || p1 <= 0 || p2 <= 0) return false;
+	return isConnected(p1, p2);
+}
+
+NEXT_LIST CFG::getNext(PROG_LINE p1, PROG_LINE p2){
+	NEXT_LIST tmp;
+	
+	// Next(n1, n2)
+	if(p1 == NULL && p2 == NULL){
+		for(int i = 1; i <= size; i++)
+		{
+			for(int j = 1; j <= size; j++)
+			{
+				if(isConnected(i, j)){
+					pair<PROG_LINE, PROG_LINE> tPair;
+					tPair.first = i;
+					tPair.second = j;
+					tmp.push_back(tPair);
+				}
+			}
+		}
+	}
+	// Next(1, n1)
+	else if (p1 != NULL && p2 == NULL){
+		for(int i = 1; i <= size; i++)
+		{
+			if(isConnected(p1, i)){
+				pair<PROG_LINE, PROG_LINE> tPair;
+				tPair.first = p1;
+				tPair.second = i;
+				tmp.push_back(tPair);
+			}
+		}
+	}
+	// Next(n1, 2)
+	else if (p1 == NULL && p2 != NULL){
+		for(int i = 1; i <= size; i++)
+		{
+			if(isConnected(i, p2)){
+				pair<PROG_LINE, PROG_LINE> tPair;
+				tPair.first = i;
+				tPair.second = p2;
+				tmp.push_back(tPair);
+			}
+		}
+	}
+	// this case shld never happen.. but for sake of error checking
+	else if(p1 != NULL && p2 != NULL){
+		pair<PROG_LINE, PROG_LINE> tPair;
+		tPair.first = p1;
+		tPair.second = p2;
+		tmp.push_back(tPair);
+	}
+	return tmp;
+}
+
+bool CFG::isConnected(PROG_LINE p1, PROG_LINE p2)
+{
+	return (cfg[p1-1][p2-1] == 1);
 }
 
 //return the PROG_LINEs that connects between p1 and p2
