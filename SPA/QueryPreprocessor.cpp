@@ -2,36 +2,64 @@
 #include "QueryPreprocessor.h"
 #include <hash_map>
 
-vector<TOKEN> *tokens;
-vector<TOKEN> *declarations;
-vector<TOKEN> *mainQuery;	
-
-hash_map<int,TYPE> *qVarTable;
-hash_map<int,TYPE>::const_iterator qVarIter;
-hash_map<string,int> *dVarTable;
-hash_map<string,int>::const_iterator dVarIter;
 
 QueryPreprocessor::QueryPreprocessor(PKB* pkb){
-	grammarTable = new GrammarTable;	
-	tokens = new vector<TOKEN>;
-	declarations = new vector<TOKEN>;
-	mainQuery = new vector<TOKEN>;
+	tokens			= new vector<TOKEN>;
 
-	qVarTable = new hash_map<int,TYPE>;
-	dVarTable = new hash_map<string,int>;
-	this->pkb = pkb;
+	paramTable		= new hash_map<int,string>;
+	qVarTable		= new hash_map<int,TYPE>;
+	dVarTable		= new hash_map<string,qVar>;
+
+	this->pkb		= pkb;
+
+	compulsoryOne	= "+";
+	optional		= "*";
+	or				= "|";		
+	underscore		= "_";
+	hash			= "#";
+	invComma		= "\"";
+	letter			= "a-zA-Z";
+	digit			= "0-9";
+	plus			= "\\+";
+	minus			= "\\-";
+	times			= "\\*";
+	op				= "["+plus+minus+times+"]";
+	integer			= "["+digit+"]"+compulsoryOne;
+	ident			= "["+letter+"]"+compulsoryOne+"["+letter+digit+hash+"]"+optional;
+	synonym			= ident;
+	rel				= "uses|modifies|follows|follows\\*|parent|parent\\*|affects|affects\\*|calls|calls\\*|next|next\\*";
+	ref				= synonym+or+underscore+or+integer+or+invComma+ident+invComma;
+	attrName		= "procName|varName|value|stmt#";
+	attrRef			= synonym+"\\.("+attrName+")";
+	attrCompare		= attrRef+"=("+invComma+ident+invComma+or+integer+or+attrRef+")"+or+synonym+"=("+integer+or+attrRef+")";
+	designEnt		= "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
+	elem			= synonym+or+attrRef;
+	tuple			= elem+or+"<"+elem+"(,"+elem+")"+optional+">";
+	declare			= designEnt+"\\s+"+synonym+"(\\s*,\\s*"+synonym+")*";
+	result_cl		= "select\\s+("+tuple+or+"BOOLEAN)";
+	suchthat_cl		= "such that\\s+("+rel+")\\s*\\(("+ref+"),("+ref+")\\)(\\s+and\\s+("+rel+")\\s*\\(("+ref+"),("+ref+")\\))"+optional;
+	with_cl			= "with\\s+("+attrCompare+")(\\s+and\\s+("+attrCompare+"))"+optional;
+	pattern_cl		= "pattern\\s+"+synonym+"\\s*\\(.+,.+,*\\)(\\s+and\\s+"+synonym+"\\s*\\(.+,.+,*\\))"+optional;
+		
+	/*
+	cout<<"result_cl==============="<<endl;
+	cout<<result_cl<<endl;
+	cout<<"suchthat_cl==============="<<endl;
+	cout<<suchthat_cl<<endl;
+	cout<<"with_cl==============="<<endl;
+	cout<<with_cl<<endl;
+	cout<<"pattern_cl==============="<<endl;
+	cout<<pattern_cl<<endl;
+	*/
 }
 
 QueryPreprocessor::~QueryPreprocessor(void){
-	delete grammarTable;
 	delete tokens;
-	delete declarations;
-	delete mainQuery;
 
+	delete paramTable;
 	delete qVarTable;
 	delete dVarTable;
 }
-
 
 //--------------PUBLIC-----------------
 
@@ -39,14 +67,9 @@ bool QueryPreprocessor::preProcess(){
 
 	//both declarations and main query must be valid
 	//then will build qrTree & qrVarTable.
-	Tokenizer tkz;
-	(*tokens) = tkz.tokenize(this->query);	
+	*tokens = parse(this->query);	
 
 	createGrammarTables();
-
-	//split the user-provided query into 2 parts:
-	//declarations and mainQuery
-	splitQuery();
 
 	/*
 	*inside validate()
@@ -57,7 +80,7 @@ bool QueryPreprocessor::preProcess(){
 	*/
 
 	bool validated = validate();
-	cleanUp();
+	//cleanUp();
 
 	return validated;
 }
@@ -72,320 +95,483 @@ hash_map<int,TYPE> *QueryPreprocessor::getQVarTable(){
 	return qVarTable;
 }
 
-QTREE* QueryPreprocessor::getQTree(){
+hash_map<int,string> *QueryPreprocessor::getParamTable(){
+	return paramTable;
+}
 
-	return qTree;
+QTREE* QueryPreprocessor::getQTree(){
+	return firstNode;
 }
 
 ERROR_MSG QueryPreprocessor::getLastError(){
 	return this->errorMsg;
 }
 
+
 //--------------PRIVATE-----------------
-void QueryPreprocessor::splitQuery(){
-
-	int i = 0;
-	bool startOfMainQr = false;
-
-	for(i = 0; i < (*tokens).size(); i++){
-		if (!startOfMainQr){
-			if ((*tokens).at(i).compare("select") != 0){
-				//if not select
-				(*declarations).push_back((*tokens).at(i));
-
-			} else {
-				//seen a select
-				startOfMainQr = true;
-				(*mainQuery).push_back((*tokens).at(i));
-
-			}
-		} else {
-			if ((*tokens).at(i).compare(";") != 0){
-				(*mainQuery).push_back((*tokens).at(i));
-			}
-		}
-	}
-
-}
 
 void QueryPreprocessor::createGrammarTables(){
-	(*grammarTable).createEntTable();
-	(*grammarTable).createRelTable();
-	(*grammarTable).createPattTable();	
-	(*grammarTable).createArgTable();
+	grammarTable.createEntTable();
+	grammarTable.createRelTable();
+	grammarTable.createPattTable();	
+	grammarTable.createArgTable();
 }
 
 bool QueryPreprocessor::validate(){
 
-	return (validateDeclarations(declarations) && validateMainQuery(mainQuery));
+	TOKEN currToken;
+
+	for(int i=0;i<(*tokens).size();i++){
+		currToken = (*tokens).at(i);
+		
+		//cout<<"i= "<< i<< endl;
+		//cout<<currToken<<endl;
+		
+		verifyDeclaration(currToken);
+		verifySelect(currToken);
+		verifyCondition(currToken);
+	}
+
+	return true;
 
 }
 
-bool QueryPreprocessor::validateDeclarations(vector<TOKEN>* declarations){
+void QueryPreprocessor::setQTree(){
+	//idea: check selected variable/s is/are from which group/s
+	int grpNum;
+	vector<int> clauseNums;
 
-	int i;
+	prevNode = firstNode;
+
+	for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
+		if(dVarIter->second.selected){
+			grpNum = dVarIter->second.groupNum;
+			if (!isFlaggedGroup(grpNum)){
+				flagGroups.push_back(grpNum);
+			}
+		}
+	}
+
+	//insert into QTREE the clauses with the variables NOT from those groups first
+	for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
+		if(!isFlaggedGroup(dVarIter->second.groupNum)){
+			clauseNums = dVarIter->second.clauseNum;
+			for (int i=0; i<clauseNums.size(); i++){
+				currNode = clauses.at(clauseNums.at(i));
+				prevNode->setSibling(currNode);
+				prevNode = currNode;
+			}
+		}
+	}
+	
+	//then insert the rest
+	for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
+		if(isFlaggedGroup(dVarIter->second.groupNum)){
+			clauseNums = dVarIter->second.clauseNum;
+			for (int i=0; i<clauseNums.size(); i++){
+				currNode = clauses.at(clauseNums.at(i));
+				prevNode->setSibling(currNode);
+				prevNode = currNode;
+			}
+		}
+	}
+}
+
+bool QueryPreprocessor::isFlaggedGroup(int grpNum){
+	for (int i=0; i<flagGroups.size(); i++){
+		if (grpNum==flagGroups.at(i)){
+			return true;
+		}
+	}
+	return false;
+}
+
+bool QueryPreprocessor::verifyDeclaration(TOKEN token){
+
+	vector<TOKEN> declarations;
 	TYPE entType;
-	bool nextSynonym = false;
 	TOKEN currToken;
+	qVar newVar;
 
-	//going through each token in declarations
-	for(i = 0; i < (*declarations).size(); i++){
-		currToken = (*declarations).at(i);
-		//not expecting a synonym
-		//expecting a type declaration eg assign, while
-		if (!nextSynonym){
-			if ((*grammarTable).isEntExists(currToken)){
-				entType = (*grammarTable).getEntType(currToken);
-				nextSynonym = true;				
-			}
-			else {
-				error(INVALID_ENTITY);
-				return false;
-			}
-
-		} else {			
-			//expecting a synonym to come up next
-			//ignore commas
-			if (!matchToken(currToken,regex(","))){
-				if (isSynonym(currToken)){
-					//if this synonym is already previous declared (repetition)
-					if (isDeclared(currToken)){
-						//check if it is a different entity type (conflict)
-						if (getQVarType(currToken)!=entType){
-							error(CONFLICTED_SYNONYM);
-							return false;
-						}
-					}
-					//if not previously declared, add new entry
-					else{
-						(*dVarTable).insert(dVarPair(currToken,(*dVarTable).size()+1));
-						(*qVarTable).insert(qVarPair((*qVarTable).size()+1,entType));
-					}
-
-					//done with this synonym
-					//look ahead to see if any more synonyms of the same type
-					//if meet with ; means no more synonyms so next token anticipate to be a type.
-					if (matchToken((*declarations).at(i+1),regex(";"))){
-						i++;
-						nextSynonym = false;
-					}
+	if (regex_match(token,regex(declare))){
+		declarations = tokenize(token,designEnt+or+synonym);
+		for(int i=0;i<declarations.size();i++){
+			currToken = declarations.at(i);
+			if (regex_match(currToken,regex(designEnt))){
+				//expect declaration type
+				if (grammarTable.isEntExists(currToken)){
+					entType = grammarTable.getEntType(currToken);
 				}
-				//not a valid synonym
 				else {
-					error(INVALID_SYNONYM);
+					error(INVALID_ENTITY);
 					return false;
 				}
 			}
+			else {
+				//expect synonym
+				if (isDeclaredVar(currToken)){
+					//already declared, check if it is a different entity type (conflict)
+					if (getQVarType(currToken)!=entType){
+						error(CONFLICTED_SYNONYM);
+						return false;
+					}
+				}
+				else{
+					//if not previously declared, add new entry
+					newVar.qVarIndex=(*dVarTable).size();
+					newVar.qVarType=entType;
+					newVar.selected=false;
+					newVar.explored=false;
+					(*dVarTable).insert(dVarPair(currToken,newVar));
+					(*qVarTable).insert(qVarPair((*qVarTable).size(),entType));
+				}
+			}
 		}
-
 	}
 	return true;
 }
 
-bool QueryPreprocessor::validateMainQuery(vector<TOKEN>* mainQuery){
-
-
-	int i = 0;		
-	int nextTokenType;
-
-	//used for working with arguments within brackets ()
-	numOfArg = 0;
-	tokenPosition = 0;
-	argPosition = 0;	
-	correctArg = false;
-
+bool QueryPreprocessor::verifySelect(TOKEN token){
+	vector<TOKEN> selections;
 	TOKEN currToken;
 
-	qTree = new QTREE();
-	qNode = new QTREE();
-	prevNode = NULL; //used for the parts with commas
-	temNode = NULL;
-	resultNode = NULL;
-	suchThatNode = NULL;
-	patternNode = NULL;
-	lastSuchThatChild = NULL;
-	lastPatternChild = NULL;
+	firstNode = createQTREENode(RESULT);
 
+	if (regex_match(token,regex(result_cl))){
+		selections = tokenize(token,elem);
+		for(int i=1;i<selections.size();i++){
+			currToken = selections.at(i);
+			if (regex_match(currToken,regex("BOOLEAN"))){
+				currNode = createQTREENode(BOOL);				
+			}
+			else{
+				if (isDeclaredVar(currToken)){
+					currNode = createQTREENode(QUERYVAR,getQVarIndex(currToken));
+					setAsSelected(currToken);
+				}
+				else{
+					error(INVALID_RESULT);
+					return false;
+				}
+			}
+			setChild(firstNode,currNode);
+		}
+	}
 
-	//first token will always be select
-	if (!matchToken((*mainQuery).at(i),regex("select"))){
+}
+
+bool QueryPreprocessor::verifyCondition(TOKEN token){
+	
+	vector<TOKEN> conditions;
+	clauseCount=0;
+	groupCount=0;
+	if (regex_match(token,regex(suchthat_cl))){
+		conditions = tokenize(token,"("+rel+")\\s*\\(("+ref+"),("+ref+")\\)");
+		for(int i=0;i<conditions.size();i++){
+			processSuchThat(conditions.at(i));
+			clauseCount++;
+		}
+	}
+	else if (regex_match(token,regex(with_cl))){
+		conditions = tokenize(token,attrCompare);
+		for(int i=0;i<conditions.size();i++){		
+			processWith(conditions.at(i));
+			clauseCount++;
+		}
+	}
+	else if (regex_match(token,regex(pattern_cl))){
+		conditions = tokenize(token,synonym+"\\s*\\(.+,.+,*\\)");
+		for(int i=0;i<conditions.size();i++){		
+			processPattern(conditions.at(i));
+			clauseCount++;
+		}
+	}
+	else{
 		error(INVALID_QUERY_SYNTAX);
 		return false;
 	}
-	else{
-		//create the first node of qrTree
-		qTree = createQTREENode(SELECT);
-
-		//the first child of root 'qTree' will always be result
-		qNode = createQTREENode(RESULT);
-		qTree->setFirstDescendant(qNode);
-		qNode->setAncestor(qTree);
-		resultNode = qNode;
-		nextTokenType=RES;
-	}
-
-	for(i = 1; i < (*mainQuery).size(); i++){			
-		currToken = (*mainQuery).at(i);
-		//such that
-		if(matchToken(currToken,regex("such")) && matchToken((*mainQuery).at(i+1),regex("that"))){
-			nextTokenType = SUCH;
-		}
-		//"pattern"
-		else if (matchToken(currToken,regex("pattern"))){
-			nextTokenType = PATT;
-		}
-
-		switch(nextTokenType){
-
-		case RES:
-			//select bool
-			if (matchToken(currToken,regex("boolean"))){
-				qNode = createQTREENode(BOOL);
-				resultNode->setFirstDescendant(qNode);
-				qNode->setAncestor(resultNode);
-				prevNode = qNode;
-			}
-			//select synonym
-			else if (isDeclared(currToken)){ 
-				qNode = createQTREENode(QUERYVAR,getQVarIndex(currToken));
-				//if this were the first synonym after SELECT, prevNode will be null
-				if (prevNode == NULL){
-					resultNode->setFirstDescendant(qNode);
-				}
-				//else there was another synonym before this
-				else{
-					prevNode->setSibling(qNode);
-				}
-				qNode->setAncestor(resultNode);
-				prevNode = qNode;
-			}
-			//anything else is wrong
-			else{
-				error(INVALID_RESULT);
-				return false;
-			}
-			break;
-
-		case SUCH:
-			i++;
-			nextTokenType = REL;
-			//if this is the first such that, suchThatNode will be null
-			if (suchThatNode == NULL){							
-				qNode = createQTREENode(SUCHTHAT);
-				qNode->setAncestor(qTree);
-				suchThatNode = qNode;
-				//if no pattern has been seen before this, patternNode will be null
-				if (patternNode == NULL)
-					resultNode->setSibling(qNode);
-				else
-					patternNode->setSibling(qNode);
-			}
-
-			break;
-
-		case PATT:
-			nextTokenType = PATT_SYNONYM;
-			if (patternNode == NULL){
-				qNode = createQTREENode(PATTERN);
-				qNode->setAncestor(qTree);
-				patternNode = qNode;
-				//if no such that has been seen before this, suchThatNode will be null
-				if (suchThatNode == NULL)
-					resultNode->setSibling(qNode);
-				else
-					suchThatNode->setSibling(qNode);
-			}
-			break;
-
-		case REL:
-			//check if relationship name is correct
-			if ((*grammarTable).isRelExists(currToken)){	
-				nextTokenType = REL_ARG;
-				getGrammar("rel",currToken);
-				qNode = createQTREENode((*grammarTable).getRelType((currToken)));	
-				//if this is the first relationship
-				if (lastSuchThatChild==NULL){
-					suchThatNode->setFirstDescendant(qNode);
-				}
-				else{
-					lastSuchThatChild->setSibling(qNode);
-				}					
-				qNode->setAncestor(suchThatNode);
-				lastSuchThatChild = qNode;
-				prevNode = qNode;
-			}
-			//not a valid relationship
-			else {
-				error(INVALID_RELATIONSHIP);						
-				return false;
-			}
-			break;
-
-		case PATT_SYNONYM:			
-			//pattern synonym must have been declared
-			if(isDeclared(currToken)){
-				nextTokenType = PATT_ARG;
-				getGrammar("patt", getQVarType(currToken));
-				qNode = createQTREENode(QUERYVAR,getQVarIndex(currToken));
-				//if this is the first pattern
-				if (lastPatternChild == NULL){
-					patternNode->setFirstDescendant(qNode);
-				}
-				else{
-					lastPatternChild->setSibling(qNode);
-				}
-				qNode->setAncestor(patternNode);
-				lastPatternChild = qNode;
-				prevNode = qNode;
-			}
-			//synonym was undeclared
-			else{
-				error(INVALID_SYNONYM);						
-				return false;
-			}
-			break;		
-
-		case REL_ARG:
-			if (tokenPosition<=(numOfArg*2)){
-				if (!checkArg(currToken, tokenPosition, "rel"))
-					return false;
-			}
-			break;
-
-		case PATT_ARG:
-			if (tokenPosition<=(numOfArg*2)){
-				if (!checkArg(currToken, tokenPosition, "patt"))
-					return false;
-			}
-			break;
-
-		default:
-			error(INVALID_QUERY_SYNTAX);
-			return false;
-		}
-	}
 
 	return true;
 }
 
-bool QueryPreprocessor::matchToken(TOKEN token, regex reg){
-	return regex_match(token,reg);
+bool QueryPreprocessor::processSuchThat(TOKEN token){
 
+	vector<TOKEN> relationships;
+	vector<TYPE> validArgType;
+	TOKEN currToken;
+	int argCount;
+	bool correctArg;
+	string relName;
+	TYPE relType;
+	TYPE tokenType;
+
+	headNode = createQTREENode(SUCHTHAT);
+	addClause(headNode);
+
+	relationships = tokenize(token,"("+rel+")"+or+"("+ref+")");
+	argCount=relationships.size()-1;
+	relName = relationships.at(0);
+
+	//check valid relationship
+	if (!grammarTable.isRelExists(relName)){
+		error(INVALID_RELATIONSHIP);
+		return false;
+	}
+
+	//check number of arguments is correct
+	if (!grammarTable.getRelArgCount(relName)==argCount){
+
+		error(INVALID_ARGUMENT);
+		return false;
+	}
+
+	relType = grammarTable.getRelType(relName);
+	currNode = createQTREENode(relType);			
+	setChild(headNode,currNode);
+	prevNode=currNode;
+	for(int i=1;i<relationships.size();i++){			
+		currToken = relationships.at(i);
+
+		//check argument's syntax
+		if(!regex_match(currToken,regex(grammarTable.getRelArg(relName,i)))){
+			error(INVALID_ARGUMENT);
+			return false;			
+		}
+		//check is the synonym declared
+		if (isDeclaredVar(currToken)){
+			tokenType = getQVarType(currToken);
+		}
+		//even if not declared,could be a constant statement number
+		else if (isConstant(currToken)){
+			tokenType = STATEMENT;
+		}
+		//not declared, not constant
+		else{
+			error(INVALID_ARGUMENT);
+			return false;		
+		}
+
+		//check argument's type
+		validArgType = grammarTable.getArgument(relType,i);
+		correctArg = false;
+		for(int j = 0; j < validArgType.size(); j++){
+			if (tokenType == validArgType.at(j)){
+				correctArg = true;
+				break;
+			}
+		}
+		if (!correctArg){
+			error(INVALID_ARGUMENT);
+			return false;
+		}
+
+		currNode = createQTREENode(QUERYVAR,getQVarIndex(currToken));						
+		setChild(prevNode,currNode);		
+		
+	}
+	relationships.erase(relationships.begin());
+	setQVarGroup(relationships);
+	return true;
 }
 
-bool QueryPreprocessor::isSynonym(TOKEN token){
+bool QueryPreprocessor::processWith(TOKEN token){
 
-	return regex_match(token,regex("[a-zA-Z]+[a-zA-Z0-9#]*"));
+	vector<TOKEN> comparisons;
+	vector<TOKEN> syn;
+	TOKEN currToken;
+	TYPE synType;
+	bool isSyn;
 
+	headNode = createQTREENode(WITH);
+	addClause(headNode);
+
+	comparisons = tokenize(token,"("+synonym+")"+or+"("+attrName+")");
+	//only 1st and 3rd token can be synonyms
+	isSyn=false;
+
+	for(int i=0;i<comparisons.size();i++){
+		currToken = comparisons.at(i);
+		if (i==0){
+			isSyn=true;
+		}
+		else if (i==2 && !isConstant(currToken) && !regex_match(currToken,regex("\".+\""))){
+			//not within "" and not a constant, has to be a declared variable
+			isSyn=true;
+		}
+
+		if (isSyn){			
+			if (!isDeclaredVar(currToken)){
+				error(INVALID_VARIABLE);
+				return false;
+			}
+			syn.push_back(currToken);
+			synType = getQVarType(currToken);
+			currNode = createQTREENode(QUERYVAR,getQVarIndex(currToken));			
+			setChild(headNode,currNode);
+
+			if(comparisons.at(i+1)=="procName"){
+				//check that the synonym before is allowed type
+				if(synType!=PROCEDURE && synType!=CALL){
+					error(INVALID_VARIABLE);
+					return false;
+				}
+				currNode = createQTREENode(NAME);
+			}
+			else if(comparisons.at(i+1)=="varName"){
+				//check that the synonym before is allowed type
+				if(synType!=VARIABLE){
+					error(INVALID_VARIABLE);
+					return false;
+				}
+				currNode = createQTREENode(NAME);
+			}
+			else if(comparisons.at(i+1)=="stmt#"){
+				//check that the synonym before is allowed type
+				if(synType==VARIABLE||synType==CONSTANT){
+					error(INVALID_VARIABLE);
+					return false;
+				}
+				currNode = createQTREENode(ANY);
+			}
+			else if(comparisons.at(i+1)=="value"){
+				//check that the synonym before is allowed type
+				if(synType!=CONSTANT){
+					error(INVALID_VARIABLE);
+					return false;
+				}
+				currNode = createQTREENode(ANY);
+			}
+			isSyn=false;
+			i++;
+		}
+		else if (regex_match(currToken,regex("\".+\""))){
+		//not syn: is string
+			(*paramTable).insert(paramPair((*paramTable).size()+1,currToken));
+			currNode = createQTREENode(PARAM,(*paramTable).size());
+		}
+		else if (isConstant(currToken)){		
+		//not syn: is constant
+			currNode = createQTREENode(INTEGER,atoi(currToken.c_str()));
+		}
+		setChild(headNode,currNode);
+	}
+	
+	setQVarGroup(syn);
+	return true;
 }
 
-bool QueryPreprocessor::isConstant(TOKEN token){
+bool QueryPreprocessor::processPattern(TOKEN token){
+	
+	vector<TOKEN> patterns;
+	vector<TYPE> validArgType;
+	vector<TOKEN> syn;
+	TOKEN currToken;
+	TYPE synType;
+	int argCount;
+	
+	string expr			= "\\(*"+synonym+"("+op+"("+synonym+or+integer+")"+"\\)*)"+optional;
+	string wildexpr		= underscore+invComma+expr+invComma+underscore;
 
-	return regex_match(token,regex("[0-9]+"));
+	headNode = createQTREENode(PATTERN);
+	addClause(headNode);
 
+	patterns = tokenize(token,synonym+or+underscore+invComma+".+"+invComma+underscore+or+invComma+".+"+invComma+or+underscore);
+	//first token is the synonym
+	//check if declared, and get type
+	if (!isDeclaredVar(patterns.at(0))){
+		error(INVALID_VARIABLE);
+		return false;
+	}
+	else{
+		syn.push_back(patterns.at(0));
+		synType = getQVarType(patterns.at(0));
+		argCount = patterns.size()-1;
+
+		currNode = createQTREENode(QUERYVAR,getQVarIndex(patterns.at(0)));
+		setChild(headNode,currNode);
+		prevNode = currNode;
+	}
+
+	for(int i=1;i<patterns.size();i++){			
+		currToken = patterns.at(i);
+
+		//is the number of arg correct
+		if (!grammarTable.getPattArgCount(synType)==argCount){			
+			error(INVALID_ARGUMENT);
+			return false;
+		}
+
+		//is the arg syntax correct
+		if (!regex_match(currToken,regex(grammarTable.getPattArg(synType,i)))){
+			error(INVALID_ARGUMENT);
+			return false;			
+		}
+
+		if (i==1){
+			if(regex_match(currToken,regex(underscore))){
+				//if underscore
+				currNode = createQTREENode(ANY);
+			}
+			else if(regex_match(currToken,regex(invComma+ident+invComma))){
+				//if with inverted commas
+				currNode = createQTREENode(VARIABLE,pkb->getVarIndex(currToken));
+			}
+			else{
+				//if without inverted commas
+				if (!isDeclaredVar(currToken)){
+					error(INVALID_VARIABLE);
+					return false;
+				}
+				syn.push_back(currToken);
+				currNode = createQTREENode(QUERYVAR,getQVarIndex(currToken));
+			}
+			setChild(prevNode,currNode);
+		}
+		else{
+			if(regex_match(currToken,regex(underscore))){
+				//if underscore
+				currNode = createQTREENode(ANY);
+			}
+			else if(regex_match(currToken,regex(wildexpr))){
+				//if with inverted commas with underscore _"x+y"_
+
+				//remove underscore and inverted commas
+				currToken.erase(currToken.begin());
+				currToken.erase(currToken.begin());	
+				currToken.resize(currToken.size()-2);
+				
+				//build expression subtree
+				currNode = createExprTree(currToken);
+			}
+			else if(regex_match(currToken,regex(invComma+expr+invComma))){				
+				//if with inverted commas without underscore "x+y"				
+				currNode = createQTREENode(synType);
+				setChild(prevNode,currNode);
+				prevNode=currNode;
+				currNode = createQTREENode(prevNode->getLeftSibling()->getType(),prevNode->getLeftSibling()->getData());
+				setChild(prevNode,currNode);
+				
+				//remove inverted commas
+				currToken.erase(currToken.begin());	
+				currToken.resize(currToken.size()-1);	
+				//continue with building expression subtree				
+				currNode = createExprTree(currToken);
+				if (currNode==NULL){
+					error(INVALID_ARGUMENT);
+					return false;
+				}
+			}
+			setChild(prevNode,currNode);
+		}
+		
+
+	}
+	
+	setQVarGroup(syn);
+	return true;
 }
 
-bool QueryPreprocessor::isDeclared(TOKEN token){
+bool QueryPreprocessor::isDeclaredVar(TOKEN token){
 	dVarIter = (*dVarTable).find(token); 
 
 	if(dVarIter==(*dVarTable).end()) 
@@ -394,20 +580,126 @@ bool QueryPreprocessor::isDeclared(TOKEN token){
 	return true;
 }
 
-TYPE QueryPreprocessor::getQVarType(TOKEN token){
+bool QueryPreprocessor::isResultVar(TOKEN token){
+	dVarIter = (*dVarTable).find(token); 
+
+	return dVarIter->second.selected;
+}
+
+bool QueryPreprocessor::isExploredVar(TOKEN token){
+	dVarIter = (*dVarTable).find(token); 
+
+	return dVarIter->second.explored;
+}
+
+bool QueryPreprocessor::isConstant(TOKEN token){
+	return regex_match(token,regex(integer));
+}
+
+void QueryPreprocessor::setAsSelected(TOKEN token){
+	qVar changeVar;
 	dVarIter = (*dVarTable).find(token);
-	int index = dVarIter->second;
-	for(qVarIter=(*qVarTable).begin();qVarIter!=(*qVarTable).end();qVarIter++){
-		if(qVarIter->first == index){
-			return qVarIter->second;
+	changeVar = dVarIter->second;
+	changeVar.selected=true;
+	(*dVarTable).erase(dVarIter);
+	(*dVarTable).insert(dVarPair(token,changeVar));
+}
+
+void QueryPreprocessor::setQVarGroup(vector<TOKEN> arguments){
+	int groupNum;
+	string arg;
+	bool prevExplored = false; //flag that the previous arguments in the same clause has been explored
+	for(int i=0;i<arguments.size();i++){
+		arg = arguments.at(i);
+		//is explored
+		if (isExploredVar(arg)){
+			if (prevExplored){
+				//prev arg also explored
+				if (groupNum!= getQVarGroup(arg)){
+					//two exists in diff groups, should merge the groups
+					mergeGroup(getQVarGroup(arg),groupNum);
+				}
+			}
+			else{
+				//no prev arg
+				groupNum = getQVarGroup(arg);
+			}
 		}
+
+		//is not explored
+		else{
+			if (!prevExplored){
+				//no prev arg
+				groupNum=groupCount;
+				groupCount++;
+			}
+			updateQVarGroup(arg,groupNum);
+		}
+		
+		prevExplored=true;
+		updateQVarClause(arg);
 	}
 }
 
+void QueryPreprocessor::updateQVarGroup(TOKEN token,int groupNum){
+	qVar changeVar;
+	dVarIter = (*dVarTable).find(token);
+	changeVar = dVarIter->second;
+	changeVar.groupNum = groupNum;
+	changeVar.explored = true;
+	(*dVarTable).erase(dVarIter);
+	(*dVarTable).insert(dVarPair(token,changeVar));
+}
+
+void QueryPreprocessor::updateQVarClause(TOKEN token){
+	qVar changeVar;
+	vector<int> clauses;
+	dVarIter = (*dVarTable).find(token);
+	changeVar = dVarIter->second;
+	clauses = dVarIter->second.clauseNum;
+	clauses.push_back(clauseCount);
+	changeVar.clauseNum=clauses;
+	(*dVarTable).erase(dVarIter);
+	(*dVarTable).insert(dVarPair(token,changeVar));
+}
+
+void QueryPreprocessor::mergeGroup(int grp1, int grp2){
+	//goal: merge grp2 into grp1
+	vector<dVarPair> updatedVar;
+	vector<hash_map<string,qVar>::const_iterator> marker;
+	qVar changeVar;
+	TOKEN varName;
+	for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
+		if(dVarIter->second.groupNum==grp2){			
+			changeVar = dVarIter->second;
+			varName = dVarIter->first;
+			changeVar.groupNum=grp1;
+			updatedVar.push_back(dVarPair(varName,changeVar));
+			marker.push_back(dVarIter);
+		}
+	}
+	for(int i=0;i<marker.size();i++){
+		(*dVarTable).erase(marker.at(i));
+		(*dVarTable).insert(updatedVar.at(i));
+	}
+}
+
+int QueryPreprocessor::getQVarGroup(TOKEN token){
+	dVarIter = (*dVarTable).find(token);
+
+	return dVarIter->second.groupNum;
+}
+
+TYPE QueryPreprocessor::getQVarType(TOKEN token){
+	dVarIter = (*dVarTable).find(token);
+
+	return dVarIter->second.qVarType;
+}
+
 TYPE QueryPreprocessor::getQVarType(int index){
-	for(qVarIter=(*qVarTable).begin();qVarIter!=(*qVarTable).end();qVarIter++){
-		if(qVarIter->first == index){
-			return qVarIter->second;
+	for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
+		if(dVarIter->second.qVarIndex == index){
+			return dVarIter->second.qVarType;
 		}
 	}
 }
@@ -416,43 +708,12 @@ int QueryPreprocessor::getQVarIndex(TOKEN token){
 	//index number in qVarTable and dVarTable is the same
 	dVarIter = (*dVarTable).find(token);
 
-	return dVarIter->second;
+	return dVarIter->second.qVarIndex;
 }
 
-vector<TOKEN> QueryPreprocessor::tokenizeGrammar(string grammar){
-	vector<TOKEN> arg;
-	std::regex rgx("[0-9a-zA-Z\"\\(\\)\\?\s\\[\\]\\|\\\\\\-\\*\\+_#]+");		
-	std::sregex_iterator rgxIter(grammar.begin(), grammar.end(), rgx), rgxend;
-
-	for (rgxIter; rgxIter != rgxend; ++rgxIter)
-	{
-		arg.push_back(rgxIter->str());
-	}
-
-	return arg;
-}
-
-void QueryPreprocessor::getGrammar(string tableType, string data){
-
-	string grammar;
-
-	if (tableType.compare("rel")==0){		
-		grammar = (*grammarTable).getRelGrammar(data);
-		arguments = tokenizeGrammar(grammar);	
-		numOfArg = arguments.size();
-	} 
-	
-}
-
-void QueryPreprocessor::getGrammar(string tableType, TYPE data){
-
-	string grammar;
-
-	if (tableType.compare("patt")==0){
-		grammar = (*grammarTable).getPattGrammar(data);
-		arguments = tokenizeGrammar(grammar);	
-		numOfArg = arguments.size();
-	} 
+void QueryPreprocessor::addClause(QTREE* headNode){
+	clauseCount++;
+	clauses.push_back(headNode);
 }
 
 QTREE* QueryPreprocessor::createQTREENode(TYPE type){
@@ -471,343 +732,141 @@ QTREE* QueryPreprocessor::createQTREENode(TYPE type,int data){
 	return node;
 }
 
-bool QueryPreprocessor::checkArg(TOKEN currToken, int tokenPosition, string arg_type){
+void QueryPreprocessor::setChild(QTREE* parent, QTREE* child){
 
-	TYPE relType,tokenType;
-	vector<TYPE> validTypes;
-	if (tokenPosition==0){
-		if (!matchToken(currToken,regex("\\("))){
-			error(MISSING_BRACKET);
-			return false;
-		}
-		this->tokenPosition++;
+	if (parent->getFirstDescendant()!=NULL){
+		parent->getLastDescendant()->setSibling(child);
+		parent->setLastDescendant(child);
 	}
-	else if(tokenPosition==numOfArg*2){
-		if (!matchToken(currToken,regex("\\)"))){
-			error(MISSING_BRACKET);
-			return false;
-		}	
-		//finish all tokens within brackets
-		else {
-			this->tokenPosition=0;
-			this->argPosition=0;
-			this->numOfArg=0;
-		}
+	else{
+		parent->setFirstDescendant(child);
+		parent->setLastDescendant(child);
 	}
-	else if(tokenPosition%2==0){
-		if (!matchToken(currToken,regex(","))){
-			error(MISSING_ARGUMENT);
-			return false;
-		}
-		this->tokenPosition++;
+}
+
+QTREE* QueryPreprocessor::createExprTree(TOKEN expr){
+	QTREE* exprTree;
+	exprPieces = tokenize(expr,"\\("+or+"\\)"+or+plus+or+minus+or+times+or+synonym+or+integer);
+	next = exprPieces.begin();
+	end = exprPieces.end();
+	
+	if (next!=end)
+		exprTree=extractPlusMinus();
+
+	return exprTree;
+}
+
+QTREE* QueryPreprocessor::extractPlusMinus(){
+	QTREE* exprtree;
+	QTREE* subtree;
+	QTREE* node;	
+	if (next!=end)
+		exprtree = extractTimes();
+
+	if (exprtree == NULL){
+		return NULL;
 	}
-	else if(tokenPosition%2!=0){
-		//check that it match the expected argument syntax
-		if (matchToken(currToken,regex(arguments.at(argPosition)))){
-			// if its not in inverted comma "" or a underscore
-			if (!matchToken(currToken,regex("\"[a-zA-Z0-9]+\"|_|_\"[a-zA-Z0-9]+\"_"))){
-				//if its a declared variable
-				if (isDeclared(currToken)){
-					if (arg_type == "rel"){
-						//if its the correct entity type
-						tokenType = getQVarType(currToken);
-						//if prevNode is lastSuchThatChild means this is first argument
-						//if prevNode's ancestor is lastSuchThatChild means this is second argument
-						relType = lastSuchThatChild->getType();
-						//retrieve allowed argument
-						validTypes = (*grammarTable).getArgument(relType,argPosition);
-						//check for any match with the allowed argument types
-						for(int j = 0; j < validTypes.size(); j++){
-							if (tokenType == validTypes.at(j)){
-								correctArg = true;
-								break;
-							}
-						}
-					}
-					else if (arg_type == "patt" && getQVarType(currToken) == VARIABLE){
-						correctArg = true;
-					}
 
-
-					//if we found a match with an allowed argument type eg ASSIGNMENT or WHILE
-					if (correctArg){
-						correctArg = false;
-						qNode = createQTREENode(QUERYVAR,getQVarIndex(currToken));
-						if (argPosition==0){
-							//first child, prevNode will be lastSuchThatChild/lastPatternChild
-							prevNode->setFirstDescendant(qNode); 
-							qNode->setAncestor(prevNode);
-						}
-						else{
-							//not first child, prevNode is prev argument
-							prevNode->setSibling(qNode);
-							qNode->setAncestor(prevNode->getAncestor());
-						}
-						prevNode = qNode;
-					}
-					//not correctArg
-					else{
-
-						error(INVALID_ARGUMENT);
-						return false;
-					}
-
-
-				}
-				//synonym not declared, could be a constant, regarded as statement
-				else if (arg_type == "rel" && isConstant(currToken)){
-					tokenType = STATEMENT;
-
-					relType = lastSuchThatChild->getType();
-					//retrieve allowed argument
-					validTypes = (*grammarTable).getArgument(relType,this->argPosition);
-					//check for any match with the allowed argument types
-					for(int j = 0; j < validTypes.size(); j++){
-						if (tokenType == validTypes.at(j)){
-							correctArg = true;
-							break;
-						}
-					}
-					//if we found a match with an allowed argument type eg STATEMENT
-					if (correctArg){
-						correctArg = false;
-						qNode = createQTREENode(STATEMENT,atoi(currToken.c_str()));
-						if (argPosition==0){
-							//first child, prevNode will be lastSuchThatChild
-							prevNode->setFirstDescendant(qNode); 
-							qNode->setAncestor(prevNode);
-						}
-						else{
-							//not first child, prevNode is prev argument
-							prevNode->setSibling(qNode);
-							qNode->setAncestor(prevNode->getAncestor());
-						}
-						prevNode = qNode;
-					}
-					//not correctArg
-					else{
-						error(INVALID_ARGUMENT);
-						return false;
-					}
-
-
-				}
-				//not declared, not constant
-				else{
-					error(INVALID_SYNONYM);
-					return false;
-				}
-			}
-			// if its in inverted comma "" or a underscore
-			// if Modifies/uses, must check if valid variable from VarTable
-			else if (arg_type == "rel"){
-				//if underscore
-				if(matchToken(currToken,regex("_"))){
-					qNode = createQTREENode(ANY);
-					if (argPosition==0){
-						//first child, prevNode will be lastSuchThatChild
-						prevNode->setFirstDescendant(qNode); 
-						qNode->setAncestor(prevNode);
-					}
-					else{
-						//not first child, prevNode is prev argument
-						prevNode->setSibling(qNode);
-						qNode->setAncestor(prevNode->getAncestor());
-					}
-					prevNode = qNode;
-				}
-				//else in ""
-				//"x" as a synonym
-				else { 						
-					tokenType = VARIABLE;
-
-					relType = lastSuchThatChild->getType();
-					//retrieve allowed argument
-					validTypes = (*grammarTable).getArgument(relType,argPosition);
-					//check for any match with the allowed argument types
-					for(int j = 0; j < validTypes.size(); j++){
-						if (tokenType == validTypes.at(j)){
-							correctArg = true;
-							break;
-						}
-					}
-					//if we found a match with an allowed argument type VARIABLE
-					if (correctArg){
-						correctArg = false;
-						//check if this is a valid variable in VarTable
-						currToken = currToken.substr(1,currToken.size()-2);
-						if (!pkb->isVarExists(currToken)){
-							error(INVALID_VARIABLE);
-							return false;
-						}
-						else{
-							qNode = createQTREENode(VARIABLE,pkb->getVarIndex(currToken));
-							if (argPosition==0){
-								//first child, prevNode can be suchThatNode or patternNode
-								prevNode->setFirstDescendant(qNode); 
-								qNode->setAncestor(prevNode);
-							}
-							else{
-								//not first child, prevNode is prev argument
-								prevNode->setSibling(qNode);
-								qNode->setAncestor(prevNode->getAncestor());
-							}
-							prevNode = qNode;
-						}
-					}
-					else{
-						error(INVALID_ARGUMENT);
-						return false;
-					}
-
-				}
-
-			}
-			else if (arg_type == "patt"){
-				//if underscore
-				if(matchToken(currToken,regex("_|\"_\""))){
-					if (argPosition==0){
-						//first child, prevNode will be lastSuchThatChild										
-						qNode = createQTREENode(ANY);
-						prevNode->setFirstDescendant(qNode); 
-						qNode->setAncestor(prevNode);
-					}
-					else{
-						//not first child, prevNode is prev argument
-						//second child: if just a single _ denote ANY, 
-						//		PATTERN|-1
-						//			/
-						//	QUERYVAR|k
-						//		/	\
-						//	1st arg  _
-
-						qNode = createQTREENode(ANY);
-						prevNode->setSibling(qNode);
-						qNode->setAncestor(prevNode->getAncestor());
-					}
-					prevNode = qNode;
-				}
-				//else in ""
-				//"x" or _"x"_
-				else { 	
-					//first argument
-					if (argPosition == 0){
-						//shouldnt have "_x_"
-						if (!matchToken(currToken,regex("_\".+\"_"))){		
-							//strip the ""
-							//check that this is a valid variable
-							//not existing variable
-							currToken = currToken.substr(1,currToken.size()-2);
-							if (!isConstant(currToken) && !pkb->isVarExists(currToken)){
-								error(INVALID_VARIABLE);
-								return false;
-							}
-							else if (isConstant(currToken)){											
-								qNode = createQTREENode(CONSTANT,atoi(currToken.c_str()));
-							}
-							else {	
-								qNode = createQTREENode(VARIABLE,pkb->getVarIndex(currToken));
-							}											
-							prevNode->setFirstDescendant(qNode); 
-							qNode->setAncestor(prevNode);
-						}
-						else{
-							error(INVALID_ARGUMENT);
-							return false;
-						}
-					}
-					//position not 0, means not first child/argument
-					//not first child, prevNode is prev argument
-
-					else {
-						//strip "" or _ _ 
-						currToken = currToken.substr(1,currToken.size()-2);
-						//if its "x"
-						//
-						//		PATTERN|-1
-						//			/
-						//	QUERYVAR|k
-						//		/	\
-						//	1st arg ASSIGNMENT|-1
-						//			/	\
-						//		1st arg  x
-
-						if (!matchToken(currToken,regex("\".+\""))){
-							//have to check if it is an existing variable
-							//not constant and not existing variable
-							if (!isConstant(currToken) && !pkb->isVarExists(currToken)){
-								error(INVALID_VARIABLE);
-								return false;
-							}
-							
-							qNode = createQTREENode(getQVarType(prevNode->getAncestor()->getData()));
-							prevNode->setSibling(qNode);
-							qNode->setAncestor(prevNode->getAncestor());
-							temNode = prevNode;
-							prevNode = qNode;
-							qNode = createQTREENode(temNode->getType(),temNode->getData());
-							prevNode->setFirstDescendant(qNode);
-							qNode->setAncestor(prevNode);
-							prevNode = qNode;
-							
-							if (isConstant(currToken)){		
-								qNode = createQTREENode(CONSTANT,atoi(currToken.c_str()));
-							}
-							else {
-								qNode = createQTREENode(VARIABLE,pkb->getVarIndex(currToken));
-							}
-
-							prevNode->setSibling(qNode);
-							qNode->setAncestor(prevNode->getAncestor());
-						}
-						//if its _"x"_
-						//
-						//		PATTERN|-1
-						//			/
-						//	QUERYVAR|k
-						//		/	\
-						//	1st arg  x
-
-						else{
-							//strip the inverted commas
-							currToken = currToken.substr(1,currToken.size()-2);
-							if (!isConstant(currToken) && !pkb->isVarExists(currToken)){
-								error(INVALID_VARIABLE);
-								return false;
-							}
-							if (isConstant(currToken)){					
-								qNode = createQTREENode(CONSTANT,atoi(currToken.c_str()));
-							}
-							else {
-								qNode = createQTREENode(VARIABLE,pkb->getVarIndex(currToken));
-							}
-							prevNode->setSibling(qNode);
-							qNode->setAncestor(prevNode->getAncestor());
-						}
-					}
-					
-					prevNode = qNode;
-				}
-			}
-			this->argPosition++;
+	while (next!=end && (*next=="+"||*next=="-")){
+		if (*next=="+"){
+			node = createQTREENode(PLUS);
 		}
-		//invalid argument syntax
 		else{
-			error(INVALID_ARGUMENT);
-			return false;
+			node = createQTREENode(MINUS);
 		}
-		this->tokenPosition++;
+		next++;
+		subtree = extractTimes();
+		
+		if (subtree == NULL){
+			return NULL;
+		}
+
+		exprtree = createSubTree(node,exprtree,subtree);
 	}
-	return true;
+
+	return exprtree;
+}
+
+QTREE* QueryPreprocessor::extractTimes(){
+	QTREE* exprtree;
+	QTREE* subtree;
+	QTREE* node;
+	if (next!=end)
+		exprtree = extractAll();
+	
+	if (exprtree == NULL){
+		return NULL;
+	}
+
+   	while (next!=end && *next=="*"){		
+		node = createQTREENode(MULTIPLY);
+		next++;
+		subtree = extractAll();
+
+		if (subtree == NULL){
+			return NULL;
+		}
+
+		exprtree = createSubTree(node,exprtree,subtree);
+	}
+	return exprtree;
+}
+
+QTREE* QueryPreprocessor::extractAll(){
+	QTREE* node;
+	if (regex_match(*next,regex(synonym))){
+		node = createQTREENode(VARIABLE,pkb->getVarIndex(*next));
+		next++;
+	}
+	else if (regex_match(*next,regex(integer))){
+		node = createQTREENode(CONSTANT,atoi((*next).c_str()));
+		next++;
+	}
+	else if (regex_match(*next,regex("\\("))){
+		next++;
+		node = extractPlusMinus();
+		if (!regex_match(*next,regex("\\)"))){
+			error(INVALID_ARGUMENT);
+			return NULL;
+		}
+		next++;
+	}
+	else{
+		return NULL;
+	}
+	
+	return node;
+}
+
+QTREE* QueryPreprocessor::createSubTree(QTREE* head,QTREE* left, QTREE* right){
+	setChild(head, left);
+	setChild(head, right);
+
+	return head;
+}
+
+vector<TOKEN> QueryPreprocessor::parse(QUERY qr){
+	string expression = declare+or+result_cl+or+suchthat_cl+or+with_cl+or+pattern_cl;
+
+	return tokenize(qr,expression);
+
+}
+
+vector<TOKEN> QueryPreprocessor::tokenize(TOKEN tk,string expression){		
+	vector<TOKEN> tokens;
+	std::regex rgx(expression);		
+	std::sregex_iterator rgxIter(tk.begin(), tk.end(), rgx), rgxend;
+
+	for (rgxIter; rgxIter != rgxend; ++rgxIter)
+	{
+		tokens.push_back(rgxIter->str());
+	}
+	return tokens;
+
 }
 
 void QueryPreprocessor::cleanUp(){
-	(*tokens).erase((*tokens).begin(),(*tokens).end());
-	(*tokens).clear();
-	(*declarations).erase((*declarations).begin(),(*declarations).end());
-	(*declarations).clear();
-	(*mainQuery).erase((*mainQuery).begin(),(*mainQuery).end());
-	(*mainQuery).clear();
+
 }
 
 void QueryPreprocessor::error(int errorCode){
@@ -832,16 +891,7 @@ void QueryPreprocessor::error(int errorCode){
 			errorMsg = "Query Error(): invalid result type(s)";
 			break;
 		case INVALID_QUERY_SYNTAX:
-			errorMsg = "Query Error(): missing select/such that/pattern";
-			break;
-		case MISSING_BRACKET:
-			errorMsg = "Query Error(): missing bracket";
-			break;
-		case MISSING_ARGUMENT:
-			errorMsg = "Query Error(): missing argument";
-			break;
-		case CONFLICTED_SYNONYM:
-			errorMsg = "Query Error(): conflicted synonym";
+			errorMsg = "Query Error(): invalid syntax";
 			break;
 		default:
 			errorMsg  = "Query Error(): unknown error";

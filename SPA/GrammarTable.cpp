@@ -23,7 +23,7 @@ GrammarTable::GrammarTable(void){
 	entRef			= synonym+or+underscore+or+integer+or+invComma+ident+invComma;
 	lineRef			= synonym+or+underscore+or+integer;
 	varRef			= synonym+or+underscore+or+invComma+ident+invComma;
-	expr			= synonym+"("+op+"("+synonym+or+integer+")"+")"+optional;
+	expr			= "\\(*"+synonym+"("+op+"("+synonym+or+integer+")"+"\\)*)"+optional;
 	wildexpr		= underscore+invComma+expr+invComma+underscore;
 	expr_spec		= invComma+expr+invComma+or+wildexpr;
 }
@@ -52,7 +52,7 @@ void GrammarTable::createEntTable(){
 	eTable[5].entName	="constant";
 	eTable[5].type		=CONSTANT;
 
-	eTable[6].entName	="var";
+	eTable[6].entName	="variable";
 	eTable[6].type		=VARIABLE;
 
 	eTable[7].entName	="call";
@@ -205,19 +205,19 @@ bool GrammarTable::isRelExists(RELATIONSHIP rel){
 }
 
 void GrammarTable::createPattTable(){
-	pTable[0].relName	="assignment";
+	pTable[0].pattName	="assignment";
 	pTable[0].numArg	=2;
 	pTable[0].arg1		=varRef;
 	pTable[0].arg2		=expr_spec+or+underscore;
 	pTable[0].type		=ASSIGNMENT;
 
-	pTable[1].relName	="while";
+	pTable[1].pattName	="while";
 	pTable[1].numArg	=2;
 	pTable[1].arg1		=varRef;
 	pTable[1].arg2		=underscore;
 	pTable[1].type		=WHILE;
 
-	pTable[2].relName	="if";
+	pTable[2].pattName	="if";
 	pTable[2].numArg	=3;
 	pTable[2].arg1		=varRef;
 	pTable[2].arg2		=underscore;
@@ -225,17 +225,17 @@ void GrammarTable::createPattTable(){
 	pTable[2].type		=IF;
 }
 
-int GrammarTable::getPattArgCount(PATTERN patt){
+int GrammarTable::getPattArgCount(TYPE pattType){
 	for(int i=0;i<3; i++){
-		if(patt==pTable[i].pattName){
+		if(pattType==pTable[i].type){
 			return pTable[i].numArg;
 		}
 	}
 }
 
-string GrammarTable::getPattArg(PATTERN patt,int argPosition){
+string GrammarTable::getPattArg(TYPE pattType,int argPosition){
 	for(int i=0;i<3; i++){
-		if(patt==pTable[i].pattName){
+		if(pattType==pTable[i].type){
 			if(argPosition==1){
 				return pTable[i].arg1;
 			} else if (argPosition==2){
@@ -345,13 +345,15 @@ vector<TYPE> GrammarTable::getArgument(TYPE rel, int argPosition){
 
 
 void GrammarTable::printAllEnt(){
+	cout<<"====================All Entities======================"<<endl;
 	for(int i=0;i<9; i++){
 		cout<<"ENTITY NAME: " << eTable[i].entName<<endl;
 		cout<<"ENTITY TYPE: " << eTable[i].type<<endl;
 	}
 }
 
-void GrammarTable::printAllRel(){
+void GrammarTable::printAllRel(){	
+	cout<<"====================All Relationships======================"<<endl;
 	for(int i=0;i<14; i++){
 		cout<<"REL NAME: " << rTable[i].relName<<endl;
 		cout<<"REL TYPE: " << rTable[i].type<<endl;
@@ -361,7 +363,8 @@ void GrammarTable::printAllRel(){
 	}
 }
 
-void GrammarTable::printAllPatt(){
+void GrammarTable::printAllPatt(){	
+	cout<<"====================All Patterns======================"<<endl;
 	for(int i=0;i<3; i++){
 		cout<<"PATT NAME: " << pTable[i].pattName<<endl;
 		cout<<"PATT TYPE: " << pTable[i].type<<endl;
@@ -373,6 +376,7 @@ void GrammarTable::printAllPatt(){
 }
 
 void GrammarTable::printAllArg(){
+	cout<<"====================All Arguments======================"<<endl;
 	for(int i=0;i<10; i++){
 		cout<<"TYPE: " << aTable[i].type<<endl;
 		for(int j=0;j<aTable[i].arg1.size();j++)

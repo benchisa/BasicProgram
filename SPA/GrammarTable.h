@@ -55,8 +55,8 @@ public:
 	void printAllRel();
 
 	void createPattTable();
-	int getPattArgCount(PATTERN);
-	string getPattArg(PATTERN, int);
+	int getPattArgCount(TYPE);
+	string getPattArg(TYPE, int);
 	TYPE getPattType(PATTERN);
 	bool isPattExists(PATTERN);
 	void printAllPatt();
