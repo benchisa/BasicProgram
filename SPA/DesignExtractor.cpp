@@ -52,7 +52,7 @@ bool DesignExtractor::getIsCallStarResult(PROC_NAME caller, PROC_NAME callee)
 {
 	if (caller!=" " && callee!=" ")
 	{
-		CALL_LIST result=DesignExtractor::getCallStarResult(caller,callee);
+		CALL_LIST result=DesignExtractor::getCallStarResult(caller," ");
 		CALL_LIST::iterator itr;
 		if (!result.empty())
 		{
@@ -373,7 +373,7 @@ bool DesignExtractor::getIsFollowsResult(STATEMENT_NUM s1, STATEMENT_NUM s2){
 bool DesignExtractor::getIsFollowsStarResult(STATEMENT_NUM s1, STATEMENT_NUM s2){
 	if (s1!=NULL && s2!=NULL)
 	{
-		FOLLOWS_LIST result=DesignExtractor::getFollowsStar(s1,s2);
+		FOLLOWS_LIST result=DesignExtractor::getFollowsStar(s1,NULL);
 		FOLLOWS_LIST::iterator itr;
 		if (!result.empty())
 		{
@@ -460,7 +460,7 @@ bool DesignExtractor::getIsParentStarResult(STATEMENT_NUM s1, STATEMENT_NUM s2)
 {
 	if (s1!=NULL && s2!=NULL)
 	{
-		PARENT_LIST result=DesignExtractor::getParentStar(s1,s2);
+		PARENT_LIST result=DesignExtractor::getParentStar(s1,NULL);
 		PARENT_LIST::iterator itr;
 		if (!result.empty())
 		{
