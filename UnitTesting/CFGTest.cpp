@@ -1,0 +1,24 @@
+#include "CFGTest.h"
+#include "../SPA/CFG.h"
+
+//CPPUNIT_TEST_SUITE_REGISTRATION( CFGTest );
+
+void CFGTest::testCFG(){
+	CFG* cfg = new CFG(5);
+	cfg->addEdge(1,2);
+	cfg->addEdge(2,3);
+	cfg->addEdge(3,4);
+	cfg->addEdge(4,5);
+	cfg->addEdge(5,1);
+
+	CPPUNIT_ASSERT(cfg->isConnected(1,2));
+	CPPUNIT_ASSERT(!cfg->isConnected(3,2));
+	CPPUNIT_ASSERT(!cfg->isConnected(10,2));
+	CPPUNIT_ASSERT(cfg->findAll(1,0).size() == 5);
+	CPPUNIT_ASSERT(cfg->findAll(0,0).size() == 5);
+	CPPUNIT_ASSERT(cfg->findAll(0,5).size() == 5);
+	CPPUNIT_ASSERT(cfg->findAll(1,5).size() == 5);
+	CPPUNIT_ASSERT(cfg->findAll(2,5).size() == 5);
+	CPPUNIT_ASSERT(cfg->findAll(3,5).size() == 5);
+	CPPUNIT_ASSERT(cfg->findAll(5,5).size() == 5);
+}
