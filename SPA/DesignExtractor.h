@@ -20,6 +20,12 @@ public:
 	bool isNextStarResult(PROG_LINE, PROG_LINE);
 	NEXT_LIST getNextResult(PROG_LINE, PROG_LINE);
 	NEXT_LIST getNextStarResult(PROG_LINE, PROG_LINE);
+	
+	//call table
+	CALL_LIST  getCallResult(PROC_NAME caller, PROC_NAME callee);
+	bool getIsCallResult(PROC_NAME caller, PROC_NAME callee);
+	CALL_LIST  getCallStarResult(PROC_NAME caller, PROC_NAME callee);
+	bool getIsCallStarResult(PROC_NAME caller, PROC_NAME callee);
 
 	//from such that, need revamp
 	FOLLOWS_LIST getFollowsResult(TYPE type, STATEMENT_NUM s1, STATEMENT_NUM s2);
@@ -58,5 +64,6 @@ private:
 	
 	
 	 void iterateAndStore(list<pair<int, int>> &result, list<pair<int, int>> tmp, int v1);
+	 void computeCallStar(PROC_NAME caller, PROC_NAME callee,list<string> &result);
 };
 
