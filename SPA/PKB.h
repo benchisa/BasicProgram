@@ -101,11 +101,11 @@ class PKB
 
 		//if caller is empty, return callee procedure
 		//if callee is empty, return caller procedure
-		list<CALL_PAIR> * getCall(PROC_NAME caller,PROC_NAME callee);
+		list<CALL_PAIR>  getCall(PROC_NAME caller,PROC_NAME callee);
 		CALL_PAIR getCALLPair(CALL_INDEX index);
 		CALL_INDEX getCallPairIndex(PROC_NAME caller,PROC_NAME callee);
 		bool isExistsCall(PROC_NAME caller,PROC_NAME callee);
-		CALL_LIST *  getAllCalls();
+		CALL_LIST   getAllCalls();
 
 		//Functions of constant table
 		CONSTANT_INDEX insertConst(int constantValue);
