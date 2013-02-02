@@ -317,7 +317,7 @@ SIZE PKB::getCallTableSize()
 	return callTable->getCallTableSize();
 }
 
-list<CALL_PAIR> * PKB::getCall(PROC_NAME caller,PROC_NAME callee)
+list<CALL_PAIR>  PKB::getCall(PROC_NAME caller,PROC_NAME callee)
 {
 	return callTable->getCall(caller, callee);
 }
@@ -336,7 +336,7 @@ bool PKB::isExistsCall(PROC_NAME caller,PROC_NAME callee)
 	return callTable->isExistsCall(caller, callee);
 }
 
-CALL_LIST * PKB::getAllCalls()
+CALL_LIST  PKB::getAllCalls()
 {
 	return callTable->getAllCalls();
 }
