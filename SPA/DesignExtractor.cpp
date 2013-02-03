@@ -199,7 +199,8 @@ NEXT_LIST DesignExtractor::getNextResult(PROG_LINE p1, PROG_LINE p2)
 // on demand
 bool DesignExtractor::isNextStarResult(PROG_LINE p1, PROG_LINE p2)
 {
-	int size = pkb->getMaxProgLine();
+	SIZE procSize = pkb->getProceTableSize();
+	int size = pkb->getProcedure(procSize)->getEndProgLine();
 
 	list<int> tmp = pkb->findAll(p1, p2);
 	if(tmp.size() != 0){
@@ -213,7 +214,8 @@ bool DesignExtractor::isNextStarResult(PROG_LINE p1, PROG_LINE p2)
 NEXT_LIST DesignExtractor::getNextStarResult(PROG_LINE p1, PROG_LINE p2)
 {
 	NEXT_LIST result;
-	int size = pkb->getMaxProgLine();
+	SIZE procSize = pkb->getProceTableSize();
+	int size = pkb->getProcedure(procSize)->getEndProgLine();
 
 	// Next*(n1, n2) --> findAll
 	if(p1 == 0 && p2 == 0){
