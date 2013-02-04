@@ -38,6 +38,7 @@ public:
 	QTREE* getQTree();
 	hash_map<int,TYPE> *getQVarTable();
 	hash_map<int,string> *getParamTable();
+	bool getSelectBool();
 	ERROR_MSG getLastError();
 
 private:
@@ -46,12 +47,13 @@ private:
 	QUERY query;		
 	GrammarTable grammarTable;
 	vector<TOKEN> *tokens;	
+	bool selectBool;
 	
 	vector<QTREE*> clauses; //keeps 'SUCHTHAT','WITH' and 'PATTERN' headNodes
 	vector<int> flagGroups;
 	int clauseCount; //keeps track of how many condition clauses are there
 	int groupCount;	
-	
+
 	vector<TOKEN> exprPieces;
 	//iterators for expression tree
 	std::vector<TOKEN>::iterator next;
@@ -89,6 +91,18 @@ private:
 	QTREE* prevNode;
 	QTREE* headNode;
 	
+	//helpers for rearranging clauses
+	QTREE* firstAffect;
+	QTREE* firstNext;
+	QTREE* firstUsesMod;
+	QTREE* firstCallPar;
+	QTREE* firstWithPatt;
+	QTREE* lastAffect;
+	QTREE* lastNext;
+	QTREE* lastUsesMod;
+	QTREE* lastCallPar;
+	QTREE* lastWithPatt;
+
 	QueryPreprocessor::ERROR_MSG errorMsg;
 
 	//regex
@@ -136,10 +150,12 @@ private:
 	QTREE* extractPlusMinus();	
 	QTREE* extractTimes();
 	QTREE* extractAll();
-	void addClause(QTREE*);
+	void insertClause(QTREE*);
 
 	//setup Query Tree for evaluator's use
 	void setQTree();
+	void arrangeClause(QTREE*);
+	void joinClauses();
 	bool isFlaggedGroup(int);
 
 	//clean up memory

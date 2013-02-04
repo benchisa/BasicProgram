@@ -34,7 +34,7 @@ GrammarTable::~GrammarTable(void){
 
 
 void GrammarTable::createEntTable(){	
-	eTable[0].entName	="procedure";
+	eTable[0].entName	="proc";
 	eTable[0].type		=PROCEDURE;
 
 	eTable[1].entName	="stmt";
@@ -88,7 +88,7 @@ void GrammarTable::createRelTable(){
 	rTable[0].arg2		=entRef;
 	rTable[0].type		=CALL;
 
-	rTable[1].relName	="callst";
+	rTable[1].relName	="calls\\*";
 	rTable[1].numArg	=2;
 	rTable[1].arg1		=entRef;
 	rTable[1].arg2		=entRef;
@@ -100,7 +100,7 @@ void GrammarTable::createRelTable(){
 	rTable[2].arg2		=stmtRef;
 	rTable[2].type		=FOLLOWS;
 
-	rTable[3].relName	="follows";
+	rTable[3].relName	="follow\\*";
 	rTable[3].numArg	=2;
 	rTable[3].arg1		=stmtRef;
 	rTable[3].arg2		=stmtRef;
@@ -112,7 +112,7 @@ void GrammarTable::createRelTable(){
 	rTable[4].arg2		=stmtRef;
 	rTable[4].type		=PARENT;
 
-	rTable[5].relName	="parentst";
+	rTable[5].relName	="parent\\*";
 	rTable[5].numArg	=2;
 	rTable[5].arg1		=stmtRef;
 	rTable[5].arg2		=stmtRef;
@@ -148,7 +148,7 @@ void GrammarTable::createRelTable(){
 	rTable[10].arg2		=lineRef;
 	rTable[10].type		=NEXT;
 
-	rTable[11].relName	="nextst";
+	rTable[11].relName	="next\\*";
 	rTable[11].numArg	=2;
 	rTable[11].arg1		=lineRef;
 	rTable[11].arg2		=lineRef;
@@ -160,7 +160,7 @@ void GrammarTable::createRelTable(){
 	rTable[12].arg2		=stmtRef;
 	rTable[12].type		=AFFECTS;
 
-	rTable[13].relName	="affectst";
+	rTable[13].relName	="affects\\*";
 	rTable[13].numArg	=2;
 	rTable[13].arg1		=stmtRef;
 	rTable[13].arg2		=stmtRef;

@@ -11,6 +11,7 @@ public:
 	void setLastDescendant(QTREE*);
 	bool setAncestor(QTREE*);
 	bool setSibling(QTREE*);
+	void setLastSibling(QTREE*);
 	void setType(TYPE);
 	void setData(int);
 
@@ -20,6 +21,7 @@ public:
 	QTREE* getLastDescendant();
 	QTREE* getRightSibling();
 	QTREE* getLeftSibling();
+	QTREE* getLastSibling();
 	QTREE* getAncestor();
 
 private:
@@ -32,4 +34,5 @@ private:
 	QTREE* ancestor;
 	QTREE* firstDescendant;
 	QTREE* lastDescendant;
+	QTREE* lastSibling;
 };

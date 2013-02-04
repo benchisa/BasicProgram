@@ -49,6 +49,12 @@ bool QTREE::setSibling(QTREE* sibling){
 	return false;
 }
 
+void QTREE::setLastSibling(QTREE* sibling){
+	//set the last right sibling of the current node	
+	this->lastSibling = sibling;		
+}
+
+
 void QTREE::setData(int data){
 	this->data=data;
 }
@@ -87,6 +93,12 @@ QTREE* QTREE::getRightSibling(){
 QTREE* QTREE::getLeftSibling(){
 
 	return leftSibling;
+
+}
+
+QTREE* QTREE::getLastSibling(){
+
+	return lastSibling;
 
 }
 
