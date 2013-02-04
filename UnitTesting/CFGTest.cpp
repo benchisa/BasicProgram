@@ -11,14 +11,15 @@ void CFGTest::testCFG(){
 	cfg->addEdge(4,5);
 	cfg->addEdge(5,1);
 
+
 	CPPUNIT_ASSERT(cfg->isNext(1,2));
 	CPPUNIT_ASSERT(!cfg->isNext(3,2));
 	CPPUNIT_ASSERT(!cfg->isNext(10,2));
-	CPPUNIT_ASSERT(cfg->findAll(1,0).size() == 5);
-	CPPUNIT_ASSERT(cfg->findAll(0,0).size() == 5);
-	CPPUNIT_ASSERT(cfg->findAll(0,5).size() == 5);
-	CPPUNIT_ASSERT(cfg->findAll(1,5).size() == 5);
-	CPPUNIT_ASSERT(cfg->findAll(2,5).size() == 5);
-	CPPUNIT_ASSERT(cfg->findAll(3,5).size() == 5);
-	CPPUNIT_ASSERT(cfg->findAll(5,5).size() == 5);
+	CPPUNIT_ASSERT(cfg->findAllPaths(1,0).size() == 5);
+	CPPUNIT_ASSERT(cfg->findAllPaths(0,0).size() == 5);
+	CPPUNIT_ASSERT(cfg->findAllPaths(0,5).size() == 5);
+	CPPUNIT_ASSERT(cfg->findAllPaths(1,5).size() == 5);
+	CPPUNIT_ASSERT(cfg->findAllPaths(2,5).size() == 5);
+	CPPUNIT_ASSERT(cfg->findAllPaths(3,5).size() == 5);
+	CPPUNIT_ASSERT(cfg->findAllPaths(5,5).size() == 5);
 }
