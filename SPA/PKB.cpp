@@ -396,4 +396,10 @@ list<int> PKB::findAll(PROG_LINE p1, PROG_LINE p2)
 	return cfg->findAll(p1, p2);
 }
 
+PROG_LINE PKB::getMaxProgLine()
+{
+	int lastProc=procTable->getProceTableSize();
+	Procedure * proc=procTable->getProcedure(lastProc);
+	return proc->getEndProgLine();
 
+}
