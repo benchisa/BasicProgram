@@ -290,7 +290,7 @@ SIZE PKB::getVarTableSize()
 }
 VAR_NAME PKB::getVarName(VAR_INDEX index)
 {
-	return (*varTable).getVarName(index);
+	return *(*varTable).getVarName(index);
 }
 VAR_INDEX PKB::getVarIndex(VAR_NAME varName)
 {
@@ -391,9 +391,15 @@ NEXT_LIST PKB::getNext(PROG_LINE p1, PROG_LINE p2)
 }
 
 
-list<int> PKB::findAll(PROG_LINE p1, PROG_LINE p2)
+list<PROG_LINE> PKB::findAllPaths(PROG_LINE p1, PROG_LINE p2)
 {
-	return cfg->findAll(p1, p2);
+	return cfg->findAllPaths(p1, p2);
 }
 
+PROG_LINE PKB::getMaxProgLine()
+{
+	int lastProc=procTable->getProceTableSize();
+	Procedure * proc=procTable->getProcedure(lastProc);
+	return proc->getEndProgLine();
 
+}

@@ -43,7 +43,7 @@ bool CFG::addEdge(PROG_LINE p1, PROG_LINE p2)
 	return true;
 }
 
-list<int> CFG::findAll(PROG_LINE p1, PROG_LINE p2)
+list<PROG_LINE> CFG::findAllPaths(PROG_LINE p1, PROG_LINE p2)
 {
 	if((p1 != 0 && p2 == 0) || (p1 == 0 && p2 == 0) || (p1 != 0 && p2 != 0))
 		BFS(p1, p2, 0);

@@ -43,6 +43,7 @@ void ParserTest::testIf()
 	std::string src;
 	
 	// Follows(2, 3), Follows(4, 5)
+	//cout << "Start=====\n";
 	src = "procedure test1{\n"
 	/*1*/	"if b then {"
 	/*2*/	"a = c;"
@@ -180,56 +181,43 @@ void ParserTest::testMultipleProcedures()
 	Parser p;
 	std::string src;
 
-	src = "procedure main{\n"
-	/*1*/	"a = y;}\n"
-	/**/	"procedure test1{\n"
-	/*2*/	"b = x + y;\n"
-	/*3*/	"if b then{\n"
-	/*4*/	"a = b;}"
-	/**/		"else{"
-	/*5*/	"a = c;}}"
-	/**/	"procedure test2{\n"
-	/*6*/	"c = a + b;\n"
-	/*7*/	"b = 1;\n"
-	/*8*/	"while a{\n"
-	/*9*/	"c = 2;\n"
-	/*10*/	"a = a - 1 * (c + d);}}";
+	src =	"procedure main{\n"
+			"	a = a + 2;}\n"
+			"procedure text1{\n"
+			"	b = a * (2 + c);\n"
+			"	c = c - 2;}"
+			"procedure text2{\n"
+			"	while a{\n"
+			"		d = d - 2;}\n"
+			"	e = e + 1;\n"
+			"	if a then {\n"
+			"		h = h * (a * b);\n"
+			"		b = b + 1;}\n"
+			"	else{\n"
+			"		c = b;\n"
+			"		while z{\n"
+			"			abc = xyz;\n"
+			"			abc1 = xyz2 * xyz + h - y;}\n"
+			"		a=abc1*2;}}";
+			
 	p.setSource(src);
 	CPPUNIT_ASSERT_EQUAL(1, p.startParse());
 	PKB *pkb = p.getPKB();
 	
-	// Test for AST
+	// AST Test
 	AST *ast = pkb->getRootAST();
-	CPPUNIT_ASSERT(ast->getRootData() == 1);
 	CPPUNIT_ASSERT(pkb->getType(ast->getRightSibling()) == PROCEDURE);
-	CPPUNIT_ASSERT(pkb->getData(ast->getRightSibling()) == 2);
-	CPPUNIT_ASSERT(pkb->getType(ast->getRightSibling()->getFirstDescendant()->getFirstDescendant()) == ASSIGNMENT);
-	CPPUNIT_ASSERT(pkb->getType(ast->getRightSibling()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == IF);
-
 	CPPUNIT_ASSERT(pkb->getType(ast->getRightSibling()->getRightSibling()) == PROCEDURE);
-	CPPUNIT_ASSERT(pkb->getData(ast->getRightSibling()->getRightSibling()) == 3);
+	CPPUNIT_ASSERT(pkb->getType(ast->getRightSibling()->getRightSibling()->getFirstDescendant()->getFirstDescendant()) == WHILE);
 
-	// Test for Follows
-	CPPUNIT_ASSERT(pkb->isFollows(1, 2) == false);
-	CPPUNIT_ASSERT(pkb->isFollows(2, 3) == true);
-	CPPUNIT_ASSERT(pkb->isFollows(3, 4) == false);
-	CPPUNIT_ASSERT(pkb->isFollows(4, 5) == false);
-	CPPUNIT_ASSERT(pkb->isFollows(5, 6) == false);
-	CPPUNIT_ASSERT(pkb->isFollows(3, 6) == false);
-	CPPUNIT_ASSERT(pkb->isFollows(6, 7) == true);
-	CPPUNIT_ASSERT(pkb->isFollows(7, 8) == true);
-	CPPUNIT_ASSERT(pkb->isFollows(8, 9) == false);
-	CPPUNIT_ASSERT(pkb->isFollows(9, 10) == true);
-	
-	// Test for Parent
-	CPPUNIT_ASSERT(pkb->isParent(3, 4) == true);
-	CPPUNIT_ASSERT(pkb->isParent(3, 5) == true);
-	CPPUNIT_ASSERT(pkb->isParent(3, 6) == false);
-	CPPUNIT_ASSERT(pkb->isParent(3, 9) == false);
-	CPPUNIT_ASSERT(pkb->isParent(7, 9) == false);
-	CPPUNIT_ASSERT(pkb->isParent(8, 9) == true);
-	CPPUNIT_ASSERT(pkb->isParent(8, 10) == true);
+	// Parent Test to ensure insertion is correct.
+	CPPUNIT_ASSERT(!pkb->isParent(1, 9));
+	CPPUNIT_ASSERT(pkb->isParent(4, 5));
 
+	// Follow Test
+	CPPUNIT_ASSERT(!pkb->isFollows(1, 2));
+	CPPUNIT_ASSERT(!pkb->isFollows(3, 4));
+	CPPUNIT_ASSERT(pkb->isFollows(4, 6));
 
 }
 
@@ -462,7 +450,7 @@ void ParserTest::testGetLastError(){
 
 	// Illegal codes
 	// Purpose: Missing ;
-	/*src = "procedure main{\nwhile c{\na=b}}";
+	src = "procedure main{\nwhile c{\na=b}}";
 	p.setSource(src);
 	CPPUNIT_ASSERT_EQUAL(-1, p.startParse());
 	CPPUNIT_ASSERT(p.getLastError()=="Source Code Error(): missing colon");
@@ -477,7 +465,7 @@ void ParserTest::testGetLastError(){
 	src = "procedure ma&#(!*in{\nwhile c{\na=b;}}";
 	p.setSource(src);
 	CPPUNIT_ASSERT_EQUAL(-1, p.startParse());
-	CPPUNIT_ASSERT(p.getLastError()=="Source Code Error(): invalid procedure name");
+	CPPUNIT_ASSERT(p.getLastError()=="Source Code Error(): invalid/repeated procedure name");
 
 	// Purpose: Missing {
 	src = "procedure main\nwhile c{\na=b;}}";
@@ -485,22 +473,16 @@ void ParserTest::testGetLastError(){
 	CPPUNIT_ASSERT_EQUAL(-1, p.startParse());
 	CPPUNIT_ASSERT(p.getLastError()=="Source Code Error(): missing bracket");
 
-	// Purpose: Invalid Factor()
-	src = "procedure main{\nwhile c{\na=!@@#b;}}";
-	p.setSource(src);
-	CPPUNIT_ASSERT_EQUAL(-1, p.startParse());
-	CPPUNIT_ASSERT(p.getLastError()=="Source Code Error(): invalid expression");
-
 	// Purpose: Invalid Procedure
 	
 	src = "procure main{\nwhile !@#c{\na=b;}}";
 	p.setSource(src);
 	CPPUNIT_ASSERT_EQUAL(-1, p.startParse());
-	CPPUNIT_ASSERT(p.getLastError()=="Source Code Error(): invalid procedure");*/
+	CPPUNIT_ASSERT(p.getLastError()=="Source Code Error(): invalid procedure");
 }
 
 void ParserTest::testGetPKB(){
-	/*Parser p;
+	Parser p;
 	std::string src;
 	src = "procedure main{\n"
 		"a = y + 1 + 0 + x + b + a;\n" 
@@ -547,31 +529,25 @@ void ParserTest::testGetPKB(){
 	//Test Modifies
 	MODIFIES_LIST modifiesList = pkb->getModifies(PROCEDURE, 1, 0);
 	MODIFIES_LIST::iterator modifiesListItr = modifiesList.begin();
-	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "a");
-	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "x");
-	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "b");
-	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "hhhhh");
-	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "k");
+	CPPUNIT_ASSERT( pkb->getVarName((modifiesListItr++->second)) == "a");
+	CPPUNIT_ASSERT( pkb->getVarName((modifiesListItr++->second)) == "x");
+	CPPUNIT_ASSERT( pkb->getVarName((modifiesListItr++->second)) == "b");
+	CPPUNIT_ASSERT( pkb->getVarName((modifiesListItr++->second)) == "hhhhh");
+	CPPUNIT_ASSERT( pkb->getVarName((modifiesListItr++->second)) == "k");
 
 	//Test Modifies While LOOP
 	modifiesList = pkb->getModifies(WHILE, 4, 0);
 	modifiesListItr = modifiesList.begin();
-	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "x");
-	CPPUNIT_ASSERT( *pkb->getVarName((modifiesListItr++->second)) == "hhhhh");
+	CPPUNIT_ASSERT( pkb->getVarName((modifiesListItr++->second)) == "x");
+	CPPUNIT_ASSERT( pkb->getVarName((modifiesListItr++->second)) == "hhhhh");
 
 	//Test Uses
 	USES_LIST useList = pkb->getUses(PROCEDURE, 1, 0);
-	USES_LIST::iterator usesListItr = useList.begin();
-	CPPUNIT_ASSERT( *pkb->getVarName((usesListItr++->second)) == "y");
-	CPPUNIT_ASSERT( *pkb->getVarName((usesListItr++->second)) == "x");
-	CPPUNIT_ASSERT( *pkb->getVarName((usesListItr++->second)) == "b");
-	CPPUNIT_ASSERT( *pkb->getVarName((usesListItr++->second)) == "a");
+	CPPUNIT_ASSERT(useList.size() == 5);
 
 	//Test Uses WHILE LOOP
 	useList = pkb->getUses(WHILE, 4, 0);
-	usesListItr = useList.begin();
-	CPPUNIT_ASSERT( *pkb->getVarName((usesListItr++->second)) == "a");
-	CPPUNIT_ASSERT( *pkb->getVarName((usesListItr++->second)) == "y");
+	CPPUNIT_ASSERT(useList.size() == 3);
 
 	// Test AST
 	AST *ast = pkb->getRootAST();
@@ -580,8 +556,6 @@ void ParserTest::testGetPKB(){
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()) == ASSIGNMENT);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == PLUS);
-	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()) == PLUS);
-	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()) == VARIABLE);
 	
 	ast = ast->getFirstDescendant()->getFirstDescendant()->getRightSibling();
 	CPPUNIT_ASSERT(pkb->getType(ast) == ASSIGNMENT);
@@ -594,6 +568,6 @@ void ParserTest::testGetPKB(){
 
 	ast = ast->getFirstDescendant()->getRightSibling()->getFirstDescendant();
 	CPPUNIT_ASSERT(pkb->getType(ast->getRightSibling()) == ASSIGNMENT);
-	CPPUNIT_ASSERT(pkb->getType(ast->getRightSibling()->getRightSibling()) == WHILE);*/
+	CPPUNIT_ASSERT(pkb->getType(ast->getRightSibling()->getRightSibling()) == WHILE);
 
 }

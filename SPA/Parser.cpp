@@ -102,6 +102,9 @@ bool Parser::program(){
 	}
 	else{
 		pkb->getProcedure(curProcIndex)->setEndProgLine(curProgLine);
+		//cout << "At Procedure: " << pkb->getProcedure(curProcIndex)->getProcName() << "\n";
+		//cout << "Prev Token: " << prevToken << "\n";
+		//cout << "Current Token: " << curToken << "\n";
 		if(matchToken(" ")){
 			return true;
 		}
@@ -131,17 +134,15 @@ bool Parser::procedure(){
 				return false;			
 			}
 			curProcIndex = pkb->insertProc(cProc);
+			//cout << "Procedure added: " << prevToken << "\n";
 			if(stmt_num == 0){
 				curAST = pkb->createAST(PROCEDURE , prevProgLine, 0, curProcIndex);
-				if(pkb->setRootAST(curAST));
-				else
-				{
+				if(!pkb->setRootAST(curAST))
 					return false;
-				}
 			}
-			// next procedure
 			else
 			{
+				// next procedure
 				AST *newProc = pkb->createAST(PROCEDURE, prevProgLine, stmt_num+1, curProcIndex);
 				pkb->addSibling(curAST, newProc);
 				curAST = newProc;
@@ -160,6 +161,7 @@ bool Parser::procedure(){
 
 			if(stmtlst()) 
 			{
+				//cout << "Back to Procedure: " << pkb->getProcedure(curProcIndex)->getProcName() << "\n";
 				curAST = prevProc; // set back pointer to procedure
 				return true;
 			}else{
@@ -320,7 +322,7 @@ bool Parser::stmt_if(){
 					{
 						//progLine++;
 						//??? do we need a progline, no right.
-						elseNode = pkb->createAST(STMT_LIST, 0, stmt_num, ELSE); // then node
+						elseNode = pkb->createAST(STMT_LIST, 0, 0, ELSE); // else node, no stmt_line
 						pkb->setAncestor(elseNode, ifNode);
 						pkb->addSibling(thenNode, elseNode);
 						
@@ -447,13 +449,13 @@ bool Parser::stmt_assign(){
 		pkb->setAncestor(assignNode, curAST->getAncestor());
 	}
 
-
 	curAST = assignNode;
 
 	insertFollowsParentForStmt(stmt_num-1, stmt_num);
 
 	if(name()){
 		curVarIndex = pkb->insertVar(prevToken);
+		//cout << "insert modifies: " << pkb->getProcedure(curProcIndex)->getProcName() << ", " << prevToken << "\n";
 		pkb->insertModifies(PROCEDURE, curProcIndex, curVarIndex);
 		pkb->insertModifies(ASSIGNMENT, stmt_num, curVarIndex);
 
@@ -673,6 +675,7 @@ bool Parser::const_value(){
 bool Parser::name(){
 	// NAME: LETTER(LETTER | DIGIT)*
 	if(matchToken(regex("[a-zA-Z][a-zA-Z0-9]*"))){
+		//cout << "Came: " << prevToken << "\n";
 		return true;
 	}
 

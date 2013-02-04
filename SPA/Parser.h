@@ -123,11 +123,21 @@ public:
 
 				if(rxItr->str() == "else")
 				{
+					// put { in token
 					rxItr++;
 					tmp.first = rxItr->str();
 					tmp.second = 0;
 					tokens.push_back(tmp);
-					rxItr++; // skip "\n"
+
+					rxItr++;
+					// if next token is "\n"
+					if(rxItr->str() != "\n")
+					{
+						progline++;
+						tmp.first = rxItr->str();
+						tmp.second = progline;
+						tokens.push_back(tmp);
+					}
 				}
 			}
 			else

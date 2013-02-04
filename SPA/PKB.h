@@ -120,7 +120,7 @@ class PKB
 		bool addEdge(PROG_LINE p1, PROG_LINE p2);
 		bool isNext(PROG_LINE p1, PROG_LINE p2);
 		NEXT_LIST getNext(PROG_LINE p1, PROG_LINE p2);
-		list<int> findAll(PROG_LINE p1, PROG_LINE p2);
+		list<PROG_LINE> findAllPaths(PROG_LINE p1, PROG_LINE p2);
 
 
 		//Other functions
@@ -145,4 +145,3 @@ private:
 	
 		
 };
-

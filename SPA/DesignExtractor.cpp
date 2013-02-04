@@ -82,8 +82,7 @@ bool DesignExtractor::isStatementTypeOf(TYPE typeName,STATEMENT_NUM stmtNum){
 
 void DesignExtractor::createCFG()
 {
-	SIZE procSize = pkb->getProceTableSize();
-	int size = pkb->getProcedure(procSize)->getEndProgLine();
+	int size = pkb->getMaxProgLine();
 	
 	// create CFG of progline_size
 	pkb->createCFG(size);
@@ -105,7 +104,6 @@ AST* DesignExtractor::buildCFG(AST * node)
 		
 		case ASSIGNMENT:
 			if(tmp->getRightSibling()){
-				//cout << "1. Add edge: (" << pkb->getProgLine(tmp) << "," << pkb->getProgLine(tmp->getRightSibling()) << ")\n";
 				pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getRightSibling()));
 			}
 			lastNode = tmp;
@@ -116,15 +114,12 @@ AST* DesignExtractor::buildCFG(AST * node)
 			cfgWhileKeepers.push_back(pkb->getProgLine(tmp));
 
 			if(tmp->getRightSibling()){
-				//cout << "2. Add edge: (" << pkb->getProgLine(tmp) << "," << pkb->getProgLine(tmp->getRightSibling()) << ")\n";
 				pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getRightSibling()));
 			}
 			
-			//cout << "2a. Add edge: (" << pkb->getProgLine(tmp) << "," << pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()) << ")\n";
 			pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()));
 
 			lastNode = buildCFG(tmp->getFirstDescendant()->getRightSibling());
-			//cout << "2b Add edge: (" << pkb->getProgLine(lastNode) << "," << cfgWhileKeepers.back() << ")\n";
 			if(pkb->getType(lastNode) != IF)
 				pkb->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
 
@@ -134,20 +129,16 @@ AST* DesignExtractor::buildCFG(AST * node)
 		case IF:
 
 			lastNode = buildCFG(tmp->getFirstDescendant()->getRightSibling());
-			//cout << "3a Add edge: (" << pkb->getProgLine(lastNode) << "," << cfgWhileKeepers.back() << ")\n";
 			if(cfgWhileKeepers.size()!= 0)
 				pkb->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
 
 			if(tmp->getRightSibling()){
-				//cout << "3a Add edge: (" << pkb->getProgLine(lastNode) << "," << pkb->getProgLine(tmp->getRightSibling()) << ")\n";
 				pkb->addEdge(pkb->getProgLine(lastNode), pkb->getProgLine(tmp->getRightSibling()));
 			}
 
-			//cout << "3b Add edge: (" << pkb->getProgLine(tmp) << "," << pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()) << ")\n";
 			pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()));
 
 			lastNode = buildCFG(tmp->getFirstDescendant()->getRightSibling()->getRightSibling());
-			//cout << "3c Add edge: (" << pkb->getProgLine(lastNode) << "," << cfgWhileKeepers.back() << ")\n";
 			if(cfgWhileKeepers.size() != 0)
 				pkb->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
 			
@@ -156,7 +147,6 @@ AST* DesignExtractor::buildCFG(AST * node)
 				pkb->addEdge(pkb->getProgLine(lastNode), pkb->getProgLine(tmp->getRightSibling()));
 			}
 
-			//cout << "3d Add edge: (" << pkb->getProgLine(tmp) << "," << pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getRightSibling()->getFirstDescendant()) << ")\n";
 			pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getRightSibling()->getFirstDescendant()));
 			
 			lastNode = tmp;
@@ -164,12 +154,10 @@ AST* DesignExtractor::buildCFG(AST * node)
 			break;
 		case CALL:
 			if(tmp->getRightSibling()){
-				//cout << "1. Add edge: (" << pkb->getProgLine(tmp) << "," << pkb->getProgLine(tmp->getRightSibling()) << ")\n";
 				pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getRightSibling()));
 			}
 
 			lastNode = tmp;
-			//cout << pkb->getType(tmp->getFirstDescendant()) << "\n";
 			tmp = tmp->getRightSibling();
 			break;
 		case PROCEDURE:
@@ -201,7 +189,10 @@ bool DesignExtractor::isNextStarResult(PROG_LINE p1, PROG_LINE p2)
 {
 	int size = pkb->getMaxProgLine();
 
-	list<int> tmp = pkb->findAll(p1, p2);
+	if(p1 > size || p2 > size || p1 <= 0 || p2 <=0)
+		return false;
+
+	list<PROG_LINE> tmp = pkb->findAllPaths(p1, p2);
 	if(tmp.size() != 0){
 		return true;
 	}
@@ -218,8 +209,8 @@ NEXT_LIST DesignExtractor::getNextStarResult(PROG_LINE p1, PROG_LINE p2)
 	// Next*(n1, n2) --> findAll
 	if(p1 == 0 && p2 == 0){
 		for(int i = 1; i <=size; i++){
-			list<int> tmp = pkb->findAll(i, i);
-			list<int>::iterator itr = tmp.begin();
+			list<PROG_LINE> tmp = pkb->findAllPaths(i, i);
+			list<PROG_LINE>::iterator itr = tmp.begin();
 			while(itr!=tmp.end())
 			{
 				pair<PROG_LINE, PROG_LINE> tPair;
@@ -232,8 +223,8 @@ NEXT_LIST DesignExtractor::getNextStarResult(PROG_LINE p1, PROG_LINE p2)
 	}
 	//Next*(n, n), Next*(1,n1), Next*(n1,2) --> findAll
 	else if(p1 == p2 || (p1 != 0 && p2 == 0) || (p1 == 0 && p2 != 0) || (p1 != 0 && p2 != 0)){
-		list<int> tmp = pkb->findAll(p1, p2);
-		list<int>::iterator itr = tmp.begin();
+		list<PROG_LINE> tmp = pkb->findAllPaths(p1, p2);
+		list<PROG_LINE>::iterator itr = tmp.begin();
 		while(itr!=tmp.end())
 		{
 			pair<PROG_LINE, PROG_LINE> tPair;
