@@ -17,7 +17,7 @@ public:
 	RELATION_LIST* evaluatePattern(QUERYTABLE * qtable);
 private:
 	PKB *p;
-	AST * ast;
+	AST *ast;
 	VAR_LIST *varList;
 	RELATION_LIST* list;
 };
