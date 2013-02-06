@@ -1,11 +1,12 @@
 #include "IntermediateResultTable.h"
 
 
-IntermediateResultTable::IntermediateResultTable(SIZE tableSize,PKB* qrTree,QUERYTABLE* qrTable)
+IntermediateResultTable::IntermediateResultTable(SIZE tableSize,PKB* qrTree,QUERYTABLE* qrTable,DesignExtractor * extractor)
 {
 	this->tableSize = tableSize;
 	this->pkb = pkb;
 	this->qrTable = qrTable;
+	this->extractor = extractor;
 	qrVarTable = new int*[2];
 	qrVarTable[0] = new int[tableSize];
 	qrVarTable[1] = new int[tableSize];
@@ -207,7 +208,7 @@ RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_L
 				int currentColNum = currentTable->getColNumOf(*selectedVar);
 				int currentEntry = currentTable->getEntryAt(i,currentColNum);
 				
-				rawData[varNum].push_back(currentEntry);
+				rawData->at(varNum).push_back(currentEntry);
 				varNum++;
 			}
 		}
@@ -230,7 +231,7 @@ RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_L
 			for(int j =0;j<tableSize;i++){
 				//first step: copy the old qrVar data
 				for(int k=0;k<rawColNum;k++){
-					tempRaw[k].push_back(rawData[i][k]);
+					tempRaw[k].push_back(rawData->at(i).at(k));
 				}
 				//second step: append new qrVar data
 				DATA_LIST::iterator selectedVar;
@@ -278,7 +279,7 @@ RAWDATA * IntermediateResultTable::joinCombinations(RAWDATA* rawData, DATA_LIST 
 			for(int j =0;j<selectedDataList->size();i++){
 				//first step: copy the old qrVar data
 				for(int k=0;k<rawColNum;k++){
-					tempRaw[k].push_back(rawData[i][k]);
+					tempRaw[k].push_back(rawData->at(i)[k]);
 				}
 				//second step: append new qrVar data
 				tempRaw[rawColNum+1].push_back(selectedDataList->at(j));					
@@ -299,7 +300,6 @@ RAWDATA * IntermediateResultTable::joinCombinations(RAWDATA* rawData, DATA_LIST 
 }
 
 DATA_LIST * IntermediateResultTable::getStmtListOf(TYPE nodeType){
-	DesignExtractor extractor(pkb);
 	DATA_LIST * returnList;
 	returnList = new DATA_LIST;
 
@@ -318,16 +318,16 @@ DATA_LIST * IntermediateResultTable::getStmtListOf(TYPE nodeType){
 		}
 		break;
 	case ASSIGNMENT:
-		returnList = extractor.getAllAssigns();
+		returnList = extractor->getAllAssigns();
 		break;
 	case WHILE:
-		returnList = extractor.getAllWhiles();
+		returnList = extractor->getAllWhiles();
 		break;
 	case IF:
-		returnList = extractor.getAllIfs();
+		returnList = extractor->getAllIfs();
 		break;
 	case CALL:
-		returnList = extractor.getAllCallStmts();
+		returnList = extractor->getAllCallStmts();
 		break;
 	case VARIABLE:
 		{

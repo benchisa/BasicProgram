@@ -5,7 +5,7 @@ void QueryFormatter::setPKB(PKB* pkb){
 	this->pkb = pkb;
 
 }
-
+/*
 list<string> QueryFormatter::formatString(RAWDATA * data) {
 	TYPE type = data->first;
 	list<int> * dataList;
@@ -52,3 +52,4 @@ list<string> QueryFormatter::formatString(RAWDATA * data) {
 	return result;
 
 }
+*/

@@ -252,8 +252,9 @@ int LinkedDataTable::getColNumOf(INDEX qrVar){
 bool LinkedDataTable::isExists(INDEX qrVar){
 	ROW::iterator itr;
 	//find if the qrVar exists in current table
-	itr= find_if(qrVarList.begin(),qrVarList.end(),qrVar);
+	itr= find(qrVarList.begin(),qrVarList.end(),qrVar);
 	if(itr!=qrVarList.end()) return true;
+
 	return false;
 }
 ROW LinkedDataTable::getQrVarList(){

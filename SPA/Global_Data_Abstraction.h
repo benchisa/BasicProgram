@@ -50,6 +50,12 @@ enum TYPE{
 	CALL,
 	PROGLINE,
 	WITH,
+	CALLST,
+	NEXT,
+	NEXTST,
+	AFFECTS,
+	AFFECTST,
+	NAME
 	
 };
 enum CONTENT{
@@ -79,8 +85,9 @@ typedef list<CALL_PAIR> CALLPAIR_LIST;
 typedef pair<TYPE,int> RELATION_PAIR;
 typedef list<int> ROW;
 typedef list<ROW> ROW_LIST;
-typedef vector<DATA_LIST> RAWDATA;
 typedef vector<int> DATA_LIST;
+typedef vector<DATA_LIST> RAWDATA;
+
 
 typedef int STATEMENT_NUM,VAR_INDEX,SIZE, PROC_INDEX,PROG_LINE,USES_INDEX,MODIFIES_INDEX,INDEX,CONSTANT_INDEX,CALL_INDEX,JOIN_ATTR;
 typedef string EXPRESSION,VAR_NAME,PROC_NAME;

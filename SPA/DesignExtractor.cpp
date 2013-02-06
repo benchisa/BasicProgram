@@ -884,7 +884,7 @@ DATA_LIST * DesignExtractor::getAllAssigns(){
 	DATA_LIST * returnList;
 	returnList = new DATA_LIST;
 
-	int stmtNo = DesignExtractor::getMaxStmtNum();
+	int stmtNo = pkb->getMaxStatementNum();
 	for(int i=1; i<=stmtNo;i++){
 		AST_LIST * stmtTree;
 		stmtTree = pkb->getASTBy(i);
@@ -904,7 +904,7 @@ DATA_LIST * DesignExtractor::getAllWhiles(){
 	DATA_LIST * returnList;
 	returnList = new DATA_LIST;
 
-	int stmtNo = DesignExtractor::getMaxStmtNum();
+	int stmtNo = pkb->getMaxStatementNum();
 	for(int i=1; i<=stmtNo;i++){
 		AST_LIST * stmtTree;
 		stmtTree = pkb->getASTBy(i);
@@ -923,7 +923,7 @@ DATA_LIST * DesignExtractor::getAllIfs(){
 	DATA_LIST * returnList;
 	returnList = new DATA_LIST;
 
-	int stmtNo = DesignExtractor::getMaxStmtNum();
+	int stmtNo = pkb->getMaxStatementNum();
 	for(int i=1; i<=stmtNo;i++){
 		AST_LIST * stmtTree;
 		stmtTree = pkb->getASTBy(i);
@@ -942,7 +942,7 @@ DATA_LIST * DesignExtractor::getAllCallStmts(){
 	DATA_LIST * returnList;
 	returnList = new DATA_LIST;
 
-	int stmtNo = DesignExtractor::getMaxStmtNum();
+	int stmtNo = pkb->getMaxStatementNum();
 	for(int i=1; i<=stmtNo;i++){
 		AST_LIST * stmtTree;
 		stmtTree = pkb->getASTBy(i);

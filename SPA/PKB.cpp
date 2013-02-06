@@ -290,7 +290,7 @@ SIZE PKB::getVarTableSize()
 }
 VAR_NAME PKB::getVarName(VAR_INDEX index)
 {
-	return *(*varTable).getVarName(index);
+	return (*varTable).getVarName(index);
 }
 VAR_INDEX PKB::getVarIndex(VAR_NAME varName)
 {

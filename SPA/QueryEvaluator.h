@@ -5,6 +5,7 @@
 #include <hash_map>
 #include "IntermediateResultTable.h"
 #include "SuchThatClause.h"
+#include "DesignExtractor.h"
 
 
 class QueryEvaluator{
@@ -37,6 +38,6 @@ private:
 	bool executeSuchThat(IntermediateResultTable * resultTable,QTREE* suchThatTree);
 	bool findResult(QTREE * resultNode,IntermediateResultTable * resultTable);
 	RELATION_LIST * appendRelationLists(RELATION_LIST* list1,RELATION_LIST* list2);
-
+	DesignExtractor * extractor;
 	    
 };

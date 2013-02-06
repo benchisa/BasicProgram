@@ -6,7 +6,7 @@
 class IntermediateResultTable
 {
 public:
-	IntermediateResultTable(SIZE tableSize,PKB* pkb,QUERYTABLE* qrTable);
+	IntermediateResultTable(SIZE tableSize,PKB* pkb,QUERYTABLE* qrTable,DesignExtractor * extractor);
 	~IntermediateResultTable(void);
 	
 	//if joinAttr is 0, both of the two relations are not in the table
@@ -31,5 +31,6 @@ private:
 	RAWDATA * joinRaw(RAWDATA * rawData,int tableNum,DATA_LIST * selectedVarList);
 	RAWDATA * joinCombinations(RAWDATA* rawData, DATA_LIST * selectedVarList);
 	DATA_LIST * getStmtListOf(TYPE nodeType);
+	DesignExtractor * extractor;
 };
 

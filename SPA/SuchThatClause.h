@@ -2,17 +2,19 @@
 #include "Global_Data_Abstraction.h"
 #include "PKB.h"
 #include "QTREE.h"
+#include "DesignExtractor.h"
 
 class SuchThatClause
 {
 public:
-	SuchThatClause(PKB* pkb,QUERYTABLE* qrTable);
+	SuchThatClause(PKB* pkb,QUERYTABLE* qrTable,DesignExtractor * extractor);
 	~SuchThatClause(void);
 
 	RELATION_LIST* evaluateSuchThatTree(QTREE* suchThatTree);
 	
 private:
 	PKB * pkb;
+	DesignExtractor * extractor;
 	QTREE * suchThatTree;
 	QUERYTABLE* qrTable;
 	RELATION_LIST* evaluateSuchThat();

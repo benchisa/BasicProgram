@@ -5,6 +5,7 @@
 //methods
 QueryEvaluator::QueryEvaluator(PKB* pkb){
 	this->pkb = pkb;
+	extractor = new DesignExtractor(pkb);
 }
 QueryEvaluator::~QueryEvaluator(void){
 
@@ -44,13 +45,13 @@ IntermediateResultTable * QueryEvaluator::computeIntermediateResult(QTREE* relat
 	
 	QTREE* currentClause = relationTree;
 	IntermediateResultTable * resultTable;
-	resultTable = new IntermediateResultTable(qrTable->size(),pkb,qrTable);
+	resultTable = new IntermediateResultTable(qrTable->size(),pkb,qrTable,extractor);
 	int selectPoint = 1;
 
 	do{	
 		if(selectPoint ==1){
 			//flag the starting point of the clause, where selected var can be found
-			resultTable = new IntermediateResultTable(qrTable->size(),pkb,qrTable);
+			resultTable = new IntermediateResultTable(qrTable->size(),pkb,qrTable,extractor);
 		}
 
 		resultTable = QueryEvaluator::evaluateClause(resultTable, currentClause);
@@ -77,7 +78,7 @@ bool QueryEvaluator::executeSuchThat(IntermediateResultTable * resultTable, QTRE
 	QTREE* firstRel;
 	QTREE* secondRel;
 	RELATION_LIST* currentResultList;
-	SuchThatClause suchThatClause(pkb, qrTable);
+	SuchThatClause suchThatClause(pkb, qrTable,extractor);
 	JOIN_ATTR joinAttr = 0;
 
 	firstRel = suchThatTree->getFirstDescendant()->getFirstDescendant();

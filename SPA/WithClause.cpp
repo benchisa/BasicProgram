@@ -98,7 +98,7 @@ RELATION_LIST* WithClause::findLeftString(){
 		break;
 	case CALL:
 		{CALLPAIR_LIST callList;
-		callList = *pkb->getCall("",rightAttributeValue);
+		callList = pkb->getCall("",rightAttributeValue);
 
 		if(callList.size()>0){
 			CALLPAIR_LIST::iterator itr;
@@ -383,11 +383,11 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			}
 			break;
 		case STATEMENT:
-			{STATEMENT_LIST * callStmts;
+			{DATA_LIST * callStmts;
 			callStmts = extractor->getAllCallStmts();
 
 			if(callStmts!=NULL){
-				STATEMENT_LIST::iterator itr;
+				DATA_LIST::iterator itr;
 				for(itr= callStmts->begin();itr!=callStmts->end();itr++){
 					returnList->push_back(pair<int,int>(*itr,*itr));
 				}
@@ -596,10 +596,10 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			break;
 		case ASSIGNMENT:
 			{
-				STATEMENT_LIST * assignList;
+				DATA_LIST * assignList;
 				assignList = extractor->getAllAssigns();
 				if(assignList != NULL){
-					STATEMENT_LIST::iterator itr;
+					DATA_LIST::iterator itr;
 					for(itr = assignList->begin();itr!=assignList->end();itr++){
 						returnList->push_back(pair<int,int>(*itr,*itr));
 					}
@@ -608,10 +608,10 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			break;
 		case WHILE:
 			{
-				STATEMENT_LIST * whileList;
+				DATA_LIST * whileList;
 				whileList = extractor->getAllWhiles();
 				if(whileList != NULL){
-					STATEMENT_LIST::iterator itr;
+					DATA_LIST::iterator itr;
 					for(itr = whileList->begin();itr!=whileList->end();itr++){
 						returnList->push_back(pair<int,int>(*itr,*itr));
 					}
@@ -620,10 +620,10 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			break;
 		case IF:
 			{
-				STATEMENT_LIST * ifList;
+				DATA_LIST * ifList;
 				ifList = extractor->getAllIfs();
 				if(ifList != NULL){
-					STATEMENT_LIST::iterator itr;
+					DATA_LIST::iterator itr;
 					for(itr = ifList->begin();itr!=ifList->end();itr++){
 						returnList->push_back(pair<int,int>(*itr,*itr));
 					}
@@ -632,10 +632,10 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			break;
 		case CALL:
 			{
-				STATEMENT_LIST * callList;
+				DATA_LIST * callList;
 				callList = extractor->getAllCallStmts();
 				if(callList != NULL){
-					STATEMENT_LIST::iterator itr;
+					DATA_LIST::iterator itr;
 					for(itr = callList->begin();itr!=callList->end();itr++){
 						returnList->push_back(pair<int,int>(*itr,*itr));
 					}
@@ -652,10 +652,10 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 		switch(rightVariableType){
 		case STATEMENT:
 			{
-				STATEMENT_LIST * assignList;
+				DATA_LIST * assignList;
 				assignList = extractor->getAllAssigns();
 				if(assignList != NULL){
-					STATEMENT_LIST::iterator itr;
+					DATA_LIST::iterator itr;
 					for(itr = assignList->begin();itr!=assignList->end();itr++){
 						returnList->push_back(pair<int,int>(*itr,*itr));
 					}
@@ -686,10 +686,10 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			break;
 		case ASSIGNMENT:
 			{
-				STATEMENT_LIST * assignList;
+				DATA_LIST * assignList;
 				assignList = extractor->getAllAssigns();
 				if(assignList != NULL){
-					STATEMENT_LIST::iterator itr;
+					DATA_LIST::iterator itr;
 					for(itr = assignList->begin();itr!=assignList->end();itr++){
 						returnList->push_back(pair<int,int>(*itr,*itr));
 					}
@@ -706,10 +706,10 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 		switch(rightVariableType){
 		case STATEMENT:
 			{
-				STATEMENT_LIST * whileList;
+				DATA_LIST * whileList;
 				whileList = extractor->getAllWhiles();
 				if(whileList != NULL){
-					STATEMENT_LIST::iterator itr;
+					DATA_LIST::iterator itr;
 					for(itr = whileList->begin();itr!=whileList->end();itr++){
 						returnList->push_back(pair<int,int>(*itr,*itr));
 					}
@@ -741,10 +741,10 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			break;
 		case WHILE:
 			{
-				STATEMENT_LIST * whileList;
+				DATA_LIST * whileList;
 				whileList = extractor->getAllWhiles();
 				if(whileList != NULL){
-					STATEMENT_LIST::iterator itr;
+					DATA_LIST::iterator itr;
 					for(itr = whileList->begin();itr!=whileList->end();itr++){
 						returnList->push_back(pair<int,int>(*itr,*itr));
 					}
@@ -761,10 +761,10 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 		switch(rightVariableType){
 		case STATEMENT:
 			{
-				STATEMENT_LIST * ifList;
+				DATA_LIST * ifList;
 				ifList = extractor->getAllIfs();
 				if(ifList != NULL){
-					STATEMENT_LIST::iterator itr;
+					DATA_LIST::iterator itr;
 					for(itr = ifList->begin();itr!=ifList->end();itr++){
 						returnList->push_back(pair<int,int>(*itr,*itr));
 					}
@@ -796,10 +796,10 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			break;
 		case ASSIGNMENT:
 			{
-				STATEMENT_LIST * ifList;
+				DATA_LIST * ifList;
 				ifList = extractor->getAllIfs();
 				if(ifList != NULL){
-					STATEMENT_LIST::iterator itr;
+					DATA_LIST::iterator itr;
 					for(itr = ifList->begin();itr!=ifList->end();itr++){
 						returnList->push_back(pair<int,int>(*itr,*itr));
 					}
