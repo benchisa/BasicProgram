@@ -1,208 +1,388 @@
 #pragma
 #include "GrammarTable.h"
-#include <hash_map>
 
-hash_map<string,TYPE> (*entTable);
-hash_map<string,pair<TYPE,string>> (*relTable);
-hash_map<TYPE,string> (*pattTable);
-hash_map<TYPE,pair<vector<TYPE>,vector<TYPE>>> (*argTable);
-hash_map<string,TYPE>::const_iterator entIter;
-hash_map<string,pair<TYPE,string>>::const_iterator relIter;
-hash_map<TYPE,string>::const_iterator pattIter;
-hash_map<TYPE,pair<vector<TYPE>,vector<TYPE>>>::const_iterator argIter;
 
-GrammarTable::GrammarTable(void){
-	entTable = new hash_map<string,TYPE>;
-	relTable = new hash_map<string,pair<TYPE,string>>;
-	pattTable = new hash_map<TYPE,string>;
-	argTable = new hash_map<TYPE,pair<vector<TYPE>,vector<TYPE>>>;
+GrammarTable::GrammarTable(void){	
+	compulsoryOne	= "+";
+	optional		= "*";
+	or				= "|";
+	plus			= "\\+";
+	minus			= "\\-";
+	times			= "\\*";
+	invComma		= "\"";
+	letter			= "a-zA-Z";
+	digit			= "0-9";
+	underscore		= "_";
+	hash			= "#";
+	ident			= "["+letter+"]"+compulsoryOne+"["+letter+digit+hash+"]"+optional;
+	synonym			= ident;
+	integer			= "["+digit+"]"+compulsoryOne;
+	op				= "["+plus+minus+times+"]";
+
+	stmtRef			= synonym+or+underscore+or+integer;
+	entRef			= synonym+or+underscore+or+integer+or+invComma+ident+invComma;
+	lineRef			= synonym+or+underscore+or+integer;
+	varRef			= synonym+or+underscore+or+invComma+ident+invComma;
+	expr			= "\\(*"+synonym+"("+op+"("+synonym+or+integer+")"+"\\)*)"+optional;
+	wildexpr		= underscore+invComma+expr+invComma+underscore;
+	expr_spec		= invComma+expr+invComma+or+wildexpr;
 }
 
 GrammarTable::~GrammarTable(void){
-	delete entTable;
-	delete relTable;
-	delete pattTable; 
-	delete argTable;
-}
-
-
-void GrammarTable::createEntTable(){
-
-	//required
-	(*entTable).insert(entPair("procedure",PROCEDURE));
-	(*entTable).insert(entPair("constant",CONSTANT));
-	(*entTable).insert(entPair("variable",VARIABLE));
-	(*entTable).insert(entPair("assign",ASSIGNMENT));
-	(*entTable).insert(entPair("while",WHILE));
-	(*entTable).insert(entPair("stmt",STATEMENT));	
-
-	//bonus
-	(*entTable).insert(entPair("if",IF));
-	//(*entTable).insert(entPair("call",CALL));
 
 }
 
+
+void GrammarTable::createEntTable(){	
+	eTable[0].entName	="proc";
+	eTable[0].type		=PROCEDURE;
+
+	eTable[1].entName	="stmt";
+	eTable[1].type		=STATEMENT;
+
+	eTable[2].entName	="assign";
+	eTable[2].type		=ASSIGNMENT;
+
+	eTable[3].entName	="while";
+	eTable[3].type		=WHILE;
+
+	eTable[4].entName	="if";
+	eTable[4].type		=IF;
+
+	eTable[5].entName	="constant";
+	eTable[5].type		=CONSTANT;
+
+	eTable[6].entName	="variable";
+	eTable[6].type		=VARIABLE;
+
+	eTable[7].entName	="call";
+	eTable[7].type		=CALL;
+
+	eTable[8].entName	="stmtlst";
+	eTable[8].type=STMT_LIST;
+}
 
 TYPE GrammarTable::getEntType(ENTITY ent){
-	//find the entity's formal type name
-	entIter = (*entTable).find(ent);
-
-	return entIter->second;
-
+	//find the entity's formal type number
+	for(int i=0;i<9; i++){
+		if(ent==eTable[i].entName){
+			return eTable[i].type;
+		}
+	}
 }
 
 bool GrammarTable::isEntExists(ENTITY ent){
-	entIter = (*entTable).find(ent); 
-
-	if(entIter==(*entTable).end()) 
-		return false;
-
-	return true;
+	for(int i=0;i<9; i++){
+		if(ent==eTable[i].entName){			
+			return true;
+		}
+	}
+	return false;
 }
 
 void GrammarTable::createRelTable(){
 
-	string ident = "[a-zA-Z]+[a-zA-Z0-9#]*";
-	string synonym = ident;
-	string integer = "[0-9]+";
-	string underscore = "_";
+	rTable[0].relName	="calls";
+	rTable[0].numArg	=2;
+	rTable[0].arg1		=entRef;
+	rTable[0].arg2		=entRef;
+	rTable[0].type		=CALL;
 
-	(*relTable).insert(relPair("follows", relSubPair(FOLLOWS,synonym+"|"+underscore+"|"+integer+","+synonym+"|"+underscore+"|"+integer)));
-	(*relTable).insert(relPair("follows*", relSubPair(FOLLOWST,synonym+"|"+underscore+"|"+integer+","+synonym+"|"+underscore+"|"+integer)));
-	(*relTable).insert(relPair("parent", relSubPair(PARENT,synonym+"|"+underscore+"|"+integer+","+synonym+"|"+underscore+"|"+integer)));
-	(*relTable).insert(relPair("parent*", relSubPair(PARENTST,synonym+"|"+underscore+"|"+integer+","+synonym+"|"+underscore+"|"+integer)));
-	//(*relTable).insert(relPair("modifiesP",relSubPair(MODIFIES,synonym+"|"+underscore+"|\\\""+ident+"\\\"|"+integer+","+synonym+"|"+underscore+"|\\\""+ident+"\\\"")));
-	(*relTable).insert(relPair("modifies",relSubPair(MODIFIES,synonym+"|"+underscore+"|"+integer+","+synonym+"|"+underscore+"|\\\""+ident+"\\\"")));
-	//(*relTable).insert(relPair("usesP",relSubPair(USES,synonym+"|"+underscore+"|\\\""+ident+"\\\"|"+integer+","+synonym+"|"+underscore+"|\\\""+ident+"\\\"")));
-	(*relTable).insert(relPair("uses",relSubPair(USES,synonym+"|"+underscore+"|"+integer+","+synonym+"|"+underscore+"|\\\""+ident+"\\\"")));
+	rTable[1].relName	="calls\\*";
+	rTable[1].numArg	=2;
+	rTable[1].arg1		=entRef;
+	rTable[1].arg2		=entRef;
+	rTable[1].type		=CALLST;
 
+	rTable[2].relName	="follows";
+	rTable[2].numArg	=2;
+	rTable[2].arg1		=stmtRef;
+	rTable[2].arg2		=stmtRef;
+	rTable[2].type		=FOLLOWS;
 
+	rTable[3].relName	="follow\\*";
+	rTable[3].numArg	=2;
+	rTable[3].arg1		=stmtRef;
+	rTable[3].arg2		=stmtRef;
+	rTable[3].type		=FOLLOWST;
+
+	rTable[4].relName	="parent";
+	rTable[4].numArg	=2;
+	rTable[4].arg1		=stmtRef;
+	rTable[4].arg2		=stmtRef;
+	rTable[4].type		=PARENT;
+
+	rTable[5].relName	="parent\\*";
+	rTable[5].numArg	=2;
+	rTable[5].arg1		=stmtRef;
+	rTable[5].arg2		=stmtRef;
+	rTable[5].type		=PARENTST;
+
+	rTable[6].relName	="uses_p";
+	rTable[6].numArg	=2;
+	rTable[6].arg1		=entRef;
+	rTable[6].arg2		=varRef;
+	rTable[6].type		=USES;
+
+	rTable[7].relName	="uses_s";
+	rTable[7].numArg	=2;
+	rTable[7].arg1		=stmtRef;
+	rTable[7].arg2		=varRef;
+	rTable[7].type		=USES;
+
+	rTable[8].relName	="modifies_p";
+	rTable[8].numArg	=2;
+	rTable[8].arg1		=entRef;
+	rTable[8].arg2		=varRef;
+	rTable[8].type		=MODIFIES;
+
+	rTable[9].relName	="modifies_s";
+	rTable[9].numArg	=2;
+	rTable[9].arg1		=stmtRef;
+	rTable[9].arg2		=varRef;
+	rTable[9].type		=MODIFIES;
+
+	rTable[10].relName	="next";
+	rTable[10].numArg	=2;
+	rTable[10].arg1		=lineRef;
+	rTable[10].arg2		=lineRef;
+	rTable[10].type		=NEXT;
+
+	rTable[11].relName	="next\\*";
+	rTable[11].numArg	=2;
+	rTable[11].arg1		=lineRef;
+	rTable[11].arg2		=lineRef;
+	rTable[11].type		=NEXTST;
+
+	rTable[12].relName	="affects";
+	rTable[12].numArg	=2;
+	rTable[12].arg1		=stmtRef;
+	rTable[12].arg2		=stmtRef;
+	rTable[12].type		=AFFECTS;
+
+	rTable[13].relName	="affects\\*";
+	rTable[13].numArg	=2;
+	rTable[13].arg1		=stmtRef;
+	rTable[13].arg2		=stmtRef;
+	rTable[13].type		=AFFECTST;
 }
 
+int GrammarTable::getRelArgCount(RELATIONSHIP rel){
+	for(int i=0;i<14; i++){
+		if(rel==rTable[i].relName){
+			return rTable[i].numArg;
+		}
+	}
+}
 
-string GrammarTable::getRelGrammar(RELATIONSHIP rel){
-	string info = "";
-	relIter = (*relTable).find(rel); 
-
-	if(relIter!=(*relTable).end())
-		info = (relIter->second).second;
-	return info;
+string GrammarTable::getRelArg(RELATIONSHIP rel,int argPosition){
+	for(int i=0;i<14; i++){
+		if(rel==rTable[i].relName){
+			if(argPosition==1){
+				return rTable[i].arg1;
+			} else{
+				return rTable[i].arg2;
+			}
+		}
+	}
 }
 
 TYPE GrammarTable::getRelType(RELATIONSHIP rel){
-	TYPE relType;
-	relIter = (*relTable).find(rel); 
-
-	if(relIter!=(*relTable).end())
-		relType = (relIter->second).first;
-	return relType;
+	for(int i=0;i<14; i++){
+		if(rel==rTable[i].relName){
+			return rTable[i].type;
+		}
+	}
 }
 
 bool GrammarTable::isRelExists(RELATIONSHIP rel){
-	relIter = (*relTable).find(rel); 
-
-	if(relIter==(*relTable).end()) 
-		return false;
-
-	return true;
+	for(int i=0;i<14; i++){
+		if(rel==rTable[i].relName){
+			return true;
+		}
+	}	
+	return false;
 }
-
 
 void GrammarTable::createPattTable(){
-	string ident = "[a-zA-Z]+[a-zA-Z0-9#]*";
-	string synonym = ident;
-	string constant = "[0-9]+";
-	string underscore = "_";
+	pTable[0].pattName	="assignment";
+	pTable[0].numArg	=2;
+	pTable[0].arg1		=varRef;
+	pTable[0].arg2		=expr_spec+or+underscore;
+	pTable[0].type		=ASSIGNMENT;
 
-	(*pattTable).insert(pattPair(ASSIGNMENT,synonym+"|"+underscore+"|\""+ident+"\",\"" + synonym + "(\\+" + synonym + ")*\"|\"" + synonym + "(\\+" + constant + ")*\"|\""+constant+"(\\+" + synonym + ")*\"|_\"" + synonym + "(\\+" + synonym + ")*\"_|_\"" + constant + "(\\+" + synonym + ")*\"_|_\"" + synonym + "(\\+" + constant + ")*\"_|_"));
-	(*pattTable).insert(pattPair(WHILE,synonym+"|"+underscore+"|\""+ident+"\",_" ));
+	pTable[1].pattName	="while";
+	pTable[1].numArg	=2;
+	pTable[1].arg1		=varRef;
+	pTable[1].arg2		=underscore;
+	pTable[1].type		=WHILE;
 
-	//future
-	//(*pattTable).insert(pattPair("pattern_if", ));
+	pTable[2].pattName	="if";
+	pTable[2].numArg	=3;
+	pTable[2].arg1		=varRef;
+	pTable[2].arg2		=underscore;
+	pTable[2].arg3		=underscore;
+	pTable[2].type		=IF;
 }
 
-string GrammarTable::getPattGrammar(TYPE patt){
-	string info = "";
-	pattIter = (*pattTable).find(patt); 
-
-	if(pattIter!=(*pattTable).end())
-		info = pattIter->second;	
-
-	return info;
+int GrammarTable::getPattArgCount(TYPE pattType){
+	for(int i=0;i<3; i++){
+		if(pattType==pTable[i].type){
+			return pTable[i].numArg;
+		}
+	}
 }
 
-bool GrammarTable::isPattExists(TYPE patt){
-	pattIter = (*pattTable).find(patt); 
+string GrammarTable::getPattArg(TYPE pattType,int argPosition){
+	for(int i=0;i<3; i++){
+		if(pattType==pTable[i].type){
+			if(argPosition==1){
+				return pTable[i].arg1;
+			} else if (argPosition==2){
+				return pTable[i].arg2;
+			} else{
+				return pTable[i].arg3;
+			}
+		}
+	}
+}
 
-	if(pattIter==(*pattTable).end()) 
-		return false;
+TYPE GrammarTable::getPattType(PATTERN patt){
+	for(int i=0;i<3; i++){
+		if(patt==pTable[i].pattName){
+			return pTable[i].type;
+		}
+	}
+}
 
-	return true;
+bool GrammarTable::isPattExists(PATTERN patt){
+	for(int i=0;i<3; i++){
+		if(patt==pTable[i].pattName){
+			return true;
+		}
+	}	
+	return false;
 }
 
 void GrammarTable::createArgTable(){
-	vector<TYPE> case1,case2,case3;
+	vector<TYPE> case1,case2,case3,case4,case5,case6;
 
+	case1.push_back(STATEMENT);
 	case1.push_back(WHILE);
 	case1.push_back(IF);
-	case1.push_back(STATEMENT);
 
 	case2.push_back(STATEMENT);
 	case2.push_back(ASSIGNMENT);
 	case2.push_back(WHILE);
 	case2.push_back(IF);
 
-	case3.push_back(VARIABLE);
+	case3.push_back(PROCEDURE);
+	case3.push_back(STATEMENT);
+	case3.push_back(ASSIGNMENT);
+	case3.push_back(WHILE);
+	case3.push_back(IF);
+	case3.push_back(CALL);
 
-	(*argTable).insert(argPair(FOLLOWS,argSubPair(case2,case2)));
-	(*argTable).insert(argPair(FOLLOWST,argSubPair(case2,case2)));
-	(*argTable).insert(argPair(PARENT,argSubPair(case1,case2)));
-	(*argTable).insert(argPair(PARENTST,argSubPair(case1,case2)));
-	(*argTable).insert(argPair(MODIFIES,argSubPair(case2,case3)));
-	(*argTable).insert(argPair(USES,argSubPair(case2,case3)));
+	case4.push_back(VARIABLE);
+
+	case5.push_back(PROGLINE);
+
+	case6.push_back(ASSIGNMENT);
+
+	aTable[0].type = FOLLOWS;
+	aTable[0].arg1 = case2;
+	aTable[0].arg2 = case2;
+
+	aTable[1].type = FOLLOWST;
+	aTable[1].arg1 = case2;
+	aTable[1].arg2 = case2;
+
+	aTable[2].type = PARENT;
+	aTable[2].arg1 = case1;
+	aTable[2].arg2 = case2;
+
+	aTable[3].type = PARENTST;
+	aTable[3].arg1 = case1;
+	aTable[3].arg2 = case2;
+
+	aTable[4].type = MODIFIES;
+	aTable[4].arg1 = case3;
+	aTable[4].arg2 = case4;
+
+	aTable[5].type = USES;
+	aTable[5].arg1 = case3;
+	aTable[5].arg2 = case4;
+
+	aTable[6].type = NEXT;
+	aTable[6].arg1 = case5;
+	aTable[6].arg2 = case5;
+
+	aTable[7].type = NEXTST;
+	aTable[7].arg1 = case5;
+	aTable[7].arg2 = case5;
+
+	aTable[8].type = AFFECTS;
+	aTable[8].arg1 = case6;
+	aTable[8].arg2 = case6;
+
+	aTable[9].type = AFFECTST;
+	aTable[9].arg1 = case6;
+	aTable[9].arg2 = case6;
 
 }
 
-vector<TYPE> GrammarTable::getArgument(TYPE rel, int arg){
-
-	vector<TYPE> res;
-	argIter = (*argTable).find(rel); 
-
-	if(argIter!=(*argTable).end())
-		if (arg == 0)
-			res = (argIter->second).first;	
-		else
-			res = (argIter->second).second;
-
-	return res;
+vector<TYPE> GrammarTable::getArgument(TYPE rel, int argPosition){
+	for(int i=0;i<10; i++){
+		if(rel==aTable[i].type){
+			if(argPosition==1){
+				return aTable[i].arg1;
+			} else{
+				return aTable[i].arg2;
+			}
+		}
+	}
 }
+
 
 void GrammarTable::printAllEnt(){
-		for(entIter=(*entTable).begin( );entIter!= (*entTable).end( );entIter++){
-			cout << "entity : " << entIter->first << "|" << entIter->second << endl;
-		}
+	cout<<"====================All Entities======================"<<endl;
+	for(int i=0;i<9; i++){
+		cout<<"ENTITY NAME: " << eTable[i].entName<<endl;
+		cout<<"ENTITY TYPE: " << eTable[i].type<<endl;
+	}
 }
 
-void GrammarTable::printAllRel(){
-		for(relIter=(*relTable).begin( );relIter!= (*relTable).end( );relIter++){
-			cout << "relationship : " << relIter->first << "|" << (relIter->second).first << "|" << (relIter->second).second << endl;
-		}
+void GrammarTable::printAllRel(){	
+	cout<<"====================All Relationships======================"<<endl;
+	for(int i=0;i<14; i++){
+		cout<<"REL NAME: " << rTable[i].relName<<endl;
+		cout<<"REL TYPE: " << rTable[i].type<<endl;
+		cout<<"NUM ARG: " << rTable[i].numArg<<endl;
+		cout<<"ARG1: " << rTable[i].arg1<<endl;
+		cout<<"ARG2: " << rTable[i].arg2<<endl;
+	}
 }
 
-void GrammarTable::printAllPatt(){
-		for(pattIter=(*pattTable).begin( );pattIter!= (*pattTable).end( );pattIter++){
-			cout << "pattern : " << pattIter->first << "|" << pattIter->second << endl;
-		}
+void GrammarTable::printAllPatt(){	
+	cout<<"====================All Patterns======================"<<endl;
+	for(int i=0;i<3; i++){
+		cout<<"PATT NAME: " << pTable[i].pattName<<endl;
+		cout<<"PATT TYPE: " << pTable[i].type<<endl;
+		cout<<"NUM ARG: " << pTable[i].numArg<<endl;
+		cout<<"ARG1: " << pTable[i].arg1<<endl;
+		cout<<"ARG2: " << pTable[i].arg2<<endl;
+		cout<<"ARG3: " << pTable[i].arg3<<endl;		
+	}
 }
 
 void GrammarTable::printAllArg(){
-		for(argIter=(*argTable).begin( );argIter!= (*argTable).end( );argIter++){
-			cout << "arguments : " << argIter->first << endl;
-			for(int j = 0; j < (argIter->second).first.size(); j++){
-				cout<<	(argIter->second).first.at(j);
-			}
-			for(int j = 0; j < (argIter->second).second.size(); j++){
-				cout<<	(argIter->second).second.at(j);
-			}
-		}
+	cout<<"====================All Arguments======================"<<endl;
+	for(int i=0;i<10; i++){
+		cout<<"TYPE: " << aTable[i].type<<endl;
+		for(int j=0;j<aTable[i].arg1.size();j++)
+			cout<<"ARG1: " << aTable[i].arg1.at(j)<<endl;
+		for(int j=0;j<aTable[i].arg2.size();j++)
+			cout<<"ARG2: " << aTable[i].arg2.at(j)<<endl;
+	}
 }
+

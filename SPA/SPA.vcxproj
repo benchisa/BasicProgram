@@ -15,8 +15,10 @@
     <ClCompile Include="CallTable.cpp" />
     <ClCompile Include="ConstantTable.cpp" />
     <ClCompile Include="DesignExtractor.cpp" />
+    <ClCompile Include="CFG.cpp" />
     <ClCompile Include="FrontEndController.cpp" />
     <ClCompile Include="GrammarTable.cpp" />
+    <ClCompile Include="IntermediateResultTable.cpp" />
     <ClCompile Include="Modifies.cpp" />
     <ClCompile Include="Parent.cpp" />
     <ClCompile Include="Parser.cpp" />
@@ -32,10 +34,10 @@
     <ClCompile Include="QueryPreprocessor.cpp" />
     <ClCompile Include="SPAController.cpp" />
     <ClCompile Include="SuchThat.cpp" />
-    <ClCompile Include="SuchThatTree.cpp" />
+    <ClCompile Include="SuchThatClause.cpp" />
     <ClCompile Include="Uses.cpp" />
     <ClCompile Include="VarTable.cpp" />
-    <ClCompile Include="WithTree.cpp" />
+    <ClCompile Include="WithClause.cpp" />
     <None Include="..\..\Team01SPA\SPA\SPA.vcxproj.filters" />
     <ClCompile Include="Follows.cpp" />
   </ItemGroup>
@@ -43,8 +45,10 @@
     <ClInclude Include="CallTable.h" />
     <ClInclude Include="ConstantTable.h" />
     <ClInclude Include="DesignExtractor.h" />
+    <ClInclude Include="CFG.h" />
     <ClInclude Include="FrontEndController.h" />
     <ClInclude Include="GrammarTable.h" />
+    <ClInclude Include="IntermediateResultTable.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Pattern.h" />
     <ClInclude Include="PatternTree.h" />
@@ -56,7 +60,7 @@
     <ClInclude Include="QueryPreprocessor.h" />
     <ClInclude Include="SPAController.h" />
     <ClInclude Include="SuchThat.h" />
-    <ClInclude Include="SuchThatTree.h" />
+    <ClInclude Include="SuchThatClause.h" />
     <ClInclude Include="VarTable.h" />
     <ClInclude Include="AST.h" />
     <ClInclude Include="Follows.h" />
@@ -66,7 +70,7 @@
     <ClInclude Include="PKB.h" />
     <ClInclude Include="Procedure.h" />
     <ClInclude Include="Uses.h" />
-    <ClInclude Include="WithTree.h" />
+    <ClInclude Include="WithClause.h" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

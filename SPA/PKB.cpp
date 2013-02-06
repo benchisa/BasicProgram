@@ -14,6 +14,7 @@ PKB::PKB(void){
 	treeMap = new hash_map<STATEMENT_NUM,AST_LIST>;
 	callTable=new CallTable;
 	constantTable=new ConstantTable;
+	progLineTable=new unordered_multimap<PROG_LINE, STATEMENT_NUM>;
 }
 PKB::~PKB(void){
 	delete rootAST;
@@ -24,10 +25,40 @@ PKB::~PKB(void){
 	delete varTable;
 	delete procTable;
 	delete treeMap;
+	delete callTable;
+	delete constantTable;
+	delete progLineTable;
 }
-AST* PKB::createAST(ASTNODE_TYPE type,STATEMENT_NUM stmt,int data){
+AST* PKB::createAST(ASTNODE_TYPE type,PROG_LINE progLine,STATEMENT_NUM stmt, int data){
 	
-	AST newAST(type, stmt,data);
+	//for prog line table.
+	unordered_map<PROG_LINE, STATEMENT_NUM>::iterator p_itr;
+	p_itr=progLineTable->find(progLine);
+	if (p_itr==progLineTable->end())
+	{
+		progLineTable->insert(make_pair(progLine, stmt));
+	}
+	else
+	{
+		bool exist=false;
+			
+		for (p_itr=progLineTable->begin(); p_itr!=progLineTable->end(); p_itr++)
+			{
+			
+				if (p_itr->first==progLine &&p_itr->second==stmt)
+				{	
+					exist=true;
+					break;
+				}
+			}
+			if (!exist)
+			{
+				progLineTable->insert(make_pair(progLine, stmt));
+				
+			}
+	}
+
+	AST newAST(type, progLine, stmt,data);
 	AST * newASTP = new AST(newAST);
 	//return the newAST without add into AST map, if the statement number is less than 1
 	if(stmt<1) return newASTP;
@@ -87,7 +118,7 @@ AST* PKB::getLeftSibling(AST* currentAST){
 ASTNODE_TYPE PKB::getType(AST* currentAST){
 	return (*currentAST).getRootType();
 }
-PROG_LINE PKB::getStatementNum(AST* currentAST){
+STATEMENT_NUM PKB::getStatementNum(AST* currentAST){
 	return (*currentAST).getRootStatementNum();
 }
 INDEX PKB::getData(AST* currentAST){
@@ -108,8 +139,41 @@ AST* PKB::getRootAST(){
 AST* PKB::getTail(){
 	return tailAST;
 }
-		
 
+PROG_LINE PKB::getProgLine(AST* currentAST)
+{
+	return currentAST->getRootProgLineNum();
+}
+
+STATEMENT_LIST * PKB::getStmtList(PROG_LINE progLine)
+{   
+	if (progLine==NULL)
+	{
+		return nullptr;
+	}
+	STATEMENT_LIST * stmtList=new STATEMENT_LIST;
+
+	unordered_multimap<int, int>::iterator p_itr;
+	p_itr=progLineTable->find(progLine);
+	
+	if (p_itr!=progLineTable->end())
+	{
+		for (p_itr; p_itr!=progLineTable->end(); p_itr++)
+		{
+			if (p_itr->first==progLine)
+			{
+				stmtList->push_back(p_itr->second);
+			}
+		}
+		return stmtList;
+	}
+	else
+	{
+		return nullptr;
+	}
+	
+
+}
 //Functions of Procedure Table
 Procedure * PKB::createProc(PROC_NAME procName, PROG_LINE startProgLine){
 	return new Procedure(Procedure(procName,startProgLine));
@@ -226,7 +290,7 @@ SIZE PKB::getVarTableSize()
 }
 VAR_NAME PKB::getVarName(VAR_INDEX index)
 {
-	return (*varTable).getVarName(index);
+	return *(*varTable).getVarName(index);
 }
 VAR_INDEX PKB::getVarIndex(VAR_NAME varName)
 {
@@ -253,7 +317,7 @@ SIZE PKB::getCallTableSize()
 	return callTable->getCallTableSize();
 }
 
-list<CALL_PAIR> * PKB::getCall(PROC_NAME caller,PROC_NAME callee)
+list<CALL_PAIR>  PKB::getCall(PROC_NAME caller,PROC_NAME callee)
 {
 	return callTable->getCall(caller, callee);
 }
@@ -272,7 +336,7 @@ bool PKB::isExistsCall(PROC_NAME caller,PROC_NAME callee)
 	return callTable->isExistsCall(caller, callee);
 }
 
-CALL_LIST * PKB::getAllCalls()
+CALL_LIST  PKB::getAllCalls()
 {
 	return callTable->getAllCalls();
 }
@@ -303,4 +367,39 @@ bool PKB::isExists(int constantValue)
 CONSTANT_LIST *  PKB::getAllConstant()
 {
 	return constantTable->getAllConstant();
+}
+
+// function for CFG
+void PKB::createCFG(int size)
+{
+	cfg = new CFG(size);
+}
+
+bool PKB::addEdge(PROG_LINE p1, PROG_LINE p2)
+{
+	return cfg->addEdge(p1, p2);
+}
+
+bool PKB::isNext(PROG_LINE p1, PROG_LINE p2)
+{
+	return cfg->isNext(p1, p2);
+}
+
+NEXT_LIST PKB::getNext(PROG_LINE p1, PROG_LINE p2)
+{
+	return cfg->getNext(p1, p2);
+}
+
+
+list<PROG_LINE> PKB::findAllPaths(PROG_LINE p1, PROG_LINE p2)
+{
+	return cfg->findAllPaths(p1, p2);
+}
+
+PROG_LINE PKB::getMaxProgLine()
+{
+	int lastProc=procTable->getProceTableSize();
+	Procedure * proc=procTable->getProcedure(lastProc);
+	return proc->getEndProgLine();
+
 }

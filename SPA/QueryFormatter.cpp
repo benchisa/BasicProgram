@@ -21,12 +21,12 @@ list<string> QueryFormatter::formatString(RAWDATA * data) {
 	for(i=dataList->begin(); i != dataList->end(); ++i) {
 
 		if(type==VARIABLE) {
-			VAR_NAME * varName = pkb->getVarName(*i);
+			VAR_NAME varName = pkb->getVarName(*i);
 
-			if(!varName->empty()) {
+			
 				//result.append("Variable: ");
-				result.push_back(varName->data());
-			}
+				result.push_back(varName);
+		
 
 		}else if(type==BOOL) { 
 			if(*i == 1) {

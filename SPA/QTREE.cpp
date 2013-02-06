@@ -23,6 +23,11 @@ bool QTREE::setFirstDescendant(QTREE* firstDescendant){
 	return false;
 }
 
+void QTREE::setLastDescendant(QTREE* lastDescendant){
+	//set the last child of the current node	
+	this->lastDescendant = lastDescendant;		
+}
+
 bool QTREE::setAncestor(QTREE* ancestor){
 	//link the parent node of current node as ancestor
 	if(this->ancestor==NULL){
@@ -38,9 +43,24 @@ bool QTREE::setSibling(QTREE* sibling){
 	if(rightSibling==NULL && (*sibling).leftSibling==NULL){
 		rightSibling =sibling;
 		(*sibling).leftSibling = this;
+		sibling->setAncestor(this->getAncestor());
 		return true;
 	}
 	return false;
+}
+
+void QTREE::setLastSibling(QTREE* sibling){
+	//set the last right sibling of the current node	
+	this->lastSibling = sibling;		
+}
+
+
+void QTREE::setData(int data){
+	this->data=data;
+}
+
+void QTREE::setType(TYPE type){
+	this->type=type;
 }
 
 int QTREE::getData(){
@@ -57,6 +77,13 @@ QTREE* QTREE::getFirstDescendant(){
 
 }
 
+QTREE* QTREE::getLastDescendant(){
+	
+	return lastDescendant;
+
+}
+
+
 QTREE* QTREE::getRightSibling(){
 
 	return rightSibling;
@@ -66,6 +93,12 @@ QTREE* QTREE::getRightSibling(){
 QTREE* QTREE::getLeftSibling(){
 
 	return leftSibling;
+
+}
+
+QTREE* QTREE::getLastSibling(){
+
+	return lastSibling;
 
 }
 

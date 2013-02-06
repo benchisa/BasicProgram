@@ -13,6 +13,20 @@ AST::AST(ASTNODE_TYPE type,STATEMENT_NUM stmt,INDEX data){
 	firstDescendant = NULL;
 	root = NULL;
 }
+
+AST::AST(ASTNODE_TYPE type,PROG_LINE progLine,STATEMENT_NUM stmt,INDEX data)
+{
+	this->myProgLine=progLine;
+	this->myStmt = stmt;
+	this->myType=type;
+	this->myData=data;
+
+	leftSibling = NULL;
+	rightSibling = NULL;
+	ancestor = NULL;
+	firstDescendant = NULL;
+	root = NULL;
+}
 bool AST::setFirstDescendant(AST *firstDescendant){
 	//if current tree does not have the first descendant
 	// and the firstDescendant has not ancestor, set the links
@@ -54,17 +68,17 @@ AST* AST::getAncestor(){
 ASTNODE_TYPE AST::getRootType(){
 	return myType;
 }
-PROG_LINE AST::getRootStatementNum(){
+STATEMENT_NUM AST::getRootStatementNum(){
 	return myStmt;
+}
+
+
+
+PROG_LINE AST::getRootProgLineNum()
+{
+	return myProgLine;
 }
 INDEX AST::getRootData(){
 	return myData;
 }
 
-	
-bool AST::setTail(AST* tail){
-	this->tail = tail;
-}
-AST * AST::getTail(){
-	return tail;
-}

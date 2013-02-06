@@ -6,16 +6,22 @@ class QTREE{
 
 public:
 	//type will tell what is data representing
-	QTREE * createQTREENode(QTREENODE_TYPE type, int data);
-	bool setFirstDescendant(QTREE* firstDescendant);
-	bool setAncestor(QTREE* ancestor);
-	bool setSibling(QTREE* rightSibling);
+	QTREE * createQTREENode(QTREENODE_TYPE, int);
+	bool setFirstDescendant(QTREE*);
+	void setLastDescendant(QTREE*);
+	bool setAncestor(QTREE*);
+	bool setSibling(QTREE*);
+	void setLastSibling(QTREE*);
+	void setType(TYPE);
+	void setData(int);
 
 	int getData();
 	QTREENODE_TYPE getType();
 	QTREE* getFirstDescendant();
+	QTREE* getLastDescendant();
 	QTREE* getRightSibling();
 	QTREE* getLeftSibling();
+	QTREE* getLastSibling();
 	QTREE* getAncestor();
 
 private:
@@ -27,4 +33,6 @@ private:
 	QTREE* rightSibling;
 	QTREE* ancestor;
 	QTREE* firstDescendant;
+	QTREE* lastDescendant;
+	QTREE* lastSibling;
 };

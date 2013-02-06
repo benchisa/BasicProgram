@@ -29,111 +29,140 @@ public:
 		PATT_ARG,
 		PATT_SYNONYM
 	};
-	
+
 	QueryPreprocessor(PKB* pkb);
 	~QueryPreprocessor(void);
-	
+
 	bool preProcess();
 	void setQuery(QUERY query);
 	QTREE* getQTree();
 	hash_map<int,TYPE> *getQVarTable();
+	hash_map<int,string> *getParamTable();
+	bool getSelectBool();
 	ERROR_MSG getLastError();
 
 private:
 	
 	PKB *pkb;	
 	QUERY query;		
-	GrammarTable* grammarTable;
+	GrammarTable grammarTable;
+	vector<TOKEN> *tokens;	
+	bool selectBool;
 	
-	typedef pair<string,int> dVarPair;				
-	typedef pair<int,TYPE> qVarPair;		
+	vector<QTREE*> clauses; //keeps 'SUCHTHAT','WITH' and 'PATTERN' headNodes
+	vector<int> flagGroups;
+	int clauseCount; //keeps track of how many condition clauses are there
+	int groupCount;	
+
+	vector<TOKEN> exprPieces;
+	//iterators for expression tree
+	std::vector<TOKEN>::iterator next;
+	std::vector<TOKEN>::iterator end;
+
+	struct qVar{
+		int qVarIndex;
+		int groupNum;
+		TYPE qVarType;
+		bool selected;
+		bool explored;
+		vector<int> clauseNum;
+	};
 	
-	QTREE* qTree;
-	QTREE* qNode;
+	//qVarTable keeps track of the synonym's number and type
+	//qVarTable is the final data structure to pass to Evaluator
+	hash_map<int,TYPE> *qVarTable;
+	hash_map<int,TYPE>::const_iterator qVarIter;
+
+	//paramTable keeps track of the string for "with"
+	hash_map<int,string> *paramTable;
+	hash_map<int,string>::const_iterator paramIter;
+
+	//dVarTable keeps track of the declared synonym and its corresponding number
+	//dVarTable is only used internally
+	hash_map<string,qVar> *dVarTable;
+	hash_map<string,qVar>::const_iterator dVarIter;
+
+	typedef pair<int,TYPE> qVarPair;	
+	typedef pair<int,string> paramPair;	
+	typedef pair<string,qVar> dVarPair;			
+
+	QTREE* firstNode;
+	QTREE* currNode;
 	QTREE* prevNode;
-	QTREE* temNode;
-	QTREE* resultNode;
-	QTREE* suchThatNode;
-	QTREE* patternNode;
-	QTREE* lastSuchThatChild;
-	QTREE* lastPatternChild;
-		
+	QTREE* headNode;
+	
+	//helpers for rearranging clauses
+	QTREE* firstAffect;
+	QTREE* firstNext;
+	QTREE* firstUsesMod;
+	QTREE* firstCallPar;
+	QTREE* firstWithPatt;
+	QTREE* lastAffect;
+	QTREE* lastNext;
+	QTREE* lastUsesMod;
+	QTREE* lastCallPar;
+	QTREE* lastWithPatt;
+
 	QueryPreprocessor::ERROR_MSG errorMsg;
 
-	//used for working within the brackets
-	vector<TOKEN> arguments;
-	int numOfArg;
-	int tokenPosition;
-	int argPosition;
-	int nextTokenType;
-	bool correctArg;
-
-
+	//regex
+	string compulsoryOne,optional,or,underscore,hash,invComma,letter,digit,plus,minus,times;
+	string op,integer,ident,synonym,rel,ref;
+	string attrName,attrRef,attrCompare;
+	string designEnt,elem,tuple;
+	string declare,result_cl,suchthat_cl,with_cl,pattern_cl;
+	
 	//helper: prepare to validate
-	void splitQuery();
 	void createGrammarTables();
+	vector<TOKEN> parse(QUERY);
+	vector<TOKEN> tokenize(TOKEN,string);
 
 	//validating
 	bool validate();
-	bool validateDeclarations(vector<TOKEN>* declarations);
-	bool validateMainQuery(vector<TOKEN>* mainQuery);
-	
-	//helper: validating
-	bool matchToken(TOKEN token, regex reg);
-	bool isSynonym(TOKEN token);	
-	bool isConstant(TOKEN token);
-	bool isDeclared(TOKEN token);
-	TYPE getQVarType(TOKEN token);
-	TYPE getQVarType(int index);
-	int getQVarIndex(TOKEN token);
-	vector<TOKEN> tokenizeGrammar(string grammar);
-	void getGrammar(string tableType, string data);
-	void getGrammar(string tableType, TYPE data);
-	QTREE* createQTREENode(TYPE type);
-	QTREE* createQTREENode(TYPE type,int data);
-	bool checkArg(TOKEN token, int tokenPosition, string arg_type);
 
-	//prepare data structure for query evaluator
-	bool createqrVarTable();
-	bool createQrTree();
+	//helper: validating
+	bool isConstant(TOKEN);
+	bool isDeclaredVar(TOKEN);
+	bool isResultVar(TOKEN);
+	bool isExploredVar(TOKEN);
+	bool verifyDeclaration(TOKEN);
+	bool verifySelect(TOKEN);
+	bool verifyCondition(TOKEN);
+	bool processSuchThat(TOKEN);
+	bool processWith(TOKEN);
+	bool processPattern(TOKEN);
+
+	void setAsSelected(TOKEN);
+	void setQVarGroup(vector<TOKEN>);
+	void updateQVarGroup(TOKEN,int);
+	void updateQVarClause(TOKEN);
+	void mergeGroup(int,int);
+	int getQVarGroup(TOKEN);
+	TYPE getQVarType(TOKEN);
+	TYPE getQVarType(int);
+	int getQVarIndex(TOKEN);
+	void createQVarTable(int);
+	QTREE* createQTREENode(TYPE);
+	QTREE* createQTREENode(TYPE,int);
+	void setChild(QTREE* parent, QTREE* child);
+	QTREE* createSubTree(QTREE*,QTREE*,QTREE*);
+	QTREE* createExprTree(TOKEN);
+	QTREE* extractPlusMinus();	
+	QTREE* extractTimes();
+	QTREE* extractAll();
+	void insertClause(QTREE*);
+
+	//setup Query Tree for evaluator's use
+	void setQTree();
+	void arrangeClause(QTREE*);
+	void joinClauses();
+	bool isFlaggedGroup(int);
 
 	//clean up memory
 	void cleanUp();
 
 	//error management
 	void error(int);
-	
+
 };
 
-//HELPER CLASSES
-
-class Tokenizer{
-public:
-	vector<TOKEN> tokenize(QUERY qr){
-		vector<TOKEN> tokens;
-		string ident = "[a-zA-Z]+[a-zA-Z0-9#]*";
-		string integer = "[0-9]+";
-		string underscore = "_";
-		string synonym = ident;
-		
-		string expression = "assign|while|prog_line|stmt|constant|variable|procedure|stmtlst|,|select|boolean|such\sthat|pattern|follows(\\*)+|parent(\\*)+|uses|modifies|\\(|"+synonym+"|"+integer+"|\""+integer+"\"|\""+ident+"\"|_\""+ident+"\"_|_\""+integer+"\"_|"+underscore+"|\\)|;";
-		
-		std::regex rgx(expression);
-		
-		std::sregex_iterator rgxIter(qr.begin(), qr.end(), rgx), rgxend;
-
-		for (rgxIter; rgxIter != rgxend; ++rgxIter)
-		{
-			tokens.push_back(rgxIter->str());
-		}
-		return tokens;
-	}
-
-	//for debugging
-	void printAll(TOKEN tmp){
-		int i = 0;
-		for(i = 0; i < tmp.size(); i++){
-			//cout << "token " << i << ": " << tmp.at(i) + "\n";
-		}
-	}
-};

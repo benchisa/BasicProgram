@@ -2,7 +2,213 @@
 #include "SuchThat.h"
 #include <iostream>
 
+//methods
+QueryEvaluator::QueryEvaluator(PKB* pkb){
+	this->pkb = pkb;
+}
+QueryEvaluator::~QueryEvaluator(void){
 
+}	
+
+bool QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrParam){
+	this->qrTree = qrTree;
+	this->qrTable = qrTable;
+	this->qrParam = qrParam;
+	bool nonEmptyResult;
+
+	//Compute the intermediate result
+	QTREE* relationTree;
+	relationTree = qrTree->getFirstDescendant()->getRightSibling();
+	IntermediateResultTable * resultTable;
+
+	resultTable = QueryEvaluator::computeIntermediateResult(relationTree);
+
+	//find the result from resultTable
+	QTREE* resultNode;
+	resultNode = qrTree->getFirstDescendant();
+
+	//can not find the result in the table,include the following cases:
+	//a. one of the condition is false, select nonBoolean value
+	//b. after taking intersection, the table is empty, select nonBoolean value
+	if(!QueryEvaluator::findResult(resultNode, resultTable)){
+		return false; 
+	}
+	//result is found in the table, include the following cases:
+	//a. one of the condition is false, select Boolean value
+	//b. after taking intersection, the table is empty, select Boolean value
+	//c. the resultTable is not empty, return the corresponding results
+	return true;
+}	
+
+IntermediateResultTable * QueryEvaluator::computeIntermediateResult(QTREE* relationTree){
+	
+	QTREE* currentClause = relationTree;
+	IntermediateResultTable * resultTable;
+	resultTable = new IntermediateResultTable(qrTable->size());
+	int selectPoint = 1;
+
+	do{	
+		if(selectPoint ==1){
+			//flag the starting point of the clause, where selected var can be found
+			resultTable = new IntermediateResultTable(qrTable->size());
+		}
+
+		resultTable = QueryEvaluator::evaluateClause(resultTable, currentClause);
+		if(resultTable==NULL) return NULL;
+		
+		currentClause = currentClause->getRightSibling();
+	}while(currentClause!=NULL);
+
+	return resultTable;
+}
+IntermediateResultTable * QueryEvaluator::evaluateClause(IntermediateResultTable * resultTable, QTREE* clause){
+	TYPE clauseType = clause->getType();
+
+	if(clauseType == SUCHTHAT){
+		if(!QueryEvaluator::executeSuchThat(resultTable, clause))
+			return NULL;
+	}
+	if(clauseType == PATTERN){
+	}
+	if(clauseType == WITH){
+	}
+}
+bool QueryEvaluator::executeSuchThat(IntermediateResultTable * resultTable, QTREE* suchThatTree){
+	QTREE* firstRel;
+	QTREE* secondRel;
+	RELATION_LIST* currentResultList;
+	SuchThatClause suchThatClause(pkb, qrTable);
+	JOIN_ATTR joinAttr = 0;
+
+	firstRel = suchThatTree->getFirstDescendant()->getFirstDescendant();
+	secondRel = firstRel->getRightSibling();
+	//original information of the two relations
+	RELATION_PAIR firstRelPair (firstRel->getType(),firstRel->getData());
+	RELATION_PAIR secondRelPair (secondRel->getType(),secondRel->getData());
+
+	if(firstRel->getType()==QUERYVAR){
+		int qrVarIndex = firstRel->getData();
+		joinAttr = qrVarIndex;
+		//test to see if firstRelVar is already probed in previous steps
+		if(!resultTable->isQrVarDiscovered(qrVarIndex)){
+			//evaluate the tree
+			currentResultList = suchThatClause.evaluateSuchThatTree(suchThatTree);
+		}else{
+		// current qrVar is evaluated in the previous steps
+		/*algo:
+			get the evaluated resultList of this qrVar from result table
+			use the list as probe to get the correct result
+			firstRel is computed in previous steps,second Rel is specified in the query
+		*/
+			INDEX_LIST * currentVarResultList;
+			currentVarResultList = resultTable->getResultListOf(qrVarIndex);
+
+			INDEX_LIST::iterator itr;
+			for(itr = currentVarResultList->begin();itr!=currentVarResultList->end();itr++){
+				//replace the firstRel with probe data
+				QUERYTABLE::iterator itr1;
+				itr1 = qrTable->find(firstRel->getData());
+				TYPE relRealType = itr1->second;
+
+				firstRel->setType(relRealType);
+				firstRel->setData(*itr);
+
+				RELATION_LIST * tempList;
+				tempList = suchThatClause.evaluateSuchThatTree(suchThatTree);
+
+				currentResultList = QueryEvaluator::appendRelationLists(currentResultList,tempList);		
+			}
+		}
+	}else if(secondRel->getType()==QUERYVAR){
+		int qrVarIndex = secondRel->getData();
+		joinAttr = qrVarIndex;
+		//test to see if firstRelVar is already probed in previous steps
+		if(!resultTable->isQrVarDiscovered(qrVarIndex)){
+			//evaluate the tree
+			currentResultList = suchThatClause.evaluateSuchThatTree(suchThatTree);
+		}else{
+		// current qrVar is evaluated in the previous steps
+		/*algo:
+			get the evaluated resultList of this qrVar from result table
+			use the list as probe to get the correct result
+			firstRel is computed in previous steps,second Rel is specified in the query
+		*/
+			INDEX_LIST * currentVarResultList;
+			currentVarResultList = resultTable->getResultListOf(qrVarIndex);
+
+			INDEX_LIST::iterator itr;
+			for(itr = currentVarResultList->begin();itr!=currentVarResultList->end();itr++){
+				//replace the firstRel with probe data
+				QUERYTABLE::iterator itr1;
+				itr1 = qrTable->find(secondRel->getData());
+				TYPE relRealType = itr1->second;
+
+				secondRel->setType(relRealType);
+				secondRel->setData(*itr);
+
+				RELATION_LIST * tempList;
+				tempList = suchThatClause.evaluateSuchThatTree(suchThatTree);
+
+				currentResultList = QueryEvaluator::appendRelationLists(currentResultList,tempList);		
+			}
+		}
+	}else{
+		currentResultList = suchThatClause.evaluateSuchThatTree(suchThatTree);
+	}
+
+	//there is no result found with all the probes, this relation is not satisfied
+	if(currentResultList==NULL){
+		return false; 
+	}else{
+	//result is found, add into resultTable
+		resultTable->joinList(joinAttr, firstRelPair,secondRelPair,currentResultList);
+	}
+	return true;
+}
+bool QueryEvaluator::findResult(QTREE* resultNode,IntermediateResultTable* resultTable){
+	
+	//the table is empty
+	if(resultTable==NULL) return false;
+
+	int nodeNum = 0;
+
+	QTREE* currentNode;
+	currentNode = resultNode->getFirstDescendant();
+
+	while(currentNode!=NULL){
+		nodeNum++;
+		currentNode = currentNode->getRightSibling();
+	}
+	
+	switch(nodeNum){
+	case 1:
+		{//translate the qrVar to its real type
+			currentNode = resultNode->getFirstDescendant();
+			QUERYTABLE::iterator itr;
+			itr = qrTable->find(currentNode->getData());
+			TYPE currentRealType = itr->second;
+		
+			if((currentRealType!=BOOL) && (resultTable==NULL)){
+				return false;
+			}else if((currentRealType==BOOL) && (resultTable==NULL)){
+				returnList->push_back(0);
+				rawData = new RAWDATA(BOOL,returnList);
+				return true;
+			}else{
+			
+			}
+		}
+		break;
+	case 2:
+		break;
+	case 3:
+		break;
+	}
+}
+RAWDATA* QueryEvaluator::getResult(){
+	
+}
+/*
 PKB * SuchThat::pkb;
 QueryEvaluator::QueryEvaluator(PKB * p){
 	this->pkb = p;
@@ -233,7 +439,7 @@ void QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qTable){
 					}
 					return;
 				}
-			}*/
+			}
 
 		}
 
@@ -283,7 +489,7 @@ void QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qTable){
 							//cout<<"returnInex:"<<*itr;
 							returnList->push_back(*itr);
 						}
-					}*/
+					} comment
  				//	cout<<"returnList size: "<<(*returnList).size();
 				}
 
@@ -352,7 +558,7 @@ void QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qTable){
 				for(int i=1; i<=stmtNo;i++){
 				returnList->push_back(i);
 				}
-				}*/
+				}comment
 			}
 		}
 	}else{
@@ -786,3 +992,4 @@ INDEX_LIST* QueryEvaluator::patternNode(QTREE* patternTree){
 
 }
 
+*/

@@ -1,6 +1,8 @@
 #pragma once
 #include "Global_Data_Abstraction.h"
 #include "AST.h"
+#include "CFG.h"
+#include "PKB.h"
 #include "VarTable.h"
 #include "ProcTable.h"
 #include "Procedure.h"
@@ -38,6 +40,12 @@ class PKB
 		INDEX getData(AST* currentAST);
 		AST* getRootAST();
 		AST* getTail();
+		
+		//this is for new progline
+		AST* createAST(ASTNODE_TYPE type,PROG_LINE progLine,STATEMENT_NUM stmt,INDEX data);
+	
+		PROG_LINE getProgLine(AST* currentAST);
+		STATEMENT_LIST * getStmtList(PROG_LINE progLine);
 
 		//Functions of VarTable
 		VAR_INDEX insertVar(VAR_NAME varName);
@@ -93,11 +101,11 @@ class PKB
 
 		//if caller is empty, return callee procedure
 		//if callee is empty, return caller procedure
-		list<CALL_PAIR> * getCall(PROC_NAME caller,PROC_NAME callee);
+		list<CALL_PAIR>  getCall(PROC_NAME caller,PROC_NAME callee);
 		CALL_PAIR getCALLPair(CALL_INDEX index);
 		CALL_INDEX getCallPairIndex(PROC_NAME caller,PROC_NAME callee);
 		bool isExistsCall(PROC_NAME caller,PROC_NAME callee);
-		CALL_LIST *  getAllCalls();
+		CALL_LIST   getAllCalls();
 
 		//Functions of constant table
 		CONSTANT_INDEX insertConst(int constantValue);
@@ -107,6 +115,13 @@ class PKB
 		bool isExists(int constantValue);
 		CONSTANT_LIST *  getAllConstant();
 
+		//Functions of CFG
+		void createCFG(int size);
+		bool addEdge(PROG_LINE p1, PROG_LINE p2);
+		bool isNext(PROG_LINE p1, PROG_LINE p2);
+		NEXT_LIST getNext(PROG_LINE p1, PROG_LINE p2);
+		list<PROG_LINE> findAllPaths(PROG_LINE p1, PROG_LINE p2);
+
 
 		//Other functions
 		PROG_LINE getMaxProgLine();
@@ -114,6 +129,7 @@ class PKB
 private:
 		//Abastract Data Types stored in PKB
 		AST* rootAST;
+		CFG* cfg;
 		AST* tailAST;
 		Follows* follows;
 		Parent* parent;
@@ -124,8 +140,8 @@ private:
 		CallTable* callTable;
 		ConstantTable* constantTable;
 		hash_map<STATEMENT_NUM,AST_LIST>* treeMap;
+		unordered_multimap<PROG_LINE, STATEMENT_NUM> * progLineTable;
 
 	
 		
 };
-
