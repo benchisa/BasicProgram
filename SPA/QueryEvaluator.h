@@ -15,7 +15,7 @@ public:
 	~QueryEvaluator(void);
 
 	bool evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrParam);
-	RAWDATA* getResult();
+	RAWDATA * getRawResult();
 //	ERROR_MSG getLastError();
 	
 
@@ -29,9 +29,9 @@ private:
 	INDEX resultIndex;
 	Pattern patProcessor;
 
-    INDEX_LIST * returnList;
-	RAWDATA* rawData;
-	
+ //   INDEX_LIST * returnList;
+	RAWDATA * rawData;
+
 	IntermediateResultTable * computeIntermediateResult(QTREE* relationTree);
 	IntermediateResultTable * evaluateClause(IntermediateResultTable * resultTable, QTREE* clause);
 	bool executeSuchThat(IntermediateResultTable * resultTable,QTREE* suchThatTree);

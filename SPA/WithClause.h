@@ -21,6 +21,7 @@ private:
 	QUERYPARAM* qrParam;
 	QTREE* withTree;
 	QTREE* leftVariable;
+	QTREE* leftAttribute;
 	QTREE* rightVariable;
 	QTREE* rightAttribute;
 

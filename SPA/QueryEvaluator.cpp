@@ -44,13 +44,13 @@ IntermediateResultTable * QueryEvaluator::computeIntermediateResult(QTREE* relat
 	
 	QTREE* currentClause = relationTree;
 	IntermediateResultTable * resultTable;
-	resultTable = new IntermediateResultTable(qrTable->size());
+	resultTable = new IntermediateResultTable(qrTable->size(),pkb,qrTable);
 	int selectPoint = 1;
 
 	do{	
 		if(selectPoint ==1){
 			//flag the starting point of the clause, where selected var can be found
-			resultTable = new IntermediateResultTable(qrTable->size());
+			resultTable = new IntermediateResultTable(qrTable->size(),pkb,qrTable);
 		}
 
 		resultTable = QueryEvaluator::evaluateClause(resultTable, currentClause);
@@ -83,11 +83,14 @@ bool QueryEvaluator::executeSuchThat(IntermediateResultTable * resultTable, QTRE
 	firstRel = suchThatTree->getFirstDescendant()->getFirstDescendant();
 	secondRel = firstRel->getRightSibling();
 	//original information of the two relations
-	RELATION_PAIR firstRelPair (firstRel->getType(),firstRel->getData());
-	RELATION_PAIR secondRelPair (secondRel->getType(),secondRel->getData());
+	//RELATION_PAIR firstRelPair (firstRel->getType(),firstRel->getData());
+	//RELATION_PAIR secondRelPair (secondRel->getType(),secondRel->getData());
+
+	INDEX firstQrVar = firstRel->getData();
+	INDEX secondQrVar = secondRel->getData();
 
 	if(firstRel->getType()==QUERYVAR){
-		int qrVarIndex = firstRel->getData();
+		int qrVarIndex = firstQrVar;
 		joinAttr = qrVarIndex;
 		//test to see if firstRelVar is already probed in previous steps
 		if(!resultTable->isQrVarDiscovered(qrVarIndex)){
@@ -120,7 +123,7 @@ bool QueryEvaluator::executeSuchThat(IntermediateResultTable * resultTable, QTRE
 			}
 		}
 	}else if(secondRel->getType()==QUERYVAR){
-		int qrVarIndex = secondRel->getData();
+		int qrVarIndex = secondQrVar;
 		joinAttr = qrVarIndex;
 		//test to see if firstRelVar is already probed in previous steps
 		if(!resultTable->isQrVarDiscovered(qrVarIndex)){
@@ -161,9 +164,8 @@ bool QueryEvaluator::executeSuchThat(IntermediateResultTable * resultTable, QTRE
 		return false; 
 	}else{
 	//result is found, add into resultTable
-		resultTable->joinList(joinAttr, firstRelPair,secondRelPair,currentResultList);
+		return resultTable->joinList(joinAttr, firstQrVar,secondQrVar,currentResultList);
 	}
-	return true;
 }
 bool QueryEvaluator::findResult(QTREE* resultNode,IntermediateResultTable* resultTable){
 	
@@ -172,41 +174,50 @@ bool QueryEvaluator::findResult(QTREE* resultNode,IntermediateResultTable* resul
 
 	int nodeNum = 0;
 
-	QTREE* currentNode;
-	currentNode = resultNode->getFirstDescendant();
+	QTREE* headNode;
+	headNode = resultNode->getFirstDescendant(); // first node of the resultNode chain
+	
+	//translate the qrVar to its real type
+	QUERYTABLE::iterator itr;
+	itr = qrTable->find(headNode->getData());
+	TYPE headNodeType = itr->second;
+		
+	//special case:--return type is boolean
+	if((headNodeType!=BOOL) && (resultTable==NULL)){
+		DATA_LIST resultType;
+		DATA_LIST content;
+		
+		resultType.push_back(0);
+		content.push_back(0);
+		rawData->push_back(resultType);
+		rawData->push_back(content);
 
-	while(currentNode!=NULL){
-		nodeNum++;
+		return true;
+	}else if((headNodeType==BOOL) && (resultTable==NULL)){
+		DATA_LIST resultType;
+		DATA_LIST content;
+		
+		resultType.push_back(0);
+		content.push_back(1);
+		rawData->push_back(resultType);
+		rawData->push_back(content);
+
+		return true;
+	}
+
+	//main: find the result combination
+	QTREE* currentNode;
+	currentNode = headNode;
+	DATA_LIST resultVarList;
+	while(currentNode->getRightSibling()!=NULL){
+		resultVarList.push_back(currentNode->getData());
 		currentNode = currentNode->getRightSibling();
 	}
-	
-	switch(nodeNum){
-	case 1:
-		{//translate the qrVar to its real type
-			currentNode = resultNode->getFirstDescendant();
-			QUERYTABLE::iterator itr;
-			itr = qrTable->find(currentNode->getData());
-			TYPE currentRealType = itr->second;
-		
-			if((currentRealType!=BOOL) && (resultTable==NULL)){
-				return false;
-			}else if((currentRealType==BOOL) && (resultTable==NULL)){
-				returnList->push_back(0);
-				rawData = new RAWDATA(BOOL,returnList);
-				return true;
-			}else{
-			
-			}
-		}
-		break;
-	case 2:
-		break;
-	case 3:
-		break;
-	}
+
+	rawData = resultTable->findResultOf(resultVarList);
 }
-RAWDATA* QueryEvaluator::getResult(){
-	
+RAWDATA* QueryEvaluator::getRawResult(){
+	return rawData;
 }
 /*
 PKB * SuchThat::pkb;

@@ -879,3 +879,81 @@ FOLLOWS_LIST DesignExtractor::getFollowsStar(STATEMENT_NUM stmt1, STATEMENT_NUM 
 		}
 	}
 }
+
+DATA_LIST * DesignExtractor::getAllAssigns(){
+	DATA_LIST * returnList;
+	returnList = new DATA_LIST;
+
+	int stmtNo = DesignExtractor::getMaxStmtNum();
+	for(int i=1; i<=stmtNo;i++){
+		AST_LIST * stmtTree;
+		stmtTree = pkb->getASTBy(i);
+		AST_LIST::iterator itr;
+
+		for(itr=stmtTree->begin();itr!=stmtTree->end();itr++){
+			if((*itr)->getRootType()==ASSIGNMENT){
+				returnList->push_back(i);
+			} 
+		}
+	}
+
+	return returnList;
+}
+
+DATA_LIST * DesignExtractor::getAllWhiles(){
+	DATA_LIST * returnList;
+	returnList = new DATA_LIST;
+
+	int stmtNo = DesignExtractor::getMaxStmtNum();
+	for(int i=1; i<=stmtNo;i++){
+		AST_LIST * stmtTree;
+		stmtTree = pkb->getASTBy(i);
+		AST_LIST::iterator itr;
+
+		for(itr=stmtTree->begin();itr!=stmtTree->end();itr++){
+			if((*itr)->getRootType()==WHILE){
+				returnList->push_back(i);
+			} 
+		}
+	}
+
+	return returnList;
+}
+DATA_LIST * DesignExtractor::getAllIfs(){
+	DATA_LIST * returnList;
+	returnList = new DATA_LIST;
+
+	int stmtNo = DesignExtractor::getMaxStmtNum();
+	for(int i=1; i<=stmtNo;i++){
+		AST_LIST * stmtTree;
+		stmtTree = pkb->getASTBy(i);
+		AST_LIST::iterator itr;
+
+		for(itr=stmtTree->begin();itr!=stmtTree->end();itr++){
+			if((*itr)->getRootType()==IF){
+				returnList->push_back(i);
+			} 
+		}
+	}
+
+	return returnList;
+}
+DATA_LIST * DesignExtractor::getAllCallStmts(){
+	DATA_LIST * returnList;
+	returnList = new DATA_LIST;
+
+	int stmtNo = DesignExtractor::getMaxStmtNum();
+	for(int i=1; i<=stmtNo;i++){
+		AST_LIST * stmtTree;
+		stmtTree = pkb->getASTBy(i);
+		AST_LIST::iterator itr;
+
+		for(itr=stmtTree->begin();itr!=stmtTree->end();itr++){
+			if((*itr)->getRootType()==CALL){
+				returnList->push_back(i);
+			} 
+		}
+	}
+
+	return returnList;
+}
