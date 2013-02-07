@@ -390,10 +390,14 @@ NEXT_LIST PKB::getNext(PROG_LINE p1, PROG_LINE p2)
 	return cfg->getNext(p1, p2);
 }
 
-
-list<PROG_LINE> PKB::findAllPaths(PROG_LINE p1, PROG_LINE p2)
+list<PROG_LINE> PKB::getAllProgLines(PROG_LINE p1, PROG_LINE p2)
 {
-	return cfg->findAllPaths(p1, p2);
+	return cfg->getAllProgLines(p1, p2);
+}
+
+NEXT_LIST PKB::getAllPaths(PROG_LINE p1, PROG_LINE p2)
+{
+	return cfg->getAllPaths(p1, p2);
 }
 
 PROG_LINE PKB::getMaxProgLine()
@@ -403,3 +407,8 @@ PROG_LINE PKB::getMaxProgLine()
 	return proc->getEndProgLine();
 
 }
+
+STATEMENT_NUM PKB::getMaxStatementNum(){
+	return 1;
+}
+
