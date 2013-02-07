@@ -13,7 +13,7 @@ void QueryPreprocessorTest::tearDown()
 }
 
 // Registers the fixture into the 'registry'
-CPPUNIT_TEST_SUITE_REGISTRATION( QueryPreprocessorTest ); 
+//CPPUNIT_TEST_SUITE_REGISTRATION( QueryPreprocessorTest ); 
 
 
 void QueryPreprocessorTest::testCorrectPreProcessing(){

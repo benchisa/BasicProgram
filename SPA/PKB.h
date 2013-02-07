@@ -121,7 +121,7 @@ class PKB
 		bool isNext(PROG_LINE p1, PROG_LINE p2);
 		NEXT_LIST getNext(PROG_LINE p1, PROG_LINE p2);
 		list<PROG_LINE> getAllProgLines(PROG_LINE p1, PROG_LINE p2);
-
+		NEXT_LIST getAllPaths(PROG_LINE p1, PROG_LINE p2);
 
 		//Other functions
 		PROG_LINE getMaxProgLine();

@@ -20,8 +20,8 @@ void PKBTest::testGetASTBy(){
 	myPKB = new PKB();
 	AST *AST1;
 	AST *AST2;
-	AST1 = myPKB->createAST(PROCEDURE,1,-1);
-	AST2 = myPKB->createAST(WHILE,2,-1);
+	AST1 = myPKB->createAST(PROCEDURE,1,1,-1);
+	AST2 = myPKB->createAST(WHILE,1,2,-1);
 
 	//myPKB.setRootAST(AST1);
 	AST_LIST* myList;

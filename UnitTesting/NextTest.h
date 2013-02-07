@@ -17,7 +17,7 @@ class NextTest : public CPPUNIT_NS::TestFixture // Note 2
 	void tearDown();
 	void testIsNext();
 	void testGetNext();
-	string src;
+	std::string src;
 };
 
 #endif

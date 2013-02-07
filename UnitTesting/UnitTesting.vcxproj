@@ -67,6 +67,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ASTTest.cpp" />
+    <ClCompile Include="CFGTest.cpp" />
     <ClCompile Include="FollowsTest.cpp" />
     <ClCompile Include="ModifiesTest.cpp" />
     <ClCompile Include="NextTest.cpp" />
@@ -78,12 +79,13 @@
     <ClCompile Include="ProcTableTest.cpp" />
     <ClCompile Include="QueryPreprocessorTest.cpp" />
     <ClCompile Include="source\UnitTest.cpp" />
-    <ClCompile Include="SuchThatTest.cpp" />
+    <ClCompile Include="DesignExtractorTest.cpp" />
     <ClCompile Include="UsesTest.cpp" />
     <ClCompile Include="VarTableTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ASTTest.h" />
+    <ClInclude Include="CFGTest.h" />
     <ClInclude Include="FollowsTest.h" />
     <ClInclude Include="ModifiesTest.h" />
     <ClInclude Include="NextTest.h" />
@@ -94,7 +96,7 @@
     <ClInclude Include="ProcedureTest.h" />
     <ClInclude Include="ProcTableTest.h" />
     <ClInclude Include="QueryPreprocessorTest.h" />
-    <ClInclude Include="SuchThatTest.h" />
+    <ClInclude Include="DesignExtractorTest.h" />
     <ClInclude Include="UsesTest.h" />
     <ClInclude Include="VarTableTest.h" />
   </ItemGroup>
