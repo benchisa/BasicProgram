@@ -402,13 +402,11 @@ NEXT_LIST PKB::getAllPaths(PROG_LINE p1, PROG_LINE p2)
 
 PROG_LINE PKB::getMaxProgLine()
 {
-	int lastProc=procTable->getProceTableSize();
-	Procedure * proc=procTable->getProcedure(lastProc);
-	return proc->getEndProgLine();
+	unordered_multimap<int,int>::reverse_iterator r_itr=progLineTable->rbegin();
+	return r_itr->first;
 
 }
-
-STATEMENT_NUM PKB::getMaxStatementNum(){
-	return 1;
+STATEMENT_NUM PKB::getMaxStatementNum()
+{	unordered_multimap<int,int>::reverse_iterator r_itr=progLineTable->rbegin();
+	return r_itr->second;
 }
-
