@@ -5,6 +5,7 @@
 #include "../SPA/QueryPreprocessor.h"
 #include "../SPA/QueryFormatter.h"
 #include "../SPA/PKB.h"
+#include "../SPA/SPAController.h"
 
 using namespace std;
 void QueryPKBTest::setUp()
@@ -19,7 +20,11 @@ void  QueryPKBTest::tearDown()
 CPPUNIT_TEST_SUITE_REGISTRATION(  QueryPKBTest );
 
 void QueryPKBTest::testSampleInput1(){
-	//create PKB
+	SPAController spa;
+
+	spa.enterProgram(SampleSimpleSources::sampleSource1);
+	spa.getQueryResult(SampleQueries::sampleQuery1);
+/*	//create PKB
 	PKB *pkb = SamplePKB::pkb5();
 
 	// test for query below
@@ -57,7 +62,7 @@ void QueryPKBTest::testSampleInput1(){
 		cout<< *itr <<" \n"  ;
 	}
 	}
-	
+	*/
 	
 }
 

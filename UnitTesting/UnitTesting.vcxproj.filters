@@ -51,13 +51,16 @@
     <ClCompile Include="UsesTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SuchThatTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="QueryPreprocessorTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NextTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CFGTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DesignExtractorTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -95,13 +98,16 @@
     <ClInclude Include="UsesTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SuchThatTest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="QueryPreprocessorTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NextTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CFGTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DesignExtractorTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

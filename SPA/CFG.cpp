@@ -6,6 +6,7 @@ CFG::CFG(int size)
 {
 	int i,j;
 	this->size = size;
+
 	//initiate a graph base on the size
 	cfg = new int*[this->size];
 	for(i = 0; i < this->size; i++)
@@ -38,18 +39,36 @@ bool CFG::addEdge(PROG_LINE p1, PROG_LINE p2)
 		return false;
 
 	cfg[p1-1][p2-1] = 1;
-	//cfg[p2-1][p1-1] = 1;
 
 	return true;
 }
 
-list<PROG_LINE> CFG::findAllPaths(PROG_LINE p1, PROG_LINE p2)
+list<PROG_LINE> CFG::getAllProgLines(PROG_LINE p1, PROG_LINE p2)
 {
-	if((p1 != 0 && p2 == 0) || (p1 == 0 && p2 == 0) || (p1 != 0 && p2 != 0))
-		BFS(p1, p2, 0);
+	//cout << "p1,p2: (" << p1 << "," << p2 << ")\n";
+	if((p1 != NULL && p2 == NULL) || (p1 == NULL && p2 == NULL) || (p1 != NULL && p2 != NULL))
+		computeProgLines(p1, p2, 0);
 	else
-		BFS(p1, p2, 1);
-	return this->paths;
+		computeProgLines(p1, p2, 1);
+
+	return this->pLines;
+}
+
+NEXT_LIST CFG::getAllPaths(PROG_LINE p1, PROG_LINE p2){
+	if((p1 != NULL && p2 == NULL) || (p1 == NULL && p2 == NULL) || (p1 != NULL && p2 != NULL))
+		computeProgLines(p1, p2, 0);
+	else
+		computeProgLines(p1, p2, 1);
+
+	NEXT_LIST::iterator itr = paths.begin();
+
+	/*cout << "GETALLPATHS====\n";
+	while(itr!=paths.end()){
+		cout << "Next(" << itr->first << ", " << itr->second << ")\n";
+		itr++;
+	}*/
+
+	return paths;
 }
 
 bool CFG::isNext(PROG_LINE p1, PROG_LINE p2)
@@ -68,10 +87,7 @@ NEXT_LIST CFG::getNext(PROG_LINE p1, PROG_LINE p2){
 			for(int j = 1; j <= size; j++)
 			{
 				if(isConnected(i, j)){
-					pair<PROG_LINE, PROG_LINE> tPair;
-					tPair.first = i;
-					tPair.second = j;
-					tmp.push_back(tPair);
+					tmp.push_back(createPair(i,j));
 				}
 			}
 		}
@@ -81,10 +97,7 @@ NEXT_LIST CFG::getNext(PROG_LINE p1, PROG_LINE p2){
 		for(int i = 1; i <= size; i++)
 		{
 			if(isConnected(p1, i)){
-				pair<PROG_LINE, PROG_LINE> tPair;
-				tPair.first = p1;
-				tPair.second = i;
-				tmp.push_back(tPair);
+				tmp.push_back(createPair(p1,i));
 			}
 		}
 	}
@@ -93,19 +106,13 @@ NEXT_LIST CFG::getNext(PROG_LINE p1, PROG_LINE p2){
 		for(int i = 1; i <= size; i++)
 		{
 			if(isConnected(i, p2)){
-				pair<PROG_LINE, PROG_LINE> tPair;
-				tPair.first = i;
-				tPair.second = p2;
-				tmp.push_back(tPair);
+				tmp.push_back(createPair(i, p2));
 			}
 		}
 	}
 	// this case shld never happen.. but for sake of error checking
 	else if(p1 != NULL && p2 != NULL){
-		pair<PROG_LINE, PROG_LINE> tPair;
-		tPair.first = p1;
-		tPair.second = p2;
-		tmp.push_back(tPair);
+		tmp.push_back(createPair(p1,p2));
 	}
 	return tmp;
 }
@@ -118,28 +125,35 @@ bool CFG::isConnected(PROG_LINE p1, PROG_LINE p2)
 //return the PROG_LINEs that connects between p1 and p2
 //return the PROG_LINEs that connects from p1 to any other possibilities
 //return the PROG_LINEs that connects to p2 from any other possibilities
-void CFG::BFS(PROG_LINE p1, PROG_LINE p2, int reverse)
+void CFG::computeProgLines(PROG_LINE p1, PROG_LINE p2, int reverse)
 {
 	// save time strategy
 	if(p1 > size || p2 > size) return; // invalid case
 	if(p1 <= 0 && p2 <= 0) return; // invalid case
 	
+	if(pLines.size() != 0)
+		pLines.clear();
 
-	if(paths.size() != 0)
-		paths.clear();
-
-	bool *visited = new bool[size+1];
+	int same = 0;
+	bool **visited = new bool*[size+1];
 	for(int i = 0; i <= size; ++i)
-		visited[i] = false;
+		visited[i] = new bool[size+1];
 
-	PROG_LINE prev, last;
+	for(int i = 0; i <= size; ++i)
+	{
+		for(int j = 0; j <= size; ++j)
+		{
+			visited[i][j] = false;
+		}
+	}
+	
 	if(!reverse){
 		q.push(p1);
-		visited[p1] = true;
+		//visited[p1] = true;
 	}
 	else{
 		q.push(p2);
-		visited[p2] = true;
+		//visited[p2] = true;
 	}
 
 	while(!q.empty())
@@ -149,31 +163,56 @@ void CFG::BFS(PROG_LINE p1, PROG_LINE p2, int reverse)
 		if(!q.empty()) 
 			q.pop();
 
+		// reach destination
+		if(p1 != NULL && p2 != NULL && tmpProg == p2 && p1 != p2)
+			return;
+
 		for(int j = 1; j<=size; j++)
 		{
 			if(reverse){
-				if(isConnected(j, tmpProg) && (j==p2||!visited[j]))
+				if(isConnected(j, tmpProg) && (j==p2||!visited[j][tmpProg]))
 				{
 					//cout << "(" << j << "," << tmpProg << ")\n";
-					paths.push_back(j);
+					pLines.push_back(j);
+					paths.push_back(createPair(j, tmpProg));
+
 					q.push(j);
-					visited[j] = true;
+					visited[j][tmpProg] = true;
 				}
 			}
 			else
 			{
-				if(isConnected(tmpProg, j) && (j==p1 || !visited[j]) )
+				if(isConnected(tmpProg, j) && (j==p1 || !visited[tmpProg][j]) )
 				{
 					//cout << "(" << tmpProg << "," << j << ")\n";
-					paths.push_back(j);
+					
+					pLines.push_back(j);
+					paths.push_back(createPair(tmpProg, j));
+					
 					q.push(j);
-					visited[j] = true;
+					visited[tmpProg][j] = true;
+
+					if(p1 != NULL && p2 != NULL && j == p2 && p1 != p2)
+						break;
 				}
 			}
+			same = 0;
 		}
 	}
 
+	pLines.sort();
+	pLines.unique();
 	paths.sort();
 	paths.unique();
+
+	// free memory
 	delete [] visited;
+}
+
+pair <PROG_LINE, PROG_LINE> CFG::createPair(PROG_LINE p1, PROG_LINE p2){
+	pair<PROG_LINE, PROG_LINE> tResult;
+	tResult.first = p1;
+	tResult.second = p2;
+	
+	return tResult;
 }
