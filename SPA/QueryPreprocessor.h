@@ -93,12 +93,12 @@ private:
 	
 	//helpers for rearranging clauses
 	QTREE* firstAffect;
-	QTREE* firstNext;
+	QTREE* firstFollowsNext;
 	QTREE* firstUsesMod;
 	QTREE* firstCallPar;
 	QTREE* firstWithPatt;
 	QTREE* lastAffect;
-	QTREE* lastNext;
+	QTREE* lastFollowsNext;
 	QTREE* lastUsesMod;
 	QTREE* lastCallPar;
 	QTREE* lastWithPatt;
