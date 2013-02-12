@@ -176,14 +176,22 @@ RAWDATA *IntermediateResultTable::findResultOf(DATA_LIST resultNodeList){
 
 	//adjust the order of returnRaw
 	//TODO
-
+	RAWDATA * tempRaw;
+	for(nodeListItr = resultNodeList.begin();nodeListItr!=resultNodeList.end();nodeListItr++){
+		for(RAWDATA::iterator rawItr=returnRaw->begin();rawItr!=returnRaw->end();rawItr++){
+			if(*nodeListItr==*rawItr->begin())
+				tempRaw->push_back(*rawItr);
+		}
+	}
+	returnRaw = tempRaw;
 	return returnRaw;
 }
 
 RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_LIST * selectedVarList){
 	//target the table with tableNum
 	DATABASE::iterator currentTable;
-	
+	DATA_LIST::iterator selectedVar;
+
 	currentTable = database.begin();
 	advance(currentTable,tableNum);
 	SIZE tableSize = currentTable->getSize();
@@ -194,15 +202,14 @@ RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_L
 		RAWDATA newRaw;
 		rawData = &newRaw;
 
-		for(int i =0;i< selectedVarList->size();i++){
+		for(selectedVar = selectedVarList->begin();selectedVar!=selectedVarList->end();selectedVar++){
 			DATA_LIST newList;
+			newList.push_back(*selectedVar);
 			rawData->push_back(newList);
 		}
 		
 		//extract the data of selectedVars
 		for(int i = 0;i<tableSize;i++){
-			
-			DATA_LIST::iterator selectedVar;
 			int varNum =0;
 			for(selectedVar = selectedVarList->begin();selectedVar!=selectedVarList->end();selectedVar++){
 				int currentColNum = currentTable->getColNumOf(*selectedVar);
@@ -217,17 +224,25 @@ RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_L
 		
 		//expand the rawList
 		RAWDATA tempRaw;
-		SIZE newSize = rawData->size()+selectedVarList->size();
-		for(int i =0;i< newSize ;i++){
+		//SIZE newSize = rawData->size()+selectedVarList->size();
+		//copy the old col
+		for(int i =0;i<rawData->size();i++){
 			DATA_LIST newList;
+			newList.push_back(rawData->at(i).at(0));
+			tempRaw.push_back(newList);
+		}
+		//create new col
+		for(selectedVar = selectedVarList->begin();selectedVar!=selectedVarList->end();selectedVar++){
+			DATA_LIST newList;
+			newList.push_back(*selectedVar);
 			tempRaw.push_back(newList);
 		}
 
 		//merge entries 
-		SIZE rawRowNum = rawData[0].size();
+		SIZE rawRowNum = rawData[0].size()-1;
 		SIZE rawColNum = rawData->size();
 		
-		for(int i =0;i<rawRowNum;i++){
+		for(int i =1;i<=rawRowNum;i++){
 			for(int j =0;j<tableSize;i++){
 				//first step: copy the old qrVar data
 				for(int k=0;k<rawColNum;k++){
@@ -259,23 +274,30 @@ RAWDATA * IntermediateResultTable::joinCombinations(RAWDATA* rawData, DATA_LIST 
 		//create first col
 		TYPE resultVarType = qrTable->find(selectedVarList->at(0))->second;
 		rawData->push_back(*IntermediateResultTable::getStmtListOf(resultVarType));
+		
+		//add the col name, which is the qrVar index
+		DATA_LIST::iterator itr;
+		itr = rawData->at(0).begin();
+		rawData->at(0).insert(itr,selectedVarList->at(0));
 	}else{
 		//merge the new data into existing rawData
 		
 		//expand the rawList by one col
 		RAWDATA tempRaw;
 		DATA_LIST newList;
+		newList.push_back(selectedVarList->at(0));
 		tempRaw.push_back(newList);
+		
 
 		//merge entries 
-		SIZE rawRowNum = rawData[0].size();
+		SIZE rawRowNum = rawData[0].size()-1;
 		SIZE rawColNum = rawData->size();
 
 		TYPE resultVarType = qrTable->find(selectedVarList->at(0))->second;
 		DATA_LIST * selectedDataList;
 		selectedDataList = IntermediateResultTable::getStmtListOf(resultVarType);
 		
-		for(int i =0;i<rawRowNum;i++){
+		for(int i =1;i<=rawRowNum;i++){
 			for(int j =0;j<selectedDataList->size();i++){
 				//first step: copy the old qrVar data
 				for(int k=0;k<rawColNum;k++){
