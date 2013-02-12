@@ -26,6 +26,7 @@ FINAL_RESULT PQLController::getQueryResult(QUERY newQuery){
 		
 	//	returnResult= queryFormatter->formatString(queryEval->getResult());
 		//cout << "returnResult: " << returnResult.size() << "\n";
+		returnResult.push_back("success");
 		return returnResult;
 	}else if(queryProcessor->getSelectBool()==true){
 		returnResult.push_back("true");
@@ -41,8 +42,8 @@ FINAL_RESULT PQLController::getQueryResult(QUERY newQuery){
 }
 void PQLController::setPKB(PKB* pkb){
 	queryProcessor = new QueryPreprocessor(pkb);
-//	queryEval = new QueryEvaluator(pkb);
-//	queryFormatter = new QueryFormatter();
-//	queryFormatter->setPKB(pkb);
+	queryEval = new QueryEvaluator(pkb);
+	queryFormatter = new QueryFormatter();
+	queryFormatter->setPKB(pkb);
 
 }
