@@ -1,37 +1,37 @@
  procedure xylo{
-     apple=1;
-     banana=apple+1;
-     carrot=apple;
-     banana=carrot+1;
-     donut=0;
-     egg=1;
-     fish=egg;
-     call yello;
-     while apple{
-          while egg{
-               innard = 0;
-               while donut{
-                    gummy=egg+1;
-               }
-               while fish{
-                    gummy=0;
-                    while innard{
-                         fish=innard;
+ 1    apple=1;
+ 2    banana=apple+1;
+ 3    carrot=apple;
+ 4    banana=carrot+1;
+ 5    donut=0;
+ 6    egg=1;
+ 7    fish=egg;
+ 8    call yello;
+ 9    while apple{
+ 10         while egg{
+ 11             innard = 0; 
+ 12              while donut{
+ 13                  gummy=egg+1;
+                 }
+ 14              while fish{
+ 15                   gummy=0;
+ 16                   while innard{
+ 17                        fish=innard;
                     }
-               }
-               ham=gummy;
-          }
-          gummy=apple+9;
+				 }
+ 18              ham=gummy;
+            }
+ 19         gummy=apple+9;
      }
-     apple=11;
-     if innard then
-          jam=apple;
+ 20  apple=11;
+ 21  if innard then
+ 22       jam=apple;
      else
-          jam=gummy;
-          if egg then{
-               gummy=33;}
+ 23       jam=gummy;
+ 24       if egg then{
+ 25            gummy=33;}
           else{
-               gummy=99;}
+ 26            gummy=99;}
 }
 procedure yello{
      kimchi = 88;
