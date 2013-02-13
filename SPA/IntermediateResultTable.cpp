@@ -35,6 +35,60 @@ INDEX_LIST* IntermediateResultTable::getResultListOf(INDEX qrVarIndex){
 	return NULL;
 }
 bool IntermediateResultTable::joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,INDEX secondQrVar,RELATION_LIST * newList){
+	//if either qrVar has index value -1, dont merge the value into the table	
+	if(firstQrVar!=-1&&secondQrVar==-1){
+		//only merge the first one
+		//case 1: firstQrVar is not in the table
+		if(qrVarTable[0][firstQrVar]!=1){
+			//create a new table to store new list
+			LinkedDataTable newTable;
+			//add new list to new table
+			newTable.addEntry(0,firstQrVar,-1,newList);
+			//add the new table to database
+			database.push_back(newTable);
+
+			//update the information of the new added qrVars
+			qrVarTable[0][firstQrVar] =1;
+			qrVarTable[1][firstQrVar] = database.size()-1;
+		}else{
+		//case 2: firstQrVar is in the table
+			//get the table contains first qrVar
+			int tableNum = qrVarTable[1][firstQrVar];
+			DATABASE::iterator currentTable;
+			currentTable = database.begin();
+			advance(currentTable,tableNum);
+			//merge the new list into table
+			currentTable->addEntry(1,firstQrVar,-1,newList);
+		}
+	}else if(firstQrVar==-1&&secondQrVar!=-1){
+		//only merge the second one
+		//case 1: secondQrVar is not in the table
+		if(qrVarTable[0][secondQrVar]!=1){
+			//create a new table to store new list
+			LinkedDataTable newTable;
+			//add new list to new table
+			newTable.addEntry(0,-1,secondQrVar,newList);
+			//add the new table to database
+			database.push_back(newTable);
+
+			//update the information of the new added qrVars
+			qrVarTable[0][secondQrVar] =1;
+			qrVarTable[1][secondQrVar] = database.size()-1;
+		}else{
+		//case 2: secondQrVar is in the table
+			//get the table contains second qrVar
+			int tableNum = qrVarTable[1][secondQrVar];
+			DATABASE::iterator currentTable;
+			currentTable = database.begin();
+			advance(currentTable,tableNum);
+			//merge the new list into table
+			currentTable->addEntry(2,secondQrVar,-1,newList);
+		}
+	}else if(firstQrVar==-1 && secondQrVar==-1){
+		//don't merge
+		return true;
+	}else{
+
 	//case 1: both qrVar are not in the table, create a new table
 	if(qrVarTable[0][firstQrVar]!=1&&qrVarTable[0][secondQrVar]!=1){
 		//create a new table to store new list
@@ -51,7 +105,7 @@ bool IntermediateResultTable::joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,IND
 		qrVarTable[1][secondQrVar] = database.size()-1;
 	}
 	//case 2:only one qrVar is in the table, merge into the existing table
-	//one first qrVar exist
+	//only first qrVar exist
 	if(qrVarTable[0][firstQrVar]==1&&qrVarTable[0][secondQrVar]!=1){
 		//merge the new list in the existing table
 		
@@ -76,7 +130,7 @@ bool IntermediateResultTable::joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,IND
 		currentTable = database.begin();
 		advance(currentTable,tableNum);
 		//merge the new list into table
-		currentTable->addEntry(2,firstQrVar,secondQrVar,newList);
+		currentTable->addEntry(2,secondQrVar,firstQrVar,newList);
 		//update the information of the second qrVar
 		qrVarTable[0][firstQrVar] = 1;
 		qrVarTable[1][firstQrVar] = qrVarTable[1][secondQrVar];
@@ -103,13 +157,21 @@ bool IntermediateResultTable::joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,IND
 			int tableNum1 = qrVarTable[1][firstQrVar];
 			table1 = database.begin();
 			advance(table1,tableNum1);
-			table1->addEntry(1,firstQrVar,secondQrVar,newList);
+
+			//failed to merge into the first table
+			if(!table1->addEntry(1,firstQrVar,secondQrVar,newList)){
+				return false;
+			}
 
 			//merge the new list to second table
 			int tableNum2 = qrVarTable[1][secondQrVar];
 			table2 = database.begin();
 			advance(table2,tableNum2);
-			table2->addEntry(2,firstQrVar,secondQrVar,newList);
+			
+			//failed to merge into the second table
+			if(!table2->addEntry(2,secondQrVar,firstQrVar,newList)){
+				return false;
+			}
 
 			LinkedDataTable  table2Pointer;
 			table2Pointer = *table2;
@@ -128,6 +190,7 @@ bool IntermediateResultTable::joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,IND
 		}
 		
 	}
+	}
 	return true;
 }
 RAWDATA *IntermediateResultTable::findResultOf(DATA_LIST resultNodeList){
@@ -141,9 +204,9 @@ RAWDATA *IntermediateResultTable::findResultOf(DATA_LIST resultNodeList){
 	DATA_LIST::iterator nodeListItr;
 	int i =0;
 	for(nodeListItr = resultNodeList.begin();nodeListItr!=resultNodeList.end();nodeListItr++){
-		//add the key_value pair into group
+		//add the key_value pair into group, key = databaseNum
 		int key = qrVarTable[1][*nodeListItr];
-		if(key<1){
+		if(key<0){
 			key =-1;
 		}else{
 			nodeGroup.insert(valuePair(key,*nodeListItr));
@@ -161,22 +224,24 @@ RAWDATA *IntermediateResultTable::findResultOf(DATA_LIST resultNodeList){
 		pair<GROUP::iterator, GROUP::iterator> keyValueList;
 		keyValueList = nodeGroup.equal_range(keyTable[i]);
 
-		DATA_LIST * selectedVarList;
+		DATA_LIST selectedVarList;
 
 		for(GROUP::iterator keyValueItr=keyValueList.first;keyValueItr!=keyValueList.second;keyValueItr++){
-			selectedVarList->push_back(keyValueItr->second);
+			int qrVar =keyValueItr->second;
+			selectedVarList.push_back(qrVar);
+			
 		}
 		//add into retrunRaw 
 		if(keyTable[i]==-1){
-			returnRaw = IntermediateResultTable::joinCombinations(returnRaw,selectedVarList);
+			returnRaw = IntermediateResultTable::joinCombinations(returnRaw,&selectedVarList);
 		}else{
-			returnRaw = IntermediateResultTable::joinRaw(returnRaw,keyTable[i],selectedVarList);
+			returnRaw = IntermediateResultTable::joinRaw(returnRaw,keyTable[i],&selectedVarList);
 		}
 	}
 
 	//adjust the order of returnRaw
 	//TODO
-	RAWDATA * tempRaw;
+	RAWDATA * tempRaw = new RAWDATA();
 	for(nodeListItr = resultNodeList.begin();nodeListItr!=resultNodeList.end();nodeListItr++){
 		for(RAWDATA::iterator rawItr=returnRaw->begin();rawItr!=returnRaw->end();rawItr++){
 			if(*nodeListItr==*rawItr->begin())
@@ -199,9 +264,7 @@ RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_L
 	if(rawData==NULL){
 		
 		//create the rawData
-		RAWDATA newRaw;
-		rawData = &newRaw;
-
+		rawData = new RAWDATA();
 		for(selectedVar = selectedVarList->begin();selectedVar!=selectedVarList->end();selectedVar++){
 			DATA_LIST newList;
 			newList.push_back(*selectedVar);

@@ -22,7 +22,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(  QueryPKBTest );
 void QueryPKBTest::testSampleInput1(){
 	SPAController spa;
 
-	spa.enterProgram(SampleSimpleSources::sampleSource1);
+	spa.enterProgram(SampleSimpleSources::sampleSource5);
 	spa.getQueryResult(SampleQueries::sampleQuery1);
 /*	//create PKB
 	PKB *pkb = SamplePKB::pkb5();
