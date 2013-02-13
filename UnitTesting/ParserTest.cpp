@@ -2,6 +2,7 @@
 #include <cppunit/config/SourcePrefix.h>
 #include <../SPA/Parser.h>
 #include <../SPA/PKB.h>
+#include <../SPA/DesignExtractor.h>
 using namespace std;
 
 void ParserTest::setUp()
@@ -15,6 +16,103 @@ void ParserTest::tearDown()
 
 // Registers the fixture into the 'registry'
 CPPUNIT_TEST_SUITE_REGISTRATION( ParserTest ); // Note 4 
+
+void ParserTest::testComplex(){
+	Parser p;
+	std::string src;
+
+	src = " procedure xylo{\n"
+		/*1*/	"     apple=1;\n"
+		/*2*/	"     banana=apple+1;\n"
+		/*3*/	"     carrot=apple;\n"
+		/*4*/	"     banana=carrot*(egg+fish-apple);\n"
+		/*5*/	"     donut=0;\n"
+		/*6*/	"     egg=1;\n"
+		/*7*/	"     fish=egg;\n"
+		/*8*/	"     call yellow;\n"
+		/*9*/	"     while apple{\n"
+		/*10*/	"          while egg{\n"
+		/*11*/	"              innard = 0;\n"
+		/*12*/	"               while donut{\n"
+		/*13*/	"                  gummy=egg+1;}\n"
+		/*14*/	"               while fish{\n"
+		/*15*/	"                    gummy=0;\n"
+		/*16*/	"                    while innard{\n"
+		/*17*/	"                         fish=innard;}}\n"
+		/*18*/	"               ham=gummy;}\n"
+		/*19*/	"          gummy=apple+9;}\n"
+		/*20*/	"   apple=11;\n"
+		/*21*/	"   if innard then{\n"
+		/*22*/	"        jam=apple;}\n"
+		/**/	"	else{\n"
+		/*23*/	"        jam=gummy;\n"
+		/*24*/	"        if egg then{\n"
+		/*25*/	"             gummy=33;}\n"
+			"          else{\n"
+		/*26*/	"             gummy=99;}}}\n"
+		/**/	"procedure yellow{\n"
+		/*27*/	"	kimchi = 88;\n"
+		/*28*/	"	leek=0;\n"
+		/*29*/	"	while leek{\n"
+		/*30*/	"      kimchi=kimchi+1;}\n"
+		/*31*/	"	call zebra;\n"
+		/*32*/	"	apple=kimchi;\n"
+		/*33*/	"	jam=egg+2;}"
+		/**/	"	procedure zebra{\n"
+		/*34*/	"	 meat=1;\n"
+		/*35*/	"	 banana=meat+10;\n"
+		/*36*/	"	 if meat then{\n"
+		/*37*/	"		  carrot=banana+22;}\n"
+		/**/	"	 else{\n"
+		/*38*/	"		  carrot=banana;}\n"
+		/*39*/	"	 apple=1;\n"
+		/*40*/	"	 kimchi=apple+10;\n"
+		/*41*/	"	 call extra;}";
+
+	p.setSource(src);
+	CPPUNIT_ASSERT_EQUAL(1, p.startParse());
+	PKB *pkb = p.getPKB();
+	AST *ast = pkb->getRootAST();
+	DesignExtractor *de = new DesignExtractor(pkb);
+	de->createCFG();
+
+	// Test for Follows
+	/*FOLLOWS_LIST result = pkb->getFollows(0,0);
+	FOLLOWS_LIST::iterator itr = result.begin();
+	while(itr!=result.end()){
+		//cout << itr->first << "," << itr->second << "\n";
+		itr++;
+	}
+	NEXT_LIST nxtResult = pkb->getNext(0,0);
+	NEXT_LIST::iterator nxtItr = nxtResult.begin();
+
+	while(nxtItr!=nxtResult.end()){
+		cout << nxtItr->first << ", " << nxtItr->second << "\n";
+		nxtItr++;
+	}
+	
+	MODIFIES_LIST modifiesResult = pkb->getModifies(PROCEDURE,0,0);
+	MODIFIES_LIST::iterator itr = modifiesResult.begin();
+	while(itr!=modifiesResult.end()){
+		cout << "Procedure " << itr->first << " modifies " << pkb->getVarName(itr->second) << "\n";
+		itr++;
+	}
+
+	USES_LIST usesResult = pkb->getUses(PROCEDURE,0,0);
+	USES_LIST::iterator uitr = usesResult.begin();
+	while(uitr!=usesResult.end()){
+		cout << "Procedure " << uitr->first << " uses " << pkb->getVarName(uitr->second) << "\n";
+		uitr++;
+	}
+
+	PARENT_LIST result = pkb->getParent(0,0);
+	PARENT_LIST::iterator itr = result.begin();
+	while(itr!=result.end()){
+		cout << itr->first << ", " << itr->second << "\n";
+		itr++;
+	}*/
+}
+
 void ParserTest::testCall(){
 	Parser p;
 	std::string src;
