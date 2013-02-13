@@ -1,7 +1,7 @@
 #include "CFGTest.h"
 #include "../SPA/CFG.h"
 
-CPPUNIT_TEST_SUITE_REGISTRATION( CFGTest );
+//CPPUNIT_TEST_SUITE_REGISTRATION( CFGTest );
 
 void CFGTest::setUp(){}
 void CFGTest::tearDown(){}

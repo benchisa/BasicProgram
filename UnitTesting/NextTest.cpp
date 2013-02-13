@@ -2,7 +2,7 @@
 #include "../SPA/DesignExtractor.h"
 #include "../SPA/Parser.h"
 
-CPPUNIT_TEST_SUITE_REGISTRATION( NextTest );
+//CPPUNIT_TEST_SUITE_REGISTRATION( NextTest );
 void NextTest::setUp(){
 	src = "procedure main{\n"
 		/*1*/		 "while a{\n"

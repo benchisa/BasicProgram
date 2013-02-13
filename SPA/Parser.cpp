@@ -126,7 +126,7 @@ bool Parser::procedure(){
 		AST* prevProc;
 		if(name()) 
 		{
-			Procedure *cProc = pkb->createProc(prevToken, stmt_num+1);
+			Procedure *cProc = pkb->createProc(prevToken, stmt_num);
 			curProc = prevToken;
 			if(pkb->isProcExists(prevToken))			
 			{				
@@ -143,7 +143,7 @@ bool Parser::procedure(){
 			else
 			{
 				// next procedure
-				AST *newProc = pkb->createAST(PROCEDURE, prevProgLine, stmt_num+1, curProcIndex);
+				AST *newProc = pkb->createAST(PROCEDURE, prevProgLine, stmt_num, curProcIndex);
 				pkb->addSibling(curAST, newProc);
 				curAST = newProc;
 			}
@@ -191,7 +191,7 @@ bool Parser::stmtlst(){
 		if(!containerIndex.empty())
 		{
 			if(curToken.compare("}") != 0 && curToken.compare("else") != 0) {
-				//cout << "insertFollows1: " << containerIndex.back().first << "," << progLine+1 << "\n";
+				//cout << "insertFollows1: " << containerIndex.back().first << "," << stmt_num+1<< "\n";
 				insertFollows(containerIndex.back().first, stmt_num+1);
 			}
 			
@@ -236,8 +236,14 @@ bool Parser::stmt(){
 
 bool Parser::stmt_call(){
 	// call: call proc_name
+		
+	insertFollowsParentForStmt(stmt_num, stmt_num+1);
+
 	if(matchToken("call")){
+		stmt_num++;
+		
 		if(name()){
+
 			// add to call table
 			pkb->insertCall(curProc, prevToken);
 
@@ -251,9 +257,6 @@ bool Parser::stmt_call(){
 
 			curAST = callNode;
 			
-			// create follows, parent
-			insertFollowsParentForStmt(stmt_num-1, stmt_num);
-
 			if(!matchToken(";")) {
 				error(MISSING_COLON);
 				return false;
@@ -377,8 +380,13 @@ bool Parser::stmt_while(){
 		AST *whileNode = pkb->createAST(WHILE, prevProgLine, stmt_num, -1);
 		AST *leftNode, *rightNode;
 
-		if(!pkb->setFirstDescendant(curAST, whileNode))
-		{
+		//cout << "Current while: " << pkb->getProgLine(whileNode) << "\n";
+
+		if(pkb->getType(curAST) == STMT_LIST){
+			pkb->setFirstDescendant(curAST, whileNode);
+		}
+		else{
+			//cout << " Add sibling: " << pkb->getProgLine(curAST) << ", " << pkb->getProgLine(whileNode) << "\n";
 			pkb->addSibling(curAST, whileNode);
 			pkb->setAncestor(whileNode, curAST->getAncestor());
 		}
@@ -400,6 +408,8 @@ bool Parser::stmt_while(){
 			containerInfo.first = stmt_num;
 			containerInfo.second = WHILE;
 			containerIndex.push_back(containerInfo);
+
+			//cout << "Last Container: " << containerIndex.back().first << "\n";
 
 			if(matchToken("{")){
 				rightNode = pkb->createAST(STMT_LIST,prevProgLine, stmt_num, -1);
@@ -439,7 +449,8 @@ bool Parser::stmt_while(){
 bool Parser::stmt_assign(){
 	//assign: var_name '=' expr
 	stmt_num++;
-
+	
+	//cout << "assign: " << stmt_num << "\n";
 	AST *assignNode = pkb->createAST(ASSIGNMENT, curProgLine, stmt_num, -1);
 	AST *leftNode, *rightNode;
 
@@ -690,14 +701,15 @@ void Parser::insertFollowsParentForStmt(PROG_LINE p1, PROG_LINE p2){
 		if(p1 != containerIndex.back().first && prevToken.compare("{") != 0 && prevToken.compare("}") != 0)
 		{	
 			//cout << "assign's insertfollow: " << curToken << "\n";
-			//cout << "assign's insertFollows: " << progLine-1 << "," << progLine << "\n";
+		//	cout << "assign's insertFollows: " << p1 << "," <<p2 << "\n";
 			insertFollows(p1, p2);
 		}
 	}
 	else
 	{
+		cout << "Prevtoken: " << prevToken << "\n";
 		if(prevToken.compare("{") != 0 && prevToken.compare("}") != 0) {
-			//cout << "assign's insertFollows2: " << progLine-1 << "," << progLine << "\n";
+			//cout << "assign's insertFollows2: " << p1 << "," <<p2 << "\n";
 			insertFollows(p1, p2);
 		}
 	}
@@ -706,8 +718,8 @@ void Parser::insertFollowsParentForStmt(PROG_LINE p1, PROG_LINE p2){
 void Parser::insertFollowsParentForCon(TOKEN tmpToken, PROG_LINE p1, PROG_LINE p2){
 	if(!containerIndex.empty())
 	{
-		if(p1 != containerIndex.back().first){
-			//cout << "Insertfollows241: " << progLine-1 << ", " << progLine << "\n";
+		if(p1 != containerIndex.back().first && tmpToken != "}"){
+			//cout << "Insertfollows241: "<< p1 << "," <<p2 << "\n";
 			insertFollows(p1, p2);
 		}
 

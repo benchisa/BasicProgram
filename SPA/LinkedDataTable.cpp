@@ -10,16 +10,18 @@ LinkedDataTable::~LinkedDataTable(void)
 {
 }
 
-void LinkedDataTable::addEntry(int mergeAttrPos,INDEX oldQrVar,INDEX newQrVar,RELATION_LIST * newEntries){
+bool LinkedDataTable::addEntry(int mergeAttrPos,INDEX oldQrVar,INDEX newQrVar,RELATION_LIST * newEntries){
 	if(mergeAttrPos==0){
 		LinkedDataTable::createEntry(oldQrVar,newQrVar,newEntries);
 	}else{
-		LinkedDataTable::addOneEntry(mergeAttrPos,oldQrVar,newQrVar,newEntries);
+		return LinkedDataTable::addOneEntry(mergeAttrPos,oldQrVar,newQrVar,newEntries);
 	}
+	return true;
 }
-void LinkedDataTable::addOneEntry(int mergeAttrPos,INDEX oldQrVar,INDEX newQrVar,RELATION_LIST * newEntries){
+bool LinkedDataTable::addOneEntry(int mergeAttrPos,INDEX oldQrVar,INDEX newQrVar,RELATION_LIST * newEntries){
 	//create new column
-	qrVarList.push_back(newQrVar);
+	if(newQrVar!=-1)
+		qrVarList.push_back(newQrVar);
 
 	//create a temporary row list
 	ROW_LIST tempRowList;
@@ -46,7 +48,7 @@ void LinkedDataTable::addOneEntry(int mergeAttrPos,INDEX oldQrVar,INDEX newQrVar
 				//matched entry is found, add to temp table
 				if(mergeAttr==*currentEntry){
 					ROW tempRow = *currentRow;
-					tempRow.push_back(newEntry->second);
+					if(newQrVar!=-1)tempRow.push_back(newEntry->second);
 					tempRowList.push_back(tempRow);
 				}
 			}else{
@@ -54,7 +56,7 @@ void LinkedDataTable::addOneEntry(int mergeAttrPos,INDEX oldQrVar,INDEX newQrVar
 				//matched entry is found, add to temp table
 				if(mergeAttr==*currentEntry){
 					ROW tempRow = *currentRow;
-					tempRow.push_back(newEntry->first);
+					if(newQrVar!=-1)tempRow.push_back(newEntry->first);
 					tempRowList.push_back(tempRow);
 				}
 			}
@@ -63,18 +65,30 @@ void LinkedDataTable::addOneEntry(int mergeAttrPos,INDEX oldQrVar,INDEX newQrVar
 		currentRow++;
 	}
 	//replace the old row list
+	if(tempRowList.size()<1){
+		return false;
+	}
 	rowList = tempRowList;
+	return true;
 }
 void LinkedDataTable::createEntry(INDEX firstQrVar,INDEX secondQrVar,RELATION_LIST * newEntries){
 	//create 2 new columns
-	qrVarList.push_back(firstQrVar);
-	qrVarList.push_back(secondQrVar);
+	if(firstQrVar !=-1){
+		qrVarList.push_back(firstQrVar);
+	}
+	if(secondQrVar !=-1){
+		qrVarList.push_back(secondQrVar);
+	}
 
 	RELATION_LIST::iterator currentEntry;
 	for(currentEntry = newEntries->begin();currentEntry!=newEntries->end();currentEntry++){
 		ROW newRow;
-		newRow.push_back(currentEntry->first);
-		newRow.push_back(currentEntry->second);
+
+		if(firstQrVar !=-1)
+			newRow.push_back(currentEntry->first);
+		if(secondQrVar != -1)
+			newRow.push_back(currentEntry->second);
+		
 		rowList.push_back(newRow);
 	}
 }
