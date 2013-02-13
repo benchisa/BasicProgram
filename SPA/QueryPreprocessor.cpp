@@ -37,7 +37,7 @@ QueryPreprocessor::QueryPreprocessor(PKB* pkb){
 	tuple			= elem+or+"<"+elem+"(,"+elem+")"+optional+">";
 	declare			= designEnt+"\\s+"+synonym+"(\\s*,\\s*"+synonym+")*";
 	result_cl		= "select\\s+("+tuple+or+"BOOLEAN)";
-	suchthat_cl		= "such that\\s+("+rel+")\\s*\\(("+ref+"),("+ref+")\\)(\\s+and\\s+("+rel+")\\s*\\(("+ref+"),("+ref+")\\))"+optional;
+	suchthat_cl		= "such that\\s+("+rel+")\\s*\\(\\s*("+ref+")\\s*,\\s*("+ref+")\\s*\\)(\\s+and\\s+("+rel+")\\s*\\(\\s*("+ref+")\\s*,\\s*("+ref+")\\s*\\))"+optional;
 	with_cl			= "with\\s+("+attrCompare+")(\\s+and\\s+("+attrCompare+"))"+optional;
 	pattern_cl		= "pattern\\s+"+synonym+"\\s*\\(.+,.+,*\\)(\\s+and\\s+"+synonym+"\\s*\\(.+,.+,*\\))"+optional;
 		
@@ -121,22 +121,36 @@ void QueryPreprocessor::createGrammarTables(){
 
 bool QueryPreprocessor::validate(){
 
-	TOKEN currToken;
-	selectBool=false;
+	TOKEN currToken;	
+	selectBool=false;	
+	clauseCount=0;
+	groupCount=0;
 
 	for(int i=0;i<(*tokens).size();i++){
 		currToken = (*tokens).at(i);
 		
 		//cout<<"i= "<< i<< endl;
 		//cout<<currToken<<endl;
-		
-		verifyDeclaration(currToken);
-		verifySelect(currToken);
-		verifyCondition(currToken);
-	}
+
+		if (regex_match(currToken,regex(declare))){		
+			if (!verifyDeclaration(currToken)){
+				return false;
+			}
+		}
+		else if (regex_match(currToken,regex(result_cl))){
+			if (!verifySelect(currToken)){
+				return false;
+			}
+		}
+		else if (regex_match(currToken,regex(suchthat_cl+or+with_cl+or+pattern_cl))){
+			if (!verifyCondition(currToken)){
+				return false;
+			}
+		}
+
+	}	
 
 	setQTree();
-
 	return true;
 
 }
@@ -166,7 +180,18 @@ void QueryPreprocessor::setQTree(){
 		}
 	}
 
-	//insert into QTREE the clauses with the variables NOT from those groups first
+	//insert into QTREE the clauses with both constants first
+	for (int i=0; i<constantClauses.size(); i++){
+		currNode = clauses.at(constantClauses.at(i));
+		if (currNode!=NULL){
+			arrangeClause(currNode);
+			clauses.at(constantClauses.at(i)) = NULL;
+		}
+	}
+
+	joinClauses();
+
+	//insert into QTREE the clauses with the variables NOT from those groups 
 	for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
 		//choose those not flagged for selected
 		if(!isFlaggedGroup(dVarIter->second.groupNum)){
@@ -310,38 +335,36 @@ bool QueryPreprocessor::verifyDeclaration(TOKEN token){
 	TOKEN currToken;
 	qVar newVar;
 
-	if (regex_match(token,regex(declare))){
-		declarations = tokenize(token,designEnt+or+synonym);
-		for(int i=0;i<declarations.size();i++){
-			currToken = declarations.at(i);
-			if (regex_match(currToken,regex(designEnt))){
-				//expect declaration type
-				if (grammarTable.isEntExists(currToken)){
-					entType = grammarTable.getEntType(currToken);
-				}
-				else {
-					error(INVALID_ENTITY);
+	declarations = tokenize(token,designEnt+or+synonym);
+	for(int i=0;i<declarations.size();i++){
+		currToken = declarations.at(i);
+		if (regex_match(currToken,regex(designEnt))){
+			//expect declaration type
+			if (grammarTable.isEntExists(currToken)){
+				entType = grammarTable.getEntType(currToken);
+			}
+			else {
+				error(INVALID_ENTITY);
+				return false;
+			}
+		}
+		else {
+			//expect synonym
+			if (isDeclaredVar(currToken)){
+				//already declared, check if it is a different entity type (conflict)
+				if (getQVarType(currToken)!=entType){
+					error(CONFLICTED_SYNONYM);
 					return false;
 				}
 			}
-			else {
-				//expect synonym
-				if (isDeclaredVar(currToken)){
-					//already declared, check if it is a different entity type (conflict)
-					if (getQVarType(currToken)!=entType){
-						error(CONFLICTED_SYNONYM);
-						return false;
-					}
-				}
-				else{
-					//if not previously declared, add new entry
-					newVar.qVarIndex=(*dVarTable).size();
-					newVar.qVarType=entType;
-					newVar.selected=false;
-					newVar.explored=false;
-					(*dVarTable).insert(dVarPair(currToken,newVar));
-					(*qVarTable).insert(qVarPair((*qVarTable).size(),entType));
-				}
+			else{
+				//if not previously declared, add new entry
+				newVar.qVarIndex=(*dVarTable).size();
+				newVar.qVarType=entType;
+				newVar.selected=false;
+				newVar.explored=false;
+				(*dVarTable).insert(dVarPair(currToken,newVar));
+				(*qVarTable).insert(qVarPair((*qVarTable).size(),entType));
 			}
 		}
 	}
@@ -352,64 +375,73 @@ bool QueryPreprocessor::verifySelect(TOKEN token){
 	vector<TOKEN> selections;
 	TOKEN currToken;
 
-	if (regex_match(token,regex(result_cl))){
-		firstNode = createQTREENode(RESULT);
-		firstNode->setLastSibling(firstNode);
+	firstNode = createQTREENode(RESULT);
+	firstNode->setLastSibling(firstNode);
 
-		selections = tokenize(token,elem);
-		for(int i=1;i<selections.size();i++){
-			currToken = selections.at(i);
-			if (regex_match(currToken,regex("BOOLEAN"))){
-				currNode = createQTREENode(BOOL);
-				selectBool=true;
+	selections = tokenize(token,elem);
+	for(int i=1;i<selections.size();i++){
+		currToken = selections.at(i);
+		if (regex_match(currToken,regex("boolean"))){
+			currNode = createQTREENode(BOOL);
+			selectBool=true;
+		}
+		else{
+			if (isDeclaredVar(currToken)){
+				currNode = createQTREENode(QUERYVAR,getQVarIndex(currToken));
+				setAsSelected(currToken);
 			}
 			else{
-				if (isDeclaredVar(currToken)){
-					currNode = createQTREENode(QUERYVAR,getQVarIndex(currToken));
-					setAsSelected(currToken);
-				}
-				else{
-					error(INVALID_RESULT);
-					return false;
-				}
+				error(INVALID_RESULT);
+				return false;
 			}
-			setChild(firstNode,currNode);
 		}
+		setChild(firstNode,currNode);
 	}
 
+	return true;
 }
 
 bool QueryPreprocessor::verifyCondition(TOKEN token){
 	
 	vector<TOKEN> conditions;
-	clauseCount=0;
-	groupCount=0;
 	if (regex_match(token,regex(suchthat_cl))){
-		conditions = tokenize(token,"("+rel+")\\s*\\(("+ref+"),("+ref+")\\)");
+		conditions = tokenize(token,"("+rel+")\\s*\\(("+ref+")\\s*,\\s*("+ref+")\\s*\\)");
 		for(int i=0;i<conditions.size();i++){
-			processSuchThat(conditions.at(i));
-			clauseCount++;
+			if (processSuchThat(conditions.at(i))){
+				clauseCount++;
+			}
+			else{
+				return false;
+			}
 		}
 	}
 	else if (regex_match(token,regex(with_cl))){
 		conditions = tokenize(token,attrCompare);
 		for(int i=0;i<conditions.size();i++){		
-			processWith(conditions.at(i));
-			clauseCount++;
+			if (processWith(conditions.at(i))){
+				clauseCount++;
+			}
+			else{
+				return false;
+			}
 		}
 	}
 	else if (regex_match(token,regex(pattern_cl))){
 		conditions = tokenize(token,synonym+"\\s*\\(.+,.+,*\\)");
 		for(int i=0;i<conditions.size();i++){		
-			processPattern(conditions.at(i));
-			clauseCount++;
+			if (processPattern(conditions.at(i))){
+				clauseCount++;
+			}
+			else{
+				return false;
+			}
 		}
 	}
 	else{
 		error(INVALID_QUERY_SYNTAX);
 		return false;
 	}
-
+	
 	return true;
 }
 
@@ -421,6 +453,8 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 	TOKEN currToken;
 	int argCount;
 	bool correctArg;
+	bool prevArgWild;
+	bool prevArgConstant;
 	string relName;
 	TYPE relType;
 	TYPE tokenType;
@@ -469,6 +503,8 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 	currNode = createQTREENode(relType);			
 	setChild(headNode,currNode);
 	prevNode=currNode;
+	prevArgWild = false;
+	prevArgConstant = false;
 	for(int i=1;i<relationships.size();i++){			
 		currToken = relationships.at(i);
 
@@ -477,23 +513,47 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 			error(INVALID_ARGUMENT);
 			return false;			
 		}
+
+		//if with inverted commas
+		if(regex_match(currToken,regex(invComma+ident+invComma))){			
+			currToken.erase(currToken.begin());	
+			currToken.resize(currToken.size()-1);	
+			if (!pkb->isVarExists(currToken)){
+				error(INVALID_VARIABLE);
+				return false;
+			}
+			tokenType = VARIABLE;
+			currNode = createQTREENode(VARIABLE,pkb->getVarIndex(currToken));
+		}
+		//can also be wildcards _
+		else if(currToken=="_"){
+			tokenType = ANY;
+			currNode = createQTREENode(ANY);
+			if (prevArgWild){
+				wildClauses.push_back(clauseCount);
+			}
+			else{
+				prevArgWild = true;
+			}
+		}
 		//check is the synonym declared
-		if (isDeclaredVar(currToken)){
+		else if (isDeclaredVar(currToken)){
 			tokenType = getQVarType(currToken);			
 			syn.push_back(currToken);			
-			currNode = createQTREENode(QUERYVAR,getQVarIndex(currToken));
+			currNode = createQTREENode(QUERYVAR,getQVarIndex(currToken));			
 		}
 		//even if not declared,could be a constant statement number
 		else if (isConstant(currToken)){
 			tokenType = STATEMENT;			
 			currNode = createQTREENode(CONSTANT,atoi(currToken.c_str()));
+			if (prevArgConstant){
+				constantClauses.push_back(clauseCount);
+			}
+			else{
+				prevArgConstant = true;
+			}
 		}
-		//can also be wildcards _
-		else if(currToken=="_"){
-			tokenType = STATEMENT;
-			currNode = createQTREENode(ANY);
-			wildClauses.push_back(clauseCount);
-		}
+		
 		//not declared, not constant
 		else{
 			error(INVALID_ARGUMENT);
@@ -655,7 +715,7 @@ bool QueryPreprocessor::processPattern(TOKEN token){
 	headNode = createQTREENode(PATTERN);
 	insertClause(headNode);
 
-	patterns = tokenize(token,synonym+or+underscore+invComma+".+"+invComma+underscore+or+invComma+".+"+invComma+or+underscore);
+	patterns = tokenize(token,wildexpr+or+invComma+expr+invComma+or+underscore+or+synonym);
 	//first token is the synonym
 	//check if declared, and get type
 	if (!isDeclaredVar(patterns.at(0))){
@@ -694,6 +754,8 @@ bool QueryPreprocessor::processPattern(TOKEN token){
 			}
 			else if(regex_match(currToken,regex(invComma+ident+invComma))){
 				//if with inverted commas
+				currToken.erase(currToken.begin());	
+				currToken.resize(currToken.size()-1);	
 				if (!pkb->isVarExists(currToken)){
 					error(INVALID_VARIABLE);
 					return false;

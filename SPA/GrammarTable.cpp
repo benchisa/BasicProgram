@@ -270,11 +270,13 @@ void GrammarTable::createArgTable(){
 	case1.push_back(STATEMENT);
 	case1.push_back(WHILE);
 	case1.push_back(IF);
+	case1.push_back(ANY);
 
 	case2.push_back(STATEMENT);
 	case2.push_back(ASSIGNMENT);
 	case2.push_back(WHILE);
 	case2.push_back(IF);
+	case2.push_back(ANY);
 
 	case3.push_back(PROCEDURE);
 	case3.push_back(STATEMENT);
@@ -282,12 +284,16 @@ void GrammarTable::createArgTable(){
 	case3.push_back(WHILE);
 	case3.push_back(IF);
 	case3.push_back(CALL);
+	case3.push_back(ANY);
 
 	case4.push_back(VARIABLE);
+	case4.push_back(ANY);
 
 	case5.push_back(PROGLINE);
+	case5.push_back(ANY);
 
 	case6.push_back(ASSIGNMENT);
+	case6.push_back(ANY);
 
 	aTable[0].type = FOLLOWS;
 	aTable[0].arg1 = case2;
