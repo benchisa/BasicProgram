@@ -50,6 +50,7 @@ private:
 	bool selectBool;
 	
 	vector<QTREE*> clauses; //keeps 'SUCHTHAT','WITH' and 'PATTERN' headNodes
+	vector<int> wildClauses; //keeps the clause numbers of the clauses that has two wilds "_"
 	vector<int> flagGroups;
 	int clauseCount; //keeps track of how many condition clauses are there
 	int groupCount;	

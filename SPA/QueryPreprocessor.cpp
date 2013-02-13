@@ -54,8 +54,6 @@ QueryPreprocessor::QueryPreprocessor(PKB* pkb){
 }
 
 QueryPreprocessor::~QueryPreprocessor(void){
-	delete tokens;
-
 	delete paramTable;
 	delete qVarTable;
 	delete dVarTable;
@@ -80,8 +78,8 @@ bool QueryPreprocessor::preProcess(){
 	*/
 
 	bool validated = validate();
-	//cleanUp();
-
+	cleanUp();
+	
 	return validated;
 }
 
@@ -186,6 +184,17 @@ void QueryPreprocessor::setQTree(){
 	
 	joinClauses();
 
+	//insert those clauses with wildcards
+	for (int i=0; i<wildClauses.size(); i++){
+		currNode = clauses.at(wildClauses.at(i));
+		if (currNode!=NULL){
+			arrangeClause(currNode);
+			clauses.at(wildClauses.at(i)) = NULL;
+		}
+	}
+
+	joinClauses();
+
 	//then insert the rest
 	for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
 		if(isFlaggedGroup(dVarIter->second.groupNum)){
@@ -201,19 +210,8 @@ void QueryPreprocessor::setQTree(){
 		}		
 	}
 	joinClauses();
-
 	
-	//insert those clauses with wildcards [NOTE: NEED TO CHANGE THIS]
-	for (int i=0; i<clauses.size(); i++){
-		currNode = clauses.at(i);
-		if (currNode!=NULL){
-			currNode->setData(1);
-			arrangeClause(currNode);
-			clauses.at(i) = NULL;
-		}
-	}
-
-	joinClauses();
+	
 }
 
 void QueryPreprocessor::arrangeClause(QTREE* node){
@@ -494,6 +492,7 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 		else if(currToken=="_"){
 			tokenType = STATEMENT;
 			currNode = createQTREENode(ANY);
+			wildClauses.push_back(clauseCount);
 		}
 		//not declared, not constant
 		else{
@@ -518,7 +517,7 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 		setChild(prevNode,currNode);		
 		
 	}
-	relationships.erase(relationships.begin());
+
 	if (!syn.empty()){
 		setQVarGroup(syn);
 	}
@@ -1054,7 +1053,12 @@ vector<TOKEN> QueryPreprocessor::tokenize(TOKEN tk,string expression){
 }
 
 void QueryPreprocessor::cleanUp(){
-
+	//delete headNode;
+	
+	clauses.clear();
+	wildClauses.clear();
+	flagGroups.clear();
+	exprPieces.clear();
 }
 
 void QueryPreprocessor::error(int errorCode){
