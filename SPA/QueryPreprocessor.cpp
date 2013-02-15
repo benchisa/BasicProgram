@@ -29,14 +29,14 @@ QueryPreprocessor::QueryPreprocessor(PKB* pkb){
 	synonym			= ident;
 	rel				= "uses|modifies|follows\\*|follows|parent\\*|parent|affects\\*|affects|calls\\*|calls|next\\*|next";
 	ref				= synonym+or+underscore+or+integer+or+invComma+ident+invComma;
-	attrName		= "procName|varName|value|stmt#";
+	attrName		= "procname|varname|value|stmt#";
 	attrRef			= synonym+"\\.("+attrName+")";
-	attrCompare		= attrRef+"=("+invComma+ident+invComma+or+integer+or+attrRef+")"+or+synonym+"=("+integer+or+attrRef+")";
+	attrCompare		= "("+attrRef+"=("+attrRef+or+"\""+ident+"\""+or+integer+")"+or+synonym+"=("+attrRef+or+integer+"))";
 	designEnt		= "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
 	elem			= synonym+or+attrRef;
 	tuple			= elem+or+"<"+elem+"(,"+elem+")"+optional+">";
 	declare			= designEnt+"\\s+"+synonym+"(\\s*,\\s*"+synonym+")*";
-	result_cl		= "select\\s+("+tuple+or+"BOOLEAN)";
+	result_cl		= "select\\s+("+tuple+or+"boolean)";
 	suchthat_cl		= "such that\\s+("+rel+")\\s*\\(\\s*("+ref+")\\s*,\\s*("+ref+")\\s*\\)(\\s+and\\s+("+rel+")\\s*\\(\\s*("+ref+")\\s*,\\s*("+ref+")\\s*\\))"+optional;
 	with_cl			= "with\\s+("+attrCompare+")(\\s+and\\s+("+attrCompare+"))"+optional;
 	pattern_cl		= "pattern\\s+"+synonym+"\\s*\\(.+,.+,*\\)(\\s+and\\s+"+synonym+"\\s*\\(.+,.+,*\\))"+optional;
@@ -117,6 +117,7 @@ void QueryPreprocessor::createGrammarTables(){
 	grammarTable.createRelTable();
 	grammarTable.createPattTable();	
 	grammarTable.createArgTable();
+	grammarTable.createAttrTable();
 }
 
 bool QueryPreprocessor::validate(){
@@ -125,12 +126,16 @@ bool QueryPreprocessor::validate(){
 	selectBool=false;	
 	clauseCount=0;
 	groupCount=0;
+	
+	bool selectOK = false;
+	bool conditionOK = false;
 
 	for(int i=0;i<(*tokens).size();i++){
 		currToken = (*tokens).at(i);
 		
 		//cout<<"i= "<< i<< endl;
 		//cout<<currToken<<endl;
+
 
 		if (regex_match(currToken,regex(declare))){		
 			if (!verifyDeclaration(currToken)){
@@ -141,17 +146,24 @@ bool QueryPreprocessor::validate(){
 			if (!verifySelect(currToken)){
 				return false;
 			}
+			selectOK = true;
 		}
-		else if (regex_match(currToken,regex(suchthat_cl+or+with_cl+or+pattern_cl))){
+		else if (selectOK && regex_match(currToken,regex(suchthat_cl+or+with_cl+or+pattern_cl))){
 			if (!verifyCondition(currToken)){
 				return false;
 			}
+			conditionOK = true;
 		}
 
 	}	
 
-	setQTree();
-	return true;
+	if (selectOK && conditionOK){
+		setQTree();
+		return true;
+	}
+	else{
+		return false;
+	}
 
 }
 
@@ -591,25 +603,22 @@ bool QueryPreprocessor::processWith(TOKEN token){
 	TOKEN currToken;
 	TYPE synType;
 	bool isSyn;
-	string attrType = "";
+	string attrType;
 
 	headNode = createQTREENode(WITH);
 	insertClause(headNode);
 
-	comparisons = tokenize(token,"("+synonym+")"+or+"("+attrName+")");
+	comparisons = tokenize(token,"\\."+or+"\"("+ident+")\""+or+"("+attrName+")"+or+integer+or+"("+synonym+")");
 	//only 1st and 3rd token can be synonyms
 	isSyn=false;
 
 	for(int i=0;i<comparisons.size();i++){
 		currToken = comparisons.at(i);
-		if (i==0){
+		if ((i!=comparisons.size()-1) && (comparisons.at(i+1)==".")){
 			isSyn=true;
+			i=i+2;
 		}
-		else if (i==2 && !isConstant(currToken) && !regex_match(currToken,regex("\".+\""))){
-			//not within "" and not a constant, has to be a declared variable
-			isSyn=true;
-		}
-
+	
 		if (isSyn){			
 			if (!isDeclaredVar(currToken)){
 				error(INVALID_VARIABLE);
@@ -619,70 +628,29 @@ bool QueryPreprocessor::processWith(TOKEN token){
 			synType = getQVarType(currToken);
 			currNode = createQTREENode(QUERYVAR,getQVarIndex(currToken));			
 			setChild(headNode,currNode);
+			
 
-			if(comparisons.at(i+1)=="procName"){
-				//check that the synonym before is allowed type
-				if(synType!=PROCEDURE && synType!=CALL){
-					error(INVALID_VARIABLE);
-					return false;
-				}
-				if (attrType!="" && attrType!="string"){
-					error(INVALID_VARIABLE);
-					return false;
+			if(comparisons.at(i)==grammarTable.getAttr(synType)){
+				if (synType==VARIABLE||synType==PROCEDURE){
+					if(attrType!="" && attrType!="string"){
+						error(INVALID_QUERY_SYNTAX);
+						return false;
+					}
+					currNode = createQTREENode(NAME);
+					attrType = "string";
 				}
 				else{
-					attrType="string";
+					if(attrType!="" && attrType!="number"){
+						error(INVALID_QUERY_SYNTAX);
+						return false;
+					}
+					currNode = createQTREENode(ANY);
+					attrType = "number";
 				}
-				currNode = createQTREENode(NAME);
 
 			}
-			else if(comparisons.at(i+1)=="varName"){
-				//check that the synonym before is allowed type
-				if(synType!=VARIABLE){
-					error(INVALID_VARIABLE);
-					return false;
-				}
-				if (attrType!="" && attrType!="string"){
-					error(INVALID_VARIABLE);
-					return false;
-				}
-				else{
-					attrType="string";
-				}
-				currNode = createQTREENode(NAME);
-			}
-			else if(comparisons.at(i+1)=="stmt#"){
-				//check that the synonym before is allowed type
-				if(synType==VARIABLE||synType==CONSTANT){
-					error(INVALID_VARIABLE);
-					return false;
-				}
-				if (attrType!="" && attrType!="int"){
-					error(INVALID_VARIABLE);
-					return false;
-				}
-				else{
-					attrType="int";
-				}
-				currNode = createQTREENode(ANY);
-			}
-			else if(comparisons.at(i+1)=="value"){
-				//check that the synonym before is allowed type
-				if(synType!=CONSTANT){
-					error(INVALID_VARIABLE);
-					return false;
-				}
-				if (attrType!="" && attrType!="int"){
-					error(INVALID_VARIABLE);
-					return false;
-				}
-				else{
-					attrType="int";
-				}
-				currNode = createQTREENode(ANY);
-			}
+			
 			isSyn=false;
-			i++;
 		}
 		else if (regex_match(currToken,regex("\".+\""))){
 		//not syn: is string

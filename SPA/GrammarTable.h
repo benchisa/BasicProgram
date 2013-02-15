@@ -9,6 +9,7 @@ public:
 	typedef std::string ENTITY;
 	typedef std::string RELATIONSHIP;
 	typedef std::string PATTERN;
+	typedef std::string ATTRIBUTE;
 
 	struct entTable{
 		ENTITY entName;
@@ -31,10 +32,16 @@ public:
 		vector<TYPE> arg2;
 	};
 
+	struct attrTable{
+		TYPE type;
+		ATTRIBUTE attr;
+	};
+
 	struct entTable eTable[9];
 	struct syntaxTable rTable[14];
 	struct syntaxTable pTable[3];
 	struct argTable aTable[10];
+	struct attrTable atTable[8];
 
 	string compulsoryOne,optional,or,plus,minus,times,invComma,letter,digit,underscore,hash,ident,synonym,integer,op;
 	string stmtRef,entRef,lineRef,varRef,expr,wildexpr,expr_spec;
@@ -64,4 +71,8 @@ public:
 	void createArgTable();
 	vector<TYPE> getArgument(TYPE,int);
 	void printAllArg();
+
+	void createAttrTable();
+	string getAttr(TYPE);
+	void printAllAttr();
 };

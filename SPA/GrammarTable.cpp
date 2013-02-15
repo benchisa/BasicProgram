@@ -349,6 +349,39 @@ vector<TYPE> GrammarTable::getArgument(TYPE rel, int argPosition){
 	}
 }
 
+void GrammarTable::createAttrTable(){
+	atTable[0].type=CONSTANT;
+	atTable[0].attr="value";
+
+	atTable[1].type=STATEMENT;
+	atTable[1].attr="stmt#";
+
+	atTable[2].type=ASSIGNMENT;
+	atTable[2].attr="stmt#";
+
+	atTable[3].type=WHILE;
+	atTable[3].attr="stmt#";
+
+	atTable[4].type=IF;
+	atTable[4].attr="stmt#";
+	
+	atTable[5].type=CALL;
+	atTable[5].attr="stmt#";
+	
+	atTable[6].type=PROCEDURE;
+	atTable[6].attr="procname";
+
+	atTable[7].type=VARIABLE;
+	atTable[7].attr="varname";
+}
+
+string GrammarTable::getAttr(TYPE ent){
+	for(int i=0;i<8; i++){
+		if(ent==atTable[i].type){
+			return atTable[i].attr;
+		}
+	}
+}
 
 void GrammarTable::printAllEnt(){
 	cout<<"====================All Entities======================"<<endl;
@@ -378,6 +411,14 @@ void GrammarTable::printAllPatt(){
 		cout<<"ARG1: " << pTable[i].arg1<<endl;
 		cout<<"ARG2: " << pTable[i].arg2<<endl;
 		cout<<"ARG3: " << pTable[i].arg3<<endl;		
+	}
+}
+
+void GrammarTable::printAllAttr(){
+	cout<<"====================All ATTRIBUTES======================"<<endl;
+	for(int i=0;i<8; i++){
+		cout<<"ENTITY TYPE: " << atTable[i].type<<endl;
+		cout<<"ATTRIBUTE: " << atTable[i].attr<<endl;
 	}
 }
 
