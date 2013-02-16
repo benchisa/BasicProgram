@@ -16,7 +16,7 @@ public:
 	bool mergeEntries(INDEX firstQrVar,INDEX secondQrVar,RELATION_LIST * mergeList); 
 	bool mergeTable(INDEX firstQrVar,INDEX secondQrVar,LinkedDataTable * newTable);
 	void deleteRowBy(INDEX QrVar,int data);
-	INDEX_LIST getDataListOf(INDEX qrVar);
+	INDEX_LIST * getDataListOf(INDEX qrVar);
 	INDEX getColNumOf(INDEX qrVar);
 	bool isExists(INDEX qrVar);
 	ROW getRow(INDEX rowNum);
