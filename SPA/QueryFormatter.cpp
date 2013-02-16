@@ -7,48 +7,34 @@ void QueryFormatter::setPKB(PKB* pkb){
 }
 
 list<string> QueryFormatter::formatString(RAWDATA * data) {
-	TYPE type = data->first;
-	list<int> * dataList;
-	dataList = data->second;
-	list<int>::iterator i;
-	list<string> result;
+	list<string>  result;
+	TYPE type;
 
-	if(dataList == NULL){
-		//	result = "No matched result found!";
-		return result;
-	}
-
-	for(i=dataList->begin(); i != dataList->end(); ++i) {
-
-		if(type==VARIABLE) {
-			VAR_NAME varName = pkb->getVarName(*i);
-
-			
-				//result.append("Variable: ");
+	//checks the type of result at the 1st row and subsequent columns eg. Vector[cols][0]
+	for(int cols = 0; cols < data->size(); cols++) {
+		type = (data[cols])[0].data;
+		//translates the result eg. Vector[cols][rows]
+		for(int rows = 0; rows < (data[cols])[0].size(); rows++) {
+			if(type == VARIABLE) {
+				VAR_NAME varName = pkb->getVarName((data[cols])[rows].data);
 				result.push_back(varName);
-		
-
-		}else if(type==BOOL) { 
-			if(*i == 1) {
-				result.push_back("true");
+			}else if(type == BOOL) {
+				if((data[cols])[rows].data == 1) {
+					result.push_back("true");
+				}else {
+					result.push_back("false");
+				}
+			}else if(type==PROCEDURE) { 
+				Procedure * proc = pkb->getProcedure((data[cols])[rows].data);
+				result.push_back(proc->getProcName());
 			}else {
-				result.push_back("false");
+				result.push_back(static_cast<ostringstream*>( &(ostringstream() << ((data[cols])[rows].data)) )->str());
+
+
 			}
-		}else if(type==PROCEDURE) { 
-			Procedure * proc = pkb->getProcedure(*i);
-			//result.append("Procedure Name: ");
-			result.push_back(proc->getProcName());
-		}else {
-			//result.append("Statement No: ");
-			result.push_back(static_cast<ostringstream*>( &(ostringstream() << (*i)) )->str());
-
-
 		}
-
-		//		result.append("\n");
-
 	}
-	//cout << result.size() << "\n";
+
 	return result;
 
 }
