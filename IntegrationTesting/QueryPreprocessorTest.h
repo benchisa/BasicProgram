@@ -3,6 +3,8 @@
 #define QueryPreprocessorTest_h
 
 #include <cppunit/extensions/HelperMacros.h>
+#include "../SPA/QueryPreprocessor.h"
+#include "../SPA/PKB.h"
 
 class QueryPreprocessorTest : public CPPUNIT_NS::TestFixture  
 { 
@@ -16,6 +18,8 @@ void setUp();
 void tearDown();
 
 void testCorrectPreProcessing();
+
+QueryPreprocessor *qpp;
 
 };
 

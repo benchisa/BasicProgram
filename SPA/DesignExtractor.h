@@ -9,10 +9,11 @@ public:
 	~DesignExtractor(void);
 
 	bool isStatementTypeOf(TYPE typeName, STATEMENT_NUM stmtNum);
-	STATEMENT_LIST * getAllCallStmts();
-	STATEMENT_LIST * getAllAssigns();
-	STATEMENT_LIST * getAllWhiles();
-	STATEMENT_LIST * getAllIfs();
+	DATA_LIST * getAllCallStmts();
+	DATA_LIST * getAllAssigns();
+	DATA_LIST * getAllWhiles();
+	DATA_LIST * getAllIfs();
+
 
 	//createCFG and store in PKB
 	void createCFG();
@@ -53,6 +54,8 @@ public:
 private:
 	PKB* pkb;
 	AST* buildCFG(AST *);
+	int maxStmtNum;
+	int maxProgNum;
 	vector<PROG_LINE> cfgWhileKeepers;
 	 void computeTypeOnly(list<pair<int, int>> &result, list<pair<int, int>> &listLst, TYPE type1, TYPE type2);
 	 void computeParent(PARENT_LIST &result, PARENT_LIST tmp, TYPE type, STATEMENT_NUM s1, STATEMENT_NUM s2);

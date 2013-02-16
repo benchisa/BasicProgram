@@ -1,10 +1,11 @@
 #include "SuchThatClause.h"
 #include "SuchThat.h"
 
-SuchThatClause::SuchThatClause(PKB* pkb,QUERYTABLE* qrTable)
+SuchThatClause::SuchThatClause(PKB* pkb,QUERYTABLE* qrTable,DesignExtractor * extractor)
 {
 	this->pkb = pkb;
 	this->qrTable = qrTable;
+	this->extractor = extractor;
 }
 
 
@@ -59,27 +60,27 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 			}
 			if(relType == PARENTST){
 
-				if(SuchThat::getIsParentStarResult(firstRel->getData(),secondRel->getData())){
+				if(extractor->getIsParentStarResult(firstRel->getData(),secondRel->getData())){
 					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
 				}
 			}
 			if(relType==FOLLOWS){
-				if(SuchThat::getIsFollowsResult(firstRel->getData(),secondRel->getData())){
+				if(extractor->getIsFollowsResult(firstRel->getData(),secondRel->getData())){
 					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
 				}
 			}
 			if(relType==FOLLOWST){
-				if(SuchThat::getIsFollowsStarResult(firstRel->getData(),secondRel->getData())){
+				if(extractor->getIsFollowsStarResult(firstRel->getData(),secondRel->getData())){
 					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
 				}
 			}
 			if(relType==MODIFIES){
-				if(SuchThat::getIsModifiesResult(STATEMENT,firstRel->getData(),secondRel->getData())){
+				if(extractor->getIsModifiesResult(STATEMENT,firstRel->getData(),secondRel->getData())){
 					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
 				}
 			}
 			if(relType==USES){
-				if(SuchThat::getIsUsesResult(STATEMENT,firstRel->getData(),secondRel->getData())){
+				if(extractor->getIsUsesResult(STATEMENT,firstRel->getData(),secondRel->getData())){
 					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
 				}
 			}
@@ -100,25 +101,25 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 			//parent, narrow down second
 			if(relType == PARENT){
 
-				tmpList = SuchThat::getParentResult(secondType,firstRel->getData(),0);
+				tmpList = extractor->getParentResult(secondType,firstRel->getData(),0);
 				iterateAndStore(relList, tmpList);
 			}
 			//parent*, narrow down second
 
 			if(relType == PARENTST){
-				tmpList = SuchThat::getParentStarResult(secondType,firstRel->getData(),0);
+				tmpList = extractor->getParentStarResult(secondType,firstRel->getData(),0);
 				iterateAndStore(relList, tmpList);
 			}
 			//follow, narrow down second
 
 			if(relType==FOLLOWS){
-				tmpList = SuchThat::getFollowsResult(secondType,firstRel->getData(),0);
+				tmpList = extractor->getFollowsResult(secondType,firstRel->getData(),0);
 				iterateAndStore(relList, tmpList);
 			}
 			//follow* narrow down
 
 			if(relType==FOLLOWST){
-				tmpList = SuchThat::getFollowsStarResult(secondType,firstRel->getData(),0);
+				tmpList = extractor->getFollowsStarResult(secondType,firstRel->getData(),0);
 				iterateAndStore(relList, tmpList);
 			}
 			//modifies, no need to narrow down
@@ -126,12 +127,12 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 			if(relType==MODIFIES){
 				//cout<<"First Rel: "<< firstRel->getType();
 				//cout<<"First Data: "<<firstRel->getData();
-				tmpList = SuchThat::getModifiesResult(firstRel->getType(),firstRel->getData(),0);
+				tmpList = extractor->getModifiesResult(firstRel->getType(),firstRel->getData(),0);
 				iterateAndStore(relList, tmpList);
 			}
 			//uses, now need to narrow down
 			if(relType==USES){
-				tmpList = SuchThat::getUsesResult(firstRel->getType(),firstRel->getData(),0);
+				tmpList = extractor->getUsesResult(firstRel->getType(),firstRel->getData(),0);
 				iterateAndStore(relList, tmpList);
 			}
 			//	RELATION_LIST::iterator itr;
@@ -149,12 +150,12 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 
 			//parent, narrow down
 			if(relType == PARENT){
-				tmpList = SuchThat::getParentResult(firstType,0,secondRel->getData());
+				tmpList = extractor->getParentResult(firstType,0,secondRel->getData());
 				iterateAndStore(relList, tmpList);
 			}
 			//parent*, narrow down
 			if(relType == PARENTST){
-				tmpList = SuchThat::getParentStarResult(firstType,0,secondRel->getData());
+				tmpList = extractor->getParentStarResult(firstType,0,secondRel->getData());
 				iterateAndStore(relList, tmpList);
 			}
 			//follow, narrow down
@@ -163,31 +164,31 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 				//cout<<"secondRel:"<< secondRel->getType();
 				//cout<<"secondIndexL: "<<secondRel->getData();
 
-				tmpList = SuchThat::getFollowsResult(firstType,0,secondRel->getData());
+				tmpList = extractor->getFollowsResult(firstType,0,secondRel->getData());
 				iterateAndStore(relList, tmpList);
 
-				//relList = &SuchThat::getFollowsResult(firstType,0,secondRel->getData());
+				//relList = &extractor->getFollowsResult(firstType,0,secondRel->getData());
 				//cout << "\nsize: " << relList->size() << "\n";
 			}
 			//follow* narrow down
 			if(relType==FOLLOWST){
 				//	cout<<"First Rel: "<< firstType;
 				//		cout<<"Second Data: "<<secondRel->getData();
-				tmpList = SuchThat::getFollowsStarResult(firstType,0,secondRel->getData());
+				tmpList = extractor->getFollowsStarResult(firstType,0,secondRel->getData());
 				iterateAndStore(relList, tmpList);
 			}
 			//modifies, narrow down
 			if(relType==MODIFIES){
 			//	cout<<"First Rel: "<< firstType;
 			//	cout<<"Second Data: "<<secondRel->getData();
-				tmpList = SuchThat::getModifiesResult(firstType,0,secondRel->getData());
+				tmpList = extractor->getModifiesResult(firstType,0,secondRel->getData());
 				iterateAndStore(relList, tmpList);
 			}
 			//uses, narrow down
 			if(relType==USES){
 				//cout<<"First Rel: "<< firstType;
 				//cout<<"Second Data: "<<secondRel->getData();
-				tmpList = SuchThat::getUsesResult(firstType,0,secondRel->getData());
+				tmpList = extractor->getUsesResult(firstType,0,secondRel->getData());
 				iterateAndStore(relList, tmpList);
 			}
 		}
@@ -225,7 +226,7 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
 						relList = NULL;
 					}else{
-						tmpList = SuchThat::getParentResult(firstType,secondType);
+						tmpList = extractor->getParentResult(firstType,secondType);
 						iterateAndStore(relList, tmpList);
 					}
 				}
@@ -236,7 +237,7 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&(firstRel->getData()==secondRel->getData())){
 						relList = NULL;
 					}else{
-						tmpList = SuchThat::getParentStarResult(firstType,secondType);
+						tmpList = extractor->getParentStarResult(firstType,secondType);
 						iterateAndStore(relList, tmpList);
 					}
 
@@ -248,7 +249,7 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
 						relList = NULL;
 					}else{
-						tmpList = SuchThat::getFollowsResult(firstType,secondType);
+						tmpList = extractor->getFollowsResult(firstType,secondType);
 						iterateAndStore(relList, tmpList);
 					}
 
@@ -260,7 +261,7 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
 						relList = NULL;
 					}else{
-						tmpList = SuchThat::getFollowsStarResult(firstType,secondType);
+						tmpList = extractor->getFollowsStarResult(firstType,secondType);
 						iterateAndStore(relList, tmpList);
 					}
 
@@ -270,12 +271,12 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 					//cout<<"firstType: "<<firstType;
 					//cout<<"secondType: "<<secondType;
 
-					tmpList = SuchThat::getModifiesResult(firstType,0,0);
+					tmpList = extractor->getModifiesResult(firstType,0,0);
 					iterateAndStore(relList, tmpList);
 				}
 				//uses, narrow down first rel
 				if(relType==USES){
-					tmpList = SuchThat::getUsesResult(firstType,0,0);
+					tmpList = extractor->getUsesResult(firstType,0,0);
 					iterateAndStore(relList, tmpList);
 				}
 		}

@@ -1,5 +1,5 @@
 #pragma once
-//#include "QueryEvaluator.h"
+#include "QueryEvaluator.h"
 #include "QueryPreprocessor.h"
 #include "QueryFormatter.h"
 
@@ -14,7 +14,7 @@ public:
 	void setPKB(PKB* pkb);
 	
 private:
-//	QueryEvaluator* queryEval;
+	QueryEvaluator* queryEval;
 	QueryPreprocessor* queryProcessor;
 	QueryFormatter* queryFormatter;
 };

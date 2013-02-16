@@ -50,6 +50,8 @@ private:
 	bool selectBool;
 	
 	vector<QTREE*> clauses; //keeps 'SUCHTHAT','WITH' and 'PATTERN' headNodes
+	vector<int> wildClauses; //keeps the clause numbers of the clauses that has two wilds "_"
+	vector<int> constantClauses; //keeps the clause numbers of the clauses that has two constants
 	vector<int> flagGroups;
 	int clauseCount; //keeps track of how many condition clauses are there
 	int groupCount;	
@@ -93,12 +95,12 @@ private:
 	
 	//helpers for rearranging clauses
 	QTREE* firstAffect;
-	QTREE* firstNext;
+	QTREE* firstFollowsNext;
 	QTREE* firstUsesMod;
 	QTREE* firstCallPar;
 	QTREE* firstWithPatt;
 	QTREE* lastAffect;
-	QTREE* lastNext;
+	QTREE* lastFollowsNext;
 	QTREE* lastUsesMod;
 	QTREE* lastCallPar;
 	QTREE* lastWithPatt;

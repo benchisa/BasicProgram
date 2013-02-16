@@ -82,8 +82,9 @@ bool DesignExtractor::isStatementTypeOf(TYPE typeName,STATEMENT_NUM stmtNum){
 
 void DesignExtractor::createCFG()
 {
-	int size = pkb->getMaxProgLine();
 	
+	int size = pkb->getMaxProgLine();
+
 	// create CFG of progline_size
 	pkb->createCFG(size);
 
@@ -192,9 +193,16 @@ bool DesignExtractor::isNextStarResult(PROG_LINE p1, PROG_LINE p2)
 	if(p1 > size || p2 > size || p1 <= 0 || p2 <=0)
 		return false;
 
-	list<PROG_LINE> tmp = pkb->findAllPaths(p1, p2);
+	list<PROG_LINE> tmp = pkb->getAllProgLines(p1, p2);
+	
 	if(tmp.size() != 0){
-		return true;
+		list<PROG_LINE>::iterator itr = tmp.begin();
+		while(itr!=tmp.end()){
+			if(*itr==p2)
+				return true;
+
+			itr++;
+		}
 	}
 	return false;
 }
@@ -209,7 +217,8 @@ NEXT_LIST DesignExtractor::getNextStarResult(PROG_LINE p1, PROG_LINE p2)
 	// Next*(n1, n2) --> findAll
 	if(p1 == 0 && p2 == 0){
 		for(int i = 1; i <=size; i++){
-			list<PROG_LINE> tmp = pkb->findAllPaths(i, i);
+			list<PROG_LINE> tmp = pkb->getAllProgLines(i, i);
+
 			list<PROG_LINE>::iterator itr = tmp.begin();
 			while(itr!=tmp.end())
 			{
@@ -223,7 +232,7 @@ NEXT_LIST DesignExtractor::getNextStarResult(PROG_LINE p1, PROG_LINE p2)
 	}
 	//Next*(n, n), Next*(1,n1), Next*(n1,2) --> findAll
 	else if(p1 == p2 || (p1 != 0 && p2 == 0) || (p1 == 0 && p2 != 0) || (p1 != 0 && p2 != 0)){
-		list<PROG_LINE> tmp = pkb->findAllPaths(p1, p2);
+		list<PROG_LINE> tmp = pkb->getAllProgLines(p1, p2);
 		list<PROG_LINE>::iterator itr = tmp.begin();
 		while(itr!=tmp.end())
 		{
@@ -878,4 +887,82 @@ FOLLOWS_LIST DesignExtractor::getFollowsStar(STATEMENT_NUM stmt1, STATEMENT_NUM 
 
 		}
 	}
+}
+
+DATA_LIST * DesignExtractor::getAllAssigns(){
+	DATA_LIST * returnList;
+	returnList = new DATA_LIST;
+
+	int stmtNo = pkb->getMaxStatementNum();
+	for(int i=1; i<=stmtNo;i++){
+		AST_LIST * stmtTree;
+		stmtTree = pkb->getASTBy(i);
+		AST_LIST::iterator itr;
+
+		for(itr=stmtTree->begin();itr!=stmtTree->end();itr++){
+			if((*itr)->getRootType()==ASSIGNMENT){
+				returnList->push_back(i);
+			} 
+		}
+	}
+
+	return returnList;
+}
+
+DATA_LIST * DesignExtractor::getAllWhiles(){
+	DATA_LIST * returnList;
+	returnList = new DATA_LIST;
+
+	int stmtNo = pkb->getMaxStatementNum();
+	for(int i=1; i<=stmtNo;i++){
+		AST_LIST * stmtTree;
+		stmtTree = pkb->getASTBy(i);
+		AST_LIST::iterator itr;
+
+		for(itr=stmtTree->begin();itr!=stmtTree->end();itr++){
+			if((*itr)->getRootType()==WHILE){
+				returnList->push_back(i);
+			} 
+		}
+	}
+
+	return returnList;
+}
+DATA_LIST * DesignExtractor::getAllIfs(){
+	DATA_LIST * returnList;
+	returnList = new DATA_LIST;
+
+	int stmtNo = pkb->getMaxStatementNum();
+	for(int i=1; i<=stmtNo;i++){
+		AST_LIST * stmtTree;
+		stmtTree = pkb->getASTBy(i);
+		AST_LIST::iterator itr;
+
+		for(itr=stmtTree->begin();itr!=stmtTree->end();itr++){
+			if((*itr)->getRootType()==IF){
+				returnList->push_back(i);
+			} 
+		}
+	}
+
+	return returnList;
+}
+DATA_LIST * DesignExtractor::getAllCallStmts(){
+	DATA_LIST * returnList;
+	returnList = new DATA_LIST;
+
+	int stmtNo = pkb->getMaxStatementNum();
+	for(int i=1; i<=stmtNo;i++){
+		AST_LIST * stmtTree;
+		stmtTree = pkb->getASTBy(i);
+		AST_LIST::iterator itr;
+
+		for(itr=stmtTree->begin();itr!=stmtTree->end();itr++){
+			if((*itr)->getRootType()==CALL){
+				returnList->push_back(i);
+			} 
+		}
+	}
+
+	return returnList;
 }

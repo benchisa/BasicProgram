@@ -34,7 +34,7 @@ GrammarTable::~GrammarTable(void){
 
 
 void GrammarTable::createEntTable(){	
-	eTable[0].entName	="proc";
+	eTable[0].entName	="procedure";
 	eTable[0].type		=PROCEDURE;
 
 	eTable[1].entName	="stmt";
@@ -88,7 +88,7 @@ void GrammarTable::createRelTable(){
 	rTable[0].arg2		=entRef;
 	rTable[0].type		=CALL;
 
-	rTable[1].relName	="calls\\*";
+	rTable[1].relName	="calls*";
 	rTable[1].numArg	=2;
 	rTable[1].arg1		=entRef;
 	rTable[1].arg2		=entRef;
@@ -100,7 +100,7 @@ void GrammarTable::createRelTable(){
 	rTable[2].arg2		=stmtRef;
 	rTable[2].type		=FOLLOWS;
 
-	rTable[3].relName	="follow\\*";
+	rTable[3].relName	="follows*";
 	rTable[3].numArg	=2;
 	rTable[3].arg1		=stmtRef;
 	rTable[3].arg2		=stmtRef;
@@ -112,7 +112,7 @@ void GrammarTable::createRelTable(){
 	rTable[4].arg2		=stmtRef;
 	rTable[4].type		=PARENT;
 
-	rTable[5].relName	="parent\\*";
+	rTable[5].relName	="parent*";
 	rTable[5].numArg	=2;
 	rTable[5].arg1		=stmtRef;
 	rTable[5].arg2		=stmtRef;
@@ -148,7 +148,7 @@ void GrammarTable::createRelTable(){
 	rTable[10].arg2		=lineRef;
 	rTable[10].type		=NEXT;
 
-	rTable[11].relName	="next\\*";
+	rTable[11].relName	="next*";
 	rTable[11].numArg	=2;
 	rTable[11].arg1		=lineRef;
 	rTable[11].arg2		=lineRef;
@@ -160,7 +160,7 @@ void GrammarTable::createRelTable(){
 	rTable[12].arg2		=stmtRef;
 	rTable[12].type		=AFFECTS;
 
-	rTable[13].relName	="affects\\*";
+	rTable[13].relName	="affects*";
 	rTable[13].numArg	=2;
 	rTable[13].arg1		=stmtRef;
 	rTable[13].arg2		=stmtRef;
@@ -270,11 +270,13 @@ void GrammarTable::createArgTable(){
 	case1.push_back(STATEMENT);
 	case1.push_back(WHILE);
 	case1.push_back(IF);
+	case1.push_back(ANY);
 
 	case2.push_back(STATEMENT);
 	case2.push_back(ASSIGNMENT);
 	case2.push_back(WHILE);
 	case2.push_back(IF);
+	case2.push_back(ANY);
 
 	case3.push_back(PROCEDURE);
 	case3.push_back(STATEMENT);
@@ -282,12 +284,16 @@ void GrammarTable::createArgTable(){
 	case3.push_back(WHILE);
 	case3.push_back(IF);
 	case3.push_back(CALL);
+	case3.push_back(ANY);
 
 	case4.push_back(VARIABLE);
+	case4.push_back(ANY);
 
 	case5.push_back(PROGLINE);
+	case5.push_back(ANY);
 
 	case6.push_back(ASSIGNMENT);
+	case6.push_back(ANY);
 
 	aTable[0].type = FOLLOWS;
 	aTable[0].arg1 = case2;
@@ -343,6 +349,39 @@ vector<TYPE> GrammarTable::getArgument(TYPE rel, int argPosition){
 	}
 }
 
+void GrammarTable::createAttrTable(){
+	atTable[0].type=CONSTANT;
+	atTable[0].attr="value";
+
+	atTable[1].type=STATEMENT;
+	atTable[1].attr="stmt#";
+
+	atTable[2].type=ASSIGNMENT;
+	atTable[2].attr="stmt#";
+
+	atTable[3].type=WHILE;
+	atTable[3].attr="stmt#";
+
+	atTable[4].type=IF;
+	atTable[4].attr="stmt#";
+	
+	atTable[5].type=CALL;
+	atTable[5].attr="stmt#";
+	
+	atTable[6].type=PROCEDURE;
+	atTable[6].attr="procname";
+
+	atTable[7].type=VARIABLE;
+	atTable[7].attr="varname";
+}
+
+string GrammarTable::getAttr(TYPE ent){
+	for(int i=0;i<8; i++){
+		if(ent==atTable[i].type){
+			return atTable[i].attr;
+		}
+	}
+}
 
 void GrammarTable::printAllEnt(){
 	cout<<"====================All Entities======================"<<endl;
@@ -372,6 +411,14 @@ void GrammarTable::printAllPatt(){
 		cout<<"ARG1: " << pTable[i].arg1<<endl;
 		cout<<"ARG2: " << pTable[i].arg2<<endl;
 		cout<<"ARG3: " << pTable[i].arg3<<endl;		
+	}
+}
+
+void GrammarTable::printAllAttr(){
+	cout<<"====================All ATTRIBUTES======================"<<endl;
+	for(int i=0;i<8; i++){
+		cout<<"ENTITY TYPE: " << atTable[i].type<<endl;
+		cout<<"ATTRIBUTE: " << atTable[i].attr<<endl;
 	}
 }
 
