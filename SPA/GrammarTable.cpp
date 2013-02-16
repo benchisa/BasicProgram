@@ -34,7 +34,7 @@ GrammarTable::~GrammarTable(void){
 
 
 void GrammarTable::createEntTable(){	
-	eTable[0].entName	="proc";
+	eTable[0].entName	="procedure";
 	eTable[0].type		=PROCEDURE;
 
 	eTable[1].entName	="stmt";
