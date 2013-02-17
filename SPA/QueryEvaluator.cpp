@@ -127,14 +127,16 @@ bool QueryEvaluator::executeSuchThat(IntermediateResultTable * resultTable, QTRE
 			INDEX_LIST * currentVarResultList;
 			currentVarResultList = resultTable->getResultListOf(qrVarIndex);
 
-			INDEX_LIST::iterator itr;
-			for(itr = currentVarResultList->begin();itr!=currentVarResultList->end();itr++){
-				//replace the firstRel with probe data
-				QUERYTABLE::iterator itr1;
-				itr1 = qrTable->find(firstRel->getData());
-				TYPE relRealType = itr1->second;
+			//find the type of the relation
+			QUERYTABLE::iterator itr1;
+			itr1 = qrTable->find(firstRel->getData());
+			TYPE relRealType = itr1->second;
+			//replace the firstRel type with its real type
+			firstRel->setType(relRealType);
 
-				firstRel->setType(relRealType);
+			INDEX_LIST::iterator itr;
+			for(itr = currentVarResultList->begin();itr!=currentVarResultList->end();itr++){	
+				//replace the firstRel with probe data
 				firstRel->setData(*itr);
 
 				RELATION_LIST * tempList;
@@ -164,14 +166,16 @@ bool QueryEvaluator::executeSuchThat(IntermediateResultTable * resultTable, QTRE
 			INDEX_LIST * currentVarResultList;
 			currentVarResultList = resultTable->getResultListOf(qrVarIndex);
 
+			//replace the firstRel with its real type
+			QUERYTABLE::iterator itr1;
+			itr1 = qrTable->find(secondRel->getData());
+			TYPE relRealType = itr1->second;
+			secondRel->setType(relRealType);
+
 			INDEX_LIST::iterator itr;
 			for(itr = currentVarResultList->begin();itr!=currentVarResultList->end();itr++){
+				
 				//replace the firstRel with probe data
-				QUERYTABLE::iterator itr1;
-				itr1 = qrTable->find(secondRel->getData());
-				TYPE relRealType = itr1->second;
-
-				secondRel->setType(relRealType);
 				secondRel->setData(*itr);
 
 				RELATION_LIST * tempList;
@@ -207,10 +211,6 @@ bool QueryEvaluator::executeWith(IntermediateResultTable * resultTable,QTREE* wi
 	firstAttr = firstRel->getRightSibling();
 	secondRel = firstAttr->getRightSibling();
 	secondAttr = secondRel->getRightSibling();
-	//original information of the two relations
-	//RELATION_PAIR firstRelPair (firstRel->getType(),firstRel->getData());
-	//RELATION_PAIR secondRelPair (secondRel->getType(),secondRel->getData());
-
 	firstQrVar = firstRel->getData();
 	secondQrVar = secondRel->getData();
 	
@@ -237,16 +237,16 @@ bool QueryEvaluator::executeWith(IntermediateResultTable * resultTable,QTREE* wi
 			INDEX_LIST * currentVarResultList;
 			currentVarResultList = resultTable->getResultListOf(qrVarIndex);
 
+			//replace the firstRel with probe data
+			QUERYTABLE::iterator itr1;
+			itr1 = qrTable->find(firstRel->getData());
+			TYPE relRealType = itr1->second;
+			firstRel->setType(ANY);
+			firstAttr->setType(relRealType);
+
 			INDEX_LIST::iterator itr;
 			for(itr = currentVarResultList->begin();itr!=currentVarResultList->end();itr++){
-				//replace the firstRel with probe data
 				
-				QUERYTABLE::iterator itr1;
-				itr1 = qrTable->find(firstRel->getData());
-				TYPE relRealType = itr1->second;
-				
-				firstRel->setType(ANY);
-				firstAttr->setType(relRealType);
 				firstAttr->setData(*itr);
 
 				RELATION_LIST * tempList;
@@ -276,15 +276,16 @@ bool QueryEvaluator::executeWith(IntermediateResultTable * resultTable,QTREE* wi
 			INDEX_LIST * currentVarResultList;
 			currentVarResultList = resultTable->getResultListOf(qrVarIndex);
 
+			//replace the firstRel with probe data
+			QUERYTABLE::iterator itr1;
+			itr1 = qrTable->find(secondRel->getData());
+			TYPE relRealType = itr1->second;
+			secondRel->setType(ANY);
+			secondAttr->setType(relRealType);
+		
 			INDEX_LIST::iterator itr;
 			for(itr = currentVarResultList->begin();itr!=currentVarResultList->end();itr++){
-				//replace the firstRel with probe data
-				QUERYTABLE::iterator itr1;
-				itr1 = qrTable->find(secondRel->getData());
-				TYPE relRealType = itr1->second;
-
-				secondRel->setType(ANY);
-				secondAttr->setType(relRealType);
+				
 				secondAttr->setData(*itr);
 
 				RELATION_LIST * tempList;
@@ -307,6 +308,8 @@ bool QueryEvaluator::executeWith(IntermediateResultTable * resultTable,QTREE* wi
 	}
 }
 RELATION_LIST * QueryEvaluator::appendRelationLists(RELATION_LIST* list1,RELATION_LIST* list2){
+	if (list2==NULL) return list1;
+
 	RELATION_LIST::iterator itr;
 
 	for(itr = list2->begin();itr!=list2->end();itr++){
