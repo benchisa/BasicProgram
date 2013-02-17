@@ -31,7 +31,7 @@ QueryPreprocessor::QueryPreprocessor(PKB* pkb){
 	ref				= synonym+or+underscore+or+integer+or+invComma+ident+invComma;
 	attrName		= "procname|varname|value|stmt#";
 	attrRef			= synonym+"\\.("+attrName+")";
-	attrCompare		= "("+attrRef+"=("+attrRef+or+"\""+ident+"\""+or+integer+")"+or+synonym+"=("+attrRef+or+integer+"))";
+	attrCompare		= "("+attrRef+"\\s*=\\s*("+attrRef+or+"\""+ident+"\""+or+integer+")"+or+synonym+"\\s*=\\s*("+attrRef+or+integer+"))";
 	designEnt		= "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
 	elem			= synonym+or+attrRef;
 	tuple			= elem+or+"\\s*<("+elem+")(\\s*,\\s*"+synonym+"|\\s*,\\s*"+attrRef+")"+optional+"\\s*>";
