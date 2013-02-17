@@ -230,8 +230,8 @@ void LinkedDataTable::deleteRowBy(INDEX qrVar,int data){
 	}
 	
 }
-INDEX_LIST LinkedDataTable::getDataListOf(INDEX qrVar){
-	INDEX_LIST returnList;
+INDEX_LIST * LinkedDataTable::getDataListOf(INDEX qrVar){
+	INDEX_LIST * returnList = new INDEX_LIST;
 	INDEX colNum = LinkedDataTable::getColNumOf(qrVar);
 	SIZE rowNum = rowList.size();
 
@@ -243,11 +243,11 @@ INDEX_LIST LinkedDataTable::getDataListOf(INDEX qrVar){
 		currentEntry = currentRow->begin();
 		advance(currentEntry,colNum);
 		//add the value in return list
-		returnList.push_back(*currentEntry);
+		returnList->push_back(*currentEntry);
 	}
 	
-	returnList.unique();
-	returnList.sort();
+	returnList->unique();
+	returnList->sort();
 
 	return returnList;
 	

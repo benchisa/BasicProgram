@@ -1,46 +1,41 @@
 #include "WithClause.h"
 
 
-WithClause::WithClause(PKB* pkb, DesignExtractor* extractor)
+WithClause::WithClause(PKB* pkb, DesignExtractor* extractor,QUERYTABLE* qrTable, QUERYPARAM* qrParam)
 {
 	this->pkb = pkb;
 	this->extractor = extractor;
+	this->qrTable = qrTable;
+	this->qrParam = qrParam;
 }
 
 
 WithClause::~WithClause(void)
 {
 }
-RELATION_LIST* WithClause::evaluateWithTree(QTREE* qrTree,QUERYTABLE* qrTable, QUERYPARAM* qrParam){
-	WithClause::setQueryTable(qrTable);
-	WithClause::setQueryValue(qrParam);
-	return WithClause::evaluateWith(qrTree);
-}
-void WithClause::setQueryTable(QUERYTABLE* qrTable){
-	this->qrTable = qrTable;
-}
-void WithClause::setQueryValue(QUERYPARAM* qrParam){
-	this->qrParam = qrParam;
-}
-RELATION_LIST* WithClause::evaluateWith(QTREE* withTree){
+
+RELATION_LIST* WithClause::evaluateWithTree(QTREE* withTree){
 	
 	RELATION_LIST * returnList;
 
 	//split the withTree into 4 subtrees
 	//the order of withTree is: LHS->attri->RHS->attri
 	leftVariable = withTree->getFirstDescendant();
-	leftAttribute = withTree->getFirstDescendant();
-	rightVariable = leftVariable->getRightSibling();
+	leftAttribute = leftVariable->getFirstDescendant();
+	rightVariable = leftAttribute->getRightSibling();
 	rightAttribute = rightVariable->getRightSibling();
 
 	//rightVariable is not specified, which means the value at right hand side is a fixed string or int;
 	//eg. proc.Name = "John" or  constant.Value = 5
-	if(rightVariable->getType()==ANY){
-		returnList = findLeftVariable();
+	if(rightVariable->getType()==ANY&&leftVariable->getType()!=ANY){
+		returnList = WithClause::findLeftVariable();
+	}else if(rightVariable->getType()==ANY&&leftVariable->getType()==ANY){
+		//both sides are discovered, test if they are equal
+		returnList= WithClause::findEqual();
 	}else{
 		//right variable is specified. Need to find two unknowns
 		//eg. proc.Name = var.Name 
-		returnList = findMatchedPairs();
+		returnList = WithClause::findMatchedPairs();
 	}
 
 	return returnList;

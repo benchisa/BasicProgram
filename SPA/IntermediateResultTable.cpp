@@ -1,7 +1,7 @@
 #include "IntermediateResultTable.h"
 
 
-IntermediateResultTable::IntermediateResultTable(SIZE tableSize,PKB* qrTree,QUERYTABLE* qrTable,DesignExtractor * extractor)
+IntermediateResultTable::IntermediateResultTable(SIZE tableSize,PKB* pkb,QUERYTABLE* qrTable,DesignExtractor * extractor)
 {
 	this->tableSize = tableSize;
 	this->pkb = pkb;
@@ -29,7 +29,7 @@ INDEX_LIST* IntermediateResultTable::getResultListOf(INDEX qrVarIndex){
 		advance(currentTable,tableNum);
 
 		if(currentTable->isExists(qrVarIndex)){
-			return &currentTable->getDataListOf(qrVarIndex);
+			return currentTable->getDataListOf(qrVarIndex);
 		}
 	}
 	return NULL;
@@ -206,11 +206,11 @@ RAWDATA *IntermediateResultTable::findResultOf(DATA_LIST resultNodeList){
 	for(nodeListItr = resultNodeList.begin();nodeListItr!=resultNodeList.end();nodeListItr++){
 		//add the key_value pair into group, key = databaseNum
 		int key = qrVarTable[1][*nodeListItr];
-		if(key<0){
+		if(key<0){ //special key for qrVars that didn't appear in any clauses
 			key =-1;
-		}else{
-			nodeGroup.insert(valuePair(key,*nodeListItr));
 		}
+		nodeGroup.insert(valuePair(key,*nodeListItr));
+		
 
 		//store the new key into the keyTable
 		DATA_LIST::iterator keyItr;
@@ -331,8 +331,7 @@ RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_L
 RAWDATA * IntermediateResultTable::joinCombinations(RAWDATA* rawData, DATA_LIST * selectedVarList){
 	if(rawData==NULL){	
 		//create the rawData
-		RAWDATA newRaw;
-		rawData = &newRaw;
+		rawData = new RAWDATA();
 
 		//create first col
 		TYPE resultVarType = qrTable->find(selectedVarList->at(0))->second;
@@ -377,7 +376,7 @@ RAWDATA * IntermediateResultTable::joinCombinations(RAWDATA* rawData, DATA_LIST 
 	itr = selectedVarList->begin();
 	selectedVarList->erase(itr);
 
-	if(itr==selectedVarList->end()){
+	if(selectedVarList->size()<1){
 		return rawData;
 	}
 	rawData = IntermediateResultTable::joinCombinations(rawData,selectedVarList);

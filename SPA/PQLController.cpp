@@ -21,13 +21,15 @@ FINAL_RESULT PQLController::getQueryResult(QUERY newQuery){
 	if(queryProcessor->preProcess()==true){
 		//get query tree and query table from preprocessor, pass them to query evaluator
 		
-		queryEval->evaluate(queryProcessor->getQTree(),queryProcessor->getQVarTable(),queryProcessor->getParamTable());
-		//print the result
-		
-	//	returnResult= queryFormatter->formatString(queryEval->getResult());
+		if(queryEval->evaluate(queryProcessor->getQTree(),queryProcessor->getQVarTable(),queryProcessor->getParamTable())){
+			//call formatter
+			//	returnResult= queryFormatter->formatString(queryEval->getResult());
+		}else{
+			//failed to evaluate the result, return nothing
+			returnResult.push_back("");
+		}
+
 		//cout << "returnResult: " << returnResult.size() << "\n";
-		returnResult.push_back("success");
-		return returnResult;
 	}else if(queryProcessor->getSelectBool()==true){
 		returnResult.push_back("true");
 		
