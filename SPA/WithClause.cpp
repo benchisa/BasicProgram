@@ -21,79 +21,207 @@ RELATION_LIST* WithClause::evaluateWithTree(QTREE* withTree){
 	//split the withTree into 4 subtrees
 	//the order of withTree is: LHS->attri->RHS->attri
 	leftVariable = withTree->getFirstDescendant();
-	leftAttribute = leftVariable->getFirstDescendant();
+	leftAttribute = leftVariable->getRightSibling();
 	rightVariable = leftAttribute->getRightSibling();
 	rightAttribute = rightVariable->getRightSibling();
 
 	//rightVariable is not specified, which means the value at right hand side is a fixed string or int;
 	//eg. proc.Name = "John" or  constant.Value = 5
-	if(rightVariable->getType()==ANY&&leftVariable->getType()!=ANY){
-		returnList = WithClause::findLeftVariable();
-	}else if(rightVariable->getType()==ANY&&leftVariable->getType()==ANY){
+	if(rightVariable->getType()==ANY&&leftVariable->getType()==ANY){
 		//both sides are discovered, test if they are equal
 		returnList= WithClause::findEqual();
-	}else{
+	}else if(rightVariable->getType()!=ANY&&leftVariable->getType()!=ANY){
 		//right variable is specified. Need to find two unknowns
 		//eg. proc.Name = var.Name 
 		returnList = WithClause::findMatchedPairs();
+	}else{
+		returnList = WithClause::findOneVariable();
 	}
 
 	return returnList;
 }
+// to do
+RELATION_LIST* WithClause::findEqual(){
+	RELATION_LIST * returnList = new RELATION_LIST();
 
+	TYPE rightAttrType,leftAttrType;
+	int rightAttrValue,leftAttrValue;
+
+	rightAttrType = rightAttribute->getType();
+	rightAttrValue = rightAttribute->getData();
+	leftAttrType = leftAttribute->getType();
+	leftAttrValue = leftAttribute->getData();
+
+	if(rightAttrType==leftAttrType&&rightAttrValue==leftAttrValue){
+		returnList->push_back(pair<int,int>(leftAttrValue,rightAttrValue));
+	}else{
+		switch(leftAttrType){
+		case CALL:
+			{	
+				//get string value from param table
+				QUERYPARAM::iterator itr1;
+				itr1 = qrParam->find(rightAttrValue);
+				string paramString = itr1->second;
+
+				//get caller name
+				PROC_NAME callerName = pkb->getProcedure(leftAttrValue)->getProcName();
+				//get callees
+				CALLPAIR_LIST callList;
+				callList = pkb->getCall(callerName,"");
+
+				//set flag
+				bool found = false;
+				if(callList.size()>0){
+					CALLPAIR_LIST::iterator itr;
+					for(itr = callList.begin();itr!=callList.end();itr++){
+
+						string calleeName = itr->second;
+						//compare the two values
+						if(calleeName == paramString){
+							found = true;
+							break;
+						}
+					}
+				}
+				if(found) 
+					returnList->push_back(pair<int,int>(leftAttrValue,rightAttrValue));
+				else
+					returnList = NULL;
+			}
+			break;
+		case PROCEDURE:
+			{
+				//get string value from param table
+				QUERYPARAM::iterator itr1;
+				itr1 = qrParam->find(rightAttrValue);
+				string paramString = itr1->second;
+				
+				//get the proc name
+				string procName = pkb->getProcedure(leftAttrValue)->getProcName();
+
+				//compare the two values
+				if(procName==paramString) 
+					returnList->push_back(pair<int,int>(leftAttrValue,rightAttrValue));
+				else 
+					returnList =NULL;
+			}
+			break;
+		case VARIABLE:
+			{
+				//get string value from param table
+				QUERYPARAM::iterator itr1;
+				itr1 = qrParam->find(rightAttrValue);
+				string paramString = itr1->second;
+				
+				//get the var name
+				string varName = pkb->getVarName(leftAttrValue);
+
+				//compare the two values
+				if(varName==paramString) 
+					returnList->push_back(pair<int,int>(leftAttrValue,rightAttrValue));
+				else 
+					returnList =NULL;
+			}
+			break;
+		default://for all the statements
+			if(rightAttrType==CONSTANT){
+				if(leftAttrValue==rightAttrValue)
+					returnList->push_back(pair<int,int>(leftAttrValue,rightAttrValue));
+				else
+					returnList =NULL;
+			}else{
+				returnList = NULL;
+			}
+			break;
+		}
+	}
+	return returnList;
+}
 //the right attribute is either string index of integer value
-RELATION_LIST* WithClause::findLeftVariable(){
+RELATION_LIST* WithClause::findOneVariable(){
 	//declare variables in the method
 	RELATION_LIST * returnList;
 	TYPE rightAttributeType = rightAttribute->getType();
+	TYPE leftAttributeType = leftAttribute->getType();
 
 	//set returnList to NULL as default return value
-	returnList = NULL;
+	//returnList = NULL;
 	
 	//find name in procedure table, variable table and call table
-	if(rightAttributeType==PARAM){
-		returnList = WithClause::findLeftString();
+	if(rightAttributeType==PARAM||leftAttributeType==PARAM){
+		returnList = WithClause::findOneString();
 	}
 	//find integer value in constant, progline, statement
-	if(rightAttributeType==INTEGER){
-		returnList = WithClause::findLeftInteger();
+	if(rightAttributeType==CONSTANT||leftAttributeType==CONSTANT){
+		returnList = WithClause::findOneInteger();
 	}
-
+	if(returnList->size()<1) return NULL;
 	return returnList;
 }
-RELATION_LIST* WithClause::findLeftString(){
-	RELATION_LIST* returnList;
+RELATION_LIST* WithClause::findOneString(){
+	RELATION_LIST* returnList = new RELATION_LIST();
+	int knownAttrIndex, unknownAttrIndex;
+	string knownAttrValue;
+	TYPE unknownAttrType;
+	bool isLR;
 
-	returnList = NULL;
+	TYPE rightAttributeType = rightAttribute->getType();
+	TYPE leftAttributeType = leftAttribute->getType();
 
-	//To get the string value of right attribute from Query parameter table
-	int rightAttributeIndex = rightAttribute->getData();
-	QUERYPARAM::iterator itr1;
-	itr1 = qrParam->find(rightAttributeIndex);
-	string rightAttributeValue = itr1->second;
+	//To detect which attribute is known and which is unknown
+	if(rightAttributeType == PARAM){ //right is known
+		//To get the string value of known(right) attribute from Query parameter table
+		knownAttrIndex = rightAttribute->getData();
+		QUERYPARAM::iterator itr1;
+		itr1 = qrParam->find(knownAttrIndex);
+		knownAttrValue = itr1->second;
 
-	//To detect the type of left variable
-	int leftAttributeIndex = leftVariable->getData();
-	QUERYTABLE::iterator itr2;
-	itr2 = qrTable->find(leftAttributeIndex);
-	TYPE leftAttributeType = itr2->second;
+		//To detect the type of unknown(left) variable
+		int unknownAttrIndex = leftVariable->getData();
+		QUERYTABLE::iterator itr2;
+		itr2 = qrTable->find(unknownAttrIndex);
+		unknownAttrType = itr2->second;
+		isLR = true;
+	}else{
+		//To get the string value of known(left) attribute from Query parameter table
+		knownAttrIndex = leftAttribute->getData();
+		QUERYPARAM::iterator itr1;
+		itr1 = qrParam->find(knownAttrIndex);
+		knownAttrValue = itr1->second;
+
+		//To detect the type of unknown(right) variable
+		int unknownAttrIndex = rightVariable->getData();
+		QUERYTABLE::iterator itr2;
+		itr2 = qrTable->find(unknownAttrIndex);
+		unknownAttrType = itr2->second;
+		isLR = false;
+	}
 	
-	switch(leftAttributeType){
+	
+	switch(unknownAttrType){
 	case PROCEDURE:
-		{int procIndex = pkb->getProcIndex(rightAttributeValue);
-		if(procIndex!=NULL) 
-			returnList->push_back(pair<int,int>(procIndex,rightAttributeIndex));
+		{int procIndex = pkb->getProcIndex(knownAttrValue);
+		if(procIndex!=NULL) {
+			if(isLR)
+				returnList->push_back(pair<int,int>(procIndex,knownAttrIndex));
+			else
+				returnList->push_back(pair<int,int>(knownAttrIndex,procIndex));
+		}
 		}
 		break;
 	case VARIABLE:
-		{int varIndex = pkb->getVarIndex(rightAttributeValue);
-		if(varIndex!=NULL)
-			returnList->push_back(pair<int,int>(varIndex,rightAttributeIndex));
+		{int varIndex = pkb->getVarIndex(knownAttrValue);
+		if(varIndex!=NULL){
+			if(isLR)
+				returnList->push_back(pair<int,int>(varIndex,knownAttrIndex));
+			else
+				returnList->push_back(pair<int,int>(knownAttrIndex,varIndex));
+		}
 		}
 		break;
 	case CALL:
 		{CALLPAIR_LIST callList;
-		callList = pkb->getCall("",rightAttributeValue);
+		callList = pkb->getCall("",knownAttrValue);
 
 		if(callList.size()>0){
 			CALLPAIR_LIST::iterator itr;
@@ -101,9 +229,12 @@ RELATION_LIST* WithClause::findLeftString(){
 				string callerName = itr->first;
 				string calleeName = itr->second;
 
-				if(calleeName == rightAttributeValue){
+				if(calleeName == knownAttrValue){
 					int callerIndex = pkb->getProcIndex(callerName);
-					returnList->push_back(pair<int,int>(callerIndex,rightAttributeIndex));
+					if(isLR)
+						returnList->push_back(pair<int,int>(callerIndex,knownAttrIndex));
+					else
+						returnList->push_back(pair<int,int>(knownAttrIndex,callerIndex));
 				}
 			}
 		}
@@ -113,47 +244,70 @@ RELATION_LIST* WithClause::findLeftString(){
 
 	return returnList;
 }
-RELATION_LIST* WithClause::findLeftInteger(){
-	RELATION_LIST* returnList;
-
-	returnList = NULL;
-
-	//To get the string value of right attribute from Query parameter table
-	int rightAttributeValue = rightAttribute->getData();
+RELATION_LIST* WithClause::findOneInteger(){
+	RELATION_LIST* returnList = new RELATION_LIST();
+	int knownAttrIndex, unknownAttrIndex;
+	int knownAttrValue;
+	TYPE unknownAttrType;
+	bool isLR; //correct order is left = right
 	
-	//To detect the type of left variable
-	int leftAttributeIndex = leftVariable->getData();
-	QUERYTABLE::iterator itr2;
-	itr2 = qrTable->find(leftAttributeIndex);
-	TYPE leftAttributeType = itr2->second;
+	TYPE rightAttributeType = rightAttribute->getType();
+	TYPE leftAttributeType = leftAttribute->getType();
 	
-	switch(leftAttributeType){
+	if(rightAttributeType ==CONSTANT){
+		//To get the string value of known(right) attribute from Query parameter table
+		knownAttrValue = rightAttribute->getData();
+	
+		//To detect the type of unknown(left) variable
+		unknownAttrIndex = leftVariable->getData();
+		QUERYTABLE::iterator itr2;
+		itr2 = qrTable->find(unknownAttrIndex);
+		unknownAttrType = itr2->second;
+		isLR = true;
+	}else{
+		//To get the string value of known(left) attribute from Query parameter table
+		knownAttrValue = leftAttribute->getData();
+	
+		//To detect the type of unknown(right) variable
+		unknownAttrIndex = rightVariable->getData();
+		QUERYTABLE::iterator itr2;
+		itr2 = qrTable->find(unknownAttrIndex);
+		unknownAttrType = itr2->second;
+		isLR = false;
+	}
+	
+	
+	switch(unknownAttrType){
 	case CONSTANT:
-		{int constantIndex = pkb->getConstantIndex(rightAttributeValue);
-		if(constantIndex!=NULL) 
-			returnList->push_back(pair<int,int>(constantIndex,rightAttributeValue));
+		{int constantIndex = pkb->getConstantIndex(knownAttrValue);
+		if(constantIndex!=NULL){
+			if(isLR)
+				returnList->push_back(pair<int,int>(constantIndex,knownAttrValue));
+			else
+				returnList->push_back(pair<int,int>(knownAttrValue,constantIndex));
+		}
 		}
 		break;
 	case PROGLINE:
 		{int maxProgLine = pkb->getMaxProgLine();
-		int queryProgLine = rightAttributeValue;
+		int queryProgLine = knownAttrValue;
 
 		if( queryProgLine <= maxProgLine)
-			returnList->push_back(pair<int,int>(rightAttributeValue,rightAttributeValue));
+				returnList->push_back(pair<int,int>(knownAttrValue,knownAttrValue));	
 		}
 		break;
 	case STATEMENT:
 		{int maxStatementNum = pkb->getMaxStatementNum();
-		int queryStatementNum = rightAttributeValue;
+		int queryStatementNum = knownAttrValue;
 
 		if(queryStatementNum <= maxStatementNum){
-			returnList->push_back(pair<int,int>(rightAttributeValue,rightAttributeValue));
+			returnList->push_back(pair<int,int>(knownAttrValue,knownAttrValue));
 		}
 		}
 		break;
 	case ASSIGNMENT:
 		{int maxStmtNum = pkb->getMaxStatementNum();
-		int queryStmtNum = rightAttributeValue;
+		int queryStmtNum = knownAttrValue;
 
 		if(queryStmtNum <= maxStmtNum&&extractor->isStatementTypeOf(ASSIGNMENT,queryStmtNum)){
 				returnList->push_back(pair<int,int>(queryStmtNum,queryStmtNum));
@@ -162,7 +316,7 @@ RELATION_LIST* WithClause::findLeftInteger(){
 		break;
 	case CALL:
 		{int maxStmtNum = pkb->getMaxStatementNum();
-		int queryStmtNum = rightAttributeValue;
+		int queryStmtNum = knownAttrValue;
 
 		if(queryStmtNum <= maxStmtNum&&extractor->isStatementTypeOf(CALL,queryStmtNum)){
 				returnList->push_back(pair<int,int>(queryStmtNum,queryStmtNum));
@@ -171,7 +325,7 @@ RELATION_LIST* WithClause::findLeftInteger(){
 		break;
 	case WHILE:
 		{int maxStmtNum = pkb->getMaxStatementNum();
-		int queryStmtNum = rightAttributeValue;
+		int queryStmtNum = knownAttrValue;
 
 		if(queryStmtNum <= maxStmtNum&&extractor->isStatementTypeOf(WHILE,queryStmtNum)){
 				returnList->push_back(pair<int,int>(queryStmtNum,queryStmtNum));
@@ -180,7 +334,7 @@ RELATION_LIST* WithClause::findLeftInteger(){
 		break;
 	case IF:
 		{int maxStmtNum = pkb->getMaxStatementNum();
-		int queryStmtNum = rightAttributeValue;
+		int queryStmtNum = knownAttrValue;
 
 		if(queryStmtNum <= maxStmtNum&&extractor->isStatementTypeOf(IF,queryStmtNum)){
 				returnList->push_back(pair<int,int>(queryStmtNum,queryStmtNum));

@@ -23,7 +23,7 @@ void QueryPKBTest::testSampleInput1(){
 	SPAController spa;
 
 	spa.enterProgram(SampleSimpleSources::sampleSource5);
-	spa.getQueryResult(SampleQueries::sampleQuery1);
+	spa.getQueryResult(SampleQueries::sampleQuery7);
 /*	//create PKB
 	PKB *pkb = SamplePKB::pkb5();
 

@@ -81,13 +81,13 @@ SOURCE SampleSimpleSources::sampleInvalidSource5 = "InvalidCode3{\n"
 // Not sure if you people need this... feel free to add a class for this if needed.
 
 //===============Test for Follows =================== PKB5
-QUERY SampleQueries::sampleQuery1 = "stmt s; select s such that Follows(s,4);";
-QUERY SampleQueries::sampleQuery2 = "stmt s; select s such that Follows (2,s);";
-QUERY SampleQueries::sampleQuery3 = "stmt s1,s2; select s2 such that Follows (s1,s2);";
-QUERY SampleQueries::sampleQuery4 = "stmt s1; select s1 such that Follows (s1,_);";
-QUERY SampleQueries::sampleQuery5 = "stmt s1; select s1 such that Follows (_,_);";
-QUERY SampleQueries::sampleQuery6 = "stmt s1; select s1 such that Follows (_,s1);";
-QUERY SampleQueries::sampleQuery7 = "while w1,w2;select w2 such that Follows (w1,w2);";
+QUERY SampleQueries::sampleQuery1 = "stmt s; select s such that Follows(s,4);";//pass
+QUERY SampleQueries::sampleQuery2 = "stmt s; select s such that Follows (2,s);";//pass
+QUERY SampleQueries::sampleQuery3 = "stmt s1,s2,s select <s1,s2> such that Follows (s1,s2);"; //pass
+QUERY SampleQueries::sampleQuery4 = "stmt s1,s2; select s2 such that Follows (s1,s2)"; //pass
+QUERY SampleQueries::sampleQuery5 = "stmt s1,s2,s3; select <s1,s2,s3> such that Follows (s1,s2) and Follows(s2,s3)";//pass
+QUERY SampleQueries::sampleQuery6 = "stmt s1,s2,s3; select s3 such that Follows (s1,s2) and Follows(s2,s3)";//pass
+QUERY SampleQueries::sampleQuery7 = "stmt s;select s with s.stmt#=2;";
 QUERY SampleQueries::sampleQuery8 = "assign a1,a2;select a2 such that Follows (a1,a2);";
 //===============Test for Follows* =================== PKB3
 QUERY SampleQueries::sampleQuery9 = "stmt s; select s such that Follows*(s,3);";

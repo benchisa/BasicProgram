@@ -29,9 +29,9 @@ private:
 //	void setQueryValue(QUERYPARAM* qrParam);
 //	RELATION_LIST* evaluateWith(QTREE* withTree);
 	
-	RELATION_LIST* findLeftVariable();
-	RELATION_LIST* findLeftString();
-	RELATION_LIST* findLeftInteger();
+	RELATION_LIST* findOneVariable();
+	RELATION_LIST* findOneString();
+	RELATION_LIST* findOneInteger();
 	RELATION_LIST* findEqual();
 
 	RELATION_LIST* findMatchedPairs();

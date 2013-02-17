@@ -1,7 +1,6 @@
 #pragma once
 #include "Global_Data_Abstraction.h"
 #include "QTREE.h"
-#include "Pattern.h"
 #include <hash_map>
 #include "IntermediateResultTable.h"
 #include "SuchThatClause.h"
@@ -29,7 +28,6 @@ private:
 	PKB * pkb;
 	TYPE resultType;
 	INDEX resultIndex;
-	Pattern patProcessor;
 
  //   INDEX_LIST * returnList;
 	RAWDATA * rawData;
