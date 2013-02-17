@@ -773,16 +773,16 @@ bool QueryPreprocessor::processWith(TOKEN token){
 		else if (regex_match(currToken,regex("\".+\""))){
 		//not syn: is string
 			(*paramTable).insert(paramPair((*paramTable).size()+1,currToken));
-			currNode = createQTREENode(PARAM,(*paramTable).size());
-			setChild(headNode,currNode);
 			currNode = createQTREENode(ANY);
+			setChild(headNode,currNode);	
+			currNode = createQTREENode(PARAM,(*paramTable).size());
 			oneConstantClauses.push_back(clauseCount);
 		}
 		else if (isConstant(currToken)){		
 		//not syn: is constant
+			currNode = createQTREENode(ANY);
+			setChild(headNode,currNode);			
 			currNode = createQTREENode(CONSTANT,atoi(currToken.c_str()));
-			setChild(headNode,currNode);
-			currNode = createQTREENode(ANY);			
 			oneConstantClauses.push_back(clauseCount);
 		}
 		setChild(headNode,currNode);
