@@ -49,18 +49,6 @@ private:
 	vector<TOKEN> *tokens;	
 	bool selectBool;
 	
-	vector<QTREE*> clauses; //keeps 'SUCHTHAT','WITH' and 'PATTERN' headNodes
-	vector<int> wildClauses; //keeps the clause numbers of the clauses that has two wilds "_"
-	vector<int> constantClauses; //keeps the clause numbers of the clauses that has two constants
-	vector<int> flagGroups;
-	int clauseCount; //keeps track of how many condition clauses are there
-	int groupCount;	
-
-	vector<TOKEN> exprPieces;
-	//iterators for expression tree
-	std::vector<TOKEN>::iterator next;
-	std::vector<TOKEN>::iterator end;
-
 	struct qVar{
 		int qVarIndex;
 		int groupNum;
@@ -70,6 +58,12 @@ private:
 		vector<int> clauseNum;
 	};
 	
+	struct sortBySecond {
+		bool operator()(const std::pair<int,TYPE> &left, const std::pair<int,TYPE> &right) {
+			return left.second < right.second;
+		}
+	};
+
 	//qVarTable keeps track of the synonym's number and type
 	//qVarTable is the final data structure to pass to Evaluator
 	hash_map<int,TYPE> *qVarTable;
@@ -87,6 +81,21 @@ private:
 	typedef pair<int,TYPE> qVarPair;	
 	typedef pair<int,string> paramPair;	
 	typedef pair<string,qVar> dVarPair;			
+	
+	vector<QTREE*> clauses; //keeps 'SUCHTHAT','WITH' and 'PATTERN' headNodes
+	vector<int> wildClauses; //keeps the clause numbers of the clauses that has two wilds "_"
+	vector<int> twoConstantClauses; //keeps the clause numbers of the clauses that has two constants
+	vector<int> oneConstantClauses;
+	vector<int> flagGroups;
+	vector<qVarPair> sorted_qVarTable;
+
+	vector<TOKEN> exprPieces;
+	//iterators for expression tree
+	std::vector<TOKEN>::iterator next;
+	std::vector<TOKEN>::iterator end;
+	
+	int clauseCount; //keeps track of how many condition clauses are there
+	int groupCount;	
 
 	QTREE* firstNode;
 	QTREE* currNode;
@@ -127,6 +136,7 @@ private:
 	bool isDeclaredVar(TOKEN);
 	bool isResultVar(TOKEN);
 	bool isExploredVar(TOKEN);
+	bool hasConstantVar(int);
 	bool verifyDeclaration(TOKEN);
 	bool verifySelect(TOKEN);
 	bool verifyCondition(TOKEN);
@@ -139,10 +149,12 @@ private:
 	void updateQVarGroup(TOKEN,int);
 	void updateQVarClause(TOKEN);
 	void mergeGroup(int,int);
+	dVarPair getQVar(int);
 	int getQVarGroup(TOKEN);
 	TYPE getQVarType(TOKEN);
 	TYPE getQVarType(int);
 	int getQVarIndex(TOKEN);
+	void sortQVarTable();
 	void createQVarTable(int);
 	QTREE* createQTREENode(TYPE);
 	QTREE* createQTREENode(TYPE,int);
@@ -156,7 +168,7 @@ private:
 
 	//setup Query Tree for evaluator's use
 	void setQTree();
-	void arrangeClause(QTREE*);
+	void arrangeClauseByRel(QTREE*);
 	void joinClauses();
 	bool isFlaggedGroup(int);
 

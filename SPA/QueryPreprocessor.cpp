@@ -171,12 +171,16 @@ void QueryPreprocessor::setQTree(){
 	//idea: check selected variable/s is/are from which group/s
 	int grpNum;
 	vector<int> clauseNums;
+	dVarPair dpair;
 	
 	firstAffect = createQTREENode(ANY);
 	firstFollowsNext = createQTREENode(ANY);
 	firstUsesMod = createQTREENode(ANY);
 	firstCallPar = createQTREENode(ANY);
 	firstWithPatt = createQTREENode(ANY);
+
+	//prepare sort
+	sortQVarTable();
 		
 	//for every variable
 	for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
@@ -193,46 +197,134 @@ void QueryPreprocessor::setQTree(){
 	}
 
 	//insert into QTREE the clauses with both constants first
-	for (int i=0; i<constantClauses.size(); i++){
-		currNode = clauses.at(constantClauses.at(i));
+	for (int i=0; i<twoConstantClauses.size(); i++){
+		currNode = clauses.at(twoConstantClauses.at(i));
 		if (currNode!=NULL){
-			arrangeClause(currNode);
-			clauses.at(constantClauses.at(i)) = NULL;
+			arrangeClauseByRel(currNode);
+			clauses.at(twoConstantClauses.at(i)) = NULL;
 		}
 	}
 
 	joinClauses();
 
-	//insert into QTREE the clauses with the variables NOT from those groups 
-	for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
-		//choose those not flagged for selected
+	//old function
+	/*for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
+		
 		if(!isFlaggedGroup(dVarIter->second.groupNum)){
 			//retrieve the clause number
 			clauseNums = dVarIter->second.clauseNum;
 			for (int i=0; i<clauseNums.size(); i++){
 				currNode = clauses.at(clauseNums.at(i));
 				if (currNode!=NULL){
-					arrangeClause(currNode);
+					arrangeClauseByRel(currNode);
 					clauses.at(clauseNums.at(i)) = NULL;
 				}
 			}
 		}		
 	}
+	*/
+
+	//insert into QTREE the clauses with the variables NOT from those flagged groups 
+	//insert those with 1 constant first
+	for (int i=0; i<sorted_qVarTable.size(); i++){
+		dpair = getQVar(sorted_qVarTable.at(i).first);
+		//choose those not flagged for selected
+		if(!isFlaggedGroup(dpair.second.groupNum)){
+			//retrieve the clause number
+			clauseNums = dpair.second.clauseNum;
+			for (int i=0; i<clauseNums.size(); i++){
+				if (hasConstantVar(clauseNums.at(i))){
+					currNode = clauses.at(clauseNums.at(i));
+					if (currNode!=NULL){
+						arrangeClauseByRel(currNode);
+						clauses.at(clauseNums.at(i)) = NULL;
+					}
+				}
+			}
+		}
+	}
 	
+	joinClauses();
+	
+	//insert those with two unknowns
+	for (int i=0; i<sorted_qVarTable.size(); i++){
+		dpair = getQVar(sorted_qVarTable.at(i).first);
+		//choose those not flagged for selected
+		if(!isFlaggedGroup(dpair.second.groupNum)){
+			//retrieve the clause number
+			clauseNums = dpair.second.clauseNum;
+			for (int i=0; i<clauseNums.size(); i++){
+				if (!hasConstantVar(clauseNums.at(i))){
+					currNode = clauses.at(clauseNums.at(i));
+					if (currNode!=NULL){
+						arrangeClauseByRel(currNode);
+						clauses.at(clauseNums.at(i)) = NULL;
+					}
+				}
+			}
+		}
+	}
+
 	joinClauses();
 
 	//insert those clauses with wildcards
 	for (int i=0; i<wildClauses.size(); i++){
 		currNode = clauses.at(wildClauses.at(i));
 		if (currNode!=NULL){
-			arrangeClause(currNode);
+			arrangeClauseByRel(currNode);
 			clauses.at(wildClauses.at(i)) = NULL;
 		}
 	}
 
 	joinClauses();
 
-	//then insert the rest
+	//then insert the rest (participating in result)
+	//with 1 constant
+	for (int i=0; i<sorted_qVarTable.size(); i++){
+		dpair = getQVar(sorted_qVarTable.at(i).first);
+		//choose those not flagged for selected
+		if(isFlaggedGroup(dpair.second.groupNum)){
+			//retrieve the clause number
+			clauseNums = dpair.second.clauseNum;
+			for (int i=0; i<clauseNums.size(); i++){
+				if (hasConstantVar(clauseNums.at(i))){
+					currNode = clauses.at(clauseNums.at(i));
+					if (currNode!=NULL){
+						currNode->setData(1);
+						arrangeClauseByRel(currNode);
+						clauses.at(clauseNums.at(i)) = NULL;
+					}
+				}
+			}
+		}
+	}
+
+	joinClauses();
+
+	//with two unknowns
+	for (int i=0; i<sorted_qVarTable.size(); i++){
+		dpair = getQVar(sorted_qVarTable.at(i).first);
+		//choose those not flagged for selected
+		if(isFlaggedGroup(dpair.second.groupNum)){
+			//retrieve the clause number
+			clauseNums = dpair.second.clauseNum;
+			for (int i=0; i<clauseNums.size(); i++){
+				if (!hasConstantVar(clauseNums.at(i))){
+					currNode = clauses.at(clauseNums.at(i));
+					if (currNode!=NULL){
+						currNode->setData(1);
+						arrangeClauseByRel(currNode);
+						clauses.at(clauseNums.at(i)) = NULL;
+					}
+				}
+			}
+		}
+	}
+
+	joinClauses();
+
+	//old function
+	/*
 	for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
 		if(isFlaggedGroup(dVarIter->second.groupNum)){
 			clauseNums = dVarIter->second.clauseNum;
@@ -240,18 +332,18 @@ void QueryPreprocessor::setQTree(){
 				currNode = clauses.at(clauseNums.at(i));
 				if (currNode!=NULL){
 					currNode->setData(1);
-					arrangeClause(currNode);
+					arrangeClauseByRel(currNode);
 					clauses.at(clauseNums.at(i)) = NULL;
 				}
 			}
 		}		
 	}
-	joinClauses();
+	*/
 	
 	
 }
 
-void QueryPreprocessor::arrangeClause(QTREE* node){
+void QueryPreprocessor::arrangeClauseByRel(QTREE* node){
 	TYPE relType;	
 	
 
@@ -329,6 +421,13 @@ void QueryPreprocessor::joinClauses(){
 		firstNode->getLastSibling()->setSibling(firstAffect);
 		firstNode->setLastSibling(lastAffect);		
 	}
+
+	
+	firstAffect = createQTREENode(ANY);
+	firstFollowsNext = createQTREENode(ANY);
+	firstUsesMod = createQTREENode(ANY);
+	firstCallPar = createQTREENode(ANY);
+	firstWithPatt = createQTREENode(ANY);
 }
 
 bool QueryPreprocessor::isFlaggedGroup(int grpNum){
@@ -467,6 +566,7 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 	bool correctArg;
 	bool prevArgWild;
 	bool prevArgConstant;
+	bool firstArg;
 	string relName;
 	TYPE relType;
 	TYPE tokenType;
@@ -517,6 +617,7 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 	prevNode=currNode;
 	prevArgWild = false;
 	prevArgConstant = false;
+	firstArg = true;
 	for(int i=1;i<relationships.size();i++){			
 		currToken = relationships.at(i);
 
@@ -536,6 +637,9 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 			}
 			tokenType = VARIABLE;
 			currNode = createQTREENode(VARIABLE,pkb->getVarIndex(currToken));
+			if (prevArgConstant){
+				oneConstantClauses.push_back(clauseCount);
+			}
 		}
 		//can also be wildcards _
 		else if(currToken=="_"){
@@ -547,22 +651,36 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 			else{
 				prevArgWild = true;
 			}
+			if (prevArgConstant){
+				oneConstantClauses.push_back(clauseCount);
+			}
 		}
 		//check is the synonym declared
 		else if (isDeclaredVar(currToken)){
 			tokenType = getQVarType(currToken);			
 			syn.push_back(currToken);			
-			currNode = createQTREENode(QUERYVAR,getQVarIndex(currToken));			
+			currNode = createQTREENode(QUERYVAR,getQVarIndex(currToken));
+			if (prevArgConstant){
+				oneConstantClauses.push_back(clauseCount);
+			}
 		}
 		//even if not declared,could be a constant statement number
 		else if (isConstant(currToken)){
 			tokenType = STATEMENT;			
 			currNode = createQTREENode(CONSTANT,atoi(currToken.c_str()));
 			if (prevArgConstant){
-				constantClauses.push_back(clauseCount);
+				twoConstantClauses.push_back(clauseCount);
 			}
 			else{
-				prevArgConstant = true;
+				//the first arg NOT constant or
+				//this is the first arg
+				if(firstArg){					
+					prevArgConstant = true;
+					firstArg = false;
+				}
+				else{
+					oneConstantClauses.push_back(clauseCount);
+				}
 			}
 		}
 		
@@ -658,12 +776,14 @@ bool QueryPreprocessor::processWith(TOKEN token){
 			currNode = createQTREENode(PARAM,(*paramTable).size());
 			setChild(headNode,currNode);
 			currNode = createQTREENode(ANY);
+			oneConstantClauses.push_back(clauseCount);
 		}
 		else if (isConstant(currToken)){		
 		//not syn: is constant
 			currNode = createQTREENode(CONSTANT,atoi(currToken.c_str()));
 			setChild(headNode,currNode);
-			currNode = createQTREENode(ANY);
+			currNode = createQTREENode(ANY);			
+			oneConstantClauses.push_back(clauseCount);
 		}
 		setChild(headNode,currNode);
 	}
@@ -814,6 +934,15 @@ bool QueryPreprocessor::isConstant(TOKEN token){
 	return regex_match(token,regex(integer));
 }
 
+bool QueryPreprocessor::hasConstantVar(int clauseNum){
+	for (int i=0; i<oneConstantClauses.size(); i++){
+		if (clauseNum == oneConstantClauses.at(i)){
+			return true;
+		}
+	}
+	return false;
+}
+
 void QueryPreprocessor::setAsSelected(TOKEN token){
 	qVar changeVar;
 	dVarIter = (*dVarTable).find(token);
@@ -902,6 +1031,14 @@ void QueryPreprocessor::mergeGroup(int grp1, int grp2){
 	}
 }
 
+QueryPreprocessor::dVarPair QueryPreprocessor::getQVar(int index){
+	for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
+		if(dVarIter->second.qVarIndex == index){
+			return dVarPair(dVarIter->first,dVarIter->second);
+		}
+	}
+}
+
 int QueryPreprocessor::getQVarGroup(TOKEN token){
 	dVarIter = (*dVarTable).find(token);
 
@@ -927,6 +1064,14 @@ int QueryPreprocessor::getQVarIndex(TOKEN token){
 	dVarIter = (*dVarTable).find(token);
 
 	return dVarIter->second.qVarIndex;
+}
+
+void QueryPreprocessor::sortQVarTable(){
+	for(qVarIter=(*qVarTable).begin();qVarIter!=(*qVarTable).end();qVarIter++){
+		sorted_qVarTable.push_back(qVarPair(qVarIter->first,qVarIter->second));
+	}
+
+	std::sort(sorted_qVarTable.begin(),sorted_qVarTable.end(), sortBySecond());
 }
 
 void QueryPreprocessor::insertClause(QTREE* headNode){
@@ -1086,13 +1231,14 @@ vector<TOKEN> QueryPreprocessor::tokenize(TOKEN tk,string expression){
 
 }
 
-void QueryPreprocessor::cleanUp(){
-	//delete headNode;
-	
+void QueryPreprocessor::cleanUp(){	
 	clauses.clear();
 	wildClauses.clear();
+	oneConstantClauses.clear();
+	twoConstantClauses.clear();
 	flagGroups.clear();
 	exprPieces.clear();
+	sorted_qVarTable.clear();
 }
 
 void QueryPreprocessor::error(int errorCode){
