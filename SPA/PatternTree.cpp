@@ -1,7 +1,7 @@
 #include "PatternTree.h"
 #include "PKB.h"
 #include "QTREE.h"
-
+/*
 PatternTree::PatternTree(PKB* pkb)
 {
 	this->pkb = pkb;
@@ -79,7 +79,7 @@ RELATION_LIST* PatternTree::evaluatePattern(){
 					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
 				}
 			}*/
-
+/*
 		}
 		//first is known ,second is unknown
 		if((firstRel->getType()!=QUERYVAR&&firstRel->getType()!=ANY)&&(secondRel->getType()==QUERYVAR||secondRel->getType()==ANY)){
@@ -282,3 +282,4 @@ RELATION_LIST* PatternTree::evaluatePattern(){
 		return relList;
 
 }
+*/

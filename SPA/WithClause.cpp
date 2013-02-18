@@ -150,9 +150,7 @@ RELATION_LIST* WithClause::findOneVariable(){
 	//find name in procedure table, variable table and call table
 	if(rightAttributeType==PARAM||leftAttributeType==PARAM){
 		returnList = WithClause::findOneString();
-	}
-	//find integer value in constant, progline, statement
-	if(rightAttributeType==CONSTANT||leftAttributeType==CONSTANT){
+	}else if(rightAttributeType==CONSTANT||leftAttributeType==CONSTANT){ //find integer value in constant, progline, statement
 		returnList = WithClause::findOneInteger();
 	}
 	if(returnList->size()<1) return NULL;
@@ -349,7 +347,7 @@ RELATION_LIST* WithClause::findOneInteger(){
 RELATION_LIST* WithClause::findMatchedPairs(){
 	//get left variable and right variable
 
-	RELATION_LIST * returnList;
+	RELATION_LIST * returnList = new RELATION_LIST();
 
 	//convert the left and right variables from query table to known types
 	QUERYTABLE::iterator itr1;
@@ -362,9 +360,6 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 	int leftVarialbeIndex = leftVariable->getData();
 	itr1 = qrTable->find(leftVarialbeIndex);
 	TYPE leftVariableType = itr1->second;
-
-	//set returnList to NULL as default return value
-	returnList = NULL;
 	
 	switch(leftVariableType){
 	//p.ProcName = 
@@ -959,5 +954,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 		}
 		break;
 	}
+
+	if(returnList->size()<1) return NULL;
 	return returnList;
 }

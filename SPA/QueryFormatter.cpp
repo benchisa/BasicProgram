@@ -11,12 +11,12 @@ list<string> QueryFormatter::formatString(RAWDATA * data) {
 	int type, value;
 
 	//checks the type of result at the 1st row and subsequent columns eg. Vector[cols][0]
-	for(int i = 0; i < (data->at(0)).size(); i++) {
+	for(int i = 1; i < (data->at(0)).size(); i++) {
 		//type = data-
 		//type = (data[cols])[0].data;
 		//translates the result eg. Vector[cols][rows]
 		for(int j = 0; j < data->size(); j++) {
-			type = (data->at(j)).at(i);
+			type = (data->at(j)).at(0);
 			value = (data->at(j)).at(i);
 			if(type == VARIABLE) {
 				VAR_NAME varName = pkb->getVarName(value);
@@ -27,7 +27,7 @@ list<string> QueryFormatter::formatString(RAWDATA * data) {
 				}else {
 					result.push_back("false");
 				}
-			}else if(type==PROCEDURE) { 
+			}else if(type==PROCEDURE||type==CALL) { 
 				Procedure * proc = pkb->getProcedure(value);
 				result.push_back(proc->getProcName());
 			}else {

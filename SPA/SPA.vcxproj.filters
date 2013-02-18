@@ -129,6 +129,9 @@
     <ClCompile Include="CFG.cpp">
       <Filter>Source Files\PKB</Filter>
     </ClCompile>
+    <ClCompile Include="LinkedDataTable.cpp">
+      <Filter>Source Files\PQL</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Follows.h">
@@ -217,6 +220,9 @@
     </ClInclude>
     <ClInclude Include="CFG.h">
       <Filter>Header Files\PKB</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedDataTable.h">
+      <Filter>Header Files\PQL</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -23,7 +23,7 @@ FINAL_RESULT PQLController::getQueryResult(QUERY newQuery){
 		
 		if(queryEval->evaluate(queryProcessor->getQTree(),queryProcessor->getQVarTable(),queryProcessor->getParamTable())){
 			//call formatter
-			//	returnResult= queryFormatter->formatString(queryEval->getResult());
+			returnResult= queryFormatter->formatString(queryEval->getRawResult());
 		}else{
 			//failed to evaluate the result, return nothing
 			returnResult.push_back("");

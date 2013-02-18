@@ -87,12 +87,11 @@ QUERY SampleQueries::sampleQuery3 = "stmt s1,s2,s select <s1,s2> such that Follo
 QUERY SampleQueries::sampleQuery4 = "stmt s1,s2; select s2 such that Follows (s1,s2)"; //pass
 QUERY SampleQueries::sampleQuery5 = "stmt s1,s2,s3; select <s1,s2,s3> such that Follows (s1,s2) and Follows(s2,s3)";//pass
 QUERY SampleQueries::sampleQuery6 = "stmt s1,s2,s3; select s3 such that Follows (s1,s2) and Follows(s2,s3)";//pass
-QUERY SampleQueries::sampleQuery7 = "stmt s;select s with s.stmt#=2;";
-QUERY SampleQueries::sampleQuery8 = "assign a1,a2;select a2 such that Follows (a1,a2);";
-//===============Test for Follows* =================== PKB3
-QUERY SampleQueries::sampleQuery9 = "stmt s; select s such that Follows*(s,3);";
-QUERY SampleQueries::sampleQuery10 = "stmt s; select s such that Follows* (1,s);";
-QUERY SampleQueries::sampleQuery11 = "stmt s1,s2; select s2 such that Follows* (s1,s2);";
+QUERY SampleQueries::sampleQuery7 = "stmt s;select s with s.stmt#=2;"; //pass
+QUERY SampleQueries::sampleQuery8 = "call c; procedure p; variable v;select p with p.procName = \"Code5\";";
+QUERY SampleQueries::sampleQuery9 = "while w; callc; select w with w.stmt#=4;"; //pass
+QUERY SampleQueries::sampleQuery10 = "variable v; select v with v.varName = \"x\";"; //pass
+QUERY SampleQueries::sampleQuery11 = "stmt s; while w; select <s,w> with s.stmt#=w.stmt#;"; //pass
 QUERY SampleQueries::sampleQuery12 = "stmt s1; select s1 such that Follows* (s1,_);";
 
 //this case fail for PKB3, it returns empty result from SUCHTHAT

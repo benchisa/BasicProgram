@@ -84,7 +84,30 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
 				}
 			}
-
+			if(relType==NEXT){
+				if(extractor->isNextResult(firstRel->getData(),secondRel->getData())){
+					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
+				}
+			}
+			if(relType==NEXTST){
+				if(extractor->isNextStarResult(firstRel->getData(),secondRel->getData())){
+					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
+				}
+			}
+			if(relType==CALL){
+				PROC_NAME callerName = pkb->getProcedure(firstRel->getData())->getProcName();
+				PROC_NAME calleeName = pkb->getProcedure(secondRel->getData())->getProcName();
+				if(extractor->getIsCallResult(callerName,calleeName)){
+					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
+				}
+			}
+			if(relType==CALLST){
+				PROC_NAME callerName = pkb->getProcedure(firstRel->getData())->getProcName();
+				PROC_NAME calleeName = pkb->getProcedure(secondRel->getData())->getProcName();
+				if(extractor->getIsCallStarResult(callerName,calleeName)){
+					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
+				}
+			}
 		}
 		//first is known ,second is unknown
 		if((firstRel->getType()!=QUERYVAR&&firstRel->getType()!=ANY)&&(secondRel->getType()==QUERYVAR||secondRel->getType()==ANY)){
@@ -135,7 +158,38 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 				tmpList = extractor->getUsesResult(firstRel->getType(),firstRel->getData(),0);
 				iterateAndStore(relList, tmpList);
 			}
-			//	RELATION_LIST::iterator itr;
+			if(relType==NEXT){
+				tmpList = extractor->getNextResult(firstRel->getData(),0);
+				iterateAndStore(relList, tmpList);
+			}
+			if(relType==NEXTST){
+				tmpList = extractor->getNextStarResult(firstRel->getData(),0);
+				iterateAndStore(relList, tmpList);
+			}
+			if(relType==CALL){
+				PROC_NAME callerName = pkb->getProcedure(firstRel->getData())->getProcName();
+				INDEX callerIndex,calleeIndex;
+				CALL_LIST callResult=extractor->getCallResult(callerName,"");
+
+				CALL_LIST::iterator callPair;
+				for(callPair = callResult.begin();callPair!=callResult.end();callPair++){
+					callerIndex = pkb->getProcIndex(callPair->first);
+					calleeIndex = pkb->getProcIndex(callPair->second);
+					tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
+				}
+			}
+			if(relType==CALLST){
+				PROC_NAME callerName = pkb->getProcedure(firstRel->getData())->getProcName();
+				INDEX callerIndex,calleeIndex;
+				CALL_LIST callResult=extractor->getCallStarResult(callerName,"");
+
+				CALL_LIST::iterator callPair;
+				for(callPair = callResult.begin();callPair!=callResult.end();callPair++){
+					callerIndex = pkb->getProcIndex(callPair->first);
+					calleeIndex = pkb->getProcIndex(callPair->second);
+					tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
+				}
+			}
 		}
 		//first is unknown, second is known
 		if((firstRel->getType()==QUERYVAR||firstRel->getType()==ANY)&&(secondRel->getType()!=QUERYVAR&&secondRel->getType()!=ANY)){
@@ -190,6 +244,38 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 				//cout<<"Second Data: "<<secondRel->getData();
 				tmpList = extractor->getUsesResult(firstType,0,secondRel->getData());
 				iterateAndStore(relList, tmpList);
+			}
+			if(relType==NEXT){
+				tmpList = extractor->getNextResult(0,secondRel->getData());
+				iterateAndStore(relList, tmpList);
+			}
+			if(relType==NEXTST){
+				tmpList = extractor->getNextResult(0,secondRel->getData());
+				iterateAndStore(relList, tmpList);
+			}
+			if(relType==CALL){
+				PROC_NAME calleeName = pkb->getProcedure(secondRel->getData())->getProcName();
+				INDEX callerIndex,calleeIndex;
+				CALL_LIST callResult=extractor->getCallResult("",calleeName);
+
+				CALL_LIST::iterator callPair;
+				for(callPair = callResult.begin();callPair!=callResult.end();callPair++){
+					callerIndex = pkb->getProcIndex(callPair->first);
+					calleeIndex = pkb->getProcIndex(callPair->second);
+					tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
+				}
+			}
+			if(relType==CALLST){
+				PROC_NAME callerName = pkb->getProcedure(firstRel->getData())->getProcName();
+				INDEX callerIndex,calleeIndex;
+				CALL_LIST callResult=extractor->getCallStarResult(callerName,"");
+
+				CALL_LIST::iterator callPair;
+				for(callPair = callResult.begin();callPair!=callResult.end();callPair++){
+					callerIndex = pkb->getProcIndex(callPair->first);
+					calleeIndex = pkb->getProcIndex(callPair->second);
+					tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
+				}
 			}
 		}
 		//first is unkown, second is unknown
@@ -278,6 +364,37 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 				if(relType==USES){
 					tmpList = extractor->getUsesResult(firstType,0,0);
 					iterateAndStore(relList, tmpList);
+				}
+				if(relType==NEXT){
+					tmpList = extractor->getNextResult(0,0);
+					iterateAndStore(relList, tmpList);
+				}
+				if(relType==NEXTST){
+					tmpList = extractor->getNextStarResult(0,0);
+					iterateAndStore(relList, tmpList);
+				}
+				if(relType==CALL){
+					INDEX callerIndex,calleeIndex;
+					CALL_LIST callResult=extractor->getCallResult("","");
+
+					CALL_LIST::iterator callPair;
+					for(callPair = callResult.begin();callPair!=callResult.end();callPair++){
+						callerIndex = pkb->getProcIndex(callPair->first);
+						calleeIndex = pkb->getProcIndex(callPair->second);
+						tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
+					}
+				}
+				if(relType==CALLST){
+					PROC_NAME callerName = pkb->getProcedure(secondRel->getData())->getProcName();
+					INDEX callerIndex,calleeIndex;
+					CALL_LIST callResult=extractor->getCallStarResult(callerName,"");
+
+					CALL_LIST::iterator callPair;
+					for(callPair = callResult.begin();callPair!=callResult.end();callPair++){
+						callerIndex = pkb->getProcIndex(callPair->first);
+						calleeIndex = pkb->getProcIndex(callPair->second);
+						tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
+					}
 				}
 		}
 
