@@ -4,7 +4,7 @@
 
 Pattern::Pattern(PKB *pkb)
 {
-	pkb = p;
+	p = pkb;
 	ast = pkb->getRootAST();
 	varList = pkb->getAllVar();
 }
@@ -27,18 +27,18 @@ RELATION_LIST* Pattern::evaluatePattern(QUERYTABLE * qtable) {
 	ASTNODE_TYPE nodeType;
 	bool flag;
 	//traverse the tree
-	for(iter1=qtable->begin(); iter1==qtable->end(); iter1++) {
-			qVar = iter1->first;
+	for(iter1=qtable->begin(); iter1!=qtable->end(); iter1++) {
+			qVar = iter1->second;
 			//check pattern type
 			if(qVar == ASSIGNMENT || qVar == WHILE || qVar == IF) {
 				//checks if variable is being assigned.
 					iter1++;
-					varType = iter1->first;
+					varType = iter1->second;
 					//checks if variable is being assigned.
 					if(varType != VARIABLE && varType != ANY) {
-						varIndex = iter1->second;
+						varIndex = iter1->first;
 						iter1++;
-						opr = iter1->first;
+						opr = iter1->second;
 						astNode = ast->getFirstDescendant();
 						while(astNode->getRootData() != NULL) {
 						if(astNode->getRootType() == qVar) { //points to the node with the pattern type specified in query

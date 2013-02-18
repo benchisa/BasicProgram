@@ -47,22 +47,23 @@ void PatternTest::testEvaluatePattern(){
 
 	//p->setQuery("Select a pattern a(y, \"x\")");
 	//Select a such that pattern a(y, "x"); 
-	qTable->insert(pair<INDEX, TYPE>(ASSIGNMENT, QUERYVAR));
+	/*qTable->insert(pair<INDEX, TYPE>(ASSIGNMENT, QUERYVAR));
 	qTable->insert(pair<INDEX, TYPE>(VARIABLE, QUERYVAR));
 	qTable->insert(pair<INDEX, TYPE>(-1, ASSIGNMENT));
 	qTable->insert(pair<INDEX, TYPE>(2, QUERYVAR));
-	qTable->insert(pair<INDEX, TYPE>(1, VARIABLE));
-	/*QueryPreprocessor *pre = new QueryPreprocessor(pkb);
+	qTable->insert(pair<INDEX, TYPE>(1, VARIABLE));*/
+	QueryPreprocessor *pre = new QueryPreprocessor(pkb);
 	QUERY q = "assign a; Select a such that pattern a(y, \"x\")";
 	pre->setQuery(q);
-	CPPUNIT_ASSERT_EQUAL(true, pre->preProcess());*/
+	pre->preProcess();
+	//CPPUNIT_ASSERT_EQUAL(true, pre->preProcess());*/
 	Pattern *myPattern = new Pattern(pkb);
 
 	RELATION_LIST * result = new RELATION_LIST();
-	result->push_back(pair<STATEMENT_NUM, VAR_INDEX>(1, 3));
-
+	//result->push_back(pair<STATEMENT_NUM, VAR_INDEX>(1, 3));
+	//pre->getParamTable();
 	//test ASSIGNMENT
-	RELATION_LIST * list = myPattern->evaluatePattern(qTable);
+	RELATION_LIST * list = myPattern->evaluatePattern(pre->getQVarTable());
 	CPPUNIT_ASSERT_EQUAL_MESSAGE("list does not match", list, result);
 	
 }
