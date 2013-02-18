@@ -118,7 +118,8 @@ public:
 					tmp.first = rxItr->str();
 					tmp.second = 0;
 					tokens.push_back(tmp);
-					rxItr++; // skip "\n"
+					if(rxItr->str() == "\n")
+						rxItr++; // skip "\n"
 				}
 
 				if(rxItr->str() == "else")
