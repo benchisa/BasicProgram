@@ -70,8 +70,8 @@ private:
 	 USES_LIST computeCallUses(STATEMENT_NUM callStmt,VAR_INDEX varIndex);
 	 bool isCallUses(STATEMENT_NUM callStmt,VAR_INDEX varIndex);
 
-	// void iterateAndStore(list<pair<int, int>> &result, list<pair<int, int>> tmp, int v1);
+	 void iterateAndStore(list<pair<int, int>> &result, list<pair<int, int>> tmp, int v1);
 	 void computeCallStar(PROC_NAME caller, PROC_NAME callee,list<string> &result);
-	 void iterateAndStore(RELATION_LIST *result, RELATION_LIST list);
+	 //void iterateAndStore(RELATION_LIST *result, RELATION_LIST list);
 };
 

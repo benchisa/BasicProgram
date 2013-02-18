@@ -25,7 +25,7 @@ void QueryPKBTest::testSampleInput1(){
 	spa.enterProgram(SampleSimpleSources::sampleSource1);
 	
 
-	FINAL_RESULT result =spa.getQueryResult(SampleQueries::sampleQuery13);
+	FINAL_RESULT result =spa.getQueryResult(SampleQueries::sampleQuery14);
 	FINAL_RESULT::iterator itr;
 
 	cout<<"\n Final result is:";

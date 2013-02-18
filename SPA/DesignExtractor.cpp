@@ -423,7 +423,7 @@ bool DesignExtractor::getIsParentStarResult(STATEMENT_NUM s1, STATEMENT_NUM s2)
 }
 
 MODIFIES_LIST DesignExtractor::getModifiesResult(TYPE type, int arg1, VAR_INDEX v1){
-	MODIFIES_LIST result, tmpLst;
+	MODIFIES_LIST result,tmpLst;
 	MODIFIES_LIST::iterator itr;
 	AST_LIST *astLst;
 	AST_LIST::iterator astItr;
@@ -454,7 +454,7 @@ MODIFIES_LIST DesignExtractor::getModifiesResult(TYPE type, int arg1, VAR_INDEX 
 	else if(type == ANY || (type == STATEMENT && arg1 == 0)){
 		// Modifies(_,_) or Modifies(_, "x")
 		tmpLst = pkb->getModifies(WHILE, 0, 0);
-	//	iterateAndStore(result, tmpLst);//, v1);
+		iterateAndStore(result, tmpLst, v1);
 
 		//need to use function getModifies(CALL,....)
 /*		if(tmpLst.size() == 0){
@@ -462,21 +462,21 @@ MODIFIES_LIST DesignExtractor::getModifiesResult(TYPE type, int arg1, VAR_INDEX 
 //			iterateAndStore(result, tmpLst, v1);
 		}*/
 
-		if(tmpLst.size() == 0){
+		if(result.size() == 0){
 			tmpLst = pkb->getModifies(ASSIGNMENT, 0, 0);
-	//		iterateAndStore(result, tmpLst, v1);
+			iterateAndStore(result, tmpLst, v1);
 		}
 
 
-		if(tmpLst.size() == 0){
+		if(result.size() == 0){
 			tmpLst = pkb->getModifies(IF, 0, 0);
-		//	iterateAndStore(result, tmpLst, v1);
+			iterateAndStore(result, tmpLst, v1);
 		}
 	}
 
 
 	//cout << "SIZE OF RESULT (MODIFIES): " << result.size() << "\n";
-	result = tmpLst;
+	
 	return result;
 }
 
@@ -511,7 +511,7 @@ bool DesignExtractor::getIsModifiesResult(TYPE type, int arg1, VAR_INDEX v1){
 }
 
 USES_LIST DesignExtractor::getUsesResult(TYPE type, int arg1, VAR_INDEX v1){
-	USES_LIST result, tmpLst;
+	USES_LIST result,tmpLst;
 	USES_LIST::iterator itr;
 	AST_LIST *astLst;
 	AST_LIST::iterator astItr;
@@ -539,11 +539,11 @@ USES_LIST DesignExtractor::getUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 	else if(type == ANY || (type == STATEMENT && arg1 == 0))
 	{
 		tmpLst = pkb->getUses(WHILE, 0, 0);
-		//iterateAndStore(result, tmpLst, v1);
+		iterateAndStore(result, tmpLst, v1);
 		
-		if(tmpLst.size() == 0){
+		if(result.size() == 0){
 			tmpLst = pkb->getUses(IF, 0, 0);
-	//		iterateAndStore(result, tmpLst, v1);
+			iterateAndStore(result, tmpLst, v1);
 		}
 /* @Zhang Xi: I think no need to check proc here, but need to check CALL
 		if(tmpLst.size() == 0){
@@ -551,14 +551,14 @@ USES_LIST DesignExtractor::getUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 			iterateAndStore(result, tmpLst, v1);
 		}
 */
-		if(tmpLst.size() == 0){		
+		if(result.size() == 0){		
 			tmpLst = pkb->getUses(ASSIGNMENT, 0, 0);
-		//	iterateAndStore(result, tmpLst, v1);
+			iterateAndStore(result, tmpLst, v1);
 		}
 	}
 
 	//cout << "SIZE OF RESULT (USES): " << result.size() << "\n";
-	result = tmpLst;
+
 	return result;
 }
 
@@ -897,7 +897,7 @@ void DesignExtractor::computeFollows(FOLLOWS_LIST &result, FOLLOWS_LIST tmp, TYP
 	}
 
 	//This function does not work properly
-	/*void DesignExtractor::iterateAndStore(list<pair<int, int>> &result, list<pair<int, int>> tmpLst, int v1){
+void DesignExtractor::iterateAndStore(list<pair<int, int>> &result, list<pair<int, int>> tmpLst, int v1){
 		list<pair<int,int>>::iterator itr;
 		if(!tmpLst.empty())
 		{
@@ -915,8 +915,8 @@ void DesignExtractor::computeFollows(FOLLOWS_LIST &result, FOLLOWS_LIST tmp, TYP
 				itr++;
 			}	
 		}
-	}*/
-
+	}
+/*
 void DesignExtractor::iterateAndStore(RELATION_LIST *result, RELATION_LIST list){
 	if(list.empty()){
 			result=NULL;
@@ -929,7 +929,7 @@ void DesignExtractor::iterateAndStore(RELATION_LIST *result, RELATION_LIST list)
 		}
 	
 }
-	
+	*/
 void  DesignExtractor::computeCallStar(PROC_NAME caller, PROC_NAME callee,list<string> &result)
 {
 	if (caller!=" " || callee!=" ")

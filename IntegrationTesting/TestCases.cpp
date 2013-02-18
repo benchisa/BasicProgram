@@ -93,8 +93,8 @@ QUERY SampleQueries::sampleQuery9 = "while w; callc; select w with w.stmt#=4;"; 
 QUERY SampleQueries::sampleQuery10 = "variable v; select v with v.varName = \"x\";"; //pass
 QUERY SampleQueries::sampleQuery11 = "stmt s; while w; select <s,w> with s.stmt#=w.stmt#;"; //pass
 QUERY SampleQueries::sampleQuery12 = "variable v;select v such that Modifies(_, v);"; //fixed
-QUERY SampleQueries::sampleQuery13 = "variable v; select v such that Modifies(1, v);"; 
-QUERY SampleQueries::sampleQuery14 = "variable v; select v such that Uses(_, v);"; 
+QUERY SampleQueries::sampleQuery13 = "variable v; select v such that Modifies(1, v);"; //fixed
+QUERY SampleQueries::sampleQuery14 = "stmt s; select s such that Uses(s, \"y\");"; 
 QUERY SampleQueries::sampleQuery15 = "assign a; while w;select a such that Follows* (a,w);"; // <-- this one suppose to return none right..
 QUERY SampleQueries::sampleQuery16 = "assign a1,a2;select a2 such that Follows* (a1,a2);";
 
