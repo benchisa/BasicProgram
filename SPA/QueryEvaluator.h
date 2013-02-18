@@ -36,6 +36,7 @@ private:
 	IntermediateResultTable * evaluateClause(IntermediateResultTable * resultTable, QTREE* clause);
 	bool executeSuchThat(IntermediateResultTable * resultTable,QTREE* suchThatTree);
 	bool executeWith(IntermediateResultTable * resultTable,QTREE* withTree);
+//	bool executePattern(IntermediateResultTable * resultTable,QTREE* withTree);
 	bool findResult(QTREE * resultNode,IntermediateResultTable * resultTable);
 	RELATION_LIST * appendRelationLists(RELATION_LIST* list1,RELATION_LIST* list2);
 	DesignExtractor * extractor;
