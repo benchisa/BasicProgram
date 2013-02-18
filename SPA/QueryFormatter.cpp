@@ -8,27 +8,30 @@ void QueryFormatter::setPKB(PKB* pkb){
 
 list<string> QueryFormatter::formatString(RAWDATA * data) {
 	list<string>  result;
-	TYPE type;
+	int type, value;
 
 	//checks the type of result at the 1st row and subsequent columns eg. Vector[cols][0]
-	for(int cols = 0; cols < data->size(); cols++) {
-		type = (data[cols])[0].data;
+	for(int i = 0; i < (data->at(0)).size(); i++) {
+		//type = data-
+		//type = (data[cols])[0].data;
 		//translates the result eg. Vector[cols][rows]
-		for(int rows = 0; rows < (data[cols])[0].size(); rows++) {
+		for(int j = 0; j < data->size(); j++) {
+			type = (data->at(j)).at(i);
+			value = (data->at(j)).at(i);
 			if(type == VARIABLE) {
-				VAR_NAME varName = pkb->getVarName((data[cols])[rows].data);
+				VAR_NAME varName = pkb->getVarName(value);
 				result.push_back(varName);
 			}else if(type == BOOL) {
-				if((data[cols])[rows].data == 1) {
+				if(value == 1) {
 					result.push_back("true");
 				}else {
 					result.push_back("false");
 				}
 			}else if(type==PROCEDURE) { 
-				Procedure * proc = pkb->getProcedure((data[cols])[rows].data);
+				Procedure * proc = pkb->getProcedure(value);
 				result.push_back(proc->getProcName());
 			}else {
-				result.push_back(static_cast<ostringstream*>( &(ostringstream() << ((data[cols])[rows].data)) )->str());
+				result.push_back(static_cast<ostringstream*>( &(ostringstream() << value) )->str());
 
 
 			}
