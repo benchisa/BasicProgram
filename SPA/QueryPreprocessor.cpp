@@ -718,9 +718,11 @@ bool QueryPreprocessor::processWith(TOKEN token){
 
 	vector<TOKEN> comparisons;
 	vector<TOKEN> syn;
+	vector<string> attrAllowed;
 	TOKEN currToken;
 	TYPE synType;
 	bool isSyn;
+	bool isCorrectAttr;
 	string attrType;
 
 	headNode = createQTREENode(WITH);
@@ -728,9 +730,10 @@ bool QueryPreprocessor::processWith(TOKEN token){
 
 	comparisons = tokenize(token,"\\."+or+"\"("+ident+")\""+or+"("+attrName+")"+or+integer+or+"("+synonym+")");
 	//only 1st and 3rd token can be synonyms
-	isSyn=false;
+	isSyn = false;
 
 	for(int i=0;i<comparisons.size();i++){
+		isCorrectAttr = false;
 		currToken = comparisons.at(i);
 		if ((i!=comparisons.size()-1) && (comparisons.at(i+1)==".")){
 			isSyn=true;
@@ -747,31 +750,59 @@ bool QueryPreprocessor::processWith(TOKEN token){
 			currNode = createQTREENode(QUERYVAR,getQVarIndex(currToken));			
 			setChild(headNode,currNode);
 			
-
-			if(comparisons.at(i)==grammarTable.getAttr(synType)){
-				if (synType==VARIABLE||synType==PROCEDURE){
-					if(attrType!="" && attrType!="string"){
-						error(INVALID_QUERY_SYNTAX);
-						return false;
+			attrAllowed = grammarTable.getAttr(synType);
+			for (int j = 0; j< attrAllowed.size(); j++){
+				if(comparisons.at(i)==attrAllowed.at(j)){
+					isCorrectAttr = true;
+					if (synType==VARIABLE||synType==PROCEDURE){
+						if(attrType!="" && attrType!="string"){
+							error(INVALID_QUERY_SYNTAX);
+							return false;
+						}
+						currNode = createQTREENode(NAME);
+						attrType = "string";
 					}
-					currNode = createQTREENode(NAME);
-					attrType = "string";
-				}
-				else{
-					if(attrType!="" && attrType!="number"){
-						error(INVALID_QUERY_SYNTAX);
-						return false;
+					else if (synType==CALL){
+						if(attrType=="" && comparisons.at(i)=="procname"){
+							currNode = createQTREENode(NAME);
+							attrType = "string";
+						}
+						else if (attrType=="" && comparisons.at(i)=="stmt#"){
+							currNode = createQTREENode(ANY);
+							attrType = "number";
+						}
+						else if (attrType=="string" && comparisons.at(i)=="stmt#"){
+							error(INVALID_QUERY_SYNTAX);
+							return false;
+						}
+						else if (attrType=="number" && comparisons.at(i)=="procname"){
+							error(INVALID_QUERY_SYNTAX);
+							return false;
+						}
 					}
-					currNode = createQTREENode(ANY);
-					attrType = "number";
-				}
+					else{
+						if(attrType!="" && attrType!="number"){
+							error(INVALID_QUERY_SYNTAX);
+							return false;
+						}
+						currNode = createQTREENode(ANY);
+						attrType = "number";
+					}
 
+					isSyn=false;
+					break;
+				}
+			}			
+			if (!isCorrectAttr){
+				error(INVALID_VARIABLE);
+				return false;
 			}
-			
-			isSyn=false;
 		}
 		else if (regex_match(currToken,regex("\".+\""))){
 		//not syn: is string
+			//want to remove the inverted commas
+			currToken.erase(currToken.begin());	
+			currToken.resize(currToken.size()-1);
 			(*paramTable).insert(paramPair((*paramTable).size()+1,currToken));
 			currNode = createQTREENode(ANY);
 			setChild(headNode,currNode);	

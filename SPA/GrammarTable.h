@@ -41,7 +41,7 @@ public:
 	struct syntaxTable rTable[14];
 	struct syntaxTable pTable[3];
 	struct argTable aTable[10];
-	struct attrTable atTable[8];
+	struct attrTable atTable[9];
 
 	string compulsoryOne,optional,or,plus,minus,times,invComma,letter,digit,underscore,hash,ident,synonym,integer,op;
 	string stmtRef,entRef,lineRef,varRef,expr,wildexpr,expr_spec;
@@ -73,6 +73,6 @@ public:
 	void printAllArg();
 
 	void createAttrTable();
-	string getAttr(TYPE);
+	vector<ATTRIBUTE> getAttr(TYPE);
 	void printAllAttr();
 };

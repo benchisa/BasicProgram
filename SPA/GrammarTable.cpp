@@ -368,19 +368,24 @@ void GrammarTable::createAttrTable(){
 	atTable[5].type=CALL;
 	atTable[5].attr="stmt#";
 	
-	atTable[6].type=PROCEDURE;
+	atTable[6].type=CALL;
 	atTable[6].attr="procname";
 
-	atTable[7].type=VARIABLE;
-	atTable[7].attr="varname";
+	atTable[7].type=PROCEDURE;
+	atTable[7].attr="procname";
+
+	atTable[8].type=VARIABLE;
+	atTable[8].attr="varname";
 }
 
-string GrammarTable::getAttr(TYPE ent){
-	for(int i=0;i<8; i++){
+vector<GrammarTable::ATTRIBUTE> GrammarTable::getAttr(TYPE ent){
+	vector<ATTRIBUTE> res;
+	for(int i=0;i<9; i++){
 		if(ent==atTable[i].type){
-			return atTable[i].attr;
+			res.push_back(atTable[i].attr);
 		}
 	}
+	return res;
 }
 
 void GrammarTable::printAllEnt(){
@@ -416,7 +421,7 @@ void GrammarTable::printAllPatt(){
 
 void GrammarTable::printAllAttr(){
 	cout<<"====================All ATTRIBUTES======================"<<endl;
-	for(int i=0;i<8; i++){
+	for(int i=0;i<9; i++){
 		cout<<"ENTITY TYPE: " << atTable[i].type<<endl;
 		cout<<"ATTRIBUTE: " << atTable[i].attr<<endl;
 	}
