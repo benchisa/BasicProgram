@@ -7,8 +7,12 @@
 
 class QueryFormatter{
 public:
-	PKB * pkb;
-	void setPKB(PKB* pkb);
+	QueryFormatter(PKB* pkb);
+	~QueryFormatter(void);
+	void setQrTable(QUERYTABLE * qrTable);
 	list<string> formatString(RAWDATA * data);
+private:
+	PKB * pkb;
+	QUERYTABLE * qrTable;
 
 };

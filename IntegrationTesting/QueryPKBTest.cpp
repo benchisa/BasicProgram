@@ -23,7 +23,15 @@ void QueryPKBTest::testSampleInput1(){
 	SPAController spa;
 
 	spa.enterProgram(SampleSimpleSources::sampleSource5);
-	spa.getQueryResult(SampleQueries::sampleQuery1);
+	
+
+	FINAL_RESULT result =spa.getQueryResult(SampleQueries::sampleQuery1);
+	FINAL_RESULT::iterator itr;
+
+	cout<<"\n Final result is:";
+	for(itr = result.begin();itr!=result.end();itr++){
+		cout<< *itr <<" "  ;
+	}
 /*	//create PKB
 	PKB *pkb = SamplePKB::pkb5();
 
@@ -53,16 +61,11 @@ void QueryPKBTest::testSampleInput1(){
 
 	//	cout<<"queryTableSize B: "<<queryTable.size();
 		queryEval.evaluate(rootQtree,queryTable);
-
+*/
 		//print the result
-	FINAL_RESULT result =queryFormatter.formatString(queryEval.getResult());
-	FINAL_RESULT::iterator itr;
 
-	for(itr = result.begin();itr!=result.end();itr++){
-		cout<< *itr <<" \n"  ;
-	}
-	}
-	*/
+	
+	
 	
 }
 

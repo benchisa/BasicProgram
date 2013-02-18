@@ -23,6 +23,7 @@ FINAL_RESULT PQLController::getQueryResult(QUERY newQuery){
 		
 		if(queryEval->evaluate(queryProcessor->getQTree(),queryProcessor->getQVarTable(),queryProcessor->getParamTable())){
 			//call formatter
+			queryFormatter->setQrTable(queryProcessor->getQVarTable());
 			returnResult= queryFormatter->formatString(queryEval->getRawResult());
 		}else{
 			//failed to evaluate the result, return nothing
@@ -45,7 +46,5 @@ FINAL_RESULT PQLController::getQueryResult(QUERY newQuery){
 void PQLController::setPKB(PKB* pkb){
 	queryProcessor = new QueryPreprocessor(pkb);
 	queryEval = new QueryEvaluator(pkb);
-	queryFormatter = new QueryFormatter();
-	queryFormatter->setPKB(pkb);
-
+	queryFormatter= new QueryFormatter(pkb);
 }
