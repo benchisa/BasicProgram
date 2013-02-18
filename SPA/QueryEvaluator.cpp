@@ -20,9 +20,15 @@ bool QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrPa
 
 	//Compute the intermediate result
 	QTREE* relationTree;
-	relationTree = qrTree->getRightSibling(); //changed
-	IntermediateResultTable * resultTable;
+	relationTree = qrTree->getRightSibling(); 
 
+	//eg select s
+	if(relationTree==NULL){
+		generateRaw(qrTree);
+		return true;
+	}
+
+	IntermediateResultTable * resultTable ;
 	resultTable = QueryEvaluator::computeIntermediateResult(relationTree);
 
 	//find the result from resultTable
@@ -41,14 +47,30 @@ bool QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrPa
 	//c. the resultTable is not empty, return the corresponding results
 	return true;
 }	
+void QueryEvaluator::generateRaw(QTREE* resultNode){
+	/*//create the rawData
+		rawData = new RAWDATA();
 
+		//get the type of the selected var
+		TYPE resultVarType;
+		QUERYTABLE::iterator itr;
+
+		itr = qrTable->find(resultNode->getData());
+		resultVarType = itr->second;
+		rawData->push_back(*extractor->getStmtListOf(resultVarType));
+		
+		//add the col name, which is the qrVar index
+		DATA_LIST::iterator itr;
+		itr = rawData->at(0).begin();
+		rawData->at(0).insert(itr,resultNode->getData());
+		*/
+}
 IntermediateResultTable * QueryEvaluator::computeIntermediateResult(QTREE* relationTree){
 	
 	IntermediateResultTable * resultTable;
-
 	QTREE* currentClause = relationTree;
-	resultTable = new IntermediateResultTable(qrTable->size(),pkb,qrTable,extractor);
 	
+	resultTable = new IntermediateResultTable(qrTable->size(),pkb,qrTable,extractor);
 	bool startClause = false;
 	int currentFlag = currentClause->getData();
 	int prevFlag = currentFlag;
