@@ -354,9 +354,6 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 				}
 				//modifies, narrow down first rel
 				if(relType==MODIFIES){
-					//cout<<"firstType: "<<firstType;
-					//cout<<"secondType: "<<secondType;
-
 					tmpList = extractor->getModifiesResult(firstType,0,0);
 					iterateAndStore(relList, tmpList);
 				}

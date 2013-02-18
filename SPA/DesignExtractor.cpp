@@ -430,7 +430,7 @@ MODIFIES_LIST DesignExtractor::getModifiesResult(TYPE type, int arg1, VAR_INDEX 
 	TYPE getStatementType;
 	//cout << "TYPE: " << type << "\n";
 
-	if((type == WHILE || type == PROCEDURE || type == ASSIGNMENT||type == IF)){
+	if((type == WHILE  || type == ASSIGNMENT||type == IF)){
 		//cout << "v1: " << pkb->getVarName(v1) << "\n";
 			result = pkb->getModifies(type, arg1, v1);
 
@@ -502,7 +502,7 @@ bool DesignExtractor::getIsModifiesResult(TYPE type, int arg1, VAR_INDEX v1){
 			astItr++;
 		}
 	}
-	else if(type == PROCEDURE){
+	else if(type == PROCEDURE){ //need to be changed
 		result = pkb->isModifies(type, arg1, v1);
 	}
 	//need to consider call
@@ -518,7 +518,7 @@ USES_LIST DesignExtractor::getUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 	TYPE getStatementType;
 
 	//Uses(w, "b")
-	if((type == WHILE || type == PROCEDURE || type == ASSIGNMENT || type == IF)){
+	if((type == WHILE  || type == ASSIGNMENT || type == IF)){
 		result = pkb->getUses(type, arg1, v1);
 	}
 	// Uses(1, a)
@@ -583,7 +583,7 @@ bool DesignExtractor::getIsUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 			astItr++;
 		}
 	}
-	else if(type == PROCEDURE)
+	else if(type == PROCEDURE) //need to be changed and need to add call
 	{
 		result = pkb->isUses(type, arg1, v1);
 	}
