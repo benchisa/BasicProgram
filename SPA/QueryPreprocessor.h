@@ -48,6 +48,7 @@ private:
 	GrammarTable grammarTable;
 	vector<TOKEN> *tokens;	
 	bool selectBool;
+	bool keepUpperCase;
 	
 	struct qVar{
 		int qVarIndex;

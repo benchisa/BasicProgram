@@ -1,6 +1,7 @@
 #pragma once
 #include "QueryPreprocessor.h"
 #include <hash_map>
+#include <ctype.h>
 
 
 QueryPreprocessor::QueryPreprocessor(PKB* pkb){
@@ -84,9 +85,27 @@ bool QueryPreprocessor::preProcess(){
 }
 
 void QueryPreprocessor::setQuery(QUERY query){
+	keepUpperCase = false;
+	char c;
+	QUERY qr;
 	//set qr to lower case
-	std::transform(query.begin(),query.end(),query.begin(), std::bind2nd(std::ptr_fun(&std::tolower<char>), std::locale("")));
-	this->query = query;
+	for (int i = 0; i<query.size(); i++){
+		c = query.at(i);
+		
+		if (keepUpperCase){
+			if (c=='\"'){
+				keepUpperCase = false;
+			}
+		}
+		else if (c=='\"'){
+			keepUpperCase = true;
+		}
+		else{
+			c = tolower(c);
+		}
+		qr.insert(qr.end(),1,c);
+	}
+	this->query = qr;
 }
 
 hash_map<int,TYPE> *QueryPreprocessor::getQVarTable(){
