@@ -34,6 +34,12 @@ void DesignExtractorTest::tearDown()
 
 CPPUNIT_TEST_SUITE_REGISTRATION( DesignExtractorTest );
 
+void DesignExtractorTest::testHelperFunction(){
+	CPPUNIT_ASSERT(DesignExtractor::convertExprToPrefix("(a + b - c) * (e * f) - ( g - h*i)") == "- * - + a b c * e f - g * h i");
+	CPPUNIT_ASSERT(DesignExtractor::convertExprToPrefix("x + y + z") == "+ + x y z");
+	CPPUNIT_ASSERT(DesignExtractor::convertExprToPrefix("(x + y + z)") == "+ + x y z");
+	CPPUNIT_ASSERT(DesignExtractor::convertExprToPrefix("((1 * 2) + (3 * 4)) - ((5 - 6) + (7 - 8))") == "- + * 1 2 * 3 4 + - 5 6 - 7 8");
+}
 
 void DesignExtractorTest::testGetParentResult(){
 	// Parent(1, a), return <1, 2>
