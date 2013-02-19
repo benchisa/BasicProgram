@@ -139,84 +139,84 @@ SOURCE SampleSimpleSources::sampleInvalidSource5 = "InvalidCode3{\n"
 // Not sure if you people need this... feel free to add a class for this if needed.
 
 //===============Test for Follows =================== PKB5
-QUERY SampleQueries::sampleQuery1 = "stmt s; select s such that Follows(s,4);";//pass
-QUERY SampleQueries::sampleQuery2 = "stmt s; select s such that Follows (2,s);";//pass
-QUERY SampleQueries::sampleQuery3 = "stmt s1,s2,s select <s1,s2> such that Follows (s1,s2);"; //pass
-QUERY SampleQueries::sampleQuery4 = "stmt s1,s2; select s2 such that Follows (s1,s2)"; //pass
-QUERY SampleQueries::sampleQuery5 = "stmt s1,s2,s3; select <s1,s2,s3> such that Follows (s1,s2) and Follows(s2,s3)";//pass
-QUERY SampleQueries::sampleQuery6 = "stmt s1,s2,s3; select s3 such that Follows (s1,s2) and Follows(s2,s3)";//pass
-QUERY SampleQueries::sampleQuery7 = "stmt s;select s with s.stmt#=2;"; //pass
-QUERY SampleQueries::sampleQuery8 = "call c; procedure p; variable v;select p with p.procName = \"Code5\";";
-QUERY SampleQueries::sampleQuery9 = "while w; callc; select w with w.stmt#=4;"; //pass
-QUERY SampleQueries::sampleQuery10 = "variable v; select v with v.varName = \"x\";"; //pass
-QUERY SampleQueries::sampleQuery11 = "stmt s; while w; select <s,w> with s.stmt#=w.stmt#;"; //pass
-QUERY SampleQueries::sampleQuery12 = "variable v;select v such that Modifies(_, v);"; 
-QUERY SampleQueries::sampleQuery13 = "variable v; select v such that Modifies(1, v);"; //fixed
-QUERY SampleQueries::sampleQuery14 = "stmt s; select s such that Uses(s, \"y\");"; 
-QUERY SampleQueries::sampleQuery15 = "assign a; while w;select a such that Follows* (a,w);"; // <-- this one suppose to return none right..
-QUERY SampleQueries::sampleQuery16 = "while w; constant c;select <w,c> with w.stmt#=c.value;"; //fixed
-QUERY SampleQueries::sampleQuery17 = "assign a; select a;"; //fixed
-QUERY SampleQueries::sampleQuery18 = "stmt s; constant c;select s with c.value=s.stmt#;";
-QUERY SampleQueries::sampleQuery19 = "assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;select BOOLEAN with p.procName = \"procedure\";";
-QUERY SampleQueries::sampleQuery20 = "stmt s1,s2;select s1 such that Follows* ( s1 , s2 );";
-QUERY SampleQueries::sampleQuery21 = "while w; select w such that Parent (_,_);";
-QUERY SampleQueries::sampleQuery22 = "stmt s1; select s1 such that Parent (_,s1);";
+QUERY SampleQueries::sampleQuery1 = "stmt s; Select s such that Follows(s,4);";//pass
+QUERY SampleQueries::sampleQuery2 = "stmt s; Select s such that Follows (2,s);";//pass
+QUERY SampleQueries::sampleQuery3 = "stmt s1,s2,s Select <s1,s2> such that Follows (s1,s2);"; //pass
+QUERY SampleQueries::sampleQuery4 = "stmt s1,s2; Select s2 such that Follows (s1,s2)"; //pass
+QUERY SampleQueries::sampleQuery5 = "stmt s1,s2,s3; Select <s1,s2,s3> such that Follows (s1,s2) and Follows(s2,s3)";//pass
+QUERY SampleQueries::sampleQuery6 = "stmt s1,s2,s3; Select s3 such that Follows (s1,s2) and Follows(s2,s3)";//pass
+QUERY SampleQueries::sampleQuery7 = "stmt s;Select s with s.stmt#=2;"; //pass
+QUERY SampleQueries::sampleQuery8 = "call c; procedure p; variable v;Select p with p.procName = \"Code5\";";
+QUERY SampleQueries::sampleQuery9 = "while w; callc; Select w with w.stmt#=4;"; //pass
+QUERY SampleQueries::sampleQuery10 = "variable v; Select v with v.varName = \"x\";"; //pass
+QUERY SampleQueries::sampleQuery11 = "stmt s; while w; Select <s,w> with s.stmt#=w.stmt#;"; //pass
+QUERY SampleQueries::sampleQuery12 = "variable v;Select v such that Modifies(_, v);"; 
+QUERY SampleQueries::sampleQuery13 = "variable v; Select v such that Modifies(1, v);"; //fixed
+QUERY SampleQueries::sampleQuery14 = "stmt s; Select s such that Uses(s, \"y\");"; 
+QUERY SampleQueries::sampleQuery15 = "assign a; while w;Select a such that Follows* (a,w);"; // <-- this one suppose to return none right..
+QUERY SampleQueries::sampleQuery16 = "while w; constant c;Select <w,c> with w.stmt#=c.value;"; //fixed
+QUERY SampleQueries::sampleQuery17 = "assign a; Select a;"; //fixed
+QUERY SampleQueries::sampleQuery18 = "stmt s; constant c;Select s with c.value=s.stmt#;";
+QUERY SampleQueries::sampleQuery19 = "assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;Select BOOLEAN with p.procName = \"procedure\";";
+QUERY SampleQueries::sampleQuery20 = "stmt s1,s2;Select s1 such that Follows* ( s1 , s2 );";
+QUERY SampleQueries::sampleQuery21 = "while w; Select w such that Parent (_,_);";
+QUERY SampleQueries::sampleQuery22 = "stmt s1; Select s1 such that Parent (_,s1);";
 
 //these two cases fail for PKB4, types are defined correctly but SUCHTAHT returns empty result - FIXED
-QUERY SampleQueries::sampleQuery23 = "while w1,w2;select w2 such that Parent (w1,w2);";
-QUERY SampleQueries::sampleQuery24 = "while w;assign a;select a such that Parent (w,a);";
+QUERY SampleQueries::sampleQuery23 = "while w1,w2;Select w2 such that Parent (w1,w2);";
+QUERY SampleQueries::sampleQuery24 = "while w;assign a;Select a such that Parent (w,a);";
 
 //===============Test for Parent* =================== PKB4
-QUERY SampleQueries::sampleQuery25 = "stmt s; select s such that Parent*(s,5);";
-QUERY SampleQueries::sampleQuery26 = "stmt s; select s such that Parent*(1,s);";
-QUERY SampleQueries::sampleQuery27 = "stmt s1,s2; select s1 such that Parent* (s1,s2);";
-QUERY SampleQueries::sampleQuery28 = "stmt s1; select s1 such that Parent* (s1,_);";
-QUERY SampleQueries::sampleQuery29 = "while w; select w such that Parent* (_,_);";
-QUERY SampleQueries::sampleQuery30 = "stmt s1; select s1 such that Parent* (_,s1);";
+QUERY SampleQueries::sampleQuery25 = "stmt s; Select s such that Parent*(s,5);";
+QUERY SampleQueries::sampleQuery26 = "stmt s; Select s such that Parent*(1,s);";
+QUERY SampleQueries::sampleQuery27 = "stmt s1,s2; Select s1 such that Parent* (s1,s2);";
+QUERY SampleQueries::sampleQuery28 = "stmt s1; Select s1 such that Parent* (s1,_);";
+QUERY SampleQueries::sampleQuery29 = "while w; Select w such that Parent* (_,_);";
+QUERY SampleQueries::sampleQuery30 = "stmt s1; Select s1 such that Parent* (_,s1);";
 
 //these two cases fail for PKB4, types are defined correctly but SUCHTAHT returns empty result - FIXED
-QUERY SampleQueries::sampleQuery31 = "stmt s;select s such that Follow* (s,s);";
-QUERY SampleQueries::sampleQuery32 = "while w;assign a;select a such that Parent* (w,a);";
+QUERY SampleQueries::sampleQuery31 = "stmt s;Select s such that Follow* (s,s);";
+QUERY SampleQueries::sampleQuery32 = "while w;assign a;Select a such that Parent* (w,a);";
 
 //===============Test for Modifies=================== PKB4
-QUERY SampleQueries::sampleQuery33 = "assign a;select a such that Uses(a,\"e\");";
-QUERY SampleQueries::sampleQuery34 = "variable v;stmt s;select v such that Modifies(s, v);";
+QUERY SampleQueries::sampleQuery33 = "assign a;Select a such that Uses(a,\"innard\");";
+QUERY SampleQueries::sampleQuery34 = "variable v;stmt s;Select v such that Modifies(s, v);";
 
 //below hant tested
-QUERY SampleQueries::sampleQuery35 = "variable v;while w;select v such that Modifies(w, v);"; // <-- this didnt call suchthat?
-QUERY SampleQueries::sampleQuery36 = "variable v;assign a;select v such that Modifies(a, v);"; // <-- works ok
-QUERY SampleQueries::sampleQuery37 = "variable v;select v such that Modifies(_, v);"; // <-- works ok
-QUERY SampleQueries::sampleQuery38 = "stmt s;select s such that Modifies(s,\"q\");"; // empty result, works ok
-QUERY SampleQueries::sampleQuery39 = "while w;select w such that Modifies(w,\"y\");"; // empty result, works ok
-QUERY SampleQueries::sampleQuery40 = "assign a;select a such that Modifies(a,\"a\");"; // empty result, works ok
-QUERY SampleQueries::sampleQuery41 = "while w;select w such that Modifies(_,_);";// <-- works ok
+QUERY SampleQueries::sampleQuery35 = "variable v;while w;Select v such that Modifies(w, v);"; // <-- this didnt call suchthat?
+QUERY SampleQueries::sampleQuery36 = "variable v;assign a;Select v such that Modifies(a, v);"; // <-- works ok
+QUERY SampleQueries::sampleQuery37 = "variable v;Select v such that Modifies(_, v);"; // <-- works ok
+QUERY SampleQueries::sampleQuery38 = "stmt s;Select s such that Modifies(s,\"banana\");"; // empty result, works ok
+QUERY SampleQueries::sampleQuery39 = "while w;Select w such that Modifies(w,\"apple\");"; // empty result, works ok
+QUERY SampleQueries::sampleQuery40 = "assign a;Select a such that Modifies(a,\"kimchi\");"; // empty result, works ok
+QUERY SampleQueries::sampleQuery41 = "while w;Select w such that Modifies(_,_);";// <-- works ok
 
 //===============Test for Pattern=================== PKB5
-QUERY SampleQueries::sampleQuery42 = "assign a;Select a  pattern a(\"d\",_);"; //pass
+QUERY SampleQueries::sampleQuery42 = "assign a;Select a  pattern a(\"carrot\",_);"; //pass
 QUERY SampleQueries::sampleQuery43 = "assign a;Select a  pattern a(_,_);";     //pass 
-QUERY SampleQueries::sampleQuery44 = "while w;Select w  pattern w(\"a\",_);";  //no prob with qtree,pass
+QUERY SampleQueries::sampleQuery44 = "while w;Select w  pattern w(\"apple\",_);";  //no prob with qtree,pass
 QUERY SampleQueries::sampleQuery45 = "while w;Select w  pattern w(_,_);"; //no prob with qtree,pass
-QUERY SampleQueries::sampleQuery46 = "assign a;Select a  pattern a(_,_\"y\"_);";  //no prob with qtree,pass
-QUERY SampleQueries::sampleQuery47 = "assign a;Select a  pattern a(_,\"a\");";  //no prob with qtree
-QUERY SampleQueries::sampleQuery48 = "assign a;Select a  pattern a(\"c\",\"2\");"; //no prob with qtree,pass
-QUERY SampleQueries::sampleQuery49 = "assign a;variable v;Select v  pattern a(v,_\"a\"_);";  //no prob with qtree
+QUERY SampleQueries::sampleQuery46 = "assign a;Select a  pattern a(_,_\"apple\"_);";  //no prob with qtree,pass
+QUERY SampleQueries::sampleQuery47 = "assign a;Select a  pattern a(_,\"kimchi\");";  //no prob with qtree
+QUERY SampleQueries::sampleQuery48 = "assign a;Select a  pattern a(\"carrot\",\"2\");"; //no prob with qtree,pass
+QUERY SampleQueries::sampleQuery49 = "assign a;variable v;Select v  pattern a(v,_\"apple\"_);";  //no prob with qtree
 
 //===============Test for mix of suchthat and pattern=================== PKB5
-QUERY SampleQueries::sampleQuery51 = "assign a;select a such that Modifies(a,\"c\") pattern a(\"c\",_);"; //pass
-QUERY SampleQueries::sampleQuery52 = "assign a;select a such that Uses(a,\"q\") pattern a(\"d\",_);";    //pass
-QUERY SampleQueries::sampleQuery53 = "assign a;variable v;select v such that Uses(a,v) pattern a(v,_\"a\"_);";  //pass
-QUERY SampleQueries::sampleQuery54 = "assign a1,a2;select a2 such that Parent(_,a1) pattern a1(\"c\",_);";  //pass
+QUERY SampleQueries::sampleQuery51 = "assign a;Select a such that Modifies(a,\"carrot\") pattern a(\"carrot\",_);"; //pass
+QUERY SampleQueries::sampleQuery52 = "assign a;Select a such that Uses(a,\"kimchi\") pattern a(\"donut\",_);";    //pass
+QUERY SampleQueries::sampleQuery53 = "assign a;variable v;Select v such that Uses(a,v) pattern a(v,_\"apple\"_);";  //pass
+QUERY SampleQueries::sampleQuery54 = "assign a1,a2;Select a2 such that Parent(_,a1) pattern a1(\"carrot\",_);";  //pass
 
 //===============Test for Boolean=================== PKB5	
-QUERY SampleQueries::sampleQuery55 = "select boolean such that Parent(2,3);";
+QUERY SampleQueries::sampleQuery55 = "Select BOOLEAN such that Parent(2,3);";
 //two clauses have relation and need to take intersection
-QUERY SampleQueries::sampleQuery56 = "assign a;select boolean such that Modifies(a,\"c\") pattern a(\"c\",_\"y\"_);";
+QUERY SampleQueries::sampleQuery56 = "assign a;Select BOOLEAN such that Modifies(a,\"carrot\") pattern a(\"carrot\",_\"egg\"_);";
 //two clauses have no relation
-QUERY SampleQueries::sampleQuery57 = "assign a1,a2;select boolean such that Modifies(a1,\"a\") pattern a2(\"d\",\"a\");"; //first false
-QUERY SampleQueries::sampleQuery58 = "assign a1,a2;select boolean such that Modifies(a1,\"c\") pattern a2(\"d\",\"a\");";//both true
-QUERY SampleQueries::sampleQuery59 = "assign a1,a2;select boolean such that Modifies(a1,\"c\") pattern a2(\"d\",\"y\");"; //second false
+QUERY SampleQueries::sampleQuery57 = "assign a1,a2;Select BOOLEAN such that Modifies(a1,\"apple\") pattern a2(\"donut\",\"apple\");"; 
+QUERY SampleQueries::sampleQuery58 = "assign a1,a2;Select BOOLEAN such that Modifies(a1,\"carrot\") pattern a2(\"donut\",\"apple\");";
+QUERY SampleQueries::sampleQuery59 = "assign a1,a2;Select BOOLEAN such that Modifies(a1,\"carrot\") pattern a2(\"donut\",\"egg\");"; 
 //test other cases
-QUERY SampleQueries::sampleQuery60 = "assign a;Select boolean  such that Uses(a,\"vcz\");";
+QUERY SampleQueries::sampleQuery60 = "assign a;Select BOOLEAN  such that Uses(a,\"vcz\");";
 // ==== SamplePKB ====//
 
 PKB* SamplePKB::pkb1(){

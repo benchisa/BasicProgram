@@ -2,121 +2,121 @@
 cat: such that with cases
 4- such that with, Typed :: follows* (known,unknown) with
 stmt s1,s2;constant c;
-select s2   such that  Follows* ( 4 , s2 ) with s2.stmt# = c.value ;
+Select s2   such that  Follows* ( 4 , s2 ) with s2.stmt# = c.value ;
 
 5000
 5- such that with, Typed :: follows* (unknown,known) with
 stmt s1,s2;variable v1;
-select s1   such that  Follows* ( s1 , 9 ) with s1.stmt# = c.value ;
+Select s1   such that  Follows* ( s1 , 9 ) with s1.stmt# = c.value ;
 
 5000
 6- such that with, Typed :: follows (unknown,unknown)  with
 stmt s1,s2;variable v1;
-select s1   such that  Follows ( s1 , s2 ) with s1.stmt# =10   ;
+Select s1   such that  Follows ( s1 , s2 ) with s1.stmt# =10   ;
 
 5000
 7- such that with, Typed :: follows* (unknown,unknown)  with
 stmt s1,s2;variable v1;
-select s1   such that  Follows* ( s1 , s2 ) with s2.stmt# =10   ;
+Select s1   such that  Follows* ( s1 , s2 ) with s2.stmt# =10   ;
 
 5000
 10- such that with, Typed :: parent (known,unknown) with
 stmt s1,s2;variable v1;
-select s2   such that  Parent ( 9 , s2 ) with s2.stmt# =10   ;
+Select s2   such that  Parent ( 9 , s2 ) with s2.stmt# =10   ;
 
 5000
 11- such that with, Typed :: parent* (known,unknown) with
 stmt s1,s2;variable v1;
-select s2   such that  Parent* ( 9 , s2 ) with s2.stmt# =10   ;
+Select s2   such that  Parent* ( 9 , s2 ) with s2.stmt# =10   ;
 
 5000
 12- such that with, Typed :: parent (unknown,unknown) with
 stmt s1,s2;variable v1;
-select s1   such that  Parent ( s1 , s2 ) with s2.stmt# = s1.stmt#;
+Select s1   such that  Parent ( s1 , s2 ) with s2.stmt# = s1.stmt#;
 
 5000
 13- such that with, Typed :: parent* (unknown,unknown) with
 stmt s1,s2;variable v1;
-select s1   such that  Parent* ( s1 , s2 ) with s2.stmt# = s1.stmt#;
+Select s1   such that  Parent* ( s1 , s2 ) with s2.stmt# = s1.stmt#;
 
 5000
 16- such that with, Typed :: calls (known,unknown) with
 procedure p1,p2; call c;
-select p2   such that  Calls ( "xylo" , p2 ) with p1.procName = c.procName;
+Select p2   such that  Calls ( "xylo" , p2 ) with p1.procName = c.procName;
 
 5000
 17- such that with, Typed :: calls* (known,unknown) with
 procedure p1,p2; call c;
-select p2   such that  Calls* ( "xylo" , p2 ) with p2.procName = c.procName;
+Select p2   such that  Calls* ( "xylo" , p2 ) with p2.procName = c.procName;
 
 5000
 18- such that with, Typed :: calls (unknown,known) with
 procedure p1,p2; 
-select p1   such that  Calls ( p1 , "zebra" ) with p2.procName = "zebra";
+Select p1   such that  Calls ( p1 , "zebra" ) with p2.procName = "zebra";
 
 5000
 19- such that with, Typed :: calls* (unknown,known) with
 procedure p1,p2; 
-select p1   such that  Calls* ( p1 , "zebra" ) with p1.procName = "zebra";
+Select p1   such that  Calls* ( p1 , "zebra" ) with p1.procName = "zebra";
 
 5000
 20- such that with, Typed :: calls (unknown,unknown) with
 procedure p1,p2; variable v1;
-select p1   such that  Calls ( p1 , p2 ) with p1.procName = p2.procName;
+Select p1   such that  Calls ( p1 , p2 ) with p1.procName = p2.procName;
 
 5000
 21- such that with, Typed :: calls* (unknown,unknown) with
 procedure p1,p2; variable v1;
-select p1   such that  Calls* ( p1 , p2 ) with p1.procName = p2.procName;
+Select p1   such that  Calls* ( p1 , p2 ) with p1.procName = p2.procName;
 
 5000
 22- such that with, Typed :: uses (known_statement,known_var) with
 stmt s1,s2;variable v1;
-select BOOLEAN   such that  Uses ( 3 , "apple" ) with v1.varName = "apple";
+Select BOOLEAN   such that  Uses ( 3 , "apple" ) with v1.varName = "apple";
 true
 5000
 23- such that with, Typed :: modifies (known_statement,known_var) with
 stmt s1,s2;variable v1;
-select BOOLEAN   such that  Modifies (1 , "apple" ) with v1.varName = "apple";
+Select BOOLEAN   such that  Modifies (1 , "apple" ) with v1.varName = "apple";
 true
 5000
 24- such that with, Typed :: uses (unknown_while,known_var) with
 while w1; variable v1,v2;
-select w1   such that  Uses ( w1 , "apple" ) with v1.varName = v2.varName;
+Select w1   such that  Uses ( w1 , "apple" ) with v1.varName = v2.varName;
 
 5000
 25- such that with, Typed :: modifies (unknown_if,known_var) with
 if i1;variable v1,v2;
-select i1   such that  Modifies ( i1 , "apple" ) with v1.varName = v2.varName;
+Select i1   such that  Modifies ( i1 , "apple" ) with v1.varName = v2.varName;
 
 5000
 26- such that with, Typed :: uses (known_statement,unknown_var) with
 variable v1;
-select v1   such that  Uses (22 , v1 ) with v1.varName = "apple";
+Select v1   such that  Uses (22 , v1 ) with v1.varName = "apple";
 
 5000
 27- such that with, Typed :: modifies (known_assignment,unknown_var) with
 variable v1;
-select v1   such that  Modifies (13 , v1 ) with v1.varName = "apple";
+Select v1   such that  Modifies (13 , v1 ) with v1.varName = "apple";
 
 5000
 28- such that with, Typed :: uses (unknown_assignment,unknown_var) with
    assign a1; variable v1; constant c;
-select a1   such that  Uses ( a1 , v1 ) with a1.stmt# = c.value;
+Select a1   such that  Uses ( a1 , v1 ) with a1.stmt# = c.value;
 
 5000
 29- such that with, Typed :: modifies (unknown_while,unknown_var) with
 while w1; variable v1;constant c;
-select w1   such that  Modifies ( w1 , v1 ) with w1.stmt# = c.value;
+Select w1   such that  Modifies ( w1 , v1 ) with w1.stmt# = c.value;
 
 5000
 30- such that with, Typed :: uses (unknown_proc,unknown_var) with
 procedure p1; variable v1;
-select p1   such that  Uses ( p1 , v1 ) with p1.procName = v1.varName;
+Select p1   such that  Uses ( p1 , v1 ) with p1.procName = v1.varName;
 
 5000
 31- such that with, Typed :: modifies (unknown_proc,unknown_var) with
 procedure p1; variable v1;
-select p1   such that  Modifies ( p1 , v1 ) with p1.procName = v1.varName;
+Select p1   such that  Modifies ( p1 , v1 ) with p1.procName = v1.varName;
 
 5000

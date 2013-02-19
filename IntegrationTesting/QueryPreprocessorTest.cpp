@@ -25,19 +25,17 @@ void QueryPreprocessorTest::testCorrectPreProcessing(){
 	
 	//PKB *pkb = SamplePKB::pkb1();
 	PKB *pkb = SamplePKB::pkb5();
-	
-	/*
+
 	qpp = new QueryPreprocessor(pkb);
-	qr = "constant c;Select boolean with c.value=10;";
-	qpp->setQuery(qr);
-	CPPUNIT_ASSERT_EQUAL(true, qpp->preProcess());	
-	*/
-	qpp = new QueryPreprocessor(pkb);
-	qr = "constant c;variable v;Select boolean with c.value=v.varName;";
+	qr = "constant c;Select BOOLEAN with c.value=10;";
 	qpp->setQuery(qr);
 	CPPUNIT_ASSERT_EQUAL(true, qpp->preProcess());	
 
-	/*
+	qpp = new QueryPreprocessor(pkb);
+	qr = "constant c;variable v;Select BOOLEAN with c.value=v.varName;";
+	qpp->setQuery(qr);
+	CPPUNIT_ASSERT_EQUAL(false, qpp->preProcess());	
+
 	qpp = new QueryPreprocessor(pkb);
 	qr = SampleQueries::sampleQuery1;
 	qpp->setQuery(qr);
@@ -104,12 +102,12 @@ void QueryPreprocessorTest::testCorrectPreProcessing(){
 	qr = SampleQueries::sampleQuery13;
 	qpp->setQuery(qr);
 	CPPUNIT_ASSERT_EQUAL(true, qpp->preProcess());	
-
+	
 	qpp = new QueryPreprocessor(pkb);
 	qr = SampleQueries::sampleQuery14;
 	qpp->setQuery(qr);
-	CPPUNIT_ASSERT_EQUAL(true, qpp->preProcess());	
-
+	CPPUNIT_ASSERT_EQUAL(false, qpp->preProcess());	
+	
 	qpp = new QueryPreprocessor(pkb);
 	qr = SampleQueries::sampleQuery15;
 	qpp->setQuery(qr);
@@ -227,7 +225,7 @@ void QueryPreprocessorTest::testCorrectPreProcessing(){
 	CPPUNIT_ASSERT_EQUAL(true, qpp->preProcess());	
 
 	qpp = new QueryPreprocessor(pkb);
-	qr = SampleQueries::sampleQuery28;
+	qr = SampleQueries::sampleQuery38;
 	qpp->setQuery(qr);
 	CPPUNIT_ASSERT_EQUAL(true, qpp->preProcess());	
 
@@ -325,17 +323,12 @@ void QueryPreprocessorTest::testCorrectPreProcessing(){
 	qr = SampleQueries::sampleQuery58;
 	qpp->setQuery(qr);
 	CPPUNIT_ASSERT_EQUAL(true, qpp->preProcess());	
-
+	
 	qpp = new QueryPreprocessor(pkb);
 	qr = SampleQueries::sampleQuery59;
 	qpp->setQuery(qr);
 	CPPUNIT_ASSERT_EQUAL(true, qpp->preProcess());	
 	
-	qpp = new QueryPreprocessor(pkb);
-	qr = SampleQueries::sampleQuery60;
-	qpp->setQuery(qr);
-	CPPUNIT_ASSERT_EQUAL(false, qpp->preProcess());
-	*/
 	//THE FOLLOWING ARE TRUE TESTS============================
 	
 	

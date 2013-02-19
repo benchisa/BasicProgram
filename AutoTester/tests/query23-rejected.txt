@@ -1,15 +1,15 @@
 11 -
 assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
-select  c with cl.stmt# = c.value;
+Select  c with cl.stmt# = c.value;
 
 5000
 13 -
 assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
-select  w with w.stmt# = c.value;
+Select  w with w.stmt# = c.value;
 
 5000
 14 -
 assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
-select  i with i.stmt# = c.value;
+Select  i with i.stmt# = c.value;
 
 5000

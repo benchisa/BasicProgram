@@ -35,7 +35,7 @@ QueryPreprocessor::QueryPreprocessor(PKB* pkb){
 	attrCompare		= "("+attrRef+"\\s*=\\s*("+attrRef+or+"\""+ident+"\""+or+integer+")"+or+synonym+"\\s*=\\s*("+attrRef+or+integer+"))";
 	designEnt		= "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
 	elem			= synonym+or+attrRef;
-	tuple			= elem+or+"\\s*<("+elem+")(\\s*,\\s*"+synonym+"|\\s*,\\s*"+attrRef+")"+optional+"\\s*>";
+	tuple			= elem+or+"\\s*<("+elem+")(\\s*,\\s*"+synonym+"|\\s*,\\s*"+attrRef+")"+compulsoryOne+"\\s*>";
 	declare			= designEnt+"\\s+"+synonym+"(\\s*,\\s*"+synonym+")*";
 	result_cl		= "Select\\s+(BOOLEAN"+or+tuple+")";
 	suchthat_cl		= "such that\\s+("+rel+")\\s*\\(\\s*("+ref+")\\s*,\\s*("+ref+")\\s*\\)(\\s+and\\s+("+rel+")\\s*\\(\\s*("+ref+")\\s*,\\s*("+ref+")\\s*\\))"+optional;

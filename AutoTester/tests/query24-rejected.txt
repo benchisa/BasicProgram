@@ -1,35 +1,35 @@
 1 - follows (known,known) with
 variable v1;
-select BOOLEAN   such that  Follows ( 4 , 5 ) with v1 . varName = "apple"   ;
+Select BOOLEAN   such that  Follows ( 4 , 5 ) with v1 . varName = "apple"   ;
 true
 5000
 2 - follows* (known,known) with
 variable v1;
-select BOOLEAN   such that  Follows* ( 4 , 9 ) with v1 . varName = 9   ;
+Select BOOLEAN   such that  Follows* ( 4 , 9 ) with v1 . varName = 9   ;
 false
 5000
 3 - follows (known,unknown) with
 stmt s1,s2;variable v1;
-select s2 such that Follows ( 4 , s2 ) with s2.stmt# = s1.stmt# ;
+Select s2 such that Follows ( 4 , s2 ) with s2.stmt# = s1.stmt# ;
 
 5000
 8 - parent (known,known) with
 procedure p;
-select BOOLEAN   such that  Parent ( 9 ,10 ) with p . procName = "yello"   ;
+Select BOOLEAN   such that  Parent ( 9 ,10 ) with p . procName = "yello"   ;
 true
 5000
 9 - parent* (known,known) with
 procedure p;
-select BOOLEAN   such that  Parent* ( 9 ,12 ) with c . procName = "yello"   ;
+Select BOOLEAN   such that  Parent* ( 9 ,12 ) with c . procName = "yello"   ;
 true
 5000
 14 - calls (known,known) with
 procedure p;
-select BOOLEAN   such that  Calls ( "xylo" , "yello" ) with p . procName = "xylo"   ;
+Select BOOLEAN   such that  Calls ( "xylo" , "yello" ) with p . procName = "xylo"   ;
 true
 5000
 15 - calls* (known,known) with
 procedure p;
-select BOOLEAN   such that  Calls* ( "xylo" , "yello" ) with p . procName = "xylo"   ;
+Select BOOLEAN   such that  Calls* ( "xylo" , "yello" ) with p . procName = "xylo"   ;
 true
 5000

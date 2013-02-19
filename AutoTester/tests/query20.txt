@@ -1,42 +1,42 @@
 8    
 cat: simple cases    
-1 - select , Typed :: all assignments
+1 - Select , Typed :: all assignments
 assign a;
-select a;
+Select a;
 1,2,3,4,5,6,7,11,13,15,17,18,19,20,22,23,25,26,27,28,30,32,33,34,35,37,38,39,40,42,43,45,46,47
 5000
-2 - select, Typed ::  all if
+2 - Select, Typed ::  all if
 if i;
-select i;
+Select i;
 21,24,36
 5000
-3 - select, Typed ::  all while
+3 - Select, Typed ::  all while
 while w;
-select w;
+Select w;
 9,10,12,14,16,29,44
 5000
-4 - select, Typed ::  all statements
+4 - Select, Typed ::  all statements
 stmt s;
-select s;
+Select s;
 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47
 5000
-5 - select, Typed ::  all variables
+5 - Select, Typed ::  all variables
 variable v;
-select v;
+Select v;
 apple,a,banana,b,carrot,c,donut,egg,fish,gummy,ham,innard,jam,kimchi,leek,meat,ingredients
 5000
-6 - select , Typed :: all procedures
+6 - Select , Typed :: all procedures
 procedure p;
-select p; 
+Select p; 
 xylo,yello,zebra,extra
 5000
-7 - select , Typed :: all calls
+7 - Select , Typed :: all calls
 call cl;
-select cl;
+Select cl;
 8,31,41
 5000
-8 - select, Typed ::  all constants
+8 - Select, Typed ::  all constants
 constant c;
-select c;
+Select c;
 0,1,2,9,10,11,22,33,88,99
 5000

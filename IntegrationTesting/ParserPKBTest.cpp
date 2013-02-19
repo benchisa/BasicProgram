@@ -149,7 +149,7 @@ void ParserPKBTest::testInvalidInput2(){
 	Parser p;
 	p.setSource(SampleSimpleSources::sampleInvalidSource2);
 	CPPUNIT_ASSERT_EQUAL(-1, p.startParse());
-	CPPUNIT_ASSERT(p.getLastError() == "Source Code Error(): invalid procedure name");
+	CPPUNIT_ASSERT(p.getLastError() == "Source Code Error(): invalid/repeated procedure name");
 }
 
 void ParserPKBTest::testInvalidInput3(){
