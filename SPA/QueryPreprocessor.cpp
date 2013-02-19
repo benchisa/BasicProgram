@@ -176,13 +176,9 @@ bool QueryPreprocessor::validate(){
 
 	}	
 
-	if (selectOK && conditionOK){
-		setQTree();
-		return true;
-	}
-	else{
-		return false;
-	}
+	setQTree();
+	return true;
+	
 
 }
 
@@ -647,15 +643,26 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 		}
 
 		//if with inverted commas
+		//two scenarios: "<varName>" and "<procName>"
 		if(regex_match(currToken,regex(invComma+ident+invComma))){			
 			currToken.erase(currToken.begin());	
 			currToken.resize(currToken.size()-1);	
-			if (!pkb->isVarExists(currToken)){
-				error(INVALID_VARIABLE);
-				return false;
+			if (relName=="modifies_p"||relName=="uses_p"){
+				if (!pkb->isProcExists(currToken)){
+					error(INVALID_VARIABLE);
+					return false;
+				}
+				tokenType = PROCEDURE;
+				currNode = createQTREENode(PROCEDURE,pkb->getProcIndex(currToken));
 			}
-			tokenType = VARIABLE;
-			currNode = createQTREENode(VARIABLE,pkb->getVarIndex(currToken));
+			else{
+				if (!pkb->isVarExists(currToken)){
+					error(INVALID_VARIABLE);
+					return false;
+				}
+				tokenType = VARIABLE;
+				currNode = createQTREENode(VARIABLE,pkb->getVarIndex(currToken));				
+			}
 			if (prevArgConstant){
 				oneConstantClauses.push_back(clauseCount);
 			}
