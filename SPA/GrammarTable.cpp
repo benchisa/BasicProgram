@@ -82,85 +82,85 @@ bool GrammarTable::isEntExists(ENTITY ent){
 
 void GrammarTable::createRelTable(){
 
-	rTable[0].relName	="calls";
+	rTable[0].relName	="Calls";
 	rTable[0].numArg	=2;
 	rTable[0].arg1		=entRef;
 	rTable[0].arg2		=entRef;
 	rTable[0].type		=CALL;
 
-	rTable[1].relName	="calls*";
+	rTable[1].relName	="Calls*";
 	rTable[1].numArg	=2;
 	rTable[1].arg1		=entRef;
 	rTable[1].arg2		=entRef;
 	rTable[1].type		=CALLST;
 
-	rTable[2].relName	="follows";
+	rTable[2].relName	="Follows";
 	rTable[2].numArg	=2;
 	rTable[2].arg1		=stmtRef;
 	rTable[2].arg2		=stmtRef;
 	rTable[2].type		=FOLLOWS;
 
-	rTable[3].relName	="follows*";
+	rTable[3].relName	="Follows*";
 	rTable[3].numArg	=2;
 	rTable[3].arg1		=stmtRef;
 	rTable[3].arg2		=stmtRef;
 	rTable[3].type		=FOLLOWST;
 
-	rTable[4].relName	="parent";
+	rTable[4].relName	="Parent";
 	rTable[4].numArg	=2;
 	rTable[4].arg1		=stmtRef;
 	rTable[4].arg2		=stmtRef;
 	rTable[4].type		=PARENT;
 
-	rTable[5].relName	="parent*";
+	rTable[5].relName	="Parent*";
 	rTable[5].numArg	=2;
 	rTable[5].arg1		=stmtRef;
 	rTable[5].arg2		=stmtRef;
 	rTable[5].type		=PARENTST;
 
-	rTable[6].relName	="uses_p";
+	rTable[6].relName	="Uses_p";
 	rTable[6].numArg	=2;
 	rTable[6].arg1		=entRef;
 	rTable[6].arg2		=varRef;
 	rTable[6].type		=USES;
 
-	rTable[7].relName	="uses_s";
+	rTable[7].relName	="Uses_s";
 	rTable[7].numArg	=2;
 	rTable[7].arg1		=stmtRef;
 	rTable[7].arg2		=varRef;
 	rTable[7].type		=USES;
 
-	rTable[8].relName	="modifies_p";
+	rTable[8].relName	="Modifies_p";
 	rTable[8].numArg	=2;
 	rTable[8].arg1		=entRef;
 	rTable[8].arg2		=varRef;
 	rTable[8].type		=MODIFIES;
 
-	rTable[9].relName	="modifies_s";
+	rTable[9].relName	="Modifies_s";
 	rTable[9].numArg	=2;
 	rTable[9].arg1		=stmtRef;
 	rTable[9].arg2		=varRef;
 	rTable[9].type		=MODIFIES;
 
-	rTable[10].relName	="next";
+	rTable[10].relName	="Next";
 	rTable[10].numArg	=2;
 	rTable[10].arg1		=lineRef;
 	rTable[10].arg2		=lineRef;
 	rTable[10].type		=NEXT;
 
-	rTable[11].relName	="next*";
+	rTable[11].relName	="Next*";
 	rTable[11].numArg	=2;
 	rTable[11].arg1		=lineRef;
 	rTable[11].arg2		=lineRef;
 	rTable[11].type		=NEXTST;
 
-	rTable[12].relName	="affects";
+	rTable[12].relName	="Affects";
 	rTable[12].numArg	=2;
 	rTable[12].arg1		=stmtRef;
 	rTable[12].arg2		=stmtRef;
 	rTable[12].type		=AFFECTS;
 
-	rTable[13].relName	="affects*";
+	rTable[13].relName	="Affects*";
 	rTable[13].numArg	=2;
 	rTable[13].arg1		=stmtRef;
 	rTable[13].arg2		=stmtRef;
@@ -369,13 +369,13 @@ void GrammarTable::createAttrTable(){
 	atTable[5].attr="stmt#";
 	
 	atTable[6].type=CALL;
-	atTable[6].attr="procname";
+	atTable[6].attr="procName";
 
 	atTable[7].type=PROCEDURE;
-	atTable[7].attr="procname";
+	atTable[7].attr="procName";
 
 	atTable[8].type=VARIABLE;
-	atTable[8].attr="varname";
+	atTable[8].attr="varName";
 }
 
 vector<GrammarTable::ATTRIBUTE> GrammarTable::getAttr(TYPE ent){

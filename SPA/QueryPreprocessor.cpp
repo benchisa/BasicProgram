@@ -28,16 +28,16 @@ QueryPreprocessor::QueryPreprocessor(PKB* pkb){
 	integer			= "["+digit+"]"+compulsoryOne;
 	ident			= "["+letter+"]"+compulsoryOne+"["+letter+digit+hash+"]"+optional;
 	synonym			= ident;
-	rel				= "uses|modifies|follows\\*|follows|parent\\*|parent|affects\\*|affects|calls\\*|calls|next\\*|next";
+	rel				= "Uses|Modifies|Follows\\*|Follows|Parent\\*|Parent|Affects\\*|Affects|Calls\\*|Calls|Next\\*|Next";
 	ref				= synonym+or+underscore+or+integer+or+invComma+ident+invComma;
-	attrName		= "procname|varname|value|stmt#";
+	attrName		= "procName|varName|value|stmt#";
 	attrRef			= synonym+"\\.("+attrName+")";
 	attrCompare		= "("+attrRef+"\\s*=\\s*("+attrRef+or+"\""+ident+"\""+or+integer+")"+or+synonym+"\\s*=\\s*("+attrRef+or+integer+"))";
 	designEnt		= "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
 	elem			= synonym+or+attrRef;
 	tuple			= elem+or+"\\s*<("+elem+")(\\s*,\\s*"+synonym+"|\\s*,\\s*"+attrRef+")"+optional+"\\s*>";
 	declare			= designEnt+"\\s+"+synonym+"(\\s*,\\s*"+synonym+")*";
-	result_cl		= "select\\s+("+tuple+or+"boolean)";
+	result_cl		= "Select\\s+(BOOLEAN"+or+tuple+")";
 	suchthat_cl		= "such that\\s+("+rel+")\\s*\\(\\s*("+ref+")\\s*,\\s*("+ref+")\\s*\\)(\\s+and\\s+("+rel+")\\s*\\(\\s*("+ref+")\\s*,\\s*("+ref+")\\s*\\))"+optional;
 	with_cl			= "with\\s+("+attrCompare+")(\\s+and\\s+("+attrCompare+"))"+optional;
 	pattern_cl		= "pattern\\s+"+synonym+"\\s*\\(.+,.+,*\\)(\\s+and\\s+"+synonym+"\\s*\\(.+,.+,*\\))"+optional;
@@ -85,27 +85,7 @@ bool QueryPreprocessor::preProcess(){
 }
 
 void QueryPreprocessor::setQuery(QUERY query){
-	keepUpperCase = false;
-	char c;
-	QUERY qr;
-	//set qr to lower case
-	for (int i = 0; i<query.size(); i++){
-		c = query.at(i);
-		
-		if (keepUpperCase){
-			if (c=='\"'){
-				keepUpperCase = false;
-			}
-		}
-		else if (c=='\"'){
-			keepUpperCase = true;
-		}
-		else{
-			c = tolower(c);
-		}
-		qr.insert(qr.end(),1,c);
-	}
-	this->query = qr;
+	this->query = query;
 }
 
 hash_map<int,TYPE> *QueryPreprocessor::getQVarTable(){
@@ -507,7 +487,7 @@ bool QueryPreprocessor::verifySelect(TOKEN token){
 	selections = tokenize(token,elem);
 	for(int i=1;i<selections.size();i++){
 		currToken = selections.at(i);
-		if (regex_match(currToken,regex("boolean"))){
+		if (regex_match(currToken,regex("BOOLEAN"))){
 			currNode = createQTREENode(BOOL);
 			selectBool=true;
 		}
@@ -594,22 +574,22 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 	relName = relationships.at(0);
 
 	//do special cases for modifies and uses
-	if (relName=="modifies"){
+	if (relName=="Modifies"){
 		//look ahead to first arg
 		if (regex_match(relationships.at(1),regex(synonym+or+underscore+or+integer))){
-			relName="modifies_s";
+			relName="Modifies_s";
 		}
 		else{
-			relName="modifies_p";
+			relName="Modifies_p";
 		}
 	}
-	else if (relName=="uses"){
+	else if (relName=="Uses"){
 		//look ahead to first arg
 		if (regex_match(relationships.at(1),regex(synonym+or+underscore+or+integer))){
-			relName="uses_s";
+			relName="Uses_s";
 		}
 		else{
-			relName="uses_p";
+			relName="Uses_p";
 		}
 	}
 
@@ -647,7 +627,7 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 		if(regex_match(currToken,regex(invComma+ident+invComma))){			
 			currToken.erase(currToken.begin());	
 			currToken.resize(currToken.size()-1);	
-			if (relName=="modifies_p"||relName=="uses_p"){
+			if (relName=="Modifies_p"||relName=="Uses_p"){
 				if (!pkb->isProcExists(currToken)){
 					error(INVALID_VARIABLE);
 					return false;
@@ -789,7 +769,7 @@ bool QueryPreprocessor::processWith(TOKEN token){
 						attrType = "string";
 					}
 					else if (synType==CALL){
-						if(attrType=="" && comparisons.at(i)=="procname"){
+						if(attrType=="" && comparisons.at(i)=="procName"){
 							currNode = createQTREENode(NAME);
 							attrType = "string";
 						}
@@ -801,7 +781,7 @@ bool QueryPreprocessor::processWith(TOKEN token){
 							error(INVALID_QUERY_SYNTAX);
 							return false;
 						}
-						else if (attrType=="number" && comparisons.at(i)=="procname"){
+						else if (attrType=="number" && comparisons.at(i)=="procName"){
 							error(INVALID_QUERY_SYNTAX);
 							return false;
 						}
