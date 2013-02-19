@@ -978,7 +978,15 @@ DATA_LIST * DesignExtractor::getAllAssigns(){
 
 	return returnList;
 }
+DATA_LIST * DesignExtractor::getAllConstants(){
+	DATA_LIST * returnList = new DATA_LIST();
 
+	int size = pkb->getConstantTableSize();
+	for(int i =1;i<=size;i++){
+		returnList->push_back(pkb->getConstantValue(i);
+	}
+	return returnList;
+}
 DATA_LIST * DesignExtractor::getAllWhiles(){
 	DATA_LIST * returnList;
 	returnList = new DATA_LIST;
@@ -1081,7 +1089,12 @@ DATA_LIST * DesignExtractor::getStmtListOf(TYPE nodeType){
 			}
 		}
 		break;
+	
+	case CONSTANT:
+		{
+			returnList = DesignExtractor::getAllConstants();
+		}
+		break;
 	}
-
 	return returnList;
 }

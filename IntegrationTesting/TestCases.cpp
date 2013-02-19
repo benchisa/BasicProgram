@@ -150,14 +150,14 @@ QUERY SampleQueries::sampleQuery8 = "call c; procedure p; variable v;select p wi
 QUERY SampleQueries::sampleQuery9 = "while w; callc; select w with w.stmt#=4;"; //pass
 QUERY SampleQueries::sampleQuery10 = "variable v; select v with v.varName = \"x\";"; //pass
 QUERY SampleQueries::sampleQuery11 = "stmt s; while w; select <s,w> with s.stmt#=w.stmt#;"; //pass
-QUERY SampleQueries::sampleQuery12 = "variable v;select v such that Modifies(_, v);"; //fixed
+QUERY SampleQueries::sampleQuery12 = "variable v;select v such that Modifies(_, v);"; 
 QUERY SampleQueries::sampleQuery13 = "variable v; select v such that Modifies(1, v);"; //fixed
 QUERY SampleQueries::sampleQuery14 = "stmt s; select s such that Uses(s, \"y\");"; 
 QUERY SampleQueries::sampleQuery15 = "assign a; while w;select a such that Follows* (a,w);"; // <-- this one suppose to return none right..
 QUERY SampleQueries::sampleQuery16 = "while w; constant c;select <w,c> with w.stmt#=c.value;"; //fixed
 QUERY SampleQueries::sampleQuery17 = "assign a; select a;"; //fixed
 QUERY SampleQueries::sampleQuery18 = "stmt s; constant c;select s with c.value=s.stmt#;";
-QUERY SampleQueries::sampleQuery19 = "procedure p;select BOOLEAN with p.procName = \"procedure\";";
+QUERY SampleQueries::sampleQuery19 = "assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;select BOOLEAN with p.procName = \"procedure\";";
 QUERY SampleQueries::sampleQuery20 = "stmt s1,s2;select s1 such that Follows* ( s1 , s2 );";
 QUERY SampleQueries::sampleQuery21 = "while w; select w such that Parent (_,_);";
 QUERY SampleQueries::sampleQuery22 = "stmt s1; select s1 such that Parent (_,s1);";

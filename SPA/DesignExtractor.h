@@ -13,6 +13,7 @@ public:
 	DATA_LIST * getAllAssigns();
 	DATA_LIST * getAllWhiles();
 	DATA_LIST * getAllIfs();
+	DATA_LIST * getAllConstants();
 	DATA_LIST * getStmtListOf(TYPE nodeType);
 
 	//createCFG and store in PKB
