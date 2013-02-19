@@ -19,6 +19,7 @@
     <ClCompile Include="FrontEndController.cpp" />
     <ClCompile Include="GrammarTable.cpp" />
     <ClCompile Include="IntermediateResultTable.cpp" />
+    <ClCompile Include="LinkedDataTable.cpp" />
     <ClCompile Include="Modifies.cpp" />
     <ClCompile Include="Parent.cpp" />
     <ClCompile Include="Parser.cpp" />
@@ -49,6 +50,7 @@
     <ClInclude Include="FrontEndController.h" />
     <ClInclude Include="GrammarTable.h" />
     <ClInclude Include="IntermediateResultTable.h" />
+    <ClInclude Include="LinkedDataTable.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Pattern.h" />
     <ClInclude Include="PatternTree.h" />

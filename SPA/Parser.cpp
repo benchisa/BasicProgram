@@ -126,7 +126,7 @@ bool Parser::procedure(){
 		AST* prevProc;
 		if(name()) 
 		{
-			Procedure *cProc = pkb->createProc(prevToken, stmt_num);
+			Procedure *cProc = pkb->createProc(prevToken, stmt_num+1);
 			curProc = prevToken;
 			if(pkb->isProcExists(prevToken))			
 			{				
@@ -135,6 +135,8 @@ bool Parser::procedure(){
 			}
 			curProcIndex = pkb->insertProc(cProc);
 			//cout << "Procedure added: " << prevToken << "\n";
+			
+			// first guy
 			if(stmt_num == 0){
 				curAST = pkb->createAST(PROCEDURE , prevProgLine, 0, curProcIndex);
 				if(!pkb->setRootAST(curAST))
