@@ -15,10 +15,11 @@ DesignExtractor::~DesignExtractor(void)
 // OUTPUT: true if higher precedence, false otherwise
 bool DesignExtractor::isHigherPrecedence(stack<pair<TYPE, TOKEN>>& operators, TOKEN t){
 	pair<TYPE, TOKEN> tPair = operators.top();
-	if(atoi(t.c_str()) > atoi(tPair.second.c_str()))
+	if(atoi(t.c_str()) > atoi(tPair.second.c_str())){
 		return true;
-	else
-		return false;
+	}
+	else{
+	return false;}
 }
 
 // INPUT: Expression
@@ -34,7 +35,7 @@ vector<pair<TYPE, TOKEN>> DesignExtractor::tokenize(EXPRESSION expr){
 	// format the tokens for easy process
 	for (rxItr; rxItr != rxend; ++rxItr)
 	{
-		
+		//cout << "rxItr: " << rxItr->str() << "\n";
 		if(rxItr->str() == "+"){
 			tPair.first = PLUS;
 			tPair.second = "1";
@@ -59,6 +60,7 @@ vector<pair<TYPE, TOKEN>> DesignExtractor::tokenize(EXPRESSION expr){
 			tPair.first = STRING;
 			tPair.second = rxItr->str();
 		}
+		//cout << tPair.first << ", " << tPair.second << "\n";
 		res.push_back(tPair);
 	}
 	return res;
@@ -108,6 +110,7 @@ PREFIXEXPR DesignExtractor::convertExprToPrefix(EXPRESSION expr){
 
 	vector<pair<TYPE, TOKEN>>::iterator itr = s.begin();
 	while(itr != s.end()){
+		
 		// If it is a left parentheses or the stack is empty or higher precendence
 		if(itr->first == STRING){
 			//cout << "Pushing: " << itr->second << " to operands\n";
@@ -127,10 +130,9 @@ PREFIXEXPR DesignExtractor::convertExprToPrefix(EXPRESSION expr){
 		}
 		// lower precedence
 		else if(!isHigherPrecedence(operators,itr->second)){
-			while(!operators.empty() && !isHigherPrecedence(operators,operators.top().second)){
+			while(!operators.empty() && !isHigherPrecedence(operators,operators.top().second) && operators.top().second != "("){
 				operands.push(formExpression(operators, operands));
 			}
-
 			operators.push(*itr);
 		}
 
