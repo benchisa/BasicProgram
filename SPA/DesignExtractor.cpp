@@ -1036,3 +1036,52 @@ DATA_LIST * DesignExtractor::getAllCallStmts(){
 
 	return returnList;
 }
+DATA_LIST * DesignExtractor::getStmtListOf(TYPE nodeType){
+	DATA_LIST * returnList = new DATA_LIST();
+
+	int maxStmtNum = pkb->getMaxStatementNum();
+	int maxProgLineNum = pkb->getMaxProgLine();
+
+	switch(nodeType){
+	case PROGLINE:
+		for(int i=1; i<=maxProgLineNum;i++){
+			returnList->push_back(i);
+		}
+		break;
+	case STATEMENT:
+		for(int i=1; i<=maxStmtNum;i++){
+			returnList->push_back(i);
+		}
+		break;
+	case ASSIGNMENT:
+		returnList = DesignExtractor::getAllAssigns();
+		break;
+	case WHILE:
+		returnList = DesignExtractor::getAllWhiles();
+		break;
+	case IF:
+		returnList = DesignExtractor::getAllIfs();
+		break;
+	case CALL:
+		returnList = DesignExtractor::getAllCallStmts();
+		break;
+	case VARIABLE:
+		{
+			int varSize = pkb->getVarTableSize();
+			for(int i =1;i<=varSize;i++){
+				returnList->push_back(i);
+			}
+		}
+		break;
+	case PROCEDURE:
+		{
+			int procSize = pkb->getProceTableSize();
+			for(int i =1;i<=procSize;i++){
+				returnList->push_back(i);
+			}
+		}
+		break;
+	}
+
+	return returnList;
+}

@@ -48,22 +48,31 @@ bool QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrPa
 	return true;
 }	
 void QueryEvaluator::generateRaw(QTREE* resultNode){
-	/*//create the rawData
+		//create the rawData
 		rawData = new RAWDATA();
 
-		//get the type of the selected var
-		TYPE resultVarType;
-		QUERYTABLE::iterator itr;
-
-		itr = qrTable->find(resultNode->getData());
-		resultVarType = itr->second;
-		rawData->push_back(*extractor->getStmtListOf(resultVarType));
+		//select bool
+		if(resultNode->getType()==BOOL){
+			DATA_LIST result;
 		
-		//add the col name, which is the qrVar index
-		DATA_LIST::iterator itr;
-		itr = rawData->at(0).begin();
-		rawData->at(0).insert(itr,resultNode->getData());
-		*/
+			result.push_back(-1);
+			result.push_back(1);
+			rawData->push_back(result);
+		}else{
+			//get the type of the selected var
+			TYPE resultVarType;
+			QUERYTABLE::iterator itr;
+
+			itr = qrTable->find(resultNode->getData());
+			resultVarType = itr->second;
+			rawData->push_back(*extractor->getStmtListOf(resultVarType));
+		
+			//add the col name, which is the qrVar index
+			DATA_LIST::iterator rawItr;
+			rawItr = rawData->at(0).begin();
+			rawData->at(0).insert(rawItr,resultNode->getData());
+		}
+		
 }
 IntermediateResultTable * QueryEvaluator::computeIntermediateResult(QTREE* relationTree){
 	
@@ -456,7 +465,7 @@ RELATION_LIST * QueryEvaluator::appendRelationLists(RELATION_LIST* list1,RELATIO
 bool QueryEvaluator::findResult(QTREE* resultNode,IntermediateResultTable* resultTable){
 	
 	//the table is empty
-	if(resultTable==NULL) return false;
+	//if(resultTable==NULL) return false;
 
 	int nodeNum = 0;
 
@@ -485,24 +494,20 @@ bool QueryEvaluator::findResult(QTREE* resultNode,IntermediateResultTable* resul
 
 		return false;
 	}else if((headNodeType==BOOL) && (resultTable==NULL)){//special case:--return type is boolean
-		DATA_LIST resultType;
-		DATA_LIST content;
-		
-		resultType.push_back(-1);
-		content.push_back(0);
-		rawData->push_back(resultType);
-		rawData->push_back(content);
+		DATA_LIST result;
+
+		result.push_back(-1);
+		result.push_back(0);
+		rawData->push_back(result);
 
 		return true;
 	}else if((headNodeType==BOOL) && (resultTable!=NULL)){
-		DATA_LIST resultType;
-		DATA_LIST content;
+		DATA_LIST result;
 		
-		resultType.push_back(-1);
-		content.push_back(1);
-		rawData->push_back(resultType);
-		rawData->push_back(content);
-
+		result.push_back(-1);
+		result.push_back(1);
+		rawData->push_back(result);
+	
 		return true;
 	}
 

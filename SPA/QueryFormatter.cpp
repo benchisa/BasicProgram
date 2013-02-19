@@ -24,6 +24,8 @@ list<string> QueryFormatter::formatString(RAWDATA * data) {
 		}else {
 			result.push_back("false");
 		}
+
+		return result;
 	}
 	//checks the type of result at the 1st row and subsequent columns eg. Vector[cols][0]
 	for(int i = 1; i < (data->at(0)).size(); i++) {

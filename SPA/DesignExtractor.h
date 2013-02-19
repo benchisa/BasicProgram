@@ -13,7 +13,7 @@ public:
 	DATA_LIST * getAllAssigns();
 	DATA_LIST * getAllWhiles();
 	DATA_LIST * getAllIfs();
-
+	DATA_LIST * getStmtListOf(TYPE nodeType);
 
 	//createCFG and store in PKB
 	void createCFG();
@@ -50,7 +50,7 @@ public:
 	 bool getIsUsesResult(TYPE type, int arg1, VAR_INDEX v1);
 
 
-
+	
 private:
 	PKB* pkb;
 	AST* buildCFG(AST *);

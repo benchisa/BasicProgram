@@ -140,7 +140,7 @@ RELATION_LIST* WithClause::findEqual(){
 //the right attribute is either string index of integer value
 RELATION_LIST* WithClause::findOneVariable(){
 	//declare variables in the method
-	RELATION_LIST * returnList;
+	RELATION_LIST * returnList = new RELATION_LIST();
 	TYPE rightAttributeType = rightAttribute->getType();
 	TYPE leftAttributeType = leftAttribute->getType();
 
