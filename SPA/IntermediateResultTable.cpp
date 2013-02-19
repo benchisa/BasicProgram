@@ -249,6 +249,30 @@ RAWDATA *IntermediateResultTable::findResultOf(DATA_LIST resultNodeList){
 		}
 	}
 	returnRaw = tempRaw;
+
+	//unique the return result if there is only one selected qrVar
+	if(returnRaw->size()==1){
+		INDEX selectedQrVar = returnRaw->at(0).at(0);
+
+		DATA_LIST::iterator dataItr;
+		dataItr = returnRaw->at(0).begin();
+		dataItr++;
+		
+		DATA_LIST tempList;
+		for(dataItr;dataItr!=returnRaw->at(0).end();dataItr++){
+			DATA_LIST::iterator tmpItr;
+			tmpItr =find(tempList.begin(),tempList.end(),*dataItr);
+			if(tmpItr==tempList.end()){
+				tempList.push_back(*dataItr);
+			} 
+		}
+
+		//add qrVarIndex
+		dataItr = tempList.begin();
+		tempList.insert(dataItr,selectedQrVar);
+		returnRaw->erase(returnRaw->begin());
+		returnRaw->push_back(tempList);
+	}
 	return returnRaw;
 }
 

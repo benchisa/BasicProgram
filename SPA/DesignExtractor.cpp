@@ -472,6 +472,7 @@ MODIFIES_LIST DesignExtractor::getModifiesResult(TYPE type, int arg1, VAR_INDEX 
 			tmpLst = pkb->getModifies(IF, 0, 0);
 			iterateAndStore(result, tmpLst, v1);
 		}
+
 	}
 
 
@@ -910,7 +911,6 @@ void DesignExtractor::iterateAndStore(list<pair<int, int>> &result, list<pair<in
 				}
 				else if(v1 == 0){
 					result.push_back(*itr);
-					break;
 				}
 				itr++;
 			}	
