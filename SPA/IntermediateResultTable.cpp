@@ -335,7 +335,7 @@ RAWDATA * IntermediateResultTable::joinCombinations(RAWDATA* rawData, DATA_LIST 
 
 		//create first col
 		TYPE resultVarType = qrTable->find(selectedVarList->at(0))->second;
-		rawData->push_back(*IntermediateResultTable::getStmtListOf(resultVarType));
+		rawData->push_back(*extractor->getStmtListOf(resultVarType));
 		
 		//add the col name, which is the qrVar index
 		DATA_LIST::iterator itr;
@@ -357,7 +357,7 @@ RAWDATA * IntermediateResultTable::joinCombinations(RAWDATA* rawData, DATA_LIST 
 
 		TYPE resultVarType = qrTable->find(selectedVarList->at(0))->second;
 		DATA_LIST * selectedDataList;
-		selectedDataList = IntermediateResultTable::getStmtListOf(resultVarType);
+		selectedDataList = extractor->getStmtListOf(resultVarType);
 		
 		for(int i =1;i<=rawRowNum;i++){
 			for(int j =0;j<selectedDataList->size();i++){
@@ -383,56 +383,6 @@ RAWDATA * IntermediateResultTable::joinCombinations(RAWDATA* rawData, DATA_LIST 
 	return rawData;
 }
 
-DATA_LIST * IntermediateResultTable::getStmtListOf(TYPE nodeType){
-	DATA_LIST * returnList;
-	returnList = new DATA_LIST;
-
-	int maxStmtNum = pkb->getMaxStatementNum();
-	int maxProgLineNum = pkb->getMaxProgLine();
-
-	switch(nodeType){
-	case PROGLINE:
-		for(int i=1; i<=maxProgLineNum;i++){
-			returnList->push_back(i);
-		}
-		break;
-	case STATEMENT:
-		for(int i=1; i<=maxStmtNum;i++){
-			returnList->push_back(i);
-		}
-		break;
-	case ASSIGNMENT:
-		returnList = extractor->getAllAssigns();
-		break;
-	case WHILE:
-		returnList = extractor->getAllWhiles();
-		break;
-	case IF:
-		returnList = extractor->getAllIfs();
-		break;
-	case CALL:
-		returnList = extractor->getAllCallStmts();
-		break;
-	case VARIABLE:
-		{
-			int varSize = pkb->getVarTableSize();
-			for(int i =1;i<=varSize;i++){
-				returnList->push_back(i);
-			}
-		}
-		break;
-	case PROCEDURE:
-		{
-			int procSize = pkb->getProceTableSize();
-			for(int i =1;i<=procSize;i++){
-				returnList->push_back(i);
-			}
-		}
-		break;
-	}
-
-	return returnList;
-}
 
 
 		

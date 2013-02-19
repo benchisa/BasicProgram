@@ -22,10 +22,10 @@ CPPUNIT_TEST_SUITE_REGISTRATION(  QueryPKBTest );
 void QueryPKBTest::testSampleInput1(){
 	SPAController spa;
 
-	spa.enterProgram(SampleSimpleSources::sampleSource1);
+	spa.enterProgram(SampleSimpleSources::sampleSource5);
 	
 
-	FINAL_RESULT result =spa.getQueryResult(SampleQueries::sampleQuery14);
+	FINAL_RESULT result =spa.getQueryResult(SampleQueries::sampleQuery18);
 	FINAL_RESULT::iterator itr;
 
 	cout<<"\n Final result is:";

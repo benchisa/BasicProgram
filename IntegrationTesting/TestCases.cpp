@@ -39,7 +39,7 @@ SOURCE SampleSimpleSources::sampleSource5 = "procedure Code5{\n"
 									/*3*/	"c = x + y + z;\n"
 									/*4*/	"while b{\n"
 									/*5*/	"d = a;\n"
-									/*6*/	"c = q+1;}\n"
+									/*6*/	"c = q+4;}\n"
 									/*7*/	"e = 2;}}\n";
 
 
@@ -96,11 +96,9 @@ QUERY SampleQueries::sampleQuery12 = "variable v;select v such that Modifies(_, 
 QUERY SampleQueries::sampleQuery13 = "variable v; select v such that Modifies(1, v);"; //fixed
 QUERY SampleQueries::sampleQuery14 = "stmt s; select s such that Uses(s, \"y\");"; 
 QUERY SampleQueries::sampleQuery15 = "assign a; while w;select a such that Follows* (a,w);"; // <-- this one suppose to return none right..
-QUERY SampleQueries::sampleQuery16 = "assign a1,a2;select a2 such that Follows* (a1,a2);";
-
-//===============Test for Parent=================== PKB4
-QUERY SampleQueries::sampleQuery17 = "stmt s; select s such that Parent(s,2);";
-QUERY SampleQueries::sampleQuery18 = "stmt s; select s such that Parent (4,s);";
+QUERY SampleQueries::sampleQuery16 = "while w; constant c;select <w,c> with w.stmt#=c.value;";
+QUERY SampleQueries::sampleQuery17 = "stmt s; select s;";
+QUERY SampleQueries::sampleQuery18 = "assign a; select a;";
 QUERY SampleQueries::sampleQuery19 = "stmt s1,s2; select s2 such that Parent (s1,s2);";
 QUERY SampleQueries::sampleQuery20 = "stmt s1; select s1 such that Parent (s1,_);";
 QUERY SampleQueries::sampleQuery21 = "while w; select w such that Parent (_,_);";
