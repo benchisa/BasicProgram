@@ -1,1122 +1,527 @@
-224                         
-cat: such that cases                         
- 1     - follows (known,known) and modifies (unknown,unknown)               
-   var v1;                      
-     select  BOOLEAN   such that  Follows ( 4 , 5 ) and Modifies ( s1 , v1 ) ;
-    TRUE                     
-  5000                       
- 2     - follows* (known,known) and modifies (known,unknown)               
-   var v1;                      
-     select  BOOLEAN   such that  Follows* ( 4 , 9 ) and Modifies ( 9 , v1 ) ;
-    TRUE                     
-  5000                       
- 3     - follows (known,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s2   such that  Follows ( 4 , s2 ) and Modifies ( s2 , v1 ) ;
-                         
-  5000                       
- 4     - follows* (known,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s2   such that  Follows* ( 4 , s2 ) and Modifies ( s2 , v1 ) ;
-                         
-  5000                       
- 5     - follows (unknown,known) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Follows ( s1 , 9 ) and Modifies ( s1 , v1 ) ;
-    8                     
-  5000                       
- 6     - follows* (unknown,known) and modifies (known,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Follows* ( s1 , 9 ) and Modifies ( 9 , v1 ) ;
-                         
-  5000                       
- 7     - follows (unknown,unknown)  and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Follows ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 8     - follows* (unknown,unknown)  and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Follows* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 9     - follows (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s2   such that  Follows ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 10     - follows* (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s2   such that  Follows* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 11     - follows (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  v1   such that  Follows ( s1 , s1 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 12     - follows* (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  v1   such that  Follows* ( s1 , s1 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 13     - parent (known,known) and modifies (known,unknown)               
-   var v1;                      
-     select  BOOLEAN   such that  Parent ( 9 , 10 ) and Modifies ( 10 , v1 ) ;
-    TRUE                     
-  5000                       
- 14     - parent* (known,known) and modifies (known,unknown)               
-   var v1;                      
-     select  BOOLEAN   such that  Parent* ( 9 , 12 ) and Modifies ( 9 , v1 ) ;
-    TRUE                     
-  5000                       
- 15     - parent (known,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s2   such that  Parent ( 9 , s2 ) and Modifies ( s2 , v1 ) ;
-                         
-  5000                       
- 16     - parent* (known,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s2   such that  Parent* ( 9 , s2 ) and Modifies ( 9 , v1 ) ;
-                         
-  5000                       
- 17     - parent (unknown,known) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Parent ( s1 , 14 ) and Modifies ( s1 , v1 ) ;
-    10                     
-  5000                       
- 18     - parent* (unknown,known) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Parent* ( s1 , 14 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 19     - parent (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Parent ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 20     - parent* (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Parent* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 21     - parent (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s2   such that  Parent ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
-                         
-  5000                       
- 22     - parent* (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s2   such that  Parent* ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
-                         
-  5000                       
- 23     - parent (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  v1   such that  Parent ( s1 , s1 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 24     - parent* (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  v1   such that  Parent* ( s1 , s1 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 25     - calls (known,known) and modifies (known,unknown)               
-   var v1;                      
-     select  BOOLEAN   such that  Calls ( "xylo" , "yello" ) and Modifies ( "xylo" , v1 ) ;
-    TRUE                     
-  5000                       
- 26     - calls* (known,known) and modifies (known,unknown)               
-   var v1;                      
-     select  BOOLEAN   such that  Calls* ( "xylo" , "yello" ) and Modifies ( "yello" , v1 ) ;
-    TRUE                     
-  5000                       
- 27     - calls (known,unknown) and modifies (known,unknown)               
-   proc p1,p2; var v1;                      
-     select  p2   such that  Calls ( "xylo" , p2 ) and Modifies ( "xylo" , v1 ) ;
-                         
-  5000                       
- 28     - calls* (known,unknown) and modifies (unknown,unknown)               
-   proc p1,p2; var v1;                      
-     select  p2   such that  Calls* ( "xylo" , p2 ) and Modifies ( p2 , v1 ) ;
-                         
-  5000                       
- 29     - calls (unknown,known) and modifies (unknown,unknown)               
-   proc p1,p2; var v1;                      
-     select  p1   such that  Calls ( p1 , "zebra" ) and Modifies ( p1 , v1 ) ;
-                         
-  5000                       
- 30     - calls* (unknown,known) and modifies (known,known)               
-   proc p1,p2; var v1;                      
-     select  p1   such that  Calls* ( p1 , "zebra" ) and Modifies ( "zebra" , "apple" ) ;
-                         
-  5000                       
- 31     - calls (unknown,unknown) and modifies (unknown,unknown)               
-   proc p1,p2; var v1;                      
-     select  p1   such that  Calls ( p1 , p2 ) and Modifies ( p1 , v1 ) ;
-                         
-  5000                       
- 32     - calls* (unknown,unknown) and modifies (unknown,unknown)               
-   proc p1,p2; var v1;                      
-     select  p1   such that  Calls* ( p1 , p2 ) and Modifies ( p1 , v1 ) ;
-                         
-  5000                       
- 33     - calls (unknown,unknown) and modifies (unknown,unknown)               
-   proc p1,p2; var v1;                      
-     select  p2   such that  Calls ( p1 , p2 ) and Modifies ( p1 , v1 ) ;
-                         
-  5000                       
- 34     - calls* (unknown,unknown) and modifies (unknown,unknown)               
-   proc p1,p2; var v1;                      
-     select  p2   such that  Calls* ( p1 , p2 ) and Modifies ( p1 , v1 ) ;
-                         
-  5000                       
- 35     - calls (unknown,unknown) and modifies (unknown,unknown)               
-   proc p1,p2; var v1;                      
-     select  p1   such that  Calls ( p1 , p1 ) and Modifies ( p1 , v1 ) ;
-                         
-  5000                       
- 36     - calls* (unknown,unknown) and modifies (unknown,unknown)               
-   proc p1,p2; var v1;                      
-     select  p1   such that  Calls* ( p1 , p1 ) and Modifies ( p1 , v1 ) ;
-                         
-  5000                       
- 37     - next (known,known) and modifies (known,unknown)               
-   var v1;                      
-     select  BOOLEAN   such that  Next ( 21 , 22 ) and Modifies ( 21 , v1 ) ;
-    TRUE                     
-  5000                       
- 38     - next* (known,known) and modifies (known,unknown)               
-   var v1;                      
-     select  BOOLEAN   such that  Next* ( 21 , 24 ) and Modifies ( 21 , v1 ) ;
-    TRUE                     
-  5000                       
- 39     - next (known,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s2   such that  Next ( 21 , s2 ) and Modifies ( s2 , v1 ) ;
-                         
-  5000                       
- 40     - next* (known,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s2   such that  Next* ( 21 , s2 ) and Modifies ( s2 , v1 ) ;
-                         
-  5000                       
- 41     - next (unknown,known) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Next (  , 24 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 42     - next* (unknown,known) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Next* ( s1 , 24 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 43     - next (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Next ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 44     - next* (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Next* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 45     - next (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Next ( s1 , s1 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 46     - next* (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Next* ( s1 , s1 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 47     - next (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s2   such that  Next ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 48     - next* (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s2   such that  Next* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 49     - affects (known,known) and modifies (known,unknown)               
-   stmt s1,s2;var v1;                      
-     select  BOOLEAN   such that  Affects ( 13 , 18 ) and Modifies ( 18 , v1 ) ;
-    TRUE                     
-  5000                       
- 50     - affects* (known,known) and modifies (known,unknown)               
-   stmt s1,s2;var v1;                      
-     select  BOOLEAN   such that  Affects* ( 13 , 18 ) and Modifies ( 18 , v1 ) ;
-    TRUE                     
-  5000                       
- 51     - affects (known,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s2   such that  Affects ( 13 , s2 ) and Modifies ( s2 , v1 ) ;
-                         
-  5000                       
- 52     - affects* (known,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s2   such that  Affects* ( 13 , s2 ) and Modifies ( s2 , v1 ) ;
-                         
-  5000                       
- 53     - affects (unknown,known) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Affects ( s1 , 18 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 54     - affects* (unknown,known) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Affects* ( s1 , 18 ) and Modifies ( s1 , v1 ) ;
-                         
-  5000                       
- 55     - affects (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Affects ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
-                         
-  5000                       
- 56     - affects* (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Affects* ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
-                         
-  5000                       
- 57     - affects (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s2   such that  Affects ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
-                         
-  5000                       
- 58     - affects* (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s2   such that  Affects* ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
-                         
-  5000                       
- 59     - affects (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Affects ( s1 , s1 ) and Modifies ( s2 , v1 ) ;
-                         
-  5000                       
- 60     - affects* (unknown,unknown) and modifies (unknown,unknown)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Affects* ( s1 , s1 ) and Modifies ( s2 , v1 ) ;
-                         
-  5000                       
- 61     - uses (known_statement,known_var) and modifies (unknown,known)               
-   stmt s1,s2;var v1;                      
-     select  BOOLEAN   such that  Uses ( 3 , "apple" ) and Modifies ( s1 , "apple" ) ;
-    TRUE                     
-  5000                       
- 62     - modifies (known_statement,known_var) and uses (unknown,known)               
-   stmt s1,s2;var v1;                      
-     select  BOOLEAN   such that  Modifies ( 1 , "apple" ) and Modifies ( s1 , "apple" ) ;
-    TRUE                     
-  5000                       
- 63     - uses (known_assignment,known_var) and modifies (unknown,known)               
-   stmt s1,s2;var v1;                      
-     select  BOOLEAN   such that  Uses ( 3 , "orange" ) and Modifies ( s1 , "apple" ) ;
-    FALSE                     
-  5000                       
- 64     - modifies (known_assignment,known_var) and uses (unknown,known)               
-   stmt s1,s2;var v1;                      
-     select  BOOLEAN   such that  Modifies ( 1 , "orange" ) and Modifies ( s1 , "apple" ) ;
-    FALSE                     
-  5000                       
- 65     - uses (known_while,known_var) and modifies (unknown,known)               
-   stmt s1,s2;var v1;                      
-     select  BOOLEAN   such that  Uses ( 9 , "apple" ) and Modifies ( s1 , "apple" ) ;
-    TRUE                     
-  5000                       
- 66     - modifies (known_while,known_var) and uses (unknown,known)               
-   stmt s1,s2;var v1;                      
-     select  BOOLEAN   such that  Modifies ( 9 , "gummy" ) and Modifies ( s1 , "apple" ) ;
-    TRUE                     
-  5000                       
- 67     - uses (known_if,known_var) and modifies (unknown,known)               
-   stmt s1,s2;var v1;                      
-     select  BOOLEAN   such that  Uses ( 21 , "apple" ) and Modifies ( s1 , "apple" ) ;
-    TRUE                     
-  5000                       
- 68     - modifies (known_if,known_var) and uses (unknown,known)               
-   stmt s1,s2;var v1;                      
-     select  BOOLEAN   such that  Modifies ( 21 , "jam" ) and Modifies ( s1 , "apple" ) ;
-    TRUE                     
-  5000                       
- 69     - uses (known_call,known_var) and modifies (unknown,known)               
-   stmt s1,s2;var v1;                      
-     select  BOOLEAN   such that  Uses ( 8 , "kimchi" ) and Modifies ( s1 , "apple" ) ;
-    TRUE                     
-  5000                       
- 70     - modifies (known_call,known_var) and uses (unknown,known)               
-   stmt s1,s2;var v1;                      
-     select  BOOLEAN   such that  Modifies ( 8 , "kimchi" ) and Modifies ( s1 , "apple" ) ;
-    TRUE                     
-  5000                       
- 71     - uses (known_proc,known_var) and modifies (unknown,known)               
-   stmt s1,s2;var v1;                      
-     select  BOOLEAN   such that  Uses ( "xylo" , "apple" ) and Modifies ( "xylo" , "apple" ) ;
-    TRUE                     
-  5000                       
- 72     - modifies (known_proc,known_var) and uses (unknown,known)               
-   stmt s1,s2;var v1;                      
-     select  BOOLEAN   such that  Modifies ( "xylo" , "apple" ) and Modifies ( "xylo" , "apple" ) ;
-    TRUE                     
-  5000                       
- 73     - uses (unknown_statement,known_var) and modifies (unknown,known)               
-   stmt s1,s2;var v1;                      
-     select  s1   such that  Uses ( s1 , "apple" ) and Modifies ( s1 , "apple" ) ;
-                         
-  5000                       
- 74     - uses (unknown_assignment,known_var) and modifies (unknown,known)               
-   assign a1;                       
-     select  a1   such that  Uses ( a1 , "apple" ) and Modifies ( a1 , "apple" ) ;
-                         
-  5000                       
- 75     - uses (unknown_while,known_var) and modifies (unknown,known)               
-   while w1;                      
-     select  w1   such that  Uses ( w1 , "apple" ) and Modifies ( w1 , "apple" ) ;
-                         
-  5000                       
- 76     - uses (unknown_if,known_var) and modifies (unknown,known)               
-   if i1;                      
-     select  i1   such that  Uses ( i1 , "apple" ) and Modifies ( i1 , "apple" ) ;
-                         
-  5000                       
- 77     - uses (unknown_call,known_var) and modifies (unknown,known)               
-   call c;                      
-     select  c   such that  Uses ( c , "apple" ) and Modifies ( c , "apple" ) ;
-                         
-  5000                       
- 78     - uses (unknown_proc,known_var) and modifies (unknown,known)               
-   proc p;                      
-     select  p   such that  Uses ( p , "apple" ) and Modifies ( p , "apple" ) ;
-                         
-  5000                       
- 79     - uses (known_statement,unknown_var) and modifies (known,unknown)               
-   var v1;                      
-     select  v1   such that  Uses ( 22 , v1 ) and Modifies ( 22 , v1 ) ;
-                         
-  5000                       
- 80     - uses (known_assignment,unknown_var) and modifies (known,unknown)               
-   var v1;                      
-     select  v1   such that  Uses ( 13 , v1 ) and Modifies ( 13 , v1 ) ;
-                         
-  5000                       
- 81     - uses (known_while,unknown_var) and modifies (known,unknown)               
-   var v1;                      
-     select  v1   such that  Uses ( 10 , v1 ) and Modifies ( 10 , v1 ) ;
-                         
-  5000                       
- 82     - modifies (known_while,unknown_var) and uses (known,unknown)               
-   var v1;                      
-     select  v1   such that  Modifies ( 10 , v1 ) and Modifies ( 10 , v1 ) ;
-                         
-  5000                       
- 83     - uses (known_if,unknown_var) and modifies (known,unknown)               
-   var v1;                      
-     select  v1   such that  Uses ( 21 , v1 ) and Modifies ( 21 , v1 ) ;
-                         
-  5000                       
- 84     - uses (known_call,unknown_var) and modifies (known,unknown)               
-   var v1;                      
-     select  v1   such that  Uses ( 8 , v1 ) and Modifies ( 8 , v1 ) ;
-                         
-  5000                       
- 85     - modifies (known_call,unknown_var) and uses (known,unknown)               
-   var v1;                      
-     select  v1   such that  Modifies ( 8 , v1 ) and Modifies ( 8 , v1 ) ;
-                         
-  5000                       
- 86     - uses (known_proc,unknown_var) and modifies (known,unknown)               
-   var v1;                      
-     select  v1   such that  Uses ( "xylo" , v1 ) and Modifies ( "xylo" , v1 ) ;
-                         
-  5000                       
- 87     - uses (unknown_statement,unknown_var) and modifies (unknown,unknown)               
-   stmt s1; var v1;                      
-     select  v1   such that  Uses ( s1 , v1 ) and Modifies ( s2 , v1 ) ;
-                         
-  5000                       
- 88     - modifies (unknown_statement,unknown_var) and uses (unknown,unknown)               
-   stmt s1; var v1;                      
-     select  s1   such that  Modifies ( s1 , v1 ) and Modifies ( s2 , v1 ) ;
-                         
-  5000                       
- 89     - uses (unknown_assignment,unknown_var) and modifies (unknown,unknown)               
-   assign a1; var v1;                      
-     select  a1   such that  Uses ( a1 , v1 ) and Modifies ( a1 , v1 ) ;
-                         
-  5000                       
- 90     - uses (unknown_while,unknown_var) and modifies (unknown,unknown)               
-   while w1; var v1;                      
-     select  w1   such that  Uses ( w1 , v1 ) and Modifies ( w1 , v1 ) ;
-                         
-  5000                       
- 91     - modifies (unknown_while,unknown_var) and uses (unknown,known)               
-   while w1; var v1;                      
-     select  s1   such that  Modifies ( w1 , v1 ) and Modifies ( w1 , "apple" ) ;
-                         
-  5000                       
- 92     - uses (unknown_if,unknown_var) and modifies (unknown,unknown)               
-   if i1; var v1;                      
-     select  v1   such that  Uses ( i1 , v1 ) and Modifies ( i1 , v1 ) ;
-                         
-  5000                       
- 93     - modifies (unknown_if,unknown_var) and uses (unknown,unknown)               
-   if i1; var v1;                      
-     select  i1   such that  Modifies ( i1 , v1 ) and Uses ( i1 , v1 ) ;
-                         
-  5000                       
- 94     - uses (unknown_call,unknown_var) and modifies (unknown,unknown)               
-   call c; var v1;                      
-     select  c   such that  Uses ( c , v1 ) and Modifies ( c , v1 ) ;
-                         
-  5000                       
- 95     - modifies (unknown_call,unknown_var) and uses (unknown,unknown)               
-   call c; var v1;                      
-     select  v1   such that  Modifies ( c , v1 ) and Uses ( c , v1 ) ;
-                         
-  5000                       
- 96     - uses (unknown_proc,unknown_var) and modifies (unknown,unknown)               
-   proc p1; var v1;                      
-     select  p1   such that  Uses ( p1 , v1 ) and Modifies ( p1 , v1 ) ;
-                         
-  5000                       
- 97     - modifies (unknown_proc,unknown_var) and uses (unknown,unknown)               
-   proc p1; var v1;                      
-     select  p1   such that  Modifies ( p1 , v1 ) and Uses ( p1 , v1 ) ;
-                         
-  5000                       
- 98     - follows (known,known) and uses (known,unknown)               
-                         
-     select  BOOLEAN   such that  Follows ( 4 , 5 ) and Uses ( 4 , v1 ) ;
-    TRUE                     
-  5000                       
- 99     - follows* (known,known) and uses (known,unknown)               
-                         
-     select  BOOLEAN   such that  Follows* ( 4 , 9 ) and Uses ( 4 , v1 ) ;
-    TRUE                     
-  5000                       
- 100     - follows (known,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Follows ( 4 , s2 ) and Uses ( s2 , v1 ) ;
-                         
-  5000                       
- 101     - follows* (known,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Follows* ( 4 , s2 ) and Uses ( s2 , v1 ) ;
-                         
-  5000                       
- 102     - follows (unknown,known) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Follows ( s1 , 9 ) and Uses ( s1 , v1 ) ;
-    8                     
-  5000                       
- 103     - follows* (unknown,known) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Follows* ( s1 , 9 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 104     - follows (unknown,unknown)  and uses (unknown,unknown)               
-                         
-     select  s1   such that  Follows ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-                         
-  5000 stmt s1,s2;                      
- 105     - follows* (unknown,unknown)  and uses (unknown,unknown)               
-                         
-     select  s1   such that  Follows* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 106     - follows (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Follows ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 107     - follows* (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Follows* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 108     - follows (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Follows ( s1 , s1 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 109     - follows* (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Follows* ( s1 , s1 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 110     - parent (known,known) and uses (known,unknown)               
-                         
-     select  BOOLEAN   such that  Parent ( 9 , 10 ) and Uses ( 10 , v1 ) ;
-    TRUE                     
-  5000                       
- 111     - parent* (known,known) and uses (known,unknown)               
-                         
-     select  BOOLEAN   such that  Parent* ( 9 , 12 ) and Uses ( 12 , v1 ) ;
-    TRUE                     
-  5000                       
- 112     - parent (known,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Parent ( 9 , s2 ) and Uses ( s2 , v1 ) ;
-                         
-  5000                       
- 113     - parent* (known,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Parent* ( 9 , s2 ) and Uses ( s2 , v1 ) ;
-                         
-  5000                       
- 114     - parent (unknown,known) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Parent ( s1 , 14 ) and Uses ( s1 , v1 ) ;
-    10                     
-  5000                       
- 115     - parent* (unknown,known) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Parent* ( s1 , 14 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 116     - parent (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Parent ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 117     - parent* (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Parent* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 118     - parent (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Parent ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 119     - parent* (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Parent* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 120     - parent (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Parent ( s1 , s1 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 121     - parent* (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Parent* ( s1 , s1 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 122     - calls (known,known) and uses (known,unknown)               
-                         
-     select  BOOLEAN   such that  Calls ( "xylo" , "yello" ) and Uses ( "xylo" , v1 ) ;
-    TRUE                     
-  5000                       
- 123     - calls* (known,known) and uses (known,unknown)               
-                         
-     select  BOOLEAN   such that  Calls* ( "xylo" , "yello" ) and Uses ( "xylo" , v1 ) ;
-    TRUE                     
-  5000                       
- 124     - calls (known,unknown) and uses (known,unknown)               
-   proc p1,p2;                      
-     select  p2   such that  Calls ( "xylo" , p2 ) and Uses ( "xylo" , v1 ) ;
-                         
-  5000                       
- 125     - calls* (known,unknown) and uses (known,unknown)               
-   proc p1,p2;                      
-     select  p2   such that  Calls* ( "xylo" , p2 ) and Uses ( "xylo" , v1 ) ;
-                         
-  5000                       
- 126     - calls (unknown,known) and uses (known,unknown)               
-   proc p1,p2;                      
-     select  p1   such that  Calls ( p1 , "zebra" ) and Uses ( "zebra" , v1 ) ;
-                         
-  5000                       
- 127     - calls* (unknown,known) and uses (unknown,unknown)               
-   proc p1,p2;                      
-     select  p1   such that  Calls* ( p1 , "zebra" ) and Uses ( p1 , v1 ) ;
-                         
-  5000                       
- 128     - calls (unknown,unknown) and uses (unknown,unknown)               
-   proc p1,p2;                      
-     select  p1   such that  Calls ( p1 , p2 ) and Uses ( p2 , v1 ) ;
-                         
-  5000                       
- 129     - calls* (unknown,unknown) and uses (unknown,unknown)               
-   proc p1,p2;                      
-     select  p1   such that  Calls* ( p1 , p2 ) and Uses ( p2 , v1 ) ;
-                         
-  5000                       
- 130     - calls (unknown,unknown) and uses (unknown,unknown)               
-   proc p1,p2;                      
-     select  p2   such that  Calls ( p1 , p2 ) and Uses ( p2 , v1 ) ;
-                         
-  5000                       
- 131     - calls* (unknown,unknown) and uses (unknown,unknown)               
-   proc p1,p2;                      
-     select  p2   such that  Calls* ( p1 , p2 ) and Uses ( p2 , v1 ) ;
-                         
-  5000                       
- 132     - calls (unknown,unknown) and uses (unknown,unknown)               
-   proc p1,p2;                      
-     select  p1   such that  Calls ( p1 , p1 ) and Uses ( p1 , v1 ) ;
-                         
-  5000                       
- 133     - calls* (unknown,unknown) and uses (unknown,unknown)               
-   proc p1,p2;                      
-     select  p1   such that  Calls* ( p1 , p1 ) and Uses ( p1 , v1 ) ;
-                         
-  5000                       
- 134     - next (known,known) and uses (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Next ( 21 , 22 ) and Uses ( 22 , v1 ) ;
-    TRUE                     
-  5000                       
- 135     - next* (known,known) and uses (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Next* ( 21 , 24 ) and Uses ( 24 , v1 ) ;
-    TRUE                     
-  5000                       
- 136     - next (known,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Next ( 21 , s2 ) and Uses ( 21 , v1 ) ;
-                         
-  5000                       
- 137     - next* (known,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Next* ( 21 , s2 ) and Uses ( 21 , v1 ) ;
-                         
-  5000                       
- 138     - next (unknown,known) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Next ( s1 , 24 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 139     - next* (unknown,known) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Next* ( s1 , 24 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 140     - next (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Next ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 141     - next* (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Next* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 142     - next (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Next ( s1 , s1 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 143     - next* (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Next* ( s1 , s1 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 144     - next (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Next ( s1 , s2 ) and Uses ( s2 , v1 ) ;
-                         
-  5000                       
- 145     - next* (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Next* ( s1 , s2 ) and Uses ( s2 , v1 ) ;
-                         
-  5000                       
- 146     - affects (known,known) and uses (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Affects ( 13 , 18 ) and Uses ( 18 , v1 ) ;
-    TRUE                     
-  5000                       
- 147     - affects* (known,known) and uses (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Affects* ( 13 , 18 ) and Uses ( 13 , v1 ) ;
-    TRUE                     
-  5000                       
- 148     - affects (known,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Affects ( 13 , s2 ) and Uses ( 13 , v1 ) ;
-                         
-  5000                       
- 149     - affects* (known,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Affects* ( 13 , s2 ) and Uses ( s2 , v1 ) ;
-                         
-  5000                       
- 150     - affects (unknown,known) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Affects ( s1 , 18 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 151     - affects* (unknown,known) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Affects* ( s1 , 18 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 152     - affects (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Affects ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 153     - affects* (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Affects* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 154     - affects (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Affects ( s1 , s2 ) and Uses ( s2 , v1 ) ;
-                         
-  5000                       
- 155     - affects* (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Affects* ( s1 , s2 ) and Uses ( s2 , v1 ) ;
-                         
-  5000                       
- 156     - affects (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Affects ( s1 , s1 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 157     - affects* (unknown,unknown) and uses (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Affects* ( s1 , s1 ) and Uses ( s1 , v1 ) ;
-                         
-  5000                       
- 158     - follows (known,known) and parent* (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Follows ( 4 , 5 ) and Parent* ( 4 , s1 ) ;
-    TRUE                     
-  5000                       
- 159     - follows* (known,known) and parent* (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Follows* ( 4 , 9 ) and Parent* ( 4 , s1 ) ;
-    TRUE                     
-  5000                       
- 160     - follows (known,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Follows ( 4 , s2 ) and Parent* ( s2 , s1 ) ;
-                         
-  5000                       
- 161     - follows* (known,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Follows* ( 4 , s2 ) and Parent* ( s2 , s1 ) ;
-                         
-  5000                       
- 162     - follows (unknown,known) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Follows ( s1 , 9 ) and Parent* ( s1 , s2 ) ;
-    8                     
-  5000                       
- 163     - follows* (unknown,known) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Follows* ( s1 , 9 ) and Parent* ( s1 , s1 ) ;
-                         
-  5000                       
- 164     - follows (unknown,unknown)  and parent* (unknown,unknown)               
-                         
-     select  s1   such that  Follows ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000 stmt s1,s2;                      
- 165     - follows* (unknown,unknown)  and parent* (unknown,unknown)               
-                         
-     select  s1   such that  Follows* ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 166     - follows (unknown,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Follows ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 167     - follows* (unknown,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Follows* ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 168     - follows (unknown,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Follows ( s1 , s1 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 169     - follows* (unknown,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Follows* ( s1 , s1 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 170     - parent (known,known) and parent* (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Parent ( 9 , 10 ) and Parent* ( s1 , s2 ) ;
-    TRUE                     
-  5000                       
- 171     - parent* (known,known) and parent* (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Parent* ( 9 , 12 ) and Parent* ( s1 , s2 ) ;
-    TRUE                     
-  5000                       
- 172     - parent (known,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Parent ( 9 , s2 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 173     - parent* (known,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Parent* ( 9 , s2 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 174     - parent (unknown,known) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Parent ( s1 , 14 ) and Parent* ( s1 , s2 ) ;
-    10                     
-  5000                       
- 175     - parent* (unknown,known) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Parent* ( s1 , 14 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 176     - parent (unknown,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Parent ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 177     - parent* (unknown,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Parent* ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 178     - parent* (unknown,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Parent* ( s1 , s1 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 179     - calls (known,known) and parent* (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Calls ( "xylo" , "yello" ) and Parent* ( s1 , s2 ) ;
-    TRUE                     
-  5000                       
- 180     - calls* (known,known) and parent* (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Calls* ( "xylo" , "yello" ) and Parent* ( s1 , s2 ) ;
-    TRUE                     
-  5000                       
- 181     - calls (known,unknown) and parent* (unknown,unknown)               
-   proc p1,p2;                      
-     select  p2   such that  Calls ( "xylo" , p2 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 182     - calls* (known,unknown) and parent* (unknown,unknown)               
-   proc p1,p2;                      
-     select  p2   such that  Calls* ( "xylo" , p2 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 183     - calls (unknown,known) and parent* (unknown,unknown)               
-   proc p1,p2;                      
-     select  p1   such that  Calls ( p1 , "zebra" ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 184     - calls* (unknown,known) and parent* (unknown,unknown)               
-   proc p1,p2;                      
-     select  p1   such that  Calls* ( p1 , "zebra" ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 185     - next (known,known) and parent* (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Next ( 21 , 22 ) and Parent* ( 21 , 22 ) ;
-    TRUE                     
-  5000                       
- 186     - next* (known,known) and parent* (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Next* ( 21 , 24 ) and Parent* ( 21 , 22 ) ;
-    TRUE                     
-  5000                       
- 187     - next (known,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Next ( 21 , s2 ) and Parent* ( 21 , s2 ) ;
-                         
-  5000                       
- 188     - next* (known,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Next* ( 21 , s2 ) and Parent* ( 21 , s2 ) ;
-                         
-  5000                       
- 189     - next (unknown,known) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Next ( s1 , 24 ) and Parent* ( s1 , 24 ) ;
-                         
-  5000                       
- 190     - next* (unknown,known) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Next* ( s1 , 24 ) and Parent* ( s1 , 24 ) ;
-                         
-  5000                       
- 191     - next (unknown,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Next ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 192     - next* (unknown,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Next* ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 193     - next (unknown,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Next ( s1 , s1 ) and Parent* ( s1 , s1 ) ;
-                         
-  5000                       
- 194     - next* (unknown,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Next* ( s1 , s1 ) and Parent* ( s1 , s1 ) ;
-                         
-  5000                       
- 195     - affects (known,known) and parent* (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Affects ( 13 , 18 ) and Parent* ( 18 , s1 ) ;
-    TRUE                     
-  5000                       
- 196     - affects* (known,known) and parent* (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Affects* ( 13 , 18 ) and Parent* ( 18 , s1 ) ;
-    TRUE                     
-  5000                       
- 197     - affects (known,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Affects ( 13 , s2 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 198     - affects* (known,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Affects* ( 13 , s2 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 199     - affects (unknown,known) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Affects ( s1 , 18 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 200     - affects* (unknown,known) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Affects* ( s1 , 18 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 201     - affects (unknown,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Affects ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 202     - affects* (unknown,unknown) and parent* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Affects* ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
-                         
-  5000                       
- 203     - uses (known_statement,known_var) and parent* (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Uses ( 3 , "apple" ) and Parent* ( s1 , s2 ) ;
-    TRUE                     
-  5000                       
- 204     - modifies (known_statement,known_var) and parent* (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Modifies ( 1 , "apple" ) and Parent* ( s1 , s2 ) ;
-    TRUE                     
-  5000                       
- 205     - uses (known_assignment,known_var) and parent* (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Uses ( 3 , "orange" ) and Parent* ( s1 , s2 ) ;
-    FALSE                     
-  5000                       
- 206     - modifies (known_assignment,known_var) and parent* (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Modifies ( 1 , "orange" ) and Parent* ( s1 , s2 ) ;
-    FALSE                     
-  5000                       
- 207     - follows (known,known) and follows* (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Follows ( 4 , 5 ) and Follows* ( 4 , 5 ) ;
-    TRUE                     
-  5000                       
- 208     - follows* (known,known) and follows* (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Follows* ( 4 , 9 ) and Follows* ( 4 , 5 ) ;
-    TRUE                     
-  5000                       
- 209     - follows (known,unknown) and follows* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Follows ( 4 , s2 ) and Follows* ( 4 , s2 ) ;
-                         
-  5000                       
- 210     - parent (known,known) and follows* (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Parent ( 9 , 10 ) and Follows* ( 9 , 10 ) ;
-    TRUE                     
-  5000                       
- 211     - parent* (known,known) and follows* (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Parent* ( 9 , 12 ) and Follows* ( 12 , 9 ) ;
-    TRUE                     
-  5000                       
- 212     - parent (known,unknown) and follows* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Parent ( 9 , s2 ) and Follows* ( s2 , 9 ) ;
-                         
-  5000                       
- 213     - parent* (known,unknown) and follows* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Parent* ( 9 , s2 ) and Follows* ( 9 , s2 ) ;
-                         
-  5000                       
- 214     - next (known,known) and follows* (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Next ( 21 , 22 ) and Follows* ( 21 , 22 ) ;
-    TRUE                     
-  5000                       
- 215     - next* (known,known) and follows* (unknown,unknown)               
-                         
-     select  BOOLEAN   such that  Next* ( 21 , 24 ) and Follows* ( 21 , 24 ) ;
-    TRUE                     
-  5000                       
- 216     - next (known,unknown) and follows* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Next ( 21 , s2 ) and Follows* ( 21 , s2 ) ;
-                         
-  5000                       
- 217     - next* (known,unknown) and follows* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Next* ( 21 , s2 ) and Follows* ( 21 , s2 ) ;
-                         
-  5000                       
- 218     - next (unknown,known) and follows* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Next ( s1 , 24 ) and Follows* ( s1 , 24 ) ;
-                         
-  5000                       
- 219     - next* (unknown,known) and follows* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Next* ( s1 , 24 ) and Follows* ( s1 , 24 ) ;
-                         
-  5000                       
- 220     - next (unknown,unknown) and follows* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Next ( s1 , s2 ) and Follows* ( s1 , s2 ) ;
-                         
-  5000                       
- 221     - next* (unknown,unknown) and follows* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Next* ( s1 , s2 ) and Follows* ( s1 , s2 ) ;
-                         
-  5000                       
- 222     - next (unknown,unknown) and follows* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Next ( s1 , s1 ) and Follows* ( s1 , s1 ) ;
-                         
-  5000                       
- 223     - next* (unknown,unknown) and follows* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s1   such that  Next* ( s1 , s1 ) and Follows* ( s1 , s1 ) ;
-                         
-  5000                       
- 224     - next (unknown,unknown) and follows* (unknown,unknown)               
-   stmt s1,s2;                      
-     select  s2   such that  Next ( s1 , s2 ) and Follows* ( s1 , s2 ) ;
-                         
-  5000                       
+224
+cat: such that cases
+1 - such that and, Typed :: follows (known,known) and modifies (unknown,unknown)               
+var v1;
+select BOOLEAN   such that  Follows (4 ,5 ) and Modifies ( s1 , v1 ) ;
+true
+5000
+2 - such that and, Typed :: follows* (known,known) and modifies (known,unknown)               
+var v1;
+select BOOLEAN   such that  Follows* (4 ,9 ) and Modifies (9 , v1 ) ;
+true
+5000
+3 - such that and, Typed :: follows (known,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s2   such that  Follows (4 , s2 ) and Modifies ( s2 , v1 ) ;
+
+5000
+4 - such that and, Typed :: follows* (known,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s2   such that  Follows* (4 , s2 ) and Modifies ( s2 , v1 ) ;
+
+5000
+5 - such that and, Typed :: follows (unknown,known) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s1   such that  Follows ( s1 ,9 ) and Modifies ( s1 , v1 ) ;
+
+5000
+6 - such that and, Typed :: follows* (unknown,known) and modifies (known,unknown)               
+stmt s1,s2;var v1;
+select s1   such that  Follows* ( s1 ,9 ) and Modifies (9 , v1 ) ;
+
+5000
+7 - such that and, Typed :: follows (unknown,unknown)  and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s1   such that  Follows ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
+
+5000
+8 - such that and, Typed :: follows* (unknown,unknown)  and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s1   such that  Follows* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
+
+5000
+9 - such that and, Typed :: follows (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s2   such that  Follows ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
+
+5000
+10 - such that and, Typed :: follows* (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s2   such that  Follows* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
+
+5000
+11 - such that and, Typed :: follows (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select v1   such that  Follows ( s1 , s1 ) and Modifies ( s1 , v1 ) ;
+
+5000
+12 - such that and, Typed :: follows* (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select v1   such that  Follows* ( s1 , s1 ) and Modifies ( s1 , v1 ) ;
+
+5000
+13 - such that and, Typed :: parent (known,known) and modifies (known,unknown)               
+var v1;
+select BOOLEAN   such that  Parent (9 ,10 ) and Modifies (10 , v1 ) ;
+true
+5000
+14 - such that and, Typed :: parent* (known,known) and modifies (known,unknown)               
+var v1;
+select BOOLEAN   such that  Parent* (9 ,12 ) and Modifies (9 , v1 ) ;
+true
+5000
+15 - such that and, Typed :: parent (known,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s2   such that  Parent (9 , s2 ) and Modifies ( s2 , v1 ) ;
+
+5000
+16 - such that and, Typed :: parent* (known,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s2   such that  Parent* (9 , s2 ) and Modifies (9 , v1 ) ;
+
+5000
+17 - such that and, Typed :: parent (unknown,known) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s1   such that  Parent ( s1 ,14 ) and Modifies ( s1 , v1 ) ;
+
+5000
+18 - such that and, Typed :: parent* (unknown,known) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s1   such that  Parent* ( s1 ,14 ) and Modifies ( s1 , v1 ) ;
+
+5000
+19 - such that and, Typed :: parent (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s1   such that  Parent ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
+
+5000
+20 - such that and, Typed :: parent* (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s1   such that  Parent* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
+
+5000
+21 - such that and, Typed :: parent (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s2   such that  Parent ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
+
+5000
+22 - such that and, Typed :: parent* (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s2   such that  Parent* ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
+
+5000
+23 - such that and, Typed :: parent (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select v1   such that  Parent ( s1 , s1 ) and Modifies ( s1 , v1 ) ;
+
+5000
+24 - such that and, Typed :: parent* (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select v1   such that  Parent* ( s1 , s1 ) and Modifies ( s1 , v1 ) ;
+
+5000
+25 - such that and, Typed :: calls (known,known) and modifies (known,unknown)               
+var v1;
+select BOOLEAN   such that  Calls ( "xylo" , "yello" ) and Modifies ( "xylo" , v1 ) ;
+true
+5000
+26 - such that and, Typed :: calls* (known,known) and modifies (known,unknown)               
+var v1;
+select BOOLEAN   such that  Calls* ( "xylo" , "yello" ) and Modifies ( "yello" , v1 ) ;
+true
+5000
+27 - such that and, Typed :: calls (known,unknown) and modifies (known,unknown)               
+proc p1,p2; var v1;
+select p2   such that  Calls ( "xylo" , p2 ) and Modifies ( "xylo" , v1 ) ;
+
+5000
+28 - such that and, Typed :: calls* (known,unknown) and modifies (unknown,unknown)               
+proc p1,p2; var v1;
+select p2   such that  Calls* ( "xylo" , p2 ) and Modifies ( p2 , v1 ) ;
+
+5000
+29 - such that and, Typed :: calls (unknown,known) and modifies (unknown,unknown)               
+proc p1,p2; var v1;
+select p1   such that  Calls ( p1 , "zebra" ) and Modifies ( p1 , v1 ) ;
+
+5000
+30 - such that and, Typed :: calls* (unknown,known) and modifies (known,known)               
+proc p1,p2; var v1;
+select p1   such that  Calls* ( p1 , "zebra" ) and Modifies ( "zebra" , "apple" ) ;
+
+5000
+31 - such that and, Typed :: calls (unknown,unknown) and modifies (unknown,unknown)               
+proc p1,p2; var v1;
+select p1   such that  Calls ( p1 , p2 ) and Modifies ( p1 , v1 ) ;
+
+5000
+32 - such that and, Typed :: calls* (unknown,unknown) and modifies (unknown,unknown)               
+proc p1,p2; var v1;
+select p1   such that  Calls* ( p1 , p2 ) and Modifies ( p1 , v1 ) ;
+
+5000
+33 - such that and, Typed :: calls (unknown,unknown) and modifies (unknown,unknown)               
+proc p1,p2; var v1;
+select p2   such that  Calls ( p1 , p2 ) and Modifies ( p1 , v1 ) ;
+
+5000
+34 - such that and, Typed :: calls* (unknown,unknown) and modifies (unknown,unknown)               
+proc p1,p2; var v1;
+select p2   such that  Calls* ( p1 , p2 ) and Modifies ( p1 , v1 ) ;
+
+5000
+35 - such that and, Typed :: calls (unknown,unknown) and modifies (unknown,unknown)               
+proc p1,p2; var v1;
+select p1   such that  Calls ( p1 , p1 ) and Modifies ( p1 , v1 ) ;
+
+5000
+36 - such that and, Typed :: calls* (unknown,unknown) and modifies (unknown,unknown)               
+proc p1,p2; var v1;
+select p1   such that  Calls* ( p1 , p1 ) and Modifies ( p1 , v1 ) ;
+
+5000
+37 - such that and, Typed :: next (known,known) and modifies (known,unknown)               
+var v1;
+select BOOLEAN   such that  Next (21 ,22 ) and Modifies (21 , v1 ) ;
+true
+5000
+38 - such that and, Typed :: next* (known,known) and modifies (known,unknown)               
+var v1;
+select BOOLEAN   such that  Next* (21 ,24 ) and Modifies (21 , v1 ) ;
+true
+5000
+39 - such that and, Typed :: next (known,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s2   such that  Next (21 , s2 ) and Modifies ( s2 , v1 ) ;
+
+5000
+40 - such that and, Typed :: next* (known,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s2   such that  Next* (21 , s2 ) and Modifies ( s2 , v1 ) ;
+
+5000
+41 - such that and, Typed :: next (unknown,known) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s1   such that  Next (  ,24 ) and Modifies ( s1 , v1 ) ;
+
+5000
+42 - such that and, Typed :: next* (unknown,known) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s1   such that  Next* ( s1 ,24 ) and Modifies ( s1 , v1 ) ;
+
+5000
+43 - such that and, Typed :: next (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s1   such that  Next ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
+
+5000
+44 - such that and, Typed :: next* (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s1   such that  Next* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
+
+5000
+45 - such that and, Typed :: next (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s1   such that  Next ( s1 , s1 ) and Modifies ( s1 , v1 ) ;
+
+5000
+46 - such that and, Typed :: next* (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s1   such that  Next* ( s1 , s1 ) and Modifies ( s1 , v1 ) ;
+
+5000
+47 - such that and, Typed :: next (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s2   such that  Next ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
+
+5000
+48 - such that and, Typed :: next* (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s2   such that  Next* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
+
+5000
+49 - such that and, Typed :: affects (known,known) and modifies (known,unknown)               
+stmt s1,s2;var v1;
+select BOOLEAN   such that  Affects (13 ,18 ) and Modifies (18 , v1 ) ;
+true
+5000
+50 - such that and, Typed :: affects* (known,known) and modifies (known,unknown)               
+stmt s1,s2;var v1;
+select BOOLEAN   such that  Affects* (13 ,18 ) and Modifies (18 , v1 ) ;
+true
+5000
+51 - such that and, Typed :: affects (known,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s2   such that  Affects (13 , s2 ) and Modifies ( s2 , v1 ) ;
+
+5000
+52 - such that and, Typed :: affects* (known,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s2   such that  Affects* (13 , s2 ) and Modifies ( s2 , v1 ) ;
+
+5000
+53 - such that and, Typed :: affects (unknown,known) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s1   such that  Affects ( s1 ,18 ) and Modifies ( s1 , v1 ) ;
+
+5000
+54 - such that and, Typed :: affects* (unknown,known) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s1   such that  Affects* ( s1 ,18 ) and Modifies ( s1 , v1 ) ;
+
+5000
+55 - such that and, Typed :: affects (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s1   such that  Affects ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
+
+5000
+56 - such that and, Typed :: affects* (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s1   such that  Affects* ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
+
+5000
+57 - such that and, Typed :: affects (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s2   such that  Affects ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
+
+5000
+58 - such that and, Typed :: affects* (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s2   such that  Affects* ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
+
+5000
+59 - such that and, Typed :: affects (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s1   such that  Affects ( s1 , s1 ) and Modifies ( s2 , v1 ) ;
+
+5000
+60 - such that and, Typed :: affects* (unknown,unknown) and modifies (unknown,unknown)               
+stmt s1,s2;var v1;
+select s1   such that  Affects* ( s1 , s1 ) and Modifies ( s2 , v1 ) ;
+
+5000
+73 - such that and, Typed :: uses (unknown_statement,known_var) and modifies (unknown,known)               
+stmt s1,s2;var v1;
+select s1   such that  Uses ( s1 , "apple" ) and Modifies ( s1 , "apple" ) ;
+
+5000
+74 - such that and, Typed :: uses (unknown_assignment,known_var) and modifies (unknown,known)               
+assign a1; 
+select a1   such that  Uses ( a1 , "apple" ) and Modifies ( a1 , "apple" ) ;
+
+5000
+75 - such that and, Typed :: uses (unknown_while,known_var) and modifies (unknown,known)               
+while w1;
+select w1   such that  Uses ( w1 , "apple" ) and Modifies ( w1 , "apple" ) ;
+
+5000
+76 - such that and, Typed :: uses (unknown_if,known_var) and modifies (unknown,known)               
+if i1;
+select i1   such that  Uses ( i1 , "apple" ) and Modifies ( i1 , "apple" ) ;
+
+5000
+77 - such that and, Typed :: uses (unknown_call,known_var) and modifies (unknown,known)               
+call c;
+select c   such that  Uses ( c , "apple" ) and Modifies ( c , "apple" ) ;
+
+5000
+78 - such that and, Typed :: uses (unknown_proc,known_var) and modifies (unknown,known)               
+proc p;
+select p   such that  Uses ( p , "apple" ) and Modifies ( p , "apple" ) ;
+
+5000
+79 - such that and, Typed :: uses (known_statement,unknown_var) and modifies (known,unknown)               
+var v1;
+select v1   such that  Uses (22 , v1 ) and Modifies (22 , v1 ) ;
+
+5000
+80 - such that and, Typed :: uses (known_assignment,unknown_var) and modifies (known,unknown)               
+var v1;
+select v1   such that  Uses (13 , v1 ) and Modifies (13 , v1 ) ;
+
+5000
+81 - such that and, Typed :: uses (known_while,unknown_var) and modifies (known,unknown)               
+var v1;
+select v1   such that  Uses (10 , v1 ) and Modifies (10 , v1 ) ;
+
+5000
+82 - such that and, Typed :: modifies (known_while,unknown_var) and uses (known,unknown)               
+var v1;
+select v1   such that  Modifies (10 , v1 ) and Modifies (10 , v1 ) ;
+
+5000
+83 - such that and, Typed :: uses (known_if,unknown_var) and modifies (known,unknown)               
+var v1;
+select v1   such that  Uses (21 , v1 ) and Modifies (21 , v1 ) ;
+
+5000
+84 - such that and, Typed :: uses (known_call,unknown_var) and modifies (known,unknown)               
+var v1;
+select v1   such that  Uses (8 , v1 ) and Modifies (8 , v1 ) ;
+
+5000
+85 - such that and, Typed :: modifies (known_call,unknown_var) and uses (known,unknown)               
+var v1;
+select v1   such that  Modifies (8 , v1 ) and Modifies (8 , v1 ) ;
+
+5000
+86 - such that and, Typed :: uses (known_proc,unknown_var) and modifies (known,unknown)               
+var v1;
+select v1   such that  Uses ( "xylo" , v1 ) and Modifies ( "xylo" , v1 ) ;
+
+5000
+87 - such that and, Typed :: uses (unknown_statement,unknown_var) and modifies (unknown,unknown)               
+stmt s1; var v1;
+select v1   such that  Uses ( s1 , v1 ) and Modifies ( s2 , v1 ) ;
+
+5000
+88 - such that and, Typed :: modifies (unknown_statement,unknown_var) and uses (unknown,unknown)               
+stmt s1; var v1;
+select s1   such that  Modifies ( s1 , v1 ) and Modifies ( s2 , v1 ) ;
+
+5000
+89 - such that and, Typed :: uses (unknown_assignment,unknown_var) and modifies (unknown,unknown)               
+assign a1; var v1;
+select a1   such that  Uses ( a1 , v1 ) and Modifies ( a1 , v1 ) ;
+
+5000
+90 - such that and, Typed :: uses (unknown_while,unknown_var) and modifies (unknown,unknown)               
+while w1; var v1;
+select w1   such that  Uses ( w1 , v1 ) and Modifies ( w1 , v1 ) ;
+
+5000
+91 - such that and, Typed :: modifies (unknown_while,unknown_var) and uses (unknown,known)               
+while w1; var v1;
+select s1   such that  Modifies ( w1 , v1 ) and Modifies ( w1 , "apple" ) ;
+
+5000
+92 - such that and, Typed :: uses (unknown_if,unknown_var) and modifies (unknown,unknown)               
+if i1; var v1;
+select v1   such that  Uses ( i1 , v1 ) and Modifies ( i1 , v1 ) ;
+
+5000
+93 - such that and, Typed :: modifies (unknown_if,unknown_var) and uses (unknown,unknown)               
+if i1; var v1;
+select i1   such that  Modifies ( i1 , v1 ) and Uses ( i1 , v1 ) ;
+
+5000
+94 - such that and, Typed :: uses (unknown_call,unknown_var) and modifies (unknown,unknown)               
+call c; var v1;
+select c   such that  Uses ( c , v1 ) and Modifies ( c , v1 ) ;
+
+5000
+95 - such that and, Typed :: modifies (unknown_call,unknown_var) and uses (unknown,unknown)               
+call c; var v1;
+select v1   such that  Modifies ( c , v1 ) and Uses ( c , v1 ) ;
+
+5000
+96 - such that and, Typed :: uses (unknown_proc,unknown_var) and modifies (unknown,unknown)               
+proc p1; var v1;
+select p1   such that  Uses ( p1 , v1 ) and Modifies ( p1 , v1 ) ;
+
+5000
+97 - such that and, Typed :: modifies (unknown_proc,unknown_var) and uses (unknown,unknown)               
+proc p1; var v1;
+select p1   such that  Modifies ( p1 , v1 ) and Uses ( p1 , v1 ) ;
+
+5000
+100 - such that and, Typed :: follows (known,unknown) and uses (unknown,unknown)               
+stmt s1,s2;
+select s2   such that  Follows (4 , s2 ) and Uses ( s2 , v1 ) ;
+
+5000
+101 - such that and, Typed :: follows* (known,unknown) and uses (unknown,unknown)               
+stmt s1,s2;
+select s2   such that  Follows* (4 , s2 ) and Uses ( s2 , v1 ) ;
+
+5000
+102 - such that and, Typed :: follows (unknown,known) and uses (unknown,unknown)               
+stmt s1,s2;
+select s1   such that  Follows ( s1 ,9 ) and Uses ( s1 , v1 ) ;
+
+5000
+103 - such that and, Typed :: follows* (unknown,known) and uses (unknown,unknown)               
+stmt s1,s2;
+select s1   such that  Follows* ( s1 ,9 ) and Uses ( s1 , v1 ) ;
+
+5000
+104 - such that and, Typed :: follows (unknown,unknown)  and uses (unknown,unknown)               
+
+select s1   such that  Follows ( s1 , s2 ) and Uses ( s1 , v1 ) ;
+
+ 5000 stmt s1,s2;
+105 - such that and, Typed :: follows* (unknown,unknown)  and uses (unknown,unknown)               
+
+select s1   such that  Follows* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
+
+5000
+106 - such that and, Typed :: follows (unknown,unknown) and uses (unknown,unknown)               
+stmt s1,s2;
+select s2   such that  Follows ( s1 , s2 ) and Uses ( s1 , v1 ) ;
+
+5000
+107 - such that and, Typed :: follows* (unknown,unknown) and uses (unknown,unknown)               
+stmt s1,s2;
+select s2   such that  Follows* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
+
+5000
+108 - such that and, Typed :: follows (unknown,unknown) and uses (unknown,unknown)               
+stmt s1,s2;
+select s1   such that  Follows ( s1 , s1 ) and Uses ( s1 , v1 ) ;
+
+5000
+109 - such that and, Typed :: follows* (unknown,unknown) and uses (unknown,unknown)               
+stmt s1,s2;
+select s1   such that  Follows* ( s1 , s1 ) and Uses ( s1 , v1 ) ;
+
+5000
+112 - such that and, Typed :: parent (known,unknown) and uses (unknown,unknown)               
+stmt s1,s2;
+select s2   such that  Parent (9 , s2 ) and Uses ( s2 , v1 ) ;
+
+5000
+113 - such that and, Typed :: parent* (known,unknown) and uses (unknown,unknown)               
+stmt s1,s2;
+select s2   such that  Parent* (9 , s2 ) and Uses ( s2 , v1 ) ;
+
+5000
+114 - such that and, Typed :: parent (unknown,known) and uses (unknown,unknown)               
+stmt s1,s2;
+select s1   such that  Parent ( s1 ,14 ) and Uses ( s1 , v1 ) ;
+
+5000
+115 - such that and, Typed :: parent* (unknown,known) and uses (unknown,unknown)               
+stmt s1,s2;
+select s1   such that  Parent* ( s1 ,14 ) and Uses ( s1 , v1 ) ;
+
+5000
+116 - such that and, Typed :: parent (unknown,unknown) and uses (unknown,unknown)               
+stmt s1,s2;
+select s1   such that  Parent ( s1 , s2 ) and Uses ( s1 , v1 ) ;
+
+5000
+117 - such that and, Typed :: parent* (unknown,unknown) and uses (unknown,unknown)               
+stmt s1,s2;
+select s1   such that  Parent* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
+
+5000
+118 - such that and, Typed :: parent (unknown,unknown) and uses (unknown,unknown)               
+stmt s1,s2;
+select s2   such that  Parent ( s1 , s2 ) and Uses ( s1 , v1 ) ;
+
+5000
+119 - such that and, Typed :: parent* (unknown,unknown) and uses (unknown,unknown)               
+stmt s1,s2;
+select s2   such that  Parent* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
+
+5000
+120 - such that and, Typed :: parent (unknown,unknown) and uses (unknown,unknown)               
+stmt s1,s2;
+select s1   such that  Parent ( s1 , s1 ) and Uses ( s1 , v1 ) ;
+
+5000
+121 - such that and, Typed :: parent* (unknown,unknown) and uses (unknown,unknown)               
+stmt s1,s2;
+select s1   such that  Parent* ( s1 , s1 ) and Uses ( s1 , v1 ) ;
+
+5000

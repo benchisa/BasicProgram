@@ -535,7 +535,7 @@ bool QueryPreprocessor::verifyCondition(TOKEN token){
 	
 	vector<TOKEN> conditions;
 	if (regex_match(token,regex(suchthat_cl))){
-		conditions = tokenize(token,"("+rel+")\\s*\\(("+ref+")\\s*,\\s*("+ref+")\\s*\\)");
+		conditions = tokenize(token,"("+rel+")\\s*\\(\\s*("+ref+")\\s*,\\s*("+ref+")\\s*\\)");
 		for(int i=0;i<conditions.size();i++){
 			if (processSuchThat(conditions.at(i))){
 				clauseCount++;
