@@ -982,7 +982,7 @@ DATA_LIST * DesignExtractor::getAllConstants(){
 
 	int size = pkb->getConstantTableSize();
 	for(int i =1;i<=size;i++){
-		returnList->push_back(pkb->getConstantValue(i);
+		returnList->push_back(pkb->getConstantValue(i));
 	}
 	return returnList;
 }
