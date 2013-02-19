@@ -11,6 +11,142 @@ DesignExtractor::~DesignExtractor(void)
 {
 }
 
+// INPUT: Stack of Operators, Current Token
+// OUTPUT: true if higher precedence, false otherwise
+bool DesignExtractor::isHigherPrecedence(stack<pair<TYPE, TOKEN>>& operators, TOKEN t){
+	pair<TYPE, TOKEN> tPair = operators.top();
+	if(atoi(t.c_str()) > atoi(tPair.second.c_str()))
+		return true;
+	else
+		return false;
+}
+
+// INPUT: Expression
+// OUTPUT: a list of pair of TYPE and its value
+vector<pair<TYPE, TOKEN>> DesignExtractor::tokenize(EXPRESSION expr){
+	vector<pair<TYPE, TOKEN>> res;
+	pair<TYPE, TOKEN> tPair;
+	
+	// separate the expr
+	regex rx("\\(|\\)|\\=|\\;|\\-|\\*|\\+|[^\\s\\n\\-\\*\\+\\;\\=\\(\\)]+");
+	sregex_iterator rxItr(expr.begin(), expr.end(), rx), rxend;
+
+	// format the tokens for easy process
+	for (rxItr; rxItr != rxend; ++rxItr)
+	{
+		
+		if(rxItr->str() == "+"){
+			tPair.first = PLUS;
+			tPair.second = "1";
+		}
+		else if(rxItr->str() == "-"){
+			tPair.first = MINUS;
+			tPair.second = "1";
+		}
+		else if(rxItr->str() == "*"){
+			tPair.first = MULTIPLY;
+			tPair.second = "2";
+		}
+		else if(rxItr->str() == "("){
+			tPair.first = BRACKET;
+			tPair.second = "(";
+		}
+		else if(rxItr->str() == ")"){
+			tPair.first = BRACKET;
+			tPair.second = ")";
+		}
+		else {
+			tPair.first = STRING;
+			tPair.second = rxItr->str();
+		}
+		res.push_back(tPair);
+	}
+	return res;
+}
+
+// INPUT: a type; PLUS, MINUS, MULIPLY
+// OUTPUT: +, -, *
+OPERATOR DesignExtractor::operatorToString(TYPE type){
+	switch(type){
+	case PLUS:
+		return "+";
+	case MINUS:
+		return "-";
+	case MULTIPLY:
+		return "*";
+	}
+}
+
+// INPUT: Operators and Operands Stack
+// OUTPUT: EXPRESSIOn
+EXPRESSION DesignExtractor::formExpression(stack<pair<TYPE, TOKEN>>& operators, stack<OPERAND> &operands){
+	OPERATOR op = operatorToString(operators.top().first);
+	operators.pop();
+
+	OPERAND right = operands.top();
+	operands.pop();
+	OPERAND left = operands.top();
+	operands.pop();
+
+	OPERAND resExpr = op.append(" " + left + " " + right);
+	//cout << "Expression: " << resExpr << "\n";
+
+	return resExpr;
+}
+
+// Convert an expression to prefix expression
+// INPUT: ((1 * 2) + (3 * 4)) - ((5 - 6) + (7 - 8))
+// OUTPUT: - + * 1 2 * 3 4 + - 5 6 - 7 8
+PREFIXEXPR DesignExtractor::convertExprToPrefix(EXPRESSION expr){
+	PREFIXEXPR result;
+	
+	stack<pair<TYPE, TOKEN>> operators;
+	stack<OPERAND> operands;
+	
+	vector<pair<TYPE, TOKEN>> s = tokenize(expr); 
+	pair<TYPE, TOKEN> tPair;
+
+	vector<pair<TYPE, TOKEN>>::iterator itr = s.begin();
+	while(itr != s.end()){
+		// If it is a left parentheses or the stack is empty or higher precendence
+		if(itr->first == STRING){
+			//cout << "Pushing: " << itr->second << " to operands\n";
+			operands.push(itr->second);
+		}
+		else if(itr->second == "(" || operators.empty() || isHigherPrecedence(operators,itr->second)){
+			//cout << "Pushing: " << itr->first << " to operators\n";
+			operators.push(*itr);
+		}
+		else if(itr->second == ")"){
+			while(operators.top().second != "("){
+				operands.push(formExpression(operators, operands));
+			}
+
+			// remove (
+			operators.pop();
+		}
+		// lower precedence
+		else if(!isHigherPrecedence(operators,itr->second)){
+			while(!operators.empty() && !isHigherPrecedence(operators,operators.top().second)){
+				operands.push(formExpression(operators, operands));
+			}
+
+			operators.push(*itr);
+		}
+
+		itr++;
+	}
+
+	// handle the leftover
+	while(!operators.empty()){
+			operands.push(formExpression(operators, operands));
+	}
+
+	result = operands.top();
+	operands.pop();
+	return result;
+}
+
 //calltable
 
 CALL_LIST DesignExtractor::getCallResult(PROC_NAME caller, PROC_NAME callee)

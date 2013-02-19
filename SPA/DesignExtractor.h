@@ -1,6 +1,7 @@
 #pragma once
 #include "Global_Data_Abstraction.h"
 #include "PKB.h"
+#include <stack>
 
 class DesignExtractor
 {
@@ -8,6 +9,8 @@ public:
 	DesignExtractor(PKB* pkb);
 	~DesignExtractor(void);
 
+	static PREFIXEXPR convertExprToPrefix(EXPRESSION expr);
+	
 	bool isStatementTypeOf(TYPE typeName, STATEMENT_NUM stmtNum);
 	DATA_LIST * getAllCallStmts();
 	DATA_LIST * getAllAssigns();
@@ -74,5 +77,12 @@ private:
 	 void iterateAndStore(list<pair<int, int>> &result, list<pair<int, int>> tmp, int v1);
 	 void computeCallStar(PROC_NAME caller, PROC_NAME callee,list<string> &result);
 	 //void iterateAndStore(RELATION_LIST *result, RELATION_LIST list);
+
+	// Helper for conversion
+	static bool isHigherPrecedence(stack<pair<TYPE, TOKEN>>& operators, TOKEN);
+	static vector<pair<TYPE, TOKEN>> tokenize(EXPRESSION);
+	static OPERATOR operatorToString(TYPE type);
+	static EXPRESSION formExpression(stack<pair<TYPE, TOKEN>>& operators,stack<OPERAND>& operands);
+
 };
 
