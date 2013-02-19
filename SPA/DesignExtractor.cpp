@@ -907,7 +907,6 @@ void DesignExtractor::iterateAndStore(list<pair<int, int>> &result, list<pair<in
 			while(itr != tmpLst.end()){
 				if(v1 != 0 && itr->second == v1){
 					result.push_back(*itr);
-					break;
 				}
 				else if(v1 == 0){
 					result.push_back(*itr);
