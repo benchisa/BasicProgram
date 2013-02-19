@@ -707,7 +707,7 @@ void Parser::insertFollowsParentForStmt(PROG_LINE p1, PROG_LINE p2){
 	}
 	else
 	{
-		cout << "Prevtoken: " << prevToken << "\n";
+		//cout << "Prevtoken: " << prevToken << "\n";
 		if(prevToken.compare("{") != 0 && prevToken.compare("}") != 0) {
 			//cout << "assign's insertFollows2: " << p1 << "," <<p2 << "\n";
 			insertFollows(p1, p2);

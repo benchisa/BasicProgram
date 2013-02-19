@@ -38,8 +38,6 @@ FINAL_RESULT PQLController::getQueryResult(QUERY newQuery){
 		returnResult.push_back("false");
 	}
 
-	//fail to preprocess the query and return the result
-//	returnResult.push_back(queryProcessor->getLastError());
 	return returnResult;
 	
 }

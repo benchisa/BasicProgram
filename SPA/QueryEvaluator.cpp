@@ -18,22 +18,22 @@ bool QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrPa
 	this->qrParam = qrParam;
 	bool nonEmptyResult;
 
+	//set the result node
+	QTREE* resultNode;
+	resultNode = qrTree->getFirstDescendant();
+
 	//Compute the intermediate result
 	QTREE* relationTree;
 	relationTree = qrTree->getRightSibling(); 
 
 	//eg select s
 	if(relationTree==NULL){
-		generateRaw(qrTree);
+		generateRaw(resultNode);
 		return true;
 	}
-
+	//compute the intermediate result and store in a database
 	IntermediateResultTable * resultTable ;
 	resultTable = QueryEvaluator::computeIntermediateResult(relationTree);
-
-	//find the result from resultTable
-	QTREE* resultNode;
-	resultNode = qrTree->getFirstDescendant();
 
 	//can not find the result in the table,include the following cases:
 	//a. one of the condition is false, select nonBoolean value
@@ -61,10 +61,10 @@ void QueryEvaluator::generateRaw(QTREE* resultNode){
 		}else{
 			//get the type of the selected var
 			TYPE resultVarType;
-			QUERYTABLE::iterator itr;
+			QUERYTABLE::iterator qrTableItr;
 
-			itr = qrTable->find(resultNode->getData());
-			resultVarType = itr->second;
+			qrTableItr = qrTable->find(resultNode->getData());
+			resultVarType = qrTableItr->second;
 			rawData->push_back(*extractor->getStmtListOf(resultVarType));
 		
 			//add the col name, which is the qrVar index

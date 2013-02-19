@@ -33,14 +33,72 @@ SOURCE SampleSimpleSources::sampleSource4 = "procedure Code4{\n"
 									/*5*/	"y = a;\n"
 									/*6*/	"b = q+1;}}}\n";
 
-SOURCE SampleSimpleSources::sampleSource5 = "procedure Code5{\n"
-									/*1*/	"while a{\n"
-									/*2*/	"c = c + a;\n"
-									/*3*/	"c = x + y + z;\n"
-									/*4*/	"while b{\n"
-									/*5*/	"d = a;\n"
-									/*6*/	"c = q+4;}\n"
-									/*7*/	"e = 2;}}\n";
+SOURCE SampleSimpleSources::sampleSource5 ="procedure xylo{\n"		
+											 "apple=1;\n"						//1
+											 "banana=apple+1;\n"				//2
+											 "carrot=apple;\n"					//3
+											 "banana=carrot+1;\n"				//4
+											 "donut=0;\n"						//5
+											 "egg=1;\n"							//6
+											 "fish=egg;\n"						//7
+											 "call yello;\n"					//8
+											 "while apple{\n"					//9
+											    "while egg{\n"					//10
+											       "innard = 0;\n"				//11
+                                                   "while donut{\n"				//12
+														"gummy=egg+1;\n"		//13
+													"}\n"
+												   "while fish{\n"				//14
+														"gummy=0;\n"			//15
+														"while innard{\n"		//16
+															"fish=innard;\n"	//17
+													    "}\n"			
+												   "}\n"
+												   "ham=gummy;\n"				//18
+												"}\n"
+												"gummy=apple+9;\n"				//19
+											  "}\n"	
+											 "apple=11;\n"						//20
+											 "if innard then{\n"				//21
+													"jam=apple;}\n"				//22
+											 "else{\n"			
+													"jam=gummy;\n"				//23
+													"if egg then{\n"			//24
+														"gummy=33;}\n"			//25
+													"else{\n"
+														"gummy=99;}\n"			//26
+													"}\n"
+											 "}\n"
+									 "procedure yello{\n"	
+										"kimchi = 88;\n"						//27
+										"leek=0;\n"								//28
+										"while leek{\n"							//29
+											"kimchi=kimchi+1;\n"				//30
+										"}\n"
+										"call zebra;\n"							//31
+										"apple=kimchi;\n"						//32
+										"jam=egg+2;\n"							//33
+									"}\n"
+									"procedure zebra{\n"
+										"meat=1;\n"								//34
+										"banana=meat+10;\n"						//35
+										"if meat then{\n"						//36
+												"carrot=banana+22;}\n"			//37
+										"else{\n"
+												"carrot=banana;}\n"				//38
+												"apple=1;\n"					//39
+												"kimchi=apple+10;\n"			//40
+												"call extra;\n"					//41
+										"}\n"
+									"procedure extra{\n"
+										"ingredients=1;\n"						//42
+										"a=ingredients;\n"						//43
+										"while ingredients{\n"					//44
+												"b=a;\n"						//45
+												"c=b;\n"						//46
+												"a=c;\n"						//47
+										"}\n"
+									"}\n";
 
 
 // Purpose: Test for missing {
@@ -96,11 +154,11 @@ QUERY SampleQueries::sampleQuery12 = "variable v;select v such that Modifies(_, 
 QUERY SampleQueries::sampleQuery13 = "variable v; select v such that Modifies(1, v);"; //fixed
 QUERY SampleQueries::sampleQuery14 = "stmt s; select s such that Uses(s, \"y\");"; 
 QUERY SampleQueries::sampleQuery15 = "assign a; while w;select a such that Follows* (a,w);"; // <-- this one suppose to return none right..
-QUERY SampleQueries::sampleQuery16 = "while w; constant c;select <w,c> with w.stmt#=c.value;";
-QUERY SampleQueries::sampleQuery17 = "stmt s; select s;";
-QUERY SampleQueries::sampleQuery18 = "assign a; select a;";
+QUERY SampleQueries::sampleQuery16 = "while w; constant c;select <w,c> with w.stmt#=c.value;"; //fixed
+QUERY SampleQueries::sampleQuery17 = "assign a; select a;"; //fixed
+QUERY SampleQueries::sampleQuery18 = "stmt s; constant c;select s with c.value=s.stmt#;";
 QUERY SampleQueries::sampleQuery19 = "procedure p;select BOOLEAN with p.procName = \"procedure\";";
-QUERY SampleQueries::sampleQuery20 = "stmt s1; select s1 such that Parent (s1,_);";
+QUERY SampleQueries::sampleQuery20 = "stmt s1,s2;select s1 such that Follows* ( s1 , s2 );";
 QUERY SampleQueries::sampleQuery21 = "while w; select w such that Parent (_,_);";
 QUERY SampleQueries::sampleQuery22 = "stmt s1; select s1 such that Parent (_,s1);";
 
