@@ -1,0 +1,42 @@
+50    
+cat: simple cases    
+1 -  select all assignments
+assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;    
+select   a 
+    
+5000    
+2 -  select all if
+assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;    
+select   i 
+    
+5000    
+3 -  select all while
+assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;    
+select   w 
+    
+5000    
+4 -  select all statements
+assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;    
+select   s 
+    
+5000    
+5 -  select all variables
+assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;    
+select   v 
+    
+5000    
+6 -  select all procedures
+assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;    
+select   p 
+    
+5000    
+7 -  select all calls
+assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;    
+select   cl 
+    
+5000    
+8 -  select all constants
+assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;    
+select   c 
+    
+5000    
