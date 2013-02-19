@@ -14,7 +14,7 @@ public:
 	bool isQrVarDiscovered(INDEX qrVarIndex);
 	INDEX_LIST* getResultListOf(INDEX qrVarIndex);
 	RAWDATA* findResultOf(DATA_LIST resultNodeList);
-
+	DATA_LIST * getStmtListOf(TYPE nodeType);
 
 private:
 	typedef list<LinkedDataTable> DATABASE;
@@ -30,7 +30,6 @@ private:
 	DATABASE database;
 	RAWDATA * joinRaw(RAWDATA * rawData,int tableNum,DATA_LIST * selectedVarList);
 	RAWDATA * joinCombinations(RAWDATA* rawData, DATA_LIST * selectedVarList);
-	DATA_LIST * getStmtListOf(TYPE nodeType);
 	DesignExtractor * extractor;
 };
 

@@ -26,7 +26,7 @@ void TestWrapper::parse(std::string filename) {
 	if(file.is_open()){
 		while(file.good()){
 			getline(file, line);
-			src+= line;
+			src+= line + "\n";
 		}
 
 		file.close();

@@ -41,7 +41,10 @@ list<string> QueryFormatter::formatString(RAWDATA * data) {
 			//get the data of curren qrVar
 			value = (data->at(j)).at(i);
 
-			if(type == VARIABLE) {
+			if(type ==CONSTANT){
+				int constValue = pkb->getConstantValue(value);
+				result.push_back(static_cast<ostringstream*>( &(ostringstream() << constValue) )->str());
+			}else if(type == VARIABLE) {
 				VAR_NAME varName = pkb->getVarName(value);
 				result.push_back(varName);
 			}else if(type==PROCEDURE||type==CALL) { 

@@ -20,9 +20,15 @@ bool QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrPa
 
 	//Compute the intermediate result
 	QTREE* relationTree;
-	relationTree = qrTree->getRightSibling(); //changed
-	IntermediateResultTable * resultTable;
+	relationTree = qrTree->getRightSibling(); 
 
+	//eg select s
+	if(relationTree==NULL){
+		generateRaw(qrTree);
+		return true;
+	}
+
+	IntermediateResultTable * resultTable ;
 	resultTable = QueryEvaluator::computeIntermediateResult(relationTree);
 
 	//find the result from resultTable
@@ -41,14 +47,30 @@ bool QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrPa
 	//c. the resultTable is not empty, return the corresponding results
 	return true;
 }	
+void QueryEvaluator::generateRaw(QTREE* resultNode){
+	/*//create the rawData
+		rawData = new RAWDATA();
 
+		//get the type of the selected var
+		TYPE resultVarType;
+		QUERYTABLE::iterator itr;
+
+		itr = qrTable->find(resultNode->getData());
+		resultVarType = itr->second;
+		rawData->push_back(*extractor->getStmtListOf(resultVarType));
+		
+		//add the col name, which is the qrVar index
+		DATA_LIST::iterator itr;
+		itr = rawData->at(0).begin();
+		rawData->at(0).insert(itr,resultNode->getData());
+		*/
+}
 IntermediateResultTable * QueryEvaluator::computeIntermediateResult(QTREE* relationTree){
 	
 	IntermediateResultTable * resultTable;
-
 	QTREE* currentClause = relationTree;
-	resultTable = new IntermediateResultTable(qrTable->size(),pkb,qrTable,extractor);
 	
+	resultTable = new IntermediateResultTable(qrTable->size(),pkb,qrTable,extractor);
 	bool startClause = false;
 	int currentFlag = currentClause->getData();
 	int prevFlag = currentFlag;
@@ -79,6 +101,8 @@ IntermediateResultTable * QueryEvaluator::evaluateClause(IntermediateResultTable
 			return NULL;
 	}
 	if(clauseType == PATTERN){
+	/*	if(!QueryEvaluator::executePattern(resultTable,clause))
+			return NULL;*/
 	}
 	if(clauseType == WITH){
 		if(!QueryEvaluator::executeWith(resultTable,clause))
@@ -307,6 +331,117 @@ bool QueryEvaluator::executeWith(IntermediateResultTable * resultTable,QTREE* wi
 		return resultTable->joinList(joinAttr, firstQrVar,secondQrVar,currentResultList);
 	}
 }
+/*bool QueryEvaluator::executePattern(IntermediateResultTable * resultTable,QTREE* withTree){
+	QTREE* firstRel;
+	QTREE* secondRel;
+	QTREE* firstAttr;
+	QTREE* secondAttr;
+	INDEX firstQrVar,secondQrVar;
+	RELATION_LIST* currentResultList = new RELATION_LIST();
+	WithClause withClause(pkb,extractor,qrTable,qrParam);
+	JOIN_ATTR joinAttr = 0;
+
+	firstRel = withTree->getFirstDescendant();
+	firstAttr = firstRel->getRightSibling();
+	secondRel = firstAttr->getRightSibling();
+	secondAttr = secondRel->getRightSibling();
+	firstQrVar = firstRel->getData();
+	secondQrVar = secondRel->getData();
+	
+	if(firstRel->getType()==QUERYVAR){
+		int qrVarIndex = firstQrVar;
+		joinAttr = qrVarIndex;
+
+		//test to see if secondrRel is known
+		if(secondRel->getType()!=QUERYVAR){
+			secondQrVar = -1;
+		}
+
+		//test to see if firstRelVar is already probed in previous steps
+		if(!resultTable->isQrVarDiscovered(qrVarIndex)){
+			//evaluate the tree
+			currentResultList = withClause.evaluateWithTree(withTree);
+		}else{
+		// current qrVar is evaluated in the previous steps
+		/*algo:
+			get the evaluated resultList of this qrVar from result table
+			use the list as probe to get the correct result
+			firstRel is computed in previous steps,second Rel is to be discovered
+		*//*
+			INDEX_LIST * currentVarResultList;
+			currentVarResultList = resultTable->getResultListOf(qrVarIndex);
+
+			//replace the firstRel with probe data
+			QUERYTABLE::iterator itr1;
+			itr1 = qrTable->find(firstRel->getData());
+			TYPE relRealType = itr1->second;
+			firstRel->setType(ANY);
+			firstAttr->setType(relRealType);
+
+			INDEX_LIST::iterator itr;
+			for(itr = currentVarResultList->begin();itr!=currentVarResultList->end();itr++){
+				
+				firstAttr->setData(*itr);
+
+				RELATION_LIST * tempList;
+				tempList = withClause.evaluateWithTree(withTree);
+
+				currentResultList = QueryEvaluator::appendRelationLists(currentResultList,tempList);		
+			}
+		}
+	}else if(secondRel->getType()==QUERYVAR){
+		int qrVarIndex = secondQrVar;
+		joinAttr = qrVarIndex;
+
+		//firstQrVar must be known
+		firstQrVar = -1;
+
+		//test to see if firstRelVar is already probed in previous steps
+		if(!resultTable->isQrVarDiscovered(qrVarIndex)){
+			//evaluate the tree
+			currentResultList = withClause.evaluateWithTree(withTree);
+		}else{
+		// current qrVar is evaluated in the previous steps
+		/*algo:
+			get the evaluated resultList of this qrVar from result table
+			use the list as probe to get the correct result
+			secondRel is computed in previous steps,first Rel is to be discovered
+		*/
+		/*	INDEX_LIST * currentVarResultList;
+			currentVarResultList = resultTable->getResultListOf(qrVarIndex);
+
+			//replace the firstRel with probe data
+			QUERYTABLE::iterator itr1;
+			itr1 = qrTable->find(secondRel->getData());
+			TYPE relRealType = itr1->second;
+			secondRel->setType(ANY);
+			secondAttr->setType(relRealType);
+		
+			INDEX_LIST::iterator itr;
+			for(itr = currentVarResultList->begin();itr!=currentVarResultList->end();itr++){
+				
+				secondAttr->setData(*itr);
+
+				RELATION_LIST * tempList;
+				tempList = withClause.evaluateWithTree(withTree);
+
+				currentResultList = QueryEvaluator::appendRelationLists(currentResultList,tempList);		
+			}
+		}
+	}else{
+		//both relations are known
+		currentResultList = withClause.evaluateWithTree(withTree);
+	}
+
+	//there is no result found with all the probes, this relation is not satisfied
+	if(currentResultList==NULL){
+		return false; 
+	}else{
+	//result is found, add into resultTable
+		return resultTable->joinList(joinAttr, firstQrVar,secondQrVar,currentResultList);
+	}
+}
+*/
 RELATION_LIST * QueryEvaluator::appendRelationLists(RELATION_LIST* list1,RELATION_LIST* list2){
 	if (list2==NULL) return list1;
 
@@ -353,7 +488,7 @@ bool QueryEvaluator::findResult(QTREE* resultNode,IntermediateResultTable* resul
 		DATA_LIST resultType;
 		DATA_LIST content;
 		
-		resultType.push_back(0);
+		resultType.push_back(-1);
 		content.push_back(0);
 		rawData->push_back(resultType);
 		rawData->push_back(content);
@@ -363,7 +498,7 @@ bool QueryEvaluator::findResult(QTREE* resultNode,IntermediateResultTable* resul
 		DATA_LIST resultType;
 		DATA_LIST content;
 		
-		resultType.push_back(0);
+		resultType.push_back(-1);
 		content.push_back(1);
 		rawData->push_back(resultType);
 		rawData->push_back(content);
@@ -389,788 +524,3 @@ bool QueryEvaluator::findResult(QTREE* resultNode,IntermediateResultTable* resul
 RAWDATA* QueryEvaluator::getRawResult(){
 	return rawData;
 }
-/*
-PKB * SuchThat::pkb;
-QueryEvaluator::QueryEvaluator(PKB * p){
-	this->pkb = p;
-	this->patProcessor.setPKB(pkb);
-	this->returnList = new INDEX_LIST;
-	SuchThat::pkb = pkb;
-}
-QueryEvaluator::~QueryEvaluator(void){
-	delete returnList;
-	delete pkb;
-}
-void QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qTable){
-	// always clear resultList
-	if(returnList != 0) 
-	{
-		returnList->clear();
-	}
-	else
-	{
-		this->returnList = new INDEX_LIST;
-		//cout << returnList << "\n";
-	}
-
-	this->qrTree= qrTree;
-	this->qrTable = qTable;
-	hash_map<int, TYPE>::iterator itr;
-
-	for(itr = qTable->begin(); itr != qTable->end(); itr++){
-		this->qrTable->insert(pair<int, TYPE>(itr->first, itr->second));
-	}
-
-	// root pointer of the query tree
-	resultNode = qrTree->getFirstDescendant();
-	//	cout<<"resultNode Type:"<< resultNode->getType();
-
-	//	QUERYTABLE::iterator itr;
-	//	itr = qrTable->find(resultNode->getData());
-
-	//get the type of result variable
-	resultType = resultNode->getFirstDescendant()->getType();
-	//get the index of result varaible
-	resultIndex = resultNode->getFirstDescendant()->getData();
-	//cout<<"resultType: "<<resultType;
-	//cout<<"resultIndex: "<<resultIndex;
-	//traverse the query tree
-	QTREE* currentNode;
-	currentNode = resultNode;
-
-	//store intemediate results
-	INDEX_LIST * patternListNode;
-	patternListNode = NULL;
-
-	INDEX_LIST * patternListRel;
-	patternListRel = NULL;
-
-	RELATION_LIST * relList;
-	relList = NULL;
-	bool patternCond = true;
-	bool relationCond = true;
-
-	//compute result
-	while(currentNode->getRightSibling()!=NULL){
-
-		currentNode = currentNode->getRightSibling();
-		TYPE nodeType = currentNode->getType();
-
-		if(nodeType == SUCHTHAT){
-			relList = QueryEvaluator::suchThat(currentNode);
-		//	cout<<"relList Size: "<<relList->size();
-			if(relList==NULL) {
-				relationCond = false;
-			}else{
-				if(relList->size()==0) relationCond = false;
-			}
-
-		}else if(nodeType == PATTERN){
-			patternListNode = QueryEvaluator::patternNode(currentNode);
-			patternListRel =  QueryEvaluator::patternRel(currentNode);
-			if(patternListNode==NULL||patternListRel==NULL) 
-				patternCond= false;
-		}
-	}
-
-
-	//traverse the query tree to take the intersection
-	if(relationCond == true && patternCond ==true) {
-
-		QTREE* currentNode;
-		currentNode = resultNode;
-		QTREE * firstRel;
-		QTREE * secondRel;
-
-		//take intersection of intermediate result, if there are results in both lists
-		if(relList!=NULL&&patternListNode!=NULL&&patternListRel!=NULL){
-
-			QTREE* patternVar;
-
-			while(currentNode->getRightSibling()!=NULL){
-
-				currentNode = currentNode->getRightSibling();
-				TYPE nodeType = currentNode->getType();
-
-				if(nodeType==SUCHTHAT){
-					firstRel = currentNode->getFirstDescendant()->getFirstDescendant();
-					secondRel = firstRel->getRightSibling();
-				}
-				if(nodeType==PATTERN){
-					patternVar = currentNode->getFirstDescendant();
-				}
-			}
-
-			//pattern entity overlap with first rel entity
-			INDEX_LIST tempPatternList;
-		//	tempPatternList = NULL;
-			RELATION_LIST tempRelList;
-	//		tempRelList = NULL;
-			RELATION_LIST::iterator itr1;
-			INDEX_LIST::iterator itr2;
-			bool intersect1 =false;
-			bool intersect2 =false;
-
-			//pattervar = firstRel
-			if((patternVar->getType()==firstRel->getType())&&(patternVar->getData()==firstRel->getData())){
-				intersect1 = true;
-				for(itr1 = relList->begin();itr1 != relList->end();itr1++){
-					for(itr2=patternListNode->begin();itr2!=patternListNode->end();itr2++){
-						if(itr1->first==*itr2){
-							int patternIndex = *itr2;
-							tempPatternList.push_back(patternIndex);
-
-							pair<int,int> relPair = *itr1;
-							tempRelList.push_back(relPair);
-						}
-					}
-				}
-			}
-			//patternvar = secondRel
-			if((patternVar->getType()==secondRel->getType())&&(patternVar->getData()==secondRel->getData())){
-				intersect2 = true;
-				for(itr1 = relList->begin();itr1 != relList->end();itr1++){
-					for(itr2=patternListNode->begin();itr2!=patternListNode->end();itr2++){
-						if(itr1->second==*itr2){
-							int patternIndex = *itr2;
-							tempPatternList.push_back(patternIndex);
-
-							pair<int,int> relPair = *itr1;
-							tempRelList.push_back(relPair);
-						}
-					}
-				}
-			}
-				// the intermediate result is narrowed down
-			if(tempPatternList.size()>0){
-				patternListNode = new INDEX_LIST(tempPatternList);
-				relList = new RELATION_LIST(tempRelList);
-				//cout<<"patternList size:"<<patternList->size();
-				//cout<<"relList size1:"<<relList->size();
-				//set bool result to true
-				if((intersect1==true||intersect2==true)&&resultType==BOOL){
-					returnList->push_back(1);
-				}
-				//reset temList
-				tempRelList.clear();
-				tempPatternList.clear();
-			}else{
-				//same variable appears in two clauses but no intersection found,
-				//set bool result to false and returnList to null
-				if(intersect1==true||intersect2==true){
-					if(resultType==BOOL){
-						returnList->push_back(0);
-					}else{
-						returnList = NULL;
-					}
-					return;
-				}
-			}
-			
-	/*
-			//patternFirstRel = firstRel
-			if((patternVar->getFirstDescendant()->getType()==firstRel->getType())&&(patternVar->getFirstDescendant()->getData()==firstRel->getData())){
-				intersect1 = true;
-				for(itr1 = relList->begin();itr1 != relList->end();itr1++){
-					for(itr2=patternListRel->begin();itr2!=patternListRel->end();itr2++){
-						if(itr1->first==*itr2){
-							int patternIndex = *itr2;
-							tempPatternList.push_back(patternIndex);
-
-							pair<int,int> relPair = *itr1;
-							tempRelList.push_back(relPair);
-						}
-					}
-				}
-			
-			}
-			//patternFirstRel = secondRel
-			if((patternVar->getFirstDescendant()->getType()==secondRel->getType())&&(patternVar->getFirstDescendant()->getData()==secondRel->getData())){
-				intersect2 = true;
-				for(itr1 = relList->begin();itr1 != relList->end();itr1++){
-					for(itr2=patternListRel->begin();itr2!=patternListRel->end();itr2++){
-						if(itr1->second==*itr2){
-							int patternIndex = *itr2;
-							tempPatternList.push_back(patternIndex);
-
-							pair<int,int> relPair = *itr1;
-							tempRelList.push_back(relPair);
-						}
-					}
-				}
-			}
-			// the intermediate result is narrowed down
-			if(tempPatternList.size()>0){
-				patternListRel = new INDEX_LIST(tempPatternList);
-				relList = new RELATION_LIST(tempRelList);
-				//cout<<"patternList size:"<<patternList->size();
-				//cout<<"relList size1:"<<relList->size();
-				//set bool result to true
-				if((intersect1==true||intersect2==true)&&resultType==BOOL){
-					returnList->push_back(1);
-				}
-			}else{
-				//same variable appears in two clauses but no intersection found,
-				//set bool result to false and returnList to null
-				if(intersect1==true||intersect2==true){
-					if(resultType==BOOL){
-						returnList->push_back(0);
-					}else{
-						returnList = NULL;
-					}
-					return;
-				}
-			}
-
-		}
-
-		currentNode = resultNode;
-		//based on result return type, add valid results in returnList
-
-		if(resultType !=BOOL){
-		
-			while(currentNode->getRightSibling()!=NULL){
-
-				currentNode = currentNode->getRightSibling();
-				TYPE nodeType = currentNode->getType();
-			
-				if(nodeType == SUCHTHAT){
-					firstRel = currentNode->getFirstDescendant()->getFirstDescendant();
-					secondRel = firstRel->getRightSibling();
-					RELATION_LIST::iterator itr;
-					//desired result is found in relationList, in first field
-					if(resultType== firstRel->getType()&&resultIndex ==firstRel->getData()){
-						//cout<<"relList size: "<<relList->size();
-						for(itr = relList->begin();itr!=relList->end();itr++){
-							int addStmt = itr->first;
-							returnList->push_back(addStmt);
-						}
-					}
-					//desired result is found in relationList, in first field
-					if(resultType== secondRel->getType()&&resultIndex ==secondRel->getData()){
-						for(itr = (*relList).begin();itr!=(*relList).end();itr++){
-							returnList->push_back(itr->second);
-						}
-					}
-				}else if(nodeType == PATTERN){
-					//get the node of assign/while in pattern tree
-					firstRel = currentNode->getFirstDescendant();
-					//cout<<"patternList size: "<<(*patternList).size();
-					if(resultType==firstRel->getType()&&resultIndex==firstRel->getData()){
-						INDEX_LIST::iterator itr;
-						for(itr = patternListNode->begin();itr!=patternListNode->end();itr++){
-							returnList->push_back(*itr);
-						}
-					}
-					/*
-					//TODO:: add variables
-					if(resultType== firstRel->getFirstDescendant()->getType()&&resultIndex== firstRel->getFirstDescendant()->getData()){
-						INDEX_LIST::iterator itr;
-						for(itr = patternListRel->begin();itr!=patternListRel->end();itr++){
-							//cout<<"returnInex:"<<*itr;
-							returnList->push_back(*itr);
-						}
-					} comment
- 				//	cout<<"returnList size: "<<(*returnList).size();
-				}
-
-			}
-		}
-
-		if((*returnList).size()>0){
-			(*returnList).sort();
-			(*returnList).unique();
-		}else{
-			//returnList is NULL, where the desired result variable is not in the intemediate results 
-			//or no clauses appear in the query
-			//return all the valid results of the resultType
-			if(resultType ==BOOL){
-				returnList->push_back(1);
-			}else{
-				TYPE resultVarType = qrTable->find(resultIndex)->second;
-				//get the max stmtNo first
-				int stmtNo = pkb->getProcedure(1)->getEndProgLine();
-
-				if(resultVarType ==STATEMENT){
-					for(int i=1; i<=stmtNo;i++){
-						returnList->push_back(i);
-					}
-				} 
-				if(resultVarType== ASSIGNMENT){
-					for(int i=1; i<=stmtNo;i++){
-						AST_LIST * stmtTree;
-						stmtTree = pkb->getASTBy(i);
-						AST_LIST::iterator itr;
-
-						for(itr=stmtTree->begin();itr!=stmtTree->end();itr++){
-							if((*itr)->getRootType()==ASSIGNMENT){
-								returnList->push_back(i);
-							} 
-						}
-					}
-				}
-
-				if(resultVarType == WHILE){
-					for(int i=1; i<=stmtNo;i++){
-						AST_LIST * stmtTree;
-						stmtTree = pkb->getASTBy(i);
-						AST_LIST::iterator itr;
-
-						for(itr=stmtTree->begin();itr!=stmtTree->end();itr++){
-							if((*itr)->getRootType()==WHILE){
-								returnList->push_back(i);
-							} 
-						}
-					}
-				} 
-				if(resultVarType== VARIABLE){
-					int varSize = pkb->getVarTableSize();
-					for(int i =1;i<=varSize;i++){
-						returnList->push_back(i);
-					}
-				}
-				if(resultVarType==PROCEDURE){
-					int procSize = pkb->getProceTableSize();
-					for(int i =1;i<=procSize;i++){
-						returnList->push_back(i);
-					}
-				}
-				/*	if(resultVarType ==PROG_LINE){
-				for(int i=1; i<=stmtNo;i++){
-				returnList->push_back(i);
-				}
-				}comment
-			}
-		}
-	}else{
-		if(resultType == BOOL){ 
-			returnList->push_back(0);
-		}else{
-			returnList = NULL;
-		}
-	}
-}
-
-
-RAWDATA* QueryEvaluator::getResult(){
-	//take care of bool case
-	if(resultType ==BOOL) {
-		rawData = new RAWDATA(BOOL,returnList);
-		return rawData;
-	}
-
-	TYPE returnType;
-	QUERYTABLE::iterator itr;
-	//	cout << this->qrTable->size() << "\n";
-
-	if(this->qrTable->size() != 0) 
-	{
-		itr= qrTable->find(resultIndex);
-
-		//	cout<< "returnType: "<< itr->second<<"\n";
-		returnType = itr->second;
-		//cout << "SIZE OF RESULT (EVALUATOR): " << returnList->size() << "\n";
-		rawData = new RAWDATA(returnType,returnList);
-		return rawData;
-	}
-}
-
-RELATION_LIST * QueryEvaluator::suchThat(QTREE* suchThatTree){
-
-	QTREE * currentNode;
-	currentNode = suchThatTree->getFirstDescendant();
-	TYPE relType;
-	QTREE * firstRel;
-	QTREE * secondRel;
-	RELATION_LIST * relList = new RELATION_LIST;
-	RELATION_LIST tmpList;
-
-	//at the level of relationships
-	while(currentNode!=NULL){
-		relType= currentNode->getType();
-		firstRel = currentNode->getFirstDescendant();
-		secondRel = firstRel->getRightSibling();
-
-		//cout << "reltype: " << relType << "\n";
-		//cout << "firstrel: " << firstRel->getType() << "\n";
-		//cout << "secondrel: " << secondRel->getData() << "\n";
-
-		//both rel vars are known
-		if((firstRel->getType()!=QUERYVAR&&firstRel->getType()!=ANY)&&(secondRel->getType()!=QUERYVAR&&secondRel->getType()!=ANY)){
-			if(relType == PARENT){
-
-				if(pkb->isParent(firstRel->getData(),secondRel->getData())){
-					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
-				}
-			}
-			if(relType == PARENTST){
-
-				if(SuchThat::getIsParentStarResult(firstRel->getData(),secondRel->getData())){
-					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
-				}
-			}
-			if(relType==FOLLOWS){
-				if(SuchThat::getIsFollowsResult(firstRel->getData(),secondRel->getData())){
-					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
-				}
-			}
-			if(relType==FOLLOWST){
-				if(SuchThat::getIsFollowsStarResult(firstRel->getData(),secondRel->getData())){
-					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
-				}
-			}
-			if(relType==MODIFIES){
-				if(SuchThat::getIsModifiesResult(STATEMENT,firstRel->getData(),secondRel->getData())){
-					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
-				}
-			}
-			if(relType==USES){
-				if(SuchThat::getIsUsesResult(STATEMENT,firstRel->getData(),secondRel->getData())){
-					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
-				}
-			}
-
-		}
-		//first is known ,second is unknown
-		if((firstRel->getType()!=QUERYVAR&&firstRel->getType()!=ANY)&&(secondRel->getType()==QUERYVAR||secondRel->getType()==ANY)){
-			//check if the unknown is from qrVarTable
-			TYPE secondType;
-			if(secondRel->getType()==QUERYVAR){
-				QUERYTABLE::iterator itr;
-				itr = qrTable->find(secondRel->getData());
-				secondType = itr->second;
-			}else{
-				secondType = secondRel->getType();
-			}
-
-			//parent, narrow down second
-			if(relType == PARENT){
-
-				tmpList = SuchThat::getParentResult(secondType,firstRel->getData(),0);
-				iterateAndStore(relList, tmpList);
-			}
-			//parent*, narrow down second
-
-			if(relType == PARENTST){
-				tmpList = SuchThat::getParentStarResult(secondType,firstRel->getData(),0);
-				iterateAndStore(relList, tmpList);
-			}
-			//follow, narrow down second
-
-			if(relType==FOLLOWS){
-				tmpList = SuchThat::getFollowsResult(secondType,firstRel->getData(),0);
-				iterateAndStore(relList, tmpList);
-			}
-			//follow* narrow down
-
-			if(relType==FOLLOWST){
-				tmpList = SuchThat::getFollowsStarResult(secondType,firstRel->getData(),0);
-				iterateAndStore(relList, tmpList);
-			}
-			//modifies, no need to narrow down
-
-			if(relType==MODIFIES){
-				//cout<<"First Rel: "<< firstRel->getType();
-				//cout<<"First Data: "<<firstRel->getData();
-				tmpList = SuchThat::getModifiesResult(firstRel->getType(),firstRel->getData(),0);
-				iterateAndStore(relList, tmpList);
-			}
-			//uses, now need to narrow down
-			if(relType==USES){
-				tmpList = SuchThat::getUsesResult(firstRel->getType(),firstRel->getData(),0);
-				iterateAndStore(relList, tmpList);
-			}
-			//	RELATION_LIST::iterator itr;
-		}
-		//first is unknown, second is known
-		if((firstRel->getType()==QUERYVAR||firstRel->getType()==ANY)&&(secondRel->getType()!=QUERYVAR&&secondRel->getType()!=ANY)){
-			TYPE firstType;
-			if(firstRel->getType()==QUERYVAR){
-				QUERYTABLE::iterator itr;
-				itr = qrTable->find(firstRel->getData());
-				firstType = itr->second;
-			}else{
-				firstType = firstRel->getType();
-			}
-
-			//parent, narrow down
-			if(relType == PARENT){
-				tmpList = SuchThat::getParentResult(firstType,0,secondRel->getData());
-				iterateAndStore(relList, tmpList);
-			}
-			//parent*, narrow down
-			if(relType == PARENTST){
-				tmpList = SuchThat::getParentStarResult(firstType,0,secondRel->getData());
-				iterateAndStore(relList, tmpList);
-			}
-			//follow, narrow down
-			if(relType==FOLLOWS){ 
-				//cout<<"firstType: "<< firstType;
-				//cout<<"secondRel:"<< secondRel->getType();
-				//cout<<"secondIndexL: "<<secondRel->getData();
-
-				tmpList = SuchThat::getFollowsResult(firstType,0,secondRel->getData());
-				iterateAndStore(relList, tmpList);
-
-				//relList = &SuchThat::getFollowsResult(firstType,0,secondRel->getData());
-				//cout << "\nsize: " << relList->size() << "\n";
-			}
-			//follow* narrow down
-			if(relType==FOLLOWST){
-				//	cout<<"First Rel: "<< firstType;
-				//		cout<<"Second Data: "<<secondRel->getData();
-				tmpList = SuchThat::getFollowsStarResult(firstType,0,secondRel->getData());
-				iterateAndStore(relList, tmpList);
-			}
-			//modifies, narrow down
-			if(relType==MODIFIES){
-			//	cout<<"First Rel: "<< firstType;
-			//	cout<<"Second Data: "<<secondRel->getData();
-				tmpList = SuchThat::getModifiesResult(firstType,0,secondRel->getData());
-				iterateAndStore(relList, tmpList);
-			}
-			//uses, narrow down
-			if(relType==USES){
-				//cout<<"First Rel: "<< firstType;
-				//cout<<"Second Data: "<<secondRel->getData();
-				tmpList = SuchThat::getUsesResult(firstType,0,secondRel->getData());
-				iterateAndStore(relList, tmpList);
-			}
-		}
-		//first is unkown, second is unknown
-		// Seok Min: I think you make a copy-paste mistake here previously. let me know if i interpret wrongly
-		// Original line: ...(secondRel->getType()!=QUERYVAR..
-		if((firstRel->getType()==QUERYVAR||firstRel->getType()==ANY)
-			&&(secondRel->getType()==QUERYVAR||secondRel->getType()==ANY)){
-				//convert to the correct type first
-				TYPE firstType;
-				if(firstRel->getType()==QUERYVAR){
-					QUERYTABLE::iterator itr;
-					itr = qrTable->find(firstRel->getData());
-					firstType = itr->second;
-
-				//	cout<<"firstType: "<<firstType;
-				}else{
-					firstType = firstRel->getType();
-				}
-
-				TYPE secondType;
-				if(secondRel->getType()==QUERYVAR){
-					QUERYTABLE::iterator itr;
-					itr = qrTable->find(secondRel->getData());
-					secondType = itr->second;
-				//	cout<<"secondType: "<<secondType;
-				}else{
-					secondType = secondRel->getType();
-				}
-
-				//parent, narrow down both
-				if(relType == PARENT){
-					//cout<<"firstType: "<<firstType;
-					//cout<<"secondType: "<<secondType;
-					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
-						relList = NULL;
-					}else{
-						tmpList = SuchThat::getParentResult(firstType,secondType);
-						iterateAndStore(relList, tmpList);
-					}
-				}
-				//parent*, narrow down both
-				if(relType == PARENTST){
-					//cout<<"firstType: "<<firstType;
-					//cout<<"secondType: "<<secondType;
-					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&(firstRel->getData()==secondRel->getData())){
-						relList = NULL;
-					}else{
-						tmpList = SuchThat::getParentStarResult(firstType,secondType);
-						iterateAndStore(relList, tmpList);
-					}
-
-				}
-				//follow, narrow down both
-				if(relType==FOLLOWS){
-					//cout<<"firstType: "<<firstType;
-					//cout<<"secondType: "<<secondType;
-					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
-						relList = NULL;
-					}else{
-						tmpList = SuchThat::getFollowsResult(firstType,secondType);
-						iterateAndStore(relList, tmpList);
-					}
-
-				}
-				//follow* narrow down both
-				if(relType==FOLLOWST){
-					//cout<<"firstType: "<<firstType;
-					//cout<<"secondType: "<<secondType;
-					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
-						relList = NULL;
-					}else{
-						tmpList = SuchThat::getFollowsStarResult(firstType,secondType);
-						iterateAndStore(relList, tmpList);
-					}
-
-				}
-				//modifies, narrow down first rel
-				if(relType==MODIFIES){
-					//cout<<"firstType: "<<firstType;
-					//cout<<"secondType: "<<secondType;
-
-					tmpList = SuchThat::getModifiesResult(firstType,0,0);
-					iterateAndStore(relList, tmpList);
-				}
-				//uses, narrow down first rel
-				if(relType==USES){
-					tmpList = SuchThat::getUsesResult(firstType,0,0);
-					iterateAndStore(relList, tmpList);
-				}
-		}
-
-		//increment the currentNode pointer
-		currentNode = currentNode->getRightSibling();
-
-	}
-
-		//cout<<relList;
-		return relList;
-	
-}
-INDEX_LIST* QueryEvaluator::patternRel(QTREE* patternTree){
-
-	QTREE * qrVarNode = patternTree->getFirstDescendant();
-	TYPE qrVarType;
-	qrVarType = qrTable->find(qrVarNode->getData())->second;
-
-	//cout<<"qrVarType: "<<qrVarType;
-	//cout<<"qrVarIndex: "<<qrVarNode->getData();
-
-	QTREE * firstNode; 
-	QTREE * secondNode; 
-	INDEX_LIST* patternList = new INDEX_LIST;
-
-	if(qrVarType==ASSIGNMENT){
-		firstNode = qrVarNode->getFirstDescendant();
-		secondNode = firstNode->getRightSibling();
-		//pattern (v,...)
-		if(firstNode->getType()==QUERYVAR){
-			//get pattern a(_,...)
-			if(secondNode->getType()==ANY){
-			//	cout<<firstNode->getData();
-				patternList = patProcessor.getPatternStmt(ASSIGNMENT,NULL,NULL);
-			}else{
-				patternList = patProcessor.getPatternStmt(ASSIGNMENT,NULL,secondNode);
-			}
-			//get all v with the pattern "..."
-			if(patternList!=NULL){
-				INDEX_LIST* temList;
-				temList = new INDEX_LIST;
-
-				INDEX_LIST::iterator itr;
-				for(itr=patternList->begin();itr!=patternList->end();itr++){
-					MODIFIES_LIST modList = pkb->getModifies(ASSIGNMENT,*itr,NULL);
-					pair<int,int> modPair = *modList.begin();
-
-					int varIndex = modPair.second;
-				//	cout<<"varIndex: "<<varIndex;
-					temList->push_back(varIndex);
-				}
-				//replace patternList with temList
-				if(temList->size()>0){
-					patternList = temList;
-				}else{
-					patternList = NULL;
-				}
-			}
-
-
-		}else{
-		//pattern("x",..)
-		if(firstNode->getType()==VARIABLE){
-			if(secondNode->getType()==ANY){
-			//	cout<<firstNode->getData();
-				patternList = patProcessor.getPatternStmt(ASSIGNMENT,firstNode->getData(),NULL);
-			}else{
-				patternList = patProcessor.getPatternStmt(ASSIGNMENT,firstNode->getData(),secondNode);
-			}
-		}else{//pattern(_,...)
-			if(secondNode->getType()==ANY){
-				
-				patternList = patProcessor.getPatternStmt(ASSIGNMENT,NULL,NULL);
-			}else{
-				patternList = patProcessor.getPatternStmt(ASSIGNMENT,NULL,secondNode);
-			}
-
-		}
-		
-		}
-	}
-	if(qrVarType==WHILE){
-		firstNode = qrVarNode->getFirstDescendant();
-		if(firstNode->getType()==VARIABLE){
-			patternList = patProcessor.getPatternStmt(WHILE,firstNode->getData(),NULL);
-		}else{
-			patternList = patProcessor.getPatternStmt(WHILE,NULL,NULL);
-		}
-	}
-
-	//if((*patternList).size()>0)
-	return patternList;
-
-	//return NULL;
-
-}
-
-INDEX_LIST* QueryEvaluator::patternNode(QTREE* patternTree){
-
-	QTREE * qrVarNode = patternTree->getFirstDescendant();
-	TYPE qrVarType;
-	qrVarType = qrTable->find(qrVarNode->getData())->second;
-
-	//cout<<"qrVarType: "<<qrVarType;
-	//cout<<"qrVarIndex: "<<qrVarNode->getData();
-
-	QTREE * firstNode; 
-	QTREE * secondNode; 
-	INDEX_LIST* patternList = new INDEX_LIST;
-
-	if(qrVarType==ASSIGNMENT){
-		firstNode = qrVarNode->getFirstDescendant();
-		secondNode = firstNode->getRightSibling();
-		
-		//pattern("x",..)
-		if(firstNode->getType()==VARIABLE){
-			if(secondNode->getType()==ANY){
-			//	cout<<firstNode->getData();
-				patternList = patProcessor.getPatternStmt(ASSIGNMENT,firstNode->getData(),NULL);
-			}else{
-				patternList = patProcessor.getPatternStmt(ASSIGNMENT,firstNode->getData(),secondNode);
-			}
-		}else{//pattern(_,...)
-			if(secondNode->getType()==ANY){
-				
-				patternList = patProcessor.getPatternStmt(ASSIGNMENT,NULL,NULL);
-			}else{
-				patternList = patProcessor.getPatternStmt(ASSIGNMENT,NULL,secondNode);
-			}
-
-		}
-		
-		
-	}
-	if(qrVarType==WHILE){
-		firstNode = qrVarNode->getFirstDescendant();
-		if(firstNode->getType()==VARIABLE){
-			patternList = patProcessor.getPatternStmt(WHILE,firstNode->getData(),NULL);
-		}else{
-			patternList = patProcessor.getPatternStmt(WHILE,NULL,NULL);
-		}
-	}
-
-	//if((*patternList).size()>0)
-	return patternList;
-
-	//return NULL;
-
-}
-
-*/
