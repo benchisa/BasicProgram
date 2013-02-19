@@ -99,7 +99,7 @@ QUERY SampleQueries::sampleQuery15 = "assign a; while w;select a such that Follo
 QUERY SampleQueries::sampleQuery16 = "while w; constant c;select <w,c> with w.stmt#=c.value;";
 QUERY SampleQueries::sampleQuery17 = "stmt s; select s;";
 QUERY SampleQueries::sampleQuery18 = "assign a; select a;";
-QUERY SampleQueries::sampleQuery19 = "stmt s1,s2; select s2 such that Parent (s1,s2);";
+QUERY SampleQueries::sampleQuery19 = "procedure p;select BOOLEAN with p.procName = \"procedure\";";
 QUERY SampleQueries::sampleQuery20 = "stmt s1; select s1 such that Parent (s1,_);";
 QUERY SampleQueries::sampleQuery21 = "while w; select w such that Parent (_,_);";
 QUERY SampleQueries::sampleQuery22 = "stmt s1; select s1 such that Parent (_,s1);";
