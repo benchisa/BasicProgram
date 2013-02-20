@@ -49,7 +49,7 @@ list<string> QueryFormatter::formatString(RAWDATA * data) {
 			}else if(type == VARIABLE) {
 				VAR_NAME varName = pkb->getVarName(value);
 				result.push_back(varName);
-			}else if(type==PROCEDURE||type==CALL) { 
+			}else if(type==PROCEDURE) { 
 				Procedure * proc = pkb->getProcedure(value);
 				result.push_back(proc->getProcName());
 			}else {
