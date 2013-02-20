@@ -101,7 +101,7 @@ bool Parser::program(){
 		return false;	
 	}
 	else{
-		pkb->getProcedure(curProcIndex)->setEndProgLine(curProgLine);
+		pkb->getProcedure(curProcIndex)->setEndProgLine(prevProgLine);
 		//cout << "At Procedure: " << pkb->getProcedure(curProcIndex)->getProcName() << "\n";
 		//cout << "Prev Token: " << prevToken << "\n";
 		//cout << "Current Token: " << curToken << "\n";
