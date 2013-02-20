@@ -13,9 +13,6 @@ public:
 	
 	bool isStatementTypeOf(TYPE typeName, STATEMENT_NUM stmtNum);
 	DATA_LIST * getAllCallStmts();
-	DATA_LIST * getAllAssigns();
-	DATA_LIST * getAllWhiles();
-	DATA_LIST * getAllIfs();
 	DATA_LIST * getAllConstants();
 	DATA_LIST * getStmtListOf(TYPE nodeType);
 

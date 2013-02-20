@@ -1096,25 +1096,6 @@ void  DesignExtractor::computeCallStar(PROC_NAME caller, PROC_NAME callee,list<s
 	}
 }
 
-DATA_LIST * DesignExtractor::getAllAssigns(){
-	DATA_LIST * returnList;
-	returnList = new DATA_LIST;
-
-	int stmtNo = pkb->getMaxStatementNum();
-	for(int i=1; i<=stmtNo;i++){
-		AST_LIST * stmtTree;
-		stmtTree = pkb->getASTBy(i);
-		AST_LIST::iterator itr;
-
-		for(itr=stmtTree->begin();itr!=stmtTree->end();itr++){
-			if((*itr)->getRootType()==ASSIGNMENT){
-				returnList->push_back(i);
-			} 
-		}
-	}
-
-	return returnList;
-}
 DATA_LIST * DesignExtractor::getAllConstants(){
 	DATA_LIST * returnList = new DATA_LIST();
 
@@ -1124,44 +1105,7 @@ DATA_LIST * DesignExtractor::getAllConstants(){
 	}
 	return returnList;
 }
-DATA_LIST * DesignExtractor::getAllWhiles(){
-	DATA_LIST * returnList;
-	returnList = new DATA_LIST;
 
-	int stmtNo = pkb->getMaxStatementNum();
-	for(int i=1; i<=stmtNo;i++){
-		AST_LIST * stmtTree;
-		stmtTree = pkb->getASTBy(i);
-		AST_LIST::iterator itr;
-
-		for(itr=stmtTree->begin();itr!=stmtTree->end();itr++){
-			if((*itr)->getRootType()==WHILE){
-				returnList->push_back(i);
-			} 
-		}
-	}
-
-	return returnList;
-}
-DATA_LIST * DesignExtractor::getAllIfs(){
-	DATA_LIST * returnList;
-	returnList = new DATA_LIST;
-
-	int stmtNo = pkb->getMaxStatementNum();
-	for(int i=1; i<=stmtNo;i++){
-		AST_LIST * stmtTree;
-		stmtTree = pkb->getASTBy(i);
-		AST_LIST::iterator itr;
-
-		for(itr=stmtTree->begin();itr!=stmtTree->end();itr++){
-			if((*itr)->getRootType()==IF){
-				returnList->push_back(i);
-			} 
-		}
-	}
-
-	return returnList;
-}
 DATA_LIST * DesignExtractor::getAllCallStmts(){
 	DATA_LIST * returnList;
 	returnList = new DATA_LIST;
@@ -1199,13 +1143,13 @@ DATA_LIST * DesignExtractor::getStmtListOf(TYPE nodeType){
 		}
 		break;
 	case ASSIGNMENT:
-		returnList = DesignExtractor::getAllAssigns();
+		returnList = pkb->getAllAssigns();
 		break;
 	case WHILE:
-		returnList = DesignExtractor::getAllWhiles();
+		returnList = pkb->getAllWhiles();
 		break;
 	case IF:
-		returnList = DesignExtractor::getAllIfs();
+		returnList = pkb->getAllIfs();
 		break;
 	case CALL:
 		returnList = DesignExtractor::getAllCallStmts();

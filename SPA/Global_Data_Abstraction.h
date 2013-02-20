@@ -99,3 +99,7 @@ struct ProgLine
 	int statementNum;
 };
 
+struct ASSIGNENTRY{
+	int varIndex;
+	string prefixTree;
+};

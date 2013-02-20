@@ -741,7 +741,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 		case ASSIGNMENT:
 			{
 				DATA_LIST * assignList;
-				assignList = extractor->getAllAssigns();
+				assignList = pkb->getAllAssigns();
 				if(assignList != NULL){
 					DATA_LIST::iterator itr;
 					for(itr = assignList->begin();itr!=assignList->end();itr++){
@@ -753,7 +753,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 		case WHILE:
 			{
 				DATA_LIST * whileList;
-				whileList = extractor->getAllWhiles();
+				whileList = pkb->getAllWhiles();
 				if(whileList != NULL){
 					DATA_LIST::iterator itr;
 					for(itr = whileList->begin();itr!=whileList->end();itr++){
@@ -765,7 +765,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 		case IF:
 			{
 				DATA_LIST * ifList;
-				ifList = extractor->getAllIfs();
+				ifList = pkb->getAllIfs();
 				if(ifList != NULL){
 					DATA_LIST::iterator itr;
 					for(itr = ifList->begin();itr!=ifList->end();itr++){
@@ -797,7 +797,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 		case STATEMENT:
 			{
 				DATA_LIST * assignList;
-				assignList = extractor->getAllAssigns();
+				assignList = pkb->getAllAssigns();
 				if(assignList != NULL){
 					DATA_LIST::iterator itr;
 					for(itr = assignList->begin();itr!=assignList->end();itr++){
@@ -831,7 +831,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 		case ASSIGNMENT:
 			{
 				DATA_LIST * assignList;
-				assignList = extractor->getAllAssigns();
+				assignList = pkb->getAllAssigns();
 				if(assignList != NULL){
 					DATA_LIST::iterator itr;
 					for(itr = assignList->begin();itr!=assignList->end();itr++){
@@ -851,7 +851,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 		case STATEMENT:
 			{
 				DATA_LIST * whileList;
-				whileList = extractor->getAllWhiles();
+				whileList = pkb->getAllWhiles();
 				if(whileList != NULL){
 					DATA_LIST::iterator itr;
 					for(itr = whileList->begin();itr!=whileList->end();itr++){
@@ -886,7 +886,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 		case WHILE:
 			{
 				DATA_LIST * whileList;
-				whileList = extractor->getAllWhiles();
+				whileList = pkb->getAllWhiles();
 				if(whileList != NULL){
 					DATA_LIST::iterator itr;
 					for(itr = whileList->begin();itr!=whileList->end();itr++){
@@ -906,7 +906,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 		case STATEMENT:
 			{
 				DATA_LIST * ifList;
-				ifList = extractor->getAllIfs();
+				ifList = pkb->getAllIfs();
 				if(ifList != NULL){
 					DATA_LIST::iterator itr;
 					for(itr = ifList->begin();itr!=ifList->end();itr++){
@@ -941,7 +941,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 		case ASSIGNMENT:
 			{
 				DATA_LIST * ifList;
-				ifList = extractor->getAllIfs();
+				ifList = pkb->getAllIfs();
 				if(ifList != NULL){
 					DATA_LIST::iterator itr;
 					for(itr = ifList->begin();itr!=ifList->end();itr++){
