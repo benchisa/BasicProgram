@@ -14,7 +14,7 @@ public:
 	~Pattern(void);
 	//static PKB *pkb;
 	//void setPKB(PKB* p);
-	RELATION_LIST* evaluatePattern(QUERYTABLE * qtable);
+	RELATION_LIST* evaluatePattern(QTREE * qtree, QUERYTABLE * qtable, QUERYPARAM * param);
 private:
 	PKB *p;
 	AST *ast;

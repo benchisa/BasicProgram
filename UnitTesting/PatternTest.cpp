@@ -37,7 +37,7 @@ void PatternTest::testEvaluatePattern(){
 	p->startParse();
 	CPPUNIT_ASSERT_EQUAL_MESSAGE("PKB did not parse successfully", 1, p->startParse());
 		pkb = p->getPKB();
-	QUERYTABLE *qTable = new QUERYTABLE();
+	//QUERYTABLE *qTable = new QUERYTABLE();
 	/*rootAST = pkb->createAST(ASSIGNMENT,1,1,-1);
 	pkb->setRootAST(rootAST);
 	
@@ -53,7 +53,7 @@ void PatternTest::testEvaluatePattern(){
 	qTable->insert(pair<INDEX, TYPE>(2, QUERYVAR));
 	qTable->insert(pair<INDEX, TYPE>(1, VARIABLE));*/
 	QueryPreprocessor *pre = new QueryPreprocessor(pkb);
-	QUERY q = "assign a; Select a such that pattern a(y, \"x\")";
+	QUERY q = "assign a; variable v; Select a such that pattern a(\"y\", \"x+y\");";
 	pre->setQuery(q);
 	pre->preProcess();
 	//CPPUNIT_ASSERT_EQUAL(true, pre->preProcess());*/
@@ -63,7 +63,7 @@ void PatternTest::testEvaluatePattern(){
 	//result->push_back(pair<STATEMENT_NUM, VAR_INDEX>(1, 3));
 	//pre->getParamTable();
 	//test ASSIGNMENT
-	RELATION_LIST * list = myPattern->evaluatePattern(pre->getQVarTable());
+	RELATION_LIST * list = myPattern->evaluatePattern(pre->getQTree(), pre->getQVarTable(), pre->getParamTable());
 	CPPUNIT_ASSERT_EQUAL_MESSAGE("list does not match", list, result);
 	
 }
