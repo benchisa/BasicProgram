@@ -600,17 +600,11 @@ MODIFIES_LIST DesignExtractor::getModifiesResult(TYPE type, int arg1, VAR_INDEX 
 //			iterateAndStore(result, tmpLst, v1);
 		}*/
 
-		if(result.size() == 0){
-			tmpLst = pkb->getModifies(ASSIGNMENT, 0, 0);
-			iterateAndStore(result, tmpLst, v1);
-		}
+		tmpLst = pkb->getModifies(ASSIGNMENT, 0, 0);
+		iterateAndStore(result, tmpLst, v1);
 
-
-		if(result.size() == 0){
-			tmpLst = pkb->getModifies(IF, 0, 0);
-			iterateAndStore(result, tmpLst, v1);
-		}
-
+		tmpLst = pkb->getModifies(IF, 0, 0);
+		iterateAndStore(result, tmpLst, v1);
 	}
 
 
@@ -655,6 +649,12 @@ USES_LIST DesignExtractor::getUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 	AST_LIST *astLst;
 	AST_LIST::iterator astItr;
 	TYPE getStatementType;
+	
+	/*cout << "asdasd\n";
+	cout << "TYPE: " << type << "\n";
+	cout << "ARG1: " << arg1 << "\n";
+	cout << "v1: " << v1 << "\n";
+	*/
 
 	//Uses(w, "b")
 	if((type == WHILE  || type == ASSIGNMENT || type == IF)){
@@ -680,20 +680,17 @@ USES_LIST DesignExtractor::getUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 		tmpLst = pkb->getUses(WHILE, 0, 0);
 		iterateAndStore(result, tmpLst, v1);
 		
-		if(result.size() == 0){
 			tmpLst = pkb->getUses(IF, 0, 0);
 			iterateAndStore(result, tmpLst, v1);
-		}
+		
 /* @Zhang Xi: I think no need to check proc here, but need to check CALL
 		if(tmpLst.size() == 0){
 			tmpLst = pkb->getUses(PROCEDURE, 0, 0);
 			iterateAndStore(result, tmpLst, v1);
 		}
 */
-		if(result.size() == 0){		
 			tmpLst = pkb->getUses(ASSIGNMENT, 0, 0);
 			iterateAndStore(result, tmpLst, v1);
-		}
 	}
 
 	//cout << "SIZE OF RESULT (USES): " << result.size() << "\n";
@@ -707,6 +704,10 @@ bool DesignExtractor::getIsUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 	AST_LIST *astLst;
 	AST_LIST::iterator astItr;
 	TYPE getStatementType;
+	/*cout << "asdasd\n";
+	cout << "TYPE: " << type << "\n";
+	cout << "ARG1: " << arg1 << "\n";
+	cout << "v1: " << v1 << "\n";*/
 
 	if(type == STATEMENT && arg1 != 0 && v1 != 0){
 		// Find the type of first argument
@@ -882,12 +883,10 @@ FOLLOWS_LIST DesignExtractor::getFollowsStar(STATEMENT_NUM stmt1, STATEMENT_NUM 
 		{
 			if (stmt1!=NULL && stmt2==NULL)
 			{
-
 				finalResult.push_back(make_pair(stmt1, *itr));
 			}
 			else if (stmt2!=NULL && stmt1==NULL)
 			{
-
 				finalResult.push_back(make_pair(*itr, stmt2));
 			}
 		}
