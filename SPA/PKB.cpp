@@ -15,6 +15,9 @@ PKB::PKB(void){
 	callTable=new CallTable;
 	constantTable=new ConstantTable;
 	progLineTable=new unordered_multimap<PROG_LINE, STATEMENT_NUM>;
+	whileTable = new WhileTable;
+	ifTable = new IfTable;
+	assignTable = new AssignTable;
 }
 PKB::~PKB(void){
 	delete rootAST;
@@ -409,4 +412,51 @@ PROG_LINE PKB::getMaxProgLine()
 STATEMENT_NUM PKB::getMaxStatementNum()
 {	unordered_multimap<int,int>::reverse_iterator r_itr=progLineTable->rbegin();
 	return r_itr->second;
+}
+
+//while table
+SIZE PKB::getWhileTableSize(){
+	return whileTable->getSize();
+}
+void PKB::insertWhile(STATEMENT_NUM stmtNo,INDEX ctrVarIndex){
+	whileTable->insert(stmtNo,ctrVarIndex);
+}
+INDEX PKB::getWhileCtrVar(STATEMENT_NUM stmtNo){
+	return whileTable->getCtrVar(stmtNo);
+}
+DATA_LIST * PKB::getWhiles(INDEX ctrVarIndex){
+	return whileTable->getWhiles(ctrVarIndex);
+}
+DATA_LIST * PKB::getAllWhiles(){
+	return whileTable->getAllWhiles();
+}
+//if table
+SIZE PKB::getIfSize(){
+	return ifTable->getSize();
+}
+void PKB::insertIf(STATEMENT_NUM stmtNo,INDEX ctrVarIndex){
+	ifTable->insert(stmtNo,ctrVarIndex);
+}
+INDEX PKB::getIfCtrVar(STATEMENT_NUM stmtNo){
+	return ifTable->getCtrVar(stmtNo);
+}
+DATA_LIST * PKB::getIfs(INDEX ctrVarIndex){
+	return ifTable->getIfs(ctrVarIndex);
+}
+DATA_LIST * PKB::getAllIfs(){
+	return ifTable->getAllIfs();
+}
+
+//assign table
+SIZE PKB::getAssignSize(){
+	return assignTable->getSize();
+}
+void PKB::insertAssign(STATEMENT_NUM stmtNo,INDEX ctrVarIndex,string prefixTree){
+	assignTable->insert(stmtNo,ctrVarIndex,prefixTree);
+}
+ASSIGNENTRY PKB::getAssignEntry(STATEMENT_NUM stmtNo){
+	return assignTable->getAssignEntry(stmtNo);
+}
+DATA_LIST * PKB::getAllAssigns(){
+	return assignTable->getAllAssigns();
 }

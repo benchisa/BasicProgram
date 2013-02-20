@@ -132,6 +132,15 @@
     <ClCompile Include="LinkedDataTable.cpp">
       <Filter>Source Files\PQL</Filter>
     </ClCompile>
+    <ClCompile Include="AssignTable.cpp">
+      <Filter>Source Files\PKB</Filter>
+    </ClCompile>
+    <ClCompile Include="IfTable.cpp">
+      <Filter>Source Files\PKB</Filter>
+    </ClCompile>
+    <ClCompile Include="WhileTable.cpp">
+      <Filter>Source Files\PKB</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Follows.h">
@@ -223,6 +232,15 @@
     </ClInclude>
     <ClInclude Include="LinkedDataTable.h">
       <Filter>Header Files\PQL</Filter>
+    </ClInclude>
+    <ClInclude Include="AssignTable.h">
+      <Filter>Header Files\PKB</Filter>
+    </ClInclude>
+    <ClInclude Include="IfTable.h">
+      <Filter>Header Files\PKB</Filter>
+    </ClInclude>
+    <ClInclude Include="WhileTable.h">
+      <Filter>Header Files\PKB</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

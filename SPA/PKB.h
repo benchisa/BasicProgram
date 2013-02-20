@@ -13,8 +13,9 @@
 #include "CallTable.h"
 #include "ConstantTable.h"
 #include <hash_map>
-
-
+#include "WhileTable.h"
+#include "IfTable.h"
+#include "AssignTable.h"
 
 class PKB
 {	
@@ -126,6 +127,26 @@ class PKB
 		//Other functions
 		PROG_LINE getMaxProgLine();
 		STATEMENT_NUM getMaxStatementNum();
+
+		//while table
+		SIZE getWhileTableSize();
+		void insertWhile(STATEMENT_NUM stmtNo,INDEX ctrVarIndex);
+		INDEX getWhileCtrVar(STATEMENT_NUM stmtNo);
+		DATA_LIST * getWhiles(INDEX ctrVarIndex);
+		DATA_LIST * getAllWhiles();
+
+		//if table
+		SIZE getIfSize();
+		void insertIf(STATEMENT_NUM stmtNo,INDEX ctrVarIndex);
+		INDEX getIfCtrVar(STATEMENT_NUM stmtNo);
+		DATA_LIST * getIfs(INDEX ctrVarIndex);
+		DATA_LIST * getAllIfs();
+
+		//assign table
+		SIZE getAssignSize();
+		void insertAssign(STATEMENT_NUM stmtNo,INDEX ctrVarIndex,string prefixTree);
+		ASSIGNENTRY getAssignEntry(STATEMENT_NUM stmtNo);
+		DATA_LIST * getAllAssigns();
 private:
 		//Abastract Data Types stored in PKB
 		AST* rootAST;
@@ -141,7 +162,9 @@ private:
 		ConstantTable* constantTable;
 		hash_map<STATEMENT_NUM,AST_LIST>* treeMap;
 		unordered_multimap<PROG_LINE, STATEMENT_NUM> * progLineTable;
-
+		WhileTable * whileTable;
+		IfTable * ifTable;
+		AssignTable * assignTable;
 	
 		
 };
