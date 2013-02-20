@@ -304,6 +304,9 @@ bool Parser::stmt_if(){
 			pkb->insertUses(PROCEDURE, curProcIndex, curVarIndex);
 			pkb->insertUses(IF, stmt_num, curVarIndex);
 
+			// insert to if table
+			pkb->insertIf(stmt_num, curVarIndex);
+
 			leftNode = pkb->createAST(VARIABLE, prevProgLine, stmt_num, curVarIndex);
 		
 			if(matchToken("then") && matchToken("{"))
@@ -400,6 +403,9 @@ bool Parser::stmt_while(){
 			pkb->insertUses(PROCEDURE, curProcIndex, curVarIndex);
 			pkb->insertUses(WHILE, stmt_num, curVarIndex);
 
+			// add to while table
+			pkb->insertWhile(stmt_num, curVarIndex);
+
 			leftNode = pkb->createAST(VARIABLE, prevProgLine,stmt_num, curVarIndex);
 
 			if(!pkb->setFirstDescendant(whileNode, leftNode))
@@ -451,6 +457,7 @@ bool Parser::stmt_while(){
 bool Parser::stmt_assign(){
 	//assign: var_name '=' expr
 	stmt_num++;
+	exp = ""; //clear
 	
 	//cout << "assign: " << stmt_num << "\n";
 	AST *assignNode = pkb->createAST(ASSIGNMENT, curProgLine, stmt_num, -1);
@@ -494,6 +501,9 @@ bool Parser::stmt_assign(){
 					pkb->setAncestor(rightNode, assignNode);
 					pkb->addSibling(leftNode, rightNode);
 					curAST = assignNode;
+
+					// add to assigntable
+					pkb->insertAssign(stmt_num, curVarIndex, DesignExtractor::convertExprToPrefix(exp));
 					return true;	
 				}
 				else{
@@ -522,6 +532,8 @@ bool Parser::expr(){
 	{
 		if(matchToken("+"))
 		{
+			exp += prevToken;
+			
 			if(operators.empty()) 
 				operators.push(pkb->createAST(PLUS, prevProgLine, stmt_num, -1));
 			else
@@ -548,6 +560,8 @@ bool Parser::expr(){
 		}
 		else if(matchToken("-"))
 		{
+			exp += prevToken;
+			
 			if(operators.empty()) 
 				operators.push(pkb->createAST(MINUS, prevProgLine, stmt_num, -1));
 			else
@@ -589,6 +603,7 @@ bool Parser::term(){
 	{
 		if(matchToken("*"))
 		{
+			exp += prevToken;
 			if(operators.empty())
 				operators.push(pkb->createAST(MULTIPLY, prevProgLine,stmt_num, -1));
 			else
@@ -620,6 +635,7 @@ bool Parser::factor(){
 	// factor: var_name | const_value | "(" expr ")"
 	if(name())
 	{
+		exp += prevToken;
 		curVarIndex = pkb->insertVar(prevToken);
 		pkb->insertUses(PROCEDURE, curProcIndex, curVarIndex);
 		pkb->insertUses(ASSIGNMENT, stmt_num, curVarIndex);
@@ -638,17 +654,20 @@ bool Parser::factor(){
 	}
 	else if(const_value())
 	{
+		exp += prevToken;
 		pkb->insertConst(atoi(prevToken.c_str()));
 		operands.push(pkb->createAST(CONSTANT, prevProgLine,stmt_num, atoi(prevToken.c_str())));
 		return true;
 	}
 	else if(openBracket())
 	{
+		exp += prevToken;
 		operators.push(pkb->createAST(BRACKET,prevProgLine, stmt_num, -1));
 		if(expr())
 		{
 			if(closeBracket())
 			{
+				exp += prevToken;
 				// remove open bracket from operands stack
 				if(!operators.empty()) operators.pop();
 			}

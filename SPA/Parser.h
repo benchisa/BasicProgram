@@ -2,6 +2,7 @@
 #include "Global_Data_Abstraction.h"
 #include "PKB.h"
 #include <stack>
+#include "DesignExtractor.h"
 using namespace std;
 
 class Parser
@@ -50,6 +51,7 @@ private:
 	AST *ast,*curAST, *prevAST;
 	PROC_NAME curProc;
 	PROG_LINE prevProgLine, curProgLine;
+	EXPRESSION exp;
 	//int procLine;
 	
 	bool parse();
