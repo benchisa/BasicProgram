@@ -17,11 +17,13 @@ list<string> QueryFormatter::formatString(RAWDATA * data) {
 
 	//check if the type is boolean (special case)
 	int firstVarIndex = data->at(0).at(0);
+	
 	if(firstVarIndex == -1) {
 		value = data->at(0).at(1);
-		if(value == 1) {
+		if(value == 1) {			
 			result.push_back("true");
-		}else {
+		}else {				
+			cout << "false!" << endl;
 			result.push_back("false");
 		}
 
