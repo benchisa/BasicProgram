@@ -34,7 +34,9 @@ list<string> QueryFormatter::formatString(RAWDATA * data) {
 		//type = data-
 		//type = (data[cols])[0].data;
 		//translates the result eg. Vector[cols][rows]
+		string currentEntry;
 		for(int j = 0; j < data->size(); j++) {
+			string currentValue;
 
 			//find the actul type of current qrVar
 			int varIndex = (data->at(j)).at(0);
@@ -47,17 +49,20 @@ list<string> QueryFormatter::formatString(RAWDATA * data) {
 
 			if(type ==CONSTANT){
 				int constValue = pkb->getConstantValue(value);
-				result.push_back(static_cast<ostringstream*>( &(ostringstream() << constValue) )->str());
+				currentValue = static_cast<ostringstream*>( &(ostringstream() << constValue) )->str();
 			}else if(type == VARIABLE) {
 				VAR_NAME varName = pkb->getVarName(value);
-				result.push_back(varName);
+				currentValue = varName;
 			}else if(type==PROCEDURE) { 
 				Procedure * proc = pkb->getProcedure(value);
-				result.push_back(proc->getProcName());
+				currentValue = proc->getProcName();
 			}else {
-				result.push_back(static_cast<ostringstream*>( &(ostringstream() << value) )->str());
+				currentValue = static_cast<ostringstream*>( &(ostringstream() << value) )->str();
 			}
+			currentEntry.append(currentValue);
+			if(j!=data->size()-1) currentEntry.append(" ");
 		}
+		result.push_back(currentEntry);
 	}
 
 	return result;

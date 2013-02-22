@@ -6,7 +6,6 @@
 QueryEvaluator::QueryEvaluator(PKB* pkb){
 	this->pkb = pkb;
 	extractor = new DesignExtractor(pkb);
-	this->rawData = new RAWDATA();
 }
 QueryEvaluator::~QueryEvaluator(void){
 
@@ -16,6 +15,8 @@ bool QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrPa
 	this->qrTree = qrTree;
 	this->qrTable = qrTable;
 	this->qrParam = qrParam;
+	this->rawData = new RAWDATA();
+
 	bool nonEmptyResult;
 
 	//set the result node
@@ -220,13 +221,16 @@ bool QueryEvaluator::executeSuchThat(IntermediateResultTable * resultTable, QTRE
 	}else{
 		//both relations are known
 		currentResultList = suchThatClause.evaluateSuchThatTree(suchThatTree);
+		firstQrVar =-1;
+		secondQrVar =-1;
 	}
 
 	//there is no result found with all the probes, this relation is not satisfied
 	if(currentResultList==NULL){
 		return false; 
 	}else{
-	//result is found, add into resultTable
+		//result is found, add into resultTable
+		if(firstQrVar==-1&&secondQrVar==-1) return true;
 		return resultTable->joinList(joinAttr, firstQrVar,secondQrVar,currentResultList);
 	}
 }

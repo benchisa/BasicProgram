@@ -29,7 +29,7 @@ FINAL_RESULT PQLController::getQueryResult(QUERY newQuery){
 			queryFormatter->setQrTable(queryProcessor->getQVarTable());
 			//cout << "the formatter is OK" << endl;	
 			returnResult= queryFormatter->formatString(queryEval->getRawResult());	
-			FINAL_RESULT::iterator itr;
+			//FINAL_RESULT::iterator itr;
 			//cout<<"\n Final result is:";
 			//for(itr = returnResult.begin();itr!=returnResult.end();itr++){
 			//	cout<< *itr <<" "  ;
