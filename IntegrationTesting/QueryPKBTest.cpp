@@ -25,13 +25,13 @@ void QueryPKBTest::testSampleInput1(){
 	spa.enterProgram(SampleSimpleSources::sampleSource5);
 	
 
-	FINAL_RESULT result =spa.getQueryResult(SampleQueries::sampleQuery19);
+	FINAL_RESULT result =spa.getQueryResult(SampleQueries::sampleQuery5);
 	FINAL_RESULT::iterator itr;
 
-	//cout<<"\n Final result is:";
-	//for(itr = result.begin();itr!=result.end();itr++){
-	//	cout<< *itr <<" "  ;
-	//}
+	cout<<"\n Final result is:";
+	for(itr = result.begin();itr!=result.end();itr++){
+		cout<< *itr <<", "  ;
+	}
 /*	//create PKB
 	PKB *pkb = SamplePKB::pkb5();
 
