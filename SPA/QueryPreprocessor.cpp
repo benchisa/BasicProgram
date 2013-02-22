@@ -335,6 +335,15 @@ void QueryPreprocessor::setQTree(){
 	}
 	*/
 	
+	for (int i=0; i<clauses.size(); i++){
+		currNode = clauses.at(i);
+		if (currNode!=NULL){
+			arrangeClauseByRel(currNode);
+			clauses.at(i) = NULL;
+		}
+	}
+
+	joinClauses();
 	
 }
 
