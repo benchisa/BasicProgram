@@ -37,7 +37,7 @@ FINAL_RESULT PQLController::getQueryResult(QUERY newQuery){
 
 		}else{
 			//failed to evaluate the result, return nothing
-			returnResult.push_back("");
+			//returnResult.push_back("");
 		}
 
 		//cout << "returnResult: " << returnResult.size() << "\n";
@@ -45,7 +45,7 @@ FINAL_RESULT PQLController::getQueryResult(QUERY newQuery){
 		returnResult.push_back("false");
 		
 	}else if(queryProcessor->getSelectBool()==false){
-		returnResult.push_back("");
+		//returnResult.push_back("");
 	}
 
 	return returnResult;
