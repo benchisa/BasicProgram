@@ -1,9 +1,9 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202-master</name><parsing_time_taken>234.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>148.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" such that with cases">
 <query>
-<id such that with="1" Typed="1" comment="follows* (known,unknown) with" >4</id><querystr><![CDATA[stmt s1,s2;constant c; select s2   such that  Follows* ( 4 , s2 ) with s2.stmt# = c.value ;]]></querystr>
+<id such that with="1" Typed="1" comment="follows* (known,unknown) with" >4</id>

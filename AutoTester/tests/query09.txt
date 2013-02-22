@@ -10,9 +10,9 @@ assign a1,a2;
 Select a1 such that Follows*(a1,a2) pattern a2("i",_"i"_);
 
 5000
-3 - Parent, Typed :: Select boolean if there exists a Uses relationship.
+3 - Parent, Typed :: Select BOOLEAN if there exists a Uses relationship.
 while w;
-Select boolean such that Parent(w,10) pattern w("f",_);
+Select BOOLEAN such that Parent(w,10) pattern w("f",_);
 false
 5000
 4 - Parent*, pattern :: Select statement s if it modifies y when there is while loop has control var k.
@@ -30,9 +30,9 @@ assign a; while w;
 Select w such that Modifies(w,"l") pattern a("y",_"y"_);
 
 2000
-7 - Modifies, pattern :: Select boolean if there exists an assignment modifies variable c and there exists while loop using x as control variable?
+7 - Modifies, pattern :: Select BOOLEAN if there exists an assignment modifies variable c and there exists while loop using x as control variable?
 stmt s; while w;
-Select boolean such that Modifies(s,"c") pattern w("x",_);
+Select BOOLEAN such that Modifies(s,"c") pattern w("x",_);
 true
 2000
 8 - Uses,Pattern :: Which is the assigment modifies c uses e and z?

@@ -23,12 +23,12 @@ Select s1  such that Follows* ( s1 ,9 );
 7 - follows , Typed :: (unknown,unknown) //answer may be inaccurate        
 stmt s1,s2;
 Select s1  such that Follows ( s1 , s2 );
-1,2,3,4,5,6,7,8,9,10,11,12,14,15,20,27,28,29,31,32,34,35,36,39,40,42,43,45,46
+1,2,3,4,5,6,7,8,9,10,11,12,14,15,20,23,27,28,29,31,32,34,35,36,39,40,42,43,45,46
 5000 
 8 - follows* , Typed :: (unknown,unknown) //answer may be inaccurate        
 stmt s1,s2;
 Select s1  such that Follows* ( s1 , s2 );
-1,2,3,4,5,6,7,8,9,10,11,12,14,15,20,27,28,29,31,32,34,35,36,39,40,42,43,45,46    
+1,2,3,4,5,6,7,8,9,10,11,12,14,15,20,23,27,28,29,31,32,34,35,36,39,40,42,43,45,46    
 5000
 9 - follows , Typed :: (unknown,unknown)//answer may be inaccurate        
 stmt s1,s2;
@@ -38,7 +38,7 @@ Select s2  such that Follows ( s1 , s2 );
 10 - follows* , Typed :: (unknown,unknown)//answer may be inaccurate        
 stmt s1,s2;
 Select s2  such that Follows* ( s1 , s2 );
-2,3,4,5,6,7,8,9,20,21,24,28,29,31,32,33,35,36,39,40,41,43,44,46,47         
+2,3,4,5,6,7,8,9,12,14,16,18,19,20,21,24,28,29,31,32,33,35,36,39,40,41,43,44,46,47         
 5000
 11 - follows , Typed :: (unknown,unknown)//answer may be inaccurate        
 stmt s1,s2;

@@ -95,9 +95,9 @@ while w;assign a;
 Select a such that Follows* (w,a);
 9, 13
 5000
-20 - parent*, pattern :: Select boolean if there exists a nested while and has control variable b.
+20 - parent*, pattern :: Select BOOLEAN if there exists a nested while and has control variable b.
 while w;
-Select boolean such that Parent*(_,w) pattern w("b",_);
+Select BOOLEAN such that Parent*(_,w) pattern w("b",_);
 true
 5000
 21 - Uses, pattern :: Select assignment a1 that uses a while assignment a2 modifies i.
@@ -105,24 +105,24 @@ assign a1,a2;
 Select a1 such that Uses(a1,"a") pattern a2("i",_);
 4, 7
 5000
-22 - parent*, Typed :: Select boolean if there exists a Uses relationship.
+22 - parent*, Typed :: Select BOOLEAN if there exists a Uses relationship.
 while w;
 Select w such that Parent*(w,1) pattern w("f",_);
 
 5000
-23 - Modifies, pattern :: Select boolean if there exists an assignment Uses variable y and modifies c?
+23 - Modifies, pattern :: Select BOOLEAN if there exists an assignment Uses variable y and modifies c?
 assign a;
-Select boolean such that Modifies(a,"c") pattern a("c",_"y"_);
+Select BOOLEAN such that Modifies(a,"c") pattern a("c",_"y"_);
 true
 2000
-24 - Modifies, pattern :: Select boolean if there exists an assignment modifies variable d and another asisgnmenent that y =a?
+24 - Modifies, pattern :: Select BOOLEAN if there exists an assignment modifies variable d and another asisgnmenent that y =a?
 assign a1,a2;
-Select boolean such that Modifies(a1,"d") pattern a2("y","a");
+Select BOOLEAN such that Modifies(a1,"d") pattern a2("y","a");
 false
 2000
-25 - Modifies, pattern :: Select boolean if there exists an assignment modifies variable d and another asisgnmenent that uses b?
+25 - Modifies, pattern :: Select BOOLEAN if there exists an assignment modifies variable d and another asisgnmenent that uses b?
 assign a1,a2;
-Select boolean such that Modifies(a1,"d") pattern a2("y",_"b"_);
+Select BOOLEAN such that Modifies(a1,"d") pattern a2("y",_"b"_);
 false
 2000
 26 - Modifeis,Pattern :: Which is the assigment modifies c uses q?

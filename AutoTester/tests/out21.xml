@@ -1,75 +1,66 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202-master</name><parsing_time_taken>116.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>142.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" such that cases">
 <query>
-<id follows="1" Typed="1" comment="(known,unknown)" >3</id><querystr><![CDATA[stmt s1,s2; select s2  such that Follows (4 , s2 );]]></querystr>
+<id follows="1" Typed="1" comment="(known,unknown)" >3</id><querystr><![CDATA[stmt s1,s2; Select s2  such that Follows (4 , s2 );]]></querystr>
 <stuans>5</stuans>
 <correct>5</correct>
-<time_taken>50.000000</time_taken>
+<time_taken>51.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id followsstar="1" Typed="1" comment="(known,unknown)" >4</id><querystr><![CDATA[stmt s1,s2; select s2  such that Follows* (4 , s2 );]]></querystr>
+<id followsstar="1" Typed="1" comment="(known,unknown)" >4</id><querystr><![CDATA[stmt s1,s2; Select s2  such that Follows* (4 , s2 );]]></querystr>
 <stuans>5,6,7,8,9,20,21</stuans>
 <correct>5,6,7,8,9,20,21</correct>
-<time_taken>53.000000</time_taken>
+<time_taken>54.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id follows="1" Typed="1" comment="(unknown,known)" >5</id><querystr><![CDATA[stmt s1,s2; select s1  such that Follows ( s1 ,9 );]]></querystr>
+<id follows="1" Typed="1" comment="(unknown,known)" >5</id><querystr><![CDATA[stmt s1,s2; Select s1  such that Follows ( s1 ,9 );]]></querystr>
 <stuans>8</stuans>
 <correct>8</correct>
-<time_taken>62.000000</time_taken>
+<time_taken>73.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id followsstar="1" Typed="1" comment="(unknown,known)" >6</id><querystr><![CDATA[stmt s1,s2; select s1  such that Follows* ( s1 ,9 );]]></querystr>
+<id followsstar="1" Typed="1" comment="(unknown,known)" >6</id><querystr><![CDATA[stmt s1,s2; Select s1  such that Follows* ( s1 ,9 );]]></querystr>
 <stuans>8,7,6,5,4,3,2,1</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>60.000000</time_taken>
+<time_taken>73.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id follows="1" Typed="1" comment="(unknown,unknown) //answer may be inaccurate" >7</id><querystr><![CDATA[stmt s1,s2; select s1  such that Follows ( s1 , s2 );]]></querystr>
+<id follows="1" Typed="1" comment="(unknown,unknown) //answer may be inaccurate" >7</id><querystr><![CDATA[stmt s1,s2; Select s1  such that Follows ( s1 , s2 );]]></querystr>
 <stuans>1,2,11,3,4,5,6,7,8,12,15,14,10,9,20,23,27,28,29,31,32,34,35,36,39,40,42,43,45,46</stuans>
-<correct>1,2,3,4,5,6,7,8,9,10,11,12,14,15,20,27,28,29,31,32,34,35,36,39,40,42,43,45,46</correct>
-<time_taken>72.000000</time_taken>
-<failed>
-<missing></missing>
-<additional>23</additional>
-<summary>
-<expected>29</expected>
-<matched>29</matched>
-<missing>0</missing>
-<additional>1</additional>
-</summary>
-</failed>
+<correct>1,2,3,4,5,6,7,8,9,10,11,12,14,15,20,23,27,28,29,31,32,34,35,36,39,40,42,43,45,46</correct>
+<time_taken>73.000000</time_taken>
+<passed/>
 </query>
 <query>
-<id followsstar="1" Typed="1" comment="(unknown,unknown) //answer may be inaccurate" >8</id><querystr><![CDATA[stmt s1,s2; select s1  such that Follows* ( s1 , s2 );]]></querystr>
+<id followsstar="1" Typed="1" comment="(unknown,unknown) //answer may be inaccurate" >8</id><querystr><![CDATA[stmt s1,s2; Select s1  such that Follows* ( s1 , s2 );]]></querystr>
 <stuans></stuans>
-<correct>1,2,3,4,5,6,7,8,9,10,11,12,14,15,20,27,28,29,31,32,34,35,36,39,40,42,43,45,46</correct>
+<correct>1,2,3,4,5,6,7,8,9,10,11,12,14,15,20,23,27,28,29,31,32,34,35,36,39,40,42,43,45,46</correct>
 <time_taken>58.000000</time_taken>
 <failed>
-<missing>1,10,11,12,14,15,2,20,27,28,29,3,31,32,34,35,36,39,4,40,42,43,45,46,5,6,7,8,9</missing>
+<missing>1,10,11,12,14,15,2,20,23,27,28,29,3,31,32,34,35,36,39,4,40,42,43,45,46,5,6,7,8,9</missing>
 <additional></additional>
 <summary>
-<expected>29</expected>
+<expected>30</expected>
 <matched>0</matched>
-<missing>29</missing>
+<missing>30</missing>
 <additional>1</additional>
 </summary>
 </failed>
 </query>
 <query>
-<id follows="1" Typed="1" comment="(unknown,unknown)//answer may be inaccurate" >9</id><querystr><![CDATA[stmt s1,s2; select s2  such that Follows ( s1 , s2 );]]></querystr>
+<id follows="1" Typed="1" comment="(unknown,unknown)//answer may be inaccurate" >9</id><querystr><![CDATA[stmt s1,s2; Select s2  such that Follows ( s1 , s2 );]]></querystr>
 <stuans>2,3,12,4,5,6,7,8,9,14,16,18,19,20,21,24,28,29,31,32,33,35,36,39,40,41,43,44,46,47</stuans>
 <correct>2,3,4,5,6,7,8,9,20,21,24,28,29,31,32,33,35,36,39,40,41,43,44,46,47</correct>
-<time_taken>61.000000</time_taken>
+<time_taken>62.000000</time_taken>
 <failed>
 <missing></missing>
 <additional>12,14,16,18,19</additional>
@@ -82,26 +73,26 @@
 </failed>
 </query>
 <query>
-<id followsstar="1" Typed="1" comment="(unknown,unknown)//answer may be inaccurate" >10</id><querystr><![CDATA[stmt s1,s2; select s2  such that Follows* ( s1 , s2 );]]></querystr>
+<id followsstar="1" Typed="1" comment="(unknown,unknown)//answer may be inaccurate" >10</id><querystr><![CDATA[stmt s1,s2; Select s2  such that Follows* ( s1 , s2 );]]></querystr>
 <stuans></stuans>
-<correct>2,3,4,5,6,7,8,9,20,21,24,28,29,31,32,33,35,36,39,40,41,43,44,46,47</correct>
-<time_taken>63.000000</time_taken>
+<correct>2,3,4,5,6,7,8,9,12,14,16,18,19,20,21,24,28,29,31,32,33,35,36,39,40,41,43,44,46,47</correct>
+<time_taken>64.000000</time_taken>
 <failed>
-<missing>2,20,21,24,28,29,3,31,32,33,35,36,39,4,40,41,43,44,46,47,5,6,7,8,9</missing>
+<missing>12,14,16,18,19,2,20,21,24,28,29,3,31,32,33,35,36,39,4,40,41,43,44,46,47,5,6,7,8,9</missing>
 <additional></additional>
 <summary>
-<expected>25</expected>
+<expected>30</expected>
 <matched>0</matched>
-<missing>25</missing>
+<missing>30</missing>
 <additional>1</additional>
 </summary>
 </failed>
 </query>
 <query>
-<id follows="1" Typed="1" comment="(unknown,unknown)//answer may be inaccurate" >11</id><querystr><![CDATA[stmt s1,s2; select s1  such that Follows ( s1 , s1 );]]></querystr>
+<id follows="1" Typed="1" comment="(unknown,unknown)//answer may be inaccurate" >11</id><querystr><![CDATA[stmt s1,s2; Select s1  such that Follows ( s1 , s1 );]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>60.000000</time_taken>
+<time_taken>57.000000</time_taken>
 <failed>
 <missing></missing>
 <additional></additional>
@@ -114,10 +105,10 @@
 </failed>
 </query>
 <query>
-<id followsstar="1" Typed="1" comment="(unknown,unknown)//answer may be inaccurate" >12</id><querystr><![CDATA[stmt s1,s2; select s1  such that Follows* ( s1 , s1 );]]></querystr>
+<id followsstar="1" Typed="1" comment="(unknown,unknown)//answer may be inaccurate" >12</id><querystr><![CDATA[stmt s1,s2; Select s1  such that Follows* ( s1 , s1 );]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>58.000000</time_taken>
+<time_taken>61.000000</time_taken>
 <failed>
 <missing></missing>
 <additional></additional>
@@ -130,45 +121,45 @@
 </failed>
 </query>
 <query>
-<id parent="1" Typed="1" comment="(known,unknown)" >15</id><querystr><![CDATA[stmt s1,s2; select s2  such that Parent (9 , s2 );]]></querystr>
+<id parent="1" Typed="1" comment="(known,unknown)" >15</id><querystr><![CDATA[stmt s1,s2; Select s2  such that Parent (9 , s2 );]]></querystr>
 <stuans>10,19</stuans>
 <correct>10,19</correct>
-<time_taken>60.000000</time_taken>
+<time_taken>79.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id parentstar="1" Typed="1" comment="(known,unknown)//answer may be inaccurate" >16</id><querystr><![CDATA[stmt s1,s2; select s2  such that Parent* (9 , s2 );]]></querystr>
+<id parentstar="1" Typed="1" comment="(known,unknown)//answer may be inaccurate" >16</id><querystr><![CDATA[stmt s1,s2; Select s2  such that Parent* (9 , s2 );]]></querystr>
 <stuans>10,11,12,13,14,15,16,17,18,19</stuans>
 <correct>10,11,12,13,14,15,16,17,18,19</correct>
-<time_taken>65.000000</time_taken>
+<time_taken>61.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id parent="1" Typed="1" comment="(unknown,known)//answer may be inaccurate" >17</id><querystr><![CDATA[stmt s1,s2; select s1  such that Parent ( s1 ,14 );]]></querystr>
+<id parent="1" Typed="1" comment="(unknown,known)//answer may be inaccurate" >17</id><querystr><![CDATA[stmt s1,s2; Select s1  such that Parent ( s1 ,14 );]]></querystr>
 <stuans>10</stuans>
 <correct>10</correct>
-<time_taken>63.000000</time_taken>
+<time_taken>61.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id parentstar="1" Typed="1" comment="(unknown,known)//answer may be inaccurate" >18</id><querystr><![CDATA[stmt s1,s2; select s1  such that Parent* ( s1 ,14 );]]></querystr>
+<id parentstar="1" Typed="1" comment="(unknown,known)//answer may be inaccurate" >18</id><querystr><![CDATA[stmt s1,s2; Select s1  such that Parent* ( s1 ,14 );]]></querystr>
 <stuans>10,9</stuans>
 <correct>9,10</correct>
-<time_taken>64.000000</time_taken>
+<time_taken>74.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id parent="1" Typed="1" comment="(unknown,unknown)//answer may be inaccurate" >19</id><querystr><![CDATA[stmt s1,s2; select s1  such that Parent ( s1 , s2 );]]></querystr>
-<stuans>9,9,10,10,10,10,12,14,14,16,21,21,21,24,24,29,36,36,44,44,44</stuans>
+<id parent="1" Typed="1" comment="(unknown,unknown)//answer may be inaccurate" >19</id><querystr><![CDATA[stmt s1,s2; Select s1  such that Parent ( s1 , s2 );]]></querystr>
+<stuans>9,10,12,14,16,21,24,29,36,44</stuans>
 <correct>9,10,12,14,16,21,24,29,36,44</correct>
-<time_taken>70.000000</time_taken>
+<time_taken>91.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id parentstar="1" Typed="1" comment="(unknown,unknown)//answer may be inaccurate" >20</id><querystr><![CDATA[stmt s1,s2; select s1  such that Parent* ( s1 , s2 );]]></querystr>
+<id parentstar="1" Typed="1" comment="(unknown,unknown)//answer may be inaccurate" >20</id><querystr><![CDATA[stmt s1,s2; Select s1  such that Parent* ( s1 , s2 );]]></querystr>
 <stuans></stuans>
 <correct>9,10,12,14,16,21,24,29,36,44</correct>
-<time_taken>64.000000</time_taken>
+<time_taken>73.000000</time_taken>
 <failed>
 <missing>10,12,14,16,21,24,29,36,44,9</missing>
 <additional></additional>
@@ -181,14 +172,14 @@
 </failed>
 </query>
 <query>
-<id parent="1" Typed="1" comment="(unknown,unknown)" >21</id><querystr><![CDATA[stmt s1,s2; select s2  such that Parent ( s1 , s2 );]]></querystr>
+<id parent="1" Typed="1" comment="(unknown,unknown)" >21</id><querystr><![CDATA[stmt s1,s2; Select s2  such that Parent ( s1 , s2 );]]></querystr>
 <stuans>10,19,11,12,14,18,13,15,16,17,22,23,24,25,26,30,37,38,45,46,47</stuans>
 <correct>10,11,12,13,14,15,16,17,18,19,22,23,24,25,26,30,37,38,45,46,47</correct>
-<time_taken>70.000000</time_taken>
+<time_taken>69.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id parentstar="1" Typed="1" comment="(unknown,unknown)" >22</id><querystr><![CDATA[stmt s1,s2; select s2  such that Parent* ( s1 , s2 );]]></querystr>
+<id parentstar="1" Typed="1" comment="(unknown,unknown)" >22</id><querystr><![CDATA[stmt s1,s2; Select s2  such that Parent* ( s1 , s2 );]]></querystr>
 <stuans></stuans>
 <correct>10,11,12,13,14,15,16,17,18,19,22,23,24,25,26,30,37,38,45,46,47</correct>
 <time_taken>67.000000</time_taken>
@@ -204,10 +195,10 @@
 </failed>
 </query>
 <query>
-<id parent="1" Typed="1" comment="(unknown,unknown)" >23</id><querystr><![CDATA[stmt s1,s2; select s1  such that Parent ( s1 , s1 );]]></querystr>
+<id parent="1" Typed="1" comment="(unknown,unknown)" >23</id><querystr><![CDATA[stmt s1,s2; Select s1  such that Parent ( s1 , s1 );]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>69.000000</time_taken>
+<time_taken>64.000000</time_taken>
 <failed>
 <missing></missing>
 <additional></additional>
@@ -220,10 +211,10 @@
 </failed>
 </query>
 <query>
-<id parentstar="1" Typed="1" comment="(unknown,unknown)" >24</id><querystr><![CDATA[stmt s1,s2; select s1  such that Parent* ( s1 , s1 );]]></querystr>
+<id parentstar="1" Typed="1" comment="(unknown,unknown)" >24</id><querystr><![CDATA[stmt s1,s2; Select s1  such that Parent* ( s1 , s1 );]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>70.000000</time_taken>
+<time_taken>67.000000</time_taken>
 <failed>
 <missing></missing>
 <additional></additional>
@@ -236,10 +227,10 @@
 </failed>
 </query>
 <query>
-<id uses="1" Typed="1" comment="(unknown_statement,known_variable)" >73</id><querystr><![CDATA[stmt s1; select s1  such that Uses ( s1 , "apple" );]]></querystr>
+<id uses="1" Typed="1" comment="(unknown_statement,known_variable)" >73</id><querystr><![CDATA[stmt s1; Select s1  such that Uses ( s1 , "apple" );]]></querystr>
 <stuans>9</stuans>
 <correct>2,3,9,19,21,22,40</correct>
-<time_taken>75.000000</time_taken>
+<time_taken>76.000000</time_taken>
 <failed>
 <missing>19,2,21,22,3,40</missing>
 <additional></additional>
@@ -252,68 +243,59 @@
 </failed>
 </query>
 <query>
-<id modifies="1" Typed="1" comment="(unknown_statement,known_variable)" >74</id><querystr><![CDATA[stmt s1; select s1  such that Modifies ( s1 , "apple" );]]></querystr>
-<stuans></stuans>
-<correct>1,20,32,39</correct>
-<time_taken>68.000000</time_taken>
-<failed>
-<missing>1,20,32,39</missing>
-<additional></additional>
-<summary>
-<expected>4</expected>
-<matched>0</matched>
-<missing>4</missing>
-<additional>0</additional>
-</summary>
-</failed>
-</query>
-<query>
-<id uses="1" Typed="1" comment="(unknown_assignment,known_variable)" >75</id><querystr><![CDATA[assign a1;  select a1  such that Uses ( a1 , "apple" );]]></querystr>
-<stuans>2,3,19,22,40</stuans>
-<correct>2,3,19,22,40</correct>
-<time_taken>75.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id modifies="1" Typed="1" comment="(unknown_assignment,known_variable)" >76</id><querystr><![CDATA[assign a1;  select a1  such that Modifies ( a1 , "apple" );]]></querystr>
+<id modifies="1" Typed="1" comment="(unknown_statement,known_variable)" >74</id><querystr><![CDATA[stmt s1; Select s1  such that Modifies ( s1 , "apple" );]]></querystr>
 <stuans>1,20,32,39</stuans>
 <correct>1,20,32,39</correct>
 <time_taken>73.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id uses="1" Typed="1" comment="(unknown_while,known_variable)" >77</id><querystr><![CDATA[while w1; select w1  such that Uses ( w1 , "apple" );]]></querystr>
-<stuans>9</stuans>
-<correct>9</correct>
+<id uses="1" Typed="1" comment="(unknown_assignment,known_variable)" >75</id><querystr><![CDATA[assign a1;  Select a1  such that Uses ( a1 , "apple" );]]></querystr>
+<stuans>2,3,19,22,40</stuans>
+<correct>2,3,19,22,40</correct>
 <time_taken>74.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id modifies="1" Typed="1" comment="(unknown_while,known_variable)" >78</id><querystr><![CDATA[while w1; select w1  such that Modifies ( w1 , "apple" );]]></querystr>
+<id modifies="1" Typed="1" comment="(unknown_assignment,known_variable)" >76</id><querystr><![CDATA[assign a1;  Select a1  such that Modifies ( a1 , "apple" );]]></querystr>
+<stuans>1,20,32,39</stuans>
+<correct>1,20,32,39</correct>
+<time_taken>101.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id uses="1" Typed="1" comment="(unknown_while,known_variable)" >77</id><querystr><![CDATA[while w1; Select w1  such that Uses ( w1 , "apple" );]]></querystr>
+<stuans>9</stuans>
+<correct>9</correct>
+<time_taken>91.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id modifies="1" Typed="1" comment="(unknown_while,known_variable)" >78</id><querystr><![CDATA[while w1; Select w1  such that Modifies ( w1 , "apple" );]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id uses="1" Typed="1" comment="(unknown_if,known_variable)" >79</id><querystr><![CDATA[if i1; Select i1  such that Uses ( i1 , "apple" );]]></querystr>
+<stuans>21</stuans>
+<correct>21</correct>
+<time_taken>74.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id modifies="1" Typed="1" comment="(unknown_if,known_variable)" >80</id><querystr><![CDATA[if i1; Select i1  such that Modifies ( i1 , "apple" );]]></querystr>
 <stuans></stuans>
 <correct></correct>
 <time_taken>72.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id uses="1" Typed="1" comment="(unknown_if,known_variable)" >79</id><querystr><![CDATA[if i1; select i1  such that Uses ( i1 , "apple" );]]></querystr>
-<stuans>21</stuans>
-<correct>21</correct>
-<time_taken>73.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id modifies="1" Typed="1" comment="(unknown_if,known_variable)" >80</id><querystr><![CDATA[if i1; select i1  such that Modifies ( i1 , "apple" );]]></querystr>
-<stuans></stuans>
-<correct></correct>
-<time_taken>71.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id uses="1" Typed="1" comment="(unknown_call,known_variable)" >81</id><querystr><![CDATA[call c; select c  such that Uses ( c , "apple" );]]></querystr>
+<id uses="1" Typed="1" comment="(unknown_call,known_variable)" >81</id><querystr><![CDATA[call c; Select c  such that Uses ( c , "apple" );]]></querystr>
 <stuans></stuans>
 <correct>31</correct>
-<time_taken>73.000000</time_taken>
+<time_taken>72.000000</time_taken>
 <failed>
 <missing>31</missing>
 <additional></additional>
@@ -326,10 +308,10 @@
 </failed>
 </query>
 <query>
-<id modifies="1" Typed="1" comment="(unknown_call,known_variable)" >82</id><querystr><![CDATA[call c; select c  such that Modifies ( c , "apple" );]]></querystr>
+<id modifies="1" Typed="1" comment="(unknown_call,known_variable)" >82</id><querystr><![CDATA[call c; Select c  such that Modifies ( c , "apple" );]]></querystr>
 <stuans></stuans>
 <correct>8,31</correct>
-<time_taken>77.000000</time_taken>
+<time_taken>81.000000</time_taken>
 <failed>
 <missing>31,8</missing>
 <additional></additional>
@@ -342,138 +324,12 @@
 </failed>
 </query>
 <query>
-<id uses="1" Typed="1" comment="(unknown_procedure,known_variable)" >83</id><querystr><![CDATA[procedure p; select p  such that Uses ( p , "apple" );]]></querystr>
-<stuans>xylo,zebra</stuans>
+<id uses="1" Typed="1" comment="(unknown_procedure,known_variable)" >83</id><querystr><![CDATA[procedure p; Select p  such that Uses ( p , "apple" );]]></querystr>
+<stuans></stuans>
 <correct>xylo,zebra</correct>
-<time_taken>74.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id modifies="1" Typed="1" comment="(unknown_procedure,known_variable)" >84</id><querystr><![CDATA[procedure p; select p  such that Modifies ( p , "apple" );]]></querystr>
-<stuans>xylo,yello,zebra</stuans>
-<correct>xylo,yello,zebra</correct>
-<time_taken>77.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id uses="1" Typed="1" comment="(known_statement,unknown_variable)" >85</id><querystr><![CDATA[variable v1; select v1  such that Uses (22 , v1 );]]></querystr>
-<stuans></stuans>
-<correct>apple</correct>
-<time_taken>72.000000</time_taken>
+<time_taken>75.000000</time_taken>
 <failed>
-<missing>apple</missing>
-<additional></additional>
-<summary>
-<expected>1</expected>
-<matched>0</matched>
-<missing>1</missing>
-<additional>0</additional>
-</summary>
-</failed>
-</query>
-<query>
-<id modifies="1" Typed="1" comment="(known_statement,unknown_variable)" >86</id><querystr><![CDATA[variable v1; select v1  such that Modifies (22 , v1 );]]></querystr>
-<stuans></stuans>
-<correct>jam</correct>
-<time_taken>80.000000</time_taken>
-<failed>
-<missing>jam</missing>
-<additional></additional>
-<summary>
-<expected>1</expected>
-<matched>0</matched>
-<missing>1</missing>
-<additional>0</additional>
-</summary>
-</failed>
-</query>
-<query>
-<id uses="1" Typed="1" comment="(known_assignment,unknown_variable)" >87</id><querystr><![CDATA[variable v1; select v1  such that Uses (13 , v1 );]]></querystr>
-<stuans></stuans>
-<correct>egg</correct>
-<time_taken>79.000000</time_taken>
-<failed>
-<missing>egg</missing>
-<additional></additional>
-<summary>
-<expected>1</expected>
-<matched>0</matched>
-<missing>1</missing>
-<additional>0</additional>
-</summary>
-</failed>
-</query>
-<query>
-<id modifies="1" Typed="1" comment="(known_assignment,unknown_variable)" >88</id><querystr><![CDATA[variable v1; select v1  such that Modifies (13 , v1 );]]></querystr>
-<stuans></stuans>
-<correct>gummy</correct>
-<time_taken>79.000000</time_taken>
-<failed>
-<missing>gummy</missing>
-<additional></additional>
-<summary>
-<expected>1</expected>
-<matched>0</matched>
-<missing>1</missing>
-<additional>0</additional>
-</summary>
-</failed>
-</query>
-<query>
-<id uses="1" Typed="1" comment="(known_while,unknown_variable)" >89</id><querystr><![CDATA[variable v1; select v1  such that Uses (10 , v1 );]]></querystr>
-<stuans></stuans>
-<correct>egg,donut,fish,innard</correct>
-<time_taken>79.000000</time_taken>
-<failed>
-<missing>donut,egg,fish,innard</missing>
-<additional></additional>
-<summary>
-<expected>4</expected>
-<matched>0</matched>
-<missing>4</missing>
-<additional>0</additional>
-</summary>
-</failed>
-</query>
-<query>
-<id modifies="1" Typed="1" comment="(known_while,unknown_variable)" >90</id><querystr><![CDATA[variable v1; select v1  such that Modifies (10 , v1 );]]></querystr>
-<stuans></stuans>
-<correct>innard,gummy,fish</correct>
-<time_taken>77.000000</time_taken>
-<failed>
-<missing>fish,gummy,innard</missing>
-<additional></additional>
-<summary>
-<expected>3</expected>
-<matched>0</matched>
-<missing>3</missing>
-<additional>0</additional>
-</summary>
-</failed>
-</query>
-<query>
-<id uses="1" Typed="1" comment="(known_if,unknown_variable)" >91</id><querystr><![CDATA[variable v1; select v1  such that Uses (21 , v1 );]]></querystr>
-<stuans></stuans>
-<correct>innard,apple,gummy,egg</correct>
-<time_taken>79.000000</time_taken>
-<failed>
-<missing>apple,egg,gummy,innard</missing>
-<additional></additional>
-<summary>
-<expected>4</expected>
-<matched>0</matched>
-<missing>4</missing>
-<additional>0</additional>
-</summary>
-</failed>
-</query>
-<query>
-<id modifies="1" Typed="1" comment="(known_if,unknown_variable)" >92</id><querystr><![CDATA[variable v1; select v1  such that Modifies (21 , v1 );]]></querystr>
-<stuans></stuans>
-<correct>jam,gummy</correct>
-<time_taken>86.000000</time_taken>
-<failed>
-<missing>gummy,jam</missing>
+<missing>xylo,zebra</missing>
 <additional></additional>
 <summary>
 <expected>2</expected>
@@ -484,10 +340,100 @@
 </failed>
 </query>
 <query>
-<id uses="1" Typed="1" comment="(known_call,unknown_variable)" >93</id><querystr><![CDATA[variable v1; select v1  such that Uses (8 , v1 );]]></querystr>
+<id modifies="1" Typed="1" comment="(unknown_procedure,known_variable)" >84</id><querystr><![CDATA[procedure p; Select p  such that Modifies ( p , "apple" );]]></querystr>
+<stuans></stuans>
+<correct>xylo,yello,zebra</correct>
+<time_taken>78.000000</time_taken>
+<failed>
+<missing>xylo,yello,zebra</missing>
+<additional></additional>
+<summary>
+<expected>3</expected>
+<matched>0</matched>
+<missing>3</missing>
+<additional>0</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id uses="1" Typed="1" comment="(known_statement,unknown_variable)" >85</id><querystr><![CDATA[variable v1; Select v1  such that Uses (22 , v1 );]]></querystr>
+<stuans>apple</stuans>
+<correct>apple</correct>
+<time_taken>96.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id modifies="1" Typed="1" comment="(known_statement,unknown_variable)" >86</id><querystr><![CDATA[variable v1; Select v1  such that Modifies (22 , v1 );]]></querystr>
+<stuans>jam</stuans>
+<correct>jam</correct>
+<time_taken>76.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id uses="1" Typed="1" comment="(known_assignment,unknown_variable)" >87</id><querystr><![CDATA[variable v1; Select v1  such that Uses (13 , v1 );]]></querystr>
+<stuans>egg</stuans>
+<correct>egg</correct>
+<time_taken>73.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id modifies="1" Typed="1" comment="(known_assignment,unknown_variable)" >88</id><querystr><![CDATA[variable v1; Select v1  such that Modifies (13 , v1 );]]></querystr>
+<stuans>gummy</stuans>
+<correct>gummy</correct>
+<time_taken>75.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id uses="1" Typed="1" comment="(known_while,unknown_variable)" >89</id><querystr><![CDATA[variable v1; Select v1  such that Uses (10 , v1 );]]></querystr>
+<stuans>donut,egg,fish,innard,gummy</stuans>
+<correct>egg,donut,fish,innard</correct>
+<time_taken>78.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>gummy</additional>
+<summary>
+<expected>4</expected>
+<matched>4</matched>
+<missing>0</missing>
+<additional>1</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id modifies="1" Typed="1" comment="(known_while,unknown_variable)" >90</id><querystr><![CDATA[variable v1; Select v1  such that Modifies (10 , v1 );]]></querystr>
+<stuans>fish,innard,gummy,ham</stuans>
+<correct>innard,gummy,fish</correct>
+<time_taken>80.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>ham</additional>
+<summary>
+<expected>3</expected>
+<matched>3</matched>
+<missing>0</missing>
+<additional>1</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id uses="1" Typed="1" comment="(known_if,unknown_variable)" >91</id><querystr><![CDATA[variable v1; Select v1  such that Uses (21 , v1 );]]></querystr>
+<stuans>apple,egg,innard,gummy</stuans>
+<correct>innard,apple,gummy,egg</correct>
+<time_taken>80.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id modifies="1" Typed="1" comment="(known_if,unknown_variable)" >92</id><querystr><![CDATA[variable v1; Select v1  such that Modifies (21 , v1 );]]></querystr>
+<stuans>gummy,jam</stuans>
+<correct>jam,gummy</correct>
+<time_taken>82.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id uses="1" Typed="1" comment="(known_call,unknown_variable)" >93</id><querystr><![CDATA[variable v1; Select v1  such that Uses (8 , v1 );]]></querystr>
 <stuans></stuans>
 <correct>leek,kimchi,egg,meat,banana,apple,ingredients,a,b,c</correct>
-<time_taken>84.000000</time_taken>
+<time_taken>87.000000</time_taken>
 <failed>
 <missing>a,apple,b,banana,c,egg,ingredients,kimchi,leek,meat</missing>
 <additional></additional>
@@ -500,10 +446,10 @@
 </failed>
 </query>
 <query>
-<id modifies="1" Typed="1" comment="(known_call,unknown_variable)" >94</id><querystr><![CDATA[variable v1; select v1  such that Modifies (8 , v1 );]]></querystr>
+<id modifies="1" Typed="1" comment="(known_call,unknown_variable)" >94</id><querystr><![CDATA[variable v1; Select v1  such that Modifies (8 , v1 );]]></querystr>
 <stuans></stuans>
 <correct>kimchi,leek,apple,jam,meat,banana,carrot,ingredients,a,b,c</correct>
-<time_taken>96.000000</time_taken>
+<time_taken>80.000000</time_taken>
 <failed>
 <missing>a,apple,b,banana,c,carrot,ingredients,jam,kimchi,leek,meat</missing>
 <additional></additional>
@@ -516,116 +462,116 @@
 </failed>
 </query>
 <query>
-<id uses="1" Typed="1" comment="(known_procedure,unknown_variable)" >95</id><querystr><![CDATA[variable v1; select v1  such that Uses ( "xylo" , v1 );]]></querystr>
-<stuans>false</stuans>
+<id uses="1" Typed="1" comment="(known_procedure,unknown_variable)" >95</id><querystr><![CDATA[variable v1; Select v1  such that Uses ( "xylo" , v1 );]]></querystr>
+<stuans></stuans>
 <correct>apple,carrot,egg,donut,fish,gummy,leek,kimchi,meat,banana,ingredients,a,b,c</correct>
-<time_taken>86.000000</time_taken>
+<time_taken>87.000000</time_taken>
 <failed>
 <missing>a,apple,b,banana,c,carrot,donut,egg,fish,gummy,ingredients,kimchi,leek,meat</missing>
-<additional>false</additional>
+<additional></additional>
 <summary>
 <expected>14</expected>
 <matched>0</matched>
 <missing>14</missing>
-<additional>1</additional>
+<additional>0</additional>
 </summary>
 </failed>
 </query>
 <query>
-<id modifies="1" Typed="1" comment="(known_procedure,unknown_variable)" >96</id><querystr><![CDATA[variable v1; select v1  such that Modifies ( "xylo" , v1 );]]></querystr>
-<stuans>false</stuans>
+<id modifies="1" Typed="1" comment="(known_procedure,unknown_variable)" >96</id><querystr><![CDATA[variable v1; Select v1  such that Modifies ( "xylo" , v1 );]]></querystr>
+<stuans></stuans>
 <correct>apple,banana,carrot,donut,egg,fish,innard,gummy,ham,jam,kimchi,leek,meat,ingredients,a,b,c</correct>
-<time_taken>89.000000</time_taken>
+<time_taken>90.000000</time_taken>
 <failed>
 <missing>a,apple,b,banana,c,carrot,donut,egg,fish,gummy,ham,ingredients,innard,jam,kimchi,leek,meat</missing>
-<additional>false</additional>
+<additional></additional>
 <summary>
 <expected>17</expected>
 <matched>0</matched>
 <missing>17</missing>
-<additional>1</additional>
+<additional>0</additional>
 </summary>
 </failed>
 </query>
 <query>
-<id uses="1" Typed="1" comment="(unknown_statement,unknown_variable)" >97</id><querystr><![CDATA[stmt s1; variable v1; select s1  such that Uses ( s1 , v1 );]]></querystr>
-<stuans>9</stuans>
+<id uses="1" Typed="1" comment="(unknown_statement,unknown_variable)" >97</id><querystr><![CDATA[stmt s1; variable v1; Select s1  such that Uses ( s1 , v1 );]]></querystr>
+<stuans>9,10,12,14,16,29,44</stuans>
 <correct>2,3,4,7,8,9,10,12,13,14,16,17,18,19,21,22,23,24,29,30,31,32,33,35,36,37,38,40,41,43,44,45,46,47</correct>
-<time_taken>90.000000</time_taken>
+<time_taken>93.000000</time_taken>
 <failed>
-<missing>10,12,13,14,16,17,18,19,2,21,22,23,24,29,3,30,31,32,33,35,36,37,38,4,40,41,43,44,45,46,47,7,8</missing>
+<missing>13,17,18,19,2,21,22,23,24,3,30,31,32,33,35,36,37,38,4,40,41,43,45,46,47,7,8</missing>
 <additional></additional>
 <summary>
 <expected>34</expected>
-<matched>1</matched>
-<missing>33</missing>
+<matched>7</matched>
+<missing>27</missing>
 <additional>0</additional>
 </summary>
 </failed>
 </query>
 <query>
-<id modifies="1" Typed="1" comment="(unknown_statement,unknown_variable)" >98</id><querystr><![CDATA[stmt s1; variable v1; select v1  such that Modifies ( s1 , v1 );]]></querystr>
-<stuans>fish</stuans>
+<id modifies="1" Typed="1" comment="(unknown_statement,unknown_variable)" >98</id><querystr><![CDATA[stmt s1; variable v1; Select v1  such that Modifies ( s1 , v1 );]]></querystr>
+<stuans>fish,innard,gummy,ham,kimchi,a,b,c</stuans>
 <correct>apple,banana,carrot,dunut,egg,fish,gummy,ham,innard,jam,kimchi,leek,meat,ingredients,a,b,c</correct>
-<time_taken>93.000000</time_taken>
+<time_taken>97.000000</time_taken>
 <failed>
-<missing>a,apple,b,banana,c,carrot,dunut,egg,gummy,ham,ingredients,innard,jam,kimchi,leek,meat</missing>
+<missing>apple,banana,carrot,dunut,egg,ingredients,jam,leek,meat</missing>
 <additional></additional>
 <summary>
 <expected>17</expected>
-<matched>1</matched>
-<missing>16</missing>
+<matched>8</matched>
+<missing>9</missing>
 <additional>0</additional>
 </summary>
 </failed>
 </query>
 <query>
-<id uses="1" Typed="1" comment="(unknown_assignment,unknown_variable)" >99</id><querystr><![CDATA[assign a1; variable v1; select v1  such that Uses ( a1 , v1 );]]></querystr>
-<stuans>apple,apple,carrot,egg,egg,innard,gummy,apple,apple,gummy,kimchi,kimchi,egg,meat,banana,banana,apple,ingredients,a,b,c</stuans>
+<id uses="1" Typed="1" comment="(unknown_assignment,unknown_variable)" >99</id><querystr><![CDATA[assign a1; variable v1; Select v1  such that Uses ( a1 , v1 );]]></querystr>
+<stuans>apple,carrot,egg,innard,gummy,kimchi,meat,banana,ingredients,a,b,c</stuans>
 <correct>apple,carrot,egg,innard,gummy,kimchi,meat,banana,ingredients,a,b,c</correct>
+<time_taken>91.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id modifies="1" Typed="1" comment="(unknown_assignment,unknown_variable)" >100</id><querystr><![CDATA[assign a1; variable v1; Select a1  such that Modifies ( a1 , v1 );]]></querystr>
+<stuans>1,2,3,4,5,6,7,11,13,15,17,18,19,20,22,23,25,26,27,28,30,32,33,34,35,37,38,39,40,42,43,45,46,47</stuans>
+<correct>1,2,3,4,5,6,7,11,13,15,17,18,19,20,22,23,25,26,27,28,30,32,33,34,35,37,38,39,40,42,43,45,46,47</correct>
+<time_taken>101.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id uses="1" Typed="1" comment="(unknown_while,unknown_variable)" >101</id><querystr><![CDATA[while w1; variable v1; Select v1  such that Uses ( w1 , v1 );]]></querystr>
+<stuans>apple,donut,egg,fish,innard,gummy,kimchi,leek,ingredients,a,b,c</stuans>
+<correct>apple,egg,donut,fish,innard,gummy,kimchi,ingredients,leek,a,b,c</correct>
 <time_taken>97.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id modifies="1" Typed="1" comment="(unknown_assignment,unknown_variable)" >100</id><querystr><![CDATA[assign a1; variable v1; select a1  such that Modifies ( a1 , v1 );]]></querystr>
-<stuans>1,2,3,4,5,6,7,11,13,15,17,18,19,20,22,23,25,26,27,28,30,32,33,34,35,37,38,39,40,42,43,45,46,47</stuans>
-<correct>1,2,3,4,5,6,7,11,13,15,17,18,19,20,22,23,25,26,27,28,30,32,33,34,35,37,38,39,40,42,43,45,46,47</correct>
-<time_taken>102.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id uses="1" Typed="1" comment="(unknown_while,unknown_variable)" >101</id><querystr><![CDATA[while w1; variable v1; select v1  such that Uses ( w1 , v1 );]]></querystr>
-<stuans>apple,donut,egg,fish,innard,gummy,donut,egg,fish,innard,gummy,donut,egg,fish,innard,innard,kimchi,leek,ingredients,a,b,c</stuans>
-<correct>apple,egg,donut,fish,innard,gummy,kimchi,ingredients,leek,a,b,c</correct>
-<time_taken>95.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id modifies="1" Typed="1" comment="(unknown_while,unknown_variable)" >102</id><querystr><![CDATA[while w1; variable v1; select w1  such that Modifies ( w1 , v1 );]]></querystr>
-<stuans>9,9,9,9,10,10,10,10,12,14,14,16,29,44,44,44</stuans>
+<id modifies="1" Typed="1" comment="(unknown_while,unknown_variable)" >102</id><querystr><![CDATA[while w1; variable v1; Select w1  such that Modifies ( w1 , v1 );]]></querystr>
+<stuans>9,10,12,14,16,29,44</stuans>
 <correct>9,10,12,14,16,29,44</correct>
-<time_taken>100.000000</time_taken>
+<time_taken>97.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id uses="1" Typed="1" comment="(unknown_if,unknown_variable)" >103</id><querystr><![CDATA[if i1; variable v1; select i1  such that Uses ( i1 , v1 );]]></querystr>
-<stuans>21,21,21,21,24,36,36</stuans>
+<id uses="1" Typed="1" comment="(unknown_if,unknown_variable)" >103</id><querystr><![CDATA[if i1; variable v1; Select i1  such that Uses ( i1 , v1 );]]></querystr>
+<stuans>21,24,36</stuans>
 <correct>21,24,36</correct>
-<time_taken>98.000000</time_taken>
+<time_taken>89.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id modifies="1" Typed="1" comment="(unknown_if,unknown_variable)" >104</id><querystr><![CDATA[if i1; variable v1; select v1  such that Modifies ( i1 , v1 );]]></querystr>
-<stuans>gummy,jam,gummy,carrot</stuans>
+<id modifies="1" Typed="1" comment="(unknown_if,unknown_variable)" >104</id><querystr><![CDATA[if i1; variable v1; Select v1  such that Modifies ( i1 , v1 );]]></querystr>
+<stuans>gummy,jam,carrot</stuans>
 <correct>jam,gummy,carrot</correct>
-<time_taken>95.000000</time_taken>
+<time_taken>93.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id uses="1" Typed="1" comment="(unknown_call,unknown_variable)" >105</id><querystr><![CDATA[call c; variable v1; select c  such that Uses ( c , v1 );]]></querystr>
+<id uses="1" Typed="1" comment="(unknown_call,unknown_variable)" >105</id><querystr><![CDATA[call c; variable v1; Select c  such that Uses ( c , v1 );]]></querystr>
 <stuans></stuans>
 <correct>8,31,41</correct>
-<time_taken>95.000000</time_taken>
+<time_taken>90.000000</time_taken>
 <failed>
 <missing>31,41,8</missing>
 <additional></additional>
@@ -638,10 +584,10 @@
 </failed>
 </query>
 <query>
-<id modifies="1" Typed="1" comment="(unknown_call,unknown_variable)" >106</id><querystr><![CDATA[call c; variable v1; select v1  such that Modifies ( c , v1 );]]></querystr>
+<id modifies="1" Typed="1" comment="(unknown_call,unknown_variable)" >106</id><querystr><![CDATA[call c; variable v1; Select v1  such that Modifies ( c , v1 );]]></querystr>
 <stuans></stuans>
 <correct>kimchi,leek,apple,jam,meat,banana,carrot,ingredients,a,b,c</correct>
-<time_taken>95.000000</time_taken>
+<time_taken>91.000000</time_taken>
 <failed>
 <missing>a,apple,b,banana,c,carrot,ingredients,jam,kimchi,leek,meat</missing>
 <additional></additional>
@@ -654,18 +600,36 @@
 </failed>
 </query>
 <query>
-<id uses="1" Typed="1" comment="(unknown_procedure,unknown_variable)" >107</id><querystr><![CDATA[procedure p1; variable v1; select p1  such that Uses ( p1 , v1 );]]></querystr>
-<stuans>xylo,xylo,xylo,xylo,xylo,xylo,xylo,yello,yello,yello,zebra,zebra,zebra,extra,extra,extra,extra</stuans>
+<id uses="1" Typed="1" comment="(unknown_procedure,unknown_variable)" >107</id><querystr><![CDATA[procedure p1; variable v1; Select p1  such that Uses ( p1 , v1 );]]></querystr>
+<stuans></stuans>
 <correct>xylo,yello,zebra,extra</correct>
-<time_taken>96.000000</time_taken>
-<passed/>
+<time_taken>94.000000</time_taken>
+<failed>
+<missing>extra,xylo,yello,zebra</missing>
+<additional></additional>
+<summary>
+<expected>4</expected>
+<matched>0</matched>
+<missing>4</missing>
+<additional>1</additional>
+</summary>
+</failed>
 </query>
 <query>
-<id modifies="1" Typed="1" comment="(unknown_procedure,unknown_variable)" >108</id><querystr><![CDATA[procedure p1; variable v1; select v1  such that Modifies ( p1 , v1 );]]></querystr>
-<stuans>apple,banana,carrot,donut,egg,fish,innard,gummy,ham,jam,apple,jam,kimchi,leek,apple,banana,carrot,kimchi,meat,ingredients,a,b,c</stuans>
+<id modifies="1" Typed="1" comment="(unknown_procedure,unknown_variable)" >108</id><querystr><![CDATA[procedure p1; variable v1; Select v1  such that Modifies ( p1 , v1 );]]></querystr>
+<stuans></stuans>
 <correct>apple,banana,carrot,donut,egg,fish,gummy,ham,innard,jam,kimchi,leek,meat,ingredients,a,b,c</correct>
-<time_taken>103.000000</time_taken>
-<passed/>
+<time_taken>98.000000</time_taken>
+<failed>
+<missing>a,apple,b,banana,c,carrot,donut,egg,fish,gummy,ham,ingredients,innard,jam,kimchi,leek,meat</missing>
+<additional></additional>
+<summary>
+<expected>17</expected>
+<matched>0</matched>
+<missing>17</missing>
+<additional>1</additional>
+</summary>
+</failed>
 </query>
 </category>
 </queries>
