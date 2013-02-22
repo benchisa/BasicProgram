@@ -226,7 +226,7 @@ bool QueryEvaluator::executeSuchThat(IntermediateResultTable * resultTable, QTRE
 	}
 
 	//there is no result found with all the probes, this relation is not satisfied
-	if(currentResultList==NULL){
+	if(currentResultList==NULL||currentResultList->size()<1){
 		return false; 
 	}else{
 		//result is found, add into resultTable
@@ -334,13 +334,16 @@ bool QueryEvaluator::executeWith(IntermediateResultTable * resultTable,QTREE* wi
 	}else{
 		//both relations are known
 		currentResultList = withClause.evaluateWithTree(withTree);
+		firstQrVar==-1;
+		secondQrVar==-1;
 	}
 
 	//there is no result found with all the probes, this relation is not satisfied
-	if(currentResultList==NULL){
+	if(currentResultList==NULL||currentResultList->size()<1){
 		return false; 
 	}else{
 	//result is found, add into resultTable
+		if(firstQrVar==-1&&secondQrVar==-1) return true;
 		return resultTable->joinList(joinAttr, firstQrVar,secondQrVar,currentResultList);
 	}
 }
