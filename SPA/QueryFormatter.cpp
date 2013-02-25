@@ -47,10 +47,7 @@ FINAL_RESULT QueryFormatter::formatString(RAWDATA * data) {
 			//get the data of curren qrVar
 			value = (data->at(j)).at(i);
 
-			if(type ==CONSTANT){
-				int constValue = pkb->getConstantValue(value);
-				currentValue = static_cast<ostringstream*>( &(ostringstream() << constValue) )->str();
-			}else if(type == VARIABLE) {
+			if(type == VARIABLE) {
 				VAR_NAME varName = pkb->getVarName(value);
 				currentValue = varName;
 			}else if(type==PROCEDURE) { 

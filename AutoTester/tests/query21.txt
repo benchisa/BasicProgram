@@ -33,7 +33,7 @@ Select s1  such that Follows* ( s1 , s2 );
 9 - follows , Typed :: (unknown,unknown)//answer may be inaccurate        
 stmt s1,s2;
 Select s2  such that Follows ( s1 , s2 );
-2,3,4,5,6,7,8,9,20,21,24,28,29,31,32,33,35,36,39,40,41,43,44,46,47          
+2,3,4,5,6,7,8,9,12,14,16,18,19,20,21,24,28,29,31,32,33,35,36,39,40,41,43,44,46,47          
 5000
 10 - follows* , Typed :: (unknown,unknown)//answer may be inaccurate        
 stmt s1,s2;
@@ -143,7 +143,7 @@ Select i1  such that Modifies ( i1 , "apple" );
 81 - uses , Typed :: (unknown_call,known_variable)
 call c;
 Select c  such that Uses ( c , "apple" );
-31
+8,31
 5000
 82 - modifies , Typed :: (unknown_call,known_variable)
 call c;
@@ -228,7 +228,7 @@ Select s1  such that Uses ( s1 , v1 );
 98 - modifies , Typed :: (unknown_statement,unknown_variable)
 stmt s1; variable v1;
 Select v1  such that Modifies ( s1 , v1 );
-apple,banana,carrot,dunut,egg,fish,gummy,ham,innard,jam,kimchi,leek,meat,ingredients,a,b,c
+apple,banana,carrot,donut,egg,fish,gummy,ham,innard,jam,kimchi,leek,meat,ingredients,a,b,c
 5000
 99 - uses , Typed :: (unknown_assignment,unknown_variable)
 assign a1; variable v1;
