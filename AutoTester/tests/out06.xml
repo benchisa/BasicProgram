@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>27.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>29.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" Test for mixture of such that and pattern">
@@ -16,7 +16,7 @@
 <id Pattern and uses="1" Typed="1" comment="Which is the assignment that modifies c and uses a?" >2</id><querystr><![CDATA[assign a; Select a such that Uses(a,"a") pattern a("c",_);]]></querystr>
 <stuans>2,5</stuans>
 <correct>2</correct>
-<time_taken>62.000000</time_taken>
+<time_taken>61.000000</time_taken>
 <failed>
 <missing></missing>
 <additional>5</additional>
@@ -29,10 +29,10 @@
 </failed>
 </query>
 <query>
-<id pattern and Follows="1" Typed="1" comment="Which is the assignment that modifeis c and followed by other statements?" >3</id><querystr><![CDATA[assign a; Select a such that Follows(a,_) pattern a("c",_);]]></querystr>
+<id pattern and Follows="1" Typed="1" comment="Which is the assignment that modifies c and followed by other statements?" >3</id><querystr><![CDATA[assign a; Select a such that Follows(a,_) pattern a("c",_);]]></querystr>
 <stuans>2,3,5</stuans>
 <correct>2,3</correct>
-<time_taken>71.000000</time_taken>
+<time_taken>65.000000</time_taken>
 <failed>
 <missing></missing>
 <additional>5</additional>
@@ -45,10 +45,10 @@
 </failed>
 </query>
 <query>
-<id pattern and parent="1" Typed="1" comment="Which is the assignment that modifeis c and nested in a container?" >4</id><querystr><![CDATA[assign a; Select a such that Parent(_,a) pattern a("c",_);]]></querystr>
+<id pattern and parent="1" Typed="1" comment="Which is the assignment that modifies c and nested in a container?" >4</id><querystr><![CDATA[assign a; Select a such that Parent(_,a) pattern a("c",_);]]></querystr>
 <stuans>2,3,7,5,6</stuans>
 <correct>2,3,6,7</correct>
-<time_taken>73.000000</time_taken>
+<time_taken>67.000000</time_taken>
 <failed>
 <missing></missing>
 <additional>5</additional>

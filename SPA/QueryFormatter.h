@@ -10,7 +10,7 @@ public:
 	QueryFormatter(PKB* pkb);
 	~QueryFormatter(void);
 	void setQrTable(QUERYTABLE * qrTable);
-	list<string> formatString(RAWDATA * data);
+	FINAL_RESULT formatString(RAWDATA * data);
 private:
 	PKB * pkb;
 	QUERYTABLE * qrTable;

@@ -10,12 +10,12 @@ assign a;
 Select a such that Uses(a,"a") pattern a("c",_);
 2
 5000
-3 - pattern and Follows, Typed :: Which is the assignment that modifeis c and followed by other statements?
+3 - pattern and Follows, Typed :: Which is the assignment that modifies c and followed by other statements?
 assign a;
 Select a such that Follows(a,_) pattern a("c",_);
 2, 3
 5000
-4 - pattern and parent, Typed :: Which is the assignment that modifeis c and nested in a container?
+4 - pattern and parent, Typed :: Which is the assignment that modifies c and nested in a container?
 assign a;
 Select a such that Parent(_,a) pattern a("c",_);
 2, 3, 6, 7

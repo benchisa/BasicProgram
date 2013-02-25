@@ -159,8 +159,8 @@ QUERY SampleQueries::sampleQuery17 = "assign a; Select a;"; //fixed
 QUERY SampleQueries::sampleQuery18 = "stmt s; constant c;Select s with c.value=s.stmt#;";
 QUERY SampleQueries::sampleQuery19 = "assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;Select BOOLEAN with p.procName = \"procedure\";";
 QUERY SampleQueries::sampleQuery20 = "stmt s1,s2;Select s1 such that Follows* ( s1 , s2 );";
-QUERY SampleQueries::sampleQuery21 = "while w; Select w such that Parent (_,_);";
-QUERY SampleQueries::sampleQuery22 = "stmt s1; Select s1 such that Parent (_,s1);";
+QUERY SampleQueries::sampleQuery21 = "while w; Select BOOLEAN such that Parent (_,_);"; //pass
+QUERY SampleQueries::sampleQuery22 = "Select BOOLEAN such that Uses(2,\"apple\");";//pass
 
 //these two cases fail for PKB4, types are defined correctly but SUCHTAHT returns empty result - FIXED
 QUERY SampleQueries::sampleQuery23 = "while w1,w2;Select w2 such that Parent (w1,w2);";

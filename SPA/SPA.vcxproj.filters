@@ -135,10 +135,10 @@
     <ClCompile Include="AssignTable.cpp">
       <Filter>Source Files\PKB</Filter>
     </ClCompile>
-    <ClCompile Include="IfTable.cpp">
+    <ClCompile Include="WhileTable.cpp">
       <Filter>Source Files\PKB</Filter>
     </ClCompile>
-    <ClCompile Include="WhileTable.cpp">
+    <ClCompile Include="IfTable.cpp">
       <Filter>Source Files\PKB</Filter>
     </ClCompile>
   </ItemGroup>

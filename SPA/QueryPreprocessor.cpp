@@ -335,6 +335,15 @@ void QueryPreprocessor::setQTree(){
 	}
 	*/
 	
+	for (int i=0; i<clauses.size(); i++){
+		currNode = clauses.at(i);
+		if (currNode!=NULL){
+			arrangeClauseByRel(currNode);
+			clauses.at(i) = NULL;
+		}
+	}
+
+	joinClauses();
 	
 }
 
@@ -809,10 +818,10 @@ bool QueryPreprocessor::processWith(TOKEN token){
 			//want to remove the inverted commas
 			currToken.erase(currToken.begin());	
 			currToken.resize(currToken.size()-1);
-			(*paramTable).insert(paramPair((*paramTable).size()+1,currToken));
+			(*paramTable).insert(paramPair((*paramTable).size(),currToken));
 			currNode = createQTREENode(ANY);
 			setChild(headNode,currNode);	
-			currNode = createQTREENode(PARAM,(*paramTable).size());
+			currNode = createQTREENode(PARAM,(*paramTable).size()-1);
 			oneConstantClauses.push_back(clauseCount);
 		}
 		else if (isConstant(currToken)){		
@@ -876,7 +885,7 @@ bool QueryPreprocessor::processPattern(TOKEN token){
 			return false;			
 		}
 
-		if (i==1){
+		if (i==1){	
 			if(regex_match(currToken,regex(underscore))){
 				//if underscore
 				currNode = createQTREENode(ANY);
@@ -902,7 +911,11 @@ bool QueryPreprocessor::processPattern(TOKEN token){
 			}
 			setChild(prevNode,currNode);
 		}
-		else{
+		else{		
+			(*paramTable).insert(paramPair((*paramTable).size(),currToken));			
+			currNode = createQTREENode(PARAM,(*paramTable).size()-1);
+			setChild(prevNode,currNode);
+			/*
 			if(regex_match(currToken,regex(underscore))){
 				//if underscore
 				currNode = createQTREENode(ANY);
@@ -916,7 +929,7 @@ bool QueryPreprocessor::processPattern(TOKEN token){
 				currToken.resize(currToken.size()-2);
 				
 				//build expression subtree
-				currNode = createExprTree(currToken);
+				//currNode = createExprTree(currToken);
 			}
 			else if(regex_match(currToken,regex(invComma+expr+invComma))){				
 				//if with inverted commas without underscore "x+y"				
@@ -937,7 +950,9 @@ bool QueryPreprocessor::processPattern(TOKEN token){
 				}
 			}
 			setChild(prevNode,currNode);
+			*/
 		}
+		
 		
 
 	}
@@ -1143,6 +1158,8 @@ void QueryPreprocessor::setChild(QTREE* parent, QTREE* child){
 	}
 }
 
+//Used in Old Implementation Pattern Subtree
+/*
 QTREE* QueryPreprocessor::createExprTree(TOKEN expr){
 	QTREE* exprTree;
 	exprPieces = tokenize(expr,"\\("+or+"\\)"+or+plus+or+minus+or+times+or+synonym+or+integer);
@@ -1240,6 +1257,7 @@ QTREE* QueryPreprocessor::extractAll(){
 	
 	return node;
 }
+*/
 
 QTREE* QueryPreprocessor::createSubTree(QTREE* head,QTREE* left, QTREE* right){
 	setChild(head, left);

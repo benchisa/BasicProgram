@@ -1,527 +1,522 @@
-224
-cat: such that cases
-1 - such that and, Typed :: follows (known,known) and modifies (unknown,unknown)               
-var v1;
+30
+cat: Test for such that and
+1 - modifies , follows :: follows (known,known) and modifies (unknown,unknown)
+stmt s1; variable v1;
 Select BOOLEAN   such that  Follows (4 ,5 ) and Modifies ( s1 , v1 ) ;
 true
 5000
-2 - such that and, Typed :: follows* (known,known) and modifies (known,unknown)               
-var v1;
+2 - modifies , follows* :: follows* (known,known) and modifies (known,unknown)
+variable v1;
 Select BOOLEAN   such that  Follows* (4 ,9 ) and Modifies (9 , v1 ) ;
 true
 5000
-3 - such that and, Typed :: follows (known,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+3 - modifies , follows :: follows (known,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s2   such that  Follows (4 , s2 ) and Modifies ( s2 , v1 ) ;
-
+5
 5000
-4 - such that and, Typed :: follows* (known,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
-Select s2   such that  Follows* (4 , s2 ) and Modifies ( s2 , v1 ) ;
-
-5000
-5 - such that and, Typed :: follows (unknown,known) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+5 - modifies , follows :: follows (unknown,known) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Follows ( s1 ,9 ) and Modifies ( s1 , v1 ) ;
 
 5000
-6 - such that and, Typed :: follows* (unknown,known) and modifies (known,unknown)               
-stmt s1,s2;var v1;
+6 - modifies , follows* :: follows* (unknown,known) and modifies (known,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Follows* ( s1 ,9 ) and Modifies (9 , v1 ) ;
-
+1,2,3,4,5,6,7,8
 5000
-7 - such that and, Typed :: follows (unknown,unknown)  and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+7 - modifies , follows :: follows (unknown,unknown)  and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Follows ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
-
+1,2,3,4,5,6,7,8,9,10,11,12,14,15,20,23,27,28,29,31,32,34,35,36,39,40,42,43,45,46
 5000
-8 - such that and, Typed :: follows* (unknown,unknown)  and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+8 - modifies , follows* :: follows* (unknown,unknown)  and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Follows* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
-
+1,2,3,4,5,6,7,8,9,10,11,12,14,15,20,23,27,28,29,31,32,34,35,36,39,40,42,43,45,46
 5000
-9 - such that and, Typed :: follows (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+9 - modifies , follows :: follows (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s2   such that  Follows ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
-
+2,3,4,5,6,7,8,9,12,14,16,20,21,23,28,29,31,32,33,35,36,39,40,41,43,46,47
 5000
-10 - such that and, Typed :: follows* (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+10 - modifies , follows* :: follows* (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s2   such that  Follows* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
-
+2,3,4,5,6,7,8,9,12,14,16,20,21,23,28,29,31,32,33,35,36,39,40,41,43,46,47
 5000
-11 - such that and, Typed :: follows (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+11 - modifies , follows :: follows (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select v1   such that  Follows ( s1 , s1 ) and Modifies ( s1 , v1 ) ;
 
 5000
-12 - such that and, Typed :: follows* (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+12 - modifies , follows* :: follows* (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select v1   such that  Follows* ( s1 , s1 ) and Modifies ( s1 , v1 ) ;
 
 5000
-13 - such that and, Typed :: parent (known,known) and modifies (known,unknown)               
-var v1;
+13 - modifies , parent :: parent (known,known) and modifies (known,unknown)
+variable v1;
 Select BOOLEAN   such that  Parent (9 ,10 ) and Modifies (10 , v1 ) ;
 true
 5000
-14 - such that and, Typed :: parent* (known,known) and modifies (known,unknown)               
-var v1;
+14 - modifies , parent* :: parent* (known,known) and modifies (known,unknown)
+variable v1;
 Select BOOLEAN   such that  Parent* (9 ,12 ) and Modifies (9 , v1 ) ;
 true
 5000
-15 - such that and, Typed :: parent (known,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+15 - modifies , parent :: parent (known,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s2   such that  Parent (9 , s2 ) and Modifies ( s2 , v1 ) ;
-
+10,19
 5000
-16 - such that and, Typed :: parent* (known,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+16 - modifies , parent* :: parent* (known,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s2   such that  Parent* (9 , s2 ) and Modifies (9 , v1 ) ;
-
+10,11,12,13,14,15,16,17,18,19
 5000
-17 - such that and, Typed :: parent (unknown,known) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+17 - modifies , parent :: parent (unknown,known) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Parent ( s1 ,14 ) and Modifies ( s1 , v1 ) ;
-
+10
 5000
-18 - such that and, Typed :: parent* (unknown,known) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+18 - modifies , parent* :: parent* (unknown,known) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Parent* ( s1 ,14 ) and Modifies ( s1 , v1 ) ;
-
+9,10
 5000
-19 - such that and, Typed :: parent (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+19 - modifies , parent :: parent (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Parent ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
-
+9,10,12,14,16,21,24,29,36,44
 5000
-20 - such that and, Typed :: parent* (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+20 - modifies , parent* :: parent* (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Parent* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
-
+9,10,12,14,16,21,24,29,36,44
 5000
-21 - such that and, Typed :: parent (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+21 - modifies , parent :: parent (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s2   such that  Parent ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
-
+10,11,12,13,14,15,16,17,18,19,22,23,24,25,26,30,37,38,45,46,47
 5000
-22 - such that and, Typed :: parent* (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+22 - modifies , parent* :: parent* (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s2   such that  Parent* ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
-
+10,11,12,13,14,15,16,17,18,19,22,23,24,25,26,30,37,38,45,46,47
 5000
-23 - such that and, Typed :: parent (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+23 - modifies , parent :: parent (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select v1   such that  Parent ( s1 , s1 ) and Modifies ( s1 , v1 ) ;
 
 5000
-24 - such that and, Typed :: parent* (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+24 - modifies , parent* :: parent* (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select v1   such that  Parent* ( s1 , s1 ) and Modifies ( s1 , v1 ) ;
 
 5000
-25 - such that and, Typed :: calls (known,known) and modifies (known,unknown)               
-var v1;
+25 - modifies , calls :: calls (known,known) and modifies (known,unknown)
+variable v1;
 Select BOOLEAN   such that  Calls ( "xylo" , "yello" ) and Modifies ( "xylo" , v1 ) ;
 true
 5000
-26 - such that and, Typed :: calls* (known,known) and modifies (known,unknown)               
-var v1;
+26 - modifies , calls* :: calls* (known,known) and modifies (known,unknown)
+variable v1;
 Select BOOLEAN   such that  Calls* ( "xylo" , "yello" ) and Modifies ( "yello" , v1 ) ;
 true
 5000
-27 - such that and, Typed :: calls (known,unknown) and modifies (known,unknown)               
-proc p1,p2; var v1;
+27 - modifies , calls :: calls (known,unknown) and modifies (known,unknown)
+proc p1,p2; variable v1;
 Select p2   such that  Calls ( "xylo" , p2 ) and Modifies ( "xylo" , v1 ) ;
 
 5000
-28 - such that and, Typed :: calls* (known,unknown) and modifies (unknown,unknown)               
-proc p1,p2; var v1;
+28 - modifies , calls* :: calls* (known,unknown) and modifies (unknown,unknown)
+proc p1,p2; variable v1;
 Select p2   such that  Calls* ( "xylo" , p2 ) and Modifies ( p2 , v1 ) ;
 
 5000
-29 - such that and, Typed :: calls (unknown,known) and modifies (unknown,unknown)               
-proc p1,p2; var v1;
+29 - modifies , calls :: calls (unknown,known) and modifies (unknown,unknown)
+proc p1,p2; variable v1;
 Select p1   such that  Calls ( p1 , "zebra" ) and Modifies ( p1 , v1 ) ;
 
 5000
-30 - such that and, Typed :: calls* (unknown,known) and modifies (known,known)               
-proc p1,p2; var v1;
+30 - modifies , calls* :: calls* (unknown,known) and modifies (known,known)
+proc p1,p2; variable v1;
 Select p1   such that  Calls* ( p1 , "zebra" ) and Modifies ( "zebra" , "apple" ) ;
 
 5000
-31 - such that and, Typed :: calls (unknown,unknown) and modifies (unknown,unknown)               
-proc p1,p2; var v1;
+31 - modifies , calls :: calls (unknown,unknown) and modifies (unknown,unknown)
+proc p1,p2; variable v1;
 Select p1   such that  Calls ( p1 , p2 ) and Modifies ( p1 , v1 ) ;
 
 5000
-32 - such that and, Typed :: calls* (unknown,unknown) and modifies (unknown,unknown)               
-proc p1,p2; var v1;
+32 - modifies , calls* :: calls* (unknown,unknown) and modifies (unknown,unknown)
+proc p1,p2; variable v1;
 Select p1   such that  Calls* ( p1 , p2 ) and Modifies ( p1 , v1 ) ;
 
 5000
-33 - such that and, Typed :: calls (unknown,unknown) and modifies (unknown,unknown)               
-proc p1,p2; var v1;
+33 - modifies , calls :: calls (unknown,unknown) and modifies (unknown,unknown)
+proc p1,p2; variable v1;
 Select p2   such that  Calls ( p1 , p2 ) and Modifies ( p1 , v1 ) ;
 
 5000
-34 - such that and, Typed :: calls* (unknown,unknown) and modifies (unknown,unknown)               
-proc p1,p2; var v1;
+34 - modifies , calls* :: calls* (unknown,unknown) and modifies (unknown,unknown)
+proc p1,p2; variable v1;
 Select p2   such that  Calls* ( p1 , p2 ) and Modifies ( p1 , v1 ) ;
 
 5000
-35 - such that and, Typed :: calls (unknown,unknown) and modifies (unknown,unknown)               
-proc p1,p2; var v1;
+35 - modifies , calls :: calls (unknown,unknown) and modifies (unknown,unknown)
+proc p1,p2; variable v1;
 Select p1   such that  Calls ( p1 , p1 ) and Modifies ( p1 , v1 ) ;
 
 5000
-36 - such that and, Typed :: calls* (unknown,unknown) and modifies (unknown,unknown)               
-proc p1,p2; var v1;
+36 - modifies , calls* :: calls* (unknown,unknown) and modifies (unknown,unknown)
+proc p1,p2; variable v1;
 Select p1   such that  Calls* ( p1 , p1 ) and Modifies ( p1 , v1 ) ;
 
 5000
-37 - such that and, Typed :: next (known,known) and modifies (known,unknown)               
-var v1;
+37 - modifies , next :: next (known,known) and modifies (known,unknown)
+variable v1;
 Select BOOLEAN   such that  Next (21 ,22 ) and Modifies (21 , v1 ) ;
 true
 5000
-38 - such that and, Typed :: next* (known,known) and modifies (known,unknown)               
-var v1;
+38 - modifies , next* :: next* (known,known) and modifies (known,unknown)
+variable v1;
 Select BOOLEAN   such that  Next* (21 ,24 ) and Modifies (21 , v1 ) ;
 true
 5000
-39 - such that and, Typed :: next (known,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+39 - modifies , next :: next (known,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s2   such that  Next (21 , s2 ) and Modifies ( s2 , v1 ) ;
 
 5000
-40 - such that and, Typed :: next* (known,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+40 - modifies , next* :: next* (known,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s2   such that  Next* (21 , s2 ) and Modifies ( s2 , v1 ) ;
 
 5000
-41 - such that and, Typed :: next (unknown,known) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+41 - modifies , next :: next (unknown,known) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Next (  ,24 ) and Modifies ( s1 , v1 ) ;
 
 5000
-42 - such that and, Typed :: next* (unknown,known) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+42 - modifies , next* :: next* (unknown,known) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Next* ( s1 ,24 ) and Modifies ( s1 , v1 ) ;
 
 5000
-43 - such that and, Typed :: next (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+43 - modifies , next :: next (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Next ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
 
 5000
-44 - such that and, Typed :: next* (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+44 - modifies , next* :: next* (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Next* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
 
 5000
-45 - such that and, Typed :: next (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+45 - modifies , next :: next (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Next ( s1 , s1 ) and Modifies ( s1 , v1 ) ;
 
 5000
-46 - such that and, Typed :: next* (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+46 - modifies , next* :: next* (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Next* ( s1 , s1 ) and Modifies ( s1 , v1 ) ;
 
 5000
-47 - such that and, Typed :: next (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+47 - modifies , next :: next (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s2   such that  Next ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
 
 5000
-48 - such that and, Typed :: next* (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+48 - modifies , next* :: next* (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s2   such that  Next* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
 
 5000
-49 - such that and, Typed :: affects (known,known) and modifies (known,unknown)               
-stmt s1,s2;var v1;
+49 - modifies , affects :: affects (known,known) and modifies (known,unknown)
+stmt s1,s2;variable v1;
 Select BOOLEAN   such that  Affects (13 ,18 ) and Modifies (18 , v1 ) ;
 true
 5000
-50 - such that and, Typed :: affects* (known,known) and modifies (known,unknown)               
-stmt s1,s2;var v1;
+50 - modifies , affects* :: affects* (known,known) and modifies (known,unknown)
+stmt s1,s2;variable v1;
 Select BOOLEAN   such that  Affects* (13 ,18 ) and Modifies (18 , v1 ) ;
 true
 5000
-51 - such that and, Typed :: affects (known,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+51 - modifies , affects :: affects (known,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s2   such that  Affects (13 , s2 ) and Modifies ( s2 , v1 ) ;
 
 5000
-52 - such that and, Typed :: affects* (known,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+52 - modifies , affects* :: affects* (known,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s2   such that  Affects* (13 , s2 ) and Modifies ( s2 , v1 ) ;
 
 5000
-53 - such that and, Typed :: affects (unknown,known) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+53 - modifies , affects :: affects (unknown,known) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Affects ( s1 ,18 ) and Modifies ( s1 , v1 ) ;
 
 5000
-54 - such that and, Typed :: affects* (unknown,known) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+54 - modifies , affects* :: affects* (unknown,known) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Affects* ( s1 ,18 ) and Modifies ( s1 , v1 ) ;
 
 5000
-55 - such that and, Typed :: affects (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+55 - modifies , affects :: affects (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Affects ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
 
 5000
-56 - such that and, Typed :: affects* (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+56 - modifies , affects* :: affects* (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Affects* ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
 
 5000
-57 - such that and, Typed :: affects (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+57 - modifies , affects :: affects (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s2   such that  Affects ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
 
 5000
-58 - such that and, Typed :: affects* (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+58 - modifies , affects* :: affects* (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s2   such that  Affects* ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
 
 5000
-59 - such that and, Typed :: affects (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+59 - modifies , affects :: affects (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Affects ( s1 , s1 ) and Modifies ( s2 , v1 ) ;
 
 5000
-60 - such that and, Typed :: affects* (unknown,unknown) and modifies (unknown,unknown)               
-stmt s1,s2;var v1;
+60 - modifies , affects* :: affects* (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Affects* ( s1 , s1 ) and Modifies ( s2 , v1 ) ;
 
 5000
-73 - such that and, Typed :: uses (unknown_statement,known_var) and modifies (unknown,known)               
-stmt s1,s2;var v1;
+73 - modifies , uses :: uses (unknown_statement,known_var) and modifies (unknown,known)
+stmt s1,s2;variable v1;
 Select s1   such that  Uses ( s1 , "apple" ) and Modifies ( s1 , "apple" ) ;
 
 5000
-74 - such that and, Typed :: uses (unknown_assignment,known_var) and modifies (unknown,known)               
+74 - modifies , uses :: uses (unknown_assignment,known_var) and modifies (unknown,known)
 assign a1; 
 Select a1   such that  Uses ( a1 , "apple" ) and Modifies ( a1 , "apple" ) ;
 
 5000
-75 - such that and, Typed :: uses (unknown_while,known_var) and modifies (unknown,known)               
+75 - modifies , uses :: uses (unknown_while,known_var) and modifies (unknown,known)
 while w1;
 Select w1   such that  Uses ( w1 , "apple" ) and Modifies ( w1 , "apple" ) ;
 
 5000
-76 - such that and, Typed :: uses (unknown_if,known_var) and modifies (unknown,known)               
+76 - modifies , uses :: uses (unknown_if,known_var) and modifies (unknown,known)
 if i1;
 Select i1   such that  Uses ( i1 , "apple" ) and Modifies ( i1 , "apple" ) ;
 
 5000
-77 - such that and, Typed :: uses (unknown_call,known_var) and modifies (unknown,known)               
+77 - modifies , uses :: uses (unknown_call,known_var) and modifies (unknown,known)
 call c;
 Select c   such that  Uses ( c , "apple" ) and Modifies ( c , "apple" ) ;
 
 5000
-78 - such that and, Typed :: uses (unknown_proc,known_var) and modifies (unknown,known)               
+78 - modifies , uses :: uses (unknown_proc,known_var) and modifies (unknown,known)
 proc p;
 Select p   such that  Uses ( p , "apple" ) and Modifies ( p , "apple" ) ;
 
 5000
-79 - such that and, Typed :: uses (known_statement,unknown_var) and modifies (known,unknown)               
-var v1;
+79 - modifies , uses :: uses (known_statement,unknown_var) and modifies (known,unknown)
+variable v1;
 Select v1   such that  Uses (22 , v1 ) and Modifies (22 , v1 ) ;
 
 5000
-80 - such that and, Typed :: uses (known_assignment,unknown_var) and modifies (known,unknown)               
-var v1;
+80 - modifies , uses :: uses (known_assignment,unknown_var) and modifies (known,unknown)
+variable v1;
 Select v1   such that  Uses (13 , v1 ) and Modifies (13 , v1 ) ;
 
 5000
-81 - such that and, Typed :: uses (known_while,unknown_var) and modifies (known,unknown)               
-var v1;
+81 - modifies , uses :: uses (known_while,unknown_var) and modifies (known,unknown)
+variable v1;
 Select v1   such that  Uses (10 , v1 ) and Modifies (10 , v1 ) ;
-
+gummy,fish,innard
 5000
-82 - such that and, Typed :: modifies (known_while,unknown_var) and uses (known,unknown)               
-var v1;
+82 - modifies :: modifies (known_while,unknown_var) and uses (known,unknown)
+variable v1;
 Select v1   such that  Modifies (10 , v1 ) and Modifies (10 , v1 ) ;
-
+gummy,fish,innard,ham
 5000
-83 - such that and, Typed :: uses (known_if,unknown_var) and modifies (known,unknown)               
-var v1;
+83 - modifies , uses :: uses (known_if,unknown_var) and modifies (known,unknown)
+variable v1;
 Select v1   such that  Uses (21 , v1 ) and Modifies (21 , v1 ) ;
-
+gummy
 5000
-84 - such that and, Typed :: uses (known_call,unknown_var) and modifies (known,unknown)               
-var v1;
+84 - modifies , uses :: uses (known_call,unknown_var) and modifies (known,unknown)
+variable v1;
 Select v1   such that  Uses (8 , v1 ) and Modifies (8 , v1 ) ;
 
 5000
-85 - such that and, Typed :: modifies (known_call,unknown_var) and uses (known,unknown)               
-var v1;
+85 - modifies :: modifies (known_call,unknown_var) and uses (known,unknown)
+variable v1;
 Select v1   such that  Modifies (8 , v1 ) and Modifies (8 , v1 ) ;
 
 5000
-86 - such that and, Typed :: uses (known_proc,unknown_var) and modifies (known,unknown)               
-var v1;
+86 - modifies , uses :: uses (known_proc,unknown_var) and modifies (known,unknown)
+variable v1;
 Select v1   such that  Uses ( "xylo" , v1 ) and Modifies ( "xylo" , v1 ) ;
 
 5000
-87 - such that and, Typed :: uses (unknown_statement,unknown_var) and modifies (unknown,unknown)               
-stmt s1; var v1;
+87 - modifies , uses :: uses (unknown_statement,unknown_var) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
 Select v1   such that  Uses ( s1 , v1 ) and Modifies ( s2 , v1 ) ;
-
+a,apple,b,banana,c,carrot,donut,egg,fish,gummy,ingredients,innard,kimchi,leek,meat
 5000
-88 - such that and, Typed :: modifies (unknown_statement,unknown_var) and uses (unknown,unknown)               
-stmt s1; var v1;
+88 - modifies :: modifies (unknown_statement,unknown_var) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Modifies ( s1 , v1 ) and Modifies ( s2 , v1 ) ;
-
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47
 5000
-89 - such that and, Typed :: uses (unknown_assignment,unknown_var) and modifies (unknown,unknown)               
-assign a1; var v1;
+89 - modifies , uses :: uses (unknown_assignment,unknown_var) and modifies (unknown,unknown)
+assign a1; variable v1;
 Select a1   such that  Uses ( a1 , v1 ) and Modifies ( a1 , v1 ) ;
-
+30
 5000
-90 - such that and, Typed :: uses (unknown_while,unknown_var) and modifies (unknown,unknown)               
-while w1; var v1;
+90 - modifies , uses :: uses (unknown_while,unknown_var) and modifies (unknown,unknown)
+while w1; variable v1;
 Select w1   such that  Uses ( w1 , v1 ) and Modifies ( w1 , v1 ) ;
-
+9,10,14,29,44
 5000
-91 - such that and, Typed :: modifies (unknown_while,unknown_var) and uses (unknown,known)               
-while w1; var v1;
+91 - modifies :: modifies (unknown_while,unknown_var) and uses (unknown,known)
+while w1; variable v1;
 Select s1   such that  Modifies ( w1 , v1 ) and Modifies ( w1 , "apple" ) ;
 
 5000
-92 - such that and, Typed :: uses (unknown_if,unknown_var) and modifies (unknown,unknown)               
-if i1; var v1;
+92 - modifies , uses :: uses (unknown_if,unknown_var) and modifies (unknown,unknown)
+if i1; variable v1;
 Select v1   such that  Uses ( i1 , v1 ) and Modifies ( i1 , v1 ) ;
-
+gummy
 5000
-93 - such that and, Typed :: modifies (unknown_if,unknown_var) and uses (unknown,unknown)               
-if i1; var v1;
+93 - modifies , uses :: modifies (unknown_if,unknown_var) and uses (unknown,unknown)
+if i1; variable v1;
 Select i1   such that  Modifies ( i1 , v1 ) and Uses ( i1 , v1 ) ;
-
+21
 5000
-94 - such that and, Typed :: uses (unknown_call,unknown_var) and modifies (unknown,unknown)               
-call c; var v1;
+94 - modifies , uses :: uses (unknown_call,unknown_var) and modifies (unknown,unknown)
+call c; variable v1;
 Select c   such that  Uses ( c , v1 ) and Modifies ( c , v1 ) ;
 
 5000
-95 - such that and, Typed :: modifies (unknown_call,unknown_var) and uses (unknown,unknown)               
-call c; var v1;
+95 - modifies , uses :: modifies (unknown_call,unknown_var) and uses (unknown,unknown)
+call c; variable v1;
 Select v1   such that  Modifies ( c , v1 ) and Uses ( c , v1 ) ;
 
 5000
-96 - such that and, Typed :: uses (unknown_proc,unknown_var) and modifies (unknown,unknown)               
-proc p1; var v1;
+96 - modifies , uses :: uses (unknown_proc,unknown_var) and modifies (unknown,unknown)
+proc p1; variable v1;
 Select p1   such that  Uses ( p1 , v1 ) and Modifies ( p1 , v1 ) ;
 
 5000
-97 - such that and, Typed :: modifies (unknown_proc,unknown_var) and uses (unknown,unknown)               
-proc p1; var v1;
+97 - modifies , uses :: modifies (unknown_proc,unknown_var) and uses (unknown,unknown)
+proc p1; variable v1;
 Select p1   such that  Modifies ( p1 , v1 ) and Uses ( p1 , v1 ) ;
 
 5000
-100 - such that and, Typed :: follows (known,unknown) and uses (unknown,unknown)               
-stmt s1,s2;
+100 - follows , uses :: follows (known,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s2   such that  Follows (4 , s2 ) and Uses ( s2 , v1 ) ;
 
 5000
-101 - such that and, Typed :: follows* (known,unknown) and uses (unknown,unknown)               
-stmt s1,s2;
+101 - follows* , uses :: follows* (known,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s2   such that  Follows* (4 , s2 ) and Uses ( s2 , v1 ) ;
-
+7,8,9,21
 5000
-102 - such that and, Typed :: follows (unknown,known) and uses (unknown,unknown)               
-stmt s1,s2;
+102 - follows , uses :: follows (unknown,known) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Follows ( s1 ,9 ) and Uses ( s1 , v1 ) ;
-
+8
 5000
-103 - such that and, Typed :: follows* (unknown,known) and uses (unknown,unknown)               
-stmt s1,s2;
+103 - follows* , uses :: follows* (unknown,known) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Follows* ( s1 ,9 ) and Uses ( s1 , v1 ) ;
-
+2,3,4,7,8
 5000
-104 - such that and, Typed :: follows (unknown,unknown)  and uses (unknown,unknown)               
-
+104 - follows , uses :: follows (unknown,unknown)  and uses (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Follows ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-
- 5000 stmt s1,s2;
-105 - such that and, Typed :: follows* (unknown,unknown)  and uses (unknown,unknown)               
-
+2,3,4,7,8,9,10,12,14,23,29,32,35,36,40,43,45,46
+5000 
+105 - follows* , uses :: follows* (unknown,unknown)  and uses (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Follows* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-
+2,3,4,7,8,9,10,12,14,23,29,32,35,36,40,43,45,46
 5000
-106 - such that and, Typed :: follows (unknown,unknown) and uses (unknown,unknown)               
-stmt s1,s2;
+106 - follows , uses :: follows (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2; variable v1;
 Select s2   such that  Follows ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-
+3,4,5,8,14,18,19,20,24,31,33,36,39,41,44,46,47
 5000
-107 - such that and, Typed :: follows* (unknown,unknown) and uses (unknown,unknown)               
-stmt s1,s2;
+107 - follows* , uses :: follows* (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2; variable v1;
 Select s2   such that  Follows* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-
+3,4,5,8,14,18,19,20,24,31,33,36,39,41,44,46,47
 5000
-108 - such that and, Typed :: follows (unknown,unknown) and uses (unknown,unknown)               
-stmt s1,s2;
+108 - follows , uses :: follows (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2; variable v1;
 Select s1   such that  Follows ( s1 , s1 ) and Uses ( s1 , v1 ) ;
 
 5000
-109 - such that and, Typed :: follows* (unknown,unknown) and uses (unknown,unknown)               
-stmt s1,s2;
+109 - follows* , uses :: follows* (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2; variable v1;
 Select s1   such that  Follows* ( s1 , s1 ) and Uses ( s1 , v1 ) ;
 
 5000
-112 - such that and, Typed :: parent (known,unknown) and uses (unknown,unknown)               
-stmt s1,s2;
+112 - parent , uses :: parent (known,unknown) and uses (unknown,unknown)
+stmt s1,s2; variable v1;
 Select s2   such that  Parent (9 , s2 ) and Uses ( s2 , v1 ) ;
-
+10,19
 5000
-113 - such that and, Typed :: parent* (known,unknown) and uses (unknown,unknown)               
-stmt s1,s2;
+113 - parent* , uses :: parent* (known,unknown) and uses (unknown,unknown)
+stmt s1,s2; variable v1;
 Select s2   such that  Parent* (9 , s2 ) and Uses ( s2 , v1 ) ;
-
+10,12,13,14,16,17,18,19
 5000
-114 - such that and, Typed :: parent (unknown,known) and uses (unknown,unknown)               
-stmt s1,s2;
+114 - parent , uses :: parent (unknown,known) and uses (unknown,unknown)
+stmt s1,s2; variable v1;
 Select s1   such that  Parent ( s1 ,14 ) and Uses ( s1 , v1 ) ;
-
+10
 5000
-115 - such that and, Typed :: parent* (unknown,known) and uses (unknown,unknown)               
-stmt s1,s2;
+115 - parent* , uses :: parent* (unknown,known) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Parent* ( s1 ,14 ) and Uses ( s1 , v1 ) ;
-
+9,10
 5000
-116 - such that and, Typed :: parent (unknown,unknown) and uses (unknown,unknown)               
-stmt s1,s2;
+116 - parent , uses :: parent (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Parent ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-
+9,10,12,14,16,21,24,29,36,44
 5000
-117 - such that and, Typed :: parent* (unknown,unknown) and uses (unknown,unknown)               
-stmt s1,s2;
+117 - parent* , uses :: parent* (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Parent* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-
+9,10,12,14,16,21,24,29,36,44
 5000
-118 - such that and, Typed :: parent (unknown,unknown) and uses (unknown,unknown)               
-stmt s1,s2;
+118 - parent , uses :: parent (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s2   such that  Parent ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-
+10,11,12,13,14,15,16,17,18,19,22,23,24,25,26,30,37,38,45,46,47
 5000
-119 - such that and, Typed :: parent* (unknown,unknown) and uses (unknown,unknown)               
-stmt s1,s2;
+119 - parent* , uses :: parent* (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s2   such that  Parent* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-
+10,11,12,13,14,15,16,17,18,19,22,23,24,25,26,30,37,38,45,46,47
 5000
-120 - such that and, Typed :: parent (unknown,unknown) and uses (unknown,unknown)               
-stmt s1,s2;
+120 - parent , uses :: parent (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Parent ( s1 , s1 ) and Uses ( s1 , v1 ) ;
 
 5000
-121 - such that and, Typed :: parent* (unknown,unknown) and uses (unknown,unknown)               
-stmt s1,s2;
+121 - parent* , uses :: parent* (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
 Select s1   such that  Parent* ( s1 , s1 ) and Uses ( s1 , v1 ) ;
 
 5000

@@ -1,32 +1,32 @@
 36
 cat: Test for Follows, Parent, Modifies, Uses for nested while loop
 1 - Parent, Typed :: Which parent does statement 2 belongs to?
-stmt s; 
+stmt s;
 Select s such that Parent(s,2);
 1
 5000
 2 - Parent, Typed :: Does statement 4 has child?
-stmt s; 
+stmt s;
 Select s such that Parent (4,s);
 5, 6
 5000
 3 - Parent, Typed :: Select all the statements which are a child of another statement.
-stmt s1,s2; 
+stmt s1,s2;
 Select s2 such that Parent (s1,s2);
 2, 3, 4, 5, 6
 5000
 4 - Parent, Typed :: Select all the parents.
-stmt s1; 
+stmt s1;
 Select s1 such that Parent (s1,_);
 1, 4
 5000
 5 - Parent, Placeholder :: Select all the while if there exists a parent relationship
-while w; 
+while w;
 Select w such that Parent (_,_);
 1, 4
 5000
 6 - Parent, Placeholder :: Select all the child statements if it exists
-stmt s1; 
+stmt s1;
 Select s1 such that Parent (_,s1);
 2, 3, 4, 5, 6
 5000
@@ -41,7 +41,7 @@ Select a such that Parent (w,a);
 2, 3, 5, 6
 5000
 9 - Parent*, Typed :: Select all the parents of statement 5.
-stmt s; 
+stmt s;
 Select s such that Parent*(s,5);
 1, 4
 5000
@@ -145,38 +145,38 @@ while w;
 Select w such that Uses(_,_);
 1, 4
 5000
-30 - Uses, Typed :: Select boolean while if statement 2 uses b.
+30 - Uses, Typed :: Select BOOLEAN while if statement 2 uses b.
 
-Select boolean such that Uses(2,"b");
+Select BOOLEAN such that Uses(2,"b");
 false
 5000
-31 - Uses, Typed :: Select boolean while if statement 2 uses a.
+31 - Uses, Typed :: Select BOOLEAN while if statement 2 uses a.
 
-Select boolean such that Uses(2,"a");
+Select BOOLEAN such that Uses(2,"a");
 true
 5000
-32 - Uses, Typed :: Select boolean if there exists a Uses relationship.
+32 - Uses, Typed :: Select BOOLEAN if there exists a Uses relationship.
 
-Select boolean such that Uses(_,_);
+Select BOOLEAN such that Uses(_,_);
 true
 5000
-33 - Modifies, pattern :: Select boolean if there exists an assignment Uses variable y and modifies c?
+33 - Modifies, pattern :: Select BOOLEAN if there exists an assignment Uses variable y and modifies c?
 assign a;
-Select boolean such that Modifies(a,"c") pattern a("c",_"y"_);
+Select BOOLEAN such that Modifies(a,"c") pattern a("c",_"y"_);
 false
 2000
-34 - Modifies, pattern :: Select boolean if there exists an assignment modifies variable d and another asisgnmenent that y =a?
+34 - Modifies, pattern :: Select BOOLEAN if there exists an assignment modifies variable d and another asisgnmenent that y =a?
 assign a1,a2;
-Select boolean such that Modifies(a1,"d") pattern a2("y","a");
+Select BOOLEAN such that Modifies(a1,"d") pattern a2("y","a");
 true
 2000
-35 - Modifies, pattern :: Select boolean if there exists an assignment modifies variable d and another asisgnmenent that uses b?
+35 - Modifies, pattern :: Select BOOLEAN if there exists an assignment modifies variable d and another asisgnmenent that uses b?
 assign a1,a2;
-Select boolean such that Modifies(a1,"d") pattern a2("y",_"b"_);
+Select BOOLEAN such that Modifies(a1,"d") pattern a2("y",_"b"_);
 false
 2000
-36 - Modifies, pattern :: Select boolean if there exists an assignment modifies variable d and uses z?
+36 - Modifies, pattern :: Select BOOLEAN if there exists an assignment modifies variable d and uses z?
 assign a;
-Select boolean  pattern a("d",_"z"_);
+Select BOOLEAN  pattern a("d",_"z"_);
 true
 2000
