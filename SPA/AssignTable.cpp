@@ -16,7 +16,7 @@ SIZE AssignTable::getSize(){
 }
 void AssignTable::insert(STATEMENT_NUM stmtNo,INDEX ctrVarIndex,string prefixTree){
 	ASSIGNENTRY newEntry;
-	newEntry.prefixTree = ctrVarIndex;
+	newEntry.varIndex = ctrVarIndex;
 	newEntry.prefixTree = prefixTree;
 
 	assignTable.insert(ASSIGNROW(stmtNo,newEntry));
