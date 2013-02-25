@@ -17,8 +17,8 @@ void PatternTest::tearDown()
 CPPUNIT_TEST_SUITE_REGISTRATION( PatternTest ); // Note 4 
 
 void PatternTest::testEvaluatePattern(){
-	Parser *p = new Parser();
-	PKB *pkb;
+	Parser p;
+	PKB * pkb = new PKB();
 
 	//create root AST
 	AST* rootAST;
@@ -29,31 +29,15 @@ void PatternTest::testEvaluatePattern(){
 	//CPPUNIT_ASSERT(pkb->getVarIndex("x") == 1);
 	/*pkb->insertVar("y");
 	cout << pkb->getVarIndex("y");*/
-	string src = "procedure test1{\n"
-	/*2*/	"y = x;\n"
-	/*3*/	"}";
+	SOURCE src = "procedure test1{\n" 
+	       /*1*/   "y = x+z;}";
 
-	p->setSource(src);
-	p->startParse();
-	CPPUNIT_ASSERT_EQUAL_MESSAGE("PKB did not parse successfully", 1, p->startParse());
-		pkb = p->getPKB();
-	//QUERYTABLE *qTable = new QUERYTABLE();
-	/*rootAST = pkb->createAST(ASSIGNMENT,1,1,-1);
-	pkb->setRootAST(rootAST);
-	
-	firstD = pkb->createAST(VARIABLE,1,1,2);
-	pkb->setFirstDescendant(rootAST,firstD);
-	pkb->addSibling(firstD,pkb->createAST(VARIABLE,1,1,1));*/
-
-	//p->setQuery("Select a pattern a(y, \"x\")");
-	//Select a such that pattern a(y, "x"); 
-	/*qTable->insert(pair<INDEX, TYPE>(ASSIGNMENT, QUERYVAR));
-	qTable->insert(pair<INDEX, TYPE>(VARIABLE, QUERYVAR));
-	qTable->insert(pair<INDEX, TYPE>(-1, ASSIGNMENT));
-	qTable->insert(pair<INDEX, TYPE>(2, QUERYVAR));
-	qTable->insert(pair<INDEX, TYPE>(1, VARIABLE));*/
+	p.setSource(src);
+	p.startParse();
+	//CPPUNIT_ASSERT_EQUAL_MESSAGE("PKB did not parse successfully", 1, p->startParse());
+		pkb = p.getPKB();
 	QueryPreprocessor *pre = new QueryPreprocessor(pkb);
-	QUERY q = "assign a; variable v; Select a such that pattern a(\"y\", \"x+y\");";
+	QUERY q = "assign a; variable v; Select a such that pattern a(v, \"x+y\");";
 	pre->setQuery(q);
 	pre->preProcess();
 	//CPPUNIT_ASSERT_EQUAL(true, pre->preProcess());*/
@@ -64,6 +48,7 @@ void PatternTest::testEvaluatePattern(){
 	//pre->getParamTable();
 	//test ASSIGNMENT
 	RELATION_LIST * list = myPattern->evaluatePattern(pre->getQTree(), pre->getQVarTable(), pre->getParamTable());
+	delete pkb;
 	CPPUNIT_ASSERT_EQUAL_MESSAGE("list does not match", list, result);
 	
 }
