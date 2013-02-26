@@ -97,16 +97,21 @@ class PKB
 
 
 		//Functions of Call Table
-		CALL_INDEX insertCall(PROC_NAME caller, PROC_NAME callee);
+		CALL_INDEX insertCall(PROC_NAME caller,STATEMENT_NUM callStmt, PROC_NAME callee);
 		SIZE getCallTableSize();
 
 		//if caller is empty, return callee procedure
 		//if callee is empty, return caller procedure
-		list<CALL_PAIR>  getCall(PROC_NAME caller,PROC_NAME callee);
+		CALL_LIST  getCall(PROC_NAME caller,PROC_NAME callee);
 		CALL_PAIR getCALLPair(CALL_INDEX index);
 		CALL_INDEX getCallPairIndex(PROC_NAME caller,PROC_NAME callee);
 		bool isExistsCall(PROC_NAME caller,PROC_NAME callee);
 		CALL_LIST   getAllCalls();
+		set<string> getAllCaller();
+		string getCallerName(STATEMENT_NUM cIndex);
+		string getCalleeName(STATEMENT_NUM cIndex);
+		set<int> getAllCallerStmt();
+		STATEMENT_NUM getCallStmt(PROC_NAME caller, PROC_NAME callee);
 
 		//Functions of constant table
 		CONSTANT_INDEX insertConst(int constantValue);
