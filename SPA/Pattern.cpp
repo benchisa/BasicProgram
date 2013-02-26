@@ -30,6 +30,7 @@ RELATION_LIST Pattern::evaluatePattern(QTREE * qtree, QUERYTABLE * qtable, QUERY
 	bool subFlag;
 	pair<int, int> result;
 	RELATION_LIST::iterator itr;
+	INDEX ctrl;
 
 	currentNode = qtree->getFirstDescendant();
 	patternNode = qtree->getRightSibling();
@@ -97,13 +98,25 @@ RELATION_LIST Pattern::evaluatePattern(QTREE * qtree, QUERYTABLE * qtable, QUERY
 				}
 				//data = p->getAllAssigns();
 			}else if(pType == WHILE) {
-
-				//check while table
-				data = p->getAllWhiles();
+				for(int x = 1; x != p->getMaxStatementNum()+1; x++) {
+					ctrl = p->getWhileCtrVar(x);
+					//compare prefixTree between WHILETABLE and QueryTree
+					if(varIndex == 0 || ex == "_") {
+						rlist.push_back(make_pair(x, varIndex));
+					}else if(ctrl == varIndex) {
+						rlist.push_back(make_pair(x, varIndex));
+					}
+				}
 			}else if(pType == IF) {
-
-				//check if table
-				data = p->getAllIfs();
+				for(int x = 1; x != p->getMaxStatementNum()+1; x++) {
+					ctrl = p->getIfCtrVar(x);
+					//compare prefixTree between WHILETABLE and QueryTree
+					if(varIndex == 0 || ex == "_") {
+						rlist.push_back(make_pair(x, varIndex));
+					}else if(ctrl == varIndex) {
+							rlist.push_back(make_pair(x, varIndex));
+					}
+				}
 			}
 		}
 
