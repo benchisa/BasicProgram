@@ -163,16 +163,43 @@ bool DesignExtractor::getIsCallResult(PROC_NAME caller, PROC_NAME callee)
 CALL_LIST  DesignExtractor::getCallStarResult(PROC_NAME caller, PROC_NAME callee)
 {
 	list<pair<string,string>> finalResult;
-	list<string> firstResult;
-	DesignExtractor::computeCallStar(caller, callee, firstResult);
-	if (firstResult.size()>0)
+	
+	if (caller==" " && callee==" ")
 	{
-		list<string>::iterator itr;
-		for (itr=firstResult.begin(); itr!=firstResult.end(); itr++)
-		{
-			if (caller!=" " && callee==" ")
-			{
+		set<string> caller=pkb->getAllCaller();
+		 std::set<string>::iterator it;
+		 for (it=caller.begin(); it!=caller.end(); it++)
+		 {
+			 
+			 list<string> result;
+			 DesignExtractor::computeCallStar(*it, " ", result);
+			 if (result.size()>0)
+			 {
+				 list<string>::iterator itr;
+				for (itr=result.begin(); itr!=result.end(); itr++)
+				{
+					finalResult.push_back(make_pair(*it, *itr));
+				}
+			 }
 
+		 }
+	}
+	else
+
+	{	
+		
+		list<string> firstResult;
+		DesignExtractor::computeCallStar(caller, callee, firstResult);
+	   if (firstResult.size()>0)
+	   {
+		
+		  list<string>::iterator itr;
+		  for (itr=firstResult.begin(); itr!=firstResult.end(); itr++)
+		  {
+			
+		 	if (caller!=" " && callee==" ")
+			{
+				
 				finalResult.push_back(make_pair(caller, *itr));
 			}
 			else if (callee!=" " && caller==" ")
@@ -180,8 +207,11 @@ CALL_LIST  DesignExtractor::getCallStarResult(PROC_NAME caller, PROC_NAME callee
 
 				finalResult.push_back(make_pair(*itr, callee));
 			}
+			
 		}
+	  }
 	}
+	
 	return finalResult;
 
 }
@@ -190,10 +220,11 @@ bool DesignExtractor::getIsCallStarResult(PROC_NAME caller, PROC_NAME callee)
 {
 	if (caller!=" " && callee!=" ")
 	{
+		
 		CALL_LIST result=DesignExtractor::getCallStarResult(caller," ");
 		CALL_LIST::iterator itr;
 		if (!result.empty())
-		{
+		{ 
 			for (itr=result.begin(); itr!=result.end(); itr++)
 			{
 				if (caller==itr->first && callee==itr->second)
@@ -206,7 +237,6 @@ bool DesignExtractor::getIsCallStarResult(PROC_NAME caller, PROC_NAME callee)
 	}
 	return false;
 }
-
 
 bool DesignExtractor::isStatementTypeOf(TYPE typeName,STATEMENT_NUM stmtNum){
 	//find the type of statement
@@ -730,58 +760,161 @@ bool DesignExtractor::getIsUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 	return result;
 }
 
-MODIFIES_LIST computeCallModifies(STATEMENT_NUM callStmt,VAR_INDEX varIndex){
+MODIFIES_LIST DesignExtractor::computeCallModifies(STATEMENT_NUM callStmt,VAR_INDEX varIndex){
 	MODIFIES_LIST resultList;
-
+			
 	if(callStmt==0&&varIndex==-1){
 		
+		set<int> callStmt=pkb->getAllCallerStmt();
+		set<int>::iterator s_itr;
+		for (s_itr=callStmt.begin();s_itr!=callStmt.end(); s_itr++)
+		{
+			string calleeName=pkb->getCalleeName(*s_itr);
+			if (calleeName!=" ")
+			{
+				MODIFIES_LIST m_list=pkb->getModifies(PROCEDURE, pkb->getProcIndex(calleeName), 0);
+				MODIFIES_LIST::iterator m_itr;
+				for (m_itr=m_list.begin(); m_itr!=m_list.end(); m_itr++)
+				{
+					resultList.push_back(make_pair(*s_itr,m_itr->second));
+				}
+			}
+		}
 	}else if(callStmt!=0&&varIndex==-1){
+
+	
+		string calleeName=pkb->getCalleeName(callStmt);
+		if (calleeName!=" ")
+		{
+			MODIFIES_LIST m_list=pkb->getModifies(PROCEDURE, pkb->getProcIndex(calleeName), 0);
+			MODIFIES_LIST::iterator m_itr;
+			for (m_itr=m_list.begin(); m_itr!=m_list.end(); m_itr++)
+			{
+				resultList.push_back(make_pair(callStmt,m_itr->second));
+			}
+		}
+		
+
+
 	
 	}else if(callStmt==0&&varIndex!=-1){
 	
-	}else{
-	
+		
+		MODIFIES_LIST m_list=pkb->getModifies(PROCEDURE, 0,varIndex);
+		MODIFIES_LIST::iterator m_itr;
+		MODIFIES_LIST::iterator m_itr2;
+		for (m_itr=m_list.begin(); m_itr!=m_list.end(); m_itr++)
+		{
+			for (m_itr2=m_list.begin(); m_itr2!=m_list.end(); m_itr2++)
+			{
+				string callerName=pkb->getProcedure(m_itr->first)->getProcName();
+				string calleeName=pkb->getProcedure(m_itr2->first)->getProcName();
+				
+				int callStmt=pkb->getCallStmt(callerName, calleeName);
+				if (callStmt!=0)
+				{	
+					
+					resultList.push_back(make_pair(callStmt, varIndex));
+				}
+			}
+		}
 	}
 	return resultList;
 }
-bool isCallModifies(STATEMENT_NUM callStmt,VAR_INDEX varIndex){
-	if(callStmt==0&&varIndex==-1){
-	
-	}else if(callStmt!=0&&varIndex==-1){
-	
-	}else if(callStmt==0&&varIndex!=-1){
-	
-	}else{
-	
+bool DesignExtractor::isCallModifies(STATEMENT_NUM callStmt,VAR_INDEX varIndex){
+	if (callStmt!=0 && varIndex!=-1)
+	{
+		MODIFIES_LIST m_list=DesignExtractor::computeCallModifies(callStmt, -1);
+		MODIFIES_LIST::iterator m_itr;
+		for (m_itr=m_list.begin(); m_itr!=m_list.end(); m_itr++)
+		{
+			if (m_itr->first==callStmt && m_itr->second==varIndex)
+			{
+				return true;
+			}
+		}
 	}
 
-	return true;
+	return false;
 }
-USES_LIST computeCallUses(STATEMENT_NUM callStmt,VAR_INDEX varIndex){
+USES_LIST DesignExtractor::computeCallUses(STATEMENT_NUM callStmt,VAR_INDEX varIndex){
 	USES_LIST resultList;
 
 	if(callStmt==0&&varIndex==-1){
-	
+		
+		set<int> callStmt=pkb->getAllCallerStmt();
+		set<int>::iterator s_itr;
+		for (s_itr=callStmt.begin();s_itr!=callStmt.end(); s_itr++)
+		{
+			string calleeName=pkb->getCalleeName(*s_itr);
+			if (calleeName!=" ")
+			{
+				USES_LIST u_list=pkb->getUses(PROCEDURE, pkb->getProcIndex(calleeName), 0);
+				USES_LIST::iterator u_itr;
+				for (u_itr=u_list.begin(); u_itr!=u_list.end(); u_itr++)
+				{
+					resultList.push_back(make_pair(*s_itr,u_itr->second));
+				}
+			}
+		}
 	}else if(callStmt!=0&&varIndex==-1){
+
+	
+		string calleeName=pkb->getCalleeName(callStmt);
+		if (calleeName!=" ")
+		{
+			USES_LIST u_list=pkb->getUses(PROCEDURE, pkb->getProcIndex(calleeName), 0);
+			USES_LIST::iterator u_itr;
+			for (u_itr=u_list.begin(); u_itr!=u_list.end(); u_itr++)
+			{
+				resultList.push_back(make_pair(callStmt,u_itr->second));
+			}
+		}
+		
+
+
 	
 	}else if(callStmt==0&&varIndex!=-1){
 	
-	}else{
-	
+		
+		USES_LIST u_list=pkb->getUses(PROCEDURE, 0,varIndex);
+		USES_LIST::iterator u_itr;
+		USES_LIST::iterator u_itr2;
+		for (u_itr=u_list.begin(); u_itr!=u_list.end(); u_itr++)
+		{
+			for (u_itr2=u_list.begin(); u_itr2!=u_list.end(); u_itr2++)
+			{
+				string callerName=pkb->getProcedure(u_itr->first)->getProcName();
+				string calleeName=pkb->getProcedure(u_itr2->first)->getProcName();
+				
+				int callStmt=pkb->getCallStmt(callerName, calleeName);
+				if (callStmt!=0)
+				{	
+					
+					resultList.push_back(make_pair(callStmt, varIndex));
+				}
+			}
+		}
 	}
 	return resultList;
 }
-bool isCallUses(STATEMENT_NUM callStmt,VAR_INDEX varIndex){
-	if(callStmt==0&&varIndex==-1){
-	
-	}else if(callStmt!=0&&varIndex==-1){
-	
-	}else if(callStmt==0&&varIndex!=-1){
-	
-	}else{
-	
+bool DesignExtractor::isCallUses(STATEMENT_NUM callStmt,VAR_INDEX varIndex){
+	if (callStmt!=0 && varIndex!=-1)
+	{
+		
+		USES_LIST u_list=DesignExtractor::computeCallUses(callStmt, -1);
+		USES_LIST::iterator u_itr;
+		for (u_itr=u_list.begin(); u_itr!=u_list.end(); u_itr++)
+		{
+			
+			if (u_itr->first==callStmt && u_itr->second==varIndex)
+			{
+				return true;
+			}
+		}
 	}
-	return true;
+
+	return false;
 }
 //above done with testing//
 
@@ -1093,6 +1226,7 @@ void  DesignExtractor::computeCallStar(PROC_NAME caller, PROC_NAME callee,list<s
 
 		}
 	}
+	
 }
 
 DATA_LIST * DesignExtractor::getAllConstants(){
@@ -1177,4 +1311,33 @@ DATA_LIST * DesignExtractor::getStmtListOf(TYPE nodeType){
 		break;
 	}
 	return returnList;
+}
+
+void DesignExtractor::insertProcModifiesUses()
+{
+	list<CALL_PAIR> procs=DesignExtractor::getCallStarResult(" "," ");
+	list<CALL_PAIR>::iterator c_itr;
+
+	for (c_itr=procs.begin(); c_itr!=procs.end(); c_itr++)
+	{  
+		int callerIndex=pkb->getProcIndex(c_itr->first);
+		int calleeIndex=pkb->getProcIndex(c_itr->second);
+		 
+		MODIFIES_LIST m_list=pkb->getModifies(PROCEDURE, calleeIndex, 0);
+		USES_LIST u_list=pkb->getUses(PROCEDURE, calleeIndex, 0);
+
+		MODIFIES_LIST::iterator m_itr;
+		USES_LIST::iterator u_itr;
+
+		for (m_itr=m_list.begin(); m_itr!=m_list.end(); m_itr++)
+		{
+			pkb->insertModifies(PROCEDURE, callerIndex, m_itr->second);
+		}
+
+		for (u_itr=u_list.begin(); u_itr!=u_list.end(); u_itr++)
+		{
+			pkb->insertUses(PROCEDURE, callerIndex, u_itr->second);
+		}	
+
+	}
 }
