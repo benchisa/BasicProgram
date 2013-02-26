@@ -3,65 +3,89 @@
 
 CallTable::CallTable(void){
 
-	callDictionary=new unordered_multimap<PROC_NAME, PROC_NAME>;
+	callDictionary=new unordered_multimap<PROC_NAME, pair<int,PROC_NAME>>();
 	counter=0;
 }
 CallTable::~CallTable(void){}
 
-CALL_INDEX CallTable::insertCall(PROC_NAME caller, PROC_NAME callee)
+CALL_INDEX CallTable::insertCall(PROC_NAME caller,STATEMENT_NUM callStmt, PROC_NAME callee)
 {
-
-	if (caller!=" " && callee!=" ")
-	{   
-		
+	if (callStmt>0 && caller!= " " && callee != " ")
+	{
 		callItr c_itr=callDictionary->find(caller);
 		if (c_itr==callDictionary->end())
 		{
-			callDictionary->insert(CALL_PAIR(caller, callee));
+			callDictionary->insert(make_pair(caller, make_pair(callStmt, callee)));
 			
 		}
 		else
 		{
 			bool exist=false;
-			
+			int internalCounter=1;
 		    for (c_itr; c_itr!=callDictionary->end(); c_itr++)
 			{
 			
-				if (c_itr->first==caller &&c_itr->second==callee)
+				if (c_itr->first==caller )
 				{	
-					exist=true;
-					break;
+					pair<int,PROC_NAME> temp=c_itr->second;
+
+					if (temp.first==callStmt && temp.second!=callee)
+					{
+						return -1;
+					}
+					else if (temp.first==callStmt && temp.second==callee)
+					{
+						exist=true;
+						break;
+					}
+						
 				}
+				internalCounter++;
 			}
+
 			if (!exist)
 			{
-				callDictionary->insert(CALL_PAIR(caller, callee));
+				callDictionary->insert(make_pair(caller, make_pair(callStmt, callee)));
 				
 			}
+			else
+			{
+				return internalCounter;
+			}
 		}
+
 		counter++;
 		return counter;
-		
 	}
-	else 
+	else
 	{
 		return -1;
 	}
 }
+
 CALL_PAIR CallTable::getCallPair(CALL_INDEX index)
-{
-	callItr c_itr;
+{	
+	CALL_PAIR answer=make_pair(" ", " ");
+	if (counter<index || index<1)
+	{
+		return answer;
+	}
+	else
+	{
+		callItr c_itr;
 	int internalCounter=1;
-	CALL_PAIR answer=make_pair("", "");
+	
 	for (c_itr=callDictionary->begin(); c_itr!=callDictionary->end(); c_itr++)
 	{
 		if (internalCounter==index)
 		{
-			answer=make_pair(c_itr->first, c_itr->second);
+			answer=make_pair(c_itr->first, c_itr->second.second);
 		}
 		internalCounter++;
 	}
 	return answer;
+	}
+	
 }
 
 CALL_INDEX CallTable::getCallPairIndex(PROC_NAME caller,PROC_NAME callee)
@@ -73,7 +97,7 @@ CALL_INDEX CallTable::getCallPairIndex(PROC_NAME caller,PROC_NAME callee)
 		for (c_itr=callDictionary->begin(); c_itr!=callDictionary->end(); c_itr++)
 		{
 
-			if (c_itr->first==caller && c_itr->second==callee)
+			if (c_itr->first==caller && c_itr->second.second==callee)
 			{
 			return internalCounter;
 			}
@@ -95,7 +119,7 @@ bool CallTable::isExistsCall(PROC_NAME caller,PROC_NAME callee)
 		for (c_itr=callDictionary->begin(); c_itr!=callDictionary->end(); c_itr++)
 		{
 
-			if (c_itr->first==caller && c_itr->second==callee)
+			if (c_itr->first==caller && c_itr->second.second==callee)
 			{
 				return true;
 			}
@@ -108,7 +132,7 @@ bool CallTable::isExistsCall(PROC_NAME caller,PROC_NAME callee)
 	
 }
 
-CALL_LIST  CallTable::getCall(PROC_NAME caller,PROC_NAME callee)
+list<CALL_PAIR> CallTable::getCall(PROC_NAME caller,PROC_NAME callee)
 {
 	list<CALL_PAIR>  answer;
 	callItr c_itr;
@@ -122,14 +146,14 @@ CALL_LIST  CallTable::getCall(PROC_NAME caller,PROC_NAME callee)
 			{
 				if (c_itr->first==caller)
 				{
-					answer.push_back(CALL_PAIR(c_itr->first, c_itr->second));
+					answer.push_back(CALL_PAIR(caller, c_itr->second.second));
 				}
 			}
 			else if (caller==" "  && callee!=" ")
 			{
-				if (c_itr->second==callee)
+				if (c_itr->second.second==callee)
 				{
-					answer.push_back(CALL_PAIR(c_itr->first, c_itr->second));
+					answer.push_back(CALL_PAIR(c_itr->first, callee));
 				}
 			} 
 		}
@@ -138,7 +162,7 @@ CALL_LIST  CallTable::getCall(PROC_NAME caller,PROC_NAME callee)
 	{
 		for (c_itr=callDictionary->begin(); c_itr!=callDictionary->end(); c_itr++)
 		{
-			answer.push_back(CALL_PAIR(c_itr->first, c_itr->second));
+			answer.push_back(CALL_PAIR(c_itr->first, c_itr->second.second));
 		}
 	}
 	
@@ -153,7 +177,7 @@ CALL_LIST   CallTable::getAllCalls()
 	callItr c_itr;
 	for (c_itr=callDictionary->begin(); c_itr!=callDictionary->end(); c_itr++)
 	{
-		answer.push_back(make_pair(c_itr->first, c_itr->second));
+		answer.push_back(make_pair(c_itr->first, c_itr->second.second));
 	}
 
 	return answer;
@@ -163,3 +187,65 @@ SIZE CallTable::getCallTableSize()
 	return counter;	
 }
 
+set<string> CallTable::getAllCaller()
+{
+	set<string> answer;
+	callItr c_itr;
+	for (c_itr=callDictionary->begin(); c_itr!=callDictionary->end(); c_itr++)
+	{
+		answer.insert(c_itr->first);
+	}
+	return answer;
+}
+
+string CallTable::getCallerName(STATEMENT_NUM cIndex)
+{
+	callItr c_itr;
+	
+	for (c_itr=callDictionary->begin(); c_itr!=callDictionary->end(); c_itr++)
+	{
+		if (c_itr->second.first==cIndex)
+		{
+			return c_itr->first;
+		}
+
+	}
+	return " ";
+}
+
+string CallTable::getCalleeName(STATEMENT_NUM cIndex)
+{
+	callItr c_itr;
+	
+	for (c_itr=callDictionary->begin(); c_itr!=callDictionary->end(); c_itr++)
+	{
+		if (c_itr->second.first==cIndex)
+		{
+			return c_itr->second.second;
+		}
+	}
+	return " ";
+}
+
+set<int> CallTable::getAllCallerStmt()
+{
+	set<int> answer;
+	callItr c_itr;
+	for (c_itr=callDictionary->begin(); c_itr!=callDictionary->end(); c_itr++)
+	{
+		answer.insert(c_itr->second.first);
+	}
+	return answer;
+}
+STATEMENT_NUM CallTable::getCallStmt(PROC_NAME caller, PROC_NAME callee)
+{
+	callItr c_itr;
+	for (c_itr=callDictionary->begin(); c_itr!=callDictionary->end(); c_itr++)
+	{
+		if (c_itr->first==caller && c_itr->second.second==callee)
+		{
+			return c_itr->second.first;
+		}
+	}
+	return 0;
+}
