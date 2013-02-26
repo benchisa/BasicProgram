@@ -28,6 +28,7 @@ public:
 	bool getIsCallResult(PROC_NAME caller, PROC_NAME callee);
 	CALL_LIST  getCallStarResult(PROC_NAME caller, PROC_NAME callee);
 	bool getIsCallStarResult(PROC_NAME caller, PROC_NAME callee);
+	void insertProcModifiesUses();
 
 	//from such that, need revamp
 	FOLLOWS_LIST getFollowsResult(TYPE type, STATEMENT_NUM s1, STATEMENT_NUM s2);
