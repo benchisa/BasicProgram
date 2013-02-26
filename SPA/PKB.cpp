@@ -310,9 +310,9 @@ VAR_LIST* PKB::getAllVar()
 
 //Function of CallTable
 
-CALL_INDEX PKB::insertCall(PROC_NAME caller, PROC_NAME callee)
+CALL_INDEX PKB::insertCall( PROC_NAME caller,STATEMENT_NUM callStmt, PROC_NAME callee)
 {
-	return callTable->insertCall(caller, callee);
+	return callTable->insertCall(caller,callStmt, callee);
 }
 
 SIZE PKB::getCallTableSize()
@@ -320,7 +320,7 @@ SIZE PKB::getCallTableSize()
 	return callTable->getCallTableSize();
 }
 
-list<CALL_PAIR>  PKB::getCall(PROC_NAME caller,PROC_NAME callee)
+CALL_LIST  PKB::getCall(PROC_NAME caller,PROC_NAME callee)
 {
 	return callTable->getCall(caller, callee);
 }
@@ -343,6 +343,30 @@ CALL_LIST  PKB::getAllCalls()
 {
 	return callTable->getAllCalls();
 }
+set<string> PKB::getAllCaller()
+{
+	return callTable->getAllCaller();
+}
+
+string PKB::getCallerName(STATEMENT_NUM cIndex)
+{
+	return callTable->getCallerName(cIndex);
+
+}
+string PKB::getCalleeName(STATEMENT_NUM cIndex)
+{
+	return callTable->getCalleeName(cIndex);
+
+}
+set<int> PKB::getAllCallerStmt()
+{
+	return callTable->getAllCallerStmt();
+}
+STATEMENT_NUM PKB::getCallStmt(PROC_NAME caller, PROC_NAME callee)
+{
+	return callTable->getCallStmt(caller, callee);
+}
+
 
 //Functions of constant table
 CONSTANT_INDEX PKB::insertConst(int constantValue)
