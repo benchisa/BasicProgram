@@ -20,7 +20,7 @@ Pattern::~Pattern(void)
 
 
 RELATION_LIST Pattern::evaluatePattern(QTREE * patternNode, QUERYTABLE * qtable, QUERYPARAM * param) {
-	QTREE *patternNode, * qVar, * paramNode, *varNode, *expr;
+	QTREE * qVar, * paramNode, *varNode, *expr;
 	TYPE pType, qType, paramType;
 	VAR_INDEX qVarIndex, varIndex;
 	string subexp, varName;
@@ -33,7 +33,6 @@ RELATION_LIST Pattern::evaluatePattern(QTREE * patternNode, QUERYTABLE * qtable,
 	INDEX ctrl;
 
 	//check if query contains Pattern
-		if(patternNode->getType() == PATTERN) {
 			qVar = patternNode->getFirstDescendant();
 			pType = qtable->at(qVar->getData());
 				varNode = qVar->getFirstDescendant();
@@ -116,10 +115,7 @@ RELATION_LIST Pattern::evaluatePattern(QTREE * patternNode, QUERYTABLE * qtable,
 					}
 				}
 			}
-		}
-
-	//}
-	delete patternNode, qVar, paramNode, varNode;
+	delete patternNode, qVar, paramNode, varNode, expr;
 	return rlist;
 }
 
