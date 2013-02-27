@@ -20,12 +20,12 @@ Pattern::~Pattern(void)
 
 
 RELATION_LIST Pattern::evaluatePattern(QTREE * patternNode, QUERYTABLE * qtable, QUERYPARAM * param) {
-	QTREE * qVar, * paramNode, *varNode, *expr;
+	QTREE * qVar, * paramNode, *varNode, *expr, *patternTree;
 	TYPE pType, qType, paramType;
 	VAR_INDEX qVarIndex, varIndex;
 	string subexp, varName;
 	DATA_LIST * data;
-	ASSIGNENTRY entry;
+	//ASSIGNENTRY entry;
 	PREFIXEXPR ex;
 	bool subFlag;
 	pair<int, int> result;
@@ -33,7 +33,8 @@ RELATION_LIST Pattern::evaluatePattern(QTREE * patternNode, QUERYTABLE * qtable,
 	INDEX ctrl;
 
 	//check if query contains Pattern
-			qVar = patternNode->getFirstDescendant();
+			patternTree = patternNode->getRightSibling();
+			qVar = patternTree->getFirstDescendant();
 			pType = qtable->at(qVar->getData());
 				varNode = qVar->getFirstDescendant();
 				paramNode = varNode->getRightSibling();
@@ -69,8 +70,9 @@ RELATION_LIST Pattern::evaluatePattern(QTREE * patternNode, QUERYTABLE * qtable,
 			//check if pattern is Assignment/While/If
 			if(pType == ASSIGNMENT) {
 				//check assignment table and return all statements
-				for(int x = 1; x != p->getMaxStatementNum()+1; x++) {
-					entry = p->getAssignEntry(x);
+					data = p->getAllAssigns();
+					for(DATA_LIST::iterator itr = data->begin(); itr != data->end(); itr++) {
+						ASSIGNENTRY entry = p->getAssignEntry(*itr);
 					//If QueryVar is unknown.
 					//if(varIndex == 0) {
 						//compare prefixTree between AssignTable and QueryTree
@@ -78,40 +80,45 @@ RELATION_LIST Pattern::evaluatePattern(QTREE * patternNode, QUERYTABLE * qtable,
 							if(subFlag == true) {
 								int r = (entry.prefixTree).find(ex);
 								if(r > -1) {
-									rlist.push_back(make_pair(x, varIndex));
+									string temp = entry.prefixTree.substr(r+ex.length(), 1);
+									if(temp == "" || temp == " ") {
+										rlist.push_back(make_pair(*itr, varIndex));
+									}
 								}
 							}else {
 								if(entry.prefixTree == ex) {
-									rlist.push_back(make_pair(x, varIndex));
+									rlist.push_back(make_pair(*itr, varIndex));
 								}
 							}
 						}else {
 							//data = p->getAllAssigns();
 							INDEX rVar = entry.varIndex;
 							if(rVar == varIndex) {
-									rlist.push_back(make_pair(x, varIndex));
+									rlist.push_back(make_pair(*itr, varIndex));
 							}
 						}
 				}
 				//data = p->getAllAssigns();
 			}else if(pType == WHILE) {
-				for(int x = 1; x != p->getMaxStatementNum()+1; x++) {
-					ctrl = p->getWhileCtrVar(x);
+				data = p->getAllWhiles();
+				for(DATA_LIST::iterator itr = data->begin(); itr != data->end(); itr++) {
+					ctrl = p->getWhileCtrVar(*itr);
 					//compare prefixTree between WHILETABLE and QueryTree
 					if(varIndex == 0 || ex == "_") {
-						rlist.push_back(make_pair(x, varIndex));
+						rlist.push_back(make_pair(*itr, varIndex));
 					}else if(ctrl == varIndex) {
-						rlist.push_back(make_pair(x, varIndex));
+						rlist.push_back(make_pair(*itr, varIndex));
 					}
 				}
 			}else if(pType == IF) {
-				for(int x = 1; x != p->getMaxStatementNum()+1; x++) {
-					ctrl = p->getIfCtrVar(x);
+				data = p->getAllIfs();
+				for(DATA_LIST::iterator itr = data->begin(); itr != data->end(); itr++) {
+					ctrl = p->getIfCtrVar(*itr);
 					//compare prefixTree between WHILETABLE and QueryTree
 					if(varIndex == 0 || ex == "_") {
-						rlist.push_back(make_pair(x, varIndex));
+						rlist.push_back(make_pair(*itr, varIndex));
 					}else if(ctrl == varIndex) {
-							rlist.push_back(make_pair(x, varIndex));
+							rlist.push_back(make_pair(*itr, varIndex));
 					}
 				}
 			}

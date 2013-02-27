@@ -100,4 +100,5 @@ public:
 	static QUERY sampleQuery58;
 	static QUERY sampleQuery59;
 	static QUERY sampleQuery60;
+	static QUERY sampleQuery61;
 };

@@ -193,30 +193,32 @@ QUERY SampleQueries::sampleQuery41 = "while w;Select w such that Modifies(_,_);"
 
 //===============Test for Pattern=================== PKB5
 QUERY SampleQueries::sampleQuery42 = "assign a;Select a  pattern a(\"banana\",\"apple+1\");"; //pass
-QUERY SampleQueries::sampleQuery43 = "assign a;Select a  pattern a(_,_);";     //pass 
-QUERY SampleQueries::sampleQuery44 = "while w;Select w  pattern w(\"apple\",_);";  //no prob with qtree,pass
-QUERY SampleQueries::sampleQuery45 = "while w;Select w  pattern w(_,_);"; //no prob with qtree,pass
-QUERY SampleQueries::sampleQuery46 = "assign a;Select a  pattern a(_,_\"apple\"_);";  //no prob with qtree,pass
-QUERY SampleQueries::sampleQuery47 = "assign a;Select a  pattern a(_,\"kimchi\");";  //no prob with qtree
-QUERY SampleQueries::sampleQuery48 = "assign a;Select a  pattern a(\"carrot\",\"2\");"; //no prob with qtree,pass
-QUERY SampleQueries::sampleQuery49 = "assign a;variable v;Select v  pattern a(v,_\"apple\"_);";  //no prob with qtree
+QUERY SampleQueries::sampleQuery43 = "assign a;variable v;Select a  pattern a(v, _\"apple+1\"_);";     //pass 
+QUERY SampleQueries::sampleQuery44 = "assign a;Select a  pattern a(_, _\"apple+10\"_);";     //pass 
+QUERY SampleQueries::sampleQuery45 = "assign a;Select a  pattern a(\"banana\", _);";     //not pass 
+QUERY SampleQueries::sampleQuery46 = "while w;Select w  pattern w(\"apple\",_);";  //no prob with qtree,pass
+QUERY SampleQueries::sampleQuery47 = "while w;Select w  pattern w(_,_);"; //no prob with qtree,pass
+QUERY SampleQueries::sampleQuery48 = "assign a;Select a  pattern a(_,_\"apple\"_);";  //no prob with qtree,pass
+QUERY SampleQueries::sampleQuery49 = "assign a;Select a  pattern a(_,\"kimchi\");";  //no prob with qtree
+QUERY SampleQueries::sampleQuery50 = "assign a;Select a  pattern a(\"carrot\",\"2\");"; //no prob with qtree,pass
+QUERY SampleQueries::sampleQuery51 = "assign a;variable v;Select v  pattern a(v,_\"apple\"_);";  //no prob with qtree
 
 //===============Test for mix of suchthat and pattern=================== PKB5
-QUERY SampleQueries::sampleQuery51 = "assign a;Select a such that Modifies(a,\"carrot\") pattern a(\"carrot\",_);"; //pass
-QUERY SampleQueries::sampleQuery52 = "assign a;Select a such that Uses(a,\"kimchi\") pattern a(\"donut\",_);";    //pass
-QUERY SampleQueries::sampleQuery53 = "assign a;variable v;Select v such that Uses(a,v) pattern a(v,_\"apple\"_);";  //pass
-QUERY SampleQueries::sampleQuery54 = "assign a1,a2;Select a2 such that Parent(_,a1) pattern a1(\"carrot\",_);";  //pass
+QUERY SampleQueries::sampleQuery52 = "assign a;Select a such that Modifies(a,\"carrot\") pattern a(\"carrot\",_);"; //pass
+QUERY SampleQueries::sampleQuery53 = "assign a;Select a such that Uses(a,\"kimchi\") pattern a(\"donut\",_);";    //pass
+QUERY SampleQueries::sampleQuery54 = "assign a;variable v;Select v such that Uses(a,v) pattern a(v,_\"apple\"_);";  //pass
+QUERY SampleQueries::sampleQuery55 = "assign a1,a2;Select a2 such that Parent(_,a1) pattern a1(\"carrot\",_);";  //pass
 
 //===============Test for Boolean=================== PKB5	
-QUERY SampleQueries::sampleQuery55 = "Select BOOLEAN such that Parent(2,3);";
+QUERY SampleQueries::sampleQuery56 = "Select BOOLEAN such that Parent(2,3);";
 //two clauses have relation and need to take intersection
-QUERY SampleQueries::sampleQuery56 = "assign a;Select BOOLEAN such that Modifies(a,\"carrot\") pattern a(\"carrot\",_\"egg\"_);";
+QUERY SampleQueries::sampleQuery57 = "assign a;Select BOOLEAN such that Modifies(a,\"carrot\") pattern a(\"carrot\",_\"egg\"_);";
 //two clauses have no relation
-QUERY SampleQueries::sampleQuery57 = "assign a1,a2;Select BOOLEAN such that Modifies(a1,\"apple\") pattern a2(\"donut\",\"apple\");"; 
-QUERY SampleQueries::sampleQuery58 = "assign a1,a2;Select BOOLEAN such that Modifies(a1,\"carrot\") pattern a2(\"donut\",\"apple\");";
-QUERY SampleQueries::sampleQuery59 = "assign a1,a2;Select BOOLEAN such that Modifies(a1,\"carrot\") pattern a2(\"donut\",\"egg\");"; 
+QUERY SampleQueries::sampleQuery58 = "assign a1,a2;Select BOOLEAN such that Modifies(a1,\"apple\") pattern a2(\"donut\",\"apple\");"; 
+QUERY SampleQueries::sampleQuery59 = "assign a1,a2;Select BOOLEAN such that Modifies(a1,\"carrot\") pattern a2(\"donut\",\"apple\");";
+QUERY SampleQueries::sampleQuery60 = "assign a1,a2;Select BOOLEAN such that Modifies(a1,\"carrot\") pattern a2(\"donut\",\"egg\");"; 
 //test other cases
-QUERY SampleQueries::sampleQuery60 = "assign a;Select BOOLEAN  such that Uses(a,\"vcz\");";
+QUERY SampleQueries::sampleQuery61 = "assign a;Select BOOLEAN  such that Uses(a,\"vcz\");";
 // ==== SamplePKB ====//
 
 PKB* SamplePKB::pkb1(){
