@@ -75,12 +75,13 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 				}
 			}
 			if(relType==MODIFIES){
-				if(extractor->getIsModifiesResult(STATEMENT,firstRel->getData(),secondRel->getData())){
+
+				if(extractor->getIsModifiesResult(firstRel->getType(),firstRel->getData(),secondRel->getData())){
 					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
 				}
 			}
 			if(relType==USES){
-				if(extractor->getIsUsesResult(STATEMENT,firstRel->getData(),secondRel->getData())){
+				if(extractor->getIsUsesResult(firstRel->getType(),firstRel->getData(),secondRel->getData())){
 					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
 				}
 			}

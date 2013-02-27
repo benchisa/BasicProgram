@@ -192,7 +192,7 @@ QUERY SampleQueries::sampleQuery40 = "assign a;Select a such that Modifies(a,\"k
 QUERY SampleQueries::sampleQuery41 = "while w;Select w such that Modifies(_,_);";// <-- works ok
 
 //===============Test for Pattern=================== PKB5
-QUERY SampleQueries::sampleQuery42 = "assign a;Select a  pattern a(\"carrot\",_);"; //pass
+QUERY SampleQueries::sampleQuery42 = "assign a;Select a  pattern a(\"banana\",\"apple+1\");"; //pass
 QUERY SampleQueries::sampleQuery43 = "assign a;Select a  pattern a(_,_);";     //pass 
 QUERY SampleQueries::sampleQuery44 = "while w;Select w  pattern w(\"apple\",_);";  //no prob with qtree,pass
 QUERY SampleQueries::sampleQuery45 = "while w;Select w  pattern w(_,_);"; //no prob with qtree,pass

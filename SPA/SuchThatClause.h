@@ -19,5 +19,6 @@ private:
 	QUERYTABLE* qrTable;
 	RELATION_LIST* evaluateSuchThat();
 	void iterateAndStore(RELATION_LIST *result, RELATION_LIST list);
+
 };
 

@@ -22,16 +22,16 @@ CPPUNIT_TEST_SUITE_REGISTRATION(  QueryPKBTest );
 void QueryPKBTest::testSampleInput1(){
 	SPAController spa;
 
-	spa.enterProgram(SampleSimpleSources::sampleSource4);
+	spa.enterProgram(SampleSimpleSources::sampleSource5);
 	
 
-	FINAL_RESULT result =spa.getQueryResult("Select BOOLEAN such that Uses(2,\"b\");");
+	FINAL_RESULT result =spa.getQueryResult(SampleQueries::sampleQuery42);
 	FINAL_RESULT::iterator itr;
 
-	//cout<<"\n Final result is:";
-	//for(itr = result.begin();itr!=result.end();itr++){
-	//	cout<< *itr <<" "  ;
-	//}
+	cout<<"\n Final result is:";
+	for(itr = result.begin();itr!=result.end();itr++){
+		cout<< *itr <<" "  ;
+	}
 /*	//create PKB
 	PKB *pkb = SamplePKB::pkb5();
 
@@ -70,7 +70,7 @@ void QueryPKBTest::testSampleInput1(){
 }
 
 void QueryPKBTest::testSampleInput2(){
-	SPAController spa;
+	/*SPAController spa;
 	spa.enterProgram(SampleSimpleSources::sampleSource4);
 	
 
@@ -80,6 +80,6 @@ void QueryPKBTest::testSampleInput2(){
 	cout<<"\n Final result is:";
 	for(itr = result.begin();itr!=result.end();itr++){
 		cout<< *itr <<" "  ;
-	}
+	}*/
 	
 }
