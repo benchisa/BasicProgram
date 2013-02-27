@@ -14,7 +14,7 @@ Pattern::Pattern(PKB *pkb)
 Pattern::~Pattern(void)
 {
 	//delete ast;
-	delete p;
+	//delete p;
 	//delete varList;
 }
 
@@ -22,10 +22,8 @@ Pattern::~Pattern(void)
 RELATION_LIST Pattern::evaluatePattern(QTREE * patternNode, QUERYTABLE * qtable, QUERYPARAM * param) {
 	QTREE * qVar, * paramNode, *varNode, *expr, *patternTree;
 	TYPE pType, qType, paramType;
-	VAR_INDEX qVarIndex, varIndex;
-	string subexp, varName;
+	VAR_INDEX varIndex;
 	DATA_LIST * data;
-	//ASSIGNENTRY entry;
 	PREFIXEXPR ex;
 	bool subFlag;
 	pair<int, int> result;
