@@ -14,13 +14,13 @@ Pattern::Pattern(PKB *pkb)
 Pattern::~Pattern(void)
 {
 	//delete ast;
-	//delete p;
+	delete p;
 	//delete varList;
 }
 
 
-RELATION_LIST Pattern::evaluatePattern(QTREE * qtree, QUERYTABLE * qtable, QUERYPARAM * param) {
-	QTREE *currentNode, *rootNode, * patternNode, * qVar, * paramNode, *varNode, *expr;
+RELATION_LIST Pattern::evaluatePattern(QTREE * patternNode, QUERYTABLE * qtable, QUERYPARAM * param) {
+	QTREE *patternNode, * qVar, * paramNode, *varNode, *expr;
 	TYPE pType, qType, paramType;
 	VAR_INDEX qVarIndex, varIndex;
 	string subexp, varName;
@@ -32,8 +32,6 @@ RELATION_LIST Pattern::evaluatePattern(QTREE * qtree, QUERYTABLE * qtable, QUERY
 	RELATION_LIST::iterator itr;
 	INDEX ctrl;
 
-	currentNode = qtree->getFirstDescendant();
-	patternNode = qtree->getRightSibling();
 	//check if query contains Pattern
 		if(patternNode->getType() == PATTERN) {
 			qVar = patternNode->getFirstDescendant();
@@ -121,7 +119,7 @@ RELATION_LIST Pattern::evaluatePattern(QTREE * qtree, QUERYTABLE * qtable, QUERY
 		}
 
 	//}
-	delete currentNode, rootNode, patternNode, qVar, paramNode, varNode;
+	delete patternNode, qVar, paramNode, varNode;
 	return rlist;
 }
 
