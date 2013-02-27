@@ -760,7 +760,7 @@ bool DesignExtractor::getIsUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 	return result;
 }
 
-MODIFIES_LIST DesignExtractor::computeCallModifies2(STATEMENT_NUM callStmt,VAR_INDEX varIndex){
+MODIFIES_LIST DesignExtractor::computeCallModifies(STATEMENT_NUM callStmt,VAR_INDEX varIndex){
 	MODIFIES_LIST resultList;
 			
 	if(callStmt==0&&varIndex==0){
@@ -810,11 +810,11 @@ MODIFIES_LIST DesignExtractor::computeCallModifies2(STATEMENT_NUM callStmt,VAR_I
 				string callerName=pkb->getProcedure(m_itr->first)->getProcName();
 				string calleeName=pkb->getProcedure(m_itr2->first)->getProcName();
 				
-				int callStmt=pkb->getCallStmt(callerName, calleeName);
-				if (callStmt!=0)
+				int callerStmt=pkb->getCallStmt(callerName, calleeName);
+				if (callerStmt!=0)
 				{	
 					
-					resultList.push_back(make_pair(callStmt, varIndex));
+					resultList.push_back(make_pair(callerStmt, varIndex));
 				}
 			}
 		}
@@ -822,50 +822,11 @@ MODIFIES_LIST DesignExtractor::computeCallModifies2(STATEMENT_NUM callStmt,VAR_I
 	return resultList;
 }
 
-MODIFIES_LIST DesignExtractor::computeCallModifies(STATEMENT_NUM callStmt,VAR_INDEX varIndex){
-	MODIFIES_LIST resultList;
-			
-	if(callStmt==0&&varIndex==0){
-		
-		vector<int> callStmt=pkb->getAllCallerStmt();
-		vector<int>::iterator s_itr;
-		for (s_itr=callStmt.begin();s_itr!=callStmt.end(); s_itr++)
-		{
-			string callerName=pkb->getCallerName(*s_itr);
-			if (callerName!=" ")
-			{
-				MODIFIES_LIST m_list=pkb->getModifies(PROCEDURE, pkb->getProcIndex(callerName), 0);
-				MODIFIES_LIST::iterator m_itr;
-				for (m_itr=m_list.begin(); m_itr!=m_list.end(); m_itr++)
-				{
-					resultList.push_back(make_pair(m_itr->first,m_itr->second));
-				}
-			}
-		}
-	}else if(callStmt!=0&&varIndex==0){
 
-	
-		string callerName=pkb->getCallerName(callStmt);
-		if (callerName!=" ")
-		{
-			resultList=pkb->getModifies(PROCEDURE, pkb->getProcIndex(callerName), 0);
-			
-		}
-		
-
-
-	
-	}else if(callStmt==0&&varIndex!=0){
-	
-		resultList=DesignExtractor::computeCallModifies2(callStmt, varIndex);
-		
-	}
-	return resultList;
-}
 bool DesignExtractor::isCallModifies(STATEMENT_NUM callStmt,VAR_INDEX varIndex){
 	if (callStmt!=0 && varIndex!=-1)
 	{
-		MODIFIES_LIST m_list=DesignExtractor::computeCallModifies(callStmt, -1);
+		MODIFIES_LIST m_list=DesignExtractor::computeCallModifies(callStmt, 0);
 		MODIFIES_LIST::iterator m_itr;
 		for (m_itr=m_list.begin(); m_itr!=m_list.end(); m_itr++)
 		{
@@ -928,11 +889,11 @@ USES_LIST DesignExtractor::computeCallUses(STATEMENT_NUM callStmt,VAR_INDEX varI
 				string callerName=pkb->getProcedure(u_itr->first)->getProcName();
 				string calleeName=pkb->getProcedure(u_itr2->first)->getProcName();
 				
-				int callStmt=pkb->getCallStmt(callerName, calleeName);
-				if (callStmt!=0)
+				int callerStmt=pkb->getCallStmt(callerName, calleeName);
+				if (callerStmt!=0)
 				{	
 					
-					resultList.push_back(make_pair(callStmt, varIndex));
+					resultList.push_back(make_pair(callerStmt, varIndex));
 				}
 			}
 		}
@@ -940,52 +901,12 @@ USES_LIST DesignExtractor::computeCallUses(STATEMENT_NUM callStmt,VAR_INDEX varI
 	return resultList;
 }
 
-USES_LIST DesignExtractor::computeCallUses2(STATEMENT_NUM callStmt,VAR_INDEX varIndex){
-	USES_LIST resultList;
 
-	if(callStmt==0&&varIndex==0){
-		
-		vector<int> callStmt=pkb->getAllCallerStmt();
-		vector<int>::iterator s_itr;
-		for (s_itr=callStmt.begin();s_itr!=callStmt.end(); s_itr++)
-		{
-			string callerName=pkb->getCallerName(*s_itr);
-			if (callerName!=" ")
-			{
-				USES_LIST u_list=pkb->getUses(PROCEDURE, pkb->getProcIndex(callerName), 0);
-				USES_LIST::iterator u_itr;
-				for (u_itr=u_list.begin(); u_itr!=u_list.end(); u_itr++)
-				{
-					resultList.push_back(make_pair(u_itr->first,u_itr->second));
-				}
-			}
-		}
-	}else if(callStmt!=0&&varIndex==0){
-
-	
-		string callerName=pkb->getCallerName(callStmt);
-		if (callerName!=" ")
-		{
-			resultList=pkb->getUses(PROCEDURE, pkb->getProcIndex(callerName), 0);
-			
-		}
-		
-
-
-	
-	}else if(callStmt==0&&varIndex!=0){
-	
-		
-		resultList=DesignExtractor::computeCallUses2(callStmt, varIndex);
-		
-	}
-	return resultList;
-}
 bool DesignExtractor::isCallUses(STATEMENT_NUM callStmt,VAR_INDEX varIndex){
 	if (callStmt!=0 && varIndex!=0)
 	{
 		
-		USES_LIST u_list=DesignExtractor::computeCallUses(callStmt, -1);
+		USES_LIST u_list=DesignExtractor::computeCallUses(callStmt, 0);
 		USES_LIST::iterator u_itr;
 		for (u_itr=u_list.begin(); u_itr!=u_list.end(); u_itr++)
 		{
