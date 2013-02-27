@@ -227,13 +227,13 @@ string CallTable::getCalleeName(STATEMENT_NUM cIndex)
 	return " ";
 }
 
-set<int> CallTable::getAllCallerStmt()
+DATA_LIST CallTable::getAllCallerStmt()
 {
-	set<int> answer;
+	DATA_LIST answer;
 	callItr c_itr;
 	for (c_itr=callDictionary->begin(); c_itr!=callDictionary->end(); c_itr++)
 	{
-		answer.insert(c_itr->second.first);
+		answer.push_back(c_itr->second.first);
 	}
 	return answer;
 }
