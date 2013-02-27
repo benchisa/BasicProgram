@@ -25,6 +25,7 @@ public:
 	int getCallerStmt(PROC_NAME calleeName);
 	DATA_LIST getAllCallerStmt();
 	STATEMENT_NUM getCallStmt(PROC_NAME caller, PROC_NAME callee);
+	bool isExistCallStmt(STATEMENT_NUM callStmt);
 
 private:
 	int counter;
