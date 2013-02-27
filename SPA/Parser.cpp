@@ -247,7 +247,7 @@ bool Parser::stmt_call(){
 		if(name()){
 
 			// add to call table
-			pkb->insertCall(curProc, prevToken);
+			pkb->insertCall(pkb->getProcedure(curProcIndex)->getProcName(), stmt_num, prevToken);
 
 			// create AST
 			AST *callNode = pkb->createAST(CALL, prevProgLine, stmt_num, pkb->getProcIndex(prevToken));
