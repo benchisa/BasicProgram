@@ -249,3 +249,15 @@ STATEMENT_NUM CallTable::getCallStmt(PROC_NAME caller, PROC_NAME callee)
 	}
 	return 0;
 }
+bool CallTable::isExistCallStmt(STATEMENT_NUM callStmt)
+{
+	callItr c_itr;
+	for (c_itr=callDictionary->begin(); c_itr!=callDictionary->end(); c_itr++)
+	{
+		if (c_itr->second.first==callStmt)
+		{
+			return true;
+		}
+	}
+	return false;
+}
