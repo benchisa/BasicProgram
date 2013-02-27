@@ -366,6 +366,11 @@ STATEMENT_NUM PKB::getCallStmt(PROC_NAME caller, PROC_NAME callee)
 {
 	return callTable->getCallStmt(caller, callee);
 }
+bool PKB::isExistCallStmt(STATEMENT_NUM callStmt)
+{
+	
+	return callTable->isExistCallStmt(callStmt);
+}
 
 
 //Functions of constant table
