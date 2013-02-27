@@ -196,11 +196,11 @@ QUERY SampleQueries::sampleQuery42 = "assign a;Select a  pattern a(\"banana\",\"
 QUERY SampleQueries::sampleQuery43 = "assign a;variable v;Select a  pattern a(v, _\"apple+1\"_);";     //pass 
 QUERY SampleQueries::sampleQuery44 = "assign a;Select a  pattern a(_, _\"apple+10\"_);";     //pass 
 QUERY SampleQueries::sampleQuery45 = "assign a;Select a  pattern a(\"banana\", _);";     //not pass 
-QUERY SampleQueries::sampleQuery46 = "while w;Select w  pattern w(\"apple\",_);";  //no prob with qtree,pass
-QUERY SampleQueries::sampleQuery47 = "while w;Select w  pattern w(_,_);"; //no prob with qtree,pass
-QUERY SampleQueries::sampleQuery48 = "assign a;Select a  pattern a(_,_\"apple\"_);";  //no prob with qtree,pass
-QUERY SampleQueries::sampleQuery49 = "assign a;Select a  pattern a(_,\"kimchi\");";  //no prob with qtree
-QUERY SampleQueries::sampleQuery50 = "assign a;Select a  pattern a(\"carrot\",\"2\");"; //no prob with qtree,pass
+QUERY SampleQueries::sampleQuery46 = "while w;Select w  pattern w(\"apple\",_);";  //pass
+QUERY SampleQueries::sampleQuery47 = "while w;Select w  pattern w(_,_);"; //pass
+QUERY SampleQueries::sampleQuery48 = "while w;Select w  pattern w(w,_);";  //pass
+QUERY SampleQueries::sampleQuery49 = "if f;Select f pattern f(_,_)";  //pass
+QUERY SampleQueries::sampleQuery50 = "if f;Select f pattern f(f,_)"; //no prob with qtree,pass
 QUERY SampleQueries::sampleQuery51 = "assign a;variable v;Select v  pattern a(v,_\"apple\"_);";  //no prob with qtree
 
 //===============Test for mix of suchthat and pattern=================== PKB5

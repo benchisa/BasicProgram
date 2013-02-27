@@ -72,7 +72,7 @@ RELATION_LIST Pattern::evaluatePattern(QTREE * patternNode, QUERYTABLE * qtable,
 				//check assignment table and return all statements
 					data = p->getAllAssigns();
 					for(DATA_LIST::iterator itr = data->begin(); itr != data->end(); itr++) {
-						ASSIGNENTRY entry = p->getAssignEntry(*itr);
+						ASSIGNENTRY entry = (*p).getAssignEntry(*itr);
 					//If QueryVar is unknown.
 					//if(varIndex == 0) {
 						//compare prefixTree between AssignTable and QueryTree
@@ -104,8 +104,10 @@ RELATION_LIST Pattern::evaluatePattern(QTREE * patternNode, QUERYTABLE * qtable,
 				for(DATA_LIST::iterator itr = data->begin(); itr != data->end(); itr++) {
 					ctrl = p->getWhileCtrVar(*itr);
 					//compare prefixTree between WHILETABLE and QueryTree
-					if(varIndex == 0 || ex == "_") {
-						rlist.push_back(make_pair(*itr, varIndex));
+					if(varIndex == 0) {
+						if(ex == "_") { 
+							rlist.push_back(make_pair(*itr, varIndex));
+						}
 					}else if(ctrl == varIndex) {
 						rlist.push_back(make_pair(*itr, varIndex));
 					}
