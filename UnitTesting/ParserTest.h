@@ -10,7 +10,7 @@ class ParserTest : public CPPUNIT_NS::TestFixture // Note 2
 	CPPUNIT_TEST( testCorrectSource );
 	CPPUNIT_TEST( testGetLastError);
 	CPPUNIT_TEST( testGetPKB);
-	CPPUNIT_TEST(testOperators);
+	//CPPUNIT_TEST(testOperators);
 	CPPUNIT_TEST(testMultipleProcedures);
 	CPPUNIT_TEST(testIf);
 	CPPUNIT_TEST(testCall);

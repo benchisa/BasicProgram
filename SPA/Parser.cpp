@@ -474,7 +474,10 @@ bool Parser::stmt_assign(){
 	insertFollowsParentForStmt(stmt_num-1, stmt_num);
 
 	if(name()){
+		int tmpVarIndex;
 		curVarIndex = pkb->insertVar(prevToken);
+		tmpVarIndex = curVarIndex;
+		//cout << "curVarIndex: " << curVarIndex << ", prevToken: " << prevToken << "\n";
 		//cout << "insert modifies: " << pkb->getProcedure(curProcIndex)->getProcName() << ", " << prevToken << "\n";
 		pkb->insertModifies(PROCEDURE, curProcIndex, curVarIndex);
 		pkb->insertModifies(ASSIGNMENT, stmt_num, curVarIndex);
@@ -503,7 +506,8 @@ bool Parser::stmt_assign(){
 					curAST = assignNode;
 
 					// add to assigntable
-					pkb->insertAssign(stmt_num, curVarIndex, DesignExtractor::convertExprToPrefix(exp));
+					//cout << "tmpVarIndex: " << tmpVarIndex << "\n";
+					pkb->insertAssign(stmt_num, tmpVarIndex, DesignExtractor::convertExprToPrefix(exp));
 					return true;	
 				}
 				else{
