@@ -598,37 +598,49 @@ MODIFIES_LIST DesignExtractor::getModifiesResult(TYPE type, int arg1, VAR_INDEX 
 	TYPE getStatementType;
 	//cout << "TYPE: " << type << "\n";
 
-	if((type == WHILE  || type == ASSIGNMENT||type == IF)){
+	// Modifies(w, 1)
+	// Modifies(w, 2)
+	// Modifies(c, 2)
+	if((type == WHILE  || type == ASSIGNMENT||type == IF|| type == PROCEDURE)){
 		//cout << "v1: " << pkb->getVarName(v1) << "\n";
 			result = pkb->getModifies(type, arg1, v1);
 
 	}
-	// Modifies(_, "x"), Modifies(1, "x")
+	// modifies(c, 2)
+	// modifies(c, _)
+	else if(type == CALL){
+		result = computeCallModifies(arg1, v1);
+	}
+	
+	// Modifies(1, _), 
 	else if((type == STATEMENT && arg1 != 0 && v1 == 0
 		|| type == ANY && arg1 != 0 && v1 == 0)){
 		// Find the type first
 		astLst = pkb->getASTBy(arg1);
 		astItr = astLst->begin();
-		while(astItr != astLst->end()){
-			if(pkb->getType(*astItr) == WHILE || pkb->getType(*astItr) == ASSIGNMENT||pkb->getType(*astItr)==IF)
-			{
-				getStatementType = pkb->getType(*astItr);
-				result = pkb->getModifies(getStatementType, arg1, v1);
-				break;
+
+		if(pkb->isExistCallStmt(arg1)){
+			result = computeCallModifies(arg1, v1);
+		}
+		else{
+			while(astItr != astLst->end()){
+				if(pkb->getType(*astItr) == WHILE || pkb->getType(*astItr) == ASSIGNMENT||pkb->getType(*astItr)==IF)
+				{
+					getStatementType = pkb->getType(*astItr);
+					result = pkb->getModifies(getStatementType, arg1, v1);
+					break;
+				}
+				astItr++;
 			}
-			astItr++;
 		}
 	}
 	else if(type == ANY || (type == STATEMENT && arg1 == 0)){
-		// Modifies(_,_) or Modifies(_, "x")
+		// Modifies(_,_) or Modifies(s, "x")
 		tmpLst = pkb->getModifies(WHILE, 0, 0);
 		iterateAndStore(result, tmpLst, v1);
 
-		//need to use function getModifies(CALL,....)
-/*		if(tmpLst.size() == 0){
-			tmpLst = pkb->getModifies(PROCEDURE, 0, 0);
-//			iterateAndStore(result, tmpLst, v1);
-		}*/
+		tmpLst = this->computeCallModifies(0,0);
+		iterateAndStore(result, tmpLst, v1);
 
 		tmpLst = pkb->getModifies(ASSIGNMENT, 0, 0);
 		iterateAndStore(result, tmpLst, v1);
@@ -655,20 +667,29 @@ bool DesignExtractor::getIsModifiesResult(TYPE type, int arg1, VAR_INDEX v1){
 		// Find the type of first argument
 		astLst = pkb->getASTBy(arg1);
 		astItr = astLst->begin();
-		while(astItr != astLst->end()){
-			if(pkb->getType(*astItr) == WHILE||pkb->getType(*astItr) == IF||pkb->getType(*astItr) == ASSIGNMENT)
-			{
-				getStatementType = pkb->getType(*astItr);
-				result = pkb->isModifies(getStatementType, arg1, v1);
-				break;
+		
+		// check for stmt existence in call table
+		/*if(pkb->cal){
+		}*/
+		if(pkb->isExistCallStmt(arg1)){
+			result = isCallModifies(arg1, v1);
+		}
+		else{
+			while(astItr != astLst->end()){
+				if(pkb->getType(*astItr) == WHILE||pkb->getType(*astItr) == IF||pkb->getType(*astItr) == ASSIGNMENT)
+				{
+					getStatementType = pkb->getType(*astItr);
+					result = pkb->isModifies(getStatementType, arg1, v1);
+					break;
+				}
+				astItr++;
 			}
-			astItr++;
 		}
 	}
-	else if(type == PROCEDURE){ //need to be changed
-		result = pkb->isModifies(type, arg1, v1);
+	else if(type == PROCEDURE){ //need to be change
+		result = pkb->isModifies(PROCEDURE, arg1, v1);
 	}
-	//need to consider call
+
 
 	return result;
 }
@@ -687,7 +708,7 @@ USES_LIST DesignExtractor::getUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 	*/
 
 	//Uses(w, "b")
-	if((type == WHILE  || type == ASSIGNMENT || type == IF)){
+	if((type == WHILE  || type == ASSIGNMENT || type == IF || type == PROCEDURE)){
 		result = pkb->getUses(type, arg1, v1);
 	}
 	// Uses(1, a)
@@ -695,14 +716,19 @@ USES_LIST DesignExtractor::getUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 		// Find the type first
 		astLst = pkb->getASTBy(arg1);
 		astItr = astLst->begin();
-		while(astItr != astLst->end()){
-			if(pkb->getType(*astItr) == WHILE || pkb->getType(*astItr) == ASSIGNMENT ||pkb->getType(*astItr) == IF)
-			{
-				getStatementType = pkb->getType(*astItr);
-				result = pkb->getUses(getStatementType, arg1, v1);
-				break;
+		if(pkb->isExistCallStmt(arg1)){
+			result = computeCallModifies(arg1, v1);
+		}
+		else{
+			while(astItr != astLst->end()){
+				if(pkb->getType(*astItr) == WHILE || pkb->getType(*astItr) == ASSIGNMENT ||pkb->getType(*astItr) == IF)
+				{
+					getStatementType = pkb->getType(*astItr);
+					result = pkb->getUses(getStatementType, arg1, v1);
+					break;
+				}
+				astItr++;
 			}
-			astItr++;
 		}
 	}
 	else if(type == ANY || (type == STATEMENT && arg1 == 0))
@@ -710,17 +736,14 @@ USES_LIST DesignExtractor::getUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 		tmpLst = pkb->getUses(WHILE, 0, 0);
 		iterateAndStore(result, tmpLst, v1);
 		
-			tmpLst = pkb->getUses(IF, 0, 0);
-			iterateAndStore(result, tmpLst, v1);
+		tmpLst = pkb->getUses(IF, 0, 0);
+		iterateAndStore(result, tmpLst, v1);
 		
-/* @Zhang Xi: I think no need to check proc here, but need to check CALL
-		if(tmpLst.size() == 0){
-			tmpLst = pkb->getUses(PROCEDURE, 0, 0);
-			iterateAndStore(result, tmpLst, v1);
-		}
-*/
-			tmpLst = pkb->getUses(ASSIGNMENT, 0, 0);
-			iterateAndStore(result, tmpLst, v1);
+		tmpLst = this->computeCallUses(0,0);
+		iterateAndStore(result, tmpLst, v1);
+
+		tmpLst = pkb->getUses(ASSIGNMENT, 0, 0);
+		iterateAndStore(result, tmpLst, v1);
 	}
 
 	//cout << "SIZE OF RESULT (USES): " << result.size() << "\n";
@@ -743,19 +766,25 @@ bool DesignExtractor::getIsUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 		// Find the type of first argument
 		astLst = pkb->getASTBy(arg1);
 		astItr = astLst->begin();
-		while(astItr != astLst->end()){
-			if(pkb->getType(*astItr) == WHILE || pkb->getType(*astItr) == ASSIGNMENT || pkb->getType(*astItr) == IF)
-			{
-				getStatementType = pkb->getType(*astItr);
-				result = pkb->isUses(getStatementType, arg1, v1);
-				break;
+		
+		if(pkb->isExistCallStmt(arg1)){
+			result = isCallModifies(arg1, v1);
+		}
+		else{
+			while(astItr != astLst->end()){
+				if(pkb->getType(*astItr) == WHILE || pkb->getType(*astItr) == ASSIGNMENT || pkb->getType(*astItr) == IF)
+				{
+					getStatementType = pkb->getType(*astItr);
+					result = pkb->isUses(getStatementType, arg1, v1);
+					break;
+				}
+				astItr++;
 			}
-			astItr++;
 		}
 	}
 	else if(type == PROCEDURE) //need to be changed and need to add call
 	{
-		result = pkb->isUses(type, arg1, v1);
+		result = pkb->isUses(PROCEDURE, arg1, v1);
 	}
 	return result;
 }
