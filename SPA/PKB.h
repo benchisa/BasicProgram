@@ -112,7 +112,8 @@ class PKB
 		string getCalleeName(STATEMENT_NUM cIndex);
 		DATA_LIST getAllCallerStmt();
 		STATEMENT_NUM getCallStmt(PROC_NAME caller, PROC_NAME callee);
-
+		bool isExistCallStmt(STATEMENT_NUM callStmt);
+		
 		//Functions of constant table
 		CONSTANT_INDEX insertConst(int constantValue);
 		SIZE getConstantTableSize();
