@@ -5,6 +5,7 @@
 #include "IntermediateResultTable.h"
 #include "SuchThatClause.h"
 #include "WithClause.h"
+#include "Pattern.h"
 #include "DesignExtractor.h"
 
 
@@ -36,7 +37,7 @@ private:
 	IntermediateResultTable * evaluateClause(IntermediateResultTable * resultTable, QTREE* clause);
 	bool executeSuchThat(IntermediateResultTable * resultTable,QTREE* suchThatTree);
 	bool executeWith(IntermediateResultTable * resultTable,QTREE* withTree);
-//	bool executePattern(IntermediateResultTable * resultTable,QTREE* withTree);
+	bool executePattern(IntermediateResultTable * resultTable,QTREE* withTree);
 	bool findResult(QTREE * resultNode,IntermediateResultTable * resultTable);
 	void generateRaw(QTREE* resultNode );
 	RELATION_LIST * appendRelationLists(RELATION_LIST* list1,RELATION_LIST* list2);
