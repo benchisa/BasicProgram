@@ -67,9 +67,11 @@ private:
 	 FOLLOWS_LIST getFollowsStar(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
 	 void computeFollowsStar(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2, list<int> &result);
 	
-	 MODIFIES_LIST computeCallModifies(STATEMENT_NUM callStmt,VAR_INDEX varIndex);
+       	MODIFIES_LIST computeCallModifies(STATEMENT_NUM callStmt,VAR_INDEX varIndex);
+	 MODIFIES_LIST computeCallModifies2(STATEMENT_NUM callStmt,VAR_INDEX varIndex);
 	 bool isCallModifies(STATEMENT_NUM callStmt,VAR_INDEX varIndex);
 	 USES_LIST computeCallUses(STATEMENT_NUM callStmt,VAR_INDEX varIndex);
+	 USES_LIST computeCallUses2(STATEMENT_NUM callStmt,VAR_INDEX varIndex);
 	 bool isCallUses(STATEMENT_NUM callStmt,VAR_INDEX varIndex);
 
 	 void iterateAndStore(list<pair<int, int>> &result, list<pair<int, int>> tmp, int v1);

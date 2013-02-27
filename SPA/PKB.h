@@ -110,7 +110,7 @@ class PKB
 		set<string> getAllCaller();
 		string getCallerName(STATEMENT_NUM cIndex);
 		string getCalleeName(STATEMENT_NUM cIndex);
-		set<int> getAllCallerStmt();
+		DATA_LIST getAllCallerStmt();
 		STATEMENT_NUM getCallStmt(PROC_NAME caller, PROC_NAME callee);
 
 		//Functions of constant table
