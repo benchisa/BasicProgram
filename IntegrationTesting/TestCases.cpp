@@ -193,8 +193,8 @@ QUERY SampleQueries::sampleQuery41 = "while w;Select w such that Modifies(_,_);"
 
 //===============Test for Pattern=================== PKB5
 QUERY SampleQueries::sampleQuery42 = "assign a;Select a  pattern a(\"banana\",\"apple+1\");"; //pass
-QUERY SampleQueries::sampleQuery43 = "assign a;variable v;Select a  pattern a(v, _\"apple+1\"_);";     //pass 
-QUERY SampleQueries::sampleQuery44 = "assign a;Select a  pattern a(_, _\"apple+10\"_);";     //pass 
+QUERY SampleQueries::sampleQuery43 = "assign a;variable v;Select v pattern a(v, _\"apple+1\"_);";     //pass 
+QUERY SampleQueries::sampleQuery44 = "assign a;variable v;Select <a,v>  pattern a(v, _\"apple+10\"_);";     //pass 
 QUERY SampleQueries::sampleQuery45 = "assign a;Select a  pattern a(\"banana\", _);";     //not pass 
 QUERY SampleQueries::sampleQuery46 = "while w;Select w  pattern w(\"apple\",_);";  //pass
 QUERY SampleQueries::sampleQuery47 = "while w;Select w  pattern w(_,_);"; //pass
