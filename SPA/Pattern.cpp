@@ -136,7 +136,7 @@ RELATION_LIST Pattern::evaluatePattern(QTREE * patternNode, QUERYTABLE * qtable,
 					}	
 				}
 			}
-	delete patternNode, qVar, paramNode, varNode, expr;
+	///delete patternNode, qVar, paramNode, varNode, expr;
 	return rlist;
 }
 
