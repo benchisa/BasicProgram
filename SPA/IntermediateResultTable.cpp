@@ -103,7 +103,7 @@ bool IntermediateResultTable::joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,IND
 		qrVarTable[1][firstQrVar] = database.size()-1;
 		qrVarTable[0][secondQrVar] =1;
 		qrVarTable[1][secondQrVar] = database.size()-1;
-	}
+	}else
 	//case 2:only one qrVar is in the table, merge into the existing table
 	//only first qrVar exist
 	if(qrVarTable[0][firstQrVar]==1&&qrVarTable[0][secondQrVar]!=1){
@@ -119,7 +119,7 @@ bool IntermediateResultTable::joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,IND
 		//update the information of the second qrVar
 		qrVarTable[0][secondQrVar] = 1;
 		qrVarTable[1][secondQrVar] = qrVarTable[1][firstQrVar];
-	}
+	}else
 	//only second qrVar exist
 	if(qrVarTable[0][firstQrVar]!=1&&qrVarTable[0][secondQrVar]==1){
 		//merge the new list in the existing table
@@ -134,7 +134,7 @@ bool IntermediateResultTable::joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,IND
 		//update the information of the second qrVar
 		qrVarTable[0][firstQrVar] = 1;
 		qrVarTable[1][firstQrVar] = qrVarTable[1][secondQrVar];
-	}
+	}else
 	/*case 3:both qrVar are in the table
 		a. both in one table
 		b. first and second are in different table, merge two tables

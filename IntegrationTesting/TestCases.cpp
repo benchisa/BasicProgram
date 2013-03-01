@@ -193,14 +193,14 @@ QUERY SampleQueries::sampleQuery41 = "while w;Select w such that Modifies(_,_);"
 
 //===============Test for Pattern=================== PKB5
 QUERY SampleQueries::sampleQuery42 = "assign a;Select a  pattern a(\"banana\",\"apple+1\");"; //pass
-QUERY SampleQueries::sampleQuery43 = "assign a;variable v;Select v pattern a(v, _\"apple+1\"_);";     //pass 
+QUERY SampleQueries::sampleQuery43 = "assign a;variable v;Select v pattern a(v, _\"blah\"_);";     //pass 
 QUERY SampleQueries::sampleQuery44 = "assign a;variable v;Select <a,v>  pattern a(v, _\"apple+10\"_);";     //pass 
-QUERY SampleQueries::sampleQuery45 = "assign a;Select a  pattern a(\"banana\", _);";     //not pass 
-QUERY SampleQueries::sampleQuery46 = "while w;Select w  pattern w(\"apple\",_);";  //pass
-QUERY SampleQueries::sampleQuery47 = "while w;Select w  pattern w(_,_);"; //pass
-QUERY SampleQueries::sampleQuery48 = "while w;Select w  pattern w(w,_);";  //pass
-QUERY SampleQueries::sampleQuery49 = "if f;Select f pattern f(_,_)";  //pass
-QUERY SampleQueries::sampleQuery50 = "if f;Select f pattern f(f,_)"; //no prob with qtree,pass
+QUERY SampleQueries::sampleQuery45 = "assign a;Select a  pattern a(\"banana\", _);";     
+QUERY SampleQueries::sampleQuery46 = "while w;variable v;Select w  pattern w(v,_);";  //pass
+QUERY SampleQueries::sampleQuery47 = "while w;Select w  pattern w(_,_);"; 
+QUERY SampleQueries::sampleQuery48 = "while w;Select w  pattern w(w,_);";  
+QUERY SampleQueries::sampleQuery49 = "if f;Select f pattern f(_,_)";  
+QUERY SampleQueries::sampleQuery50 = "if f; variable v;Select f pattern f(v,_)"; 
 QUERY SampleQueries::sampleQuery51 = "assign a;variable v;Select v  pattern a(v,_\"apple\"_);";  //no prob with qtree
 
 //===============Test for mix of suchthat and pattern=================== PKB5

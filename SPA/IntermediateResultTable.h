@@ -10,6 +10,8 @@ public:
 	~IntermediateResultTable(void);
 	
 	//if joinAttr is 0, both of the two relations are not in the table
+	//if joinAttr is 1,
+	//if joinAttr is 2,
 	bool joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,INDEX secondQrVar,RELATION_LIST * newList);
 	bool isQrVarDiscovered(INDEX qrVarIndex);
 	INDEX_LIST* getResultListOf(INDEX qrVarIndex);

@@ -97,7 +97,8 @@ IntermediateResultTable * QueryEvaluator::computeIntermediateResult(QTREE* relat
 		currentClause = currentClause->getRightSibling();
 		//set the flag of the clause
 		prevFlag = currentFlag;
-		if(currentClause!=NULL)currentFlag = currentClause->getData();
+		if(currentClause!=NULL)
+			currentFlag = currentClause->getData();
 	}while(currentClause!=NULL);
 
 	return resultTable;
@@ -376,7 +377,7 @@ bool QueryEvaluator::executePattern(IntermediateResultTable * resultTable,QTREE*
 		secondQrVar =-1;
 	}
 
-	currentResultList = new RELATION_LIST(patternClause.evaluatePattern(qrTree,qrTable,qrParam));
+	currentResultList = new RELATION_LIST(patternClause.evaluatePattern(patternTree,qrTable,qrParam));
 	//there is no result found with all the probes, this relation is not satisfied
 	if(currentResultList ==NULL ||currentResultList->size()<1){
 		return false; 
