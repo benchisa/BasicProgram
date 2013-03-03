@@ -278,7 +278,7 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 				}
 			}
 			if(relType==CALLST){
-				PROC_NAME callerName = pkb->getProcedure(firstRel->getData())->getProcName();
+				PROC_NAME callerName = pkb->getProcedure(secondRel->getData())->getProcName();
 				INDEX callerIndex,calleeIndex;
 				CALL_LIST callResult=extractor->getCallStarResult(callerName,"");
 
