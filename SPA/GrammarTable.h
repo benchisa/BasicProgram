@@ -40,7 +40,7 @@ public:
 	struct entTable eTable[9];
 	struct syntaxTable rTable[14];
 	struct syntaxTable pTable[3];
-	struct argTable aTable[10];
+	struct argTable aTable[12];
 	struct attrTable atTable[9];
 
 	string compulsoryOne,optional,or,plus,minus,times,invComma,letter,digit,underscore,hash,ident,synonym,integer,op;

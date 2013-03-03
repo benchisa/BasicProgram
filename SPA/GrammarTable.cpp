@@ -265,7 +265,7 @@ bool GrammarTable::isPattExists(PATTERN patt){
 }
 
 void GrammarTable::createArgTable(){
-	vector<TYPE> case1,case2,case3,case4,case5,case6;
+	vector<TYPE> case1,case2,case3,case4,case5,case6,case7;
 
 	case1.push_back(STATEMENT);
 	case1.push_back(WHILE);
@@ -294,6 +294,9 @@ void GrammarTable::createArgTable(){
 
 	case6.push_back(ASSIGNMENT);
 	case6.push_back(ANY);
+	
+	case7.push_back(PROCEDURE);
+	case7.push_back(ANY);
 
 	aTable[0].type = FOLLOWS;
 	aTable[0].arg1 = case2;
@@ -335,10 +338,18 @@ void GrammarTable::createArgTable(){
 	aTable[9].arg1 = case6;
 	aTable[9].arg2 = case6;
 
+	aTable[10].type = CALL;
+	aTable[10].arg1 = case7;
+	aTable[10].arg2 = case7;
+
+	aTable[11].type = CALLST;
+	aTable[11].arg1 = case7;
+	aTable[11].arg2 = case7;
+
 }
 
 vector<TYPE> GrammarTable::getArgument(TYPE rel, int argPosition){
-	for(int i=0;i<10; i++){
+	for(int i=0;i<12; i++){
 		if(rel==aTable[i].type){
 			if(argPosition==1){
 				return aTable[i].arg1;

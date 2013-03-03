@@ -31,7 +31,7 @@ QueryPreprocessor::QueryPreprocessor(PKB* pkb){
 	rel				= "Uses|Modifies|Follows\\*|Follows|Parent\\*|Parent|Affects\\*|Affects|Calls\\*|Calls|Next\\*|Next";
 	ref				= synonym+or+underscore+or+integer+or+invComma+ident+invComma;
 	attrName		= "procName|varName|value|stmt#";
-	attrRef			= synonym+"\\.("+attrName+")";
+	attrRef			= synonym+"\\s*\\.\\s*("+attrName+")";
 	attrCompare		= "("+attrRef+"\\s*=\\s*("+attrRef+or+"\""+ident+"\""+or+integer+")"+or+synonym+"\\s*=\\s*("+attrRef+or+integer+"))";
 	designEnt		= "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
 	elem			= synonym+or+attrRef;
@@ -636,7 +636,7 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 		if(regex_match(currToken,regex(invComma+ident+invComma))){			
 			currToken.erase(currToken.begin());	
 			currToken.resize(currToken.size()-1);	
-			if (relName=="Modifies_p"||relName=="Uses_p"){
+			if (relName=="Modifies_p"||relName=="Uses_p"||relName=="Calls"||relName=="Calls*"){
 				if (!pkb->isProcExists(currToken)){
 					error(INVALID_VARIABLE);
 					return false;
