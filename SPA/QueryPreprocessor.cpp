@@ -681,8 +681,14 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 		}
 		//even if not declared,could be a constant statement number
 		else if (isConstant(currToken)){
-			tokenType = STATEMENT;			
-			currNode = createQTREENode(STATEMENT,atoi(currToken.c_str()));
+			if (relName=="Next"||relName=="Next*"){
+				tokenType = PROGLINE;
+				currNode = createQTREENode(PROGLINE,atoi(currToken.c_str()));
+			}
+			else{
+				tokenType = STATEMENT;			
+				currNode = createQTREENode(STATEMENT,atoi(currToken.c_str()));
+			}
 			if (prevArgConstant){
 				twoConstantClauses.push_back(clauseCount);
 			}

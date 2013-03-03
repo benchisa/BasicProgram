@@ -37,7 +37,7 @@ public:
 		ATTRIBUTE attr;
 	};
 
-	struct entTable eTable[9];
+	struct entTable eTable[10];
 	struct syntaxTable rTable[14];
 	struct syntaxTable pTable[3];
 	struct argTable aTable[12];
