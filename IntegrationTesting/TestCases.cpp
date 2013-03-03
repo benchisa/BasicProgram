@@ -15,23 +15,32 @@ SOURCE SampleSimpleSources::sampleSource2 = "procedure Code2{\n"
 									/*3*/	"d = x + y + z;}}";
 
 
-// Purpose: Test for Follows, Parent, Modifies, Uses for two consecutives while loop
-SOURCE SampleSimpleSources::sampleSource3 = "procedure Code3{\n"
-									/*1*/	"while a{\n"
-									/*2*/	"c = c + a;\n"
-									/*3*/	"d = x + y + z;}\n"
-									/*4*/	"while b{\n"
-									/*5*/	"y = a;\n"
-									/*6*/	"b = q+1;}}\n";
+// Purpose: Test for Follows, Parent, Modifies, Uses for two consecutives while loop, same as simple 7
+SOURCE SampleSimpleSources::sampleSource3 = "procedure Code7{\n"
+											"z = 10;\n"				//1
+											"x = z+5;\n"			//2
+											"while a{\n"			//3
+												"c = c+a;\n"		//4
+												"c = x+y+z;\n"		//5
+												"while b{\n"		//6
+													"d = a;\n"		//7
+													"c = q+1;\n"	//8
+												"}\n"			
+													"e = y+z;\n"	//9
+													"while f{\n"	//10
+													"i = i+1;\n"	//11
+													"z = x+z;}\n"	//12
+													"c = z+2;}}";	//13
+	
 
-// Purpose: Test for Follows, Parent, Modifies, Uses for nested while loop
+// Purpose: Test for Follows, Parent, Modifies, Uses for nested while loop,same as simple 5
 SOURCE SampleSimpleSources::sampleSource4 = "procedure Code4{\n"
 									/*1*/	"while a{\n"
 									/*2*/	"c = c + a;\n"
 									/*3*/	"d = x + y + z;\n"
 									/*4*/	"while b{\n"
-									/*5*/	"y = a;\n"
-									/*6*/	"b = q+1;}}}\n";
+									/*5*/	"d = a;\n"
+									/*6*/	"c = q+1;}}}\n";
 
 SOURCE SampleSimpleSources::sampleSource5 ="procedure xylo{\n"		
 											 "apple=1;\n"						//1
@@ -193,18 +202,16 @@ QUERY SampleQueries::sampleQuery41 = "while w;Select w such that Modifies(_,_);"
 
 //===============Test for Pattern=================== PKB5
 QUERY SampleQueries::sampleQuery42 = "assign a;Select a  pattern a(\"banana\",\"apple+1\");"; //pass
-QUERY SampleQueries::sampleQuery43 = "assign a;variable v;Select v pattern a(v, _\"blah\"_);";     //pass 
-QUERY SampleQueries::sampleQuery44 = "assign a;variable v;Select <a,v>  pattern a(v, _\"apple+10\"_);";     //pass 
+QUERY SampleQueries::sampleQuery43 = "assign a;variable v;Select v pattern a(\"banana\", \"blah\");";     //pass 
+QUERY SampleQueries::sampleQuery44 = "assign a;variable v;Select <a,v>  pattern a(v, _\"apple\"_);";     //pass 
 QUERY SampleQueries::sampleQuery45 = "assign a;Select a  pattern a(\"banana\", _);";     
 QUERY SampleQueries::sampleQuery46 = "while w;variable v;Select w  pattern w(v,_);";  //pass
 QUERY SampleQueries::sampleQuery47 = "while w;Select w  pattern w(_,_);"; 
 QUERY SampleQueries::sampleQuery48 = "while w;Select w  pattern w(w,_);";  
 QUERY SampleQueries::sampleQuery49 = "if f;Select f pattern f(_,_)";  
 QUERY SampleQueries::sampleQuery50 = "if f; variable v;Select f pattern f(v,_)"; 
-QUERY SampleQueries::sampleQuery51 = "assign a;variable v;Select v  pattern a(v,_\"apple\"_);";  //no prob with qtree
-
-//===============Test for mix of suchthat and pattern=================== PKB5
-QUERY SampleQueries::sampleQuery52 = "assign a;Select a such that Modifies(a,\"carrot\") pattern a(\"carrot\",_);"; //pass
+QUERY SampleQueries::sampleQuery51 = "assign a; Select a such that pattern a(\"c\",_\"1\"_);";  
+QUERY SampleQueries::sampleQuery52 = "assign a;variable v;Select v  pattern a(v,_\"a\"_);"; //pass
 QUERY SampleQueries::sampleQuery53 = "assign a;Select a such that Uses(a,\"kimchi\") pattern a(\"donut\",_);";    //pass
 QUERY SampleQueries::sampleQuery54 = "assign a;variable v;Select v such that Uses(a,v) pattern a(v,_\"apple\"_);";  //pass
 QUERY SampleQueries::sampleQuery55 = "assign a1,a2;Select a2 such that Parent(_,a1) pattern a1(\"carrot\",_);";  //pass
