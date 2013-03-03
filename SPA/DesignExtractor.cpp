@@ -240,10 +240,13 @@ bool DesignExtractor::getIsCallStarResult(PROC_NAME caller, PROC_NAME callee)
 
 bool DesignExtractor::isStatementTypeOf(TYPE typeName,STATEMENT_NUM stmtNum){
 	//find the type of statement
-	AST_LIST* currentAST = pkb->getASTBy(stmtNum);
-	AST_LIST::iterator itr;
-	for(itr = currentAST->begin();itr!=currentAST->end();itr++){
-		if((*itr)->getRootType()==typeName) return true;
+	if(stmtNum>0&&stmtNum<=pkb->getMaxStatementNum()){
+
+		AST_LIST* currentAST = pkb->getASTBy(stmtNum);
+		AST_LIST::iterator itr;
+		for(itr = currentAST->begin();itr!=currentAST->end();itr++){
+			if((*itr)->getRootType()==typeName) return true;
+		}
 	}
 	return false;
 }

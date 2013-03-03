@@ -53,7 +53,10 @@ FINAL_RESULT QueryFormatter::formatString(RAWDATA * data) {
 			}else if(type==PROCEDURE) { 
 				Procedure * proc = pkb->getProcedure(value);
 				currentValue = proc->getProcName();
-			}else {
+			}else if(type==CONSTANT){
+				int constValue = pkb->getConstantValue(value);
+				currentValue = static_cast<ostringstream*>( &(ostringstream() << constValue) )->str();
+			}else{
 				currentValue = static_cast<ostringstream*>( &(ostringstream() << value) )->str();
 			}
 			currentEntry.append(currentValue);
