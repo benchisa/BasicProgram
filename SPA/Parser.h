@@ -95,33 +95,78 @@ public:
 	static vector<pair<TOKEN, PROG_LINE>> tokenize(SOURCE src){
 		vector<pair<TOKEN, PROG_LINE>> tokens;
 		pair<TOKEN, PROG_LINE> tmp;
-		int progline = 0;
+		int progline = 1;
 		regex rx("call|while|procedure|if|then|else|\\n|\\(|\\)|\\{|\\}|\\=|\\;|\\-|\\*|\\+|[^\\s\\n\\{\\}\\-\\*\\+\\;\\=\\(\\)]+");
 		sregex_iterator rxItr(src.begin(), src.end(), rx), rxend;
 
 		for (rxItr; rxItr != rxend; ++rxItr)
 		{
-			if(rxItr->str() != "\n")
-			{
-				tmp.first = rxItr->str();
-				if(rxItr->str() != "else" && rxItr->str() != "procedure")
-					tmp.second = progline;
-				else
-					tmp.second = 0;
-				tokens.push_back(tmp);
+			//if(rxItr->str() == "\n")
+			//	cout << "asd\n";
 
+			if(rxItr->str() != ";" && rxItr->str() != "\n")
+			{
+				//cout << "asd\n";
+				if(rxItr->str() == "}")
+				{
+					tmp.first = rxItr->str();
+					tmp.second = 0;
+					tokens.push_back(tmp);
+					progline--;
+					//cout << "1: " << tmp.first << ", " << tmp.second << "\n";
+
+				}
+				
+				if(rxItr->str() == "{")
+				{
+					tmp.first = rxItr->str();
+					tmp.second = 0;
+					tokens.push_back(tmp);
+					//cout << "8: " << tmp.first << ", " << tmp.second << "\n";
+
+					progline++;
+				}
+				else if(rxItr->str() != "else" && rxItr->str() != "procedure")
+				{	
+					if(rxItr->str() == "}"){
+						tmp.first = rxItr->str();
+						tmp.second = 0;
+						progline++;
+					}
+					else{
+						tmp.first = rxItr->str();
+						tmp.second = progline;
+						tokens.push_back(tmp);
+					}
+					
+					//cout << "7: " << tmp.first << ", " << tmp.second << "\n";
+
+				}
+				else
+				{
+					tmp.first = rxItr->str();
+					tmp.second = 0;
+					tokens.push_back(tmp);
+					//cout << "6: " << tmp.first << ", " << tmp.second << "\n";
+
+				}
+				
+				
 				if(rxItr->str() == "procedure")
 				{
+					// put the name into the token
 					rxItr++;
 					tmp.first = rxItr->str();
 					tmp.second = 0;
 					tokens.push_back(tmp);
+					//cout << "2: " << tmp.first << ", " << tmp.second << "\n";
+					// put { into the token
 					rxItr++;
 					tmp.first = rxItr->str();
 					tmp.second = 0;
 					tokens.push_back(tmp);
-					if(rxItr->str() == "\n")
-						rxItr++; // skip "\n"
+					//cout << "3: " << tmp.first << ", " << tmp.second << "\n";
+					//progline++;
 				}
 
 				if(rxItr->str() == "else")
@@ -131,20 +176,16 @@ public:
 					tmp.first = rxItr->str();
 					tmp.second = 0;
 					tokens.push_back(tmp);
-
-					rxItr++;
-					// if next token is "\n"
-					if(rxItr->str() != "\n")
-					{
-						progline++;
-						tmp.first = rxItr->str();
-						tmp.second = progline;
-						tokens.push_back(tmp);
-					}
+					//cout << "4: " << tmp.first << ", " << tmp.second << "\n";
 				}
+
 			}
-			else
+			else if(rxItr->str() == ";")
 			{
+				tmp.first = rxItr->str();
+				tmp.second = progline;
+				tokens.push_back(tmp);
+				//cout << "5: " << tmp.first << ", " << tmp.second << "\n";
 				progline++;
 			}
 		}
