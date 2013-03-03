@@ -1,5 +1,6 @@
 #pragma once
 #include "Global_Data_Abstraction.h"
+#include "CFG.h"
 #include "PKB.h"
 #include <stack>
 
@@ -22,6 +23,8 @@ public:
 	bool isNextStarResult(PROG_LINE, PROG_LINE);
 	NEXT_LIST getNextResult(PROG_LINE, PROG_LINE);
 	NEXT_LIST getNextStarResult(PROG_LINE, PROG_LINE);
+	NEXT_LIST getAllPaths(PROG_LINE p1, PROG_LINE p2);
+	list<PROG_LINE> getAllProgLines(PROG_LINE p1, PROG_LINE p2);
 	
 	//call table
 	CALL_LIST  getCallResult(PROC_NAME caller, PROC_NAME callee);
@@ -55,6 +58,7 @@ public:
 	
 private:
 	PKB* pkb;
+	CFG* cfg;
 	AST* buildCFG(AST *);
 	int maxStmtNum;
 	int maxProgNum;

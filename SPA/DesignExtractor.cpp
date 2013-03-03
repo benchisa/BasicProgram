@@ -4,6 +4,7 @@
 DesignExtractor::DesignExtractor(PKB* pkb)
 {
 	this->pkb = pkb;
+	DesignExtractor::createCFG();
 }
 
 
@@ -246,7 +247,7 @@ void DesignExtractor::createCFG()
 	int size = pkb->getMaxProgLine();
 
 	// create CFG of progline_size
-	pkb->createCFG(size);
+	cfg = new CFG(size);
 
 	// traverse AST and create the CFG
 	AST* cAST = pkb->getRootAST();
@@ -265,7 +266,7 @@ AST* DesignExtractor::buildCFG(AST * node)
 		
 		case ASSIGNMENT:
 			if(tmp->getRightSibling()){
-				pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getRightSibling()));
+				cfg->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getRightSibling()));
 			}
 			lastNode = tmp;
 			tmp = tmp->getRightSibling();
@@ -275,14 +276,14 @@ AST* DesignExtractor::buildCFG(AST * node)
 			cfgWhileKeepers.push_back(pkb->getProgLine(tmp));
 
 			if(tmp->getRightSibling()){
-				pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getRightSibling()));
+				cfg->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getRightSibling()));
 			}
 			
-			pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()));
+			cfg->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()));
 
 			lastNode = buildCFG(tmp->getFirstDescendant()->getRightSibling());
 			if(pkb->getType(lastNode) != IF)
-				pkb->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
+				cfg->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
 
 			cfgWhileKeepers.pop_back();
 			tmp = tmp->getRightSibling();
@@ -291,31 +292,31 @@ AST* DesignExtractor::buildCFG(AST * node)
 
 			lastNode = buildCFG(tmp->getFirstDescendant()->getRightSibling());
 			if(cfgWhileKeepers.size()!= 0)
-				pkb->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
+				cfg->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
 
 			if(tmp->getRightSibling()){
-				pkb->addEdge(pkb->getProgLine(lastNode), pkb->getProgLine(tmp->getRightSibling()));
+				cfg->addEdge(pkb->getProgLine(lastNode), pkb->getProgLine(tmp->getRightSibling()));
 			}
 
-			pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()));
+			cfg->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()));
 
 			lastNode = buildCFG(tmp->getFirstDescendant()->getRightSibling()->getRightSibling());
 			if(cfgWhileKeepers.size() != 0)
-				pkb->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
+				cfg->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
 			
 			
 			if(tmp->getRightSibling()){
-				pkb->addEdge(pkb->getProgLine(lastNode), pkb->getProgLine(tmp->getRightSibling()));
+				cfg->addEdge(pkb->getProgLine(lastNode), pkb->getProgLine(tmp->getRightSibling()));
 			}
 
-			pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getRightSibling()->getFirstDescendant()));
+			cfg->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getRightSibling()->getFirstDescendant()));
 			
 			lastNode = tmp;
 			tmp = tmp->getRightSibling();
 			break;
 		case CALL:
 			if(tmp->getRightSibling()){
-				pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getRightSibling()));
+				cfg->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getRightSibling()));
 			}
 
 			lastNode = tmp;
@@ -336,13 +337,13 @@ AST* DesignExtractor::buildCFG(AST * node)
 
 bool DesignExtractor::isNextResult(PROG_LINE p1, PROG_LINE p2)
 {
-	return pkb->isNext(p1, p2);
+	return cfg->isNext(p1, p2);
 }
 
 // already stored in CFG
 NEXT_LIST DesignExtractor::getNextResult(PROG_LINE p1, PROG_LINE p2)
 {
-	return pkb->getNext(p1, p2);
+	return cfg->getNext(p1, p2);
 }
 
 // on demand
@@ -353,7 +354,7 @@ bool DesignExtractor::isNextStarResult(PROG_LINE p1, PROG_LINE p2)
 	if(p1 > size || p2 > size || p1 <= 0 || p2 <=0)
 		return false;
 
-	list<PROG_LINE> tmp = pkb->getAllProgLines(p1, p2);
+	list<PROG_LINE> tmp = cfg->getAllProgLines(p1, p2);
 	
 	if(tmp.size() != 0){
 		list<PROG_LINE>::iterator itr = tmp.begin();
@@ -367,7 +368,6 @@ bool DesignExtractor::isNextStarResult(PROG_LINE p1, PROG_LINE p2)
 	return false;
 }
 
-
 // on demand
 NEXT_LIST DesignExtractor::getNextStarResult(PROG_LINE p1, PROG_LINE p2)
 {
@@ -377,7 +377,7 @@ NEXT_LIST DesignExtractor::getNextStarResult(PROG_LINE p1, PROG_LINE p2)
 	// Next*(n1, n2) --> findAll
 	if(p1 == 0 && p2 == 0){
 		for(int i = 1; i <=size; i++){
-			list<PROG_LINE> tmp = pkb->getAllProgLines(i, i);
+			list<PROG_LINE> tmp = cfg->getAllProgLines(i, i);
 
 			list<PROG_LINE>::iterator itr = tmp.begin();
 			while(itr!=tmp.end())
@@ -392,7 +392,7 @@ NEXT_LIST DesignExtractor::getNextStarResult(PROG_LINE p1, PROG_LINE p2)
 	}
 	//Next*(n, n), Next*(1,n1), Next*(n1,2) --> findAll
 	else if(p1 == p2 || (p1 != 0 && p2 == 0) || (p1 == 0 && p2 != 0) || (p1 != 0 && p2 != 0)){
-		list<PROG_LINE> tmp = pkb->getAllProgLines(p1, p2);
+		list<PROG_LINE> tmp = cfg->getAllProgLines(p1, p2);
 		list<PROG_LINE>::iterator itr = tmp.begin();
 		while(itr!=tmp.end())
 		{
@@ -410,6 +410,13 @@ NEXT_LIST DesignExtractor::getNextStarResult(PROG_LINE p1, PROG_LINE p2)
 		}
 	}
 	return result;
+}
+NEXT_LIST DesignExtractor::getAllPaths(PROG_LINE p1, PROG_LINE p2){
+	return cfg->getAllPaths(p1, p2);
+}
+list<PROG_LINE> DesignExtractor::getAllProgLines(PROG_LINE p1, PROG_LINE p2)
+{
+	return cfg->getAllProgLines(p1, p2);
 }
 
 FOLLOWS_LIST DesignExtractor::getFollowsResult(TYPE type1, TYPE type2){

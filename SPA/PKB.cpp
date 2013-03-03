@@ -401,37 +401,6 @@ CONSTANT_LIST *  PKB::getAllConstant()
 	return constantTable->getAllConstant();
 }
 
-// function for CFG
-void PKB::createCFG(int size)
-{
-	cfg = new CFG(size);
-}
-
-bool PKB::addEdge(PROG_LINE p1, PROG_LINE p2)
-{
-	return cfg->addEdge(p1, p2);
-}
-
-bool PKB::isNext(PROG_LINE p1, PROG_LINE p2)
-{
-	return cfg->isNext(p1, p2);
-}
-
-NEXT_LIST PKB::getNext(PROG_LINE p1, PROG_LINE p2)
-{
-	return cfg->getNext(p1, p2);
-}
-
-list<PROG_LINE> PKB::getAllProgLines(PROG_LINE p1, PROG_LINE p2)
-{
-	return cfg->getAllProgLines(p1, p2);
-}
-
-NEXT_LIST PKB::getAllPaths(PROG_LINE p1, PROG_LINE p2)
-{
-	return cfg->getAllPaths(p1, p2);
-}
-
 PROG_LINE PKB::getMaxProgLine()
 {
 	unordered_multimap<int,int>::reverse_iterator r_itr=progLineTable->rbegin();
