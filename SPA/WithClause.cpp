@@ -725,8 +725,9 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			if (constantTableSize!=0){
 				for(int i =1;i<=constantTableSize;i++){
 					int currentConstantValue = pkb->getConstantValue(i);
-					if(currentConstantValue<=maxStatementNum);
-					returnList->push_back(pair<int,int>(currentConstantValue,i));
+					if(currentConstantValue<=maxStatementNum){
+						returnList->push_back(pair<int,int>(currentConstantValue,i));
+					}
 				}
 			}
 			}
