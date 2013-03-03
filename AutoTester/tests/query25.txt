@@ -1,0 +1,202 @@
+1
+cat: other cases
+2 - follows* , Typed :: (known,known)
+stmt s1,s2;
+Select BOOLEAN such that Follows* (4 , 9 );
+true
+5000
+3 - follows , Typed :: (known,unknown)
+stmt s1,s2;
+Select s2  such that Follows (4 , s2 );
+5
+5000
+13 - parent , Typed :: (known,known)
+
+Select BOOLEAN  such that Parent (9 ,10 );
+true
+5000
+14 - parent* , Typed :: (known,known)
+
+Select BOOLEAN  such that Parent* (9 ,12 );
+true
+5000
+61 - uses , Typed :: (known_statement,known_variable)
+
+Select BOOLEAN  such that Uses (3 , "apple" );
+true
+5000
+62 - modifies , Typed :: (known_statement,known_variable)
+
+Select BOOLEAN  such that Modifies (1 , "apple" );
+true
+5000
+63 - uses , Typed :: (known_assignment,known_variable)
+
+Select BOOLEAN  such that Uses (3 , "orange" );
+false
+5000
+64 - modifies , Typed :: (known_assignment,known_variable)
+
+Select BOOLEAN  such that Modifies (1 , "orange" );
+false
+5000
+65 - uses , Typed :: (known_while,known_variable)
+
+Select BOOLEAN  such that Uses (9 , "apple" );
+true
+5000
+66 - modifies , Typed :: (known_while,known_variable)
+
+Select BOOLEAN  such that Modifies (9 , "gummy" );
+true
+5000
+67 - uses , Typed :: (known_if,known_variable)
+
+Select BOOLEAN  such that Uses (21 , "apple" );
+true
+5000
+68 - modifies , Typed :: (known_if,known_variable)
+
+Select BOOLEAN  such that Modifies (21 , "jam" );
+true
+5000
+69 - uses , Typed :: (known_call,known_variable)
+
+Select BOOLEAN  such that Uses (8 , "kimchi" );
+true
+5000
+70 - modifies , Typed :: (known_call,known_variable)
+
+Select BOOLEAN  such that Modifies (8 , "kimchi" );
+true
+5000
+71 - uses , Typed :: (known_procedure,known_variable)
+
+Select BOOLEAN  such that Uses ( "xylo" , "apple" );
+true
+5000
+72 - modifies , Typed :: (known_procedure,known_variable)
+
+Select BOOLEAN  such that Modifies ( "xylo" , "apple" );
+true
+5000
+37 - next , Typed :: (known,known)
+
+Select BOOLEAN  such that Next (21 ,22 );
+true
+5000
+38 - next* , Typed :: (known,known)
+
+Select BOOLEAN  such that Next* (21 ,24 );
+true
+5000
+39 - next , Typed :: (known,unknown)
+stmt s1,s2;
+Select s2  such that Next (21 , s2 );
+
+5000
+40 - next* , Typed :: (known,unknown)
+stmt s1,s2;
+Select s2  such that Next* (21 , s2 );
+
+5000
+41 - next , Typed :: (unknown,known)
+stmt s1,s2;
+Select s1  such that Next ( s1 ,24 );
+
+5000
+42 - next* , Typed :: (unknown,known)
+stmt s1,s2;
+Select s1  such that Next* ( s1 ,24 );
+
+5000
+43 - next , Typed :: (unknown,unknown)
+stmt s1,s2;
+Select s1  such that Next ( s1 , s2 );
+
+5000
+44 - next* , Typed :: (unknown,unknown)
+stmt s1,s2;
+Select s1  such that Next* ( s1 , s2 );
+
+5000
+45 - next , Typed :: (unknown,unknown)
+stmt s1,s2;
+Select s1  such that Next ( s1 , s1 );
+
+5000
+46 - next* , Typed :: (unknown,unknown)
+stmt s1,s2;
+Select s1  such that Next* ( s1 , s1 );
+
+5000
+47 - next , Typed :: (unknown,unknown)
+stmt s1,s2;
+Select s2  such that Next ( s1 , s2 );
+
+5000
+48 - next* , Typed :: (unknown,unknown)
+stmt s1,s2;
+Select s2  such that Next* ( s1 , s2 );
+
+5000
+25 - calls , Typed :: (known,known)
+
+Select BOOLEAN  such that Calls ( "xylo" , "yello" );
+true
+5000
+26 - calls* , Typed :: (known,known)
+
+Select BOOLEAN  such that Calls* ( "xylo" , "yello" );
+true
+5000
+27 - calls , Typed :: (known,unknown)
+procedure p1,p2;
+Select p2  such that Calls ( "xylo" , p2 );
+
+5000
+28 - calls* , Typed :: (known,unknown)
+procedure p1,p2;
+Select p2  such that Calls* ( "xylo" , p2 );
+
+5000
+29 - calls , Typed :: (unknown,known)
+procedure p1,p2;
+Select p1  such that Calls ( p1 , "zebra" );
+
+5000
+30 - calls* , Typed :: (unknown,known)
+procedure p1,p2;
+Select p1  such that Calls* ( p1 , "zebra" );
+
+5000
+31 - calls , Typed :: (unknown,unknown)
+procedure p1,p2;
+Select p1  such that Calls ( p1 , p2 );
+
+5000
+32 - calls* , Typed :: (unknown,unknown)
+procedure p1,p2;
+Select p1  such that Calls* ( p1 , p2 );
+
+5000
+33 - calls , Typed :: (unknown,unknown)
+procedure p1,p2;
+Select p2  such that Calls ( p1 , p2 );
+
+5000
+34 - calls* , Typed :: (unknown,unknown)
+procedure p1,p2;
+Select p2  such that Calls* ( p1 , p2 );
+
+5000
+35 - calls , Typed :: (unknown,unknown)
+procedure p1,p2;
+Select p1  such that Calls ( p1 , p1 );
+
+5000
+36 - calls* , Typed :: (unknown,unknown)
+procedure p1,p2;
+Select p1  such that Calls* ( p1 , p1 );
+
+5000

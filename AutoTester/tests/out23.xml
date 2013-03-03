@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>151.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>187.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" with cases">
@@ -9,14 +9,14 @@
 <id with="1" Typed="1" comment="" >1</id><querystr><![CDATA[stmt s1; Select  s1 with s1.stmt# = 10;]]></querystr>
 <stuans>10</stuans>
 <correct>10</correct>
-<time_taken>52.000000</time_taken>
+<time_taken>96.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id with="1" Typed="1" comment="" >2</id><querystr><![CDATA[stmt s1; constant c; Select  c with s1.stmt# = c.value;]]></querystr>
 <stuans>1,0,9,11,33,99,88,2,10,22</stuans>
 <correct>0,1,2,9,10,11,22,33</correct>
-<time_taken>54.000000</time_taken>
+<time_taken>70.000000</time_taken>
 <failed>
 <missing></missing>
 <additional>88,99</additional>
@@ -32,21 +32,21 @@
 <id with="1" Typed="1" comment="" >3</id><querystr><![CDATA[stmt s1,s2; Select  s2 with s1.stmt# = s2.stmt#;]]></querystr>
 <stuans>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47</stuans>
 <correct>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47</correct>
-<time_taken>61.000000</time_taken>
+<time_taken>73.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id with="1" Typed="1" comment="" >4</id><querystr><![CDATA[constant c; Select  c with c.value = 1;]]></querystr>
 <stuans>1</stuans>
 <correct>1</correct>
-<time_taken>55.000000</time_taken>
+<time_taken>67.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id with="1" Typed="1" comment="" >5</id><querystr><![CDATA[stmt s1; constant c; Select  s1 with c.value = s1.stmt#;]]></querystr>
 <stuans>1,0,9,11,33,99,88,2,10,22</stuans>
 <correct>0,1,2,9,10,11,22,33</correct>
-<time_taken>56.000000</time_taken>
+<time_taken>69.000000</time_taken>
 <failed>
 <missing></missing>
 <additional>88,99</additional>
@@ -62,31 +62,44 @@
 <id with="1" Typed="1" comment="" >6</id><querystr><![CDATA[assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c; Select  v with v.varName = "apple";]]></querystr>
 <stuans>apple</stuans>
 <correct>apple</correct>
-<time_taken>76.000000</time_taken>
+<time_taken>94.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id with="1" Typed="1" comment="" >7</id><querystr><![CDATA[assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c; Select  p with p.procName = "zebra";]]></querystr>
 <stuans>zebra</stuans>
 <correct>zebra</correct>
-<time_taken>76.000000</time_taken>
+<time_taken>90.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id with="1" Typed="1" comment="" >8</id><querystr><![CDATA[assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c; Select  v with v.varName = "orange";]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>75.000000</time_taken>
-<failed>
-<missing></missing>
-<additional></additional>
-<summary>
-<expected>0</expected>
-<matched>0</matched>
-<missing>0</missing>
-<additional>1</additional>
-</summary>
-</failed>
+<time_taken>94.000000</time_taken>
+<passed/>
 </query>
 <query>
-<id with="1" Typed="1" comment="" >9</id>
+<id with="1" Typed="1" comment="" >9</id><querystr><![CDATA[assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c; Select  BOOLEAN with p.procName = "procedure";]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>97.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id with="1" Typed="1" comment="" >10</id><querystr><![CDATA[assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c; Select  BOOLEAN with v.varName = p.procName;]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>95.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id with="1" Typed="1" comment="" >12</id><querystr><![CDATA[assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c; Select  p with cl.procName = p.procName;]]></querystr>
+<stuans>yello,zebra,extra</stuans>
+<correct>yello,zebra,extra</correct>
+<time_taken>98.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>25.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>31.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" Test Case 5, Follows, Parent, Modifies, Uses for multiple procedures">
@@ -9,84 +9,84 @@
 <id Follows="1" Typed="1" comment="Is statement 3 following any other statement?" >1</id><querystr><![CDATA[assign a; Select a such that Follows(a, 3);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>44.000000</time_taken>
+<time_taken>58.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Parent="1" Typed="1" comment="Is statement 3 a child of any statement?" >2</id><querystr><![CDATA[stmt s; Select s such that Parent(s, 3);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>48.000000</time_taken>
+<time_taken>58.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Uses="1" Typed="1" comment="Is our while loop using b?" >3</id><querystr><![CDATA[while w; Select w such that Uses(w, "b")]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>47.000000</time_taken>
+<time_taken>63.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Follows="1" Typed="1" comment="Is statement 3 followed by other statements?" >4</id><querystr><![CDATA[stmt s; Select s such that Follows(3, s);]]></querystr>
 <stuans>4</stuans>
 <correct>4</correct>
-<time_taken>49.000000</time_taken>
+<time_taken>62.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Modifies="1" Typed="1" comment="Is variable b modified by any while loop?" >5</id><querystr><![CDATA[while w; Select w such that Modifies(w, "b");]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>49.000000</time_taken>
+<time_taken>65.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Modifies="1" Typed="1" comment="Is variable b modified by any statements?" >6</id><querystr><![CDATA[stmt s; Select s such that Modifies(s, "b");]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>49.000000</time_taken>
+<time_taken>65.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Parentstar="1" Typed="1" comment="Which is/are the child/grandchild of statement 1?" >7</id><querystr><![CDATA[stmt s; Select s such that Parent*(1, s);]]></querystr>
 <stuans>2</stuans>
 <correct>2</correct>
-<time_taken>50.000000</time_taken>
+<time_taken>65.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Followsstar="1" Typed="1" comment="Which statement(s) follow(s) statement 1?" >8</id><querystr><![CDATA[stmt s; Select s such that Follows*(1, s);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>49.000000</time_taken>
+<time_taken>64.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Followsstar="1" Typed="1" comment="Which statement(s) follow(s) statement 3?" >9</id><querystr><![CDATA[stmt s; Select s such that Follows*(3, s);]]></querystr>
 <stuans>4</stuans>
 <correct>4</correct>
-<time_taken>51.000000</time_taken>
+<time_taken>64.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Modifies="1" Typed="1" comment="Which statement(s) modifies variable a?" >10</id><querystr><![CDATA[stmt s; Select s such that Modifies(s, "a");]]></querystr>
 <stuans>1,5,2,6</stuans>
 <correct>1,2,5,6</correct>
-<time_taken>55.000000</time_taken>
+<time_taken>67.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Uses="1" Typed="1" comment="Which statement(s) uses variable a?" >11</id><querystr><![CDATA[stmt s; Select s such that Uses(s, "a");]]></querystr>
 <stuans>1,5,2,6</stuans>
 <correct>1,2,5,6</correct>
-<time_taken>54.000000</time_taken>
+<time_taken>69.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Uses="1" Typed="1" comment="Which statement(s) uses variable z?" >12</id><querystr><![CDATA[stmt s; Select s such that Uses(s, "z");]]></querystr>
 <stuans>5</stuans>
 <correct>5</correct>
-<time_taken>56.000000</time_taken>
+<time_taken>68.000000</time_taken>
 <passed/>
 </query>
 </category>

@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>67.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>69.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" Test for Follows(*), Parent(*), Modifies, Uses,pattern">
@@ -9,134 +9,288 @@
 <id Parent="1" Typed="1" comment="Which parent does statement 4 belongs to?" >1</id><querystr><![CDATA[stmt s;  Select s such that Parent(s,4);]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>45.000000</time_taken>
+<time_taken>56.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Parent="1" Typed="1" comment="Does statement 2 has child?" >2</id><querystr><![CDATA[stmt s;  Select s such that Parent (2,s);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>47.000000</time_taken>
+<time_taken>59.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Parent="1" Typed="1" comment="Select all the statements which are a child of another statement." >3</id><querystr><![CDATA[stmt s1,s2;  Select s2 such that Parent (s1,s2);]]></querystr>
 <stuans>4,5,6,9,10,13,7,8,11,12</stuans>
 <correct>4,5,6,7,8,9,10,11,12,13</correct>
-<time_taken>71.000000</time_taken>
+<time_taken>66.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Parent="1" Typed="1" comment="Select all the parents." >4</id><querystr><![CDATA[stmt s1;  Select s1 such that Parent (s1,_);]]></querystr>
 <stuans>3,6,10</stuans>
 <correct>3,6,10</correct>
-<time_taken>55.000000</time_taken>
+<time_taken>61.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Parent="1" Placeholder="1" comment="Select all the while if there exists a parent relationship" >5</id><querystr><![CDATA[while w;  Select w such that Parent (_,_);]]></querystr>
 <stuans>3,6,10</stuans>
 <correct>3,6,10</correct>
-<time_taken>50.000000</time_taken>
+<time_taken>65.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Parent="1" Placeholder="1" comment="Select all the child statements if it exists" >6</id><querystr><![CDATA[stmt s1;  Select s1 such that Parent (_,s1);]]></querystr>
 <stuans>4,5,6,9,10,13,7,8,11,12</stuans>
 <correct>4,5,6,7,8,9,10,11,12,13</correct>
-<time_taken>59.000000</time_taken>
+<time_taken>71.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Parent="1" Typed="1" comment="Is there any nested while loop?" >7</id><querystr><![CDATA[while w1,w2; Select w2 such that Parent (w1,w2);]]></querystr>
 <stuans>6,10</stuans>
 <correct>6,10</correct>
-<time_taken>54.000000</time_taken>
+<time_taken>67.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Parent="1" Typed="1" comment="Select assignments nested in a while loop?" >8</id><querystr><![CDATA[while w;assign a; Select a such that Parent (w,a);]]></querystr>
 <stuans>4,5,9,13,7,8,11,12</stuans>
 <correct>4,5,7,8,9,11,12,13</correct>
-<time_taken>56.000000</time_taken>
+<time_taken>72.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Parentstar="1" Typed="1" comment="Select all the parents of statement 5." >9</id><querystr><![CDATA[stmt s;  Select s such that Parent*(s,5);]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>56.000000</time_taken>
+<time_taken>65.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Parentstar="1" Typed="1" comment="Select all the while loop which is/are a child of another while loop." >10</id><querystr><![CDATA[while w1,w2; Select w2 such that Parent* (w1,w2);]]></querystr>
 <stuans>6,10</stuans>
 <correct>6,10</correct>
-<time_taken>58.000000</time_taken>
+<time_taken>72.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Parentstar="1" Typed="1" comment="Select all the assignments nested directly/indrectly in a while loop." >11</id><querystr><![CDATA[while w;assign a; Select a such that Parent* (w,a);]]></querystr>
 <stuans>4,5,7,8,9,11,12,13</stuans>
 <correct>4,5,7,8,9,11,12,13</correct>
-<time_taken>60.000000</time_taken>
+<time_taken>72.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Follows="1" Typed="1" comment="Which statement does statement 3 follow?" >12</id><querystr><![CDATA[stmt s;  Select s such that Follows(s,3);]]></querystr>
 <stuans>2</stuans>
 <correct>2</correct>
-<time_taken>56.000000</time_taken>
+<time_taken>66.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Follows="1" Typed="1" comment="Select statement directly follow statement 5 ?" >13</id><querystr><![CDATA[stmt s;  Select s such that Follows (5,s);]]></querystr>
 <stuans>6</stuans>
 <correct>6</correct>
-<time_taken>58.000000</time_taken>
+<time_taken>70.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Followsstar="1" Typed="1" comment="Select all the statements which follows a while statement." >14</id><querystr><![CDATA[stmt s;while w;  Select s such that Follows* (w,s);]]></querystr>
 <stuans>9,10,13</stuans>
 <correct>9,10,13</correct>
-<time_taken>59.000000</time_taken>
+<time_taken>77.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Followsstar="1" Typed="1" comment="Select all the statements that are followed by assignment statement." >15</id><querystr><![CDATA[stmt s1; assign a; Select s1 such that Follows* (s1,a);]]></querystr>
 <stuans>1,4,5,6,7,9,10,11</stuans>
 <correct>1,4,5,6,7,9,10,11</correct>
-<time_taken>64.000000</time_taken>
+<time_taken>78.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Followsstar="1" Placeholder="1" comment="Select all the while if there exists a follows* relationship" >16</id><querystr><![CDATA[while w;  Select w such that Follows* (_,_);]]></querystr>
 <stuans>3,6,10</stuans>
 <correct>3,6,10</correct>
-<time_taken>57.000000</time_taken>
+<time_taken>72.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Followsstar="1" Placeholder="1" comment="Select all the statements if it follows some statements." >17</id><querystr><![CDATA[stmt s;  Select s such that Follows* (_,s);]]></querystr>
 <stuans>2,3,5,6,9,10,13,8,12</stuans>
 <correct>2,3,5,6,8,9,10,12,13</correct>
-<time_taken>58.000000</time_taken>
+<time_taken>74.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Followsstar="1" Typed="1" comment="Select while loops that are followed by some statements?" >18</id><querystr><![CDATA[while w; Select w such that Follows* (w,_);]]></querystr>
 <stuans>6,10</stuans>
 <correct>6,10</correct>
-<time_taken>64.000000</time_taken>
+<time_taken>71.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Followsstar="1" Typed="1" comment="Select assignments that follow while loops?" >19</id><querystr><![CDATA[while w;assign a; Select a such that Follows* (w,a);]]></querystr>
 <stuans>9,13</stuans>
 <correct>9,13</correct>
-<time_taken>69.000000</time_taken>
+<time_taken>77.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id parentstar="1" pattern="1" comment="Select BOOLEAN if there exists a nested while and has control variable b." >20</id>
+<id parentstar="1" pattern="1" comment="Select BOOLEAN if there exists a nested while and has control variable b." >20</id><querystr><![CDATA[while w; Select BOOLEAN such that Parent*(_,w) pattern w("b",_);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>97.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" pattern="1" comment="Select assignment a1 that uses a while assignment a2 modifies i." >21</id><querystr><![CDATA[assign a1,a2; Select a1 such that Uses(a1,"a") pattern a2("i",_);]]></querystr>
+<stuans>4,7</stuans>
+<correct>4,7</correct>
+<time_taken>101.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id parentstar="1" Typed="1" comment="Select BOOLEAN if there exists a Uses relationship." >22</id><querystr><![CDATA[while w; Select w such that Parent*(w,1) pattern w("f",_);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>97.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" pattern="1" comment="Select BOOLEAN if there exists an assignment Uses variable y and modifies c?" >23</id><querystr><![CDATA[assign a; Select BOOLEAN such that Modifies(a,"c") pattern a("c",_"y"_);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>105.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" pattern="1" comment="Select BOOLEAN if there exists an assignment modifies variable d and another asisgnmenent that y =a?" >24</id><querystr><![CDATA[assign a1,a2; Select BOOLEAN such that Modifies(a1,"d") pattern a2("y","a");]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>103.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" pattern="1" comment="Select BOOLEAN if there exists an assignment modifies variable d and another asisgnmenent that uses b?" >25</id><querystr><![CDATA[assign a1,a2; Select BOOLEAN such that Modifies(a1,"d") pattern a2("y",_"b"_);]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>103.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifeis="1" Pattern="1" comment="Which is the assigment modifies c uses q?" >26</id><querystr><![CDATA[assign a; Select a such that Modifies(a,"c") pattern a("c",_"q"_);]]></querystr>
+<stuans>4,5,8,13</stuans>
+<correct>8</correct>
+<time_taken>105.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>13,4,5</additional>
+<summary>
+<expected>1</expected>
+<matched>1</matched>
+<missing>0</missing>
+<additional>3</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id Uses="1" Pattern="1" comment="Which is the assignment modifies c uses x and z?" >27</id><querystr><![CDATA[assign a; Select a such that Uses(a,"x") pattern a("c",_"z"_);]]></querystr>
+<stuans>5,12</stuans>
+<correct>5</correct>
+<time_taken>106.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>12</additional>
+<summary>
+<expected>1</expected>
+<matched>1</matched>
+<missing>0</missing>
+<additional>1</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id followsstar="1" Pattern="1" comment="Which is the assignment modifies c and follows some statements?" >28</id><querystr><![CDATA[assign a; Select a such that Follows*(_,a) pattern a("c",_);]]></querystr>
+<stuans>2,5,9,13,8,12</stuans>
+<correct>5,8,13</correct>
+<time_taken>109.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>12,2,9</additional>
+<summary>
+<expected>3</expected>
+<matched>3</matched>
+<missing>0</missing>
+<additional>3</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id parent="1" Pattern="1" comment="Which is the assignment modifies c and follows some statements?" >29</id><querystr><![CDATA[while w;assign a; Select w such that Parent(w,a) pattern w("b",_);]]></querystr>
+<stuans>3,6,10</stuans>
+<correct>6</correct>
+<time_taken>113.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>10,3</additional>
+<summary>
+<expected>1</expected>
+<matched>1</matched>
+<missing>0</missing>
+<additional>2</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id pattern : which variable is modified in assignment a and uses a?="1" >30</id><exception/>
+<querystr><![CDATA[assign a;variable v; Select v  pattern a(v,_"a"_);]]></querystr>
+</query>
+<query>
+<id pattern : which variable is modified in assignment a and uses a?="1" >31</id><querystr><![CDATA[assign a;variable v; Select v  such that such that Uses(a,v) pattern a(v,_"a"_);]]></querystr>
+<stuans>c,d</stuans>
+<correct>c,d</correct>
+<time_taken>106.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="Which statment is the parent of itself?" >32</id><exception/>
+<querystr><![CDATA[stmt s;  Select s such that Parent(s,s);]]></querystr>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="Which statment if the parent* of itself?" >33</id><querystr><![CDATA[stmt s;  Select s such that Parent*(s,s);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>84.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="Which while is the parent of itself?" >34</id><exception/>
+<querystr><![CDATA[while w;  Select w such that Parent(w,w);]]></querystr>
+</query>
+<query>
+<id Follows="1" Typed="1" comment="Which while follows itself?" >35</id><querystr><![CDATA[while w;  Select w such that Follows(w,w);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>85.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Follows="1" Typed="1" comment="Which statement follows itself?" >36</id><querystr><![CDATA[assign s;  Select s such that Follows(s,s);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>67.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Followsstar="1" Typed="1" comment="Which statement follows* itself?" >37</id><querystr><![CDATA[assign s;  Select s such that Follows*(s,s);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>65.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

@@ -103,12 +103,12 @@ Select s1  such that Parent* ( s1 , s1 );
 73 - uses , Typed :: (unknown_statement,known_variable)
 stmt s1;
 Select s1  such that Uses ( s1 , "apple" );
-2,3,9,19,21,22,40
+2,3,8,9,19,21,22,31,40
 5000
 74 - modifies , Typed :: (unknown_statement,known_variable)
 stmt s1;
 Select s1  such that Modifies ( s1 , "apple" );
-1,20,32,39
+1,8,20,31,32,39
 5000
 75 - uses , Typed :: (unknown_assignment,known_variable)
 assign a1; 
@@ -183,12 +183,12 @@ gummy
 89 - uses , Typed :: (known_while,unknown_variable)
 variable v1;
 Select v1  such that Uses (10 , v1 );
-egg,donut,fish,innard
+egg,donut,gummy,fish,innard
 5000
 90 - modifies , Typed :: (known_while,unknown_variable)
 variable v1;
 Select v1  such that Modifies (10 , v1 );
-innard,gummy,fish
+innard,gummy,ham,fish
 5000
 91 - uses , Typed :: (known_if,unknown_variable)
 variable v1;
@@ -213,7 +213,7 @@ kimchi,leek,apple,jam,meat,banana,carrot,ingredients,a,b,c
 95 - uses , Typed :: (known_procedure,unknown_variable)
 variable v1;
 Select v1  such that Uses ( "xylo" , v1 );
-apple,carrot,egg,donut,fish,gummy,leek,kimchi,meat,banana,ingredients,a,b,c
+apple,carrot,egg,donut,fish,gummy,innard,leek,kimchi,meat,banana,ingredients,a,b,c
 5000
 96 - modifies , Typed :: (known_procedure,unknown_variable)
 variable v1;
