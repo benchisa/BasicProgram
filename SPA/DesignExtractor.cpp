@@ -265,20 +265,21 @@ AST* DesignExtractor::buildCFG(AST * node)
 		
 		case ASSIGNMENT:
 			if(tmp->getRightSibling()){
-				pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getRightSibling()));
+				// seems like statement line is better
+				pkb->addEdge(pkb->getStatementNum(tmp), pkb->getStatementNum(tmp->getRightSibling()));
 			}
 			lastNode = tmp;
 			tmp = tmp->getRightSibling();
 			break;
 		
 		case WHILE:
-			cfgWhileKeepers.push_back(pkb->getProgLine(tmp));
+			cfgWhileKeepers.push_back(pkb->getStatementNum(tmp));
 
 			if(tmp->getRightSibling()){
-				pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getRightSibling()));
+				pkb->addEdge(pkb->getStatementNum(tmp), pkb->getStatementNum(tmp->getRightSibling()));
 			}
 			
-			pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()));
+			pkb->addEdge(pkb->getStatementNum(tmp), pkb->getStatementNum(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()));
 
 			lastNode = buildCFG(tmp->getFirstDescendant()->getRightSibling());
 			if(pkb->getType(lastNode) != IF)
@@ -294,28 +295,28 @@ AST* DesignExtractor::buildCFG(AST * node)
 				pkb->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
 
 			if(tmp->getRightSibling()){
-				pkb->addEdge(pkb->getProgLine(lastNode), pkb->getProgLine(tmp->getRightSibling()));
+				pkb->addEdge(pkb->getStatementNum(lastNode), pkb->getStatementNum(tmp->getRightSibling()));
 			}
 
-			pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()));
+			pkb->addEdge(pkb->getStatementNum(tmp), pkb->getStatementNum(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()));
 
 			lastNode = buildCFG(tmp->getFirstDescendant()->getRightSibling()->getRightSibling());
 			if(cfgWhileKeepers.size() != 0)
-				pkb->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
+				pkb->addEdge(pkb->getStatementNum(lastNode), cfgWhileKeepers.back());
 			
 			
 			if(tmp->getRightSibling()){
-				pkb->addEdge(pkb->getProgLine(lastNode), pkb->getProgLine(tmp->getRightSibling()));
+				pkb->addEdge(pkb->getStatementNum(lastNode), pkb->getStatementNum(tmp->getRightSibling()));
 			}
 
-			pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getRightSibling()->getFirstDescendant()));
+			pkb->addEdge(pkb->getStatementNum(tmp), pkb->getStatementNum(tmp->getFirstDescendant()->getRightSibling()->getRightSibling()->getFirstDescendant()));
 			
 			lastNode = tmp;
 			tmp = tmp->getRightSibling();
 			break;
 		case CALL:
 			if(tmp->getRightSibling()){
-				pkb->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getRightSibling()));
+				pkb->addEdge(pkb->getStatementNum(tmp), pkb->getStatementNum(tmp->getRightSibling()));
 			}
 
 			lastNode = tmp;
