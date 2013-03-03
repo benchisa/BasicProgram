@@ -95,7 +95,7 @@ public:
 	static vector<pair<TOKEN, PROG_LINE>> tokenize(SOURCE src){
 		vector<pair<TOKEN, PROG_LINE>> tokens;
 		pair<TOKEN, PROG_LINE> tmp;
-		int progline = 1;
+		int progline = 0;
 		regex rx("call|while|procedure|if|then|else|\\n|\\(|\\)|\\{|\\}|\\=|\\;|\\-|\\*|\\+|[^\\s\\n\\{\\}\\-\\*\\+\\;\\=\\(\\)]+");
 		sregex_iterator rxItr(src.begin(), src.end(), rx), rxend;
 
