@@ -20,9 +20,9 @@ Pattern::~Pattern(void)
 
 
 RELATION_LIST Pattern::evaluatePattern(QTREE * patternNode, QUERYTABLE * qtable, QUERYPARAM * param) {
-	QTREE * qVar, * paramNode, *varNode, *expr, *patternTree;
-	TYPE pType, qType,varType, paramType;
-	VAR_INDEX varIndex,varTableIndex;
+	QTREE * stmtNode, * paramNode, *varNode, *expr;
+	TYPE stmtType,varType, paramType;
+	VAR_INDEX varIndex;
 	DATA_LIST * data;
 	PREFIXEXPR ex;
 	bool subFlag;
@@ -32,25 +32,39 @@ RELATION_LIST Pattern::evaluatePattern(QTREE * patternNode, QUERYTABLE * qtable,
 
 	//check if query contains Pattern
 	//patternTree = patternNode->getRightSibling();
-	qVar = patternNode->getFirstDescendant();
-	pType = qtable->at(qVar->getData());
-	varNode = qVar->getFirstDescendant();
+	stmtNode = patternNode->getFirstDescendant();
+	stmtType = qtable->at(stmtNode->getData());
+	varNode = stmtNode->getFirstDescendant();
 	varType = varNode->getType();
 	paramNode = varNode->getRightSibling();
 	paramType = paramNode->getType();
-	qType = varNode->getType();
 	varIndex = varNode->getData();
 	
 	//if variable name is unknown 
 	if(varType==QUERYVAR){
-		varTableIndex = qtable->at(varIndex);
-	}
-	if(varIndex < 1) {
-			varIndex = 0;
+		varIndex = qtable->at(varNode->getData());
+	}else{
+		varIndex= varNode->getData();
 	}
 	//translate the expression to prefix
-	ex = DesignExtractor::convertExprToPrefix(param->find(paramNode->getData())->second);
-	if(ex != "_") {
+	ex = param->find(paramNode->getData())->second;
+	if(ex.size()==1){
+		ex = "_";
+	}else{
+		unsigned firstPos = ex.find("_");
+		if(firstPos!=std::string::npos){ //subtree expression
+			ex = ex.erase(firstPos,2);
+			ex = ex.erase(ex.size()-2,2);
+			ex = DesignExtractor::convertExprToPrefix(ex);
+			subFlag = true;
+		}else{ //full tree
+			ex = ex.erase(0,1);
+			ex = ex.erase(ex.size()-1,1);
+			ex = DesignExtractor::convertExprToPrefix(ex);
+			subFlag = false;
+		}
+	}
+/*	if(ex != "_") {
 		unsigned firstPos = ex.find("\"");
 		while(firstPos != -1) {
 			ex = ex.erase(firstPos, 1);
@@ -68,25 +82,31 @@ RELATION_LIST Pattern::evaluatePattern(QTREE * patternNode, QUERYTABLE * qtable,
 			subFlag = false;
 		}
 	}
-
+	*/
 	//check if pattern is Assignment/While/If
-	if(pType == ASSIGNMENT) {
+	if(stmtType == ASSIGNMENT) {
 		//check assignment table and return all statements
 		data = p->getAllAssigns();
 		for(DATA_LIST::iterator itr = data->begin(); itr != data->end(); itr++) {
 			ASSIGNENTRY entry = (*p).getAssignEntry(*itr);
 			int currentVarTableIndex = entry.varIndex;
+			string currentPrefix = entry.prefixTree;
 				//compare prefixTree between AssignTable and QueryTree
 				if(ex != "_") {// has expression tree
 					if(subFlag == true) {
-						int r = (entry.prefixTree).find(ex);
+						int r = currentPrefix.find(ex);
 						if(r > -1) {
-							string temp = entry.prefixTree.substr(r+ex.length(), 1);
-							if(temp == "" || temp == " ") {
+							bool endOfString = r + ex.length()==currentPrefix.length();
+							bool matchSubStr = false;
+							if(!endOfString){
+								string temp = currentPrefix.substr(r+ex.length(), 1);	
+								if(temp == " ") matchSubStr = true;
+							}
+							if(endOfString||matchSubStr) {
 								if(varType==QUERYVAR||varType==ANY){
 									rlist.push_back(make_pair(*itr, currentVarTableIndex));
 								}else if(varType==VARIABLE){
-									if(varTableIndex== currentVarTableIndex)
+									if(varIndex== currentVarTableIndex)
 										rlist.push_back(make_pair(*itr, currentVarTableIndex));
 								}	
 							}
@@ -96,7 +116,7 @@ RELATION_LIST Pattern::evaluatePattern(QTREE * patternNode, QUERYTABLE * qtable,
 							if(varType==QUERYVAR||varType==ANY){
 								rlist.push_back(make_pair(*itr, currentVarTableIndex));
 							}else if(varType==VARIABLE){
-								if(varTableIndex== currentVarTableIndex)
+								if(varIndex== currentVarTableIndex)
 									rlist.push_back(make_pair(*itr, currentVarTableIndex));
 							}	
 						}
@@ -105,13 +125,13 @@ RELATION_LIST Pattern::evaluatePattern(QTREE * patternNode, QUERYTABLE * qtable,
 						if(varType==QUERYVAR||varType==ANY){
 							rlist.push_back(make_pair(*itr, currentVarTableIndex));
 						}else if(varType==VARIABLE){
-							if(varTableIndex== currentVarTableIndex)
+							if(varIndex== currentVarTableIndex)
 								rlist.push_back(make_pair(*itr, currentVarTableIndex));
 						}	
 					}
 				}
 				//data = p->getAllAssigns();
-			}else if(pType == WHILE) {
+			}else if(stmtType == WHILE) {
 				data = p->getAllWhiles();
 				for(DATA_LIST::iterator itr = data->begin(); itr != data->end(); itr++) {
 					ctrl = p->getWhileCtrVar(*itr);
@@ -119,11 +139,11 @@ RELATION_LIST Pattern::evaluatePattern(QTREE * patternNode, QUERYTABLE * qtable,
 					if(varType==QUERYVAR||varType==ANY){
 						rlist.push_back(make_pair(*itr, ctrl));
 					}else if(varType==VARIABLE){
-						if(varTableIndex== ctrl)
+						if(varIndex== ctrl)
 							rlist.push_back(make_pair(*itr, ctrl));
 					}	
 				}
-			}else if(pType == IF) {
+			}else if(stmtType == IF) {
 				data = p->getAllIfs();
 				for(DATA_LIST::iterator itr = data->begin(); itr != data->end(); itr++) {
 					ctrl = p->getIfCtrVar(*itr);
@@ -131,7 +151,7 @@ RELATION_LIST Pattern::evaluatePattern(QTREE * patternNode, QUERYTABLE * qtable,
 					if(varType==QUERYVAR||varType==ANY){
 						rlist.push_back(make_pair(*itr, ctrl));
 					}else if(varType==VARIABLE){
-						if(varTableIndex== ctrl)
+						if(varIndex== ctrl)
 							rlist.push_back(make_pair(*itr, ctrl));
 					}	
 				}
