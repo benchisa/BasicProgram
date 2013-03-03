@@ -847,7 +847,7 @@ bool QueryPreprocessor::processPattern(TOKEN token){
 	TYPE synType;
 	int argCount;
 	
-	string expr			= "\\(*"+synonym+"("+op+"("+synonym+or+integer+")"+"\\)*)"+optional;
+	string expr			= "\\(*("+synonym+or+integer+")("+op+"("+synonym+or+integer+")"+"\\)*)"+optional;
 	string wildexpr		= underscore+invComma+expr+invComma+underscore;
 
 	headNode = createQTREENode(PATTERN);

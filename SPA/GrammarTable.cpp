@@ -23,7 +23,7 @@ GrammarTable::GrammarTable(void){
 	entRef			= synonym+or+underscore+or+integer+or+invComma+ident+invComma;
 	lineRef			= synonym+or+underscore+or+integer;
 	varRef			= synonym+or+underscore+or+invComma+ident+invComma;
-	expr			= "\\(*"+synonym+"("+op+"("+synonym+or+integer+")"+"\\)*)"+optional;
+	expr			= "\\(*("+synonym+or+integer+")("+op+"("+synonym+or+integer+")"+"\\)*)"+optional;
 	wildexpr		= underscore+invComma+expr+invComma+underscore;
 	expr_spec		= invComma+expr+invComma+or+wildexpr;
 }
