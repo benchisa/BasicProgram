@@ -238,18 +238,7 @@ bool DesignExtractor::getIsCallStarResult(PROC_NAME caller, PROC_NAME callee)
 	return false;
 }
 
-bool DesignExtractor::isStatementTypeOf(TYPE typeName,STATEMENT_NUM stmtNum){
-	//find the type of statement
-	if(stmtNum>0&&stmtNum<=pkb->getMaxStatementNum()){
 
-		AST_LIST* currentAST = pkb->getASTBy(stmtNum);
-		AST_LIST::iterator itr;
-		for(itr = currentAST->begin();itr!=currentAST->end();itr++){
-			if((*itr)->getRootType()==typeName) return true;
-		}
-	}
-	return false;
-}
 
 void DesignExtractor::createCFG()
 {
@@ -1294,6 +1283,18 @@ DATA_LIST * DesignExtractor::getAllCallStmts(){
 
 	return returnList;
 }
+bool DesignExtractor::isStatementTypeOf(TYPE typeName,STATEMENT_NUM stmtNum){
+	//find the type of statement
+	if(stmtNum>0&&stmtNum<=pkb->getMaxStatementNum()){
+
+		AST_LIST* currentAST = pkb->getASTBy(stmtNum);
+		AST_LIST::iterator itr;
+		for(itr = currentAST->begin();itr!=currentAST->end();itr++){
+			if((*itr)->getRootType()==typeName) return true;
+		}
+	}
+	return false;
+}
 DATA_LIST * DesignExtractor::getStmtListOf(TYPE nodeType){
 	DATA_LIST * returnList = new DATA_LIST();
 
@@ -1342,7 +1343,10 @@ DATA_LIST * DesignExtractor::getStmtListOf(TYPE nodeType){
 	
 	case CONSTANT:
 		{
-			returnList = DesignExtractor::getAllConstants();
+			int constSize = pkb->getConstantTableSize();
+			for(int i=1;i<=constSize;i++){
+				returnList->push_back(i);
+			}
 		}
 		break;
 	}
