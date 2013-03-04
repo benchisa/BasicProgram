@@ -5,6 +5,7 @@ DesignExtractor::DesignExtractor(PKB* pkb)
 {
 	this->pkb = pkb;
 	DesignExtractor::createCFG();
+        DesignExtracter::insertProcModifiesUses();
 }
 
 
