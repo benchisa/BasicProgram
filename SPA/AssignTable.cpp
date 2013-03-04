@@ -25,7 +25,9 @@ void AssignTable::insert(STATEMENT_NUM stmtNo,INDEX ctrVarIndex,string prefixTre
 }
 ASSIGNENTRY AssignTable::getAssignEntry(STATEMENT_NUM stmtNo){
 	itr = assignTable.find(stmtNo);
-	return itr->second;
+	
+	if(itr!=assignTable.end())
+		return itr->second;
 }
 DATA_LIST * AssignTable::getAllAssigns(){
 	DATA_LIST * returnList = new DATA_LIST(assignStmtList);
