@@ -63,7 +63,8 @@ bool Parser::parse(){
 bool Parser::matchToken(TOKEN token){
 	if(curToken.compare(token) == 0){
 		prevToken = curToken;
-		prevProgLine = curProgLine;
+		if(prevToken != "}")
+			prevProgLine = curProgLine;
 		if(tokenIndex < tokens.size()-1) {
 			curToken = tokens.at(++tokenIndex).first;
 			curProgLine = tokens.at(tokenIndex).second;
@@ -81,7 +82,8 @@ bool Parser::matchToken(TOKEN token){
 bool Parser::matchToken(regex reg){
 	if(regex_match(curToken, reg)){
 		prevToken = curToken;
-		prevProgLine = curProgLine;
+		if(prevToken != "}")
+			prevProgLine = curProgLine;
 		if(tokenIndex < tokens.size()-1) {
 			curToken = tokens.at(++tokenIndex).first;
 			curProgLine = tokens.at(tokenIndex).second;
