@@ -1,0 +1,62 @@
+30
+cat: Test for such that and affects modifies
+49 - modifies , affects :: affects (known,known) and modifies (known,unknown)
+stmt s1,s2;variable v1;
+Select BOOLEAN   such that  Affects (13 ,18 ) and Modifies (18 , v1 ) ;
+true
+5000
+50 - modifies , affects* :: affects* (known,known) and modifies (known,unknown)
+stmt s1,s2;variable v1;
+Select BOOLEAN   such that  Affects* (13 ,18 ) and Modifies (18 , v1 ) ;
+true
+5000
+51 - modifies , affects :: affects (known,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s2   such that  Affects (13 , s2 ) and Modifies ( s2 , v1 ) ;
+
+5000
+52 - modifies , affects* :: affects* (known,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s2   such that  Affects* (13 , s2 ) and Modifies ( s2 , v1 ) ;
+
+5000
+53 - modifies , affects :: affects (unknown,known) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Affects ( s1 ,18 ) and Modifies ( s1 , v1 ) ;
+
+5000
+54 - modifies , affects* :: affects* (unknown,known) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Affects* ( s1 ,18 ) and Modifies ( s1 , v1 ) ;
+
+5000
+55 - modifies , affects :: affects (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Affects ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
+
+5000
+56 - modifies , affects* :: affects* (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Affects* ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
+
+5000
+57 - modifies , affects :: affects (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s2   such that  Affects ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
+
+5000
+58 - modifies , affects* :: affects* (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s2   such that  Affects* ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
+
+5000
+59 - modifies , affects :: affects (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Affects ( s1 , s1 ) and Modifies ( s2 , v1 ) ;
+
+5000
+60 - modifies , affects* :: affects* (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Affects* ( s1 , s1 ) and Modifies ( s2 , v1 ) ;
+
+5000

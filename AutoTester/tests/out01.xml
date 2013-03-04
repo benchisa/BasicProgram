@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>16.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>15.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" Test Case 2, Follows, Parent, Modifies, Uses for single while loop">
@@ -9,63 +9,63 @@
 <id Followsstar="1" Typed="1" comment="Which statement follows statement #2?" >1</id><querystr><![CDATA[stmt s; Select s such that Follows*(2, s);]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>56.000000</time_taken>
+<time_taken>47.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Follows="1" Typed="1" comment="Which statement follows statement #2?" >2</id><querystr><![CDATA[stmt s;  Select s such that Follows(2,s);]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>59.000000</time_taken>
+<time_taken>62.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Parent="1" Typed="1" comment="Which statement is a parent of statement #2?" >3</id><querystr><![CDATA[stmt s;  Select s such that Parent(s,2);]]></querystr>
 <stuans>1</stuans>
 <correct>1</correct>
-<time_taken>62.000000</time_taken>
+<time_taken>47.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Parent="1" Typed="1" comment="Which statement(s) is/are the child of statement #1?" >4</id><querystr><![CDATA[stmt s;  Select s such that Parent(1,s);]]></querystr>
 <stuans>2,3</stuans>
 <correct>2,3</correct>
-<time_taken>64.000000</time_taken>
+<time_taken>47.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Parentstar="1" Typed="1" comment="Which statement(s) is/are the child/grandchild of statement #1?" >5</id><querystr><![CDATA[stmt s; Select s such that Parent*(1, s);]]></querystr>
 <stuans>2,3</stuans>
 <correct>2,3</correct>
-<time_taken>68.000000</time_taken>
+<time_taken>47.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Parent="1" PlaceHolder="1" comment="Select all the parents" >7</id><querystr><![CDATA[stmt s1,s2; Select s1 such that Parent(s1, s2);]]></querystr>
 <stuans>1</stuans>
 <correct>1</correct>
-<time_taken>65.000000</time_taken>
+<time_taken>63.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Parent="1" Typed="1" comment="Children, which are assignments" >8</id><querystr><![CDATA[assign a; stmt s; Select a such that Parent(s, a);]]></querystr>
 <stuans>2,3</stuans>
 <correct>2,3</correct>
-<time_taken>68.000000</time_taken>
+<time_taken>62.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Modifies="1" Typed="1" comment="What variable(s) is/are modified by statement #1?" >9</id><querystr><![CDATA[variable v; Select v such that Modifies(1, v);]]></querystr>
 <stuans>c,d</stuans>
 <correct>c,d</correct>
-<time_taken>65.000000</time_taken>
+<time_taken>62.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Uses="1" Typed="1" comment="What variable(s) is/are used by statement #1?" >10</id><querystr><![CDATA[variable v; Select v such that Uses(1, v);]]></querystr>
 <stuans>q,c,a,x,y,z</stuans>
 <correct>c,a,x,y,z,q</correct>
-<time_taken>64.000000</time_taken>
+<time_taken>47.000000</time_taken>
 <passed/>
 </query>
 </category>

@@ -145,12 +145,12 @@ while w;assign a;
 Select w such that Parent(w,a) pattern w("b",_);
 6
 5000
-30 - pattern : which variable is modified in assignment a and uses a?
+30 - pattern :: which variable is modified in assignment a and uses a?
 assign a;variable v;
 Select v  pattern a(v,_"a"_);
 c, d
 5000
-31 - pattern : which variable is modified in assignment a and uses a?
+31 - pattern :: which variable is modified in assignment a and uses a?
 assign a;variable v;
 Select v  such that such that Uses(a,v) pattern a(v,_"a"_);
 c, d

@@ -1,57 +1,62 @@
-14
-cat: with cases
-1 - with, Typed :: 
-stmt s1;
-Select  s1 with s1.stmt# = 10;
-10
+108
+cat: such that parent
+13 - parent , Typed :: (known,known)
+
+Select BOOLEAN  such that Parent (9 ,10 );
+true
 5000
-2 - with, Typed :: 
-stmt s1; constant c;
-Select  c with s1.stmt# = c.value;
-0,1,2,9,10,11,22,33
+14 - parent* , Typed :: (known,known)
+
+Select BOOLEAN  such that Parent* (9 ,12 );
+true
 5000
-3 - with, Typed :: 
+15 - parent , Typed :: (known,unknown)
 stmt s1,s2;
-Select  s2 with s1.stmt# = s2.stmt#;
-1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47
+Select s2  such that Parent (9 , s2 );
+10,19            
 5000
-4 - with, Typed :: 
-constant c;
-Select  c with c.value = 1;
-1
+16 - parent* , Typed :: (known,unknown)//answer may be inaccurate        
+stmt s1,s2;
+Select s2  such that Parent* (9 , s2 );
+10,11,12,13,14,15,16,17,18,19            
 5000
-5 - with, Typed :: 
-stmt s1; constant c;
-Select  s1 with c.value = s1.stmt#;
-0,1,2,9,10,11,22,33
+17 - parent , Typed :: (unknown,known)//answer may be inaccurate        
+stmt s1,s2;
+Select s1  such that Parent ( s1 ,14 );
+10            
 5000
-6 - with, Typed :: 
-assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
-Select  v with v.varName = "apple";
-apple
+18 - parent* , Typed :: (unknown,known)//answer may be inaccurate        
+stmt s1,s2;
+Select s1  such that Parent* ( s1 ,14 );
+9,10            
 5000
-7 - with, Typed :: 
-assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
-Select  p with p.procName = "zebra";
-zebra
+19 - parent , Typed :: (unknown,unknown)//answer may be inaccurate        
+stmt s1,s2;
+Select s1  such that Parent ( s1 , s2 );
+9,10,12,14,16,21,24,29,36,44          
 5000
-8 - with, Typed :: 
-assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
-Select  v with v.varName = "orange";
+20 - parent* , Typed :: (unknown,unknown)//answer may be inaccurate        
+stmt s1,s2;
+Select s1  such that Parent* ( s1 , s2 );
+9,10,12,14,16,21,24,29,36,44            
+5000
+21 - parent , Typed :: (unknown,unknown)
+stmt s1,s2;
+Select s2  such that Parent ( s1 , s2 );
+10,11,12,13,14,15,16,17,18,19,22,23,24,25,26,30,37,38,45,46,47
+5000
+22 - parent* , Typed :: (unknown,unknown)
+stmt s1,s2;
+Select s2  such that Parent* ( s1 , s2 );
+10,11,12,13,14,15,16,17,18,19,22,23,24,25,26,30,37,38,45,46,47
+5000
+23 - parent , Typed :: (unknown,unknown)
+stmt s1,s2;
+Select s1  such that Parent ( s1 , s1 );
 
 5000
-9 - with, Typed :: 
-assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
-Select  BOOLEAN with p.procName = "procedure";
-false
-5000
-10 - with, Typed :: 
-assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
-Select  BOOLEAN with v.varName = p.procName;
-false
-5000
-12 - with, Typed :: 
-assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
-Select  p with cl.procName = p.procName;
-yello,zebra,extra
+24 - parent* , Typed :: (unknown,unknown)
+stmt s1,s2;
+Select s1  such that Parent* ( s1 , s1 );
+
 5000

@@ -1,0 +1,91 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>CS3202</name><parsing_time_taken>140.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" Test for such that and next modifies">
+<query>
+<id modifies="1" next="1" comment="next (known,known) and modifies (known,unknown)" >37</id><querystr><![CDATA[variable v1; Select BOOLEAN   such that  Next (21 ,22 ) and Modifies (21 , v1 ) ;]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id modifies="1" nextstar="1" comment="next* (known,known) and modifies (known,unknown)" >38</id><querystr><![CDATA[variable v1; Select BOOLEAN   such that  Next* (21 ,24 ) and Modifies (21 , v1 ) ;]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id modifies="1" next="1" comment="next (known,unknown) and modifies (unknown,unknown)" >39</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s2   such that  Next (21 , s2 ) and Modifies ( s2 , v1 ) ;]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id modifies="1" nextstar="1" comment="next* (known,unknown) and modifies (unknown,unknown)" >40</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s2   such that  Next* (21 , s2 ) and Modifies ( s2 , v1 ) ;]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id modifies="1" next="1" comment="next (unknown,known) and modifies (unknown,unknown)" >41</id><exception/>
+<querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Next (  ,24 ) and Modifies ( s1 , v1 ) ;]]></querystr>
+</query>
+<query>
+<id modifies="1" nextstar="1" comment="next* (unknown,known) and modifies (unknown,unknown)" >42</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Next* ( s1 ,24 ) and Modifies ( s1 , v1 ) ;]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id modifies="1" next="1" comment="next (unknown,unknown) and modifies (unknown,unknown)" >43</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Next ( s1 , s2 ) and Modifies ( s1 , v1 ) ;]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id modifies="1" nextstar="1" comment="next* (unknown,unknown) and modifies (unknown,unknown)" >44</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Next* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id modifies="1" next="1" comment="next (unknown,unknown) and modifies (unknown,unknown)" >45</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Next ( s1 , s1 ) and Modifies ( s1 , v1 ) ;]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id modifies="1" nextstar="1" comment="next* (unknown,unknown) and modifies (unknown,unknown)" >46</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Next* ( s1 , s1 ) and Modifies ( s1 , v1 ) ;]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id modifies="1" next="1" comment="next (unknown,unknown) and modifies (unknown,unknown)" >47</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s2   such that  Next ( s1 , s2 ) and Modifies ( s1 , v1 ) ;]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id modifies="1" nextstar="1" comment="next* (unknown,unknown) and modifies (unknown,unknown)" >48</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s2   such that  Next* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

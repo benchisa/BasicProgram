@@ -1,0 +1,57 @@
+30
+cat: Test for such that and follows modifies
+1 - modifies , follows :: follows (known,known) and modifies (unknown,unknown)
+stmt s1; variable v1;
+Select BOOLEAN   such that  Follows (4 ,5 ) and Modifies ( s1 , v1 ) ;
+true
+5000
+2 - modifies , follows* :: follows* (known,known) and modifies (known,unknown)
+variable v1;
+Select BOOLEAN   such that  Follows* (4 ,9 ) and Modifies (9 , v1 ) ;
+true
+5000
+3 - modifies , follows :: follows (known,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s2   such that  Follows (4 , s2 ) and Modifies ( s2 , v1 ) ;
+5
+5000
+5 - modifies , follows :: follows (unknown,known) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Follows ( s1 ,9 ) and Modifies ( s1 , v1 ) ;
+8
+5000
+6 - modifies , follows* :: follows* (unknown,known) and modifies (known,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Follows* ( s1 ,9 ) and Modifies (9 , v1 ) ;
+1,2,3,4,5,6,7,8
+5000
+7 - modifies , follows :: follows (unknown,unknown)  and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Follows ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
+1,2,3,4,5,6,7,8,9,10,11,12,14,15,20,23,27,28,29,31,32,34,35,36,39,40,42,43,45,46
+5000
+8 - modifies , follows* :: follows* (unknown,unknown)  and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Follows* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
+1,2,3,4,5,6,7,8,9,10,11,12,14,15,20,23,27,28,29,31,32,34,35,36,39,40,42,43,45,46
+5000
+9 - modifies , follows :: follows (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s2   such that  Follows ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
+2,3,4,5,6,7,8,9,12,14,16,18,19,20,21,24,28,29,31,32,33,35,36,39,40,41,43,44,46,47
+5000
+10 - modifies , follows* :: follows* (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s2   such that  Follows* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;
+2,3,4,5,6,7,8,9,12,14,16,18,19,20,21,24,28,29,31,32,33,35,36,39,40,41,43,44,46,47
+5000
+11 - modifies , follows :: follows (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
+Select v1   such that  Follows ( s1 , s1 ) and Modifies ( s1 , v1 ) ;
+
+5000
+12 - modifies , follows* :: follows* (unknown,unknown) and modifies (unknown,unknown)
+stmt s1,s2;variable v1;
+Select v1   such that  Follows* ( s1 , s1 ) and Modifies ( s1 , v1 ) ;
+
+5000

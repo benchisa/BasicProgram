@@ -1,0 +1,167 @@
+100
+cat: such that and next
+216 - next , follows* :: next (known,unknown) and follows* (unknown,unknown)
+stmt s1,s2;
+Select s2   such that  Next (21 , s2 ) and Follows* (21 , s2 ) ;
+
+5000
+217 - next* , follows* :: next* (known,unknown) and follows* (unknown,unknown)
+stmt s1,s2;
+Select s2   such that  Next* (21 , s2 ) and Follows* (21 , s2 ) ;
+
+5000
+218 - next , follows* :: next (unknown,known) and follows* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Next ( s1 ,24 ) and Follows* ( s1 ,24 ) ;
+
+5000
+219 - next* , follows* :: next* (unknown,known) and follows* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Next* ( s1 ,24 ) and Follows* ( s1 ,24 ) ;
+
+5000
+220 - next , follows* :: next (unknown,unknown) and follows* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Next ( s1 , s2 ) and Follows* ( s1 , s2 ) ;
+
+5000
+221 - next* , follows* :: next* (unknown,unknown) and follows* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Next* ( s1 , s2 ) and Follows* ( s1 , s2 ) ;
+
+5000
+222 - next , follows* :: next (unknown,unknown) and follows* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Next ( s1 , s1 ) and Follows* ( s1 , s1 ) ;
+
+5000
+223 - next* , follows* :: next* (unknown,unknown) and follows* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Next* ( s1 , s1 ) and Follows* ( s1 , s1 ) ;
+
+5000
+224 - next , follows* :: next (unknown,unknown) and follows* (unknown,unknown)
+stmt s1,s2;
+Select s2   such that  Next ( s1 , s2 ) and Follows* ( s1 , s2 ) ;
+
+5000
+185 - next, parent* :: next (known,known) and parent* (unknown,unknown)
+
+Select BOOLEAN   such that  Next (21 ,22 ) and Parent* (21 ,22 ) ;
+true
+5000
+186 - next*, parent* :: next* (known,known) and parent* (unknown,unknown)
+
+Select BOOLEAN   such that  Next* (21 ,24 ) and Parent* (21 ,22 ) ;
+true
+5000
+187 - next, parent* :: next (known,unknown) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s2   such that  Next (21 , s2 ) and Parent* (21 , s2 ) ;
+
+5000
+188 - next*, parent* :: next* (known,unknown) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s2   such that  Next* (21 , s2 ) and Parent* (21 , s2 ) ;
+
+5000
+189 - next, parent* :: next (unknown,known) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Next ( s1 ,24 ) and Parent* ( s1 ,24 ) ;
+
+5000
+190 - next*, parent* :: next* (unknown,known) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Next* ( s1 ,24 ) and Parent* ( s1 ,24 ) ;
+
+5000
+191 - next, parent* :: next (unknown,unknown) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Next ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
+
+5000
+192 - next*, parent* :: next* (unknown,unknown) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Next* ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
+
+5000
+193 - next, parent* :: next (unknown,unknown) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Next ( s1 , s1 ) and Parent* ( s1 , s1 ) ;
+
+5000
+194 - next*, parent* :: next* (unknown,unknown) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Next* ( s1 , s1 ) and Parent* ( s1 , s1 ) ;
+
+5000
+134 - next, uses :: next (known,known) and uses (unknown,unknown)
+variable v1;
+Select BOOLEAN   such that  Next (21 ,22 ) and Uses (22 , v1 ) ;
+true
+5000
+135 - next*, uses :: next* (known,known) and uses (unknown,unknown)
+variable v1;
+Select BOOLEAN   such that  Next* (21 ,24 ) and Uses (24 , v1 ) ;
+true
+5000
+136 - next, uses :: next (known,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s2   such that  Next (21 , s2 ) and Uses (21 , v1 ) ;
+
+5000
+137 - next*, uses :: next* (known,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s2   such that  Next* (21 , s2 ) and Uses (21 , v1 ) ;
+
+5000
+138 - next, uses :: next (unknown,known) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Next ( s1 ,24 ) and Uses ( s1 , v1 ) ;
+
+5000
+139 - next*, uses :: next* (unknown,known) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Next* ( s1 ,24 ) and Uses ( s1 , v1 ) ;
+
+5000
+140 - next, uses :: next (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Next ( s1 , s2 ) and Uses ( s1 , v1 ) ;
+
+5000
+141 - next*, uses :: next* (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Next* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
+
+5000
+142 - next, uses :: next (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Next ( s1 , s1 ) and Uses ( s1 , v1 ) ;
+
+5000
+143 - next*, uses :: next* (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Next* ( s1 , s1 ) and Uses ( s1 , v1 ) ;
+
+5000
+144 - next, uses :: next (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s2   such that  Next ( s1 , s2 ) and Uses ( s2 , v1 ) ;
+
+5000
+145 - next*, uses :: next* (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s2   such that  Next* ( s1 , s2 ) and Uses ( s2 , v1 ) ;
+
+5000
+214 - next , follows* :: next (known,known) and follows* (unknown,unknown)
+
+Select BOOLEAN   such that  Next (21 ,22 ) and Follows* (21 ,22 ) ;
+true
+5000
+215 - next* , follows* :: next* (known,known) and follows* (unknown,unknown)
+
+Select BOOLEAN   such that  Next* (21 ,24 ) and Follows* (21 ,24 ) ;
+true
+5000

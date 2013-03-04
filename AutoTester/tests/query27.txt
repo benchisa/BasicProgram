@@ -1,472 +1,77 @@
-100
-cat: others
-181 - calls, parent* :: calls (known,unknown) and parent* (unknown,unknown)
-proc p1,p2;
-Select p2   such that  Calls ( "xylo" , p2 ) and Parent* ( s1 , s2 ) ;
-
+14
+cat: with cases
+1 - with, Typed :: 
+stmt s1;
+Select  s1 with s1.stmt# = 10;
+10
 5000
-182 - calls*, parent* :: calls* (known,unknown) and parent* (unknown,unknown)
-proc p1,p2;
-Select p2   such that  Calls* ( "xylo" , p2 ) and Parent* ( s1 , s2 ) ;
-
+2 - with, Typed :: 
+stmt s1; constant c;
+Select  c with s1.stmt# = c.value;
+0,1,2,9,10,11,22,33
 5000
-183 - calls, parent* :: calls (unknown,known) and parent* (unknown,unknown)
-proc p1,p2;
-Select p1   such that  Calls ( p1 , "zebra" ) and Parent* ( s1 , s2 ) ;
-
-5000
-184 - calls*, parent* :: calls* (unknown,known) and parent* (unknown,unknown)
-proc p1,p2;
-Select p1   such that  Calls* ( p1 , "zebra" ) and Parent* ( s1 , s2 ) ;
-
-5000
-124 - calls, uses :: calls (known,unknown) and uses (known,unknown)
-proc p1,p2;variable v1;
-Select p2   such that  Calls ( "xylo" , p2 ) and Uses ( "xylo" , v1 ) ;
-
-5000
-125 - calls*, uses :: calls* (known,unknown) and uses (known,unknown)
-proc p1,p2;variable v1;
-Select p2   such that  Calls* ( "xylo" , p2 ) and Uses ( "xylo" , v1 ) ;
-
-5000
-126 - calls, uses :: calls (unknown,known) and uses (known,unknown)
-proc p1,p2;variable v1;
-Select p1   such that  Calls ( p1 , "zebra" ) and Uses ( "zebra" , v1 ) ;
-
-5000
-127 - calls*, uses :: calls* (unknown,known) and uses (unknown,unknown)
-proc p1,p2;variable v1;
-Select p1   such that  Calls* ( p1 , "zebra" ) and Uses ( p1 , v1 ) ;
-
-5000
-128 - calls, uses :: calls (unknown,unknown) and uses (unknown,unknown)
-proc p1,p2;variable v1;
-Select p1   such that  Calls ( p1 , p2 ) and Uses ( p2 , v1 ) ;
-
-5000
-129 - calls*, uses :: calls* (unknown,unknown) and uses (unknown,unknown)
-proc p1,p2;variable v1;
-Select p1   such that  Calls* ( p1 , p2 ) and Uses ( p2 , v1 ) ;
-
-5000
-130 - calls, uses :: calls (unknown,unknown) and uses (unknown,unknown)
-proc p1,p2;variable v1;
-Select p2   such that  Calls ( p1 , p2 ) and Uses ( p2 , v1 ) ;
-
-5000
-131 - calls*, uses :: calls* (unknown,unknown) and uses (unknown,unknown)
-proc p1,p2;variable v1;
-Select p2   such that  Calls* ( p1 , p2 ) and Uses ( p2 , v1 ) ;
-
-5000
-132 - calls, uses :: calls (unknown,unknown) and uses (unknown,unknown)
-proc p1,p2;variable v1;
-Select p1   such that  Calls ( p1 , p1 ) and Uses ( p1 , v1 ) ;
-
-5000
-133 - calls*, uses :: calls* (unknown,unknown) and uses (unknown,unknown)
-proc p1,p2;variable v1;
-Select p1   such that  Calls* ( p1 , p1 ) and Uses ( p1 , v1 ) ;
-
-5000
-179 - calls , parent* :: calls (known,known) and parent* (unknown,unknown)
+3 - with, Typed :: 
 stmt s1,s2;
-Select BOOLEAN   such that  Calls ( "xylo" , "yello" ) and Parent* ( s1 , s2 ) ;
-true
+Select  s2 with s1.stmt# = s2.stmt#;
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47
 5000
-180 - calls* , parent* :: calls* (known,known) and parent* (unknown,unknown)
-stmt s1,s2;
-Select BOOLEAN   such that  Calls* ( "xylo" , "yello" ) and Parent* ( s1 , s2 ) ;
-true
+4 - with, Typed :: 
+constant c;
+Select  c with c.value = 1;
+1
 5000
-122 - calls , uses :: calls (known,known) and uses (known,unknown)
-variable v1;
-Select BOOLEAN   such that  Calls ( "xylo" , "yello" ) and Uses ( "xylo" , v1 ) ;
-true
+5 - with, Typed :: 
+stmt s1; constant c;
+Select  s1 with c.value = s1.stmt#;
+0,1,2,9,10,11,22,33
 5000
-123 - calls* , uses :: calls* (known,known) and uses (known,unknown)
-variable v1;
-Select BOOLEAN   such that  Calls* ( "xylo" , "yello" ) and Uses ( "xylo" , v1 ) ;
-true
+6 - with, Typed :: 
+assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
+Select  v with v.varName = "apple";
+apple
 5000
-3 - follows (known,known) with
-variable v1;
-Select BOOLEAN   such that  Follows ( 4 , 5 ) with v1 . varName = "apple"   ;
-true
+7 - with, Typed :: 
+assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
+Select  p with p.procName = "zebra";
+zebra
 5000
-4 - follows* (known,known) with
-variable v1;
-Select BOOLEAN   such that  Follows* ( 4 , 9 ) with v1 . varName = 9   ;
+8 - with, Typed :: 
+assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
+Select  v with v.varName = "orange";
+
+5000
+9 - with, Typed :: 
+assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
+Select  BOOLEAN with p.procName = "procedure";
 false
 5000
-5 - follows (known,unknown) with
-stmt s1,s2;variable v1;
-Select s2 such that Follows ( 4 , s2 ) with s2.stmt# = s1.stmt# ;
-
+10 - with, Typed :: 
+assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
+Select  BOOLEAN with v.varName = p.procName;
+false
 5000
-6 - parent (known,known) with
-procedure p;
-Select BOOLEAN   such that  Parent ( 9 ,10 ) with p . procName = "yello"   ;
-true
+12 - with, Typed :: 
+assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
+Select  p with cl.procName = p.procName;
+yello,zebra,extra
 5000
-7 - parent* (known,known) with
-call c;
-Select BOOLEAN   such that  Parent* ( 9 ,12 ) with c . procName = "yello"   ;
-true
-5000
-8 - calls (known,known) with
-procedure p;
-Select BOOLEAN   such that  Calls ( "xylo" , "yello" ) with p . procName = "xylo"   ;
-true
-5000
-9 - calls* (known,known) with
-procedure p;
-Select BOOLEAN   such that  Calls* ( "xylo" , "yello" ) with p . procName = "xylo"   ;
-true
-5000
-216 - next , follows* :: next (known,unknown) and follows* (unknown,unknown)
-stmt s1,s2;
-Select s2   such that  Next (21 , s2 ) and Follows* (21 , s2 ) ;
-
-5000
-217 - next* , follows* :: next* (known,unknown) and follows* (unknown,unknown)
-stmt s1,s2;
-Select s2   such that  Next* (21 , s2 ) and Follows* (21 , s2 ) ;
-
-5000
-218 - next , follows* :: next (unknown,known) and follows* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next ( s1 ,24 ) and Follows* ( s1 ,24 ) ;
-
-5000
-219 - next* , follows* :: next* (unknown,known) and follows* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next* ( s1 ,24 ) and Follows* ( s1 ,24 ) ;
-
-5000
-220 - next , follows* :: next (unknown,unknown) and follows* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next ( s1 , s2 ) and Follows* ( s1 , s2 ) ;
-
-5000
-221 - next* , follows* :: next* (unknown,unknown) and follows* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next* ( s1 , s2 ) and Follows* ( s1 , s2 ) ;
-
-5000
-222 - next , follows* :: next (unknown,unknown) and follows* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next ( s1 , s1 ) and Follows* ( s1 , s1 ) ;
-
-5000
-223 - next* , follows* :: next* (unknown,unknown) and follows* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next* ( s1 , s1 ) and Follows* ( s1 , s1 ) ;
-
-5000
-224 - next , follows* :: next (unknown,unknown) and follows* (unknown,unknown)
-stmt s1,s2;
-Select s2   such that  Next ( s1 , s2 ) and Follows* ( s1 , s2 ) ;
-
-5000
-185 - next, parent* :: next (known,known) and parent* (unknown,unknown)
-
-Select BOOLEAN   such that  Next (21 ,22 ) and Parent* (21 ,22 ) ;
-true
-5000
-186 - next*, parent* :: next* (known,known) and parent* (unknown,unknown)
-
-Select BOOLEAN   such that  Next* (21 ,24 ) and Parent* (21 ,22 ) ;
-true
-5000
-187 - next, parent* :: next (known,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s2   such that  Next (21 , s2 ) and Parent* (21 , s2 ) ;
-
-5000
-188 - next*, parent* :: next* (known,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s2   such that  Next* (21 , s2 ) and Parent* (21 , s2 ) ;
-
-5000
-189 - next, parent* :: next (unknown,known) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next ( s1 ,24 ) and Parent* ( s1 ,24 ) ;
-
-5000
-190 - next*, parent* :: next* (unknown,known) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next* ( s1 ,24 ) and Parent* ( s1 ,24 ) ;
-
-5000
-191 - next, parent* :: next (unknown,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
-
-5000
-192 - next*, parent* :: next* (unknown,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next* ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
-
-5000
-193 - next, parent* :: next (unknown,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next ( s1 , s1 ) and Parent* ( s1 , s1 ) ;
-
-5000
-194 - next*, parent* :: next* (unknown,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next* ( s1 , s1 ) and Parent* ( s1 , s1 ) ;
-
-5000
-134 - next, uses :: next (known,known) and uses (unknown,unknown)
-variable v1;
-Select BOOLEAN   such that  Next (21 ,22 ) and Uses (22 , v1 ) ;
-true
-5000
-135 - next*, uses :: next* (known,known) and uses (unknown,unknown)
-variable v1;
-Select BOOLEAN   such that  Next* (21 ,24 ) and Uses (24 , v1 ) ;
-true
-5000
-136 - next, uses :: next (known,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Next (21 , s2 ) and Uses (21 , v1 ) ;
-
-5000
-137 - next*, uses :: next* (known,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Next* (21 , s2 ) and Uses (21 , v1 ) ;
-
-5000
-138 - next, uses :: next (unknown,known) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Next ( s1 ,24 ) and Uses ( s1 , v1 ) ;
-
-5000
-139 - next*, uses :: next* (unknown,known) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Next* ( s1 ,24 ) and Uses ( s1 , v1 ) ;
-
-5000
-140 - next, uses :: next (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Next ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-
-5000
-141 - next*, uses :: next* (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Next* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-
-5000
-142 - next, uses :: next (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Next ( s1 , s1 ) and Uses ( s1 , v1 ) ;
-
-5000
-143 - next*, uses :: next* (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Next* ( s1 , s1 ) and Uses ( s1 , v1 ) ;
-
-5000
-144 - next, uses :: next (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Next ( s1 , s2 ) and Uses ( s2 , v1 ) ;
-
-5000
-145 - next*, uses :: next* (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Next* ( s1 , s2 ) and Uses ( s2 , v1 ) ;
-
-5000
-214 - next , follows* :: next (known,known) and follows* (unknown,unknown)
-
-Select BOOLEAN   such that  Next (21 ,22 ) and Follows* (21 ,22 ) ;
-true
-5000
-215 - next* , follows* :: next* (known,known) and follows* (unknown,unknown)
-
-Select BOOLEAN   such that  Next* (21 ,24 ) and Follows* (21 ,24 ) ;
-true
-5000
-225 - with :: stmt#=value
+225 - with, Typed :: stmt#=value
 call cl; constant c;
 Select  c with cl.stmt# = c.value;
 
 5000
-226 - with :: stmt#=value
+226 - with, Typed :: stmt#=value
 while w; constant c;
 Select  w with w.stmt# = c.value;
-
+9,10
 5000
-227 - with :: stmt#=value
+227 - with, Typed :: stmt#=value
 if i; constant c;
 Select  i with i.stmt# = c.value;
 
 5000
-228 - with :: stmt#=value
+228 - with, Typed :: stmt#=value
 assign a; constant c;
 Select  BOOLEAN with a.stmt# = c.value;
 true
-5000
-49 - affects , Typed :: (known,known)
-
-Select BOOLEAN  such that Affects (13 ,18 );
-true
-5000
-50 - affects* , Typed :: (known,known)
-
-Select BOOLEAN  such that Affects* (13 ,18 );
-true
-5000
-51 - affects , Typed :: (known,unknown)
-stmt s1,s2;
-Select s2  such that Affects (13 , s2 );
-
-5000
-52 - affects* , Typed :: (known,unknown)
-stmt s1,s2;
-Select s2  such that Affects* (13 , s2 );
-
-5000
-53 - affects , Typed :: (unknown,known)
-stmt s1,s2;
-Select s1  such that Affects ( s1 ,18 );
-
-5000
-54 - affects* , Typed :: (unknown,known)
-stmt s1,s2;
-Select s1  such that Affects* ( s1 ,18 );
-
-5000
-55 - affects , Typed :: (unknown,unknown)
-stmt s1,s2;
-Select s1  such that Affects ( s1 , s2 );
-
-5000
-56 - affects* , Typed :: (unknown,unknown)
-stmt s1,s2;
-Select s1  such that Affects* ( s1 , s2 );
-
-5000
-57 - affects , Typed :: (unknown,unknown)
-stmt s1,s2;
-Select s2  such that Affects ( s1 , s2 );
-
-5000
-58 - affects* , Typed :: (unknown,unknown)
-stmt s1,s2;
-Select s2  such that Affects* ( s1 , s2 );
-
-5000
-59 - affects , Typed :: (unknown,unknown)
-stmt s1,s2;
-Select s1  such that Affects ( s1 , s1 );
-
-5000
-60 - affects* , Typed :: (unknown,unknown)
-stmt s1,s2;
-Select s1  such that Affects* ( s1 , s1 );
-
-5000
-146 - affects, uses :: affects (known,known) and uses (unknown,unknown)
-variable v1;
-Select BOOLEAN   such that  Affects (13 ,18 ) and Uses (18 , v1 ) ;
-true
-5000
-147 - affects*, uses :: affects* (known,known) and uses (unknown,unknown)
-variable v1;
-Select BOOLEAN   such that  Affects* (13 ,18 ) and Uses (13 , v1 ) ;
-true
-5000
-148 - affects, uses :: affects (known,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Affects (13 , s2 ) and Uses (13 , v1 ) ;
-
-5000
-149 - affects*, uses :: affects* (known,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Affects* (13 , s2 ) and Uses ( s2 , v1 ) ;
-
-5000
-150 - affects, uses :: affects (unknown,known) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects ( s1 ,18 ) and Uses ( s1 , v1 ) ;
-
-5000
-151 - affects*, uses :: affects* (unknown,known) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects* ( s1 ,18 ) and Uses ( s1 , v1 ) ;
-
-5000
-152 - affects, uses :: affects (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-
-5000
-153 - affects*, uses :: affects* (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-
-5000
-154 - affects, uses :: affects (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Affects ( s1 , s2 ) and Uses ( s2 , v1 ) ;
-
-5000
-155 - affects*, uses :: affects* (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Affects* ( s1 , s2 ) and Uses ( s2 , v1 ) ;
-
-5000
-156 - affects, uses :: affects (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects ( s1 , s1 ) and Uses ( s1 , v1 ) ;
-
-5000
-157 - affects*, uses :: affects* (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects* ( s1 , s1 ) and Uses ( s1 , v1 ) ;
-
-5000
-195 - affects , parent* :: affects (known,known) and parent* (unknown,unknown)
-stmt s1,s2;
-Select BOOLEAN   such that  Affects (13 ,18 ) and Parent* (18 , s1 ) ;
-true
-5000
-196 -  affect* , parent* :: affects* (known,known) and parent* (unknown,unknown)
-stmt s1,s2;
-Select BOOLEAN   such that  Affects* (13 ,18 ) and Parent* (18 , s1 ) ;
-true
-5000
-197 - affects, parent* :: affects (known,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s2   such that  Affects (13 , s2 ) and Parent* ( s1 , s2 ) ;
-
-5000
-198 - affects*, parent* :: affects* (known,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s2   such that  Affects* (13 , s2 ) and Parent* ( s1 , s2 ) ;
-
-5000
-199 - affects, parent* :: affects (unknown,known) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Affects ( s1 ,18 ) and Parent* ( s1 , s2 ) ;
-
-5000
-200 - affects*, parent* :: affects* (unknown,known) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Affects* ( s1 ,18 ) and Parent* ( s1 , s2 ) ;
-
-5000
-201 - affects, parent* :: affects (unknown,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Affects ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
-
-5000
-202 - affects*, parent* :: affects* (unknown,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Affects* ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
-
 5000

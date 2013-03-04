@@ -1,0 +1,82 @@
+30
+cat: Test for such that and parent uses modifies
+110 - parent , uses :: parent (known,known) and uses (known,unknown)
+variable v1;
+Select BOOLEAN   such that  Parent (9 ,10 ) and Uses (10 , v1 ) ;
+true
+5000
+111 - parent* , uses :: parent* (known,known) and uses (known,unknown)
+variable v1;
+Select BOOLEAN   such that  Parent* (9 ,12 ) and Uses (12 , v1 ) ;
+true
+5000
+112 - parent , uses :: parent (known,unknown) and uses (unknown,unknown)
+stmt s1,s2; variable v1;
+Select s2   such that  Parent (9 , s2 ) and Uses ( s2 , v1 ) ;
+10,19
+5000
+113 - parent* , uses :: parent* (known,unknown) and uses (unknown,unknown)
+stmt s1,s2; variable v1;
+Select s2   such that  Parent* (9 , s2 ) and Uses ( s2 , v1 ) ;
+10,12,13,14,16,17,18,19
+5000
+114 - parent , uses :: parent (unknown,known) and uses (unknown,unknown)
+stmt s1,s2; variable v1;
+Select s1   such that  Parent ( s1 ,14 ) and Uses ( s1 , v1 ) ;
+10
+5000
+115 - parent* , uses :: parent* (unknown,known) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Parent* ( s1 ,14 ) and Uses ( s1 , v1 ) ;
+9,10
+5000
+116 - parent , uses :: parent (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Parent ( s1 , s2 ) and Uses ( s1 , v1 ) ;
+9,10,12,14,16,21,24,29,36,44
+5000
+117 - parent* , uses :: parent* (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Parent* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
+9,10,12,14,16,21,24,29,36,44
+5000
+118 - parent , uses :: parent (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s2   such that  Parent ( s1 , s2 ) and Uses ( s1 , v1 ) ;
+10,11,12,13,14,15,16,17,18,19,22,23,24,25,26,30,37,38,45,46,47
+5000
+119 - parent* , uses :: parent* (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s2   such that  Parent* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
+10,11,12,13,14,15,16,17,18,19,22,23,24,25,26,30,37,38,45,46,47
+5000
+120 - parent , uses :: parent (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Parent ( s1 , s1 ) and Uses ( s1 , v1 ) ;
+
+5000
+121 - parent* , uses :: parent* (unknown,unknown) and uses (unknown,unknown)
+stmt s1,s2;variable v1;
+Select s1   such that  Parent* ( s1 , s1 ) and Uses ( s1 , v1 ) ;
+
+5000
+203 - uses , parent* :: uses (known_statement,known_var) and parent* (unknown,unknown)            
+stmt s1,s2;
+Select BOOLEAN   such that  Uses (3 , "apple" ) and Parent* ( s1 , s2 ) ;
+true
+5000
+204 - modifies , parent* :: modifies (known_statement,known_var) and parent* (unknown,unknown)       
+stmt s1,s2;
+Select BOOLEAN   such that  Modifies (1 , "apple" ) and Parent* ( s1 , s2 ) ;
+true
+5000
+205 - uses , parent* :: uses (known_assignment,known_var) and parent* (unknown,unknown)
+stmt s1,s2;
+Select BOOLEAN   such that  Uses (3 , "orange" ) and Parent* ( s1 , s2 ) ;
+false
+5000
+206 - modifies , parent* :: modifies (known_assignment,known_var) and parent* (unknown,unknown)
+stmt s1,s2;
+Select BOOLEAN   such that  Modifies (1 , "orange" ) and Parent* ( s1 , s2 ) ;
+false
+5000

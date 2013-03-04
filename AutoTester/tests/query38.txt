@@ -1,0 +1,97 @@
+100
+cat:such that and follows parent
+158 - follows , parent* :: follows (known,known) and parent* (unknown,unknown)
+stmt s1,s2;
+Select BOOLEAN   such that  Follows (4 ,5 ) and Parent* (4 , s1 ) ;
+false
+5000
+159 - follows* , parent* :: follows* (known,known) and parent* (unknown,unknown)
+stmt s1,s2;
+Select BOOLEAN   such that  Follows* (4 ,9 ) and Parent* (4 , s1 ) ;
+true
+5000
+160 - follows, parent* :: follows (known,unknown) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s2   such that  Follows (4 , s2 ) and Parent* ( s2 , s1 ) ;
+
+5000
+161 - follows*, parent* :: follows* (known,unknown) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s2   such that  Follows* (4 , s2 ) and Parent* ( s2 , s1 ) ;
+9,21
+5000
+162 - follows, parent* :: follows (unknown,known) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Follows ( s1 ,9 ) and Parent* ( s1 , s2 ) ;
+
+5000
+163 - follows*, parent* :: follows* (unknown,known) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Follows* ( s1 ,9 ) and Parent* ( s1 , s1 ) ;
+
+5000
+164 - follows, parent* :: follows (unknown,unknown)  and parent* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Follows ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
+
+5000                     
+165 - follows*, parent* :: follows* (unknown,unknown)  and parent* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Follows* ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
+
+5000
+166 - follows, parent* :: follows (unknown,unknown) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s2   such that  Follows ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
+
+5000
+167 - follows*, parent* :: follows* (unknown,unknown) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s2   such that  Follows* ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
+
+5000
+168 - follows, parent* :: follows (unknown,unknown) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Follows ( s1 , s1 ) and Parent* ( s1 , s2 ) ;
+
+5000
+169 - follows*, parent* :: follows* (unknown,unknown) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Follows* ( s1 , s1 ) and Parent* ( s1 , s2 ) ;
+
+5000
+209 - follows , follows* :: follows (known,unknown) and follows* (unknown,unknown)
+stmt s1,s2;
+Select s2   such that  Follows (4 , s2 ) and Follows* (4 , s2 ) ;
+5
+5000
+210 - parent , follows* :: parent (known,known) and follows* (unknown,unknown)
+
+Select BOOLEAN   such that  Parent (9 ,10 ) and Follows* (9 ,10 ) ;
+false
+5000
+211 - parent* , follows* :: parent* (known,known) and follows* (unknown,unknown)
+
+Select BOOLEAN   such that  Parent* (9 ,12 ) and Follows* (12 ,9 ) ;
+false
+5000
+212 - parent , follows* :: parent (known,unknown) and follows* (unknown,unknown)
+stmt s1,s2;
+Select s2   such that  Parent (9 , s2 ) and Follows* ( s2 ,9 ) ;
+
+5000
+213 - parent* , follows* :: parent* (known,unknown) and follows* (unknown,unknown)
+stmt s1,s2;
+Select s2   such that  Parent* (9 , s2 ) and Follows* (9 , s2 ) ;
+
+5000
+207 - follows , follows* :: follows (known,known) and follows* (unknown,unknown)
+
+Select BOOLEAN   such that  Follows (4 ,5 ) and Follows* (4 ,5 ) ;
+true
+5000
+208 - follows* :: follows* (known,known) and follows* (unknown,unknown)
+
+Select BOOLEAN   such that  Follows* (4 ,9 ) and Follows* (4 ,5 ) ;
+true
+5000

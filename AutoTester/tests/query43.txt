@@ -1,0 +1,52 @@
+224
+cat: such that with complex
+1 - Follows , Follows* , Uses , Modifies , Parent , Parent* :: All
+stmt s1,s2,s3,s4; assign a1,a2; constant c1; while w1,w2; if i1,i2;
+Select BOOLEAN such that Follows*(s3,s4) with c1.value=1 and w1.stmt#=s1.stmt# such that Parent(w1,s2) and Uses(w1, "apple") and Modifies(s2, "gummy") and Parent*(w2,s3) and Follows(1,2) with i1.stmt#=36 and i2.stmt#=21;
+
+5000
+2 - Follows , Follows* , Uses , Modifies , Parent , Parent* :: All
+stmt s1,s2,s3,s4; assign a1,a2; constant c1; while w1,w2; if i1,i2;
+Select s2 such that Follows*(s3,s4) with c1.value=1 and w1.stmt#=s1.stmt# such that Parent(w1,s2) and Uses(w1, "apple") and Modifies(s2, "gummy") and Parent*(w2,s3) and Follows(1,2) with i1.stmt#=36 and i2.stmt#=21;
+
+5000
+3 - Follows , Follows* , Uses , Modifies , Parent , Parent* :: All
+stmt s1,s2,s3,s4; assign a1,a2; constant c1; while w1,w2; if i1,i2;
+Select <s2,w1> such that Follows*(s3,s4) with c1.value=1 and w1.stmt#=s1.stmt# such that Parent(w1,s2) and Uses(w1, "apple") and Modifies(s2, "gummy") and Parent*(w2,s3) and Follows(1,2) with i1.stmt#=36 and i2.stmt#=21;
+
+5000
+4 - Follows , Follows* , Uses , Modifies , Parent , Parent* :: All
+stmt s1,s2,s3,s4; assign a1,a2,a3,a4;
+Select s1 such that Follows(s1,s2) and Follows*(s2,s3) and Follows*(s3,s4) and Uses(a1,"apple") and Modifies(a2,"apple") and Parent*(s3,a2) and Parent(s4,a1);
+
+5000
+5 - Follows , Follows* , Uses , Modifies , Parent , Parent* :: All
+stmt s1,s2,s3,s4; assign a1,a2,a3,a4;
+Select <a1,s1> such that Follows(s1,s2) and Follows*(s2,s3) and Follows*(s3,s4) and Uses(a1,"apple") and Modifies(a2,"apple") and Parent*(s3,a2) and Parent(s4,a1);
+
+5000
+6 - Follows , Follows* , Uses , Modifies , Parent , Parent* :: All
+stmt s1,s2,s3,s4; assign a1,a2,a3,a4;
+Select <s1,s2,s3> such that Follows(s1,s2) and Follows*(s2,s3) and Follows*(s3,s4) and Uses(a1,"apple") and Modifies(a2,"apple") and Parent*(s3,a2) and Parent(s4,a1);
+
+5000
+7 - Follows , Follows* , Uses , Modifies , Parent , Parent* :: All
+stmt s1,s2,s3,s4; assign a1,a2,a3,a4; variable v1,v2;
+Select <s1,s2,s3> such that Follows(s1,s2) and Follows*(s2,s3) with v1.varName="kimchi" and v2.varName="leek" such that Follows*(s3,s4) and Uses(a1,v1) and Modifies(a2,"apple") and Parent*(s3,a2) and Parent(s4,a1);
+
+5000
+8 - Follows , Follows* , Uses , Modifies , Parent , Parent* , Calls , Calls*, Next , Next* :: All
+stmt s1,s2,s3,s4; assign a1,a2,a3,a4; procedure p1,p2,p3; prog_line pg1,pg2,pg3; variable v1,v2;
+Select s1 such that Uses(a1,"apple") and Uses(p1,"apple") and Modifies(p1,v1) and Modifies(a4,v2) and Modifies(pg2,v2) and Next(pg1,pg2) and Calls(p1,p2) and Calls*(p2,p3) and Parent(s1,a2) and Parent*(s2,s1) and Follows(a2,a3) and Follows*(a3,a4) and Next(pg2,pg3) and Next*(pg3,38);
+
+5000
+9 - Follows , Follows* , Uses , Modifies , Parent , Parent* , Calls , Calls*, Next , Next* :: All
+stmt s1,s2,s3,s4; assign a1,a2,a3,a4; procedure p1,p2,p3; prog_line pg1,pg2,pg3; variable v1,v2;
+Select <v1,s1,p1> such that Uses(a1,"apple") and Uses(p1,"apple") and Modifies(p1,v1) and Modifies(a4,v2) and Modifies(pg2,v2) and Next(pg1,pg2) and Calls(p1,p2) and Calls*(p2,p3) and Parent(s1,a2) and Parent*(s2,s1) and Follows(a2,a3) and Follows*(a3,a4) and Next(pg2,pg3) and Next*(pg3,38);
+
+5000
+10 - Follows , Follows* , Uses , Modifies , Parent , Parent* , Calls , Calls*, Next , Next* :: All
+stmt s1,s2,s3,s4; assign a1,a2,a3,a4; procedure p1,p2,p3; prog_line pg1,pg2,pg3; variable v1,v2;
+Select <s1,a1,pg1> such that Uses(a1,"apple") with v1.varName="innard" and p1.procName="xylo" such that Uses(p1,"apple") and Modifies(p1,v1) and Modifies(a4,v2) and Modifies(pg2,v2) and Next(pg1,pg2) and Calls(p1,p2) and Calls*(p2,p3) and Parent(s1,a2) and Parent*(s2,s1) and Follows(a2,a3) and Follows*(a3,a4) and Next(pg2,pg3) and Next*(pg3,38);
+
+5000
