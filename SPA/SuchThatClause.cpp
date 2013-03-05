@@ -181,7 +181,7 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 			if(relType==CALL){
 				PROC_NAME callerName = pkb->getProcedure(firstRel->getData())->getProcName();
 				INDEX callerIndex,calleeIndex;
-				CALL_LIST callResult=extractor->getCallResult(callerName,"");
+				CALL_LIST callResult=extractor->getCallResult(callerName," ");
 
 				CALL_LIST::iterator callPair;
 				for(callPair = callResult.begin();callPair!=callResult.end();callPair++){
@@ -189,11 +189,12 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 					calleeIndex = pkb->getProcIndex(callPair->second);
 					tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
 				}
+				iterateAndStore(relList, tmpList);
 			}
 			if(relType==CALLST){
 				PROC_NAME callerName = pkb->getProcedure(firstRel->getData())->getProcName();
 				INDEX callerIndex,calleeIndex;
-				CALL_LIST callResult=extractor->getCallStarResult(callerName,"");
+				CALL_LIST callResult=extractor->getCallStarResult(callerName," ");
 
 				CALL_LIST::iterator callPair;
 				for(callPair = callResult.begin();callPair!=callResult.end();callPair++){
@@ -201,6 +202,7 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 					calleeIndex = pkb->getProcIndex(callPair->second);
 					tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
 				}
+				iterateAndStore(relList, tmpList);
 			}
 		}
 		//first is unknown, second is known
@@ -268,7 +270,7 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 			if(relType==CALL){
 				PROC_NAME calleeName = pkb->getProcedure(secondRel->getData())->getProcName();
 				INDEX callerIndex,calleeIndex;
-				CALL_LIST callResult=extractor->getCallResult("",calleeName);
+				CALL_LIST callResult=extractor->getCallResult(" ",calleeName);
 
 				CALL_LIST::iterator callPair;
 				for(callPair = callResult.begin();callPair!=callResult.end();callPair++){
@@ -276,11 +278,12 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 					calleeIndex = pkb->getProcIndex(callPair->second);
 					tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
 				}
+				iterateAndStore(relList, tmpList);
 			}
 			if(relType==CALLST){
 				PROC_NAME callerName = pkb->getProcedure(secondRel->getData())->getProcName();
 				INDEX callerIndex,calleeIndex;
-				CALL_LIST callResult=extractor->getCallStarResult(callerName,"");
+				CALL_LIST callResult=extractor->getCallStarResult(callerName," ");
 
 				CALL_LIST::iterator callPair;
 				for(callPair = callResult.begin();callPair!=callResult.end();callPair++){
@@ -288,6 +291,7 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 					calleeIndex = pkb->getProcIndex(callPair->second);
 					tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
 				}
+				iterateAndStore(relList, tmpList);
 			}
 		}
 		//first is unkown, second is unknown
@@ -388,7 +392,7 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 				}
 				if(relType==CALL){
 					INDEX callerIndex,calleeIndex;
-					CALL_LIST callResult=extractor->getCallResult("","");
+					CALL_LIST callResult=extractor->getCallResult(" "," ");
 
 					CALL_LIST::iterator callPair;
 					for(callPair = callResult.begin();callPair!=callResult.end();callPair++){
@@ -396,11 +400,11 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 						calleeIndex = pkb->getProcIndex(callPair->second);
 						tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
 					}
+					iterateAndStore(relList, tmpList);
 				}
 				if(relType==CALLST){
-					PROC_NAME callerName = pkb->getProcedure(secondRel->getData())->getProcName();
 					INDEX callerIndex,calleeIndex;
-					CALL_LIST callResult=extractor->getCallStarResult(callerName,"");
+					CALL_LIST callResult=extractor->getCallStarResult(" "," ");
 
 					CALL_LIST::iterator callPair;
 					for(callPair = callResult.begin();callPair!=callResult.end();callPair++){
@@ -408,6 +412,7 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 						calleeIndex = pkb->getProcIndex(callPair->second);
 						tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
 					}
+					iterateAndStore(relList, tmpList);
 				}
 		}
 
