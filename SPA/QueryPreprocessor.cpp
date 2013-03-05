@@ -155,8 +155,13 @@ bool QueryPreprocessor::validate(){
 
 	}	
 
-	setQTree();
-	return true;
+	if(selectOK){
+		setQTree();
+		return true;
+	}
+	else{
+		return false;
+	}
 	
 
 }

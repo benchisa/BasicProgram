@@ -299,6 +299,7 @@ void GrammarTable::createArgTable(){
 	case6.push_back(ANY);
 	
 	case7.push_back(PROCEDURE);
+	case7.push_back(CALL);
 	case7.push_back(ANY);
 
 	aTable[0].type = FOLLOWS;
