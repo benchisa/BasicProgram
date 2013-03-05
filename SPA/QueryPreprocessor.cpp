@@ -32,7 +32,7 @@ QueryPreprocessor::QueryPreprocessor(PKB* pkb){
 	attrName		= "procName|varName|value|stmt#";
 	attrRef			= synonym+"\\s*\\.\\s*("+attrName+")";
 	attrCompare		= "("+attrRef+"\\s*=\\s*("+attrRef+or+"\""+ident+"\""+or+integer+")"+or+synonym+"\\s*=\\s*("+attrRef+or+integer+"))";
-	designEnt		= "(procedure|stmtLst|stmt|assign|while|if|variable|constant|prog_line)";
+	designEnt		= "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
 	elem			= synonym+or+attrRef;
 	tuple			= elem+or+"\\s*<("+elem+")(\\s*,\\s*"+synonym+"|\\s*,\\s*"+attrRef+")"+compulsoryOne+"\\s*>";
 	declare			= designEnt+"\\s+"+synonym+"(\\s*,\\s*"+synonym+")*";

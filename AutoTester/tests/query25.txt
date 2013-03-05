@@ -50,3 +50,8 @@ procedure p1,p2;
 Select p2  such that Calls* ( p1 , p2 );
 yellow,zebra,extra
 5000
+35 - calls , Typed :: (unknown,unknown)
+procedure c1,c2;
+Select c1 such that Calls(c1,c2);
+
+5000

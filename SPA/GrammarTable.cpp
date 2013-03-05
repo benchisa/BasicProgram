@@ -55,16 +55,19 @@ void GrammarTable::createEntTable(){
 	eTable[6].entName	="variable";
 	eTable[6].type		=VARIABLE;
 
-	eTable[7].entName	="prog_line";
-	eTable[7].type		=PROGLINE;
+	eTable[7].entName	="call";
+	eTable[7].type		=CALL;
 
 	eTable[8].entName	="stmtlst";
 	eTable[8].type		=STMT_LIST;
+
+	eTable[9].entName	="prog_line";
+	eTable[9].type		=PROGLINE;
 }
 
 TYPE GrammarTable::getEntType(ENTITY ent){
 	//find the entity's formal type number
-	for(int i=0;i<9; i++){
+	for(int i=0;i<10; i++){
 		if(ent==eTable[i].entName){
 			return eTable[i].type;
 		}
@@ -283,6 +286,7 @@ void GrammarTable::createArgTable(){
 	case3.push_back(ASSIGNMENT);
 	case3.push_back(WHILE);
 	case3.push_back(IF);
+	case3.push_back(CALL);
 	case3.push_back(ANY);
 
 	case4.push_back(VARIABLE);

@@ -213,7 +213,7 @@ apple
 83 - uses , Typed :: (unknown_procedure,known_variable)
 procedure p;
 Select p  such that Uses ( p , "apple" );
-xylo,zebra
+xylo,yello,zebra
 5000
 81 - uses , Typed :: (unknown_call,known_variable)
 call c;
