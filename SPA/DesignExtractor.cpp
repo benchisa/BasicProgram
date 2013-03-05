@@ -717,7 +717,7 @@ USES_LIST DesignExtractor::getUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 		astLst = pkb->getASTBy(arg1);
 		astItr = astLst->begin();
 		if(pkb->isExistCallStmt(arg1)){
-			result = computeCallModifies(arg1, v1);
+			result = computeCallUses(arg1, v1);
 		}
 		else{
 			while(astItr != astLst->end()){
