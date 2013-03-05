@@ -1,6 +1,5 @@
 #include "Pattern.h"
-#include "DesignExtractor.h"
-#include <iostream>
+
 
 
 Pattern::Pattern(PKB *pkb)

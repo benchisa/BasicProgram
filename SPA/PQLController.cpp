@@ -21,14 +21,14 @@ FINAL_RESULT PQLController::getQueryResult(QUERY newQuery){
 	if(queryProcessor->preProcess()==true){
 		//get query tree and query table from preprocessor, pass them to query evaluator
 		
-		//cout << "the query is parsed!" << endl;
+	//	cout << "the query is parsed!" << endl;
 		if(queryEval->evaluate(queryProcessor->getQTree(),queryProcessor->getQVarTable(),queryProcessor->getParamTable())){
-			
 			
 			//call formatter
 			queryFormatter->setQrTable(queryProcessor->getQVarTable());
 			//cout << "the formatter is OK" << endl;	
 			returnResult= queryFormatter->formatString(queryEval->getRawResult());	
+			
 
 		}else{
 			//failed to evaluate the result, return nothing

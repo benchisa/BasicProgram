@@ -1,5 +1,5 @@
 #include "SuchThat.h"
-#include "PKB.h"
+
 
 FOLLOWS_LIST SuchThat::getFollowsResult(TYPE type1, TYPE type2){
 

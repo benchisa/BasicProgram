@@ -1,6 +1,5 @@
 #include "VarTable.h"
-#include <hash_map>
-#include <iostream>
+
 
 hash_map<string,int> *varTable;
 hash_map<string,int>::const_iterator varItr1;

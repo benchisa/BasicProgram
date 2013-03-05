@@ -3,6 +3,8 @@
 #include "PKB.h"
 #include "QTREE.h"
 #include "GrammarTable.h"
+#include <hash_map>
+#include <ctype.h>
 
 class QueryPreprocessor{
 

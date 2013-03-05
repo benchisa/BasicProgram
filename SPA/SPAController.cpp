@@ -1,12 +1,10 @@
-#include "SPAController.h"
-#include "FrontEndController.h"
-#include "PQLController.h"
 
+#include "SPAController.h"
 SPAController::SPAController(void)
 {
 	frontEnd = new FrontEndController;
 	pql = new PQLController;
-	setPKB = false;
+	isParsed = false;
 }
 
 
@@ -22,9 +20,8 @@ REPORT_MSG SPAController::enterProgram(SOURCE source){
 	string returnMsg = "";
 
 	if(returnVal!=-1){
-		//parse successfully, pass the pkb pointer to query processer
-		pql->setPKB(frontEnd->getPKB());
-		setPKB = true;
+		//parse successfully
+		isParsed = true;
 		return "Parse the program Successfully!";
 
 	}else{
@@ -38,7 +35,9 @@ REPORT_MSG SPAController::enterProgram(SOURCE source){
 FINAL_RESULT SPAController::getQueryResult(QUERY newQuery){
 	list<string> returnResult;
 	
-	if(setPKB){
+	if(isParsed){
+		//pass the pkb pointer to query processer
+		pql->setPKB(frontEnd->getPKB());
 		//let PQL to evaluate the query, and return the result found
 		return pql->getQueryResult(newQuery);
 	}

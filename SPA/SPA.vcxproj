@@ -26,7 +26,6 @@
     <ClCompile Include="Parent.cpp" />
     <ClCompile Include="Parser.cpp" />
     <ClCompile Include="Pattern.cpp" />
-    <ClCompile Include="PatternTree.cpp" />
     <ClCompile Include="PKB.cpp" />
     <ClCompile Include="PQLController.cpp" />
     <ClCompile Include="Procedure.cpp" />
@@ -58,7 +57,6 @@
     <ClInclude Include="LinkedDataTable.h" />
     <ClInclude Include="Parser.h" />
     <ClInclude Include="Pattern.h" />
-    <ClInclude Include="PatternTree.h" />
     <ClInclude Include="PQLController.h" />
     <ClInclude Include="ProcTable.h" />
     <ClInclude Include="QTREE.h" />

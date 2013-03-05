@@ -1,6 +1,6 @@
+
 #include "ProcTable.h"
-#include "Procedure.h"
-#include <hash_map>
+
 
 typedef pair<Procedure*,int> procPair;
 typedef pair<PROC_NAME,procPair> tablePair;

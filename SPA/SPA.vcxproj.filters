@@ -40,6 +40,12 @@
     <Filter Include="Source Files\GUI">
       <UniqueIdentifier>{9b417eba-0977-4de2-9bf6-c54cdf5aba71}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\DE">
+      <UniqueIdentifier>{b2473ef0-e618-4261-9bfa-3a4dc1a475e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DE">
+      <UniqueIdentifier>{ac7dcbc3-cdf3-476b-9326-927f3c6266c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Team01SPA\SPA\SPA.vcxproj.filters" />
@@ -102,12 +108,6 @@
     <ClCompile Include="GrammarTable.cpp">
       <Filter>Source Files\PQL</Filter>
     </ClCompile>
-    <ClCompile Include="PatternTree.cpp">
-      <Filter>Source Files\PQL</Filter>
-    </ClCompile>
-    <ClCompile Include="DesignExtractor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CallTable.cpp">
       <Filter>Source Files\PKB</Filter>
     </ClCompile>
@@ -126,9 +126,6 @@
     <ClCompile Include="WithClause.cpp">
       <Filter>Source Files\PQL</Filter>
     </ClCompile>
-    <ClCompile Include="CFG.cpp">
-      <Filter>Source Files\PKB</Filter>
-    </ClCompile>
     <ClCompile Include="LinkedDataTable.cpp">
       <Filter>Source Files\PQL</Filter>
     </ClCompile>
@@ -140,6 +137,12 @@
     </ClCompile>
     <ClCompile Include="IfTable.cpp">
       <Filter>Source Files\PKB</Filter>
+    </ClCompile>
+    <ClCompile Include="DesignExtractor.cpp">
+      <Filter>Source Files\DE</Filter>
+    </ClCompile>
+    <ClCompile Include="CFG.cpp">
+      <Filter>Source Files\DE</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -203,17 +206,11 @@
     <ClInclude Include="GrammarTable.h">
       <Filter>Header Files\PQL</Filter>
     </ClInclude>
-    <ClInclude Include="PatternTree.h">
-      <Filter>Header Files\PQL</Filter>
-    </ClInclude>
     <ClInclude Include="CallTable.h">
       <Filter>Header Files\PKB</Filter>
     </ClInclude>
     <ClInclude Include="ConstantTable.h">
       <Filter>Header Files\PKB</Filter>
-    </ClInclude>
-    <ClInclude Include="DesignExtractor.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QueryEvaluator.h">
       <Filter>Header Files\PQL</Filter>
@@ -227,12 +224,6 @@
     <ClInclude Include="WithClause.h">
       <Filter>Header Files\PQL</Filter>
     </ClInclude>
-    <ClInclude Include="CFG.h">
-      <Filter>Header Files\PKB</Filter>
-    </ClInclude>
-    <ClInclude Include="LinkedDataTable.h">
-      <Filter>Header Files\PQL</Filter>
-    </ClInclude>
     <ClInclude Include="AssignTable.h">
       <Filter>Header Files\PKB</Filter>
     </ClInclude>
@@ -241,6 +232,15 @@
     </ClInclude>
     <ClInclude Include="WhileTable.h">
       <Filter>Header Files\PKB</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedDataTable.h">
+      <Filter>Header Files\PQL</Filter>
+    </ClInclude>
+    <ClInclude Include="DesignExtractor.h">
+      <Filter>Header Files\DE</Filter>
+    </ClInclude>
+    <ClInclude Include="CFG.h">
+      <Filter>Header Files\DE</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,7 +1,6 @@
 #pragma once
 #include "QueryPreprocessor.h"
-#include <hash_map>
-#include <ctype.h>
+
 
 
 QueryPreprocessor::QueryPreprocessor(PKB* pkb){

@@ -1,6 +1,7 @@
 #pragma once
 #include "Global_Data_Abstraction.h"
-
+#include <hash_map>
+#include <iostream>
 class VarTable
 {
 	public:

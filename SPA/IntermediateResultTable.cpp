@@ -43,7 +43,7 @@ bool IntermediateResultTable::joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,IND
 			//create a new table to store new list
 			LinkedDataTable newTable;
 			//add new list to new table
-			newTable.addEntry(0,firstQrVar,-1,newList);
+			if(!newTable.addEntry(0,firstQrVar,-1,newList)) return false;
 			//add the new table to database
 			database.push_back(newTable);
 
@@ -58,7 +58,7 @@ bool IntermediateResultTable::joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,IND
 			currentTable = database.begin();
 			advance(currentTable,tableNum);
 			//merge the new list into table
-			currentTable->addEntry(1,firstQrVar,-1,newList);
+			if(!currentTable->addEntry(1,firstQrVar,-1,newList))return false;
 		}
 	}else if(firstQrVar==-1&&secondQrVar!=-1){
 		//only merge the second one
@@ -67,7 +67,7 @@ bool IntermediateResultTable::joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,IND
 			//create a new table to store new list
 			LinkedDataTable newTable;
 			//add new list to new table
-			newTable.addEntry(0,-1,secondQrVar,newList);
+			if(!newTable.addEntry(0,-1,secondQrVar,newList))return false;
 			//add the new table to database
 			database.push_back(newTable);
 
@@ -82,7 +82,7 @@ bool IntermediateResultTable::joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,IND
 			currentTable = database.begin();
 			advance(currentTable,tableNum);
 			//merge the new list into table
-			currentTable->addEntry(2,secondQrVar,-1,newList);
+			if(!currentTable->addEntry(2,secondQrVar,-1,newList)) return false;
 		}
 	}else if(firstQrVar==-1 && secondQrVar==-1){
 		//don't merge
@@ -94,7 +94,7 @@ bool IntermediateResultTable::joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,IND
 		//create a new table to store new list
 		LinkedDataTable newTable;
 		//add new list to new table
-		newTable.addEntry(0,firstQrVar,secondQrVar,newList);
+		if(!newTable.addEntry(0,firstQrVar,secondQrVar,newList))return false;
 		//add the new table to database
 		database.push_back(newTable);
 
@@ -115,7 +115,7 @@ bool IntermediateResultTable::joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,IND
 		currentTable = database.begin();
 		advance(currentTable,tableNum);
 		//merge the new list into table
-		currentTable->addEntry(1,firstQrVar,secondQrVar,newList);
+		if(!currentTable->addEntry(1,firstQrVar,secondQrVar,newList))return false;
 		//update the information of the second qrVar
 		qrVarTable[0][secondQrVar] = 1;
 		qrVarTable[1][secondQrVar] = qrVarTable[1][firstQrVar];
@@ -130,7 +130,7 @@ bool IntermediateResultTable::joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,IND
 		currentTable = database.begin();
 		advance(currentTable,tableNum);
 		//merge the new list into table
-		currentTable->addEntry(2,secondQrVar,firstQrVar,newList);
+		if(!currentTable->addEntry(2,secondQrVar,firstQrVar,newList))return false;
 		//update the information of the second qrVar
 		qrVarTable[0][firstQrVar] = 1;
 		qrVarTable[1][firstQrVar] = qrVarTable[1][secondQrVar];
@@ -177,7 +177,7 @@ bool IntermediateResultTable::joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,IND
 			table2Pointer = *table2;
 
 			//merge two tables
-			table1->mergeTable(firstQrVar,secondQrVar,&table2Pointer);
+			if(!table1->mergeTable(firstQrVar,secondQrVar,&table2Pointer))return false;
 
 			//update qrVar info (table num)
 			for(int i =0;i<tableSize;i++){

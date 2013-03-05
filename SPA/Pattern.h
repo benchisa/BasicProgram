@@ -4,6 +4,8 @@
 #include "AST.h"
 #include "QTREE.h"
 #include "PKB.h"
+#include "DesignExtractor.h"
+#include <iostream>
 
 class Pattern
 {

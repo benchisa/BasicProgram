@@ -1,5 +1,5 @@
 #include "SuchThatClause.h"
-#include "SuchThat.h"
+
 
 SuchThatClause::SuchThatClause(PKB* pkb,QUERYTABLE* qrTable,DesignExtractor * extractor)
 {

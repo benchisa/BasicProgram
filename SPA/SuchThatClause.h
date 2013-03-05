@@ -3,6 +3,7 @@
 #include "PKB.h"
 #include "QTREE.h"
 #include "DesignExtractor.h"
+#include "SuchThat.h"
 
 class SuchThatClause
 {

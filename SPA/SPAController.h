@@ -1,5 +1,7 @@
 #pragma once
 #include "Global_Data_Abstraction.h"
+#include "FrontEndController.h"
+#include "PQLController.h"
 
 class FrontEndController;
 class PQLController;
@@ -15,6 +17,6 @@ public:
 private:
 	FrontEndController* frontEnd;
 	PQLController* pql;
-	bool setPKB;
+	bool isParsed;
 };
 

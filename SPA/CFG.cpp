@@ -1,5 +1,5 @@
 #include "CFG.h"
-#include <stack>
+
 
 // all prog_line need to -1 due to array position
 CFG::CFG(int size)

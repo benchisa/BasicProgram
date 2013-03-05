@@ -7,6 +7,8 @@
 #include "WithClause.h"
 #include "Pattern.h"
 #include "DesignExtractor.h"
+#include "SuchThat.h"
+#include <iostream>
 
 
 class QueryEvaluator{

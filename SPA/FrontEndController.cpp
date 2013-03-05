@@ -1,5 +1,4 @@
 #include "FrontEndController.h"
-#include "Parser.h"
 
 FrontEndController::FrontEndController(void)
 {	//holds pointer of both parser and design extractor

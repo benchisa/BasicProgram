@@ -1,41 +1,152 @@
-﻿Build started 1/22/2013 8:32:33 PM.
-     1>Project "C:\Users\Xi\Documents\GitHub\CS3202\SPA\SPA.vcxproj" on node 2 (build target(s)).
-     1>InitializeBuildStatus:
+﻿Build started 3/5/2013 5:36:21 PM.
+     1>Project "C:\Users\Xi\Documents\GitHub\CS3202\SPA\SPA.vcxproj" on node 2 (rebuild target(s)).
+     1>_PrepareForClean:
+         Deleting file "Debug\SPA.lastbuildstate".
+       InitializeBuildStatus:
          Creating "Debug\SPA.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         All outputs are up-to-date.
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt AssignTable.cpp AST.cpp CallTable.cpp ConstantTable.cpp DesignExtractor.cpp CFG.cpp FrontEndController.cpp GrammarTable.cpp IfTable.cpp IntermediateResultTable.cpp LinkedDataTable.cpp Modifies.cpp Parent.cpp Parser.cpp Pattern.cpp PKB.cpp PQLController.cpp Procedure.cpp ProcTable.cpp QTREE.cpp QueryEvaluator.cpp QueryFormatter.cpp QueryPreprocessor.cpp SPAController.cpp SuchThat.cpp SuchThatClause.cpp Uses.cpp VarTable.cpp WhileTable.cpp WithClause.cpp Follows.cpp
+         Follows.cpp
+         WithClause.cpp
+     1>WithClause.cpp(161): warning C4101: 'unknownAttrIndex' : unreferenced local variable
+     1>WithClause.cpp(247): warning C4101: 'knownAttrIndex' : unreferenced local variable
+     1>WithClause.cpp(586): warning C4390: ';' : empty controlled statement found; is this the intent?
+     1>WithClause.cpp(597): warning C4390: ';' : empty controlled statement found; is this the intent?
+     1>WithClause.cpp(662): warning C4390: ';' : empty controlled statement found; is this the intent?
+         WhileTable.cpp
+         VarTable.cpp
+     1>VarTable.cpp(34): warning C4018: '>' : signed/unsigned mismatch
+         Uses.cpp
+         SuchThatClause.cpp
+         SuchThat.cpp
+         SPAController.cpp
+     1>c:\users\xi\documents\github\cs3202\spa\Parser.h(198): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\xi\documents\github\cs3202\spa\GrammarTable.h(2): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+         QueryPreprocessor.cpp
+     1>c:\users\xi\documents\github\cs3202\spa\GrammarTable.h(2): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>QueryPreprocessor.cpp(131): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(194): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(223): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(229): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(244): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(250): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(265): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(277): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(283): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(299): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(305): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(337): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(437): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(453): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(496): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(523): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(534): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(545): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(624): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(716): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(755): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(774): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(878): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(995): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(1016): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryPreprocessor.cpp(1085): warning C4018: '<' : signed/unsigned mismatch
+         QueryFormatter.cpp
+     1>QueryFormatter.cpp(33): warning C4018: '<' : signed/unsigned mismatch
+     1>QueryFormatter.cpp(38): warning C4018: '<' : signed/unsigned mismatch
+         QueryEvaluator.cpp
+     1>QueryEvaluator.cpp(21): warning C4101: 'nonEmptyResult' : unreferenced local variable
+     1>QueryEvaluator.cpp(361): warning C4553: '==' : operator has no effect; did you intend '='?
+     1>QueryEvaluator.cpp(362): warning C4553: '==' : operator has no effect; did you intend '='?
+         QTREE.cpp
+         ProcTable.cpp
+     1>ProcTable.cpp(35): warning C4018: '>' : signed/unsigned mismatch
+         Procedure.cpp
+         PQLController.cpp
+     1>c:\users\xi\documents\github\cs3202\spa\GrammarTable.h(2): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+         PKB.cpp
+         Pattern.cpp
+     1>Pattern.cpp(22): warning C4101: 'expr' : unreferenced local variable
+         Parser.cpp
+     1>c:\users\xi\documents\github\cs3202\spa\Parser.h(198): warning C4018: '<' : signed/unsigned mismatch
+     1>Parser.cpp(68): warning C4018: '<' : signed/unsigned mismatch
+     1>Parser.cpp(87): warning C4018: '<' : signed/unsigned mismatch
+         Parent.cpp
+         Modifies.cpp
+         Generating Code...
+     1>c:\users\xi\documents\github\cs3202\spa\parser.cpp(683): warning C4715: 'Parser::factor' : not all control paths return a value
+     1>c:\users\xi\documents\github\cs3202\spa\proctable.cpp(46): warning C4715: 'ProcTable::getProcedure' : not all control paths return a value
+     1>c:\users\xi\documents\github\cs3202\spa\querypreprocessor.cpp(1097): warning C4715: 'QueryPreprocessor::getQVar' : not all control paths return a value
+     1>c:\users\xi\documents\github\cs3202\spa\querypreprocessor.cpp(1117): warning C4715: 'QueryPreprocessor::getQVarType' : not all control paths return a value
+     1>c:\users\xi\documents\github\cs3202\spa\vartable.cpp(44): warning C4715: 'VarTable::getVarName' : not all control paths return a value
+         Compiling...
+         LinkedDataTable.cpp
+         IntermediateResultTable.cpp
+     1>IntermediateResultTable.cpp(223): warning C4018: '<' : signed/unsigned mismatch
+     1>IntermediateResultTable.cpp(316): warning C4018: '<' : signed/unsigned mismatch
+     1>IntermediateResultTable.cpp(387): warning C4018: '<' : signed/unsigned mismatch
+         IfTable.cpp
+         GrammarTable.cpp
+     1>c:\users\xi\documents\github\cs3202\spa\GrammarTable.h(2): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+     1>GrammarTable.cpp(448): warning C4018: '<' : signed/unsigned mismatch
+     1>GrammarTable.cpp(450): warning C4018: '<' : signed/unsigned mismatch
+         FrontEndController.cpp
+     1>c:\users\xi\documents\github\cs3202\spa\Parser.h(198): warning C4018: '<' : signed/unsigned mismatch
+         CFG.cpp
+         DesignExtractor.cpp
+     1>DesignExtractor.cpp(262): warning C4101: 'containerTmp' : unreferenced local variable
+         ConstantTable.cpp
+         CallTable.cpp
+         AST.cpp
+         AssignTable.cpp
+         Generating Code...
+     1>c:\users\xi\documents\github\cs3202\spa\assigntable.cpp(31): warning C4715: 'AssignTable::getAssignEntry' : not all control paths return a value
+     1>c:\users\xi\documents\github\cs3202\spa\designextractor.cpp(82): warning C4715: 'DesignExtractor::operatorToString' : not all control paths return a value
+     1>c:\users\xi\documents\github\cs3202\spa\grammartable.cpp(75): warning C4715: 'GrammarTable::getEntType' : not all control paths return a value
+     1>c:\users\xi\documents\github\cs3202\spa\grammartable.cpp(179): warning C4715: 'GrammarTable::getRelArgCount' : not all control paths return a value
+     1>c:\users\xi\documents\github\cs3202\spa\grammartable.cpp(191): warning C4715: 'GrammarTable::getRelArg' : not all control paths return a value
+     1>c:\users\xi\documents\github\cs3202\spa\grammartable.cpp(199): warning C4715: 'GrammarTable::getRelType' : not all control paths return a value
+     1>c:\users\xi\documents\github\cs3202\spa\grammartable.cpp(237): warning C4715: 'GrammarTable::getPattArgCount' : not all control paths return a value
+     1>c:\users\xi\documents\github\cs3202\spa\grammartable.cpp(251): warning C4715: 'GrammarTable::getPattArg' : not all control paths return a value
+     1>c:\users\xi\documents\github\cs3202\spa\grammartable.cpp(259): warning C4715: 'GrammarTable::getPattType' : not all control paths return a value
+     1>c:\users\xi\documents\github\cs3202\spa\grammartable.cpp(364): warning C4715: 'GrammarTable::getArgument' : not all control paths return a value
        Lib:
-         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"C:\Users\Xi\Documents\GitHub\CS3202\Debug\SPA.lib" /NOLOGO Debug\AST.obj
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"C:\Users\Xi\Documents\GitHub\CS3202\Debug\SPA.lib" /NOLOGO Debug\AssignTable.obj
+         Debug\AST.obj
          Debug\CallTable.obj
          Debug\ConstantTable.obj
          Debug\DesignExtractor.obj
+         Debug\CFG.obj
          Debug\FrontEndController.obj
          Debug\GrammarTable.obj
+         Debug\IfTable.obj
+         Debug\IntermediateResultTable.obj
+         Debug\LinkedDataTable.obj
          Debug\Modifies.obj
          Debug\Parent.obj
          Debug\Parser.obj
          Debug\Pattern.obj
-         Debug\PatternTree.obj
          Debug\PKB.obj
          Debug\PQLController.obj
          Debug\Procedure.obj
          Debug\ProcTable.obj
          Debug\QTREE.obj
+         Debug\QueryEvaluator.obj
          Debug\QueryFormatter.obj
          Debug\QueryPreprocessor.obj
          Debug\SPAController.obj
          Debug\SuchThat.obj
-         Debug\SuchThatTree.obj
+         Debug\SuchThatClause.obj
          Debug\Uses.obj
          Debug\VarTable.obj
-         Debug\WithTree.obj
+         Debug\WhileTable.obj
+         Debug\WithClause.obj
          Debug\Follows.obj
          SPA.vcxproj -> C:\Users\Xi\Documents\GitHub\CS3202\Debug\SPA.lib
        FinalizeBuildStatus:
          Deleting file "Debug\SPA.unsuccessfulbuild".
          Touching "Debug\SPA.lastbuildstate".
-     1>Done Building Project "C:\Users\Xi\Documents\GitHub\CS3202\SPA\SPA.vcxproj" (build target(s)).
+     1>Done Building Project "C:\Users\Xi\Documents\GitHub\CS3202\SPA\SPA.vcxproj" (rebuild target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.21
+Time Elapsed 00:00:18.01

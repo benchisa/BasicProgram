@@ -1,9 +1,9 @@
 #pragma once
 #include "Global_Data_Abstraction.h"
+#include "Parser.h"
 
 
 class PKB;
-class Parser;
 
 class FrontEndController
 {

@@ -1,6 +1,6 @@
 #include "QueryEvaluator.h"
-#include "SuchThat.h"
 #include <iostream>
+
 
 //methods
 QueryEvaluator::QueryEvaluator(PKB* pkb){
@@ -12,6 +12,7 @@ QueryEvaluator::~QueryEvaluator(void){
 }	
 
 bool QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrParam){
+	cout<<"enter evaluator!\n";
 	this->qrTree = qrTree;
 	this->qrTable = qrTable;
 	this->qrParam = qrParam;
@@ -147,8 +148,33 @@ bool QueryEvaluator::executeSuchThat(IntermediateResultTable * resultTable, QTRE
 
 		//test to see if firstRelVar is already probed in previous steps
 		if(!resultTable->isQrVarDiscovered(qrVarIndex)){
-			//evaluate the tree
-			currentResultList = suchThatClause.evaluateSuchThatTree(suchThatTree);
+			 //secondRel is also qrVar and probed in previous steps
+		/*	if(secondQrVar!=-1&&resultTable->isQrVarDiscovered(secondQrVar)){
+				//set qrVarIndex to second 
+				qrVarIndex = secondQrVar;
+				INDEX_LIST * currentVarResultList;
+				currentVarResultList = resultTable->getResultListOf(qrVarIndex);
+
+				//replace the firstRel with its real type
+				QUERYTABLE::iterator itr1;
+				itr1 = qrTable->find(secondRel->getData());
+				TYPE relRealType = itr1->second;
+				secondRel->setType(relRealType);
+
+				INDEX_LIST::iterator itr;
+				for(itr = currentVarResultList->begin();itr!=currentVarResultList->end();itr++){
+					//replace the firstRel with probe data
+					secondRel->setData(*itr);
+
+					RELATION_LIST * tempList;
+					tempList = suchThatClause.evaluateSuchThatTree(suchThatTree);
+
+					currentResultList = QueryEvaluator::appendRelationLists(currentResultList,tempList);		
+				}
+			}else{*/
+				//evaluate the tree with no data replacement
+				currentResultList = suchThatClause.evaluateSuchThatTree(suchThatTree);
+			//}
 		}else{
 		// current qrVar is evaluated in the previous steps
 		/*algo:
