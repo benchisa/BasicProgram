@@ -524,7 +524,7 @@ PARENT_LIST DesignExtractor::getParentStarResult(TYPE type1, TYPE type2)
 
 	PROC_LIST *procLst = pkb->getAllProc();
 	PROG_LINE startProgLine = procLst->begin()->getStartProgLine();
-	PROG_LINE endProgLine = procLst->back().getEndProgLine();
+	PROG_LINE endProgLine = pkb->getMaxProgLine();
 
 	// iterate from 1....n
 	for(int i = startProgLine; i <= endProgLine; i++){
