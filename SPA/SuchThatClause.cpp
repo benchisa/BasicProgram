@@ -262,7 +262,7 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 				iterateAndStore(relList, tmpList);
 			}
 			if(relType==NEXTST){
-				tmpList = extractor->getNextResult(0,secondRel->getData());
+				tmpList = extractor->getNextStarResult(0,secondRel->getData());
 				iterateAndStore(relList, tmpList);
 			}
 			if(relType==CALL){
@@ -375,8 +375,12 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 					iterateAndStore(relList, tmpList);
 				}
 				if(relType==NEXT){
-					tmpList = extractor->getNextResult(0,0);
-					iterateAndStore(relList, tmpList);
+					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
+						relList = NULL;
+					}else{
+						tmpList = extractor->getNextResult(0,0);
+						iterateAndStore(relList, tmpList);
+					}
 				}
 				if(relType==NEXTST){
 					tmpList = extractor->getNextStarResult(0,0);

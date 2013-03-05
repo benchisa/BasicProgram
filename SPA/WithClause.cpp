@@ -380,8 +380,9 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 					string currentProcName = pkb->getProcedure(i)->getProcName();
 					string currentVarName = pkb->getVarName(j);
 
-					if(currentProcName==currentVarName)
+					if(currentProcName==currentVarName){
 						returnList->push_back(pair<int,int>(i,j));
+					}
 				}
 			}
 			}
@@ -423,8 +424,9 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 					string currentProcName = pkb->getProcedure(j)->getProcName();
 					string currentVarName = pkb->getVarName(i);
 
-					if(currentProcName==currentVarName)
+					if(currentProcName==currentVarName){
 						returnList->push_back(pair<int,int>(i,j));
+					}
 				}
 			}
 			}
@@ -582,8 +584,9 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			if (constantTableSize!=0){
 				for(int i =1;i<=constantTableSize;i++){
 					int currentConstantValue = pkb->getConstantValue(i);
-					if(currentConstantValue<=maxProgLine);
-					returnList->push_back(pair<int,int>(i,currentConstantValue));
+					if(currentConstantValue<=maxProgLine){
+						returnList->push_back(pair<int,int>(i,currentConstantValue));
+					}
 				}
 			}
 			}
@@ -593,8 +596,9 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			if (constantTableSize!=0){
 				for(int i =1;i<=constantTableSize;i++){
 					int currentConstantValue = pkb->getConstantValue(i);
-					if(currentConstantValue<=maxStatementNum);
-					returnList->push_back(pair<int,int>(i,currentConstantValue));
+					if(currentConstantValue<=maxStatementNum){
+						returnList->push_back(pair<int,int>(i,currentConstantValue));
+					}
 				}
 			}
 			}
@@ -658,8 +662,9 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			if (constantTableSize!=0){
 				for(int i =1;i<=constantTableSize;i++){
 					int currentConstantValue = pkb->getConstantValue(i);
-					if(currentConstantValue<=maxProgLine);
-					returnList->push_back(pair<int,int>(currentConstantValue,i));
+					if(currentConstantValue<=maxProgLine){
+						returnList->push_back(pair<int,int>(currentConstantValue,i));
+					}
 				}
 			}
 			}
@@ -823,8 +828,9 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 		{int maxProgLine = pkb->getMaxProgLine();
 			if(maxProgLine!=0){
 				for(int i =1;i<=maxProgLine;i++){
-					if(extractor->isStatementTypeOf(ASSIGNMENT,i))
+					if(extractor->isStatementTypeOf(ASSIGNMENT,i)){
 						returnList->push_back(pair<int,int>(i,i));	
+					}
 				}
 			}
 		}
