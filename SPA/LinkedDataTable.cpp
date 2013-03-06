@@ -8,6 +8,8 @@ LinkedDataTable::LinkedDataTable(void)
 
 LinkedDataTable::~LinkedDataTable(void)
 {
+	delete &qrVarList;
+	delete &rowList;
 }
 
 bool LinkedDataTable::addEntry(int mergeAttrPos,INDEX oldQrVar,INDEX newQrVar,RELATION_LIST * newEntries){

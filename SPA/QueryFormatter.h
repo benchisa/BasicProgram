@@ -14,5 +14,6 @@ public:
 private:
 	PKB * pkb;
 	QUERYTABLE * qrTable;
+	FINAL_RESULT  result;
 
 };

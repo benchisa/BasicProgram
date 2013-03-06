@@ -8,7 +8,8 @@ QueryEvaluator::QueryEvaluator(PKB* pkb){
 	extractor = new DesignExtractor(pkb);
 }
 QueryEvaluator::~QueryEvaluator(void){
-
+	delete pkb;
+	delete extractor;
 }	
 
 bool QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrParam){

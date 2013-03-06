@@ -15,6 +15,7 @@ IntermediateResultTable::IntermediateResultTable(SIZE tableSize,PKB* pkb,QUERYTA
 
 IntermediateResultTable::~IntermediateResultTable(void)
 {
+	delete &database;
 }
 bool IntermediateResultTable::isQrVarDiscovered(INDEX qrVarIndex){
 	if (qrVarTable[0][qrVarIndex]!=1) return false;

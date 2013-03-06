@@ -5,13 +5,13 @@ QueryFormatter::QueryFormatter(PKB * pkb){
 	this->pkb = pkb;
 }
 QueryFormatter::~QueryFormatter(void){
-
+	delete &result;
 }
 void QueryFormatter::setQrTable(QUERYTABLE * qrTable){
 	this->qrTable = qrTable;
 }
 FINAL_RESULT QueryFormatter::formatString(RAWDATA * data) {
-	FINAL_RESULT  result;
+	
 	TYPE type;
 	int value;
 
