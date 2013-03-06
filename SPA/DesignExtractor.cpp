@@ -11,6 +11,8 @@ DesignExtractor::DesignExtractor(PKB* pkb)
 
 DesignExtractor::~DesignExtractor(void)
 {
+	delete pkb;
+	delete cfg;
 }
 
 // INPUT: Stack of Operators, Current Token
