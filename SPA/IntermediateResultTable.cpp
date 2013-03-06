@@ -333,7 +333,7 @@ RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_L
 			for(int j =0;j<tableSize;i++){
 				//first step: copy the old qrVar data
 				for(int k=0;k<rawColNum;k++){
-					tempRaw[k].push_back(rawData->at(i).at(k));
+					tempRaw[k].push_back(rawData->at(k).at(i));
 				}
 				//second step: append new qrVar data
 				DATA_LIST::iterator selectedVar;
@@ -370,27 +370,34 @@ RAWDATA * IntermediateResultTable::joinCombinations(RAWDATA* rawData, DATA_LIST 
 		
 		//expand the rawList by one col
 		RAWDATA tempRaw;
+		//first step:copy the old col
+		for(int i =0;i<rawData->size();i++){
+			DATA_LIST newList;
+			newList.push_back(rawData->at(i).at(0));
+			tempRaw.push_back(newList);
+		}
+		//create one new col
 		DATA_LIST newList;
 		newList.push_back(selectedVarList->at(0));
 		tempRaw.push_back(newList);
 		
 
 		//merge entries 
-		SIZE rawRowNum = rawData->at(0).size()-1;
-		SIZE rawColNum = rawData->size();
+		SIZE rawRowNum = rawData->at(0).size()-1; //number of data sets
+		SIZE rawColNum = rawData->size(); //number of qrVars in raw
 
 		TYPE resultVarType = qrTable->find(selectedVarList->at(0))->second;
 		DATA_LIST * selectedDataList;
 		selectedDataList = extractor->getStmtListOf(resultVarType);
 		
 		for(int i =1;i<=rawRowNum;i++){
-			for(int j =0;j<selectedDataList->size();i++){
+			for(int j =0;j<selectedDataList->size();j++){
 				//first step: copy the old qrVar data
 				for(int k=0;k<rawColNum;k++){
-					tempRaw[k].push_back(rawData->at(i).at(k));
+					tempRaw[k].push_back(rawData->at(k).at(i));
 				}
 				//second step: append new qrVar data
-				tempRaw[rawColNum+1].push_back(selectedDataList->at(j));					
+				tempRaw[rawColNum].push_back(selectedDataList->at(j));					
 			}
 		}
 		rawData = new RAWDATA(tempRaw);
