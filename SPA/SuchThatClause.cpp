@@ -281,9 +281,9 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 				iterateAndStore(relList, tmpList);
 			}
 			if(relType==CALLST){
-				PROC_NAME callerName = pkb->getProcedure(secondRel->getData())->getProcName();
+				PROC_NAME calleeName = pkb->getProcedure(secondRel->getData())->getProcName();
 				INDEX callerIndex,calleeIndex;
-				CALL_LIST callResult=extractor->getCallStarResult(callerName," ");
+				CALL_LIST callResult=extractor->getCallStarResult(" ",calleeName);
 
 				CALL_LIST::iterator callPair;
 				for(callPair = callResult.begin();callPair!=callResult.end();callPair++){
