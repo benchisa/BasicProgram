@@ -435,7 +435,7 @@ FOLLOWS_LIST DesignExtractor::getFollowsStarResult(TYPE type1, TYPE type2){
 	
 	PROC_LIST *procLst = pkb->getAllProc();
 	PROG_LINE startProgLine = procLst->begin()->getStartProgLine();
-	PROG_LINE endProgLine = procLst->back().getEndProgLine();
+	PROG_LINE endProgLine = pkb->getMaxProgLine();
 
 	// iterate from 1....n
 	for(int i = startProgLine; i <= endProgLine; i++){
@@ -710,6 +710,11 @@ USES_LIST DesignExtractor::getUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 	//Uses(w, "b")
 	if((type == WHILE  || type == ASSIGNMENT || type == IF || type == PROCEDURE)){
 		result = pkb->getUses(type, arg1, v1);
+	}
+	// uses(c, 2)
+	// uses(c, _)
+	else if(type == CALL){
+		result = computeCallUses(arg1, v1);
 	}
 	// Uses(1, a)
 	else if((type == STATEMENT && arg1 != 0 && v1 == 0) || (type == ANY && arg1 != 0 && v1 == 0)){
