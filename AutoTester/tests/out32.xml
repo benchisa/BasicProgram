@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>156.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>162.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" Test for such that and calls modifies">
@@ -9,157 +9,112 @@
 <id modifies="1" calls="1" comment="calls (known,known) and modifies (known,unknown)" >25</id><querystr><![CDATA[variable v1; Select BOOLEAN   such that  Calls ( "xylo" , "yello" ) and Modifies ( "xylo" , v1 ) ;]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>141.000000</time_taken>
+<time_taken>155.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" callsstar="1" comment="calls* (known,known) and modifies (known,unknown)" >26</id><querystr><![CDATA[variable v1; Select BOOLEAN   such that  Calls* ( "xylo" , "yello" ) and Modifies ( "yello" , v1 ) ;]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>171.000000</time_taken>
+<time_taken>182.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id modifies="1" calls="1" comment="calls (known,unknown) and modifies (known,unknown)" >27</id><querystr><![CDATA[proc p1,p2; variable v1; Select p2   such that  Calls ( "xylo" , p2 ) and Modifies ( "xylo" , v1 ) ;]]></querystr>
-<stuans></stuans>
+<id modifies="1" calls="1" comment="calls (known,unknown) and modifies (known,unknown)" >27</id><querystr><![CDATA[procedure p1,p2; variable v1; Select p2   such that  Calls ( "xylo" , p2 ) and Modifies ( "xylo" , v1 ) ;]]></querystr>
+<stuans>yello</stuans>
 <correct>yello</correct>
-<time_taken>47.000000</time_taken>
-<failed>
-<missing>yello</missing>
-<additional></additional>
-<summary>
-<expected>1</expected>
-<matched>0</matched>
-<missing>1</missing>
-<additional>0</additional>
-</summary>
-</failed>
+<time_taken>100.000000</time_taken>
+<passed/>
 </query>
 <query>
-<id modifies="1" callsstar="1" comment="calls* (known,unknown) and modifies (unknown,unknown)" >28</id><querystr><![CDATA[proc p1,p2; variable v1; Select p2   such that  Calls* ( "xylo" , p2 ) and Modifies ( p2 , v1 ) ;]]></querystr>
-<stuans></stuans>
+<id modifies="1" callsstar="1" comment="calls* (known,unknown) and modifies (unknown,unknown)" >28</id><querystr><![CDATA[procedure p1,p2; variable v1; Select p2   such that  Calls* ( "xylo" , p2 ) and Modifies ( p2 , v1 ) ;]]></querystr>
+<stuans>yello,zebra,extra</stuans>
 <correct>yello,zebra,extra</correct>
-<time_taken>47.000000</time_taken>
-<failed>
-<missing>extra,yello,zebra</missing>
-<additional></additional>
-<summary>
-<expected>3</expected>
-<matched>0</matched>
-<missing>3</missing>
-<additional>0</additional>
-</summary>
-</failed>
+<time_taken>112.000000</time_taken>
+<passed/>
 </query>
 <query>
-<id modifies="1" calls="1" comment="calls (unknown,known) and modifies (unknown,unknown)" >29</id><querystr><![CDATA[proc p1,p2; variable v1; Select p1   such that  Calls ( p1 , "zebra" ) and Modifies ( p1 , v1 ) ;]]></querystr>
-<stuans></stuans>
+<id modifies="1" calls="1" comment="calls (unknown,known) and modifies (unknown,unknown)" >29</id><querystr><![CDATA[procedure p1,p2; variable v1; Select p1   such that  Calls ( p1 , "zebra" ) and Modifies ( p1 , v1 ) ;]]></querystr>
+<stuans>yello</stuans>
 <correct>yello</correct>
-<time_taken>31.000000</time_taken>
-<failed>
-<missing>yello</missing>
-<additional></additional>
-<summary>
-<expected>1</expected>
-<matched>0</matched>
-<missing>1</missing>
-<additional>0</additional>
-</summary>
-</failed>
+<time_taken>97.000000</time_taken>
+<passed/>
 </query>
 <query>
-<id modifies="1" callsstar="1" comment="calls* (unknown,known) and modifies (known,known)" >30</id><querystr><![CDATA[proc p1,p2; variable v1; Select p1   such that  Calls* ( p1 , "zebra" ) and Modifies ( "zebra" , "apple" ) ;]]></querystr>
-<stuans></stuans>
+<id modifies="1" callsstar="1" comment="calls* (unknown,known) and modifies (known,known)" >30</id><querystr><![CDATA[procedure p1,p2; variable v1; Select p1   such that  Calls* ( p1 , "zebra" ) and Modifies ( "zebra" , "apple" ) ;]]></querystr>
+<stuans>zebra</stuans>
 <correct>xylo,yello</correct>
-<time_taken>62.000000</time_taken>
+<time_taken>146.000000</time_taken>
 <failed>
 <missing>xylo,yello</missing>
-<additional></additional>
+<additional>zebra</additional>
 <summary>
 <expected>2</expected>
 <matched>0</matched>
 <missing>2</missing>
-<additional>0</additional>
+<additional>1</additional>
 </summary>
 </failed>
 </query>
 <query>
-<id modifies="1" calls="1" comment="calls (unknown,unknown) and modifies (unknown,unknown)" >31</id><querystr><![CDATA[proc p1,p2; variable v1; Select p1   such that  Calls ( p1 , p2 ) and Modifies ( p1 , v1 ) ;]]></querystr>
-<stuans></stuans>
+<id modifies="1" calls="1" comment="calls (unknown,unknown) and modifies (unknown,unknown)" >31</id><querystr><![CDATA[procedure p1,p2; variable v1; Select p1   such that  Calls ( p1 , p2 ) and Modifies ( p1 , v1 ) ;]]></querystr>
+<stuans>xylo,yello,zebra</stuans>
 <correct>xylo,yello,zebra</correct>
-<time_taken>46.000000</time_taken>
-<failed>
-<missing>xylo,yello,zebra</missing>
-<additional></additional>
-<summary>
-<expected>3</expected>
-<matched>0</matched>
-<missing>3</missing>
-<additional>0</additional>
-</summary>
-</failed>
-</query>
-<query>
-<id modifies="1" callsstar="1" comment="calls* (unknown,unknown) and modifies (unknown,unknown)" >32</id><querystr><![CDATA[proc p1,p2; variable v1; Select p1   such that  Calls* ( p1 , p2 ) and Modifies ( p1 , v1 ) ;]]></querystr>
-<stuans></stuans>
-<correct>xylo,yello,zebra</correct>
-<time_taken>62.000000</time_taken>
-<failed>
-<missing>xylo,yello,zebra</missing>
-<additional></additional>
-<summary>
-<expected>3</expected>
-<matched>0</matched>
-<missing>3</missing>
-<additional>0</additional>
-</summary>
-</failed>
-</query>
-<query>
-<id modifies="1" calls="1" comment="calls (unknown,unknown) and modifies (unknown,unknown)" >33</id><querystr><![CDATA[proc p1,p2; variable v1; Select p2   such that  Calls ( p1 , p2 ) and Modifies ( p1 , v1 ) ;]]></querystr>
-<stuans></stuans>
-<correct>yello,zebra,extra</correct>
-<time_taken>47.000000</time_taken>
-<failed>
-<missing>extra,yello,zebra</missing>
-<additional></additional>
-<summary>
-<expected>3</expected>
-<matched>0</matched>
-<missing>3</missing>
-<additional>0</additional>
-</summary>
-</failed>
-</query>
-<query>
-<id modifies="1" callsstar="1" comment="calls* (unknown,unknown) and modifies (unknown,unknown)" >34</id><querystr><![CDATA[proc p1,p2; variable v1; Select p2   such that  Calls* ( p1 , p2 ) and Modifies ( p1 , v1 ) ;]]></querystr>
-<stuans></stuans>
-<correct>yello,zebra,extra</correct>
-<time_taken>47.000000</time_taken>
-<failed>
-<missing>extra,yello,zebra</missing>
-<additional></additional>
-<summary>
-<expected>3</expected>
-<matched>0</matched>
-<missing>3</missing>
-<additional>0</additional>
-</summary>
-</failed>
-</query>
-<query>
-<id modifies="1" calls="1" comment="calls (unknown,unknown) and modifies (unknown,unknown)" >35</id><querystr><![CDATA[proc p1,p2; variable v1; Select p1   such that  Calls ( p1 , p1 ) and Modifies ( p1 , v1 ) ;]]></querystr>
-<stuans></stuans>
-<correct></correct>
-<time_taken>46.000000</time_taken>
+<time_taken>86.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id modifies="1" callsstar="1" comment="calls* (unknown,unknown) and modifies (unknown,unknown)" >36</id><querystr><![CDATA[proc p1,p2; variable v1; Select p1   such that  Calls* ( p1 , p1 ) and Modifies ( p1 , v1 ) ;]]></querystr>
-<stuans></stuans>
-<correct></correct>
-<time_taken>47.000000</time_taken>
+<id modifies="1" callsstar="1" comment="calls* (unknown,unknown) and modifies (unknown,unknown)" >32</id><querystr><![CDATA[procedure p1,p2; variable v1; Select p1   such that  Calls* ( p1 , p2 ) and Modifies ( p1 , v1 ) ;]]></querystr>
+<stuans>xylo,yello,zebra</stuans>
+<correct>xylo,yello,zebra</correct>
+<time_taken>87.000000</time_taken>
 <passed/>
+</query>
+<query>
+<id modifies="1" calls="1" comment="calls (unknown,unknown) and modifies (unknown,unknown)" >33</id><querystr><![CDATA[procedure p1,p2; variable v1; Select p2   such that  Calls ( p1 , p2 ) and Modifies ( p1 , v1 ) ;]]></querystr>
+<stuans>yello,zebra,extra</stuans>
+<correct>yello,zebra,extra</correct>
+<time_taken>83.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id modifies="1" callsstar="1" comment="calls* (unknown,unknown) and modifies (unknown,unknown)" >34</id><querystr><![CDATA[procedure p1,p2; variable v1; Select p2   such that  Calls* ( p1 , p2 ) and Modifies ( p1 , v1 ) ;]]></querystr>
+<stuans>yello,zebra,extra</stuans>
+<correct>yello,zebra,extra</correct>
+<time_taken>86.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id modifies="1" calls="1" comment="calls (unknown,unknown) and modifies (unknown,unknown)" >35</id><querystr><![CDATA[procedure p1,p2; variable v1; Select p1   such that  Calls ( p1 , p1 ) and Modifies ( p1 , v1 ) ;]]></querystr>
+<stuans>xylo,yello,zebra</stuans>
+<correct></correct>
+<time_taken>84.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>xylo,yello,zebra</additional>
+<summary>
+<expected>0</expected>
+<matched>0</matched>
+<missing>0</missing>
+<additional>3</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id modifies="1" callsstar="1" comment="calls* (unknown,unknown) and modifies (unknown,unknown)" >36</id><querystr><![CDATA[procedure p1,p2; variable v1; Select p1   such that  Calls* ( p1 , p1 ) and Modifies ( p1 , v1 ) ;]]></querystr>
+<stuans>xylo,yello,zebra</stuans>
+<correct></correct>
+<time_taken>116.000000</time_taken>
+<failed>
+<missing></missing>
+<additional>xylo,yello,zebra</additional>
+<summary>
+<expected>0</expected>
+<matched>0</matched>
+<missing>0</missing>
+<additional>3</additional>
+</summary>
+</failed>
 </query>
 </category>
 </queries>

@@ -1,72 +1,72 @@
 100
 cat: such that and calls
 181 - calls, parent* :: calls (known,unknown) and parent* (unknown,unknown)
-proc p1,p2;
+procedure p1,p2;
 Select p2   such that  Calls ( "xylo" , p2 ) and Parent* ( s1 , s2 ) ;
 
 5000
 182 - calls*, parent* :: calls* (known,unknown) and parent* (unknown,unknown)
-proc p1,p2;
+procedure p1,p2;
 Select p2   such that  Calls* ( "xylo" , p2 ) and Parent* ( s1 , s2 ) ;
 
 5000
 183 - calls, parent* :: calls (unknown,known) and parent* (unknown,unknown)
-proc p1,p2;
+procedure p1,p2;
 Select p1   such that  Calls ( p1 , "zebra" ) and Parent* ( s1 , s2 ) ;
 
 5000
 184 - calls*, parent* :: calls* (unknown,known) and parent* (unknown,unknown)
-proc p1,p2;
+procedure p1,p2;
 Select p1   such that  Calls* ( p1 , "zebra" ) and Parent* ( s1 , s2 ) ;
 
 5000
 124 - calls, uses :: calls (known,unknown) and uses (known,unknown)
-proc p1,p2;variable v1;
+procedure p1,p2;variable v1;
 Select p2   such that  Calls ( "xylo" , p2 ) and Uses ( "xylo" , v1 ) ;
 
 5000
 125 - calls*, uses :: calls* (known,unknown) and uses (known,unknown)
-proc p1,p2;variable v1;
+procedure p1,p2;variable v1;
 Select p2   such that  Calls* ( "xylo" , p2 ) and Uses ( "xylo" , v1 ) ;
 
 5000
 126 - calls, uses :: calls (unknown,known) and uses (known,unknown)
-proc p1,p2;variable v1;
+procedure p1,p2;variable v1;
 Select p1   such that  Calls ( p1 , "zebra" ) and Uses ( "zebra" , v1 ) ;
 
 5000
 127 - calls*, uses :: calls* (unknown,known) and uses (unknown,unknown)
-proc p1,p2;variable v1;
+procedure p1,p2;variable v1;
 Select p1   such that  Calls* ( p1 , "zebra" ) and Uses ( p1 , v1 ) ;
 
 5000
 128 - calls, uses :: calls (unknown,unknown) and uses (unknown,unknown)
-proc p1,p2;variable v1;
+procedure p1,p2;variable v1;
 Select p1   such that  Calls ( p1 , p2 ) and Uses ( p2 , v1 ) ;
 
 5000
 129 - calls*, uses :: calls* (unknown,unknown) and uses (unknown,unknown)
-proc p1,p2;variable v1;
+procedure p1,p2;variable v1;
 Select p1   such that  Calls* ( p1 , p2 ) and Uses ( p2 , v1 ) ;
 
 5000
 130 - calls, uses :: calls (unknown,unknown) and uses (unknown,unknown)
-proc p1,p2;variable v1;
+procedure p1,p2;variable v1;
 Select p2   such that  Calls ( p1 , p2 ) and Uses ( p2 , v1 ) ;
 
 5000
 131 - calls*, uses :: calls* (unknown,unknown) and uses (unknown,unknown)
-proc p1,p2;variable v1;
+procedure p1,p2;variable v1;
 Select p2   such that  Calls* ( p1 , p2 ) and Uses ( p2 , v1 ) ;
 
 5000
 132 - calls, uses :: calls (unknown,unknown) and uses (unknown,unknown)
-proc p1,p2;variable v1;
+procedure p1,p2;variable v1;
 Select p1   such that  Calls ( p1 , p1 ) and Uses ( p1 , v1 ) ;
 
 5000
 133 - calls*, uses :: calls* (unknown,unknown) and uses (unknown,unknown)
-proc p1,p2;variable v1;
+procedure p1,p2;variable v1;
 Select p1   such that  Calls* ( p1 , p1 ) and Uses ( p1 , v1 ) ;
 
 5000

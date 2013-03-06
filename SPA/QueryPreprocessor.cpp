@@ -640,7 +640,7 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 		if(regex_match(currToken,regex(invComma+ident+invComma))){			
 			currToken.erase(currToken.begin());	
 			currToken.resize(currToken.size()-1);	
-			if (relName=="Modifies_p"||relName=="Uses_p"||relName=="Calls"||relName=="Calls*"){
+			if ((i==1&&(relName=="Modifies_p"||relName=="Uses_p"))||relName=="Calls"||relName=="Calls*"){
 				if (!pkb->isProcExists(currToken)){
 					error(INVALID_VARIABLE);
 					return false;

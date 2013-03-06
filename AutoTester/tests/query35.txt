@@ -86,7 +86,7 @@ Select c   such that  Uses ( c , "kimchi" ) and Modifies ( c , "kimchi" ) ;
 8
 5000
 78 - modifies , uses :: uses (unknown_proc,known_var) and modifies (unknown,known)
-proc p;
+procedure p;
 Select p   such that  Uses ( p , "kimchi" ) and Modifies ( p , "kimchi" ) ;
 xylo,yello
 5000
@@ -171,12 +171,12 @@ Select v1   such that  Modifies ( c , v1 ) and Uses ( c , v1 ) ;
 meat,ingredients,kimchi,banana,leek,a,b,c
 5000
 96 - modifies , uses :: uses (unknown_proc,unknown_var) and modifies (unknown,unknown)
-proc p1; variable v1;
+procedure p1; variable v1;
 Select p1   such that  Uses ( p1 , v1 ) and Modifies ( p1 , v1 ) ;
 xylo,yello,zebra,extra
 5000
 97 - modifies , uses :: modifies (unknown_proc,unknown_var) and uses (unknown,unknown)
-proc p1; variable v1;
+procedure p1; variable v1;
 Select p1   such that  Modifies ( p1 , v1 ) and Uses ( p1 , v1 ) ;
 xylo,yello,zebra,extra
 5000
