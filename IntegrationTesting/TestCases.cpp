@@ -148,23 +148,23 @@ SOURCE SampleSimpleSources::sampleInvalidSource5 = "InvalidCode3{\n"
 // Not sure if you people need this... feel free to add a class for this if needed.
 
 //===============Test for Follows =================== PKB5
-QUERY SampleQueries::sampleQuery1 = "stmt s; Select s such that Follows(s,4);";//pass
-QUERY SampleQueries::sampleQuery2 = "stmt s; Select s such that Follows (2,s);";//pass
-QUERY SampleQueries::sampleQuery3 = "stmt s1,s2,s Select <s1,s2> such that Follows (s1,s2);"; //pass
-QUERY SampleQueries::sampleQuery4 = "stmt s1,s2; Select s2 such that Follows (s1,s2)"; //pass
+QUERY SampleQueries::sampleQuery1 = "stmt s1,s2; Select <s1,s2> such that Follows*(1,s1) ;";
+QUERY SampleQueries::sampleQuery2 = "Select BOOLEAN  such that Uses ( \"xylo\" , \"apple\" );";//pass
+QUERY SampleQueries::sampleQuery3 = "prog_line s1,s2; Select s1  such that Next* ( s1 , s1 );"; //pass
+QUERY SampleQueries::sampleQuery4 = "call c; Select BOOLEAN   such that  Parent* ( 9 ,12 ) with c . procName = \"yello\";"; //pass
 QUERY SampleQueries::sampleQuery5 = "stmt s1,s2,s3; Select <s1,s2,s3> such that Follows (s1,s2) and Follows(s2,s3)";//pass
 QUERY SampleQueries::sampleQuery6 = "stmt s1,s2,s3; Select s3 such that Follows (s1,s2) and Follows(s2,s3)";//pass
 QUERY SampleQueries::sampleQuery7 = "stmt s;Select s with s.stmt#=2;"; //pass
 QUERY SampleQueries::sampleQuery8 = "call c; procedure p; variable v;Select p with p.procName = \"Code5\";";
 QUERY SampleQueries::sampleQuery9 = "while w; callc; Select w with w.stmt#=4;"; //pass
 QUERY SampleQueries::sampleQuery10 = "variable v; Select v with v.varName = \"x\";"; //pass
-QUERY SampleQueries::sampleQuery11 = "stmt s; while w; Select <s,w> with s.stmt#=w.stmt#;"; //pass
+QUERY SampleQueries::sampleQuery11 = "stmt s; constant c; Select <s,c> with c.value=s.stmt#;"; //pass
 QUERY SampleQueries::sampleQuery12 = "variable v;Select v such that Modifies(_, v);"; 
 QUERY SampleQueries::sampleQuery13 = "variable v; Select v such that Modifies(1, v);"; //fixed
 QUERY SampleQueries::sampleQuery14 = "stmt s; Select s such that Uses(s, \"y\");"; 
 QUERY SampleQueries::sampleQuery15 = "assign a; while w;Select a such that Follows* (a,w);"; // <-- this one suppose to return none right..
 QUERY SampleQueries::sampleQuery16 = "while w; constant c;Select <w,c> with w.stmt#=c.value;"; //fixed
-QUERY SampleQueries::sampleQuery17 = "assign a; Select a;"; //fixed
+QUERY SampleQueries::sampleQuery17 = "constant c; Select c;"; //fixed
 QUERY SampleQueries::sampleQuery18 = "stmt s; constant c;Select s with c.value=s.stmt#;";
 QUERY SampleQueries::sampleQuery19 = "assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;Select BOOLEAN with p.procName = \"procedure\";";
 QUERY SampleQueries::sampleQuery20 = "stmt s1,s2;Select s1 such that Follows* ( s1 , s2 );";
@@ -210,14 +210,14 @@ QUERY SampleQueries::sampleQuery47 = "while w;Select w  pattern w(_,_);";
 QUERY SampleQueries::sampleQuery48 = "while w;Select w  pattern w(w,_);";  
 QUERY SampleQueries::sampleQuery49 = "if f;Select f pattern f(_,_)";  
 QUERY SampleQueries::sampleQuery50 = "if f; variable v;Select f pattern f(v,_)"; 
-QUERY SampleQueries::sampleQuery51 = "assign a; Select a such that pattern a(\"c\",_\"1\"_);";  
+QUERY SampleQueries::sampleQuery51 = "assign a; variable v;Select a such that pattern a(v,_\"1\"_);";  
 QUERY SampleQueries::sampleQuery52 = "assign a;variable v;Select v  pattern a(v,_\"a\"_);"; //pass
-QUERY SampleQueries::sampleQuery53 = "assign a;Select a such that Uses(a,\"kimchi\") pattern a(\"donut\",_);";    //pass
+QUERY SampleQueries::sampleQuery53 = "assign a;Select BOOLEAN pattern a(\"d\",_\"z\"_);";  
 QUERY SampleQueries::sampleQuery54 = "assign a;variable v;Select v such that Uses(a,v) pattern a(v,_\"apple\"_);";  //pass
 QUERY SampleQueries::sampleQuery55 = "assign a1,a2;Select a2 such that Parent(_,a1) pattern a1(\"carrot\",_);";  //pass
 
 //===============Test for Boolean=================== PKB5	
-QUERY SampleQueries::sampleQuery56 = "Select BOOLEAN such that Parent(2,3);";
+QUERY SampleQueries::sampleQuery56 = "assign a1,a2;Select a1 such that Follows*(a1,a2) pattern a2(\"i\",_\"i\"_);";
 //two clauses have relation and need to take intersection
 QUERY SampleQueries::sampleQuery57 = "assign a;Select BOOLEAN such that Modifies(a,\"carrot\") pattern a(\"carrot\",_\"egg\"_);";
 //two clauses have no relation
