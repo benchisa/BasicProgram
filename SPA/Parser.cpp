@@ -104,7 +104,6 @@ bool Parser::program(){
 	}
 	else{
 		pkb->getProcedure(curProcIndex)->setEndProgLine(prevProgLine);
-		//cout << "At Procedure: " << pkb->getProcedure(curProcIndex)->getProcName() << "\n";
 		//cout << "Prev Token: " << prevToken << "\n";
 		//cout << "Current Token: " << curToken << "\n";
 		if(matchToken(" ")){
@@ -136,7 +135,7 @@ bool Parser::procedure(){
 				return false;			
 			}
 			curProcIndex = pkb->insertProc(cProc);
-			//cout << "Procedure added: " << prevToken << "\n";
+			//cout << "Procedure added: " << pkb->getProcedure(curProcIndex)->getProcName() << "\n";
 			
 			// first guy
 			if(stmt_num == 0){
@@ -499,7 +498,9 @@ bool Parser::stmt_assign(){
 
 		if(matchToken("=")){
 			if(expr()){
-				if(matchToken(";")) {
+				//cout << "Expression: " << exp << "\n";
+				if(matchToken(";"))
+				{
 					rightNode = operands.top();
 					if(!operands.empty()) operands.pop();
 
@@ -512,13 +513,10 @@ bool Parser::stmt_assign(){
 					pkb->insertAssign(stmt_num, tmpVarIndex, DesignExtractor::convertExprToPrefix(exp));
 					return true;	
 				}
-				else{
-					error(MISSING_COLON);
-					return false;
-				}
 			}
-			else
+			else{
 				return false;
+			}
 		}else
 		{
 			//print error
@@ -534,68 +532,16 @@ bool Parser::stmt_assign(){
 
 bool Parser::expr(){
 	// expr: expr '+' term | expr '-' term | term
-	if(term())
+	if(factor())
 	{
-		if(matchToken("+"))
-		{
+		if(matchToken("+") || matchToken("-") || matchToken("*")){
 			exp += prevToken;
-			
-			if(operators.empty()) 
-				operators.push(pkb->createAST(PLUS, prevProgLine, stmt_num, -1));
-			else
-			{
-				if(pkb->getType(operators.top()) == MULTIPLY)
-				{
-					createExprTree();
-				}
-				else
-				{
-					operators.push(pkb->createAST(PLUS, prevProgLine, stmt_num, -1));
-				}
-				
-			}
+		}
 
-			if(expr())
-			{
-				createExprTree();
-			}
-			else
-			{
-				return false;
-			}
-		}
-		else if(matchToken("-"))
-		{
-			exp += prevToken;
-			
-			if(operators.empty()) 
-				operators.push(pkb->createAST(MINUS, prevProgLine, stmt_num, -1));
-			else
-			{
-				if(pkb->getType(operators.top()) == MULTIPLY)
-				{
-					createExprTree();
-				}
-				else
-				{
-					operators.push(pkb->createAST(MINUS,prevProgLine, stmt_num, -1));
-				}
-			}
-
-			if(term())
-			{
-				createExprTree();
-			}
-			else
-			{
-				return false;
-			}
-		}
-		else{
-			
-		}
+		expr();
 
 		return true;
+		
 	}
 	else
 	{
@@ -606,35 +552,9 @@ bool Parser::expr(){
 bool Parser::term(){
 	// term: term "*" factor | factor
 	if(factor())
-	{
-		if(matchToken("*"))
-		{
-			exp += prevToken;
-			if(operators.empty())
-				operators.push(pkb->createAST(MULTIPLY, prevProgLine,stmt_num, -1));
-			else
-			{
-				operators.push(pkb->createAST(MULTIPLY, prevProgLine,stmt_num, -1));
-
-			}
-
-			if(factor())
-			{
-				createExprTree();
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
 		return true;
-	}
 	else
-	{
 		return false;
-	}
 }
 
 bool Parser::factor(){
@@ -722,6 +642,7 @@ bool Parser::name(){
 void Parser::insertFollowsParentForStmt(PROG_LINE p1, PROG_LINE p2){
 	if(!containerIndex.empty() && p2 != 1){
 		// not first line, and previous line not a container
+		//cout << "InsertParent: " << containerIndex.back().first << ", " <<  p2 << "\n";
 		pkb->insertParent(containerIndex.back().first, p2);
 	
 		// while {} a=b; a=b;
