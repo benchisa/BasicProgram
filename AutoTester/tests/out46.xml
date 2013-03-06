@@ -1,0 +1,80 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>CS3202</name><parsing_time_taken>1357.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" Modifies Queries">
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >1</id><querystr><![CDATA[assign a1; variable v1;  Select a1 such that Modifies(a1,v1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >2</id><querystr><![CDATA[while w1; variable v1; Select w1 such that Modifies(w1,v1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >3</id><querystr><![CDATA[if i1; variable v1; Select i1 such that Modifies(i1,v1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >4</id><querystr><![CDATA[call c1; variable v1; Select c1 such that Modifies(c1,v1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >5</id><querystr><![CDATA[procedure p1; variable v1; Select p1 such that Modifies(p1,v1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >6</id><querystr><![CDATA[assign a1; variable v1;  Select v1 such that Modifies(a1,v1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >7</id><querystr><![CDATA[while w1; variable v1; Select v1 such that Modifies(w1,v1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >8</id><querystr><![CDATA[if i1; variable v1; Select v1 such that Modifies(i1,v1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>15.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >9</id><querystr><![CDATA[call c1; variable v1; Select v1 such that Modifies(c1,v1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >10</id><querystr><![CDATA[procedure p1; variable v1; Select v1 such that Modifies(p1,v1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

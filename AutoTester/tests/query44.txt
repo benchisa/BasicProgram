@@ -1,0 +1,52 @@
+100
+cat: Uses Queries
+1 - Uses, Typed :: check Uses assignment
+assign a1; variable v1; 
+Select a1 such that Uses(a1,v1);
+
+5000
+2 - Uses, Typed :: check Uses while
+while w1; variable v1;
+Select w1 such that Uses(w1,v1);
+
+5000
+3 - Uses, Typed :: check Uses if
+if i1; variable v1;
+Select i1 such that Uses(i1,v1);
+
+5000
+4 - Uses, Typed :: check Uses call
+call c1; variable v1;
+Select c1 such that Uses(c1,v1);
+
+5000
+5 - Uses, Typed :: check Uses procedure
+procedure p1; variable v1;
+Select p1 such that Uses(p1,v1);
+
+5000
+6 - Uses, Typed :: check Uses assignment
+assign a1; variable v1; 
+Select v1 such that Uses(a1,v1);
+
+5000
+7 - Uses, Typed :: check Uses while
+while w1; variable v1;
+Select v1 such that Uses(w1,v1);
+
+5000
+8 - Uses, Typed :: check Uses if
+if i1; variable v1;
+Select v1 such that Uses(i1,v1);
+
+5000
+9 - Uses, Typed :: check Uses call
+call c1; variable v1;
+Select v1 such that Uses(c1,v1);
+
+5000
+10 - Uses, Typed :: check Uses procedure
+procedure p1; variable v1;
+Select v1 such that Uses(p1,v1);
+
+5000

@@ -1,0 +1,632 @@
+100
+cat: Parent Query
+1 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent(7,s1);
+
+5000
+2 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent*(7,s1);
+
+5000
+3 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent(9,s1);
+
+5000
+4 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent*(9,s1);
+
+5000
+5 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent(13,s1);
+
+5000
+6 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent*(13,s1);
+
+5000
+7 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent(15,s1);
+
+5000
+8 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent*(15,s1);
+
+5000
+9 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent(17,s1);
+
+5000
+10 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent*(17,s1);
+
+5000
+11 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent(22,s1);
+
+5000
+12 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent*(22,s1);
+
+5000
+13 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent(23,s1);
+
+5000
+14 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent*(23,s1);
+
+5000
+15 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent(29,s1);
+
+5000
+16 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent*(29,s1);
+
+5000
+17 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent(30,s1);
+
+5000
+18 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent*(30,s1);
+
+5000
+19 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent(36,s1);
+
+5000
+20 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent*(36,s1);
+
+5000
+21 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent(41,s1);
+
+5000
+22 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent*(41,s1);
+
+5000
+23 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent(48,s1);
+
+5000
+24 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent*(48,s1);
+
+5000
+25 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent(51,s1);
+
+5000
+26 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent*(51,s1);
+
+5000
+27 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent(60,s1);
+
+5000
+28 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent*(60,s1);
+
+5000
+29 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent(61,s1);
+
+5000
+30 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent*(61,s1);
+
+5000
+31 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent(99,s1);
+
+5000
+32 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent*(99,s1);
+
+5000
+33 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent(131,s1);
+
+5000
+34 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent*(131,s1);
+
+5000
+35 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent(s1,s1);
+
+5000
+36 - Parent, Typed :: check parent
+stmt s1;
+Select s1 such that Parent*(s1,s1);
+
+5000
+37 - Parent, Typed :: check parent
+stmt s1,s2;
+Select s1 such that Parent(s1,s2);
+
+5000
+38 - Parent, Typed :: check parent
+stmt s1,s2;
+Select s1 such that Parent*(s1,s2);
+
+5000
+39 - Parent, Typed :: check parent
+stmt s1,s2;
+Select s2 such that Parent(s1,s2);
+
+5000
+40 - Parent, Typed :: check parent
+stmt s1,s2;
+Select s2 such that Parent*(s1,s2);
+
+5000
+41 - Parent, Typed :: check parent
+stmt s1,s2;
+Select <s1,s2> such that Parent(s1,s2);
+
+5000
+42 - Parent, Typed :: check parent
+stmt s1,s2;
+Select <s1,s2> such that Parent*(s1,s2);
+
+5000
+43 - Parent, Typed :: check parent
+stmt s1;assign a1;
+Select s1 such that Parent(s1,a1);
+
+5000
+44 - Parent, Typed :: check parent
+stmt s1;assign a1;
+Select s1 such that Parent*(s1,a1);
+
+5000
+45 - Parent, Typed :: check parent
+stmt s1; assign a1;
+Select a1 such that Parent(s1,a1);
+
+5000
+46 - Parent, Typed :: check parent
+stmt s1;assign a1;
+Select a1 such that Parent*(s1,a1);
+
+5000
+47 - Parent, Typed :: check parent
+stmt s1;assign a1;
+Select <s1,a1> such that Parent(s1,a1);
+
+5000
+48 - Parent, Typed :: check parent
+stmt s1;assign a1;
+Select <s1,a1> such that Parent*(s1,a1);
+
+5000
+49 - Parent, Typed :: check parent
+stmt s1;while w1;
+Select s1 such that Parent(s1,w1);
+
+5000
+50 - Parent, Typed :: check parent
+stmt s1;while w1;
+Select s1 such that Parent*(s1,w1);
+
+5000
+51 - Parent, Typed :: check parent
+stmt s1; while w1;
+Select w1 such that Parent(s1,w1);
+
+5000
+52 - Parent, Typed :: check parent
+stmt s1;while w1;
+Select w1 such that Parent*(s1,w1);
+
+5000
+53 - Parent, Typed :: check parent
+stmt s1;while w1;
+Select <s1,w1> such that Parent(s1,w1);
+
+5000
+54 - Parent, Typed :: check parent
+stmt s1;while w1;
+Select <s1,w1> such that Parent*(s1,w1);
+
+5000
+55 - Parent, Typed :: check parent
+stmt s1;if i1;
+Select s1 such that Parent(s1,i1);
+
+5000
+56 - Parent, Typed :: check parent
+stmt s1;if i1;
+Select s1 such that Parent*(s1,i1);
+
+5000
+57 - Parent, Typed :: check parent
+stmt s1; if i1;
+Select i1 such that Parent(s1,i1);
+
+5000
+58 - Parent, Typed :: check parent
+stmt s1;if i1;
+Select i1 such that Parent*(s1,i1);
+
+5000
+59 - Parent, Typed :: check parent
+stmt s1;if i1;
+Select <s1,i1> such that Parent(s1,i1);
+
+5000
+60 - Parent, Typed :: check parent
+stmt s1;if i1;
+Select <s1,i1> such that Parent*(s1,i1);
+
+5000
+61 - Parent, Typed :: check parent
+stmt s1;call c1;
+Select s1 such that Parent(s1,c1);
+
+5000
+62 - Parent, Typed :: check parent
+stmt s1;call c1;
+Select s1 such that Parent*(s1,c1);
+
+5000
+63 - Parent, Typed :: check parent
+stmt s1;call c1;
+Select c1 such that Parent(s1,c1);
+
+5000
+64 - Parent, Typed :: check parent
+stmt s1;call c1;
+Select c1 such that Parent*(s1,c1);
+
+5000
+65 - Parent, Typed :: check parent
+stmt s1;call c1;
+Select <s1,c1> such that Parent(s1,c1);
+
+5000
+66 - Parent, Typed :: check parent
+stmt s1;call c1;
+Select <s1,c1> such that Parent*(s1,c1);
+
+5000
+67 - Parent, Typed :: check parent
+while w1;assign a1;
+Select w1 such that Parent(w1,a1);
+
+5000
+68 - Parent, Typed :: check parent
+while w1;assign a1;
+Select w1 such that Parent*(w1,a1);
+
+5000
+69 - Parent, Typed :: check parent
+while w1; assign a1;
+Select a1 such that Parent(w1,a1);
+
+5000
+70 - Parent, Typed :: check parent
+while w1;assign a1;
+Select a1 such that Parent*(w1,a1);
+
+5000
+71 - Parent, Typed :: check parent
+while w1;assign a1;
+Select <w1,a1> such that Parent(w1,a1);
+
+5000
+72 - Parent, Typed :: check parent
+while w1;assign a1;
+Select <w1,a1> such that Parent*(w1,a1);
+
+5000
+73 - Parent, Typed :: check parent
+while w1;
+Select w1 such that Parent(w1,w1);
+
+5000
+74 - Parent, Typed :: check parent
+while w1;
+Select w1 such that Parent*(w1,w1);
+
+5000
+75 - Parent, Typed :: check parent
+while w1; 
+Select w1 such that Parent(w1,w1);
+
+5000
+76 - Parent, Typed :: check parent
+while w1;
+Select w1 such that Parent*(w1,w1);
+
+5000
+77 - Parent, Typed :: check parent
+while w1;
+Select <w1,w1> such that Parent(w1,w1);
+
+5000
+78 - Parent, Typed :: check parent
+while w1;
+Select <w1,w1> such that Parent*(w1,w1);
+
+5000
+79 - Parent, Typed :: check parent
+while w1,w2;
+Select w1 such that Parent(w1,w2);
+
+5000
+80 - Parent, Typed :: check parent
+while w1,w2;
+Select w1 such that Parent*(w1,w2);
+
+5000
+81 - Parent, Typed :: check parent
+while w1,w2;
+Select w2 such that Parent(w1,w2);
+
+5000
+82 - Parent, Typed :: check parent
+while w1,w2;
+Select w2 such that Parent*(w1,w2);
+
+5000
+83 - Parent, Typed :: check parent
+while w1,w2;
+Select <w1,w2> such that Parent(w1,w2);
+
+5000
+84 - Parent, Typed :: check parent
+while w1,w2;
+Select <w1,w2> such that Parent*(w1,w2);
+
+5000
+85 - Parent, Typed :: check parent
+while w1;if i1;
+Select w1 such that Parent(w1,i1);
+
+5000
+86 - Parent, Typed :: check parent
+while w1;if i1;
+Select w1 such that Parent*(w1,i1);
+
+5000
+87 - Parent, Typed :: check parent
+while w1; if i1;
+Select i1 such that Parent(w1,i1);
+
+5000
+88 - Parent, Typed :: check parent
+while w1;if i1;
+Select i1 such that Parent*(w1,i1);
+
+5000
+89 - Parent, Typed :: check parent
+while w1;if i1;
+Select <w1,i1> such that Parent(w1,i1);
+
+5000
+90 - Parent, Typed :: check parent
+while w1;if i1;
+Select <w1,i1> such that Parent*(w1,i1);
+
+5000
+91 - Parent, Typed :: check parent
+while w1;call c1;
+Select w1 such that Parent(w1,c1);
+
+5000
+92 - Parent, Typed :: check parent
+while w1;call c1;
+Select w1 such that Parent*(w1,c1);
+
+5000
+93 - Parent, Typed :: check parent
+while w1;call c1;
+Select c1 such that Parent(w1,c1);
+
+5000
+94 - Parent, Typed :: check parent
+while w1;call c1;
+Select c1 such that Parent*(w1,c1);
+
+5000
+95 - Parent, Typed :: check parent
+while w1;call c1;
+Select <w1,c1> such that Parent(w1,c1);
+
+5000
+96 - Parent, Typed :: check parent
+while w1;call c1;
+Select <w1,c1> such that Parent*(w1,c1);
+
+5000
+97 - Parent, Typed :: check parent
+if i1;assign a1;
+Select i1 such that Parent(i1,a1);
+
+5000
+98 - Parent, Typed :: check parent
+if i1;assign a1;
+Select i1 such that Parent*(i1,a1);
+
+5000
+99 - Parent, Typed :: check parent
+if i1; assign a1;
+Select a1 such that Parent(i1,a1);
+
+5000
+100 - Parent, Typed :: check parent
+if i1;assign a1;
+Select a1 such that Parent*(i1,a1);
+
+5000
+101 - Parent, Typed :: check parent
+if i1;assign a1;
+Select <i1,a1> such that Parent(i1,a1);
+
+5000
+102 - Parent, Typed :: check parent
+if i1;assign a1;
+Select <i1,a1> such that Parent*(i1,a1);
+
+5000
+103 - Parent, Typed :: check parent
+if i1; while w1;
+Select i1 such that Parent(i1,w1);
+
+5000
+104 - Parent, Typed :: check parent
+if i1;while w1;
+Select i1 such that Parent*(i1,w1);
+
+5000
+105 - Parent, Typed :: check parent
+if i1; while w1;
+Select i1 such that Parent(i1,w1);
+
+5000
+106 - Parent, Typed :: check parent
+if i1;while w1;
+Select i1 such that Parent*(i1,w1);
+
+5000
+107 - Parent, Typed :: check parent
+if i1;while w1;
+Select <i1,i1> such that Parent(i1,w1);
+
+5000
+108 - Parent, Typed :: check parent
+if i1;while w1;
+Select <i1,i1> such that Parent*(i1,w1);
+
+5000
+109 - Parent, Typed :: check parent
+if i1;
+Select i1 such that Parent(i1,i1);
+
+5000
+110 - Parent, Typed :: check parent
+if i1;
+Select i1 such that Parent*(i1,i1);
+
+5000
+111 - Parent, Typed :: check parent
+if i1;
+Select i1 such that Parent(i1,i1);
+
+5000
+112 - Parent, Typed :: check parent
+if i1;
+Select i1 such that Parent*(i1,i1);
+
+5000
+113 - Parent, Typed :: check parent
+if i1;
+Select <i1,i1> such that Parent(i1,i1);
+
+5000
+114 - Parent, Typed :: check parent
+if i1;
+Select <i1,i1> such that Parent*(i1,i1);
+
+5000
+115 - Parent, Typed :: check parent
+if i1,i2;
+Select i1 such that Parent(i1,i2);
+
+5000
+116 - Parent, Typed :: check parent
+if i1,i2;
+Select i1 such that Parent*(i1,i2);
+
+5000
+117 - Parent, Typed :: check parent
+if i1,i2;
+Select i2 such that Parent(i1,i2);
+
+5000
+118 - Parent, Typed :: check parent
+if i1,i2;
+Select i2 such that Parent*(i1,i2);
+
+5000
+119 - Parent, Typed :: check parent
+if i1,i2;
+Select <i1,i2> such that Parent(i1,i2);
+
+5000
+120 - Parent, Typed :: check parent
+if i1,i2;
+Select <i1,i2> such that Parent*(i1,i2);
+
+5000
+121 - Parent, Typed :: check parent
+if i1;call c1;
+Select i1 such that Parent(i1,c1);
+
+5000
+122 - Parent, Typed :: check parent
+if i1;call c1;
+Select i1 such that Parent*(i1,c1);
+
+5000
+123 - Parent, Typed :: check parent
+if i1;call c1;
+Select c1 such that Parent(i1,c1);
+
+5000
+124 - Parent, Typed :: check parent
+if i1;call c1;
+Select c1 such that Parent*(i1,c1);
+
+5000
+125 - Parent, Typed :: check parent
+if i1;call c1;
+Select <i1,c1> such that Parent(i1,c1);
+
+5000
+126 - Parent, Typed :: check parent
+if i1;call c1;
+Select <i1,c1> such that Parent*(i1,c1);
+
+5000

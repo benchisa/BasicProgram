@@ -28,7 +28,7 @@ Select s1   such that  Parent ( s1 ,14 ) and Parent* ( s1 , s2 ) ;
 175 - parent* :: parent* (unknown,known) and parent* (unknown,unknown)
 stmt s1,s2;
 Select s1   such that  Parent* ( s1 ,14 ) and Parent* ( s1 , s2 ) ;
-9 10
+9,10
 5000
 176 - parent, parent* :: parent (unknown,unknown) and parent* (unknown,unknown)
 stmt s1,s2;

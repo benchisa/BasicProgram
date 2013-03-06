@@ -1,0 +1,102 @@
+100
+cat: complex queries
+1 - all, Typed :: 1 set of interrelated 9 such that clauses
+
+
+
+5000
+2 - all, Typed :: 2 sets of interrelated 4 such that clauses
+
+
+
+5000
+3 - all, Typed :: 3 sets of interrelated 9 such that clauses
+
+
+
+5000
+4 - all, Typed :: 4 sets of interrelated 12 such that clauses
+
+
+
+5000
+5 - all, Typed :: 5 sets of interrelated 25 such that clauses
+
+
+
+5000
+6 - all, Typed :: 1 set of interrelated 9 such that with clauses
+
+
+
+5000
+7 - all, Typed :: 2 sets of interrelated 4 such that with clauses
+
+
+
+5000
+8 - all, Typed :: 3 sets of interrelated 9 such that with clauses
+
+
+
+5000
+9 - all, Typed :: 4 sets of interrelated 12 such that with clauses
+
+
+
+5000
+10 - all, Typed :: 5 sets of interrelated 25 such that with clauses
+
+
+
+5000
+11 - all, Typed :: 1 set of interrelated 9 such that pattern clauses
+
+
+
+5000
+12 - all, Typed :: 2 sets of interrelated 4 such that pattern clauses
+
+
+
+5000
+13 - all, Typed :: 3 sets of interrelated 9 such that pattern clauses
+
+
+
+5000
+14 - all, Typed :: 4 sets of interrelated 12 such that pattern clauses
+
+
+
+5000
+15 - all, Typed :: 5 sets of interrelated 25 such that with pattern clauses
+
+
+
+5000
+16 - all, Typed :: 1 set of interrelated 9 such that with pattern clauses
+
+
+
+5000
+17 - all, Typed :: 2 sets of interrelated 4 such that with pattern clauses
+
+
+
+5000
+18 - all, Typed :: 3 sets of interrelated 9 such that with pattern clauses
+
+
+
+5000
+19 - all, Typed :: 4 sets of interrelated 12 such that with pattern clauses
+
+
+
+5000
+20 - all, Typed :: 5 sets of interrelated 25 such that with pattern clauses
+
+
+
+5000

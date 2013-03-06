@@ -1,0 +1,682 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>CS3202</name><parsing_time_taken>1404.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" Next Queries">
+<query>
+<id Next="1" Typed="1" comment="check next" >1</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >2</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,8);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >3</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,27);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >4</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,28);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >5</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >6</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,8);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >7</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,27);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>15.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >8</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,28);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>15.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >9</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,29);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >10</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,35);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >11</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,40);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >12</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,43);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >13</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,29);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >14</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,35);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >15</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,40);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >16</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,43);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >17</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,59);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >18</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,77);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >19</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,78);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >20</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,82);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >21</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,59);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >22</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,77);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >23</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,78);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >24</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,82);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >25</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,99);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >26</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,101);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >27</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,118);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >28</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,120);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >29</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,99);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >30</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,101);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >31</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,118);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >32</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,120);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >33</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,121);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >34</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,121);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >35</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,122);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >36</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,122);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >37</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,124);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >38</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,124);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >39</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,126);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >40</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,126);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >41</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,128);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >42</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,128);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >43</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,134);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >44</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,134);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >45</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(1,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >46</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(8,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >47</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(27,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >48</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(28,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >49</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(1,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >50</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(8,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >51</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(27,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >52</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(28,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >53</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(29,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >54</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(35,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >55</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(40,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >56</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(43,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >57</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(29,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >58</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(35,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >59</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(40,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >60</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(43,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >61</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(59,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >62</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(77,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >63</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(78,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >64</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(82,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >65</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(59,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >66</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(77,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >67</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(78,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >68</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(82,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >69</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(99,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >70</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(101,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >71</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(118,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >72</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(120,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >73</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(99,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >74</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(101,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >75</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(118,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >76</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(120,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >77</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(121,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >78</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(121,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >79</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(122,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >80</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(122,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >81</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(124,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >82</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(124,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >83</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(126,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >84</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(126,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >85</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(128,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >86</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(128,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >87</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(134,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >88</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(134,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >89</id><querystr><![CDATA[prog_line n1; Select n1 such that Next(n1,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >90</id><querystr><![CDATA[prog_line n1; Select n1 such that Next*(n1,n1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >91</id><querystr><![CDATA[prog_line n1,n2; Select n1 such that Next(n1,n2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >92</id><querystr><![CDATA[prog_line n1,n2; Select n1 such that Next*(n1,n2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >93</id><querystr><![CDATA[prog_line n1,n2; Select n2 such that Next(n1,n2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >94</id><querystr><![CDATA[prog_line n1,n2; Select n2 such that Next*(n1,n2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >95</id><querystr><![CDATA[prog_line n1,n2; Select <n1,n2> such that Next(n1,n2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Next="1" Typed="1" comment="check next" >96</id><querystr><![CDATA[prog_line n1,n2; Select <n1,n2> such that Next*(n1,n2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

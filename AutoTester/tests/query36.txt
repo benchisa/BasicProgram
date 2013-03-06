@@ -12,8 +12,8 @@ true
 5000
 100 - follows , uses :: follows (known,unknown) and uses (unknown,unknown)
 stmt s1,s2;variable v1;
-Select s2   such that  Follows (4 , s2 ) and Uses ( s2 , v1 ) ;
-5
+Select s2   such that  Follows (6 , s2 ) and Uses ( s2 , v1 ) ;
+7
 5000
 101 - follows* , uses :: follows* (known,unknown) and uses (unknown,unknown)
 stmt s1,s2;variable v1;

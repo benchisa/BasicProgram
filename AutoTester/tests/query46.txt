@@ -1,0 +1,52 @@
+100
+cat: Modifies Queries
+1 - Modifies, Typed :: check Modifies assignment
+assign a1; variable v1; 
+Select a1 such that Modifies(a1,v1);
+
+5000
+2 - Modifies, Typed :: check Modifies while
+while w1; variable v1;
+Select w1 such that Modifies(w1,v1);
+
+5000
+3 - Modifies, Typed :: check Modifies if
+if i1; variable v1;
+Select i1 such that Modifies(i1,v1);
+
+5000
+4 - Modifies, Typed :: check Modifies call
+call c1; variable v1;
+Select c1 such that Modifies(c1,v1);
+
+5000
+5 - Modifies, Typed :: check Modifies procedure
+procedure p1; variable v1;
+Select p1 such that Modifies(p1,v1);
+
+5000
+6 - Modifies, Typed :: check Modifies assignment
+assign a1; variable v1; 
+Select v1 such that Modifies(a1,v1);
+
+5000
+7 - Modifies, Typed :: check Modifies while
+while w1; variable v1;
+Select v1 such that Modifies(w1,v1);
+
+5000
+8 - Modifies, Typed :: check Modifies if
+if i1; variable v1;
+Select v1 such that Modifies(i1,v1);
+
+5000
+9 - Modifies, Typed :: check Modifies call
+call c1; variable v1;
+Select v1 such that Modifies(c1,v1);
+
+5000
+10 - Modifies, Typed :: check Modifies procedure
+procedure p1; variable v1;
+Select v1 such that Modifies(p1,v1);
+
+5000

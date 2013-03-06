@@ -1,0 +1,482 @@
+100
+cat: Follows Queries
+1 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,1);
+
+5000
+2 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,8);
+
+5000
+3 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,27);
+
+5000
+4 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,28);
+
+5000
+5 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,1);
+
+5000
+6 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,8);
+
+5000
+7 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,27);
+
+5000
+8 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,28);
+
+5000
+9 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,29);
+
+5000
+10 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,35);
+
+5000
+11 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,40);
+
+5000
+12 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,43);
+
+5000
+13 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,29);
+
+5000
+14 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,35);
+
+5000
+15 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,40);
+
+5000
+16 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,43);
+
+5000
+17 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,59);
+
+5000
+18 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,77);
+
+5000
+19 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,78);
+
+5000
+20 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,82);
+
+5000
+21 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,59);
+
+5000
+22 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,77);
+
+5000
+23 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,78);
+
+5000
+24 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,82);
+
+5000
+25 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,99);
+
+5000
+26 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,101);
+
+5000
+27 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,118);
+
+5000
+28 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,120);
+
+5000
+29 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,99);
+
+5000
+30 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,101);
+
+5000
+31 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,118);
+
+5000
+32 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,120);
+
+5000
+33 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,121);
+
+5000
+34 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,121);
+
+5000
+35 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,122);
+
+5000
+36 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,122);
+
+5000
+37 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,124);
+
+5000
+38 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,124);
+
+5000
+39 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,126);
+
+5000
+40 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,126);
+
+5000
+41 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,128);
+
+5000
+42 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,128);
+
+5000
+43 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,134);
+
+5000
+44 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,134);
+
+5000
+45 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(1,s1);
+
+5000
+46 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(8,s1);
+
+5000
+47 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(27,s1);
+
+5000
+48 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(28,s1);
+
+5000
+49 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(1,s1);
+
+5000
+50 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(8,s1);
+
+5000
+51 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(27,s1);
+
+5000
+52 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(28,s1);
+
+5000
+53 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(29,s1);
+
+5000
+54 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(35,s1);
+
+5000
+55 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(40,s1);
+
+5000
+56 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(43,s1);
+
+5000
+57 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(29,s1);
+
+5000
+58 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(35,s1);
+
+5000
+59 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(40,s1);
+
+5000
+60 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(43,s1);
+
+5000
+61 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(59,s1);
+
+5000
+62 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(77,s1);
+
+5000
+63 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(78,s1);
+
+5000
+64 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(82,s1);
+
+5000
+65 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(59,s1);
+
+5000
+66 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(77,s1);
+
+5000
+67 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(78,s1);
+
+5000
+68 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(82,s1);
+
+5000
+69 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(99,s1);
+
+5000
+70 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(101,s1);
+
+5000
+71 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(118,s1);
+
+5000
+72 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(120,s1);
+
+5000
+73 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(99,s1);
+
+5000
+74 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(101,s1);
+
+5000
+75 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(118,s1);
+
+5000
+76 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(120,s1);
+
+5000
+77 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(121,s1);
+
+5000
+78 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(121,s1);
+
+5000
+79 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(122,s1);
+
+5000
+80 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(122,s1);
+
+5000
+81 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(124,s1);
+
+5000
+82 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(124,s1);
+
+5000
+83 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(126,s1);
+
+5000
+84 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(126,s1);
+
+5000
+85 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(128,s1);
+
+5000
+86 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(128,s1);
+
+5000
+87 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(134,s1);
+
+5000
+88 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(134,s1);
+
+5000
+89 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows(s1,s1);
+
+5000
+90 - Follows, Typed :: check follows
+stmt s1;
+Select s1 such that Follows*(s1,s1);
+
+5000
+91 - Follows, Typed :: check follows
+stmt s1,s2;
+Select s1 such that Follows(s1,s2);
+
+5000
+92 - Follows, Typed :: check follows
+stmt s1,s2;
+Select s1 such that Follows*(s1,s2);
+
+5000
+93 - Follows, Typed :: check follows
+stmt s1,s2;
+Select s2 such that Follows(s1,s2);
+
+5000
+94 - Follows, Typed :: check follows
+stmt s1,s2;
+Select s2 such that Follows*(s1,s2);
+
+5000
+95 - Follows, Typed :: check follows
+stmt s1,s2;
+Select <s1,s2> such that Follows(s1,s2);
+
+5000
+96 - Follows, Typed :: check follows
+stmt s1,s2;
+Select <s1,s2> such that Follows*(s1,s2);
+
+5000

@@ -1,81 +1,1513 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>156.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>1263.000000</parsing_time_taken>
 </info>
 <queries>
-<category name=" such that with complex">
+<category name=" Uses Queries">
 <query>
-<id Follows="1" Followsstar="1" Uses="1" Modifies="1" Parent="1" Parentstar="1" comment="All" >1</id><querystr><![CDATA[stmt s1,s2,s3,s4; assign a1,a2; constant c1; while w1,w2; if i1,i2; Select BOOLEAN such that Follows*(s3,s4) with c1.value=1 and w1.stmt#=s1.stmt# such that Parent(w1,s2) and Uses(w1, "apple") and Modifies(s2, "gummy") and Parent*(w2,s3) and Follows(1,2) with i1.stmt#=36 and i2.stmt#=21;]]></querystr>
-<stuans>false</stuans>
-<correct></correct>
-<time_taken>156.000000</time_taken>
-<failed>
-<missing></missing>
-<additional>false</additional>
-<summary>
-<expected>0</expected>
-<matched>0</matched>
-<missing>0</missing>
-<additional>1</additional>
-</summary>
-</failed>
-</query>
-<query>
-<id Follows="1" Followsstar="1" Uses="1" Modifies="1" Parent="1" Parentstar="1" comment="All" >2</id><querystr><![CDATA[stmt s1,s2,s3,s4; assign a1,a2; constant c1; while w1,w2; if i1,i2; Select s2 such that Follows*(s3,s4) with c1.value=1 and w1.stmt#=s1.stmt# such that Parent(w1,s2) and Uses(w1, "apple") and Modifies(s2, "gummy") and Parent*(w2,s3) and Follows(1,2) with i1.stmt#=36 and i2.stmt#=21;]]></querystr>
+<id Uses="1" Typed="1" comment="check Uses assignment" >1</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"apple");]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>156.000000</time_taken>
+<time_taken>15.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id Follows="1" Followsstar="1" Uses="1" Modifies="1" Parent="1" Parentstar="1" comment="All" >3</id><querystr><![CDATA[stmt s1,s2,s3,s4; assign a1,a2; constant c1; while w1,w2; if i1,i2; Select <s2,w1> such that Follows*(s3,s4) with c1.value=1 and w1.stmt#=s1.stmt# such that Parent(w1,s2) and Uses(w1, "apple") and Modifies(s2, "gummy") and Parent*(w2,s3) and Follows(1,2) with i1.stmt#=36 and i2.stmt#=21;]]></querystr>
+<id Uses="1" Typed="1" comment="check Uses assignment" >2</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"banana");]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>172.000000</time_taken>
+<time_taken>16.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id Follows="1" Followsstar="1" Uses="1" Modifies="1" Parent="1" Parentstar="1" comment="All" >4</id><exception/>
-<querystr><![CDATA[stmt s1,s2,s3,s4; assign a1,a2,a3,a4; Select s1 such that Follows(s1,s2) and Follows*(s2,s3) and Follows*(s3,s4) and Uses(a1,"apple") and Modifies(a2,"apple") and Parent*(s3,a2) and Parent(s4,a1);]]></querystr>
+<id Uses="1" Typed="1" comment="check Uses assignment" >3</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"carrot");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>16.000000</time_taken>
+<passed/>
 </query>
 <query>
-<id Follows="1" Followsstar="1" Uses="1" Modifies="1" Parent="1" Parentstar="1" comment="All" >5</id><querystr><![CDATA[stmt s1,s2,s3,s4; assign a1,a2,a3,a4; Select <a1,s1> such that Follows(s1,s2) and Follows*(s2,s3) and Follows*(s3,s4) and Uses(a1,"apple") and Modifies(a2,"apple") and Parent*(s3,a2) and Parent(s4,a1);]]></querystr>
+<id Uses="1" Typed="1" comment="check Uses assignment" >4</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"donut");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >5</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"egg");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>15.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >6</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"fish");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >7</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"gummy");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >8</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"ham");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >9</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"innard");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >10</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"jam");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >11</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"kimchi");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >12</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"leek");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >13</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"mango");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >14</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"nachos");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >15</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"orange");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >16</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"pear");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >17</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"aeroplane");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >18</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"basin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >19</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"cloud");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >20</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"door");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >21</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"elevator");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >22</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"fan");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >23</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"garbage");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >24</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"hanger");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >25</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"igloo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >26</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"jumper");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >27</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"keep");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >28</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"ant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >29</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"beetle");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >30</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"cockroach");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >31</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"dinosaur");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >32</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"elephant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >33</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"fox");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >34</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"goat");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >35</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"hamster");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >36</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"jaguar");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >37</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"kangeroo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >38</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"lion");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >39</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"monkey");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >40</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"newt");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >41</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"owl");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >42</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"penguin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >43</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"quail");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >44</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"apple");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >45</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"banana");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >46</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"carrot");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >47</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"donut");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >48</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"egg");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >49</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"fish");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >50</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"gummy");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >51</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"ham");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >52</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"innard");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >53</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"jam");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >54</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"kimchi");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >55</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"leek");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >56</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"mango");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >57</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"nachos");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >58</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"orange");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >59</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"pear");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >60</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"aeroplane");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >61</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"basin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >62</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"cloud");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >63</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"door");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >64</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"elevator");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >65</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"fan");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >66</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"garbage");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >67</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"hanger");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >68</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"igloo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >69</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"jumper");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >70</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"keep");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >71</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"ant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >72</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"beetle");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >73</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"cockroach");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >74</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"dinosaur");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >75</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"elephant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >76</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"fox");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >77</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"goat");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >78</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"hamster");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >79</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"jaguar");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >80</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"kangeroo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >81</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"lion");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >82</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"monkey");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >83</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"newt");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >84</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"owl");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >85</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"penguin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >86</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"quail");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >87</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"apple");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >88</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"banana");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >89</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"carrot");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >90</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"donut");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >91</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"egg");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >92</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"fish");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >93</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"gummy");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >94</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"ham");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >95</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"innard");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >96</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"jam");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >97</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"kimchi");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >98</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"leek");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >99</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"mango");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >100</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"nachos");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >101</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"orange");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >102</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"pear");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >103</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"aeroplane");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >104</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"basin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >105</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"cloud");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >106</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"door");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >107</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"elevator");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >108</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"fan");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >109</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"garbage");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >110</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"hanger");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >111</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"igloo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >112</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"jumper");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >113</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"keep");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >114</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"ant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >115</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"beetle");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >116</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"cockroach");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >117</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"dinosaur");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >118</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"elephant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >119</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"fox");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >120</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"goat");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >121</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"hamster");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >122</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"jaguar");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >123</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"kangeroo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >124</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"lion");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >125</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"monkey");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >126</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"newt");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >127</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"owl");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >128</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"penguin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >129</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"quail");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >130</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"apple");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >131</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"banana");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >132</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"carrot");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >133</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"donut");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >134</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"egg");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >135</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"fish");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >136</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"gummy");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >137</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"ham");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >138</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"innard");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >139</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"jam");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >140</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"kimchi");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >141</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"leek");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >142</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"mango");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >143</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"nachos");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >144</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"orange");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >145</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"pear");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >146</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"aeroplane");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >147</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"basin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >148</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"cloud");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >149</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"door");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >150</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"elevator");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >151</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"fan");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >152</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"garbage");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >153</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"hanger");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >154</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"igloo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >155</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"jumper");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >156</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"keep");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >157</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"ant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >158</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"beetle");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >159</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"cockroach");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >160</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"dinosaur");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >161</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"elephant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >162</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"fox");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >163</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"goat");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >164</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"hamster");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >165</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"jaguar");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >166</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"kangeroo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >167</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"lion");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >168</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"monkey");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >169</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"newt");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >170</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"owl");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >171</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"penguin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >172</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"quail");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >173</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"apple");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >174</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"banana");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >175</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"carrot");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >176</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"donut");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >177</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"egg");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >178</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"fish");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >179</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"gummy");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >180</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"ham");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>110.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >181</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"innard");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >182</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"jam");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >183</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"kimchi");]]></querystr>
 <stuans></stuans>
 <correct></correct>
 <time_taken>125.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id Follows="1" Followsstar="1" Uses="1" Modifies="1" Parent="1" Parentstar="1" comment="All" >6</id><exception/>
-<querystr><![CDATA[stmt s1,s2,s3,s4; assign a1,a2,a3,a4; Select <s1,s2,s3> such that Follows(s1,s2) and Follows*(s2,s3) and Follows*(s3,s4) and Uses(a1,"apple") and Modifies(a2,"apple") and Parent*(s3,a2) and Parent(s4,a1);]]></querystr>
-</query>
-<query>
-<id Follows="1" Followsstar="1" Uses="1" Modifies="1" Parent="1" Parentstar="1" comment="All" >7</id><querystr><![CDATA[stmt s1,s2,s3,s4; assign a1,a2,a3,a4; variable v1,v2; Select <s1,s2,s3> such that Follows(s1,s2) and Follows*(s2,s3) with v1.varName="kimchi" and v2.varName="leek" such that Follows*(s3,s4) and Uses(a1,v1) and Modifies(a2,"apple") and Parent*(s3,a2) and Parent(s4,a1);]]></querystr>
+<id Uses="1" Typed="1" comment="check Uses procedure" >184</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"leek");]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>156.000000</time_taken>
+<time_taken>94.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id Follows="1" Followsstar="1" Uses="1" Modifies="1" Parent="1" Parentstar="1" Calls="1" Callsstar="1" Next="1" Nextstar="1" comment="All" >8</id><querystr><![CDATA[stmt s1,s2,s3,s4; assign a1,a2,a3,a4; procedure p1,p2,p3; prog_line pg1,pg2,pg3; variable v1,v2; Select s1 such that Uses(a1,"apple") and Uses(p1,"apple") and Modifies(p1,v1) and Modifies(a4,v2) and Modifies(pg2,v2) and Next(pg1,pg2) and Calls(p1,p2) and Calls*(p2,p3) and Parent(s1,a2) and Parent*(s2,s1) and Follows(a2,a3) and Follows*(a3,a4) and Next(pg2,pg3) and Next*(pg3,38);]]></querystr>
+<id Uses="1" Typed="1" comment="check Uses procedure" >185</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"mango");]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>249.000000</time_taken>
+<time_taken>94.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id Follows="1" Followsstar="1" Uses="1" Modifies="1" Parent="1" Parentstar="1" Calls="1" Callsstar="1" Next="1" Nextstar="1" comment="All" >9</id><querystr><![CDATA[stmt s1,s2,s3,s4; assign a1,a2,a3,a4; procedure p1,p2,p3; prog_line pg1,pg2,pg3; variable v1,v2; Select <v1,s1,p1> such that Uses(a1,"apple") and Uses(p1,"apple") and Modifies(p1,v1) and Modifies(a4,v2) and Modifies(pg2,v2) and Next(pg1,pg2) and Calls(p1,p2) and Calls*(p2,p3) and Parent(s1,a2) and Parent*(s2,s1) and Follows(a2,a3) and Follows*(a3,a4) and Next(pg2,pg3) and Next*(pg3,38);]]></querystr>
+<id Uses="1" Typed="1" comment="check Uses procedure" >186</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"nachos");]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>250.000000</time_taken>
+<time_taken>109.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id Follows="1" Followsstar="1" Uses="1" Modifies="1" Parent="1" Parentstar="1" Calls="1" Callsstar="1" Next="1" Nextstar="1" comment="All" >10</id><querystr><![CDATA[stmt s1,s2,s3,s4; assign a1,a2,a3,a4; procedure p1,p2,p3; prog_line pg1,pg2,pg3; variable v1,v2; Select <s1,a1,pg1> such that Uses(a1,"apple") with v1.varName="innard" and p1.procName="xylo" such that Uses(p1,"apple") and Modifies(p1,v1) and Modifies(a4,v2) and Modifies(pg2,v2) and Next(pg1,pg2) and Calls(p1,p2) and Calls*(p2,p3) and Parent(s1,a2) and Parent*(s2,s1) and Follows(a2,a3) and Follows*(a3,a4) and Next(pg2,pg3) and Next*(pg3,38);]]></querystr>
+<id Uses="1" Typed="1" comment="check Uses procedure" >187</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"orange");]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>281.000000</time_taken>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >188</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"pear");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >189</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"aeroplane");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >190</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"basin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>110.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >191</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"cloud");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >192</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"door");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >193</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"elevator");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >194</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"fan");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>110.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >195</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"garbage");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >196</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"hanger");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>125.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >197</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"igloo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >198</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"jumper");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >199</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"keep");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >200</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"ant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >201</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"beetle");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >202</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"cockroach");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>110.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >203</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"dinosaur");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>125.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >204</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"elephant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>110.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >205</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"fox");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >206</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"goat");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>125.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >207</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"hamster");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>125.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >208</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"jaguar");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >209</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"kangeroo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >210</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"lion");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>124.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >211</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"monkey");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>140.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >212</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"newt");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>141.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >213</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"owl");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>110.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >214</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"penguin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>110.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >215</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"quail");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>125.000000</time_taken>
 <passed/>
 </query>
 </category>

@@ -1,102 +1,332 @@
-100
-cat:such that and affects
-146 - affects, uses :: affects (known,known) and uses (unknown,unknown)
-variable v1;
-Select BOOLEAN   such that  Affects (13 ,18 ) and Uses (18 , v1 ) ;
-true
-5000
-147 - affects*, uses :: affects* (known,known) and uses (unknown,unknown)
-variable v1;
-Select BOOLEAN   such that  Affects* (13 ,18 ) and Uses (13 , v1 ) ;
-true
-5000
-148 - affects, uses :: affects (known,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Affects (13 , s2 ) and Uses (13 , v1 ) ;
+66
+cat: Calls Queries
+1 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Alice");
 
 5000
-149 - affects*, uses :: affects* (known,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Affects* (13 , s2 ) and Uses ( s2 , v1 ) ;
+2 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Bob");
 
 5000
-150 - affects, uses :: affects (unknown,known) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects ( s1 ,18 ) and Uses ( s1 , v1 ) ;
+3 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Charlie");
 
 5000
-151 - affects*, uses :: affects* (unknown,known) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects* ( s1 ,18 ) and Uses ( s1 , v1 ) ;
+4 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Danny");
 
 5000
-152 - affects, uses :: affects (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects ( s1 , s2 ) and Uses ( s1 , v1 ) ;
+5 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Eliza");
 
 5000
-153 - affects*, uses :: affects* (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
+6 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Fred");
 
 5000
-154 - affects, uses :: affects (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Affects ( s1 , s2 ) and Uses ( s2 , v1 ) ;
+7 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Goneril");
 
 5000
-155 - affects*, uses :: affects* (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Affects* ( s1 , s2 ) and Uses ( s2 , v1 ) ;
+8 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Henry");
 
 5000
-156 - affects, uses :: affects (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects ( s1 , s1 ) and Uses ( s1 , v1 ) ;
+9 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Illidan");
 
 5000
-157 - affects*, uses :: affects* (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects* ( s1 , s1 ) and Uses ( s1 , v1 ) ;
+10 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"James");
 
 5000
-195 - affects , parent* :: affects (known,known) and parent* (unknown,unknown)
-stmt s1,s2;
-Select BOOLEAN   such that  Affects (13 ,18 ) and Parent* (18 , s1 ) ;
-true
-5000
-196 -  affect* , parent* :: affects* (known,known) and parent* (unknown,unknown)
-stmt s1,s2;
-Select BOOLEAN   such that  Affects* (13 ,18 ) and Parent* (18 , s1 ) ;
-true
-5000
-197 - affects, parent* :: affects (known,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s2   such that  Affects (13 , s2 ) and Parent* ( s1 , s2 ) ;
+11 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Kingsley");
 
 5000
-198 - affects*, parent* :: affects* (known,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s2   such that  Affects* (13 , s2 ) and Parent* ( s1 , s2 ) ;
+12 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Lucas");
 
 5000
-199 - affects, parent* :: affects (unknown,known) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Affects ( s1 ,18 ) and Parent* ( s1 , s2 ) ;
+13 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Merril");
 
 5000
-200 - affects*, parent* :: affects* (unknown,known) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Affects* ( s1 ,18 ) and Parent* ( s1 , s2 ) ;
+14 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Nancy");
 
 5000
-201 - affects, parent* :: affects (unknown,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Affects ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
+15 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Oppi");
 
 5000
-202 - affects*, parent* :: affects* (unknown,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Affects* ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
+16 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Alice");
+
+5000
+17 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Bob");
+
+5000
+18 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Charlie");
+
+5000
+19 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Danny");
+
+5000
+20 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Eliza");
+
+5000
+21 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Fred");
+
+5000
+22 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Goneril");
+
+5000
+23 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Henry");
+
+5000
+24 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Illidan");
+
+5000
+25 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"James");
+
+5000
+26 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Kingsley");
+
+5000
+27 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Lucas");
+
+5000
+28 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Merril");
+
+5000
+29 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Nancy");
+
+5000
+30 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Oppi");
+
+5000
+31 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Alice",p2);
+
+5000
+32 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Bob",p2);
+
+5000
+33 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Charlie",p2);
+
+5000
+34 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Danny",p2);
+
+5000
+35 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Eliza",p2);
+
+5000
+36 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Fred",p2);
+
+5000
+37 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Goneril",p2);
+
+5000
+38 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Henry",p2);
+
+5000
+39 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Illidan",p2);
+
+5000
+40 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("James",p2);
+
+5000
+41 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Kingsley",p2);
+
+5000
+42 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Lucas",p2);
+
+5000
+43 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Merril",p2);
+
+5000
+44 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Nancy",p2);
+
+5000
+45 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Oppi",p2);
+
+5000
+46 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Alice",p2);
+
+5000
+47 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Bob",p2);
+
+5000
+48 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Charlie",p2);
+
+5000
+49 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Danny",p2);
+
+5000
+50 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Eliza",p2);
+
+5000
+51 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Fred",p2);
+
+5000
+52 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Goneril",p2);
+
+5000
+53 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Henry",p2);
+
+5000
+54 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Illidan",p2);
+
+5000
+55 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("James",p2);
+
+5000
+56 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Kingsley",p2);
+
+5000
+57 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Lucas",p2);
+
+5000
+58 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Merril",p2);
+
+5000
+59 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Nancy",p2);
+
+5000
+60 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Oppi",p2);
+
+5000
+61 - Calls, Typed :: Check call loops (callception)
+procedure p1,p2;
+Select p1 such that Calls(p1,p2);
+
+5000
+62 - Calls, Typed :: Check call loops (callception)
+procedure p1,p2;
+Select p2 such that Calls(p1,p2);
+
+5000
+63 - Calls, Typed :: Check call loops (callception)
+procedure p1;
+Select p1 such that Calls(p1,p1);
+
+5000
+64 - Calls, Typed :: Check call loops (callception)
+procedure p1,p2;
+Select p1 such that Calls*(p1,p2);
+
+5000
+65 - Calls, Typed :: Check call loops (callception)
+procedure p1,p2;
+Select p2 such that Calls*(p1,p2);
+
+5000
+66 - Calls, Typed :: Check call loops (callception)
+procedure p1;
+Select p1 such that Calls*(p1,p1);
 
 5000

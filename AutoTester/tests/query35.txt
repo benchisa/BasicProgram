@@ -118,7 +118,7 @@ gummy
 84 - modifies , uses :: uses (known_call,unknown_var) and modifies (known,unknown)
 variable v1;
 Select v1   such that  Uses (8 , v1 ) and Modifies (8 , v1 ) ;
-leek,kimchi,apple,ingredients,banana,a,b,c
+leek,kimchi,meat,apple,ingredients,banana,a,b,c
 5000
 86 - modifies , uses :: uses (known_proc,unknown_var) and modifies (known,unknown)
 variable v1;
@@ -168,7 +168,7 @@ Select c   such that  Uses ( c , v1 ) and Modifies ( c , v1 ) ;
 95 - modifies , uses :: modifies (unknown_call,unknown_var) and uses (unknown,unknown)
 call c; variable v1;
 Select v1   such that  Modifies ( c , v1 ) and Uses ( c , v1 ) ;
-meat,ingredients,kimchi,banana,leek,a,b,c
+meat,apple,ingredients,kimchi,banana,leek,a,b,c
 5000
 96 - modifies , uses :: uses (unknown_proc,unknown_var) and modifies (unknown,unknown)
 procedure p1; variable v1;

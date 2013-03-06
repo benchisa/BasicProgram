@@ -1,0 +1,80 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>CS3202</name><parsing_time_taken>1372.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" Uses Queries">
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >1</id><querystr><![CDATA[assign a1; variable v1;  Select a1 such that Uses(a1,v1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >2</id><querystr><![CDATA[while w1; variable v1; Select w1 such that Uses(w1,v1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >3</id><querystr><![CDATA[if i1; variable v1; Select i1 such that Uses(i1,v1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >4</id><querystr><![CDATA[call c1; variable v1; Select c1 such that Uses(c1,v1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >5</id><querystr><![CDATA[procedure p1; variable v1; Select p1 such that Uses(p1,v1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >6</id><querystr><![CDATA[assign a1; variable v1;  Select v1 such that Uses(a1,v1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>15.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >7</id><querystr><![CDATA[while w1; variable v1; Select v1 such that Uses(w1,v1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>15.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >8</id><querystr><![CDATA[if i1; variable v1; Select v1 such that Uses(i1,v1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >9</id><querystr><![CDATA[call c1; variable v1; Select v1 such that Uses(c1,v1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >10</id><querystr><![CDATA[procedure p1; variable v1; Select v1 such that Uses(p1,v1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

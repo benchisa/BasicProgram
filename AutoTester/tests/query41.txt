@@ -1,167 +1,142 @@
 100
-cat: such that and next
-216 - next , follows* :: next (known,unknown) and follows* (unknown,unknown)
-stmt s1,s2;
-Select s2   such that  Next (21 , s2 ) and Follows* (21 , s2 ) ;
+cat: Pattern Queries
+1 - all, Typed :: check pattern
+assign a1; variable v1;
+Select a1 pattern a1(v1,_);
 
 5000
-217 - next* , follows* :: next* (known,unknown) and follows* (unknown,unknown)
-stmt s1,s2;
-Select s2   such that  Next* (21 , s2 ) and Follows* (21 , s2 ) ;
+2 - all, Typed :: check pattern
+assign a1; variable v1;
+Select a1 pattern a1(v1,"banana");
 
 5000
-218 - next , follows* :: next (unknown,known) and follows* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next ( s1 ,24 ) and Follows* ( s1 ,24 ) ;
+3 - all, Typed :: check pattern
+assign a1; variable v1;
+Select a1 pattern a1(v1,_"banana"_);
 
 5000
-219 - next* , follows* :: next* (unknown,known) and follows* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next* ( s1 ,24 ) and Follows* ( s1 ,24 ) ;
+4 - all, Typed :: check pattern
+assign a1; variable v1;
+Select a1 pattern a1(v1,"elephant*fish");
 
 5000
-220 - next , follows* :: next (unknown,unknown) and follows* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next ( s1 , s2 ) and Follows* ( s1 , s2 ) ;
+5 - all, Typed :: check pattern
+assign a1; variable v1;
+Select a1 pattern a1(v1,_"elephant*fish"_);
 
 5000
-221 - next* , follows* :: next* (unknown,unknown) and follows* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next* ( s1 , s2 ) and Follows* ( s1 , s2 ) ;
+6 - all, Typed :: check pattern
+assign a1; variable v1;
+Select a1 pattern a1(v1,"fish*fish");
 
 5000
-222 - next , follows* :: next (unknown,unknown) and follows* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next ( s1 , s1 ) and Follows* ( s1 , s1 ) ;
+7 - all, Typed :: check pattern
+assign a1; variable v1;
+Select a1 pattern a1(v1,_"fish/fish"_);
 
 5000
-223 - next* , follows* :: next* (unknown,unknown) and follows* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next* ( s1 , s1 ) and Follows* ( s1 , s1 ) ;
+8 - all, Typed :: check pattern
+assign a1; variable v1;
+Select a1 pattern a1(v1,_"ham/banana"_);
 
 5000
-224 - next , follows* :: next (unknown,unknown) and follows* (unknown,unknown)
-stmt s1,s2;
-Select s2   such that  Next ( s1 , s2 ) and Follows* ( s1 , s2 ) ;
+9 - all, Typed :: check pattern
+assign a1; variable v1;
+Select a1 pattern a1(v1,_"egg+fish"_);
 
 5000
-185 - next, parent* :: next (known,known) and parent* (unknown,unknown)
-
-Select BOOLEAN   such that  Next (21 ,22 ) and Parent* (21 ,22 ) ;
-true
-5000
-186 - next*, parent* :: next* (known,known) and parent* (unknown,unknown)
-
-Select BOOLEAN   such that  Next* (21 ,24 ) and Parent* (21 ,22 ) ;
-true
-5000
-187 - next, parent* :: next (known,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s2   such that  Next (21 , s2 ) and Parent* (21 , s2 ) ;
+10 - all, Typed :: check pattern
+assign a1; variable v1;
+Select a1 pattern a1(v1,_"orange/carrot"_);
 
 5000
-188 - next*, parent* :: next* (known,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s2   such that  Next* (21 , s2 ) and Parent* (21 , s2 ) ;
+11 - all, Typed :: check pattern
+assign a1; variable v1;
+Select <a1,v1> pattern a1(v1,_);
 
 5000
-189 - next, parent* :: next (unknown,known) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next ( s1 ,24 ) and Parent* ( s1 ,24 ) ;
+12 - all, Typed :: check pattern
+assign a1; variable v1;
+Select <a1,v1> pattern a1(v1,"banana");
 
 5000
-190 - next*, parent* :: next* (unknown,known) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next* ( s1 ,24 ) and Parent* ( s1 ,24 ) ;
+13 - all, Typed :: check pattern
+assign a1; variable v1;
+Select <a1,v1> pattern a1(v1,_"banana"_);
 
 5000
-191 - next, parent* :: next (unknown,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
+14 - all, Typed :: check pattern
+assign a1; variable v1;
+Select <a1,v1> pattern a1(v1,"elephant*fish");
 
 5000
-192 - next*, parent* :: next* (unknown,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next* ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
+15 - all, Typed :: check pattern
+assign a1; variable v1;
+Select <a1,v1> pattern a1(v1,_"elephant*fish"_);
 
 5000
-193 - next, parent* :: next (unknown,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next ( s1 , s1 ) and Parent* ( s1 , s1 ) ;
+16 - all, Typed :: check pattern
+assign a1; variable v1;
+Select <a1,v1> pattern a1(v1,"fish*fish");
 
 5000
-194 - next*, parent* :: next* (unknown,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Next* ( s1 , s1 ) and Parent* ( s1 , s1 ) ;
+17 - all, Typed :: check pattern
+assign a1; variable v1;
+Select <a1,v1> pattern a1(v1,_"fish/fish"_);
 
 5000
-134 - next, uses :: next (known,known) and uses (unknown,unknown)
-variable v1;
-Select BOOLEAN   such that  Next (21 ,22 ) and Uses (22 , v1 ) ;
-true
-5000
-135 - next*, uses :: next* (known,known) and uses (unknown,unknown)
-variable v1;
-Select BOOLEAN   such that  Next* (21 ,24 ) and Uses (24 , v1 ) ;
-true
-5000
-136 - next, uses :: next (known,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Next (21 , s2 ) and Uses (21 , v1 ) ;
+18 - all, Typed :: check pattern
+assign a1; variable v1;
+Select <a1,v1> pattern a1(v1,_"ham/banana"_);
 
 5000
-137 - next*, uses :: next* (known,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Next* (21 , s2 ) and Uses (21 , v1 ) ;
+19 - all, Typed :: check pattern
+assign a1; variable v1;
+Select <a1,v1> pattern a1(v1,_"egg+fish"_);
 
 5000
-138 - next, uses :: next (unknown,known) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Next ( s1 ,24 ) and Uses ( s1 , v1 ) ;
+20 - all, Typed :: check pattern
+assign a1; variable v1;
+Select <a1,v1> pattern a1(v1,_"orange/carrot"_);
 
 5000
-139 - next*, uses :: next* (unknown,known) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Next* ( s1 ,24 ) and Uses ( s1 , v1 ) ;
+21 - all, Typed :: check pattern
+if i1; variable v1;
+Select i1 pattern i1(v1,_,_);
 
 5000
-140 - next, uses :: next (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Next ( s1 , s2 ) and Uses ( s1 , v1 ) ;
+22 - all, Typed :: check pattern
+if i1; variable v1;
+Select v1 pattern i1(v1,_,_);
 
 5000
-141 - next*, uses :: next* (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Next* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
+23 - all, Typed :: check pattern
+if i1;
+Select i1 pattern i1("ham",_,_);
 
 5000
-142 - next, uses :: next (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Next ( s1 , s1 ) and Uses ( s1 , v1 ) ;
+24 - all, Typed :: check pattern
+if i1;
+Select i1 pattern i1("kangeroo",_,_);
 
 5000
-143 - next*, uses :: next* (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Next* ( s1 , s1 ) and Uses ( s1 , v1 ) ;
+25 - all, Typed :: check pattern
+while w1; variable v1;
+Select w1 pattern w1(v1,_);
 
 5000
-144 - next, uses :: next (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Next ( s1 , s2 ) and Uses ( s2 , v1 ) ;
+26 - all, Typed :: check pattern
+while w1; variable v1;
+Select v1 pattern w1(v1,_);
 
 5000
-145 - next*, uses :: next* (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Next* ( s1 , s2 ) and Uses ( s2 , v1 ) ;
+27 - all, Typed :: check pattern
+if w1;
+Select w1 pattern w1("aeroplane",_,_);
 
 5000
-214 - next , follows* :: next (known,known) and follows* (unknown,unknown)
+27 - all, Typed :: check pattern
+if w1;
+Select w1 pattern w1("ant",_,_);
 
-Select BOOLEAN   such that  Next (21 ,22 ) and Follows* (21 ,22 ) ;
-true
-5000
-215 - next* , follows* :: next* (known,known) and follows* (unknown,unknown)
-
-Select BOOLEAN   such that  Next* (21 ,24 ) and Follows* (21 ,24 ) ;
-true
 5000

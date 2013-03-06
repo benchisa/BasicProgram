@@ -1,0 +1,1515 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>CS3202</name><parsing_time_taken>1404.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" Modifies Queries">
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >1</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"apple");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >2</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"banana");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >3</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"carrot");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >4</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"donut");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >5</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"egg");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>15.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >6</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"fish");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >7</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"gummy");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >8</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"ham");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >9</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"innard");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >10</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"jam");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >11</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"kimchi");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >12</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"leek");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >13</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"mango");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >14</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"nachos");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >15</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"orange");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >16</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"pear");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >17</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"aeroplane");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >18</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"basin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >19</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"cloud");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >20</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"door");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >21</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"elevator");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >22</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"fan");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >23</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"garbage");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >24</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"hanger");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >25</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"igloo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >26</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"jumper");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >27</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"keep");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >28</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"ant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >29</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"beetle");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >30</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"cockroach");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >31</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"dinosaur");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >32</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"elephant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >33</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"fox");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >34</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"goat");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >35</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"hamster");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >36</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"jaguar");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >37</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"kangeroo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >38</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"lion");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >39</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"monkey");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >40</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"newt");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >41</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"owl");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >42</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"penguin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >43</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"quail");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >44</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"apple");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >45</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"banana");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >46</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"carrot");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >47</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"donut");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >48</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"egg");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >49</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"fish");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >50</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"gummy");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >51</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"ham");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >52</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"innard");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >53</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"jam");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >54</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"kimchi");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >55</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"leek");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >56</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"mango");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >57</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"nachos");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >58</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"orange");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >59</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"pear");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >60</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"aeroplane");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >61</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"basin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >62</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"cloud");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >63</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"door");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >64</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"elevator");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >65</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"fan");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >66</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"garbage");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >67</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"hanger");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >68</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"igloo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >69</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"jumper");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >70</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"keep");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >71</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"ant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >72</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"beetle");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >73</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"cockroach");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >74</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"dinosaur");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >75</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"elephant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >76</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"fox");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >77</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"goat");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >78</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"hamster");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >79</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"jaguar");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >80</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"kangeroo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >81</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"lion");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >82</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"monkey");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >83</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"newt");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >84</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"owl");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >85</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"penguin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >86</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"quail");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >87</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"apple");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >88</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"banana");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >89</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"carrot");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >90</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"donut");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >91</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"egg");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >92</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"fish");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >93</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"gummy");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >94</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"ham");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >95</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"innard");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >96</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"jam");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >97</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"kimchi");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >98</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"leek");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >99</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"mango");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >100</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"nachos");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >101</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"orange");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >102</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"pear");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >103</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"aeroplane");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >104</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"basin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >105</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"cloud");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >106</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"door");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>156.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >107</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"elevator");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >108</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"fan");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >109</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"garbage");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >110</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"hanger");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >111</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"igloo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >112</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"jumper");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >113</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"keep");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >114</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"ant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >115</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"beetle");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >116</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"cockroach");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >117</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"dinosaur");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >118</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"elephant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >119</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"fox");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >120</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"goat");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >121</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"hamster");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >122</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"jaguar");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >123</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"kangeroo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >124</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"lion");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >125</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"monkey");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >126</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"newt");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >127</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"owl");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >128</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"penguin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >129</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"quail");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >130</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"apple");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >131</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"banana");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >132</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"carrot");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >133</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"donut");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >134</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"egg");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >135</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"fish");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >136</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"gummy");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >137</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"ham");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >138</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"innard");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >139</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"jam");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >140</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"kimchi");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >141</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"leek");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >142</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"mango");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >143</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"nachos");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >144</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"orange");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >145</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"pear");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >146</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"aeroplane");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >147</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"basin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >148</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"cloud");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >149</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"door");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >150</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"elevator");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >151</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"fan");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >152</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"garbage");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >153</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"hanger");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >154</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"igloo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >155</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"jumper");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >156</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"keep");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >157</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"ant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >158</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"beetle");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >159</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"cockroach");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >160</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"dinosaur");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >161</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"elephant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >162</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"fox");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >163</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"goat");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >164</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"hamster");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >165</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"jaguar");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >166</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"kangeroo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >167</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"lion");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >168</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"monkey");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>110.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >169</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"newt");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >170</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"owl");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >171</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"penguin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>110.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >172</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"quail");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >173</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"apple");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >174</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"banana");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >175</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"carrot");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >176</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"donut");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >177</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"egg");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >178</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"fish");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >179</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"gummy");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >180</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"ham");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >181</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"innard");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>110.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >182</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"jam");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >183</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"kimchi");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >184</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"leek");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >185</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"mango");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >186</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"nachos");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >187</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"orange");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >188</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"pear");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >189</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"aeroplane");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >190</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"basin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>187.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >191</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"cloud");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>110.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >192</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"door");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >193</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"elevator");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >194</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"fan");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >195</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"garbage");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >196</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"hanger");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >197</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"igloo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >198</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"jumper");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>110.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >199</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"keep");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >200</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"ant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >201</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"beetle");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >202</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"cockroach");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >203</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"dinosaur");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >204</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"elephant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >205</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"fox");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >206</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"goat");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >207</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"hamster");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >208</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"jaguar");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>187.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >209</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"kangeroo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>110.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >210</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"lion");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>110.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >211</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"monkey");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>125.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >212</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"newt");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>125.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >213</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"owl");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>125.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >214</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"penguin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>125.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >215</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"quail");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>110.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

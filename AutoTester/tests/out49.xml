@@ -1,0 +1,892 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>CS3202</name><parsing_time_taken>1419.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" Parent Query">
+<query>
+<id Parent="1" Typed="1" comment="check parent" >1</id><querystr><![CDATA[stmt s1; Select s1 such that Parent(7,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>15.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >2</id><querystr><![CDATA[stmt s1; Select s1 such that Parent*(7,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >3</id><querystr><![CDATA[stmt s1; Select s1 such that Parent(9,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >4</id><querystr><![CDATA[stmt s1; Select s1 such that Parent*(9,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >5</id><querystr><![CDATA[stmt s1; Select s1 such that Parent(13,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >6</id><querystr><![CDATA[stmt s1; Select s1 such that Parent*(13,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >7</id><querystr><![CDATA[stmt s1; Select s1 such that Parent(15,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >8</id><querystr><![CDATA[stmt s1; Select s1 such that Parent*(15,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >9</id><querystr><![CDATA[stmt s1; Select s1 such that Parent(17,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >10</id><querystr><![CDATA[stmt s1; Select s1 such that Parent*(17,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>15.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >11</id><querystr><![CDATA[stmt s1; Select s1 such that Parent(22,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >12</id><querystr><![CDATA[stmt s1; Select s1 such that Parent*(22,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >13</id><querystr><![CDATA[stmt s1; Select s1 such that Parent(23,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >14</id><querystr><![CDATA[stmt s1; Select s1 such that Parent*(23,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >15</id><querystr><![CDATA[stmt s1; Select s1 such that Parent(29,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >16</id><querystr><![CDATA[stmt s1; Select s1 such that Parent*(29,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >17</id><querystr><![CDATA[stmt s1; Select s1 such that Parent(30,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >18</id><querystr><![CDATA[stmt s1; Select s1 such that Parent*(30,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >19</id><querystr><![CDATA[stmt s1; Select s1 such that Parent(36,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >20</id><querystr><![CDATA[stmt s1; Select s1 such that Parent*(36,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >21</id><querystr><![CDATA[stmt s1; Select s1 such that Parent(41,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >22</id><querystr><![CDATA[stmt s1; Select s1 such that Parent*(41,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >23</id><querystr><![CDATA[stmt s1; Select s1 such that Parent(48,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >24</id><querystr><![CDATA[stmt s1; Select s1 such that Parent*(48,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >25</id><querystr><![CDATA[stmt s1; Select s1 such that Parent(51,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >26</id><querystr><![CDATA[stmt s1; Select s1 such that Parent*(51,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >27</id><querystr><![CDATA[stmt s1; Select s1 such that Parent(60,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >28</id><querystr><![CDATA[stmt s1; Select s1 such that Parent*(60,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >29</id><querystr><![CDATA[stmt s1; Select s1 such that Parent(61,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >30</id><querystr><![CDATA[stmt s1; Select s1 such that Parent*(61,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >31</id><querystr><![CDATA[stmt s1; Select s1 such that Parent(99,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >32</id><querystr><![CDATA[stmt s1; Select s1 such that Parent*(99,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >33</id><querystr><![CDATA[stmt s1; Select s1 such that Parent(131,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >34</id><querystr><![CDATA[stmt s1; Select s1 such that Parent*(131,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>141.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >35</id><querystr><![CDATA[stmt s1; Select s1 such that Parent(s1,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >36</id><querystr><![CDATA[stmt s1; Select s1 such that Parent*(s1,s1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >37</id><querystr><![CDATA[stmt s1,s2; Select s1 such that Parent(s1,s2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >38</id><querystr><![CDATA[stmt s1,s2; Select s1 such that Parent*(s1,s2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >39</id><querystr><![CDATA[stmt s1,s2; Select s2 such that Parent(s1,s2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >40</id><querystr><![CDATA[stmt s1,s2; Select s2 such that Parent*(s1,s2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >41</id><querystr><![CDATA[stmt s1,s2; Select <s1,s2> such that Parent(s1,s2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >42</id><querystr><![CDATA[stmt s1,s2; Select <s1,s2> such that Parent*(s1,s2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >43</id><querystr><![CDATA[stmt s1;assign a1; Select s1 such that Parent(s1,a1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >44</id><querystr><![CDATA[stmt s1;assign a1; Select s1 such that Parent*(s1,a1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >45</id><querystr><![CDATA[stmt s1; assign a1; Select a1 such that Parent(s1,a1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >46</id><querystr><![CDATA[stmt s1;assign a1; Select a1 such that Parent*(s1,a1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >47</id><querystr><![CDATA[stmt s1;assign a1; Select <s1,a1> such that Parent(s1,a1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >48</id><querystr><![CDATA[stmt s1;assign a1; Select <s1,a1> such that Parent*(s1,a1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >49</id><querystr><![CDATA[stmt s1;while w1; Select s1 such that Parent(s1,w1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >50</id><querystr><![CDATA[stmt s1;while w1; Select s1 such that Parent*(s1,w1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >51</id><querystr><![CDATA[stmt s1; while w1; Select w1 such that Parent(s1,w1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >52</id><querystr><![CDATA[stmt s1;while w1; Select w1 such that Parent*(s1,w1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >53</id><querystr><![CDATA[stmt s1;while w1; Select <s1,w1> such that Parent(s1,w1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >54</id><querystr><![CDATA[stmt s1;while w1; Select <s1,w1> such that Parent*(s1,w1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >55</id><querystr><![CDATA[stmt s1;if i1; Select s1 such that Parent(s1,i1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >56</id><querystr><![CDATA[stmt s1;if i1; Select s1 such that Parent*(s1,i1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >57</id><querystr><![CDATA[stmt s1; if i1; Select i1 such that Parent(s1,i1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >58</id><querystr><![CDATA[stmt s1;if i1; Select i1 such that Parent*(s1,i1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >59</id><querystr><![CDATA[stmt s1;if i1; Select <s1,i1> such that Parent(s1,i1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >60</id><querystr><![CDATA[stmt s1;if i1; Select <s1,i1> such that Parent*(s1,i1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >61</id><querystr><![CDATA[stmt s1;call c1; Select s1 such that Parent(s1,c1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >62</id><querystr><![CDATA[stmt s1;call c1; Select s1 such that Parent*(s1,c1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >63</id><querystr><![CDATA[stmt s1;call c1; Select c1 such that Parent(s1,c1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >64</id><querystr><![CDATA[stmt s1;call c1; Select c1 such that Parent*(s1,c1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >65</id><querystr><![CDATA[stmt s1;call c1; Select <s1,c1> such that Parent(s1,c1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >66</id><querystr><![CDATA[stmt s1;call c1; Select <s1,c1> such that Parent*(s1,c1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >67</id><querystr><![CDATA[while w1;assign a1; Select w1 such that Parent(w1,a1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >68</id><querystr><![CDATA[while w1;assign a1; Select w1 such that Parent*(w1,a1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >69</id><querystr><![CDATA[while w1; assign a1; Select a1 such that Parent(w1,a1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >70</id><querystr><![CDATA[while w1;assign a1; Select a1 such that Parent*(w1,a1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >71</id><querystr><![CDATA[while w1;assign a1; Select <w1,a1> such that Parent(w1,a1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >72</id><querystr><![CDATA[while w1;assign a1; Select <w1,a1> such that Parent*(w1,a1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >73</id><querystr><![CDATA[while w1; Select w1 such that Parent(w1,w1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >74</id><querystr><![CDATA[while w1; Select w1 such that Parent*(w1,w1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >75</id><querystr><![CDATA[while w1;  Select w1 such that Parent(w1,w1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >76</id><querystr><![CDATA[while w1; Select w1 such that Parent*(w1,w1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >77</id><querystr><![CDATA[while w1; Select <w1,w1> such that Parent(w1,w1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >78</id><querystr><![CDATA[while w1; Select <w1,w1> such that Parent*(w1,w1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >79</id><querystr><![CDATA[while w1,w2; Select w1 such that Parent(w1,w2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >80</id><querystr><![CDATA[while w1,w2; Select w1 such that Parent*(w1,w2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >81</id><querystr><![CDATA[while w1,w2; Select w2 such that Parent(w1,w2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >82</id><querystr><![CDATA[while w1,w2; Select w2 such that Parent*(w1,w2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >83</id><querystr><![CDATA[while w1,w2; Select <w1,w2> such that Parent(w1,w2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >84</id><querystr><![CDATA[while w1,w2; Select <w1,w2> such that Parent*(w1,w2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >85</id><querystr><![CDATA[while w1;if i1; Select w1 such that Parent(w1,i1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >86</id><querystr><![CDATA[while w1;if i1; Select w1 such that Parent*(w1,i1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >87</id><querystr><![CDATA[while w1; if i1; Select i1 such that Parent(w1,i1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >88</id><querystr><![CDATA[while w1;if i1; Select i1 such that Parent*(w1,i1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >89</id><querystr><![CDATA[while w1;if i1; Select <w1,i1> such that Parent(w1,i1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >90</id><querystr><![CDATA[while w1;if i1; Select <w1,i1> such that Parent*(w1,i1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >91</id><querystr><![CDATA[while w1;call c1; Select w1 such that Parent(w1,c1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >92</id><querystr><![CDATA[while w1;call c1; Select w1 such that Parent*(w1,c1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >93</id><querystr><![CDATA[while w1;call c1; Select c1 such that Parent(w1,c1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >94</id><querystr><![CDATA[while w1;call c1; Select c1 such that Parent*(w1,c1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >95</id><querystr><![CDATA[while w1;call c1; Select <w1,c1> such that Parent(w1,c1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >96</id><querystr><![CDATA[while w1;call c1; Select <w1,c1> such that Parent*(w1,c1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >97</id><querystr><![CDATA[if i1;assign a1; Select i1 such that Parent(i1,a1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >98</id><querystr><![CDATA[if i1;assign a1; Select i1 such that Parent*(i1,a1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >99</id><querystr><![CDATA[if i1; assign a1; Select a1 such that Parent(i1,a1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >100</id><querystr><![CDATA[if i1;assign a1; Select a1 such that Parent*(i1,a1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >101</id><querystr><![CDATA[if i1;assign a1; Select <i1,a1> such that Parent(i1,a1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >102</id><querystr><![CDATA[if i1;assign a1; Select <i1,a1> such that Parent*(i1,a1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >103</id><querystr><![CDATA[if i1; while w1; Select i1 such that Parent(i1,w1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >104</id><querystr><![CDATA[if i1;while w1; Select i1 such that Parent*(i1,w1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >105</id><querystr><![CDATA[if i1; while w1; Select i1 such that Parent(i1,w1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >106</id><querystr><![CDATA[if i1;while w1; Select i1 such that Parent*(i1,w1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >107</id><querystr><![CDATA[if i1;while w1; Select <i1,i1> such that Parent(i1,w1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >108</id><querystr><![CDATA[if i1;while w1; Select <i1,i1> such that Parent*(i1,w1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >109</id><querystr><![CDATA[if i1; Select i1 such that Parent(i1,i1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >110</id><querystr><![CDATA[if i1; Select i1 such that Parent*(i1,i1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>140.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >111</id><querystr><![CDATA[if i1; Select i1 such that Parent(i1,i1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >112</id><querystr><![CDATA[if i1; Select i1 such that Parent*(i1,i1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >113</id><querystr><![CDATA[if i1; Select <i1,i1> such that Parent(i1,i1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >114</id><querystr><![CDATA[if i1; Select <i1,i1> such that Parent*(i1,i1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >115</id><querystr><![CDATA[if i1,i2; Select i1 such that Parent(i1,i2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >116</id><querystr><![CDATA[if i1,i2; Select i1 such that Parent*(i1,i2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >117</id><querystr><![CDATA[if i1,i2; Select i2 such that Parent(i1,i2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >118</id><querystr><![CDATA[if i1,i2; Select i2 such that Parent*(i1,i2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >119</id><querystr><![CDATA[if i1,i2; Select <i1,i2> such that Parent(i1,i2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >120</id><querystr><![CDATA[if i1,i2; Select <i1,i2> such that Parent*(i1,i2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >121</id><querystr><![CDATA[if i1;call c1; Select i1 such that Parent(i1,c1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >122</id><querystr><![CDATA[if i1;call c1; Select i1 such that Parent*(i1,c1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >123</id><querystr><![CDATA[if i1;call c1; Select c1 such that Parent(i1,c1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >124</id><querystr><![CDATA[if i1;call c1; Select c1 such that Parent*(i1,c1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >125</id><querystr><![CDATA[if i1;call c1; Select <i1,c1> such that Parent(i1,c1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Parent="1" Typed="1" comment="check parent" >126</id><querystr><![CDATA[if i1;call c1; Select <i1,c1> such that Parent*(i1,c1);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

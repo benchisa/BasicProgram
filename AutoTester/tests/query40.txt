@@ -1,92 +1,47 @@
-100
-cat: such that and calls
-181 - calls, parent* :: calls (known,unknown) and parent* (unknown,unknown)
-procedure p1,p2;
-Select p2   such that  Calls ( "xylo" , p2 ) and Parent* ( s1 , s2 ) ;
+9
+cat: simple queries
+1 - all, Typed :: select all variables
+variable v;
+Select v;
 
 5000
-182 - calls*, parent* :: calls* (known,unknown) and parent* (unknown,unknown)
-procedure p1,p2;
-Select p2   such that  Calls* ( "xylo" , p2 ) and Parent* ( s1 , s2 ) ;
+2 - all, Typed :: select all constants
+constant c;
+Select c;
 
 5000
-183 - calls, parent* :: calls (unknown,known) and parent* (unknown,unknown)
-procedure p1,p2;
-Select p1   such that  Calls ( p1 , "zebra" ) and Parent* ( s1 , s2 ) ;
+3 - all, Typed :: select all call statements
+call c;
+Select c;
 
 5000
-184 - calls*, parent* :: calls* (unknown,known) and parent* (unknown,unknown)
-procedure p1,p2;
-Select p1   such that  Calls* ( p1 , "zebra" ) and Parent* ( s1 , s2 ) ;
+4 - all, Typed :: select all assignment statements
+assign a;
+Select a;
 
 5000
-124 - calls, uses :: calls (known,unknown) and uses (known,unknown)
-procedure p1,p2;variable v1;
-Select p2   such that  Calls ( "xylo" , p2 ) and Uses ( "xylo" , v1 ) ;
+5 - all, Typed :: select all while statements
+while w;
+Select w;
 
 5000
-125 - calls*, uses :: calls* (known,unknown) and uses (known,unknown)
-procedure p1,p2;variable v1;
-Select p2   such that  Calls* ( "xylo" , p2 ) and Uses ( "xylo" , v1 ) ;
+6 - all, Typed :: select all if statements
+if i;
+Select i;
 
 5000
-126 - calls, uses :: calls (unknown,known) and uses (known,unknown)
-procedure p1,p2;variable v1;
-Select p1   such that  Calls ( p1 , "zebra" ) and Uses ( "zebra" , v1 ) ;
+7 - all, Typed :: select all statements
+stmt s;
+Select s;
 
 5000
-127 - calls*, uses :: calls* (unknown,known) and uses (unknown,unknown)
-procedure p1,p2;variable v1;
-Select p1   such that  Calls* ( p1 , "zebra" ) and Uses ( p1 , v1 ) ;
+8 - all, Typed :: select all procedures
+procedure p;
+Select p;
 
 5000
-128 - calls, uses :: calls (unknown,unknown) and uses (unknown,unknown)
-procedure p1,p2;variable v1;
-Select p1   such that  Calls ( p1 , p2 ) and Uses ( p2 , v1 ) ;
+9 - all, Typed :: select all program lines
+prog_line p;
+Select p;
 
-5000
-129 - calls*, uses :: calls* (unknown,unknown) and uses (unknown,unknown)
-procedure p1,p2;variable v1;
-Select p1   such that  Calls* ( p1 , p2 ) and Uses ( p2 , v1 ) ;
-
-5000
-130 - calls, uses :: calls (unknown,unknown) and uses (unknown,unknown)
-procedure p1,p2;variable v1;
-Select p2   such that  Calls ( p1 , p2 ) and Uses ( p2 , v1 ) ;
-
-5000
-131 - calls*, uses :: calls* (unknown,unknown) and uses (unknown,unknown)
-procedure p1,p2;variable v1;
-Select p2   such that  Calls* ( p1 , p2 ) and Uses ( p2 , v1 ) ;
-
-5000
-132 - calls, uses :: calls (unknown,unknown) and uses (unknown,unknown)
-procedure p1,p2;variable v1;
-Select p1   such that  Calls ( p1 , p1 ) and Uses ( p1 , v1 ) ;
-
-5000
-133 - calls*, uses :: calls* (unknown,unknown) and uses (unknown,unknown)
-procedure p1,p2;variable v1;
-Select p1   such that  Calls* ( p1 , p1 ) and Uses ( p1 , v1 ) ;
-
-5000
-179 - calls , parent* :: calls (known,known) and parent* (unknown,unknown)
-stmt s1,s2;
-Select BOOLEAN   such that  Calls ( "xylo" , "yello" ) and Parent* ( s1 , s2 ) ;
-true
-5000
-180 - calls* , parent* :: calls* (known,known) and parent* (unknown,unknown)
-stmt s1,s2;
-Select BOOLEAN   such that  Calls* ( "xylo" , "yello" ) and Parent* ( s1 , s2 ) ;
-true
-5000
-122 - calls , uses :: calls (known,known) and uses (known,unknown)
-variable v1;
-Select BOOLEAN   such that  Calls ( "xylo" , "yello" ) and Uses ( "xylo" , v1 ) ;
-true
-5000
-123 - calls* , uses :: calls* (known,known) and uses (known,unknown)
-variable v1;
-Select BOOLEAN   such that  Calls* ( "xylo" , "yello" ) and Uses ( "xylo" , v1 ) ;
-true
 5000

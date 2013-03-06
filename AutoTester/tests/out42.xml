@@ -1,184 +1,470 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>156.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>1357.000000</parsing_time_taken>
 </info>
 <queries>
-<category name="such that and affects">
+<category name=" Calls Queries">
 <query>
-<id affects="1" uses="1" comment="affects (known,known) and uses (unknown,unknown)" >146</id><querystr><![CDATA[variable v1; Select BOOLEAN   such that  Affects (13 ,18 ) and Uses (18 , v1 ) ;]]></querystr>
-<stuans>false</stuans>
-<correct>true</correct>
+<id Calls="1" Typed="1" comment="Check call" >1</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Alice");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >2</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Bob");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>15.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >3</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Charlie");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>15.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >4</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Danny");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >5</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Eliza");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >6</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Fred");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >7</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Goneril");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >8</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Henry");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >9</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Illidan");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >10</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"James");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>15.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >11</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Kingsley");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >12</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Lucas");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >13</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Merril");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >14</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Nancy");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >15</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Oppi");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >16</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Alice");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>16.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >17</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Bob");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >18</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Charlie");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >19</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Danny");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >20</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Eliza");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >21</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Fred");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >22</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Goneril");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >23</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Henry");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >24</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Illidan");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >25</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"James");]]></querystr>
+<stuans></stuans>
+<correct></correct>
 <time_taken>47.000000</time_taken>
-<failed>
-<missing>true</missing>
-<additional>false</additional>
-<summary>
-<expected>1</expected>
-<matched>0</matched>
-<missing>1</missing>
-<additional>1</additional>
-</summary>
-</failed>
-</query>
-<query>
-<id affectsstar="1" uses="1" comment="affects* (known,known) and uses (unknown,unknown)" >147</id><querystr><![CDATA[variable v1; Select BOOLEAN   such that  Affects* (13 ,18 ) and Uses (13 , v1 ) ;]]></querystr>
-<stuans>false</stuans>
-<correct>true</correct>
-<time_taken>62.000000</time_taken>
-<failed>
-<missing>true</missing>
-<additional>false</additional>
-<summary>
-<expected>1</expected>
-<matched>0</matched>
-<missing>1</missing>
-<additional>1</additional>
-</summary>
-</failed>
-</query>
-<query>
-<id affects="1" uses="1" comment="affects (known,unknown) and uses (unknown,unknown)" >148</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s2   such that  Affects (13 , s2 ) and Uses (13 , v1 ) ;]]></querystr>
-<stuans></stuans>
-<correct></correct>
-<time_taken>62.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id affectsstar="1" uses="1" comment="affects* (known,unknown) and uses (unknown,unknown)" >149</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s2   such that  Affects* (13 , s2 ) and Uses ( s2 , v1 ) ;]]></querystr>
+<id Calls="1" Typed="1" comment="Check call" >26</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Kingsley");]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>62.000000</time_taken>
+<time_taken>31.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id affects="1" uses="1" comment="affects (unknown,known) and uses (unknown,unknown)" >150</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Affects ( s1 ,18 ) and Uses ( s1 , v1 ) ;]]></querystr>
+<id Calls="1" Typed="1" comment="Check call" >27</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Lucas");]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>63.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id affectsstar="1" uses="1" comment="affects* (unknown,known) and uses (unknown,unknown)" >151</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Affects* ( s1 ,18 ) and Uses ( s1 , v1 ) ;]]></querystr>
-<stuans></stuans>
-<correct></correct>
-<time_taken>62.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id affects="1" uses="1" comment="affects (unknown,unknown) and uses (unknown,unknown)" >152</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Affects ( s1 , s2 ) and Uses ( s1 , v1 ) ;]]></querystr>
-<stuans></stuans>
-<correct></correct>
-<time_taken>63.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id affectsstar="1" uses="1" comment="affects* (unknown,unknown) and uses (unknown,unknown)" >153</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Affects* ( s1 , s2 ) and Uses ( s1 , v1 ) ;]]></querystr>
-<stuans></stuans>
-<correct></correct>
-<time_taken>63.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id affects="1" uses="1" comment="affects (unknown,unknown) and uses (unknown,unknown)" >154</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s2   such that  Affects ( s1 , s2 ) and Uses ( s2 , v1 ) ;]]></querystr>
-<stuans></stuans>
-<correct></correct>
-<time_taken>63.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id affectsstar="1" uses="1" comment="affects* (unknown,unknown) and uses (unknown,unknown)" >155</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s2   such that  Affects* ( s1 , s2 ) and Uses ( s2 , v1 ) ;]]></querystr>
-<stuans></stuans>
-<correct></correct>
-<time_taken>62.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id affects="1" uses="1" comment="affects (unknown,unknown) and uses (unknown,unknown)" >156</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Affects ( s1 , s1 ) and Uses ( s1 , v1 ) ;]]></querystr>
-<stuans></stuans>
-<correct></correct>
-<time_taken>62.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id affectsstar="1" uses="1" comment="affects* (unknown,unknown) and uses (unknown,unknown)" >157</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Affects* ( s1 , s1 ) and Uses ( s1 , v1 ) ;]]></querystr>
-<stuans></stuans>
-<correct></correct>
-<time_taken>62.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id affects="1" parentstar="1" comment="affects (known,known) and parent* (unknown,unknown)" >195</id><querystr><![CDATA[stmt s1,s2; Select BOOLEAN   such that  Affects (13 ,18 ) and Parent* (18 , s1 ) ;]]></querystr>
-<stuans>false</stuans>
-<correct>true</correct>
 <time_taken>46.000000</time_taken>
-<failed>
-<missing>true</missing>
-<additional>false</additional>
-<summary>
-<expected>1</expected>
-<matched>0</matched>
-<missing>1</missing>
-<additional>1</additional>
-</summary>
-</failed>
+<passed/>
 </query>
 <query>
-<id affectstar="1" parentstar="1" comment="affects* (known,known) and parent* (unknown,unknown)" >196</id><querystr><![CDATA[stmt s1,s2; Select BOOLEAN   such that  Affects* (13 ,18 ) and Parent* (18 , s1 ) ;]]></querystr>
-<stuans>false</stuans>
-<correct>true</correct>
-<time_taken>63.000000</time_taken>
-<failed>
-<missing>true</missing>
-<additional>false</additional>
-<summary>
-<expected>1</expected>
-<matched>0</matched>
-<missing>1</missing>
-<additional>1</additional>
-</summary>
-</failed>
+<id Calls="1" Typed="1" comment="Check call" >28</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Merril");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
 </query>
 <query>
-<id affects="1" parentstar="1" comment="affects (known,unknown) and parent* (unknown,unknown)" >197</id><querystr><![CDATA[stmt s1,s2; Select s2   such that  Affects (13 , s2 ) and Parent* ( s1 , s2 ) ;]]></querystr>
+<id Calls="1" Typed="1" comment="Check call" >29</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Nancy");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >30</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Oppi");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >31</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Alice",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>32.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >32</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Bob",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >33</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Charlie",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >34</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Danny",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >35</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Eliza",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >36</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Fred",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >37</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Goneril",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >38</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Henry",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >39</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Illidan",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >40</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("James",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >41</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Kingsley",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >42</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Lucas",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >43</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Merril",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >44</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Nancy",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >45</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Oppi",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >46</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Alice",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >47</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Bob",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >48</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Charlie",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >49</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Danny",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>31.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >50</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Eliza",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >51</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Fred",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >52</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Goneril",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >53</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Henry",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >54</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Illidan",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >55</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("James",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >56</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Kingsley",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >57</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Lucas",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >58</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Merril",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >59</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Nancy",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call" >60</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Oppi",p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call loops (callception)" >61</id><querystr><![CDATA[procedure p1,p2; Select p1 such that Calls(p1,p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>47.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call loops (callception)" >62</id><querystr><![CDATA[procedure p1,p2; Select p2 such that Calls(p1,p2);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>46.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Calls="1" Typed="1" comment="Check call loops (callception)" >63</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,p1);]]></querystr>
 <stuans></stuans>
 <correct></correct>
 <time_taken>62.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id affectsstar="1" parentstar="1" comment="affects* (known,unknown) and parent* (unknown,unknown)" >198</id><querystr><![CDATA[stmt s1,s2; Select s2   such that  Affects* (13 , s2 ) and Parent* ( s1 , s2 ) ;]]></querystr>
+<id Calls="1" Typed="1" comment="Check call loops (callception)" >64</id><querystr><![CDATA[procedure p1,p2; Select p1 such that Calls*(p1,p2);]]></querystr>
 <stuans></stuans>
 <correct></correct>
 <time_taken>78.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id affects="1" parentstar="1" comment="affects (unknown,known) and parent* (unknown,unknown)" >199</id><querystr><![CDATA[stmt s1,s2; Select s1   such that  Affects ( s1 ,18 ) and Parent* ( s1 , s2 ) ;]]></querystr>
+<id Calls="1" Typed="1" comment="Check call loops (callception)" >65</id><querystr><![CDATA[procedure p1,p2; Select p2 such that Calls*(p1,p2);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>63.000000</time_taken>
+<time_taken>47.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id affectsstar="1" parentstar="1" comment="affects* (unknown,known) and parent* (unknown,unknown)" >200</id><querystr><![CDATA[stmt s1,s2; Select s1   such that  Affects* ( s1 ,18 ) and Parent* ( s1 , s2 ) ;]]></querystr>
+<id Calls="1" Typed="1" comment="Check call loops (callception)" >66</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,p1);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>63.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id affects="1" parentstar="1" comment="affects (unknown,unknown) and parent* (unknown,unknown)" >201</id><querystr><![CDATA[stmt s1,s2; Select s1   such that  Affects ( s1 , s2 ) and Parent* ( s1 , s2 ) ;]]></querystr>
-<stuans></stuans>
-<correct></correct>
-<time_taken>78.000000</time_taken>
-<passed/>
-</query>
-<query>
-<id affectsstar="1" parentstar="1" comment="affects* (unknown,unknown) and parent* (unknown,unknown)" >202</id><querystr><![CDATA[stmt s1,s2; Select s1   such that  Affects* ( s1 , s2 ) and Parent* ( s1 , s2 ) ;]]></querystr>
-<stuans></stuans>
-<correct></correct>
-<time_taken>78.000000</time_taken>
+<time_taken>47.000000</time_taken>
 <passed/>
 </query>
 </category>

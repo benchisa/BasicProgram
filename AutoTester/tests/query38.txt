@@ -7,13 +7,13 @@ false
 5000
 159 - follows* , parent* :: follows* (known,known) and parent* (unknown,unknown)
 stmt s1,s2;
-Select BOOLEAN   such that  Follows* (4 ,9 ) and Parent* (4 , s1 ) ;
+Select BOOLEAN   such that  Follows* (4 ,9 ) and Parent* (9 , s1 ) ;
 true
 5000
 160 - follows, parent* :: follows (known,unknown) and parent* (unknown,unknown)
 stmt s1,s2;
-Select s2   such that  Follows (4 , s2 ) and Parent* ( s2 , s1 ) ;
-
+Select s2   such that  Follows (12 , s2 ) and Parent* ( s2 , s1 ) ;
+14
 5000
 161 - follows*, parent* :: follows* (known,unknown) and parent* (unknown,unknown)
 stmt s1,s2;
@@ -22,8 +22,8 @@ Select s2   such that  Follows* (4 , s2 ) and Parent* ( s2 , s1 ) ;
 5000
 162 - follows, parent* :: follows (unknown,known) and parent* (unknown,unknown)
 stmt s1,s2;
-Select s1   such that  Follows ( s1 ,9 ) and Parent* ( s1 , s2 ) ;
-
+Select s1   such that  Follows ( s1 ,14 ) and Parent* ( s1 , s2 ) ;
+12
 5000
 163 - follows*, parent* :: follows* (unknown,known) and parent* (unknown,unknown)
 stmt s1,s2;

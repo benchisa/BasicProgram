@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>197.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>148.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" such that affects">
@@ -9,7 +9,7 @@
 <id affects="1" Typed="1" comment="(known,known)" >49</id><querystr><![CDATA[ Select BOOLEAN  such that Affects (13 ,18 );]]></querystr>
 <stuans>false</stuans>
 <correct>true</correct>
-<time_taken>57.000000</time_taken>
+<time_taken>49.000000</time_taken>
 <failed>
 <missing>true</missing>
 <additional>false</additional>
@@ -25,7 +25,7 @@
 <id affectsstar="1" Typed="1" comment="(known,known)" >50</id><querystr><![CDATA[ Select BOOLEAN  such that Affects* (13 ,18 );]]></querystr>
 <stuans>false</stuans>
 <correct>true</correct>
-<time_taken>59.000000</time_taken>
+<time_taken>57.000000</time_taken>
 <failed>
 <missing>true</missing>
 <additional>false</additional>
@@ -41,70 +41,70 @@
 <id affects="1" Typed="1" comment="(known,unknown)" >51</id><querystr><![CDATA[stmt s1,s2; Select s2  such that Affects (13 , s2 );]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>68.000000</time_taken>
+<time_taken>60.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affectsstar="1" Typed="1" comment="(known,unknown)" >52</id><querystr><![CDATA[stmt s1,s2; Select s2  such that Affects* (13 , s2 );]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>71.000000</time_taken>
+<time_taken>65.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affects="1" Typed="1" comment="(unknown,known)" >53</id><querystr><![CDATA[stmt s1,s2; Select s1  such that Affects ( s1 ,18 );]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>68.000000</time_taken>
+<time_taken>65.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affectsstar="1" Typed="1" comment="(unknown,known)" >54</id><querystr><![CDATA[stmt s1,s2; Select s1  such that Affects* ( s1 ,18 );]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>67.000000</time_taken>
+<time_taken>66.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affects="1" Typed="1" comment="(unknown,unknown)" >55</id><querystr><![CDATA[stmt s1,s2; Select s1  such that Affects ( s1 , s2 );]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>65.000000</time_taken>
+<time_taken>68.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affectsstar="1" Typed="1" comment="(unknown,unknown)" >56</id><querystr><![CDATA[stmt s1,s2; Select s1  such that Affects* ( s1 , s2 );]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>67.000000</time_taken>
+<time_taken>65.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affects="1" Typed="1" comment="(unknown,unknown)" >57</id><querystr><![CDATA[stmt s1,s2; Select s2  such that Affects ( s1 , s2 );]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>63.000000</time_taken>
+<time_taken>69.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affectsstar="1" Typed="1" comment="(unknown,unknown)" >58</id><querystr><![CDATA[stmt s1,s2; Select s2  such that Affects* ( s1 , s2 );]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>65.000000</time_taken>
+<time_taken>71.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affects="1" Typed="1" comment="(unknown,unknown)" >59</id><querystr><![CDATA[stmt s1,s2; Select s1  such that Affects ( s1 , s1 );]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>63.000000</time_taken>
+<time_taken>65.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affectsstar="1" Typed="1" comment="(unknown,unknown)" >60</id><querystr><![CDATA[stmt s1,s2; Select s1  such that Affects* ( s1 , s1 );]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>66.000000</time_taken>
+<time_taken>64.000000</time_taken>
 <passed/>
 </query>
 </category>

@@ -1,0 +1,482 @@
+100
+cat: Next Queries
+1 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,1);
+
+5000
+2 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,8);
+
+5000
+3 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,27);
+
+5000
+4 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,28);
+
+5000
+5 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,1);
+
+5000
+6 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,8);
+
+5000
+7 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,27);
+
+5000
+8 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,28);
+
+5000
+9 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,29);
+
+5000
+10 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,35);
+
+5000
+11 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,40);
+
+5000
+12 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,43);
+
+5000
+13 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,29);
+
+5000
+14 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,35);
+
+5000
+15 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,40);
+
+5000
+16 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,43);
+
+5000
+17 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,59);
+
+5000
+18 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,77);
+
+5000
+19 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,78);
+
+5000
+20 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,82);
+
+5000
+21 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,59);
+
+5000
+22 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,77);
+
+5000
+23 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,78);
+
+5000
+24 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,82);
+
+5000
+25 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,99);
+
+5000
+26 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,101);
+
+5000
+27 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,118);
+
+5000
+28 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,120);
+
+5000
+29 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,99);
+
+5000
+30 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,101);
+
+5000
+31 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,118);
+
+5000
+32 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,120);
+
+5000
+33 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,121);
+
+5000
+34 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,121);
+
+5000
+35 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,122);
+
+5000
+36 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,122);
+
+5000
+37 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,124);
+
+5000
+38 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,124);
+
+5000
+39 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,126);
+
+5000
+40 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,126);
+
+5000
+41 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,128);
+
+5000
+42 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,128);
+
+5000
+43 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,134);
+
+5000
+44 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,134);
+
+5000
+45 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(1,n1);
+
+5000
+46 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(8,n1);
+
+5000
+47 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(27,n1);
+
+5000
+48 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(28,n1);
+
+5000
+49 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(1,n1);
+
+5000
+50 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(8,n1);
+
+5000
+51 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(27,n1);
+
+5000
+52 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(28,n1);
+
+5000
+53 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(29,n1);
+
+5000
+54 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(35,n1);
+
+5000
+55 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(40,n1);
+
+5000
+56 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(43,n1);
+
+5000
+57 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(29,n1);
+
+5000
+58 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(35,n1);
+
+5000
+59 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(40,n1);
+
+5000
+60 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(43,n1);
+
+5000
+61 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(59,n1);
+
+5000
+62 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(77,n1);
+
+5000
+63 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(78,n1);
+
+5000
+64 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(82,n1);
+
+5000
+65 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(59,n1);
+
+5000
+66 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(77,n1);
+
+5000
+67 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(78,n1);
+
+5000
+68 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(82,n1);
+
+5000
+69 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(99,n1);
+
+5000
+70 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(101,n1);
+
+5000
+71 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(118,n1);
+
+5000
+72 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(120,n1);
+
+5000
+73 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(99,n1);
+
+5000
+74 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(101,n1);
+
+5000
+75 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(118,n1);
+
+5000
+76 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(120,n1);
+
+5000
+77 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(121,n1);
+
+5000
+78 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(121,n1);
+
+5000
+79 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(122,n1);
+
+5000
+80 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(122,n1);
+
+5000
+81 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(124,n1);
+
+5000
+82 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(124,n1);
+
+5000
+83 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(126,n1);
+
+5000
+84 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(126,n1);
+
+5000
+85 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(128,n1);
+
+5000
+86 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(128,n1);
+
+5000
+87 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(134,n1);
+
+5000
+88 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(134,n1);
+
+5000
+89 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next(n1,n1);
+
+5000
+90 - Next, Typed :: check next
+prog_line n1;
+Select n1 such that Next*(n1,n1);
+
+5000
+91 - Next, Typed :: check next
+prog_line n1,n2;
+Select n1 such that Next(n1,n2);
+
+5000
+92 - Next, Typed :: check next
+prog_line n1,n2;
+Select n1 such that Next*(n1,n2);
+
+5000
+93 - Next, Typed :: check next
+prog_line n1,n2;
+Select n2 such that Next(n1,n2);
+
+5000
+94 - Next, Typed :: check next
+prog_line n1,n2;
+Select n2 such that Next*(n1,n2);
+
+5000
+95 - Next, Typed :: check next
+prog_line n1,n2;
+Select <n1,n2> such that Next(n1,n2);
+
+5000
+96 - Next, Typed :: check next
+prog_line n1,n2;
+Select <n1,n2> such that Next*(n1,n2);
+
+5000
