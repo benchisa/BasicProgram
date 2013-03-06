@@ -711,6 +711,11 @@ USES_LIST DesignExtractor::getUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 	if((type == WHILE  || type == ASSIGNMENT || type == IF || type == PROCEDURE)){
 		result = pkb->getUses(type, arg1, v1);
 	}
+	// uses(c, 2)
+	// uses(c, _)
+	else if(type == CALL){
+		result = computeCallUses(arg1, v1);
+	}
 	// Uses(1, a)
 	else if((type == STATEMENT && arg1 != 0 && v1 == 0) || (type == ANY && arg1 != 0 && v1 == 0)){
 		// Find the type first

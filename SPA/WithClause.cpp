@@ -67,7 +67,7 @@ RELATION_LIST* WithClause::findEqual(){
 				PROC_NAME callerName = pkb->getProcedure(leftAttrValue)->getProcName();
 				//get callees
 				CALLPAIR_LIST callList;
-				callList = pkb->getCall(callerName,"");
+				callList = pkb->getCall(callerName," ");
 
 				//set flag
 				bool found = false;
@@ -219,7 +219,7 @@ RELATION_LIST* WithClause::findOneString(){
 		break;
 	case CALL:
 		{CALLPAIR_LIST callList;
-		callList = pkb->getCall("",knownAttrValue);
+		callList = pkb->getCall(" ",knownAttrValue);
 
 		if(callList.size()>0){
 			CALLPAIR_LIST::iterator itr;

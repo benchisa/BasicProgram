@@ -376,7 +376,7 @@ RAWDATA * IntermediateResultTable::joinCombinations(RAWDATA* rawData, DATA_LIST 
 		
 
 		//merge entries 
-		SIZE rawRowNum = rawData[0].size()-1;
+		SIZE rawRowNum = rawData->at(0).size()-1;
 		SIZE rawColNum = rawData->size();
 
 		TYPE resultVarType = qrTable->find(selectedVarList->at(0))->second;
@@ -387,13 +387,13 @@ RAWDATA * IntermediateResultTable::joinCombinations(RAWDATA* rawData, DATA_LIST 
 			for(int j =0;j<selectedDataList->size();i++){
 				//first step: copy the old qrVar data
 				for(int k=0;k<rawColNum;k++){
-					tempRaw[k].push_back(rawData->at(i)[k]);
+					tempRaw[k].push_back(rawData->at(i).at(k));
 				}
 				//second step: append new qrVar data
 				tempRaw[rawColNum+1].push_back(selectedDataList->at(j));					
 			}
 		}
-		rawData = &tempRaw;
+		rawData = new RAWDATA(tempRaw);
 	}
 	DATA_LIST::iterator itr;
 	//remove current selected var
