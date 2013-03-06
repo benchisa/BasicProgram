@@ -388,7 +388,13 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 				}
 				if(relType==NEXTST){
 					tmpList = extractor->getNextStarResult(0,0);
-					iterateAndStore(relList, tmpList);
+					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
+						for(RELATION_LIST::iterator tmpItr = tmpList.begin();tmpItr!=tmpList.end();tmpItr++){
+							if(tmpItr->first==tmpItr->second) relList->push_back(pair<int,int>(tmpItr->first,tmpItr->second));
+						}
+					}else{
+						iterateAndStore(relList, tmpList);
+					}
 				}
 				if(relType==CALL){
 					INDEX callerIndex,calleeIndex;
@@ -412,7 +418,13 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 						calleeIndex = pkb->getProcIndex(callPair->second);
 						tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
 					}
-					iterateAndStore(relList, tmpList);
+					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
+						for(RELATION_LIST::iterator tmpItr = tmpList.begin();tmpItr!=tmpList.end();tmpItr++){
+							if(tmpItr->first==tmpItr->second) relList->push_back(pair<int,int>(tmpItr->first,tmpItr->second));
+						}
+					}else{
+						iterateAndStore(relList, tmpList);
+					}
 				}
 		}
 
