@@ -253,12 +253,12 @@ bool Parser::stmt_call(){
 			// create AST
 			AST *callNode = pkb->createAST(CALL, prevProgLine, stmt_num, pkb->getProcIndex(prevToken));
 			// not under then, else or while
-			if(pkb->getType(curAST) != THEN || pkb->getType(curAST) != ELSE || pkb->getType(curAST) != STMT_LIST){
-				pkb->addSibling(curAST, callNode);
-				pkb->setAncestor(callNode, curAST->getAncestor());
+			if(pkb->getType(curAST) == STMT_LIST){
+				pkb->setFirstDescendant(curAST, callNode);
 			}
 			else{
-				pkb->setFirstDescendant(curAST, callNode);
+				pkb->addSibling(curAST, callNode);
+				pkb->setAncestor(callNode, curAST->getAncestor());
 			}
 
 			curAST = callNode;
