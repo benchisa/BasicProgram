@@ -8,8 +8,9 @@ QueryEvaluator::QueryEvaluator(PKB* pkb){
 	extractor = new DesignExtractor(pkb);
 }
 QueryEvaluator::~QueryEvaluator(void){
-	delete pkb;
 	delete extractor;
+	delete rawData;
+	delete resultTable;
 }	
 
 bool QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrParam){
@@ -35,7 +36,6 @@ bool QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrPa
 		return true;
 	}
 	//compute the intermediate result and store in a database
-	IntermediateResultTable * resultTable ;
 	resultTable = QueryEvaluator::computeIntermediateResult(relationTree);
 
 	//can not find the result in the table,include the following cases:
@@ -51,9 +51,6 @@ bool QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrPa
 	return true;
 }	
 void QueryEvaluator::generateRaw(QTREE* resultNode){
-		//create the rawData
-		rawData = new RAWDATA();
-
 		//select bool
 		if(resultNode->getType()==BOOL){
 			DATA_LIST result;
@@ -255,8 +252,17 @@ bool QueryEvaluator::executeSuchThat(IntermediateResultTable * resultTable, QTRE
 		return false; 
 	}else{
 		//result is found, add into resultTable
-		if(firstQrVar==-1&&secondQrVar==-1) return true;
-		return resultTable->joinList(joinAttr, firstQrVar,secondQrVar,currentResultList);
+		if(firstQrVar==-1&&secondQrVar==-1){
+			delete currentResultList;
+			return true;
+		}
+		if(resultTable->joinList(joinAttr, firstQrVar,secondQrVar,currentResultList)){
+			delete currentResultList;
+			return true;
+		}else{
+			delete currentResultList;
+			return false;
+		}
 	}
 }
 bool QueryEvaluator::executeWith(IntermediateResultTable * resultTable,QTREE* withTree){
@@ -368,8 +374,17 @@ bool QueryEvaluator::executeWith(IntermediateResultTable * resultTable,QTREE* wi
 		return false; 
 	}else{
 	//result is found, add into resultTable
-		if(firstQrVar==-1&&secondQrVar==-1) return true;
-		return resultTable->joinList(joinAttr, firstQrVar,secondQrVar,currentResultList);
+		if(firstQrVar==-1&&secondQrVar==-1){
+			delete currentResultList;
+			return true;
+		}
+		if(resultTable->joinList(joinAttr, firstQrVar,secondQrVar,currentResultList)){
+			delete currentResultList;
+			return true;
+		}else{
+			delete currentResultList;
+			return false;
+		}
 	}
 }
 bool QueryEvaluator::executePattern(IntermediateResultTable * resultTable,QTREE* patternTree){
@@ -410,8 +425,17 @@ bool QueryEvaluator::executePattern(IntermediateResultTable * resultTable,QTREE*
 		return false; 
 	}else{
 		//result is found, add into resultTable
-		if(firstQrVar==-1&&secondQrVar==-1) return true;
-		return resultTable->joinList(joinAttr, firstQrVar,secondQrVar,currentResultList);
+		if(firstQrVar==-1&&secondQrVar==-1){
+			delete currentResultList;
+			return true;
+		}
+		if(resultTable->joinList(joinAttr, firstQrVar,secondQrVar,currentResultList)){
+			delete currentResultList;
+			return true;
+		}else{
+			delete currentResultList;
+			return false;
+		}
 	}
 }
 

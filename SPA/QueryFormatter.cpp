@@ -5,7 +5,6 @@ QueryFormatter::QueryFormatter(PKB * pkb){
 	this->pkb = pkb;
 }
 QueryFormatter::~QueryFormatter(void){
-	delete &result;
 }
 void QueryFormatter::setQrTable(QUERYTABLE * qrTable){
 	this->qrTable = qrTable;

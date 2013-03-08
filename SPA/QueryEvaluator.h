@@ -31,9 +31,9 @@ private:
 	PKB * pkb;
 	TYPE resultType;
 	INDEX resultIndex;
-
- //   INDEX_LIST * returnList;
 	RAWDATA * rawData;
+	DesignExtractor * extractor;
+	IntermediateResultTable * resultTable ;
 
 	IntermediateResultTable * computeIntermediateResult(QTREE* relationTree);
 	IntermediateResultTable * evaluateClause(IntermediateResultTable * resultTable, QTREE* clause);
@@ -43,6 +43,6 @@ private:
 	bool findResult(QTREE * resultNode,IntermediateResultTable * resultTable);
 	void generateRaw(QTREE* resultNode );
 	RELATION_LIST * appendRelationLists(RELATION_LIST* list1,RELATION_LIST* list2);
-	DesignExtractor * extractor;
+	
 	    
 };
