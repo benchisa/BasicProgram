@@ -779,7 +779,7 @@ bool DesignExtractor::getIsUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 		astItr = astLst->begin();
 		
 		if(pkb->isExistCallStmt(arg1)){
-			result = isCallModifies(arg1, v1);
+			result = isCallUses(arg1, v1);
 		}
 		else{
 			while(astItr != astLst->end()){
