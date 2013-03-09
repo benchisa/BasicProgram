@@ -181,7 +181,7 @@ CALL_LIST  DesignExtractor::getCallStarResult(PROC_NAME caller, PROC_NAME callee
 				 list<string>::iterator itr;
 				for (itr=result.begin(); itr!=result.end(); itr++)
 				{
-					if (*it!=*itr)
+				
 					finalResult.insert(make_pair(*it, *itr));
 				}
 			 }
@@ -204,12 +204,12 @@ CALL_LIST  DesignExtractor::getCallStarResult(PROC_NAME caller, PROC_NAME callee
 			
 		 	if (caller!=" " && callee==" ")
 			{
-				if (caller!=*itr)
+				
 				finalResult.insert(make_pair(caller, *itr));
 			}
 			else if (callee!=" " && caller==" ")
 			{
-				if (callee!=*itr)
+				
 				finalResult.insert(make_pair(*itr, callee));
 			}
 			
