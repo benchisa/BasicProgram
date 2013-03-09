@@ -15,7 +15,6 @@ IntermediateResultTable::IntermediateResultTable(SIZE tableSize,PKB* pkb,QUERYTA
 
 IntermediateResultTable::~IntermediateResultTable(void)
 {
-	delete &database;
 }
 bool IntermediateResultTable::isQrVarDiscovered(INDEX qrVarIndex){
 	if (qrVarTable[0][qrVarIndex]!=1) return false;
@@ -348,8 +347,9 @@ RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_L
 				}
 			}
 		}
-		rawData = &tempRaw;
+		rawData = new RAWDATA(tempRaw);
 	}
+	
 	return rawData;
 }
 

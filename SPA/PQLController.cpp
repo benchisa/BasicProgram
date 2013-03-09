@@ -43,6 +43,8 @@ FINAL_RESULT PQLController::getQueryResult(QUERY newQuery){
 		//returnResult.push_back("");
 	}
 
+	//delete unused objects
+	delete queryProcessor, queryEval, queryFormatter;
 	return returnResult;
 	
 }

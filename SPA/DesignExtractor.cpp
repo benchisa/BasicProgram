@@ -11,7 +11,6 @@ DesignExtractor::DesignExtractor(PKB* pkb)
 
 DesignExtractor::~DesignExtractor(void)
 {
-	delete pkb;
 	delete cfg;
 }
 
