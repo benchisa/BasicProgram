@@ -295,7 +295,6 @@ AST* DesignExtractor::buildCFG(AST * node)
 			tmp = tmp->getRightSibling();
 			break;
 		case IF:
-
 			lastNode = buildCFG(tmp->getFirstDescendant()->getRightSibling());
 			if(cfgWhileKeepers.size()!= 0 && !tmp->getRightSibling())
 				cfg->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
@@ -306,7 +305,8 @@ AST* DesignExtractor::buildCFG(AST * node)
 
 			cfg->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()));
 
-			if(pkb->getProgLine(lastNode) < maxProgline){
+			// last if line before last max line
+			if(pkb->getProgLine(lastNode)+2 == maxProgline){
 				cfg->addEdge(pkb->getProgLine(lastNode), maxProgline);
 			}
 
@@ -320,7 +320,7 @@ AST* DesignExtractor::buildCFG(AST * node)
 				cfg->addEdge(pkb->getProgLine(lastNode), pkb->getProgLine(tmp->getRightSibling()));
 			}
 
-			if(pkb->getProgLine(lastNode) < maxProgline){
+			if(pkb->getProgLine(lastNode)+1 == maxProgline){
 				cfg->addEdge(pkb->getProgLine(lastNode), maxProgline);
 			}
 
