@@ -1392,24 +1392,29 @@ void DesignExtractor::insertProcModifiesUses()
 
 	for (c_itr=procs.begin(); c_itr!=procs.end(); c_itr++)
 	{  
-		int callerIndex=pkb->getProcIndex(c_itr->first);
-		int calleeIndex=pkb->getProcIndex(c_itr->second);
+		if (c_itr->first!=c_itr->second)
+		{
+			int callerIndex=pkb->getProcIndex(c_itr->first);
+			int calleeIndex=pkb->getProcIndex(c_itr->second);
 		 
-		MODIFIES_LIST m_list=pkb->getModifies(PROCEDURE, calleeIndex, 0);
-		USES_LIST u_list=pkb->getUses(PROCEDURE, calleeIndex, 0);
+			MODIFIES_LIST m_list=pkb->getModifies(PROCEDURE, calleeIndex, 0);
+			USES_LIST u_list=pkb->getUses(PROCEDURE, calleeIndex, 0);
 
-		MODIFIES_LIST::iterator m_itr;
-		USES_LIST::iterator u_itr;
+			MODIFIES_LIST::iterator m_itr;
+			USES_LIST::iterator u_itr;
 
-		for (m_itr=m_list.begin(); m_itr!=m_list.end(); m_itr++)
-		{
-			pkb->insertModifies(PROCEDURE, callerIndex, m_itr->second);
-		}
-
-		for (u_itr=u_list.begin(); u_itr!=u_list.end(); u_itr++)
-		{
-			pkb->insertUses(PROCEDURE, callerIndex, u_itr->second);
-		}	
-
+			for (m_itr=m_list.begin(); m_itr!=m_list.end(); m_itr++)
+			{
+				pkb->insertModifies(PROCEDURE, callerIndex, m_itr->second);
+			}
+	
+			for (u_itr=u_list.begin(); u_itr!=u_list.end(); u_itr++)
+			{
+				pkb->insertUses(PROCEDURE, callerIndex, u_itr->second);
+			}		
+		}		
 	}
+	
+
+	
 }
