@@ -294,8 +294,11 @@ bool Parser::stmt_if(){
 		AST *ifNode = pkb->createAST(IF, prevProgLine, stmt_num, -1);
 		AST *leftNode, *thenNode, *elseNode;
 
-		if(!pkb->setFirstDescendant(curAST, ifNode))
-		{
+		if(pkb->getType(curAST) == STMT_LIST){
+			pkb->setFirstDescendant(curAST, ifNode);
+		}
+		else{
+		
 			pkb->addSibling(curAST, ifNode);
 			pkb->setAncestor(ifNode, curAST->getAncestor());
 		}
