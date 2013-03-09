@@ -165,7 +165,7 @@ bool DesignExtractor::getIsCallResult(PROC_NAME caller, PROC_NAME callee)
 
 CALL_LIST  DesignExtractor::getCallStarResult(PROC_NAME caller, PROC_NAME callee)
 {
-	list<pair<string,string>> finalResult;
+	set<pair<string,string>> finalResult;
 	
 	if (caller==" " && callee==" ")
 	{
@@ -181,7 +181,8 @@ CALL_LIST  DesignExtractor::getCallStarResult(PROC_NAME caller, PROC_NAME callee
 				 list<string>::iterator itr;
 				for (itr=result.begin(); itr!=result.end(); itr++)
 				{
-					finalResult.push_back(make_pair(*it, *itr));
+					if (*it!=*itr)
+					finalResult.insert(make_pair(*it, *itr));
 				}
 			 }
 
@@ -193,6 +194,7 @@ CALL_LIST  DesignExtractor::getCallStarResult(PROC_NAME caller, PROC_NAME callee
 		
 		list<string> firstResult;
 		DesignExtractor::computeCallStar(caller, callee, firstResult);
+		
 	   if (firstResult.size()>0)
 	   {
 		
@@ -202,20 +204,22 @@ CALL_LIST  DesignExtractor::getCallStarResult(PROC_NAME caller, PROC_NAME callee
 			
 		 	if (caller!=" " && callee==" ")
 			{
-				
-				finalResult.push_back(make_pair(caller, *itr));
+				if (caller!=*itr)
+				finalResult.insert(make_pair(caller, *itr));
 			}
 			else if (callee!=" " && caller==" ")
 			{
-
-				finalResult.push_back(make_pair(*itr, callee));
+				if (callee!=*itr)
+				finalResult.insert(make_pair(*itr, callee));
 			}
 			
 		}
 	  }
 	}
 	
-	return finalResult;
+	list <pair<string,string>> answer(finalResult.begin(), finalResult.end());
+
+	return answer;
 
 }
 
@@ -774,7 +778,7 @@ bool DesignExtractor::getIsUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 		astItr = astLst->begin();
 		
 		if(pkb->isExistCallStmt(arg1)){
-			result = isCallModifies(arg1, v1);
+			result = isCallUses(arg1, v1);
 		}
 		else{
 			while(astItr != astLst->end()){
@@ -1252,13 +1256,27 @@ void  DesignExtractor::computeCallStar(PROC_NAME caller, PROC_NAME callee,list<s
 
 				if (caller!=" " && callee==" ")
 				{	
-					result.push_back(itr->second);
-					DesignExtractor::computeCallStar(itr->second, " ",result);
+					list<string>::iterator findIter = find(result.begin(), result.end(), itr->second);
+					if (findIter==result.end())
+					{
+						result.push_back(itr->second);
+						DesignExtractor::computeCallStar(itr->second, " ",result);
+					}
+					
+					
 				}
 				else if (caller==" " && callee!=" ")
 				{
-					result.push_back(itr->first);
-					DesignExtractor::computeCallStar(" ",itr->first,result);
+					list<string>::iterator findIter = find(result.begin(), result.end(), itr->first);
+					if (findIter==result.end())
+					{
+						result.push_back(itr->first);
+						DesignExtractor::computeCallStar(" ",itr->first,result);
+					}
+
+					
+
+					
 				}
 			}
 
