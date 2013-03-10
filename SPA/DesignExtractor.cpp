@@ -289,26 +289,18 @@ AST* DesignExtractor::buildCFG(AST * node)
 			cfg->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()));
 
 			lastNode = buildCFG(tmp->getFirstDescendant()->getRightSibling());
+			
 			if(pkb->getType(lastNode) != IF)
 				cfg->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
 
+			
+			// change to the correct last node
+			if(lastNode->getAncestor() && pkb->getType(lastNode->getAncestor()->getAncestor()) != IF)
+				lastNode =lastNode->getAncestor()->getAncestor();
+
+
 			cfgWhileKeepers.pop_back();
-
-			// Check Grandparent's Sibling with Parent dont have sibling
-			grandparent = lastNode->getAncestor()->getAncestor();
-
-			while(grandparent){
-				if(grandparent->getRightSibling()
-					&& pkb->getType(grandparent->getRightSibling()) != PROCEDURE){
-						cfg->addEdge(pkb->getProgLine(lastNode), pkb->getProgLine(grandparent->getRightSibling()));
-					
-						
-						break;
-				}
-				else 
-					grandparent = grandparent->getAncestor();
-			}
-
+			
 			tmp = tmp->getRightSibling();
 			break;
 		case IF:
@@ -323,28 +315,7 @@ AST* DesignExtractor::buildCFG(AST * node)
 
 			cfg->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()));
 
-			
-			// Check Grandparent's Sibling with Parent dont have sibling
-			grandparent = lastNode->getAncestor()->getAncestor();
-
-			while(grandparent){
-				if(grandparent->getRightSibling()
-					&& pkb->getType(grandparent->getRightSibling()) != PROCEDURE){
-						cfg->addEdge(pkb->getProgLine(lastNode), pkb->getProgLine(grandparent->getRightSibling()));
-						
-						break;
-				}
-				else 
-					grandparent = grandparent->getAncestor();
-			}
-
-			
-			
-			// last if line before last max line
-			if(pkb->getProgLine(lastNode)+2 == maxProgline){
-				cfg->addEdge(pkb->getProgLine(lastNode), maxProgline);
-			}
-
+		
 			// else
 			lastNode = buildCFG(tmp->getFirstDescendant()->getRightSibling()->getRightSibling());
 			if(cfgWhileKeepers.size() != 0 && !tmp->getRightSibling())
@@ -355,9 +326,6 @@ AST* DesignExtractor::buildCFG(AST * node)
 				cfg->addEdge(pkb->getProgLine(lastNode), pkb->getProgLine(tmp->getRightSibling()));
 			}
 
-			if(pkb->getProgLine(lastNode)+1 == maxProgline){
-				cfg->addEdge(pkb->getProgLine(lastNode), maxProgline);
-			}
 
 			cfg->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getRightSibling()->getFirstDescendant()));
 			
@@ -373,7 +341,6 @@ AST* DesignExtractor::buildCFG(AST * node)
 			tmp = tmp->getRightSibling();
 			break;
 		case PROCEDURE:
-			maxProgline = pkb->getProcedure(pkb->getData(tmp))->getEndProgLine();
 			lastNode = buildCFG(tmp->getFirstDescendant());
 			tmp = tmp->getRightSibling();
 			break;
@@ -385,6 +352,7 @@ AST* DesignExtractor::buildCFG(AST * node)
 
 	return lastNode;
 }
+
 
 bool DesignExtractor::isNextResult(PROG_LINE p1, PROG_LINE p2)
 {
