@@ -301,6 +301,7 @@ AST* DesignExtractor::buildCFG(AST * node)
 				if(grandparent->getRightSibling()
 					&& pkb->getType(grandparent->getRightSibling()) != PROCEDURE){
 						cfg->addEdge(pkb->getProgLine(lastNode), pkb->getProgLine(grandparent->getRightSibling()));
+					
 						
 						break;
 				}
