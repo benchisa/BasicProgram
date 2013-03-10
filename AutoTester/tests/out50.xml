@@ -1,0 +1,9 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>AutoTester</name><parsing_time_taken>2304.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" complex queries">
+<query>
+<id all="1" Typed="1" comment="1 set of interrelated 9 such that clauses, single select" >1</id><querystr><![CDATA[assign a1,a2;stmt s1,s2,s3;while w1,w2;variable v1; Select a1 such that Follows(a1,a2) and Parent(s1,a2) and Parent*(w1,s1) and Follows*(s2,s3) and Modifies(s2,v1) and Uses(w2,v1) and Parent*(w2,w1) and Parent(108,a1) and Modifies(s2,"dinosaur");]]></querystr>

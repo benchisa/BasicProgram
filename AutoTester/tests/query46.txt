@@ -3,50 +3,50 @@ cat: Modifies Queries
 1 - Modifies, Typed :: check Modifies assignment
 assign a1; variable v1; 
 Select a1 such that Modifies(a1,v1);
-
+1,10,101,103,105,107,109,11,110,112,114,118,119,12,121,122,124,126,129,132,133,137,14,16,18,19,2,20,21,24,25,26,27,3,31,32,33,34,35,37,38,39,4,42,43,44,45,46,49,5,50,52,54,57,58,59,6,62,63,65,66,68,69,71,72,73,75,77,78,79,8,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98
 5000
 2 - Modifies, Typed :: check Modifies while
 while w1; variable v1;
 Select w1 such that Modifies(w1,v1);
-
+100,102,104,106,108,111,113,115,116,13,15,23,29,36,51,55,60,7,74,76,9,99
 5000
 3 - Modifies, Typed :: check Modifies if
 if i1; variable v1;
 Select i1 such that Modifies(i1,v1);
-
+117,131,17,22,30,41,48,61,64,67,70
 5000
 4 - Modifies, Typed :: check Modifies call
 call c1; variable v1;
 Select c1 such that Modifies(c1,v1);
-
+120,123,125,127,128,130,134,135,136,28,40,47,53,56
 5000
 5 - Modifies, Typed :: check Modifies procedure
 procedure p1; variable v1;
 Select p1 such that Modifies(p1,v1);
-
+Alice,Bob,Charlie,Danny,Eliza,Fred,Goneril,Henry,Illidan,James,Kingsley,Lucas,Merril,Nancy,Oppi
 5000
 6 - Modifies, Typed :: check Modifies assignment
 assign a1; variable v1; 
 Select v1 such that Modifies(a1,v1);
-
+aeroplane,ant,apple,banana,basin,beetle,carrot,cloud,cockroach,dinosaur,donut,door,egg,elephant,elevator,fan,fish,fox,garbage,goat,gummy,ham,hamster,hanger,igloo,innard,jaguar,jam,jumper,kangeroo,keep,kimchi,lamp,leek,lion,mango,monkey,nachos,newt,orange,owl,pear,penguin,quail
 5000
 7 - Modifies, Typed :: check Modifies while
 while w1; variable v1;
 Select v1 such that Modifies(w1,v1);
-
+aeroplane,ant,apple,banana,carrot,cloud,cockroach,dinosaur,door,egg,elevator,fan,fish,fox,garbage,goat,gummy,ham,hamster,hanger,igloo,innard,jaguar,jam,jumper,kangeroo,keep,kimchi,leek,mango,nachos,pear 
 5000
 8 - Modifies, Typed :: check Modifies if
 if i1; variable v1;
 Select v1 such that Modifies(i1,v1);
-
+aeroplane,carrot,cloud,door,elevator,fan,garbage,ham,hanger,igloo,jumper,keep,kimchi,lamp,leek,mango,nachos,pear
 5000
 9 - Modifies, Typed :: check Modifies call
 call c1; variable v1;
 Select v1 such that Modifies(c1,v1);
-
+aeroplane,ant,apple,banana,basin,beetle,carrot,cloud,cockroach,dinosaur,donut,door,egg,elephant,elevator,fan,fish,fox,garbage,goat,gummy,ham,hamster,hanger,igloo,innard,jaguar,jam,jumper,kangeroo,keep,kimchi,lamp,leek,lion,mango,monkey,nachos,newt,orange,owl,pear,penguin,quail
 5000
 10 - Modifies, Typed :: check Modifies procedure
 procedure p1; variable v1;
 Select v1 such that Modifies(p1,v1);
-
+aeroplane,ant,apple,banana,basin,beetle,carrot,cloud,cockroach,dinosaur,donut,door,egg,elephant,elevator,fan,fish,fox,garbage,goat,gummy,ham,hamster,hanger,igloo,innard,jaguar,jam,jumper,kangeroo,keep,kimchi,lamp,leek,lion,mango,monkey,nachos,newt,orange,owl,pear,penguin,quail
 5000

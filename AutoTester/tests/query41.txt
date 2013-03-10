@@ -3,42 +3,42 @@ cat: Pattern Queries
 1 - all, Typed :: check pattern
 assign a1; variable v1;
 Select a1 pattern a1(v1,_);
-
+1,10,101,103,105,107,109,11,110,112,114,118,119,12,121,122,124,126,129,132,133,137,14,16,18,19,2,20,21,24,25,26,27,3,31,32,33,34,35,37,38,39,4,42,43,44,45,46,49,5,50,52,54,57,58,59,6,62,63,65,66,68,69,71,72,73,75,77,78,79,8,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98
 5000
 2 - all, Typed :: check pattern
 assign a1; variable v1;
 Select a1 pattern a1(v1,"banana");
-
+3
 5000
 3 - all, Typed :: check pattern
 assign a1; variable v1;
 Select a1 pattern a1(v1,_"banana"_);
-
+3,39,50
 5000
 4 - all, Typed :: check pattern
 assign a1; variable v1;
 Select a1 pattern a1(v1,"elephant*fish");
-
+137
 5000
 5 - all, Typed :: check pattern
 assign a1; variable v1;
 Select a1 pattern a1(v1,_"elephant*fish"_);
-
+129,137
 5000
 6 - all, Typed :: check pattern
 assign a1; variable v1;
 Select a1 pattern a1(v1,"fish*fish");
-
+126
 5000
 7 - all, Typed :: check pattern
 assign a1; variable v1;
-Select a1 pattern a1(v1,_"fish/fish"_);
-
+Select BOOLEAN pattern a1(v1,_"fish/fish"_);
+false
 5000
 8 - all, Typed :: check pattern
 assign a1; variable v1;
-Select a1 pattern a1(v1,_"ham/banana"_);
-
+Select BOOLEAN pattern a1(v1,_"ham/banana"_);
+false
 5000
 9 - all, Typed :: check pattern
 assign a1; variable v1;
@@ -53,32 +53,32 @@ Select a1 pattern a1(v1,_"orange/carrot"_);
 11 - all, Typed :: check pattern
 assign a1; variable v1;
 Select <a1,v1> pattern a1(v1,_);
-
+1 apple,10 ham,101 cockroach,103 dinosaur,105 fox,107 goat,109 hamster,11 innard,110 jaguar,112 kangeroo,114 ant,118 aeroplane,119 aeroplane,12 jam,121 apple,122 pear,124 dinosaur,126 elephant,129 ant,132 lamp,133 lamp,137 ant,14 egg,16 fish,18 carrot,19 kimchi,2 banana,20 carrot,21 kimchi,24 kimchi,25 leek,26 leek,27 apple,3 carrot,31 mango,32 nachos,33 mango,34 nachos,35 banana,37 ham,38 jam,39 carrot,4 donut,42 ham,43 ham,44 orange,45 orange,46 leek,49 pear,5 egg,50 pear,52 mango,54 pear,57 fish,58 aeroplane,59 basin,6 fish,62 cloud,63 door,65 elevator,66 fan,68 garbage,69 hanger,71 igloo,72 fan,73 igloo,75 jumper,77 keep,78 keep,79 hanger,8 gummy,80 aeroplane,81 aeroplane,82 lamp,83 ant,84 beetle,85 cockroach,86 dinosaur,87 elephant,88 fox,89 goat,90 hamster,91 jaguar,92 kangeroo,93 lion,94 monkey,95 newt,96 owl,97 penguin,98 quail
 5000
 12 - all, Typed :: check pattern
 assign a1; variable v1;
 Select <a1,v1> pattern a1(v1,"banana");
-
+3 carrot
 5000
 13 - all, Typed :: check pattern
 assign a1; variable v1;
 Select <a1,v1> pattern a1(v1,_"banana"_);
-
+3 carrot,39 carrot,50 pear
 5000
 14 - all, Typed :: check pattern
 assign a1; variable v1;
 Select <a1,v1> pattern a1(v1,"elephant*fish");
-
+137 ant
 5000
 15 - all, Typed :: check pattern
 assign a1; variable v1;
 Select <a1,v1> pattern a1(v1,_"elephant*fish"_);
-
+129 ant,137 ant
 5000
 16 - all, Typed :: check pattern
 assign a1; variable v1;
 Select <a1,v1> pattern a1(v1,"fish*fish");
-
+126 elephant
 5000
 17 - all, Typed :: check pattern
 assign a1; variable v1;
@@ -103,40 +103,40 @@ Select <a1,v1> pattern a1(v1,_"orange/carrot"_);
 21 - all, Typed :: check pattern
 if i1; variable v1;
 Select i1 pattern i1(v1,_,_);
-
+117,131,17,22,30,41,48,61,64,67,70
 5000
 22 - all, Typed :: check pattern
 if i1; variable v1;
 Select v1 pattern i1(v1,_,_);
-
+aeroplane,banana,carrot,door,fan,ham,hamster,hanger,kangeroo,leek
 5000
 23 - all, Typed :: check pattern
 if i1;
 Select i1 pattern i1("ham",_,_);
-
+17
 5000
 24 - all, Typed :: check pattern
 if i1;
 Select i1 pattern i1("kangeroo",_,_);
-
+131
 5000
 25 - all, Typed :: check pattern
 while w1; variable v1;
 Select w1 pattern w1(v1,_);
-
+100,102,104,106,108,111,113,115,116,13,15,23,29,36,51,55,60,7,74,76,9,99
 5000
 26 - all, Typed :: check pattern
 while w1; variable v1;
 Select v1 pattern w1(v1,_);
-
+aeroplane,ant,apple,banana,basin,beetle,cockroach,dinosaur,fox,goat,gummy,ham,hamster,igloo,jam,jumper,kangeroo,leek,mango
 5000
 27 - all, Typed :: check pattern
-if w1;
-Select w1 pattern w1("aeroplane",_,_);
-
+if i1;
+Select i1 pattern i1("aeroplane",_,_);
+61
 5000
 27 - all, Typed :: check pattern
-if w1;
-Select w1 pattern w1("ant",_,_);
+if i1;
+Select i1 pattern i1("ant",_,_);
 
 5000
