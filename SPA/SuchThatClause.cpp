@@ -397,20 +397,22 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 					}
 				}
 				if(relType==CALL){
-					INDEX callerIndex,calleeIndex;
-					CALL_LIST callResult=extractor->getCallResult(" "," ");
-
-					CALL_LIST::iterator callPair;
-					for(callPair = callResult.begin();callPair!=callResult.end();callPair++){
-						callerIndex = pkb->getProcIndex(callPair->first);
-						calleeIndex = pkb->getProcIndex(callPair->second);
-						tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
-					}
+				
 					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
-						for(RELATION_LIST::iterator tmpItr = tmpList.begin();tmpItr!=tmpList.end();tmpItr++){
+						/*for(RELATION_LIST::iterator tmpItr = tmpList.begin();tmpItr!=tmpList.end();tmpItr++){
 							if(tmpItr->first==tmpItr->second) relList->push_back(pair<int,int>(tmpItr->first,tmpItr->second));
-						}
+						}*/
+						relList = NULL;
 					}else{
+						INDEX callerIndex,calleeIndex;
+						CALL_LIST callResult=extractor->getCallResult(" "," ");
+
+						CALL_LIST::iterator callPair;
+						for(callPair = callResult.begin();callPair!=callResult.end();callPair++){
+							callerIndex = pkb->getProcIndex(callPair->first);
+							calleeIndex = pkb->getProcIndex(callPair->second);
+							tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
+						}
 						iterateAndStore(relList, tmpList);
 					}
 				}
