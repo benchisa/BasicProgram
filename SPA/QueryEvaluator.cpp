@@ -31,10 +31,10 @@ bool QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrPa
 	relationTree = qrTree->getRightSibling(); 
 
 	//eg select s
-	if(relationTree==NULL){
+	/*if(relationTree==NULL){
 		generateRaw(resultNode);
 		return true;
-	}
+	}*/
 	//compute the intermediate result and store in a database
 	resultTable = QueryEvaluator::computeIntermediateResult(relationTree);
 
@@ -80,6 +80,10 @@ IntermediateResultTable * QueryEvaluator::computeIntermediateResult(QTREE* relat
 	QTREE* currentClause = relationTree;
 	
 	resultTable = new IntermediateResultTable(qrTable->size(),pkb,qrTable,extractor);
+	//no relation tree append, eg select w
+	if(relationTree==NULL) return resultTable; 
+
+	//evaluate the relation trees
 	bool startClause = false;
 	int currentFlag = currentClause->getData();
 	int prevFlag = currentFlag;

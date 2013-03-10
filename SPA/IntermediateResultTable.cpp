@@ -240,17 +240,23 @@ RAWDATA *IntermediateResultTable::findResultOf(DATA_LIST resultNodeList){
 	}
 
 	//adjust the order of returnRaw
-	//TODO
 	RAWDATA * tempRaw = new RAWDATA();
 	for(nodeListItr = resultNodeList.begin();nodeListItr!=resultNodeList.end();nodeListItr++){
 		for(RAWDATA::iterator rawItr=returnRaw->begin();rawItr!=returnRaw->end();rawItr++){
-			if(*nodeListItr==*rawItr->begin())
+			if(*nodeListItr==rawItr->at(0)){
+				//add to temp return List
 				tempRaw->push_back(*rawItr);
+				//remove current added entry to avoid duplicate result
+				returnRaw->erase(rawItr);
+				break;
+			}
 		}
 	}
-	returnRaw = tempRaw;
+	//returnRaw = tempRaw;
 
-	//unique the return result if there is only one selected qrVar
+	//unique the return result
+	returnRaw = IntermediateResultTable::uniqueRaw(tempRaw);
+	/*
 	if(returnRaw->size()==1){
 		INDEX selectedQrVar = returnRaw->at(0).at(0);
 
@@ -272,10 +278,52 @@ RAWDATA *IntermediateResultTable::findResultOf(DATA_LIST resultNodeList){
 		tempList.insert(dataItr,selectedQrVar);
 		returnRaw->erase(returnRaw->begin());
 		returnRaw->push_back(tempList);
-	}
+	}*/
 	return returnRaw;
 }
+RAWDATA * IntermediateResultTable::uniqueRaw(RAWDATA * currentRaw){
+	//delcare returnRaw
+	RAWDATA * retnRaw = new RAWDATA();
+	//declare iterators;
+	RAWDATA::iterator curItr;
+	RAWDATA::iterator retItr;
+	//step 1:copy the qrVar list 
+	for(curItr = currentRaw->begin();curItr!=currentRaw->end();curItr++){
+		DATA_LIST newList;
+		newList.push_back(curItr->at(0));  //add qrVar List
+		newList.push_back(curItr->at(1));  //add the first entry
+		retnRaw->push_back(newList);
+	}
+	/*step 2:a. loop through the currentRaw,
+			 b. loop through the returnRaw
+			 c. check if current entry exist in any return entry
+			 d. if there is no repeated result, add to return entry
+	*/
 
+	for(int i = 2;i<currentRaw->at(0).size();i++){
+		bool repeated = true;
+		for(int j =1; j<retnRaw->at(0).size();j++){  //checking for loop
+			// assume current entry is repeated
+			repeated = true; 
+			//check result
+			for(int pos = 0; pos <currentRaw->size();pos++){
+				if(currentRaw->at(pos).at(i)!=retnRaw->at(pos).at(j)){
+					repeated = false; //current entry is not repeated
+				}
+			}
+			//if current entry is repeated, break current checking for loop
+			if(repeated) break;
+		}
+		//add non repeated entry to return raw
+		if(!repeated){
+			for(int pos = 0;pos<currentRaw->size();pos++){
+				retnRaw->at(pos).push_back(currentRaw->at(pos).at(i));
+			}
+		}
+	}
+	delete currentRaw;
+	return retnRaw;
+}
 RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_LIST * selectedVarList){
 	//target the table with tableNum
 	DATABASE::iterator currentTable;

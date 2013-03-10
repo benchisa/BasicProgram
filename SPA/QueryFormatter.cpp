@@ -28,7 +28,10 @@ FINAL_RESULT QueryFormatter::formatString(RAWDATA * data) {
 
 		return result;
 	}
-	//checks the type of result at the 1st row and subsequent columns eg. Vector[cols][0]
+	//check if there is empty result
+	if(data->at(0).size()==1) return result;
+
+	//check the type of result at the 1st row and subsequent columns eg. Vector[cols][0]
 	for(int i = 1; i < (data->at(0)).size(); i++) {
 		//type = data-
 		//type = (data[cols])[0].data;

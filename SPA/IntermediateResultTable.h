@@ -32,6 +32,7 @@ private:
 	DATABASE database;
 	RAWDATA * joinRaw(RAWDATA * rawData,int tableNum,DATA_LIST * selectedVarList);
 	RAWDATA * joinCombinations(RAWDATA* rawData, DATA_LIST * selectedVarList);
+	RAWDATA * uniqueRaw(RAWDATA* currentRaw);
 	DesignExtractor * extractor;
 };
 
