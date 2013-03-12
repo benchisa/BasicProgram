@@ -90,7 +90,7 @@ private:
 	static OPERATOR operatorToString(TYPE type);
 	static EXPRESSION formExpression(stack<pair<TYPE, TOKEN>>& operators,stack<OPERAND>& operands);
 	
-	void computeIsAffect(int starting, int ending, int varIndex,list<int> & checkForDuplicate,list<bool> &result);
+	list<bool> computeIsAffect(int starting, int ending, int varIndex);
 	
 
 };
