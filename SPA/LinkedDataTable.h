@@ -30,6 +30,7 @@ private:
 	ROW_LIST rowList;
 
 	bool addOneEntry(int mergeAttrPos,INDEX oldQrVar,INDEX newQrVar,RELATION_LIST * newEntries);
-	void createEntry(INDEX firstQrVar,INDEX secondQrVar,RELATION_LIST * newEntries);
+	bool createEntry(INDEX firstQrVar,INDEX secondQrVar,RELATION_LIST * newEntries);
+	hash_map<int,DATA_LIST> * convertToHash(int mergeAttrPos,RELATION_LIST * newEntries);
 };
 

@@ -125,6 +125,9 @@ IntermediateResultTable * QueryEvaluator::evaluateClause(IntermediateResultTable
 
 	return resultTable;
 }
+void QueryEvaluator::replaceValue(QTREE* probRel,QTREE* replaceRel,INDEX_LIST * probedList){
+
+}
 bool QueryEvaluator::executeSuchThat(IntermediateResultTable * resultTable, QTREE* suchThatTree){
 	QTREE* firstRel;
 	QTREE* secondRel;
@@ -151,7 +154,7 @@ bool QueryEvaluator::executeSuchThat(IntermediateResultTable * resultTable, QTRE
 		//test to see if firstRelVar is already probed in previous steps
 		if(!resultTable->isQrVarDiscovered(qrVarIndex)){
 			 //secondRel is also qrVar and probed in previous steps
-		/*	if(secondQrVar!=-1&&resultTable->isQrVarDiscovered(secondQrVar)){
+			if(secondQrVar!=-1&&resultTable->isQrVarDiscovered(secondQrVar)){
 				//set qrVarIndex to second 
 				qrVarIndex = secondQrVar;
 				INDEX_LIST * currentVarResultList;
@@ -173,10 +176,10 @@ bool QueryEvaluator::executeSuchThat(IntermediateResultTable * resultTable, QTRE
 
 					currentResultList = QueryEvaluator::appendRelationLists(currentResultList,tempList);		
 				}
-			}else{*/
+			}else{
 				//evaluate the tree with no data replacement
 				currentResultList = suchThatClause.evaluateSuchThatTree(suchThatTree);
-			//}
+			}
 		}else{
 		// current qrVar is evaluated in the previous steps
 		/*algo:

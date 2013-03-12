@@ -20,6 +20,7 @@ private:
 	QUERYTABLE* qrTable;
 	RELATION_LIST* evaluateSuchThat();
 	void iterateAndStore(RELATION_LIST *result, RELATION_LIST list);
+	void filterResult(RELATION_LIST * result,RELATION_LIST list,TYPE cond1,TYPE cond2);
 
 };
 

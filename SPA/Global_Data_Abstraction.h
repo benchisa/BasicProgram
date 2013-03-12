@@ -83,8 +83,8 @@ typedef list<pair<string,string>> CALL_LIST;
 typedef pair<string,string> CALL_PAIR;
 typedef list<CALL_PAIR> CALLPAIR_LIST;
 typedef pair<TYPE,int> RELATION_PAIR;
-typedef list<int> ROW;
-typedef list<ROW> ROW_LIST;
+typedef vector<int> ROW;
+typedef vector<ROW> ROW_LIST;
 typedef vector<int> DATA_LIST;
 typedef vector<DATA_LIST> RAWDATA;
 
