@@ -1431,3 +1431,101 @@ void DesignExtractor::insertProcModifiesUses()
 
 	
 }
+
+
+void DesignExtractor::computeIsAffect(int starting, int ending, int varIndex, list<int> & checkForDuplicate,list<bool> &result)
+{
+	
+	NEXT_LIST n_list=getNextResult(starting,0);
+	NEXT_LIST::iterator n_itr;
+
+	for (n_itr=n_list.begin(); n_itr!=n_list.end(); n_itr++)
+	{   
+		//if finally reach ending...means got path!
+		if (n_itr->second==ending)
+		{	
+			result.push_back(true);
+			return;
+		}
+		else
+		{ 			
+			if (pkb->isModifies(ASSIGNMENT,n_itr->second,varIndex))
+			{	
+			    //this is optional, since we checking if there are any "true".
+				result.push_back(false);
+				
+			}
+			else 
+			{
+				//this is for checking cycle
+				list<int>::iterator findIter = find(checkForDuplicate.begin(), checkForDuplicate.end(), n_itr->second);
+				if (findIter==checkForDuplicate.end())
+				{
+					
+					checkForDuplicate.push_back(n_itr->second);
+				   computeIsAffect(n_itr->second, ending,varIndex,checkForDuplicate,result);
+				   
+				}
+				
+				
+			}
+		}
+	}
+	
+}
+
+bool DesignExtractor::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
+{
+	if (stmt1!=0 && stmt2!=0)
+	{
+		//check if they are in same procedure
+		//check if both of them are assignment statement  
+		if (pkb->isInSameProc(stmt1, stmt2) && isStatementTypeOf(ASSIGNMENT, stmt1) &&isStatementTypeOf(ASSIGNMENT, stmt2))
+		{			
+			//if there is a path between them
+			if (isNextStarResult(stmt1, stmt2))
+			{		  
+				MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT, stmt1, 0);
+				MODIFIES_LIST::iterator m_itr=m_list.begin();
+			
+				bool modVarUsed=false;
+				int modVar=0;
+
+				//check if stmt 2 use the variable modified by stmt1
+				if (pkb->isUses(ASSIGNMENT, stmt2, m_itr->second))
+				{  
+					
+					modVarUsed=true;
+					modVar=m_itr->second;
+			
+				}
+			
+				
+			
+				//yes, stmt 2 use the variable modified by stmt1
+				if (modVarUsed)
+				{
+					
+					list<bool> result;
+					list<int> checkForDuplicate;
+					computeIsAffect(stmt1, stmt2, modVar,checkForDuplicate, result);
+					list<bool>::iterator b_itr=find(result.begin(), result.end(), true);
+					if (b_itr==result.end())
+					{
+						return false;
+					}
+					else
+					{
+						return true;
+					}
+					
+				}
+		 
+
+		  }
+		}
+	}
+	
+	return false;
+
+}
