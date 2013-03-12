@@ -1440,46 +1440,6 @@ void DesignExtractor::insertProcModifiesUses()
 }
 
 
-void DesignExtractor::computeIsAffect(int starting, int ending, int varIndex, list<int> & checkForDuplicate,list<bool> &result)
-{
-	
-	NEXT_LIST n_list=getNextResult(starting,0);
-	NEXT_LIST::iterator n_itr;
-
-	for (n_itr=n_list.begin(); n_itr!=n_list.end(); n_itr++)
-	{   
-		//if finally reach ending...means got path!
-		if (n_itr->second==ending)
-		{	
-			result.push_back(true);
-			return;
-		}
-		else
-		{ 			
-			if (pkb->isModifies(ASSIGNMENT,n_itr->second,varIndex))
-			{	
-			    //this is optional, since we checking if there are any "true".
-				result.push_back(false);
-				
-			}
-			else 
-			{
-				//this is for checking cycle
-				list<int>::iterator findIter = find(checkForDuplicate.begin(), checkForDuplicate.end(), n_itr->second);
-				if (findIter==checkForDuplicate.end())
-				{
-					
-					checkForDuplicate.push_back(n_itr->second);
-				   computeIsAffect(n_itr->second, ending,varIndex,checkForDuplicate,result);
-				   
-				}
-				
-				
-			}
-		}
-	}
-	
-}
 
 bool DesignExtractor::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 {
@@ -1537,7 +1497,7 @@ bool DesignExtractor::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2
 
 }
 
-void DesignExtractor::computeIsAffect2(int starting, int ending, int varIndex, list<int> & checkForDuplicate,list<bool> &result)
+void DesignExtractor::computeIsAffect(int starting, int ending, int varIndex, list<int> & checkForDuplicate,list<bool> &result)
 {
 	NEXT_LIST root=getNextResult(starting,0);
 	stack<NEXT_LIST> stacks;
