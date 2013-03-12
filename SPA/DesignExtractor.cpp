@@ -1496,7 +1496,7 @@ bool DesignExtractor::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2
 
 }
 
-void DesignExtractor::computeIsAffect(int starting, int ending, int varIndex)
+list<bool> DesignExtractor::computeIsAffect(int starting, int ending, int varIndex)
 {
 	list<bool> result;
 	list<int> checkForDuplicate;
@@ -1537,6 +1537,7 @@ void DesignExtractor::computeIsAffect(int starting, int ending, int varIndex)
 		}
 
 	}
+	return result;
 }
 
 AFFECT_LIST DesignExtractor::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
