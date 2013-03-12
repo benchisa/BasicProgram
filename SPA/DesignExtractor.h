@@ -54,7 +54,8 @@ public:
 
 	 USES_LIST getUsesResult(TYPE type, int arg1, VAR_INDEX v1);
 	 bool getIsUsesResult(TYPE type, int arg1, VAR_INDEX v1);
-
+	
+	bool getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
 
 	
 private:
@@ -88,6 +89,8 @@ private:
 	static vector<pair<TYPE, TOKEN>> tokenize(EXPRESSION);
 	static OPERATOR operatorToString(TYPE type);
 	static EXPRESSION formExpression(stack<pair<TYPE, TOKEN>>& operators,stack<OPERAND>& operands);
+	
+	void computeIsAffect(int starting, int ending, int varIndex,list<int> & checkForDuplicate,list<bool> &result);
 
 };
 
