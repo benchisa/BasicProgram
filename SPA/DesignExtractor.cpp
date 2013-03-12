@@ -1529,3 +1529,49 @@ bool DesignExtractor::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2
 	return false;
 
 }
+
+void DesignExtractor::computeIsAffect2(int starting, int ending, int varIndex, list<int> & checkForDuplicate,list<bool> &result)
+{
+	NEXT_LIST root=getNextResult(starting,0);
+	stack<NEXT_LIST> stacks;
+	stacks.push(root);
+	while (stacks.size()>0)
+	{
+		NEXT_LIST n_list=stacks.top();
+		NEXT_LIST::iterator n_itr;
+		stacks.pop();
+		for (n_itr=n_list.begin(); n_itr!=n_list.end(); n_itr++)
+		
+		{
+			if (n_itr->second==ending)
+			{	
+				result.push_back(true);
+				return;
+			}
+			else
+			{
+				if (pkb->isModifies(ASSIGNMENT,n_itr->second,varIndex))
+				{	
+					//this is optional, since we checking if there are any "true".
+					result.push_back(false);
+				
+				}
+				else 
+				{
+					//this is for checking cycle
+					list<int>::iterator findIter = find(checkForDuplicate.begin(), checkForDuplicate.end(), n_itr->second);
+					if (findIter==checkForDuplicate.end())
+					{
+					
+						checkForDuplicate.push_back(n_itr->second);
+						NEXT_LIST temp=getNextResult(n_itr->second, 0);
+						stacks.push(temp);
+				   
+					}
+
+				}
+			}
+		}
+
+	}
+}
