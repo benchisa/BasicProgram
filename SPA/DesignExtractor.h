@@ -91,6 +91,7 @@ private:
 	static EXPRESSION formExpression(stack<pair<TYPE, TOKEN>>& operators,stack<OPERAND>& operands);
 	
 	void computeIsAffect(int starting, int ending, int varIndex,list<int> & checkForDuplicate,list<bool> &result);
+	void computeIsAffect2(int starting, int ending, int varIndex,list<int> & checkForDuplicate,list<bool> &result);
 
 };
 
