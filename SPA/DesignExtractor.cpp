@@ -1474,9 +1474,9 @@ bool DesignExtractor::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2
 				{
 					
 					
-					result=computeIsAffect(stmt1, stmt2, modVar);
-					list<bool>::iterator b_itr=find(result.begin(), result.end(), true);
-					if (b_itr==result.end())
+					list<bool>result=computeIsAffect(stmt1, stmt2, modVar);
+					
+					if(result.empty())
 					{
 						return false;
 					}
