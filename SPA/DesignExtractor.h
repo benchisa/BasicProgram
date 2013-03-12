@@ -56,7 +56,7 @@ public:
 	 bool getIsUsesResult(TYPE type, int arg1, VAR_INDEX v1);
 	
 	bool getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
-
+	AFFECT_LIST getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
 	
 private:
 	PKB* pkb;
@@ -91,6 +91,7 @@ private:
 	static EXPRESSION formExpression(stack<pair<TYPE, TOKEN>>& operators,stack<OPERAND>& operands);
 	
 	void computeIsAffect(int starting, int ending, int varIndex,list<int> & checkForDuplicate,list<bool> &result);
+	
 
 };
 
