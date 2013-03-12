@@ -1542,3 +1542,103 @@ void DesignExtractor::computeIsAffect(int starting, int ending, int varIndex, li
 
 	}
 }
+
+AFFECT_LIST DesignExtractor::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
+{
+	AFFECT_LIST answer;
+	//affect (known, unknown);
+	if (stmt1!=0 && stmt2==0)
+	{
+		//check if it is assignment type
+		if (DesignExtractor::isStatementTypeOf(ASSIGNMENT, stmt1))
+		{	
+			//get the modifies variable
+			MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT, stmt1, 0);
+			MODIFIES_LIST::iterator m_itr=m_list.begin();
+			int modVar=m_itr->second;
+
+			//get all the statement that uses modVar
+			USES_LIST u_list=pkb->getUses(ASSIGNMENT, 0, modVar);
+			USES_LIST::iterator u_itr;
+
+			//check one by one if isaffect
+			for (u_itr=u_list.begin(); u_itr!=u_list.end(); u_itr++)
+			{
+				if (pkb->isInSameProc(stmt1, u_itr->first))
+				{
+					if (getIsAffectResult(stmt1, u_itr->first))
+					{
+						answer.push_back(make_pair(stmt1, u_itr->first));
+					}
+				}
+			}
+			
+		}
+	}
+	//affect(unknown, known);
+	else if (stmt1==0 && stmt2!=0)
+	{
+		//check if it is assignment type
+		if (DesignExtractor::isStatementTypeOf(ASSIGNMENT, stmt2))
+		{
+			//get all the uses variable
+			USES_LIST u_list=pkb->getUses(ASSIGNMENT, stmt2, 0);
+			USES_LIST::iterator u_itr;
+
+			//for each of the uses variable, get the modifies index
+			for (u_itr=u_list.begin(); u_itr!=u_list.end(); u_itr++)
+			{
+				MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT, 0, u_itr->second);
+				MODIFIES_LIST::iterator m_itr;
+				//for each of the modifies index, check if they are in same proc and affect each other
+				for (m_itr=m_list.begin(); m_itr!=m_list.end(); m_itr++)
+				{
+					if (pkb->isInSameProc(m_itr->first, stmt2))
+					{
+						if (getIsAffectResult(m_itr->first, stmt2))
+						{
+							answer.push_back(make_pair(m_itr->first, stmt2));
+						}
+					}
+				}
+				
+			}
+		}
+	}
+	//affect(unknown, unknown)
+	else if (stmt1==0 && stmt2==0)
+	{
+		PROC_LIST * p_list=pkb->getAllProc();
+		PROC_LIST::iterator p_itr;
+		for (p_itr=p_list->begin(); p_itr!=p_list->end(); p_itr++)
+		{
+			for (int i=p_itr->getStartProgLine(); i<p_itr->getEndProgLine(); i++)
+			{
+				if (DesignExtractor::isStatementTypeOf(ASSIGNMENT, i))
+				{
+					//get the modifies variable
+					MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT, i, 0);
+					MODIFIES_LIST::iterator m_itr=m_list.begin();
+					int modVar=m_itr->second;
+
+					//get all the statement that uses modVar
+					USES_LIST u_list=pkb->getUses(ASSIGNMENT, 0, modVar);
+					USES_LIST::iterator u_itr;
+
+					//check one by one if isaffect
+					for (u_itr=u_list.begin(); u_itr!=u_list.end(); u_itr++)
+					{
+						if (pkb->isInSameProc(i, u_itr->first))
+						{
+							if (getIsAffectResult(i, u_itr->first))
+							{
+								answer.push_back(make_pair(i, u_itr->first));
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	return answer;
+}
