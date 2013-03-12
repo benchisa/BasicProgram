@@ -1473,9 +1473,8 @@ bool DesignExtractor::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2
 				if (modVarUsed)
 				{
 					
-					list<bool> result;
-					list<int> checkForDuplicate;
-					computeIsAffect(stmt1, stmt2, modVar,checkForDuplicate, result);
+					
+					result=computeIsAffect(stmt1, stmt2, modVar);
 					list<bool>::iterator b_itr=find(result.begin(), result.end(), true);
 					if (b_itr==result.end())
 					{
@@ -1497,8 +1496,10 @@ bool DesignExtractor::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2
 
 }
 
-void DesignExtractor::computeIsAffect(int starting, int ending, int varIndex, list<int> & checkForDuplicate,list<bool> &result)
+void DesignExtractor::computeIsAffect(int starting, int ending, int varIndex)
 {
+	list<bool> result;
+	list<int> checkForDuplicate;
 	NEXT_LIST root=getNextResult(starting,0);
 	stack<NEXT_LIST> stacks;
 	stacks.push(root);
@@ -1517,14 +1518,9 @@ void DesignExtractor::computeIsAffect(int starting, int ending, int varIndex, li
 			}
 			else
 			{
-				if (pkb->isModifies(ASSIGNMENT,n_itr->second,varIndex))
+				if (!pkb->isModifies(ASSIGNMENT,n_itr->second,varIndex))
 				{	
-					//this is optional, since we checking if there are any "true".
-					result.push_back(false);
-				
-				}
-				else 
-				{
+					
 					//this is for checking cycle
 					list<int>::iterator findIter = find(checkForDuplicate.begin(), checkForDuplicate.end(), n_itr->second);
 					if (findIter==checkForDuplicate.end())
@@ -1535,8 +1531,8 @@ void DesignExtractor::computeIsAffect(int starting, int ending, int varIndex, li
 						stacks.push(temp);
 				   
 					}
-
 				}
+			
 			}
 		}
 
