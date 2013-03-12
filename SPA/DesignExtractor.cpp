@@ -1256,49 +1256,56 @@ void DesignExtractor::iterateAndStore(RELATION_LIST *result, RELATION_LIST list)
 }
 	*/
 void  DesignExtractor::computeCallStar(PROC_NAME caller, PROC_NAME callee,list<string> &result)
+
 {
 	if (caller!=" " || callee!=" ")
 	{
-		CALL_LIST calls=pkb->getCall(caller, callee);
-		if (calls.size()>0)
+		CALL_LIST root=pkb->getCall(caller, callee);
+		stack<CALL_LIST> stacks;
+		stacks.push(root);
+		while (!stacks.empty())
 		{
-			CALL_LIST::iterator itr;
-
-			for (itr=calls.begin(); itr!=calls.end(); itr++)
+			CALL_LIST calls=stacks.top();
+			stacks.pop();
+			
+			if (calls.size()>0)
 			{
+				CALL_LIST::iterator itr;
 
-				if (caller!=" " && callee==" ")
-				{	
-					list<string>::iterator findIter = find(result.begin(), result.end(), itr->second);
-					if (findIter==result.end())
-					{
-						result.push_back(itr->second);
-						DesignExtractor::computeCallStar(itr->second, " ",result);
-					}
-					
-					
-				}
-				else if (caller==" " && callee!=" ")
+				for (itr=calls.begin(); itr!=calls.end(); itr++)
 				{
-					list<string>::iterator findIter = find(result.begin(), result.end(), itr->first);
-					if (findIter==result.end())
-					{
-						result.push_back(itr->first);
-						DesignExtractor::computeCallStar(" ",itr->first,result);
+						
+					if (caller!=" " && callee==" ")
+					{	
+						list<string>::iterator findIter = find(result.begin(), result.end(), itr->second);
+						if (findIter==result.end())
+						{
+							result.push_back(itr->second);
+							CALL_LIST temp=pkb->getCall(itr->second, " ");
+							stacks.push(temp);
+						}
+
+
 					}
+					else if (caller==" " && callee!=" ")
+					{
+						list<string>::iterator findIter = find(result.begin(), result.end(), itr->first);
+						if (findIter==result.end())
+						{
+							result.push_back(itr->first);
+							CALL_LIST temp=pkb->getCall(" ",itr->first);
+							stacks.push(temp);
+						}
 
-					
-
-					
+					}
 				}
+
+
 			}
-
-
 		}
-	}
-	
-}
 
+	}
+}
 DATA_LIST * DesignExtractor::getAllConstants(){
 	DATA_LIST * returnList = new DATA_LIST();
 
