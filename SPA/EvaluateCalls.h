@@ -11,6 +11,7 @@ public:
 	static PKB*				EvaluateCalls::pkb;
 	static CALL_LIST		getCallStarResult(PROC_NAME caller, PROC_NAME callee);
 	static bool				getIsCallStarResult(PROC_NAME caller, PROC_NAME callee);
+	static bool				getIsCallResult(PROC_NAME caller, PROC_NAME callee);
 	static MODIFIES_LIST	computeCallModifies(STATEMENT_NUM callStmt,VAR_INDEX varIndex);
 	static bool				isCallModifies(STATEMENT_NUM callStmt,VAR_INDEX varIndex);
 	static bool				isCallUses(STATEMENT_NUM callStmt,VAR_INDEX varIndex);
