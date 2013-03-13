@@ -42,7 +42,7 @@ bool Affects::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 				if (modVarUsed)
 				{
 					
-					return computeIsAffect(stmt1, stmt2, modVar);
+					return Affects::computeIsAffect(stmt1, stmt2, modVar);
 	
 				}
 		  }
@@ -55,9 +55,9 @@ bool Affects::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 bool Affects::computeIsAffect(int starting, int ending, int varIndex)
 {
 	list<int> checkForDuplicate;
-	NEXT_LIST root=EvaluateNext::getNextResult(starting,0);
+
 	stack<NEXT_LIST> stacks;
-	stacks.push(root);
+	stacks.push(EvaluateNext::getNextResult(starting,0););
 	while (stacks.size()>0)
 	{
 		NEXT_LIST n_list=stacks.top();
@@ -82,8 +82,8 @@ bool Affects::computeIsAffect(int starting, int ending, int varIndex)
 						if (findIter==checkForDuplicate.end())
 						{
 							checkForDuplicate.push_back(n_itr->second);
-							NEXT_LIST temp=EvaluateNext::getNextResult(n_itr->second, 0);
-							stacks.push(temp);
+							
+							stacks.push(EvaluateNext::getNextResult(n_itr->second, 0));
 
 						}
 					}
@@ -97,8 +97,8 @@ bool Affects::computeIsAffect(int starting, int ending, int varIndex)
 					{
 
 						checkForDuplicate.push_back(n_itr->second);
-						NEXT_LIST temp=EvaluateNext::getNextResult(n_itr->second, 0);
-						stacks.push(temp);
+					
+						stacks.push(EvaluateNext::getNextResult(n_itr->second, 0));
 
 					}
 				}
@@ -133,7 +133,7 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 			{
 				if (pkb->isInSameProc(stmt1, u_itr->first))
 				{
-					if (getIsAffectResult(stmt1, u_itr->first))
+					if (Affects::getIsAffectResult(stmt1, u_itr->first))
 					{
 						answer.push_back(make_pair(stmt1, u_itr->first));
 					}
@@ -162,7 +162,7 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 				{
 					if (pkb->isInSameProc(m_itr->first, stmt2))
 					{
-						if (getIsAffectResult(m_itr->first, stmt2))
+						if (Affects::getIsAffectResult(m_itr->first, stmt2))
 						{
 							answer.push_back(make_pair(m_itr->first, stmt2));
 						}
@@ -199,7 +199,7 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 					{
 						if (pkb->isInSameProc(i, u_itr->first))
 						{
-							if (getIsAffectResult(i, u_itr->first) )
+							if (Affects::getIsAffectResult(i, u_itr->first) )
 							{
 								answer.push_back(make_pair(i, u_itr->first));
 							}
@@ -218,13 +218,13 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 	{
 		if(stmt1!=0 && stmt2!=0)
 		{
-			if (getIsAffectResult(stmt1,stmt2))
+			if (Affects::getIsAffectResult(stmt1,stmt2))
 			{
 						return true;
 			}
 			if (pkb->isInSameProc(stmt1, stmt2))
 			{
-				if (isNextStarResult(stmt1, stmt2))
+				if (EvaluateNext::isNextStarResult(stmt1, stmt2))
 				{	
 					
 						MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT, stmt1,0);
@@ -234,12 +234,12 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 
 						list<int> checkDuplicate;
 
-						NEXT_LIST root=getNextResult(stmt1,0);
+						
 						NEXT_LIST::iterator n_itr;
 					
 					
 						stack<NEXT_LIST> stacks;
-						stacks.push(root);
+						stacks.push(EvaluateNext::getNextResult(stmt1,0););
 						while (!stacks.empty())
 						{
 							
@@ -260,7 +260,7 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 								}
 								else
 								{	
-									if (isStatementTypeOf(CALL, n_itr->second))
+									if (Helper::isStatementTypeOf(CALL, n_itr->second))
 									{
 										string callee=pkb->getCalleeName(n_itr->second);
 										int calleeIndex=pkb->getProcIndex(callee);
@@ -271,8 +271,8 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 											{
 												checkDuplicate.push_back(n_itr->second);
 											}
-											NEXT_LIST temp=getNextResult(n_itr->second, 0);
-											stacks.push(temp);
+											
+											stacks.push(EvaluateNext::getNextResult(n_itr->second, 0));
 										}
 									}	
 									
@@ -291,8 +291,8 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 											checkDuplicate.push_back(n_itr->second);			
 
 										}
-										NEXT_LIST n_temp=getNextResult(n_itr->second, 0);
-										stacks.push(n_temp);
+										
+										stacks.push(EvaluateNext::getNextResult(n_itr->second, 0));
 										
 									}
 								}
