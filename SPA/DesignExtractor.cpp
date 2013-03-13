@@ -159,3 +159,8 @@ bool DesignExtractor::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2
 AFFECT_LIST DesignExtractor::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2){
 	return Affects::getAffectResult(stmt1, stmt2);
 }
+
+bool	DesignExtractpr::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2){
+	
+	return Affects::getIsAffectStarResult(stmt1,stmt2)
+}
