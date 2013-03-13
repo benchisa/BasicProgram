@@ -30,7 +30,7 @@ bool DesignExtractor::isHigherPrecedence(stack<pair<TYPE, TOKEN>>& operators, TO
 vector<pair<TYPE, TOKEN>> DesignExtractor::tokenize(EXPRESSION expr){
 	vector<pair<TYPE, TOKEN>> res;
 	pair<TYPE, TOKEN> tPair;
-	
+
 	// separate the expr
 	regex rx("\\(|\\)|\\=|\\;|\\-|\\*|\\+|[^\\s\\n\\-\\*\\+\\;\\=\\(\\)]+");
 	sregex_iterator rxItr(expr.begin(), expr.end(), rx), rxend;
@@ -104,16 +104,16 @@ EXPRESSION DesignExtractor::formExpression(stack<pair<TYPE, TOKEN>>& operators, 
 // OUTPUT: - + * 1 2 * 3 4 + - 5 6 - 7 8
 PREFIXEXPR DesignExtractor::convertExprToPrefix(EXPRESSION expr){
 	PREFIXEXPR result;
-	
+
 	stack<pair<TYPE, TOKEN>> operators;
 	stack<OPERAND> operands;
-	
+
 	vector<pair<TYPE, TOKEN>> s = tokenize(expr); 
 	pair<TYPE, TOKEN> tPair;
 
 	vector<pair<TYPE, TOKEN>>::iterator itr = s.begin();
 	while(itr != s.end()){
-		
+
 		// If it is a left parentheses or the stack is empty or higher precendence
 		if(itr->first == STRING){
 			//cout << "Pushing: " << itr->second << " to operands\n";
@@ -166,21 +166,21 @@ bool DesignExtractor::getIsCallResult(PROC_NAME caller, PROC_NAME callee)
 CALL_LIST  DesignExtractor::getCallStarResult(PROC_NAME caller, PROC_NAME callee)
 {
 	set<pair<string,string>> finalResult;
-	
+
 	if (caller==" " && callee==" ")
 	{
 		set<string> caller=pkb->getAllCaller();
 		 std::set<string>::iterator it;
 		 for (it=caller.begin(); it!=caller.end(); it++)
 		 {
-		
-			list<string> &result= DesignExtractor::computeCallStar(*it, " ", result);
+
+			list<string> &result= DesignExtractor::computeCallStar(*it, " ");
 			 if (result.size()>0)
 			 {
 				 list<string>::iterator itr;
 				for (itr=result.begin(); itr!=result.end(); itr++)
 				{
-				
+
 					finalResult.insert(make_pair(*it, *itr));
 				}
 			 }
@@ -189,30 +189,30 @@ CALL_LIST  DesignExtractor::getCallStarResult(PROC_NAME caller, PROC_NAME callee
 	}
 	else{
 
-		list<string> &firstResult= DesignExtractor::computeCallStar(caller, callee, firstResult);
-		
+		list<string> firstResult= DesignExtractor::computeCallStar(caller, callee );
+
 	   if (firstResult.size()>0)
 	   {
-		
+
 		  list<string>::iterator itr;
 		  for (itr=firstResult.begin(); itr!=firstResult.end(); itr++)
 		  {
-			
+
 		 	if (caller!=" " && callee==" ")
 			{
-				
+
 				finalResult.insert(make_pair(caller, *itr));
 			}
 			else if (callee!=" " && caller==" ")
 			{
-				
+
 				finalResult.insert(make_pair(*itr, callee));
 			}
-			
+
 		}
 	  }
 	}
-	
+
 	list <pair<string,string>> answer(finalResult.begin(), finalResult.end());
 
 	return answer;
@@ -223,7 +223,7 @@ bool DesignExtractor::getIsCallStarResult(PROC_NAME caller, PROC_NAME callee)
 {
 	if (caller!=" " && callee!=" ")
 	{
-		
+
 		CALL_LIST result=DesignExtractor::getCallStarResult(caller," ");
 		CALL_LIST::iterator itr;
 		if (!result.empty())
@@ -245,7 +245,7 @@ bool DesignExtractor::getIsCallStarResult(PROC_NAME caller, PROC_NAME callee)
 
 void DesignExtractor::createCFG()
 {
-	
+
 	int size = pkb->getMaxProgLine();
 
 	// create CFG of progline_size
@@ -266,7 +266,7 @@ AST* DesignExtractor::buildCFG(AST * node)
 	while(tmp)
 	{
 		switch(pkb->getType(tmp)){
-		
+
 		case ASSIGNMENT:
 			if(tmp->getRightSibling()){
 				cfg->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getRightSibling()));
@@ -274,29 +274,29 @@ AST* DesignExtractor::buildCFG(AST * node)
 			lastNode = tmp;
 			tmp = tmp->getRightSibling();
 			break;
-		
+
 		case WHILE:
 			cfgWhileKeepers.push_back(pkb->getProgLine(tmp));
 
 			if(tmp->getRightSibling()){
 				cfg->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getRightSibling()));
 			}
-			
+
 			cfg->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()));
 
 			lastNode = buildCFG(tmp->getFirstDescendant()->getRightSibling());
-			
+
 			if(pkb->getType(lastNode) != IF)
 				cfg->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
 
-			
+
 			// change to the correct last node
 			if(lastNode->getAncestor() && pkb->getType(lastNode->getAncestor()->getAncestor()) != IF)
 				lastNode =lastNode->getAncestor()->getAncestor();
 
 
 			cfgWhileKeepers.pop_back();
-			
+
 			tmp = tmp->getRightSibling();
 			break;
 		case IF:
@@ -311,20 +311,20 @@ AST* DesignExtractor::buildCFG(AST * node)
 
 			cfg->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getFirstDescendant()));
 
-		
+
 			// else
 			lastNode = buildCFG(tmp->getFirstDescendant()->getRightSibling()->getRightSibling());
 			if(cfgWhileKeepers.size() != 0 && !tmp->getRightSibling())
 				cfg->addEdge(pkb->getProgLine(lastNode), cfgWhileKeepers.back());
-			
-			
+
+
 			if(tmp->getRightSibling()){
 				cfg->addEdge(pkb->getProgLine(lastNode), pkb->getProgLine(tmp->getRightSibling()));
 			}
 
 
 			cfg->addEdge(pkb->getProgLine(tmp), pkb->getProgLine(tmp->getFirstDescendant()->getRightSibling()->getRightSibling()->getFirstDescendant()));
-			
+
 			lastNode = tmp;
 			tmp = tmp->getRightSibling();
 			break;
@@ -370,7 +370,7 @@ bool DesignExtractor::isNextStarResult(PROG_LINE p1, PROG_LINE p2)
 		return false;
 
 	list<PROG_LINE> tmp = cfg->getAllProgLines(p1, p2);
-	
+
 	if(tmp.size() != 0){
 		list<PROG_LINE>::iterator itr = tmp.begin();
 		while(itr!=tmp.end()){
@@ -437,7 +437,7 @@ list<PROG_LINE> DesignExtractor::getAllProgLines(PROG_LINE p1, PROG_LINE p2)
 FOLLOWS_LIST DesignExtractor::getFollowsResult(TYPE type1, TYPE type2){
 
 	FOLLOWS_LIST result, followLst;
-	
+
 	followLst = pkb->getFollows(0, 0);
 	DesignExtractor::computeTypeOnly(result, followLst, type1, type2);
 	return result;
@@ -446,7 +446,7 @@ FOLLOWS_LIST DesignExtractor::getFollowsResult(TYPE type1, TYPE type2){
 FOLLOWS_LIST DesignExtractor::getFollowsStarResult(TYPE type1, TYPE type2){
 	FOLLOWS_LIST result, followLst, tmpLst;
 	FOLLOWS_LIST::iterator followItr;
-	
+
 	PROC_LIST *procLst = pkb->getAllProc();
 	PROG_LINE startProgLine = procLst->begin()->getStartProgLine();
 	PROG_LINE endProgLine = pkb->getMaxProgLine();
@@ -463,14 +463,14 @@ FOLLOWS_LIST DesignExtractor::getFollowsStarResult(TYPE type1, TYPE type2){
 			}
 		}
 	}
-	
+
 	DesignExtractor::computeTypeOnly(result, followLst, type1, type2);
 	return result;
 }
 
 FOLLOWS_LIST DesignExtractor::getFollowsResult(TYPE type, STATEMENT_NUM s1, STATEMENT_NUM s2){
 	FOLLOWS_LIST result, tmp;
-	
+
 	if((s1 == 0 && s2 != 0) || (s1 != 0 && s2 == 0)){
 		tmp = pkb->getFollows(s1, s2);
 		DesignExtractor::computeFollows(result, tmp, type, s1, s2);
@@ -481,7 +481,7 @@ FOLLOWS_LIST DesignExtractor::getFollowsResult(TYPE type, STATEMENT_NUM s1, STAT
 
 FOLLOWS_LIST DesignExtractor::getFollowsStarResult(TYPE type, STATEMENT_NUM s1, STATEMENT_NUM s2){
 	FOLLOWS_LIST result, tmp;
-	
+
 
 	if((s1 == 0 && s2 != 0) || (s1 != 0 && s2 == 0)){
 		tmp = DesignExtractor::getFollowsStar(s1, s2);
@@ -523,7 +523,7 @@ bool DesignExtractor::getIsFollowsStarResult(STATEMENT_NUM s1, STATEMENT_NUM s2)
 PARENT_LIST DesignExtractor::getParentResult(TYPE type1, TYPE type2)
 {	
 	PARENT_LIST result, parentLst;
-	
+
 	parentLst = pkb->getParent(0, 0);
 	DesignExtractor::computeTypeOnly(result, parentLst, type1, type2);
 
@@ -559,7 +559,7 @@ PARENT_LIST DesignExtractor::getParentStarResult(TYPE type1, TYPE type2)
 
 PARENT_LIST DesignExtractor::getParentResult(TYPE type, STATEMENT_NUM s1, STATEMENT_NUM s2){
 	PARENT_LIST result, tmp;
-	
+
 	if((s1 == 0 && s2 != 0) || (s1 != 0 && s2 == 0)){
 		tmp = pkb->getParent(s1, s2);
 		DesignExtractor::computeParent(result, tmp, type, s1, s2);
@@ -625,7 +625,7 @@ MODIFIES_LIST DesignExtractor::getModifiesResult(TYPE type, int arg1, VAR_INDEX 
 	else if(type == CALL){
 		result = computeCallModifies(arg1, v1);
 	}
-	
+
 	// Modifies(1, _), 
 	else if((type == STATEMENT && arg1 != 0 && v1 == 0
 		|| type == ANY && arg1 != 0 && v1 == 0)){
@@ -665,7 +665,7 @@ MODIFIES_LIST DesignExtractor::getModifiesResult(TYPE type, int arg1, VAR_INDEX 
 
 
 	//cout << "SIZE OF RESULT (MODIFIES): " << result.size() << "\n";
-	
+
 	return result;
 }
 
@@ -681,7 +681,7 @@ bool DesignExtractor::getIsModifiesResult(TYPE type, int arg1, VAR_INDEX v1){
 		// Find the type of first argument
 		astLst = pkb->getASTBy(arg1);
 		astItr = astLst->begin();
-		
+
 		// check for stmt existence in call table
 		/*if(pkb->cal){
 		}*/
@@ -714,7 +714,7 @@ USES_LIST DesignExtractor::getUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 	AST_LIST *astLst;
 	AST_LIST::iterator astItr;
 	TYPE getStatementType;
-	
+
 	/*cout << "asdasd\n";
 	cout << "TYPE: " << type << "\n";
 	cout << "ARG1: " << arg1 << "\n";
@@ -754,10 +754,10 @@ USES_LIST DesignExtractor::getUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 	{
 		tmpLst = pkb->getUses(WHILE, 0, 0);
 		iterateAndStore(result, tmpLst, v1);
-		
+
 		tmpLst = pkb->getUses(IF, 0, 0);
 		iterateAndStore(result, tmpLst, v1);
-		
+
 		tmpLst = this->computeCallUses(0,0);
 		iterateAndStore(result, tmpLst, v1);
 
@@ -785,7 +785,7 @@ bool DesignExtractor::getIsUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 		// Find the type of first argument
 		astLst = pkb->getASTBy(arg1);
 		astItr = astLst->begin();
-		
+
 		if(pkb->isExistCallStmt(arg1)){
 			result = isCallUses(arg1, v1);
 		}
@@ -810,9 +810,9 @@ bool DesignExtractor::getIsUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 
 MODIFIES_LIST DesignExtractor::computeCallModifies(STATEMENT_NUM callStmt,VAR_INDEX varIndex){
 	MODIFIES_LIST resultList;
-			
+
 	if(callStmt==0&&varIndex==0){
-		
+
 		vector<int> callStmt=pkb->getAllCallerStmt();
 		vector<int>::iterator s_itr;
 		for (s_itr=callStmt.begin();s_itr!=callStmt.end(); s_itr++)
@@ -830,7 +830,7 @@ MODIFIES_LIST DesignExtractor::computeCallModifies(STATEMENT_NUM callStmt,VAR_IN
 		}
 	}else if(callStmt!=0&&varIndex==0){
 
-	
+
 		string calleeName=pkb->getCalleeName(callStmt);
 		if (calleeName!=" ")
 		{
@@ -841,13 +841,13 @@ MODIFIES_LIST DesignExtractor::computeCallModifies(STATEMENT_NUM callStmt,VAR_IN
 				resultList.push_back(make_pair(callStmt,m_itr->second));
 			}
 		}
-		
 
 
-	
+
+
 	}else if(callStmt==0&&varIndex!=0){
-	
-		
+
+
 		MODIFIES_LIST m_list=pkb->getModifies(PROCEDURE, 0,varIndex);
 		MODIFIES_LIST::iterator m_itr;
 		MODIFIES_LIST::iterator m_itr2;
@@ -857,11 +857,11 @@ MODIFIES_LIST DesignExtractor::computeCallModifies(STATEMENT_NUM callStmt,VAR_IN
 			{
 				string callerName=pkb->getProcedure(m_itr->first)->getProcName();
 				string calleeName=pkb->getProcedure(m_itr2->first)->getProcName();
-				
+
 				int callerStmt=pkb->getCallStmt(callerName, calleeName);
 				if (callerStmt!=0)
 				{	
-					
+
 					resultList.push_back(make_pair(callerStmt, varIndex));
 				}
 			}
@@ -891,7 +891,7 @@ USES_LIST DesignExtractor::computeCallUses(STATEMENT_NUM callStmt,VAR_INDEX varI
 	USES_LIST resultList;
 
 	if(callStmt==0&&varIndex==0){
-		
+
 		vector<int> callStmt=pkb->getAllCallerStmt();
 		vector<int>::iterator s_itr;
 		for (s_itr=callStmt.begin();s_itr!=callStmt.end(); s_itr++)
@@ -909,7 +909,7 @@ USES_LIST DesignExtractor::computeCallUses(STATEMENT_NUM callStmt,VAR_INDEX varI
 		}
 	}else if(callStmt!=0&&varIndex==0){
 
-	
+
 		string calleeName=pkb->getCalleeName(callStmt);
 		if (calleeName!=" ")
 		{
@@ -920,13 +920,13 @@ USES_LIST DesignExtractor::computeCallUses(STATEMENT_NUM callStmt,VAR_INDEX varI
 				resultList.push_back(make_pair(callStmt,u_itr->second));
 			}
 		}
-		
 
 
-	
+
+
 	}else if(callStmt==0&&varIndex!=0){
-	
-		
+
+
 		USES_LIST u_list=pkb->getUses(PROCEDURE, 0,varIndex);
 		USES_LIST::iterator u_itr;
 		USES_LIST::iterator u_itr2;
@@ -936,11 +936,11 @@ USES_LIST DesignExtractor::computeCallUses(STATEMENT_NUM callStmt,VAR_INDEX varI
 			{
 				string callerName=pkb->getProcedure(u_itr->first)->getProcName();
 				string calleeName=pkb->getProcedure(u_itr2->first)->getProcName();
-				
+
 				int callerStmt=pkb->getCallStmt(callerName, calleeName);
 				if (callerStmt!=0)
 				{	
-					
+
 					resultList.push_back(make_pair(callerStmt, varIndex));
 				}
 			}
@@ -953,12 +953,12 @@ USES_LIST DesignExtractor::computeCallUses(STATEMENT_NUM callStmt,VAR_INDEX varI
 bool DesignExtractor::isCallUses(STATEMENT_NUM callStmt,VAR_INDEX varIndex){
 	if (callStmt!=0 && varIndex!=0)
 	{
-		
+
 		USES_LIST u_list=DesignExtractor::computeCallUses(callStmt, 0);
 		USES_LIST::iterator u_itr;
 		for (u_itr=u_list.begin(); u_itr!=u_list.end(); u_itr++)
 		{
-			
+
 			if (u_itr->first==callStmt && u_itr->second==varIndex)
 			{
 				return true;
@@ -1084,7 +1084,7 @@ void DesignExtractor::computeTypeOnly(list<pair<int, int>> &result, list<pair<in
 		PARENT_LIST::iterator tmpItr;
 		AST_LIST *astLst_t1, *astLst_t2;
 		AST_LIST::iterator astItr_t1, astItr_t2;
-		
+
 		// Parent(s1, s2)/ Parent(_, _)/Parent(ANY, s2)/Parent(s1, ANY)
 		if((type1 == STATEMENT && type2 == STATEMENT ) || (type1== ANY && type2 == ANY)
 			|| (type1 == STATEMENT && type2 == ANY) || (type1 == ANY && type2==STATEMENT)){
@@ -1143,7 +1143,7 @@ void DesignExtractor::computeTypeOnly(list<pair<int, int>> &result, list<pair<in
 			}
 		}
 	}
-	
+
 void DesignExtractor::computeParent(PARENT_LIST &result,PARENT_LIST tmpLst, TYPE type, STATEMENT_NUM s1, STATEMENT_NUM s2)
 	{
 		PARENT_LIST::iterator tmpItr;
@@ -1158,7 +1158,7 @@ void DesignExtractor::computeParent(PARENT_LIST &result,PARENT_LIST tmpLst, TYPE
 
 				if(s1 == 0) astLst = pkb->getASTBy(tmpItr->first);
 				else astLst = pkb->getASTBy(tmpItr->second);
-				
+
 				//cout << tmp << "\n";
 				if(!astLst->empty())
 				{
@@ -1179,7 +1179,7 @@ void DesignExtractor::computeParent(PARENT_LIST &result,PARENT_LIST tmpLst, TYPE
 			else if(type == STATEMENT || type == ANY)
 			{
 				// just want the pair of statement.
-							
+
 				result = tmpLst;
 			}
 		}
@@ -1198,13 +1198,13 @@ void DesignExtractor::computeFollows(FOLLOWS_LIST &result, FOLLOWS_LIST tmp, TYP
 				{
 					if(s1 == 0) astLst = pkb->getASTBy(followItr->first);
 					else astLst = pkb->getASTBy(followItr->second);
-				
+
 					astItr = astLst->begin();
 					while(astItr!=astLst->end())
 					{	
 						if(pkb->getType(*astItr) == type){		
 							result.push_back(*followItr);
-							 
+
 						}
 						astItr++;
 					}
@@ -1254,7 +1254,7 @@ void DesignExtractor::iterateAndStore(RELATION_LIST *result, RELATION_LIST list)
 list<string>  DesignExtractor::computeCallStar(PROC_NAME caller, PROC_NAME callee)
 
 {	
-	list<string> result
+	list<string> result;
 	if (caller!=" " || callee!=" ")
 	{
 		CALL_LIST root=pkb->getCall(caller, callee);
@@ -1264,14 +1264,14 @@ list<string>  DesignExtractor::computeCallStar(PROC_NAME caller, PROC_NAME calle
 		{
 			CALL_LIST calls=stacks.top();
 			stacks.pop();
-			
+
 			if (calls.size()>0)
 			{
 				CALL_LIST::iterator itr;
 
 				for (itr=calls.begin(); itr!=calls.end(); itr++)
 				{
-						
+
 					if (caller!=" " && callee==" ")
 					{	
 						list<string>::iterator findIter = find(result.begin(), result.end(), itr->second);
@@ -1302,7 +1302,7 @@ list<string>  DesignExtractor::computeCallStar(PROC_NAME caller, PROC_NAME calle
 		}
 
 	}
-	return result
+	return result;
 }
 DATA_LIST * DesignExtractor::getAllConstants(){
 	DATA_LIST * returnList = new DATA_LIST();
@@ -1390,7 +1390,7 @@ DATA_LIST * DesignExtractor::getStmtListOf(TYPE nodeType){
 			}
 		}
 		break;
-	
+
 	case CONSTANT:
 		{
 			int constSize = pkb->getConstantTableSize();
@@ -1414,7 +1414,7 @@ void DesignExtractor::insertProcModifiesUses()
 		{
 			int callerIndex=pkb->getProcIndex(c_itr->first);
 			int calleeIndex=pkb->getProcIndex(c_itr->second);
-		 
+
 			MODIFIES_LIST m_list=pkb->getModifies(PROCEDURE, calleeIndex, 0);
 			USES_LIST u_list=pkb->getUses(PROCEDURE, calleeIndex, 0);
 
@@ -1425,16 +1425,16 @@ void DesignExtractor::insertProcModifiesUses()
 			{
 				pkb->insertModifies(PROCEDURE, callerIndex, m_itr->second);
 			}
-	
+
 			for (u_itr=u_list.begin(); u_itr!=u_list.end(); u_itr++)
 			{
 				pkb->insertUses(PROCEDURE, callerIndex, u_itr->second);
 			}		
 		}		
 	}
-	
 
-	
+
+
 }
 
 
@@ -1452,28 +1452,28 @@ bool DesignExtractor::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2
 			{		  
 				MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT, stmt1, 0);
 				MODIFIES_LIST::iterator m_itr=m_list.begin();
-			
+
 				bool modVarUsed=false;
 				int modVar=0;
 
 				//check if stmt 2 use the variable modified by stmt1
 				if (pkb->isUses(ASSIGNMENT, stmt2, m_itr->second))
 				{  
-					
+
 					modVarUsed=true;
 					modVar=m_itr->second;
-			
+
 				}
-			
-				
-			
+
+
+
 				//yes, stmt 2 use the variable modified by stmt1
 				if (modVarUsed)
 				{
-					
-					
+
+
 					list<bool>result=computeIsAffect(stmt1, stmt2, modVar);
-					
+
 					if(result.empty())
 					{
 						return false;
@@ -1482,14 +1482,14 @@ bool DesignExtractor::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2
 					{
 						return true;
 					}
-					
+
 				}
-		 
+
 
 		  }
 		}
 	}
-	
+
 	return false;
 
 }
@@ -1507,30 +1507,30 @@ list<bool> DesignExtractor::computeIsAffect(int starting, int ending, int varInd
 		NEXT_LIST::iterator n_itr;
 		stacks.pop();
 		for (n_itr=n_list.begin(); n_itr!=n_list.end(); n_itr++)
-		
+
 		{
 			if (n_itr->second==ending)
 			{	
 				result.push_back(true);
-				return;
+				break;
 			}
 			else
 			{
 				if (!pkb->isModifies(ASSIGNMENT,n_itr->second,varIndex))
 				{	
-					
+
 					//this is for checking cycle
 					list<int>::iterator findIter = find(checkForDuplicate.begin(), checkForDuplicate.end(), n_itr->second);
 					if (findIter==checkForDuplicate.end())
 					{
-					
+
 						checkForDuplicate.push_back(n_itr->second);
 						NEXT_LIST temp=getNextResult(n_itr->second, 0);
 						stacks.push(temp);
-				   
+
 					}
 				}
-			
+
 			}
 		}
 
@@ -1567,7 +1567,7 @@ AFFECT_LIST DesignExtractor::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM 
 					}
 				}
 			}
-			
+
 		}
 	}
 	//affect(unknown, known);
@@ -1596,7 +1596,7 @@ AFFECT_LIST DesignExtractor::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM 
 						}
 					}
 				}
-				
+
 			}
 		}
 	}
