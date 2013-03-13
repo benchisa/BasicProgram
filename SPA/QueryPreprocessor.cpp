@@ -170,32 +170,72 @@ void QueryPreprocessor::setQTree(){
 	//idea: check selected variable/s is/are from which group/s
 	int grpNum;
 	vector<int> clauseNums;
+	vector<vector<int>> groupings;
 	dVarPair dpair;
-	
-	firstAffect = createQTREENode(ANY);
-	firstFollowsNext = createQTREENode(ANY);
-	firstUsesMod = createQTREENode(ANY);
-	firstCallPar = createQTREENode(ANY);
+
 	firstWithPatt = createQTREENode(ANY);
+	firstFollows= createQTREENode(ANY); 
+	firstFollowsSt= createQTREENode(ANY);
+	firstUsesMod_Proc= createQTREENode(ANY);
+	firstUsesMod_Call= createQTREENode(ANY);
+	firstUsesMod_Stmt= createQTREENode(ANY);
+	firstUsesMod_Assign= createQTREENode(ANY);
+	firstUsesMod_Container= createQTREENode(ANY);
+	firstUsesMod= createQTREENode(ANY);
+	firstCall= createQTREENode(ANY);
+	firstCallSt= createQTREENode(ANY);
+	firstParent_KU= createQTREENode(ANY);
+	firstParent_UK= createQTREENode(ANY);
+	firstParent= createQTREENode(ANY);
+	firstParentSt_KU= createQTREENode(ANY);
+	firstParentSt_UK= createQTREENode(ANY);
+	firstParentSt= createQTREENode(ANY);
+	firstAffect= createQTREENode(ANY);
+	firstAffectSt= createQTREENode(ANY);
+	firstNext= createQTREENode(ANY);
+	firstNextSt= createQTREENode(ANY);
 
 	//prepare sort
-	sortQVarTable();
-		
+	//sortQVarTable();
+	
+	//initialise grouping
+	for (int i=0;i<groupCount;i++){
+		groupings.push_back(vector<int>());
+	}
+
+
+	//flag groups of selected variable
 	//for every variable
 	for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
 		//check if its selected
-		if(dVarIter->second.selected){
-			//get selected's groupNum
-			grpNum = dVarIter->second.groupNum;
+		qVar var = dVarIter->second;
+		string varName = dVarIter->first;
+		//get groupNum
+		grpNum = var.groupNum;
+		if(var.selected){
 			//check if the group is already flagged
 			if (!isFlaggedGroup(grpNum)){
 				//add flag 
 				flagGroups.push_back(grpNum);
+			}	
+		}
+		
+		//get groupings right
+		vector<int> cN = var.clauseNum;
+		for (int v = 0; v<cN.size(); v++){
+			if(std::find(groupings[grpNum].begin(),groupings[grpNum].end(),cN[v])==groupings[grpNum].end()){
+				groupings[grpNum].push_back(cN[v]);
 			}
 		}
+
 	}
 
-	//insert into QTREE the clauses with both constants first
+	//want to further rearrange the clauses in the groups
+
+	
+	//insert the clauses NOT participating in results
+
+	//1. add clauses with two constants
 	for (int i=0; i<twoConstantClauses.size(); i++){
 		currNode = clauses.at(twoConstantClauses.at(i));
 		if (currNode!=NULL){
@@ -205,6 +245,128 @@ void QueryPreprocessor::setQTree(){
 	}
 
 	joinClauses();
+
+	//2. add clauses with one constant	
+	for (int i=0; i<groupings.size(); i++){
+		if (!groupings[i].empty() && !isFlaggedGroup(i)){
+			for (int k = 0; k<groupings[i].size(); k++){
+				if(hasConstantVar(groupings[i][k])){
+					currNode = clauses.at(groupings[i][k]);
+					if (currNode!=NULL){
+						arrangeClauseByRel(currNode);//-------------Apply filters here
+						clauses.at(groupings[i][k]) = NULL;
+					}
+				}
+			}
+
+		}
+	}
+	joinClauses();
+
+	//3. add clauses with two unknowns
+	for (int i=0; i<groupings.size(); i++){
+		if (!groupings[i].empty() && !isFlaggedGroup(i)){
+			//throw the whole list of clauses to be processed
+			processClauses(groupings[i]);
+		}
+	}
+
+	/*
+	//3. add clause with two unknowns
+	for (int i=0; i<sorted_qVarTable.size(); i++){
+		dpair = getQVar(sorted_qVarTable.at(i).first);
+		//choose those not flagged for selected
+		if(!isFlaggedGroup(dpair.second.groupNum)){
+			//retrieve the clause number
+			clauseNums = dpair.second.clauseNum;
+			for (int i=0; i<clauseNums.size(); i++){
+				if (!hasConstantVar(clauseNums.at(i))){
+					currNode = clauses.at(clauseNums.at(i));
+					if (currNode!=NULL){
+						arrangeClauseByRel(currNode);//-------------Apply filters here
+						clauses.at(clauseNums.at(i)) = NULL;
+					}
+				}
+
+			}
+		}
+	}
+	joinClauses();
+	*/
+
+	//4. add clause with wildcard		
+	for (int i=0; i<wildClauses.size(); i++){
+		currNode = clauses.at(wildClauses.at(i));
+		if (currNode!=NULL){
+			arrangeClauseByRel(currNode);
+			clauses.at(wildClauses.at(i)) = NULL;
+		}
+	}		
+	joinClauses();
+
+	//insert the clauses participating in results
+
+	//5. add clauses with one constant
+	for (int i=0; i<groupings.size(); i++){
+		if (!groupings[i].empty() && isFlaggedGroup(i)){
+			for (int k = 0; k<groupings[i].size(); k++){
+				if(hasConstantVar(groupings[i][k])){
+					currNode = clauses.at(groupings[i][k]);
+					if (currNode!=NULL){
+						arrangeClauseByRel(currNode);//-------------Apply filters here
+						clauses.at(groupings[i][k]) = NULL;
+					}
+				}
+			}
+
+		}
+	}
+	joinClauses();
+	
+	/*
+	//6. add clause with two unknowns
+	for (int i=0; i<sorted_qVarTable.size(); i++){
+		dpair = getQVar(sorted_qVarTable.at(i).first);
+			//choose those flagged for selected
+			if(isFlaggedGroup(dpair.second.groupNum)){
+				//retrieve the clause number
+				clauseNums = dpair.second.clauseNum;
+				for (int i=0; i<clauseNums.size(); i++){
+					if (!hasConstantVar(clauseNums.at(i))){
+						currNode = clauses.at(clauseNums.at(i));
+						if (currNode!=NULL){
+							arrangeClauseByRel(currNode);//-------------Apply filters here
+							clauses.at(clauseNums.at(i)) = NULL;
+						}
+					}
+				
+			}
+		}
+	}
+	joinClauses();
+	*/
+
+	//6. add clauses with two unknowns
+	for (int i=0; i<groupings.size(); i++){
+		if (!groupings[i].empty() && isFlaggedGroup(i)){
+			//throw the whole list of clauses to be processed
+			processClauses(groupings[i]);
+		}
+	}
+
+	/*
+	//7. add everything else (make sure everything is added)
+	for (int i=0; i<clauses.size(); i++){
+		currNode = clauses.at(i);
+		if (currNode!=NULL){
+			arrangeClauseByRel(currNode);
+			clauses.at(i) = NULL;
+		}
+	}
+
+	joinClauses();	
+	
+	*/
 
 	//old function
 	/*for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
@@ -221,7 +383,7 @@ void QueryPreprocessor::setQTree(){
 			}
 		}		
 	}
-	*/
+	
 
 	//insert into QTREE the clauses with the variables NOT from those flagged groups 
 	//insert those with 1 constant first
@@ -281,7 +443,7 @@ void QueryPreprocessor::setQTree(){
 	//with 1 constant
 	for (int i=0; i<sorted_qVarTable.size(); i++){
 		dpair = getQVar(sorted_qVarTable.at(i).first);
-		//choose those not flagged for selected
+		//choose those flagged for selected
 		if(isFlaggedGroup(dpair.second.groupNum)){
 			//retrieve the clause number
 			clauseNums = dpair.second.clauseNum;
@@ -323,7 +485,6 @@ void QueryPreprocessor::setQTree(){
 	joinClauses();
 
 	//old function
-	/*
 	for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
 		if(isFlaggedGroup(dVarIter->second.groupNum)){
 			clauseNums = dVarIter->second.clauseNum;
@@ -337,8 +498,9 @@ void QueryPreprocessor::setQTree(){
 			}
 		}		
 	}
-	*/
 	
+	
+
 	for (int i=0; i<clauses.size(); i++){
 		currNode = clauses.at(i);
 		if (currNode!=NULL){
@@ -348,7 +510,348 @@ void QueryPreprocessor::setQTree(){
 	}
 
 	joinClauses();
-	
+	*/
+}
+
+vector<QTREE*> QueryPreprocessor::addToProbe(QTREE* currClause){
+	vector<QTREE*> queue;
+	//found in probed, add to queue
+	int first = currClause->getFirstDescendant()->getFirstDescendant()->getData();
+	int second = currClause->getFirstDescendant()->getLastDescendant()->getData();
+	vector<int>::iterator posfirst = std::find(trackProbes.begin(),trackProbes.end(),first);
+	vector<int>::iterator possecond = std::find(trackProbes.begin(),trackProbes.end(),second);
+	//both arguments probed
+	if(posfirst!=trackProbes.end() && possecond!=trackProbes.end()){
+		queue.push_back(currClause);
+	}
+	//first argument probed
+	else if (posfirst!=trackProbes.end()){
+		queue.push_back(currClause);
+		trackProbes.push_back(second);
+	}
+	//second argument probed
+	else if (possecond!=trackProbes.end()){
+		queue.push_back(currClause);
+		trackProbes.push_back(first);
+	}
+	return queue;
+}
+
+void QueryPreprocessor::processClauses(vector<int> cl){
+	QTREE* currClause;
+	vector<QTREE*> queue;
+	vector<QTREE*> follows;	
+	vector<QTREE*> parent;	
+	vector<QTREE*> calls;
+	vector<QTREE*> modifies_assign;
+	vector<QTREE*> modifies_container;	
+	vector<QTREE*> modifies_proc;
+	vector<QTREE*> modifies_call;
+	vector<QTREE*> modifies_stmt;
+	vector<QTREE*> uses_assign;
+	vector<QTREE*> uses_container;	
+	vector<QTREE*> uses_proc;
+	vector<QTREE*> uses_call;
+	vector<QTREE*> uses_stmt;
+	vector<QTREE*> callst;
+	vector<QTREE*> parentst;
+	vector<QTREE*> followst;
+	vector<QTREE*> next;
+	vector<QTREE*> nextst;
+	vector<QTREE*> affects;
+	vector<QTREE*> affectst;
+	TYPE relType;
+	for (int w=0; w< cl.size() ; w++){
+		currClause = clauses[cl[w]];
+		if(currClause!=NULL){			
+			relType = currClause->getFirstDescendant()->getType();
+			//follows
+			if (relType==FOLLOWS){
+				follows.push_back(currClause);
+			}
+			//follows*
+			else if (relType==FOLLOWST){
+				followst.push_back(currClause);
+			}
+			//parent
+			else if (relType==PARENT){			
+				parent.push_back(currClause);
+			}
+			//parent*
+			else if (relType==PARENTST){
+				parentst.push_back(currClause);
+			}
+			//calls
+			else if (relType==CALL){
+				calls.push_back(currClause);
+			}
+			//calls*
+			else if (relType==CALLST){
+				callst.push_back(currClause);
+			}
+			//next
+			else if (relType==NEXT){
+				next.push_back(currClause);
+			}
+			//next*
+			else if (relType==NEXTST){
+				nextst.push_back(currClause);
+			}
+			//affect
+			else if (relType==AFFECTS){
+				affects.push_back(currClause);
+			}
+			//affect*
+			else if (relType==AFFECTST){
+				affects.push_back(currClause);
+			}
+			//modifies
+			else if (relType==MODIFIES){
+				//assign
+				if (getQVarType(currClause->getFirstDescendant()->getFirstDescendant()->getData())==ASSIGNMENT){
+					modifies_assign.push_back(currClause);
+				}
+				//proc
+				if (getQVarType(currClause->getFirstDescendant()->getFirstDescendant()->getData())==PROCEDURE){
+					modifies_proc.push_back(currClause);
+				}
+				//call
+				if (getQVarType(currClause->getFirstDescendant()->getFirstDescendant()->getData())==CALL){
+					modifies_call.push_back(currClause);
+				}
+				//container
+				if (getQVarType(currClause->getFirstDescendant()->getFirstDescendant()->getData())==WHILE || getQVarType(currClause->getFirstDescendant()->getFirstDescendant()->getData())==IF){
+					modifies_container.push_back(currClause);
+				}
+				//stmt
+				if (getQVarType(currClause->getFirstDescendant()->getFirstDescendant()->getData())==STATEMENT){
+					modifies_stmt.push_back(currClause);
+				}
+			}
+			//uses
+			else if (relType==USES){
+				//assign
+				if (getQVarType(currClause->getFirstDescendant()->getFirstDescendant()->getData())==ASSIGNMENT){
+					uses_assign.push_back(currClause);
+				}
+				//proc
+				if (getQVarType(currClause->getFirstDescendant()->getFirstDescendant()->getData())==PROCEDURE){
+					uses_proc.push_back(currClause);
+				}
+				//call
+				if (getQVarType(currClause->getFirstDescendant()->getFirstDescendant()->getData())==CALL){
+					uses_call.push_back(currClause);
+				}
+				//container
+				if (getQVarType(currClause->getFirstDescendant()->getFirstDescendant()->getData())==WHILE || getQVarType(currClause->getFirstDescendant()->getFirstDescendant()->getData())==IF){
+					uses_container.push_back(currClause);
+				}
+				//stmt
+				if (getQVarType(currClause->getFirstDescendant()->getFirstDescendant()->getData())==STATEMENT){
+					uses_stmt.push_back(currClause);
+				}
+			}
+			clauses[cl[w]] = NULL;
+		}
+	}
+
+	//check for probes
+	for(int a = 0; a< follows.size(); a++){
+		currClause = follows[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
+	for(int a = 0; a< parent.size(); a++){
+		currClause = parent[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
+	for(int a = 0; a< calls.size(); a++){
+		currClause = calls[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
+	for(int a = 0; a< modifies_assign.size(); a++){
+		currClause = modifies_assign[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
+	for(int a = 0; a< uses_assign.size(); a++){
+		currClause = uses_assign[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
+	for(int a = 0; a< callst.size(); a++){
+		currClause = callst[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
+	for(int a = 0; a< parentst.size(); a++){
+		currClause = parentst[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
+	for(int a = 0; a< followst.size(); a++){
+		currClause = followst[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
+	for(int a = 0; a< modifies_container.size(); a++){
+		currClause = modifies_container[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
+	for(int a = 0; a< modifies_proc.size(); a++){
+		currClause = modifies_proc[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
+	for(int a = 0; a< modifies_call.size(); a++){
+		currClause = modifies_call[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
+	for(int a = 0; a< modifies_stmt.size(); a++){
+		currClause = modifies_stmt[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
+	for(int a = 0; a< uses_container.size(); a++){
+		currClause = uses_container[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
+	for(int a = 0; a< uses_proc.size(); a++){
+		currClause = uses_proc[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
+	for(int a = 0; a< uses_call.size(); a++){
+		currClause = uses_call[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
+	for(int a = 0; a< uses_stmt.size(); a++){
+		currClause = uses_stmt[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
+	for(int a = 0; a< next.size(); a++){
+		currClause = next[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
+	for(int a = 0; a< nextst.size(); a++){
+		currClause = nextst[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
+	for(int a = 0; a< affects.size(); a++){
+		currClause = affects[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
+	for(int a = 0; a< affectst.size(); a++){
+		currClause = affectst[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
+
+	//chainup
+	for(int i=0;i< follows.size();i++){
+		if(std::find(queue.begin(),queue.end(),follows[i])==queue.end())
+			queue.push_back(follows[i]);
+	}
+	for(int i=0;i< parent.size();i++){
+		if(std::find(queue.begin(),queue.end(),parent[i])==queue.end())
+			queue.push_back(parent[i]);
+	}	
+	for(int i=0;i< calls.size();i++){
+		if(std::find(queue.begin(),queue.end(),calls[i])==queue.end())
+			queue.push_back(calls[i]);
+	}
+	for(int i=0;i< modifies_assign.size();i++){
+		if(std::find(queue.begin(),queue.end(),modifies_assign[i])==queue.end())
+			queue.push_back(modifies_assign[i]);
+	}
+	for(int i=0;i< uses_assign.size();i++){
+		if(std::find(queue.begin(),queue.end(),uses_assign[i])==queue.end())
+			queue.push_back(uses_assign[i]);
+	}
+	for(int i=0;i< callst.size();i++){
+		if(std::find(queue.begin(),queue.end(),callst[i])==queue.end())
+			queue.push_back(callst[i]);
+	}
+	for(int i=0;i< parentst.size();i++){
+		if(std::find(queue.begin(),queue.end(),parentst[i])==queue.end())
+			queue.push_back(parentst[i]);
+	}
+	for(int i=0;i< followst.size();i++){
+		if(std::find(queue.begin(),queue.end(),followst[i])==queue.end())
+			queue.push_back(followst[i]);
+	}
+	for(int i=0;i< modifies_container.size();i++){
+		if(std::find(queue.begin(),queue.end(),modifies_container[i])==queue.end())
+			queue.push_back(modifies_container[i]);
+	}	
+	for(int i=0;i< modifies_proc.size();i++){
+		if(std::find(queue.begin(),queue.end(),modifies_proc[i])==queue.end())
+			queue.push_back(modifies_proc[i]);
+	}
+	for(int i=0;i< modifies_assign.size();i++){
+		if(std::find(queue.begin(),queue.end(),modifies_assign[i])==queue.end())
+			queue.push_back(modifies_assign[i]);
+	}
+	for(int i=0;i< modifies_call.size();i++){
+		if(std::find(queue.begin(),queue.end(),modifies_call[i])==queue.end())
+			queue.push_back(modifies_call[i]);
+	}
+	for(int i=0;i< modifies_stmt.size();i++){
+		if(std::find(queue.begin(),queue.end(),modifies_stmt[i])==queue.end())
+			queue.push_back(modifies_stmt[i]);
+	}
+	for(int i=0;i< uses_container.size();i++){
+		if(std::find(queue.begin(),queue.end(),uses_container[i])==queue.end())
+			queue.push_back(uses_container[i]);
+	}	
+	for(int i=0;i< uses_proc.size();i++){
+		if(std::find(queue.begin(),queue.end(),uses_proc[i])==queue.end())
+			queue.push_back(uses_proc[i]);
+	}
+	for(int i=0;i< uses_assign.size();i++){
+		if(std::find(queue.begin(),queue.end(),uses_assign[i])==queue.end())
+			queue.push_back(uses_assign[i]);
+	}
+	for(int i=0;i< uses_call.size();i++){
+		if(std::find(queue.begin(),queue.end(),uses_call[i])==queue.end())
+			queue.push_back(uses_call[i]);
+	}
+	for(int i=0;i< uses_stmt.size();i++){
+		if(std::find(queue.begin(),queue.end(),uses_stmt[i])==queue.end())
+			queue.push_back(uses_stmt[i]);
+	}
+	for(int i=0;i< next.size();i++){
+		if(std::find(queue.begin(),queue.end(),next[i])==queue.end())
+			queue.push_back(next[i]);
+	}	
+	for(int i=0;i< nextst.size();i++){
+		if(std::find(queue.begin(),queue.end(),nextst[i])==queue.end())
+			queue.push_back(nextst[i]);
+	}
+	for(int i=0;i< affects.size();i++){
+		if(std::find(queue.begin(),queue.end(),affects[i])==queue.end())
+			queue.push_back(affects[i]);
+	}	
+	for(int i=0;i< affectst.size();i++){
+		if(std::find(queue.begin(),queue.end(),affectst[i])==queue.end())
+			queue.push_back(affectst[i]);
+	}
+
+	//finally can add to final node
+	for(int w=0;w<queue.size();w++){
+		firstNode->getLastSibling()->setSibling(queue[w]);
+		firstNode->setLastSibling(queue[w]);
+	}
 }
 
 void QueryPreprocessor::arrangeClauseByRel(QTREE* node){
@@ -356,7 +859,9 @@ void QueryPreprocessor::arrangeClauseByRel(QTREE* node){
 	
 
 	relType = node->getFirstDescendant()->getType();
-	if (node->getType()==PATTERN || node->getType()==WITH){
+	
+	//pattern, with
+	if (relType==PATTERN || relType==WITH){
 		if (firstWithPatt->getType()==ANY){
 			firstWithPatt = node;
 		}
@@ -365,34 +870,191 @@ void QueryPreprocessor::arrangeClauseByRel(QTREE* node){
 		}
 		lastWithPatt = node;
 	}
-	else if (relType==CALL||relType==PARENT||relType==CALLST||relType==PARENTST){
-		if (firstCallPar->getType()==ANY){
-			firstCallPar = node;
+	//calls
+	else if (relType==CALL){
+		if (firstCall->getType()==ANY){
+			firstCall = node;
 		}
 		else{
-			lastCallPar->setSibling(node);
+			lastCall->setSibling(node);
 		}
-		lastCallPar = node;
+		lastCall = node;
 	}
-	else if (relType==USES||relType==MODIFIES){
-		if (firstUsesMod->getType()==ANY){
-			firstUsesMod = node;
+	//calls*
+	else if (relType==CALLST){
+		if (firstCallSt->getType()==ANY){
+			firstCallSt = node;
 		}
 		else{
-			lastUsesMod->setSibling(node);
+			lastCallSt->setSibling(node);
 		}
-		lastUsesMod = node;
+		lastCallSt = node;
 	}
-	else if (relType==FOLLOWS||relType==FOLLOWST||relType==NEXT||relType==NEXTST){
-		if (firstFollowsNext->getType()==ANY){
-			firstFollowsNext = node;
+	//parent
+	else if (relType==PARENT){
+		if (node->getFirstDescendant()->getFirstDescendant()->getType()==QUERYVAR){
+			//(unknown,known)
+			if (firstParent_UK->getType()==ANY){
+				firstParent_UK = node;
+			}
+			else{
+				lastParent_UK->setSibling(node);
+			}
+			lastParent_UK = node;
 		}
 		else{
-			lastFollowsNext->setSibling(node);
-		}
-		lastFollowsNext = node;
+			//(known,unknown)			
+			if (firstParent_KU->getType()==ANY){
+				firstParent_KU = node;
+			}
+			else{
+				lastParent_KU->setSibling(node);
+			}
+			lastParent_KU = node;
+		}			
 	}
-	else if (relType==AFFECTS||relType==AFFECTST){
+	//parent*
+	else if (relType==PARENTST){
+		if (node->getFirstDescendant()->getFirstDescendant()->getType()==QUERYVAR){
+			//(unknown,known)
+			if (firstParentSt_UK->getType()==ANY){
+				firstParentSt_UK = node;
+			}
+			else{
+				lastParentSt_UK->setSibling(node);
+			}
+			lastParentSt_UK = node;
+		}
+		else{
+			//(known,unknown)
+			if (firstParentSt_KU->getType()==ANY){
+				firstParentSt_KU = node;
+			}
+			else{
+				lastParentSt_KU->setSibling(node);
+			}
+			lastParentSt_KU = node;
+		}
+	}
+	//follows
+	else if (relType==FOLLOWS){
+		if (firstFollows->getType()==ANY){
+			firstFollows = node;
+		}
+		else{
+			lastFollows->setSibling(node);
+		}
+		lastFollows = node;
+	}
+	//follows*
+	else if (relType==FOLLOWST){
+		if (firstFollowsSt->getType()==ANY){
+			firstFollowsSt = node;
+		}
+		else{
+			lastFollowsSt->setSibling(node);
+		}
+		lastFollowsSt = node;
+	}
+	//modifies,uses
+	else if (relType==MODIFIES||relType==USES){
+		if (node->getFirstDescendant()->getFirstDescendant()->getType()==QUERYVAR){
+			//(unknown,known)
+				//find out what is the first unknown: stmt,while/if,assign,call,proc?
+				if(getQVarType(node->getFirstDescendant()->getFirstDescendant()->getData())==STATEMENT){
+					if (firstUsesMod_Stmt->getType()==ANY){
+						firstUsesMod_Stmt = node;
+					}
+					else{
+						lastUsesMod_Stmt->setSibling(node);
+					}
+					lastUsesMod_Stmt = node;
+				}
+				else if(getQVarType(node->getFirstDescendant()->getFirstDescendant()->getData())==ASSIGNMENT){
+					if (firstUsesMod_Assign->getType()==ANY){
+						firstUsesMod_Assign = node;
+					}
+					else{
+						lastUsesMod_Assign->setSibling(node);
+					}
+					lastUsesMod_Assign = node;
+				}
+				else if(getQVarType(node->getFirstDescendant()->getFirstDescendant()->getData())==PROCEDURE){
+					if (firstUsesMod_Proc->getType()==ANY){
+						firstUsesMod_Proc = node;
+					}
+					else{
+						lastUsesMod_Proc->setSibling(node);
+					}
+					lastUsesMod_Proc = node;
+				}
+				else if(getQVarType(node->getFirstDescendant()->getFirstDescendant()->getData())==CALL){
+					if (firstUsesMod_Call->getType()==ANY){
+						firstUsesMod_Call = node;
+					}
+					else{
+						lastUsesMod_Call->setSibling(node);
+					}
+					lastUsesMod_Call = node;
+				}
+				else if(getQVarType(node->getFirstDescendant()->getFirstDescendant()->getData())==WHILE || getQVarType(node->getFirstDescendant()->getFirstDescendant()->getData())==IF){
+					if (firstUsesMod_Container->getType()==ANY){
+						firstUsesMod_Container = node;
+					}
+					else{
+						lastUsesMod_Container->setSibling(node);
+					}
+					lastUsesMod_Container = node;
+				}
+			
+		}
+		else{
+			//(known,unknown)
+			if (node->getFirstDescendant()->getLastDescendant()->getType()==QUERYVAR){
+				if (node->getFirstDescendant()->getFirstDescendant()->getType()==STATEMENT){
+					if (firstUsesMod_Stmt->getType()==ANY){
+						firstUsesMod_Stmt = node;
+					}
+					else{
+						lastUsesMod_Stmt->setSibling(node);
+					}
+					lastUsesMod_Stmt = node;
+				}
+				else if (node->getFirstDescendant()->getFirstDescendant()->getType()==PROCEDURE){
+					if (firstUsesMod_Proc->getType()==ANY){
+						firstUsesMod_Proc = node;
+					}
+					else{
+						lastUsesMod_Proc->setSibling(node);
+					}
+					lastUsesMod_Proc = node;
+				}
+			}			
+		}
+		
+	}
+	//next
+	else if (relType==NEXT){
+		if (firstNext->getType()==ANY){
+			firstNext = node;
+		}
+		else{
+			lastNext->setSibling(node);
+		}
+		lastNext = node;
+	}
+	//next*
+	else if (relType==NEXTST){
+		if (firstNextSt->getType()==ANY){
+			firstNextSt = node;
+		}
+		else{
+			lastNextSt->setSibling(node);
+		}
+		lastNextSt = node;
+	}
+	//affects
+	else if (relType==AFFECTS){
 		if (firstAffect->getType()==ANY){
 			firstAffect = node;
 		}
@@ -401,41 +1063,150 @@ void QueryPreprocessor::arrangeClauseByRel(QTREE* node){
 		}
 		lastAffect = node;
 	}
+	//affects*
+	else if (relType==AFFECTST){
+		if (firstAffectSt->getType()==ANY){
+			firstAffectSt = node;
+		}
+		else{
+			lastAffectSt->setSibling(node);
+		}
+		lastAffectSt = node;
+	}
+
+
 }
 
 void QueryPreprocessor::joinClauses(){
 
+	//with,pattern
 	if (firstWithPatt->getType()!=ANY){
 		firstNode->getLastSibling()->setSibling(firstWithPatt);
 		firstNode->setLastSibling(lastWithPatt);		
 	}
-
-	if (firstCallPar->getType()!=ANY){
-		firstNode->getLastSibling()->setSibling(firstCallPar);
-		firstNode->setLastSibling(lastCallPar);		
+	//follows
+	if (firstFollows->getType()!=ANY){
+		firstNode->getLastSibling()->setSibling(firstFollows);
+		firstNode->setLastSibling(lastFollows);		
 	}
-
+	//parent(unknown,known)
+	if (firstParent_UK->getType()!=ANY){
+		firstNode->getLastSibling()->setSibling(firstParent_UK);
+		firstNode->setLastSibling(lastParent_UK);		
+	}
+	//parent(known,unknown)
+	if (firstParent_KU->getType()!=ANY){
+		firstNode->getLastSibling()->setSibling(firstParent_KU);
+		firstNode->setLastSibling(lastParent_KU);		
+	}
+	//parent
+	if (firstParent->getType()!=ANY){
+		firstNode->getLastSibling()->setSibling(firstParent);
+		firstNode->setLastSibling(lastParent);		
+	}
+	//calls
+	if (firstCall->getType()!=ANY){
+		firstNode->getLastSibling()->setSibling(firstCall);
+		firstNode->setLastSibling(lastCall);		
+	}
+	//modifies(unknown_assign,unknown/known)
+	if (firstUsesMod_Assign->getType()!=ANY){
+		firstNode->getLastSibling()->setSibling(firstUsesMod_Assign);
+		firstNode->setLastSibling(lastUsesMod_Assign);		
+	}
+	//calls*
+	if (firstCallSt->getType()!=ANY){
+		firstNode->getLastSibling()->setSibling(firstCallSt);
+		firstNode->setLastSibling(lastCallSt);		
+	}
+	//parent*(unknown,known)
+	if (firstParentSt_UK->getType()!=ANY){
+		firstNode->getLastSibling()->setSibling(firstParentSt_UK);
+		firstNode->setLastSibling(lastParentSt_UK);		
+	}	
+	//follows*
+	if (firstFollowsSt->getType()!=ANY){
+		firstNode->getLastSibling()->setSibling(firstFollowsSt);
+		firstNode->setLastSibling(lastFollowsSt);		
+	}
+	//parent*(known,unknown)
+	if (firstParentSt_KU->getType()!=ANY){
+		firstNode->getLastSibling()->setSibling(firstParentSt_KU);
+		firstNode->setLastSibling(lastParentSt_KU);		
+	}
+	//parent*
+	if (firstParentSt->getType()!=ANY){
+		firstNode->getLastSibling()->setSibling(firstParentSt);
+		firstNode->setLastSibling(lastParentSt);		
+	}
+	//uses/modifies(unknown_container,unknown/known)
+	if (firstUsesMod_Container->getType()!=ANY){
+		firstNode->getLastSibling()->setSibling(firstUsesMod_Container);
+		firstNode->setLastSibling(lastUsesMod_Container);		
+	}
+	//uses/modifies(unknown_proc,unknown/known)
+	if (firstUsesMod_Proc->getType()!=ANY){
+		firstNode->getLastSibling()->setSibling(firstUsesMod_Proc);
+		firstNode->setLastSibling(lastUsesMod_Proc);		
+	}
+	//uses/modifies(unknown_call,unknown/known)
+	if (firstUsesMod_Call->getType()!=ANY){
+		firstNode->getLastSibling()->setSibling(firstUsesMod_Call);
+		firstNode->setLastSibling(lastUsesMod_Call);		
+	}
+	//uses/modifies(unknown_stmt,unknown/known)
+	if (firstUsesMod_Stmt->getType()!=ANY){
+		firstNode->getLastSibling()->setSibling(firstUsesMod_Stmt);
+		firstNode->setLastSibling(lastUsesMod_Stmt);		
+	}
+	//uses/modifies
 	if (firstUsesMod->getType()!=ANY){
 		firstNode->getLastSibling()->setSibling(firstUsesMod);
 		firstNode->setLastSibling(lastUsesMod);		
 	}
-
-	if (firstFollowsNext->getType()!=ANY){
-	firstNode->getLastSibling()->setSibling(firstFollowsNext);
-		firstNode->setLastSibling(lastFollowsNext);		
+	//next
+	if (firstNext->getType()!=ANY){
+		firstNode->getLastSibling()->setSibling(firstNext);
+		firstNode->setLastSibling(lastNext);		
 	}
-
+	//next*
+	if (firstNextSt->getType()!=ANY){
+		firstNode->getLastSibling()->setSibling(firstNextSt);
+		firstNode->setLastSibling(lastNextSt);		
+	}
+	//affect
 	if (firstAffect->getType()!=ANY){
 		firstNode->getLastSibling()->setSibling(firstAffect);
 		firstNode->setLastSibling(lastAffect);		
 	}
-
+	//affect*
+	if (firstAffectSt->getType()!=ANY){
+		firstNode->getLastSibling()->setSibling(firstAffectSt);
+		firstNode->setLastSibling(lastAffectSt);		
+	}
 	
-	firstAffect = createQTREENode(ANY);
-	firstFollowsNext = createQTREENode(ANY);
-	firstUsesMod = createQTREENode(ANY);
-	firstCallPar = createQTREENode(ANY);
+	
 	firstWithPatt = createQTREENode(ANY);
+	firstFollows= createQTREENode(ANY); 
+	firstFollowsSt= createQTREENode(ANY);
+	firstUsesMod_Proc= createQTREENode(ANY);
+	firstUsesMod_Call= createQTREENode(ANY);
+	firstUsesMod_Stmt= createQTREENode(ANY);
+	firstUsesMod_Assign= createQTREENode(ANY);
+	firstUsesMod_Container= createQTREENode(ANY);
+	firstUsesMod= createQTREENode(ANY);
+	firstCall= createQTREENode(ANY);
+	firstCallSt= createQTREENode(ANY);
+	firstParent_KU= createQTREENode(ANY);
+	firstParent_UK= createQTREENode(ANY);
+	firstParent= createQTREENode(ANY);
+	firstParentSt_KU= createQTREENode(ANY);
+	firstParentSt_UK= createQTREENode(ANY);
+	firstParentSt= createQTREENode(ANY);
+	firstAffect= createQTREENode(ANY);
+	firstAffectSt= createQTREENode(ANY);
+	firstNext= createQTREENode(ANY);
+	firstNextSt= createQTREENode(ANY);
 }
 
 bool QueryPreprocessor::isFlaggedGroup(int grpNum){
@@ -657,7 +1428,18 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 				currNode = createQTREENode(VARIABLE,pkb->getVarIndex(currToken));				
 			}
 			if (prevArgConstant){
+				twoConstantClauses.push_back(clauseCount);
+			}
+			else if(firstArg){					
+				prevArgConstant = true;
+				firstArg = false;
+			}
+			else{
 				oneConstantClauses.push_back(clauseCount);
+				int t = getQVarIndex(syn[0]);
+				if(std::find(trackProbes.begin(),trackProbes.end(),t)==trackProbes.end()){
+					trackProbes.push_back(t);
+				}
 			}
 		}
 		//can also be wildcards _
@@ -673,6 +1455,9 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 			if (prevArgConstant){
 				oneConstantClauses.push_back(clauseCount);
 			}
+			else if(firstArg){				
+				firstArg = false;
+			}			
 		}
 		//check is the synonym declared
 		else if (isDeclaredVar(currToken)){
@@ -680,8 +1465,15 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 			syn.push_back(currToken);			
 			currNode = createQTREENode(QUERYVAR,getQVarIndex(currToken));
 			if (prevArgConstant){
-				oneConstantClauses.push_back(clauseCount);
+				oneConstantClauses.push_back(clauseCount);		
+				int t = getQVarIndex(syn[0]);		
+				if(std::find(trackProbes.begin(),trackProbes.end(),t)==trackProbes.end()){
+					trackProbes.push_back(t);
+				}
 			}
+			else if(firstArg){		
+				firstArg = false;
+			}			
 		}
 		//even if not declared,could be a constant statement number
 		else if (isConstant(currToken)){
@@ -705,6 +1497,10 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 				}
 				else{
 					oneConstantClauses.push_back(clauseCount);
+					int t = getQVarIndex(syn[0]);
+					if(std::find(trackProbes.begin(),trackProbes.end(),t)==trackProbes.end()){
+						trackProbes.push_back(t);
+					}
 				}
 			}
 		}
@@ -833,6 +1629,10 @@ bool QueryPreprocessor::processWith(TOKEN token){
 			setChild(headNode,currNode);	
 			currNode = createQTREENode(PARAM,(*paramTable).size()-1);
 			oneConstantClauses.push_back(clauseCount);
+			int t = getQVarIndex(syn[0]);
+			if(std::find(trackProbes.begin(),trackProbes.end(),t)==trackProbes.end()){
+				trackProbes.push_back(t);
+			}
 		}
 		else if (isConstant(currToken)){		
 		//not syn: is constant
@@ -840,6 +1640,10 @@ bool QueryPreprocessor::processWith(TOKEN token){
 			setChild(headNode,currNode);			
 			currNode = createQTREENode(CONSTANT,atoi(currToken.c_str()));
 			oneConstantClauses.push_back(clauseCount);
+			int t = getQVarIndex(syn[0]);
+			if(std::find(trackProbes.begin(),trackProbes.end(),t)==trackProbes.end()){
+				trackProbes.push_back(t);
+			}
 		}
 		setChild(headNode,currNode);
 	}
@@ -878,6 +1682,10 @@ bool QueryPreprocessor::processPattern(TOKEN token){
 		currNode = createQTREENode(QUERYVAR,getQVarIndex(patterns.at(0)));
 		setChild(headNode,currNode);
 		prevNode = currNode;
+		int t = getQVarIndex(syn[0]);
+		if(std::find(trackProbes.begin(),trackProbes.end(),t)==trackProbes.end()){
+			trackProbes.push_back(t);
+		}
 	}
 
 	for(int i=1;i<patterns.size();i++){			
@@ -918,6 +1726,10 @@ bool QueryPreprocessor::processPattern(TOKEN token){
 				}
 				syn.push_back(currToken);
 				currNode = createQTREENode(QUERYVAR,getQVarIndex(currToken));
+				int t = getQVarIndex(syn[1]);
+				if(std::find(trackProbes.begin(),trackProbes.end(),t)==trackProbes.end()){
+					trackProbes.push_back(t);
+				}
 			}
 			setChild(prevNode,currNode);
 		}
@@ -1024,6 +1836,7 @@ void QueryPreprocessor::setQVarGroup(vector<TOKEN> arguments){
 		if (isExploredVar(arg)){
 			if (prevExplored){
 				//prev arg also explored
+				updateRelatedVar(arg,arguments.at(i-1));
 				if (groupNum!= getQVarGroup(arg)){
 					//two exists in diff groups, should merge the groups
 					mergeGroup(getQVarGroup(arg),groupNum);
@@ -1042,6 +1855,9 @@ void QueryPreprocessor::setQVarGroup(vector<TOKEN> arguments){
 				groupNum=groupCount;
 				groupCount++;
 			}
+			else{				
+				updateRelatedVar(arg,arguments.at(i-1));
+			}
 			updateQVarGroup(arg,groupNum);
 		}
 		
@@ -1050,12 +1866,31 @@ void QueryPreprocessor::setQVarGroup(vector<TOKEN> arguments){
 	}
 }
 
+void QueryPreprocessor::updateRelatedVar(TOKEN rightVar,TOKEN leftVar){
+	qVar changeVar;
+	dVarIter = (*dVarTable).find(rightVar);
+	changeVar = dVarIter->second;
+	(*dVarTable).erase(dVarIter);
+	if(std::find(changeVar.leftVar.begin(),changeVar.leftVar.end(),getQVarIndex(leftVar))==changeVar.leftVar.end()){
+		changeVar.leftVar.push_back(getQVarIndex(leftVar));
+	}
+	(*dVarTable).insert(dVarPair(rightVar,changeVar));
+
+	dVarIter = (*dVarTable).find(leftVar);
+	changeVar = dVarIter->second;
+	(*dVarTable).erase(dVarIter);
+	if(std::find(changeVar.rightVar.begin(),changeVar.rightVar.end(),getQVarIndex(rightVar))==changeVar.rightVar.end()){
+		changeVar.rightVar.push_back(getQVarIndex(rightVar));
+	}
+	(*dVarTable).insert(dVarPair(leftVar,changeVar));
+}
+
 void QueryPreprocessor::updateQVarGroup(TOKEN token,int groupNum){
 	qVar changeVar;
 	dVarIter = (*dVarTable).find(token);
 	changeVar = dVarIter->second;
 	changeVar.groupNum = groupNum;
-	changeVar.explored = true;
+	changeVar.explored = true;	
 	(*dVarTable).erase(dVarIter);
 	(*dVarTable).insert(dVarPair(token,changeVar));
 }
@@ -1072,12 +1907,23 @@ void QueryPreprocessor::updateQVarClause(TOKEN token){
 	(*dVarTable).insert(dVarPair(token,changeVar));
 }
 
+void QueryPreprocessor::updateQVarClause(TOKEN token,vector<int> newClauses){
+	qVar changeVar;
+	vector<int> clauses;
+	dVarIter = (*dVarTable).find(token);
+	changeVar = dVarIter->second;
+	changeVar.clauseNum = newClauses;
+	(*dVarTable).erase(dVarIter);
+	(*dVarTable).insert(dVarPair(token,changeVar));
+}
+
 void QueryPreprocessor::mergeGroup(int grp1, int grp2){
 	//goal: merge grp2 into grp1
 	vector<dVarPair> updatedVar;
 	vector<hash_map<string,qVar>::const_iterator> marker;
 	qVar changeVar;
 	TOKEN varName;
+
 	for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
 		if(dVarIter->second.groupNum==grp2){			
 			changeVar = dVarIter->second;
@@ -1090,7 +1936,7 @@ void QueryPreprocessor::mergeGroup(int grp1, int grp2){
 	for(int i=0;i<marker.size();i++){
 		(*dVarTable).erase(marker.at(i));
 		(*dVarTable).insert(updatedVar.at(i));
-	}
+	}	
 }
 
 QueryPreprocessor::dVarPair QueryPreprocessor::getQVar(int index){
@@ -1302,7 +2148,7 @@ void QueryPreprocessor::cleanUp(){
 	oneConstantClauses.clear();
 	twoConstantClauses.clear();
 	flagGroups.clear();
-	exprPieces.clear();
+	//exprPieces.clear();
 	sorted_qVarTable.clear();
 }
 

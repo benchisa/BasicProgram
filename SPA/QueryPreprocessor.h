@@ -50,7 +50,6 @@ private:
 	GrammarTable grammarTable;
 	vector<TOKEN> *tokens;	
 	bool selectBool;
-	bool keepUpperCase;
 	
 	struct qVar{
 		int qVarIndex;
@@ -58,15 +57,17 @@ private:
 		TYPE qVarType;
 		bool selected;
 		bool explored;
+		vector<int> rightVar;
+		vector<int> leftVar;
 		vector<int> clauseNum;
 	};
-	
+
 	struct sortBySecond {
 		bool operator()(const std::pair<int,TYPE> &left, const std::pair<int,TYPE> &right) {
 			return left.second < right.second;
 		}
 	};
-
+	
 	//qVarTable keeps track of the synonym's number and type
 	//qVarTable is the final data structure to pass to Evaluator
 	hash_map<int,TYPE> *qVarTable;
@@ -83,19 +84,20 @@ private:
 
 	typedef pair<int,TYPE> qVarPair;	
 	typedef pair<int,string> paramPair;	
-	typedef pair<string,qVar> dVarPair;			
+	typedef pair<string,qVar> dVarPair;	
 	
 	vector<QTREE*> clauses; //keeps 'SUCHTHAT','WITH' and 'PATTERN' headNodes
 	vector<int> wildClauses; //keeps the clause numbers of the clauses that has two wilds "_"
 	vector<int> twoConstantClauses; //keeps the clause numbers of the clauses that has two constants
 	vector<int> oneConstantClauses;
 	vector<int> flagGroups;
+	vector<int> trackProbes;
 	vector<qVarPair> sorted_qVarTable;
 
-	vector<TOKEN> exprPieces;
+	//vector<TOKEN> exprPieces;
 	//iterators for expression tree
-	std::vector<TOKEN>::iterator next;
-	std::vector<TOKEN>::iterator end;
+	//std::vector<TOKEN>::iterator next;
+	//std::vector<TOKEN>::iterator end;
 	
 	int clauseCount; //keeps track of how many condition clauses are there
 	int groupCount;	
@@ -106,16 +108,49 @@ private:
 	QTREE* headNode;
 	
 	//helpers for rearranging clauses
-	QTREE* firstAffect;
-	QTREE* firstFollowsNext;
-	QTREE* firstUsesMod;
-	QTREE* firstCallPar;
 	QTREE* firstWithPatt;
-	QTREE* lastAffect;
-	QTREE* lastFollowsNext;
-	QTREE* lastUsesMod;
-	QTREE* lastCallPar;
+	QTREE* firstFollows; 
+	QTREE* firstFollowsSt;
+	QTREE* firstUsesMod_Proc;
+	QTREE* firstUsesMod_Call;
+	QTREE* firstUsesMod_Stmt;
+	QTREE* firstUsesMod_Assign;
+	QTREE* firstUsesMod_Container;
+	QTREE* firstUsesMod;
+	QTREE* firstCall;
+	QTREE* firstCallSt;
+	QTREE* firstParent_KU;
+	QTREE* firstParent_UK;
+	QTREE* firstParent;
+	QTREE* firstParentSt_KU;
+	QTREE* firstParentSt_UK;
+	QTREE* firstParentSt;
+	QTREE* firstAffect;
+	QTREE* firstAffectSt;
+	QTREE* firstNext;
+	QTREE* firstNextSt;
 	QTREE* lastWithPatt;
+	QTREE* lastFollows; 
+	QTREE* lastFollowsSt;
+	QTREE* lastUsesMod_Proc;
+	QTREE* lastUsesMod_Call;
+	QTREE* lastUsesMod_Stmt;
+	QTREE* lastUsesMod_Assign;
+	QTREE* lastUsesMod_Container;
+	QTREE* lastUsesMod;
+	QTREE* lastCall;	
+	QTREE* lastCallSt;
+	QTREE* lastParent_KU;
+	QTREE* lastParent_UK;
+	QTREE* lastParent;
+	QTREE* lastParentSt_KU;
+	QTREE* lastParentSt_UK;
+	QTREE* lastParentSt;
+	QTREE* lastAffect;
+	QTREE* lastAffectSt;
+	QTREE* lastNext;
+	QTREE* lastNextSt;
+	
 
 	QueryPreprocessor::ERROR_MSG errorMsg;
 
@@ -151,6 +186,8 @@ private:
 	void setQVarGroup(vector<TOKEN>);
 	void updateQVarGroup(TOKEN,int);
 	void updateQVarClause(TOKEN);
+	void updateQVarClause(TOKEN,vector<int>);
+	void updateRelatedVar(TOKEN,TOKEN);
 	void mergeGroup(int,int);
 	dVarPair getQVar(int);
 	int getQVarGroup(TOKEN);
@@ -170,9 +207,12 @@ private:
 	void insertClause(QTREE*);
 
 	//setup Query Tree for evaluator's use
+	int chain(int);
 	void setQTree();
 	void arrangeClauseByRel(QTREE*);
 	void joinClauses();
+	void processClauses(vector<int>);
+	vector<QTREE*> addToProbe(QTREE*);
 	bool isFlaggedGroup(int);
 
 	//clean up memory
