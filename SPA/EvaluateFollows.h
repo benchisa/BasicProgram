@@ -2,6 +2,7 @@
 #include "Global_Data_Abstraction.h"
 #include "PKB.h"
 #include "Helper.h"
+#include <stack>
 
 class EvaluateFollows
 {
