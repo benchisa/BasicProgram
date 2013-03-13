@@ -22,9 +22,6 @@ private:
 	NEXT_LIST paths;
 	bool isConnected(PROG_LINE p1, PROG_LINE p2);
 	void computeProgLines(PROG_LINE p1, PROG_LINE p2, int reverse);
-
-	// Helpers
-	pair <PROG_LINE, PROG_LINE> createPair(PROG_LINE p1, PROG_LINE p2);
 	
 };
 
