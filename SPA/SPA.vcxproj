@@ -11,14 +11,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Affects.cpp" />
     <ClCompile Include="AssignTable.cpp" />
     <ClCompile Include="AST.cpp" />
     <ClCompile Include="CallTable.cpp" />
     <ClCompile Include="ConstantTable.cpp" />
     <ClCompile Include="DesignExtractor.cpp" />
     <ClCompile Include="CFG.cpp" />
+    <ClCompile Include="EvaluateCalls.cpp" />
+    <ClCompile Include="EvaluateFollows.cpp" />
+    <ClCompile Include="EvaluateModifies.cpp" />
+    <ClCompile Include="EvaluateNext.cpp" />
+    <ClCompile Include="EvaluateParents.cpp" />
+    <ClCompile Include="EvaluateUses.cpp" />
     <ClCompile Include="FrontEndController.cpp" />
     <ClCompile Include="GrammarTable.cpp" />
+    <ClCompile Include="Helper.cpp" />
     <ClCompile Include="IfTable.cpp" />
     <ClCompile Include="IntermediateResultTable.cpp" />
     <ClCompile Include="LinkedDataTable.cpp" />
@@ -45,13 +53,21 @@
     <ClCompile Include="Follows.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Affects.h" />
     <ClInclude Include="AssignTable.h" />
     <ClInclude Include="CallTable.h" />
     <ClInclude Include="ConstantTable.h" />
     <ClInclude Include="DesignExtractor.h" />
     <ClInclude Include="CFG.h" />
+    <ClInclude Include="EvaluateCalls.h" />
+    <ClInclude Include="EvaluateFollows.h" />
+    <ClInclude Include="EvaluateModifies.h" />
+    <ClInclude Include="EvaluateNext.h" />
+    <ClInclude Include="EvaluateParents.h" />
+    <ClInclude Include="EvaluateUses.h" />
     <ClInclude Include="FrontEndController.h" />
     <ClInclude Include="GrammarTable.h" />
+    <ClInclude Include="Helper.h" />
     <ClInclude Include="IfTable.h" />
     <ClInclude Include="IntermediateResultTable.h" />
     <ClInclude Include="LinkedDataTable.h" />

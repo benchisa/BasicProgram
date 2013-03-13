@@ -144,6 +144,30 @@
     <ClCompile Include="CFG.cpp">
       <Filter>Source Files\DE</Filter>
     </ClCompile>
+    <ClCompile Include="EvaluateCalls.cpp">
+      <Filter>Source Files\DE</Filter>
+    </ClCompile>
+    <ClCompile Include="EvaluateUses.cpp">
+      <Filter>Source Files\DE</Filter>
+    </ClCompile>
+    <ClCompile Include="EvaluateFollows.cpp">
+      <Filter>Source Files\DE</Filter>
+    </ClCompile>
+    <ClCompile Include="EvaluateModifies.cpp">
+      <Filter>Source Files\DE</Filter>
+    </ClCompile>
+    <ClCompile Include="EvaluateNext.cpp">
+      <Filter>Source Files\DE</Filter>
+    </ClCompile>
+    <ClCompile Include="EvaluateParents.cpp">
+      <Filter>Source Files\DE</Filter>
+    </ClCompile>
+    <ClCompile Include="Helper.cpp">
+      <Filter>Source Files\DE</Filter>
+    </ClCompile>
+    <ClCompile Include="Affects.cpp">
+      <Filter>Source Files\DE</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Follows.h">
@@ -240,6 +264,30 @@
       <Filter>Header Files\DE</Filter>
     </ClInclude>
     <ClInclude Include="CFG.h">
+      <Filter>Header Files\DE</Filter>
+    </ClInclude>
+    <ClInclude Include="EvaluateCalls.h">
+      <Filter>Header Files\DE</Filter>
+    </ClInclude>
+    <ClInclude Include="EvaluateUses.h">
+      <Filter>Header Files\DE</Filter>
+    </ClInclude>
+    <ClInclude Include="EvaluateFollows.h">
+      <Filter>Header Files\DE</Filter>
+    </ClInclude>
+    <ClInclude Include="EvaluateModifies.h">
+      <Filter>Header Files\DE</Filter>
+    </ClInclude>
+    <ClInclude Include="EvaluateNext.h">
+      <Filter>Header Files\DE</Filter>
+    </ClInclude>
+    <ClInclude Include="EvaluateParents.h">
+      <Filter>Header Files\DE</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper.h">
+      <Filter>Header Files\DE</Filter>
+    </ClInclude>
+    <ClInclude Include="Affects.h">
       <Filter>Header Files\DE</Filter>
     </ClInclude>
   </ItemGroup>

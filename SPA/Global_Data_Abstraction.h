@@ -70,6 +70,7 @@ typedef list<pair<int, int>> FOLLOWS_LIST;
 typedef list<pair<int, int>> PARENT_LIST;
 typedef list<pair<int, int>> RELATION_LIST;
 typedef list<pair<int, int>> NEXT_LIST;
+typedef list<pair<int, int>> AFFECT_LIST;
 typedef list<int> STATEMENT_LIST;
 typedef list<int> INDEX_LIST;
 typedef std::list<int> CONSTANT_LIST;

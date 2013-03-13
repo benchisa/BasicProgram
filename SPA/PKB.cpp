@@ -358,7 +358,7 @@ string PKB::getCalleeName(STATEMENT_NUM cIndex)
 	return callTable->getCalleeName(cIndex);
 
 }
-DATA_LIST PKB::getAllCallerStmt()
+DATA_LIST* PKB::getAllCallerStmt()
 {
 	return callTable->getAllCallerStmt();
 }

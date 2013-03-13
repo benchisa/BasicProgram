@@ -109,7 +109,7 @@ class PKB
 		set<string> getAllCaller();
 		string getCallerName(STATEMENT_NUM cIndex);
 		string getCalleeName(STATEMENT_NUM cIndex);
-		DATA_LIST getAllCallerStmt();
+		DATA_LIST* getAllCallerStmt();
 		STATEMENT_NUM getCallStmt(PROC_NAME caller, PROC_NAME callee);
 		bool isExistCallStmt(STATEMENT_NUM callStmt);
 		
