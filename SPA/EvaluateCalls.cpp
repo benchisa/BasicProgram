@@ -154,9 +154,9 @@ MODIFIES_LIST EvaluateCalls::computeCallModifies(STATEMENT_NUM callStmt,VAR_INDE
 
 	if(callStmt==0&&varIndex==0){
 
-		DATA_LIST callStmt=pkb->getAllCallerStmt();
+		DATA_LIST *callStmt=pkb->getAllCallerStmt();
 		DATA_LIST::iterator s_itr;
-		for (s_itr=callStmt.begin();s_itr!=callStmt.end(); s_itr++)
+		for (s_itr=callStmt->begin();s_itr!=callStmt->end(); s_itr++)
 		{
 			string calleeName=pkb->getCalleeName(*s_itr);
 			if (calleeName!=" ")
@@ -233,9 +233,9 @@ USES_LIST EvaluateCalls::computeCallUses(STATEMENT_NUM callStmt,VAR_INDEX varInd
 
 	if(callStmt==0&&varIndex==0){
 
-		DATA_LIST callStmt=pkb->getAllCallerStmt();
+		DATA_LIST *callStmt=pkb->getAllCallerStmt();
 		DATA_LIST::iterator s_itr;
-		for (s_itr=callStmt.begin();s_itr!=callStmt.end(); s_itr++)
+		for (s_itr=callStmt->begin();s_itr!=callStmt->end(); s_itr++)
 		{
 			string calleeName=pkb->getCalleeName(*s_itr);
 			if (calleeName!=" ")
