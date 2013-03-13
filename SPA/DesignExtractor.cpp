@@ -1624,8 +1624,10 @@ AFFECT_LIST DesignExtractor::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM 
 		PROC_LIST::iterator p_itr;
 		for (p_itr=p_list->begin(); p_itr!=p_list->end(); p_itr++)
 		{
-			for (int i=p_itr->getStartProgLine(); i<p_itr->getEndProgLine(); i++)
+			
+			for (int i=p_itr->getStartProgLine(); i<=p_itr->getEndProgLine(); i++)
 			{
+				
 				if (DesignExtractor::isStatementTypeOf(ASSIGNMENT, i))
 				{
 					//get the modifies variable
@@ -1642,14 +1644,16 @@ AFFECT_LIST DesignExtractor::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM 
 					{
 						if (pkb->isInSameProc(i, u_itr->first))
 						{
-							if (getIsAffectResult(i, u_itr->first))
+							if (getIsAffectResult(i, u_itr->first) )
 							{
 								answer.push_back(make_pair(i, u_itr->first));
 							}
+							
 						}
 					}
 				}
 			}
+			
 		}
 	}
 	return answer;
