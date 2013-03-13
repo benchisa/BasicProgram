@@ -173,9 +173,8 @@ CALL_LIST  DesignExtractor::getCallStarResult(PROC_NAME caller, PROC_NAME callee
 		 std::set<string>::iterator it;
 		 for (it=caller.begin(); it!=caller.end(); it++)
 		 {
-			 
-			 list<string> result;
-			 DesignExtractor::computeCallStar(*it, " ", result);
+		
+			list<string> &result= DesignExtractor::computeCallStar(*it, " ", result);
 			 if (result.size()>0)
 			 {
 				 list<string>::iterator itr;
@@ -188,12 +187,9 @@ CALL_LIST  DesignExtractor::getCallStarResult(PROC_NAME caller, PROC_NAME callee
 
 		 }
 	}
-	else
+	else{
 
-	{	
-		
-		list<string> firstResult;
-		DesignExtractor::computeCallStar(caller, callee, firstResult);
+		list<string> &firstResult= DesignExtractor::computeCallStar(caller, callee, firstResult);
 		
 	   if (firstResult.size()>0)
 	   {
@@ -1255,9 +1251,10 @@ void DesignExtractor::iterateAndStore(RELATION_LIST *result, RELATION_LIST list)
 	
 }
 	*/
-void  DesignExtractor::computeCallStar(PROC_NAME caller, PROC_NAME callee,list<string> &result)
+list<string>  DesignExtractor::computeCallStar(PROC_NAME caller, PROC_NAME callee)
 
-{
+{	
+	list<string> &result
 	if (caller!=" " || callee!=" ")
 	{
 		CALL_LIST root=pkb->getCall(caller, callee);
@@ -1305,6 +1302,7 @@ void  DesignExtractor::computeCallStar(PROC_NAME caller, PROC_NAME callee,list<s
 		}
 
 	}
+	return result
 }
 DATA_LIST * DesignExtractor::getAllConstants(){
 	DATA_LIST * returnList = new DATA_LIST();
