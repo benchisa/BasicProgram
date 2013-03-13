@@ -5,11 +5,66 @@ QueryFormatter::QueryFormatter(PKB * pkb){
 	this->pkb = pkb;
 }
 QueryFormatter::~QueryFormatter(void){
+
 }
 void QueryFormatter::setQrTable(QUERYTABLE * qrTable){
 	this->qrTable = qrTable;
 }
-FINAL_RESULT QueryFormatter::formatString(RAWDATA * data) {
+
+FINAL_RESULT QueryFormatter::formatString(FINALRAW * data,DATA_LIST * selectedVars){
+
+	TYPE type;
+	int value;
+	FINAL_RESULT  result;
+	//check if the type is boolean (special case)
+	if(selectedVars==NULL||selectedVars->size()==0){
+		if(data->begin()->second[0]==1){
+			result.push_back("true");
+		}else{
+			result.push_back("false");
+		}
+
+		return result;
+	}
+	
+	//check if there is empty result
+	if(data==NULL||data->size()<1) return result;
+
+	//check the type of result at the 1st row and subsequent columns eg. Vector[cols][0]
+	FINALRAW::iterator itr;
+	for(itr = data->begin();itr!=data->end();itr++){
+		//find current set of result
+		DATA_LIST currentValue = itr->second;
+		string currentEntry;  //entry in string result
+
+		for(int i=0;i<selectedVars->size();i++){
+			//find current selected variable type
+			TYPE currentVarType = qrTable->find(selectedVars->at(i))->second;
+			//find current data in the set of final raw
+			int currData = currentValue[i];
+			string currentValue;
+
+			if(currentVarType == VARIABLE) {
+				VAR_NAME varName = pkb->getVarName(currData);
+				currentValue = varName;
+			}else if(currentVarType==PROCEDURE) { 
+				Procedure * proc = pkb->getProcedure(currData);
+				currentValue = proc->getProcName();
+			}else if(currentVarType==CONSTANT){
+				int constValue = pkb->getConstantValue(currData);
+				currentValue = static_cast<ostringstream*>( &(ostringstream() << constValue) )->str();
+			}else{
+				currentValue = static_cast<ostringstream*>( &(ostringstream() << currData) )->str();
+			}
+			currentEntry.append(currentValue);
+			if(i!=selectedVars->size()-1) currentEntry.append(" ");
+		}
+		result.push_back(currentEntry);
+	}
+	return result;
+}
+
+/*FINAL_RESULT QueryFormatter::formatString(RAWDATA * data) {
 	
 	TYPE type;
 	int value;
@@ -69,5 +124,4 @@ FINAL_RESULT QueryFormatter::formatString(RAWDATA * data) {
 
 	return result;
 
-}
-
+}*/

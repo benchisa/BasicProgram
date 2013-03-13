@@ -15,7 +15,7 @@ public:
 	bool joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,INDEX secondQrVar,RELATION_LIST * newList);
 	bool isQrVarDiscovered(INDEX qrVarIndex);
 	INDEX_LIST* getResultListOf(INDEX qrVarIndex);
-	RAWDATA* findResultOf(DATA_LIST resultNodeList);
+	FINALRAW* findResultOf(DATA_LIST resultNodeList);
 	DATA_LIST * getStmtListOf(TYPE nodeType);
 
 private:
@@ -32,7 +32,7 @@ private:
 	DATABASE database;
 	RAWDATA * joinRaw(RAWDATA * rawData,int tableNum,DATA_LIST * selectedVarList);
 	RAWDATA * joinCombinations(RAWDATA* rawData, DATA_LIST * selectedVarList);
-	RAWDATA * uniqueRaw(RAWDATA* currentRaw);
+	FINALRAW * uniqueRaw(RAWDATA* currentRaw);
 	DesignExtractor * extractor;
 };
 

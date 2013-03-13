@@ -87,6 +87,7 @@ typedef vector<int> ROW;
 typedef vector<ROW> ROW_LIST;
 typedef vector<int> DATA_LIST;
 typedef vector<DATA_LIST> RAWDATA;
+typedef hash_map<string,DATA_LIST> FINALRAW;
 
 
 typedef int STATEMENT_NUM,VAR_INDEX,SIZE, PROC_INDEX,PROG_LINE,USES_INDEX,MODIFIES_INDEX,INDEX,CONSTANT_INDEX,CALL_INDEX,JOIN_ATTR;
@@ -104,3 +105,4 @@ struct ASSIGNENTRY{
 	int varIndex;
 	string prefixTree;
 };
+

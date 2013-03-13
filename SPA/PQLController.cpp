@@ -27,7 +27,7 @@ FINAL_RESULT PQLController::getQueryResult(QUERY newQuery){
 			//call formatter
 			queryFormatter->setQrTable(queryProcessor->getQVarTable());
 			//cout << "the formatter is OK" << endl;	
-			returnResult= queryFormatter->formatString(queryEval->getRawResult());	
+			returnResult= queryFormatter->formatString(queryEval->getRawResult(),queryEval->getSelectedVars());	
 			
 
 		}else{

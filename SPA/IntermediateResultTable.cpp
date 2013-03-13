@@ -193,15 +193,16 @@ bool IntermediateResultTable::joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,IND
 	}
 	return true;
 }
-RAWDATA *IntermediateResultTable::findResultOf(DATA_LIST resultNodeList){
+FINALRAW *IntermediateResultTable::findResultOf(DATA_LIST resultNodeList){
 	RAWDATA * returnRaw;
 	returnRaw = NULL;
 	GROUP nodeGroup;
 	DATA_LIST keyTable;
-	
+	bool repeatedEntity = false;
 
 	//group the qrVar nodes order according to their database number
 	DATA_LIST::iterator nodeListItr;
+
 	int i =0;
 	for(nodeListItr = resultNodeList.begin();nodeListItr!=resultNodeList.end();nodeListItr++){
 		//add the key_value pair into group, key = databaseNum
@@ -211,12 +212,12 @@ RAWDATA *IntermediateResultTable::findResultOf(DATA_LIST resultNodeList){
 		}
 		nodeGroup.insert(valuePair(key,*nodeListItr));
 		
-
 		//store the new key into the keyTable
 		DATA_LIST::iterator keyItr;
 		keyItr = find(keyTable.begin(),keyTable.end(),key);
-		if(keyItr==keyTable.end())
+		if(keyItr==keyTable.end()){
 			keyTable.push_back(key);
+		}
 	}
 
 	//extract the qrVar names in one table, and merge them into the final returnRaw
@@ -255,7 +256,13 @@ RAWDATA *IntermediateResultTable::findResultOf(DATA_LIST resultNodeList){
 	//returnRaw = tempRaw;
 
 	//unique the return result
-	returnRaw = IntermediateResultTable::uniqueRaw(tempRaw);
+	FINALRAW * finalRaw = IntermediateResultTable::uniqueRaw(tempRaw);
+	delete returnRaw, tempRaw;
+
+	return finalRaw;
+	
+//	returnRaw = IntermediateResultTable::uniqueRaw(tempRaw);
+	
 	/*
 	if(returnRaw->size()==1){
 		INDEX selectedQrVar = returnRaw->at(0).at(0);
@@ -278,11 +285,35 @@ RAWDATA *IntermediateResultTable::findResultOf(DATA_LIST resultNodeList){
 		tempList.insert(dataItr,selectedQrVar);
 		returnRaw->erase(returnRaw->begin());
 		returnRaw->push_back(tempList);
-	}*/
-	return returnRaw;
+	}
+	return returnRaw;*/
+
+	
 }
-RAWDATA * IntermediateResultTable::uniqueRaw(RAWDATA * currentRaw){
-	//delcare returnRaw
+FINALRAW * IntermediateResultTable::uniqueRaw(RAWDATA * currentRaw){
+	FINALRAW * finalRaw = new FINALRAW;
+	FINALRAW::iterator finalRawItr;
+	int rowSize = currentRaw->at(0).size();
+	for(int row =1; row<rowSize; row++){
+		string key="";
+		DATA_LIST value;
+		for(int col=0;col<currentRaw->size();col++){
+			//create the final raw key
+			//create the final raw value
+			int currentData = currentRaw->at(col).at(row);
+			key.append(static_cast<ostringstream*>( &(ostringstream() << currentData))->str());
+			value.push_back(currentData);
+		}
+		//check unique of current entry
+		finalRawItr = finalRaw->find(key);
+
+		if(finalRawItr==finalRaw->end()){
+			(*finalRaw)[key]=value; //add to final raw
+		}
+	}
+
+	return finalRaw;
+	/*//delcare returnRaw
 	RAWDATA * retnRaw = new RAWDATA();
 	//declare iterators;
 	RAWDATA::iterator curItr;
@@ -299,7 +330,7 @@ RAWDATA * IntermediateResultTable::uniqueRaw(RAWDATA * currentRaw){
 			 c. check if current entry exist in any return entry
 			 d. if there is no repeated result, add to return entry
 	*/
-
+	/*
 	for(int i = 2;i<currentRaw->at(0).size();i++){
 		bool repeated = true;
 		for(int j =1; j<retnRaw->at(0).size();j++){  //checking for loop
@@ -322,7 +353,7 @@ RAWDATA * IntermediateResultTable::uniqueRaw(RAWDATA * currentRaw){
 		}
 	}
 	delete currentRaw;
-	return retnRaw;
+	return retnRaw;*/
 }
 RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_LIST * selectedVarList){
 	//target the table with tableNum

@@ -19,7 +19,8 @@ public:
 	~QueryEvaluator(void);
 
 	bool evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrParam);
-	RAWDATA * getRawResult();
+	FINALRAW * getRawResult();
+	DATA_LIST * getSelectedVars();
 //	ERROR_MSG getLastError();
 	
 
@@ -31,9 +32,10 @@ private:
 	PKB * pkb;
 	TYPE resultType;
 	INDEX resultIndex;
-	RAWDATA * rawData;
+	FINALRAW * rawData;
 	DesignExtractor * extractor;
 	IntermediateResultTable * resultTable ;
+	DATA_LIST * resultVarList;
 
 	IntermediateResultTable * computeIntermediateResult(QTREE* relationTree);
 	IntermediateResultTable * evaluateClause(IntermediateResultTable * resultTable, QTREE* clause);

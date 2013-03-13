@@ -18,7 +18,7 @@ bool QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrPa
 	this->qrTree = qrTree;
 	this->qrTable = qrTable;
 	this->qrParam = qrParam;
-	this->rawData = new RAWDATA();
+	this->rawData = new FINALRAW;
 
 	bool nonEmptyResult;
 
@@ -49,7 +49,7 @@ bool QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrPa
 	//b. after taking intersection, the table is empty, select Boolean value
 	//c. the resultTable is not empty, return the corresponding results
 	return true;
-}	
+}	/*
 void QueryEvaluator::generateRaw(QTREE* resultNode){
 		//select bool
 		if(resultNode->getType()==BOOL){
@@ -73,7 +73,7 @@ void QueryEvaluator::generateRaw(QTREE* resultNode){
 			rawData->at(0).insert(rawItr,resultNode->getData());
 		}
 		
-}
+}*/
 IntermediateResultTable * QueryEvaluator::computeIntermediateResult(QTREE* relationTree){
 	
 	IntermediateResultTable * resultTable;
@@ -461,7 +461,7 @@ bool QueryEvaluator::findResult(QTREE* resultNode,IntermediateResultTable* resul
 	
 	//the table is empty
 	//if(resultTable==NULL) return false;
-
+	resultVarList = new DATA_LIST;
 	int nodeNum = 0;
 
 	QTREE* headNode;
@@ -489,19 +489,26 @@ bool QueryEvaluator::findResult(QTREE* resultNode,IntermediateResultTable* resul
 
 		return false;
 	}else if((headNodeType==BOOL) && (resultTable==NULL)){//special case:--return type is boolean
-		DATA_LIST result;
+		/*DATA_LIST result;
 
 		result.push_back(-1);
 		result.push_back(0);
-		rawData->push_back(result);
-
+		rawData->push_back(result);*/
+		string key = "BOOLEAN";
+		DATA_LIST value;
+		value.push_back(0);
+		(*rawData)[key]= value;
 		return true;
 	}else if((headNodeType==BOOL) && (resultTable!=NULL)){
-		DATA_LIST result;
+	/*	DATA_LIST result;
 		
 		result.push_back(-1);
 		result.push_back(1);
-		rawData->push_back(result);
+		rawData->push_back(result);*/
+		string key = "BOOLEAN";
+		DATA_LIST value;
+		value.push_back(1);
+		(*rawData)[key]=value;
 	
 		return true;
 	}
@@ -509,18 +516,21 @@ bool QueryEvaluator::findResult(QTREE* resultNode,IntermediateResultTable* resul
 	//main: find the result combination
 	QTREE* currentNode;
 	currentNode = headNode;
-	DATA_LIST resultVarList;
+	
 	do{
-		resultVarList.push_back(currentNode->getData());
+		resultVarList->push_back(currentNode->getData());
 		currentNode = currentNode->getRightSibling();
 	}while(currentNode!=NULL);
 
 	//there must be something found in this stage
-	rawData = resultTable->findResultOf(resultVarList);
-
+//	rawData = resultTable->findResultOf(resultVarList);
+	rawData = resultTable->findResultOf(*resultVarList);
 	//if(rawData==NULL) return false;
 	return true;
 }
-RAWDATA* QueryEvaluator::getRawResult(){
+FINALRAW* QueryEvaluator::getRawResult(){
 	return rawData;
+}
+DATA_LIST * QueryEvaluator::getSelectedVars(){
+	return resultVarList;
 }
