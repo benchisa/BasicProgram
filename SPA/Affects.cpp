@@ -1,5 +1,5 @@
 #include "Affects.h"
-
+#include "Helper.h"
 
 
 PKB * Affects::pkb = NULL;
@@ -24,7 +24,7 @@ bool Affects::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 			//if there is a path between them
 			if (EvaluateNext::isNextStarResult(stmt1, stmt2))
 			{		
-			
+
 				MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT, stmt1, 0);
 				MODIFIES_LIST::iterator m_itr=m_list.begin();
 
@@ -41,9 +41,9 @@ bool Affects::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 				//yes, stmt 2 use the variable modified by stmt1
 				if (modVarUsed)
 				{
-					
+
 					return Affects::computeIsAffect(stmt1, stmt2, modVar);
-	
+
 				}
 		  }
 		}
@@ -57,7 +57,7 @@ bool Affects::computeIsAffect(int starting, int ending, int varIndex)
 	list<int> checkForDuplicate;
 
 	stack<NEXT_LIST> stacks;
-	stacks.push(EvaluateNext::getNextResult(starting,0););
+	stacks.push(EvaluateNext::getNextResult(starting,0));
 	while (stacks.size()>0)
 	{
 		NEXT_LIST n_list=stacks.top();
@@ -82,7 +82,7 @@ bool Affects::computeIsAffect(int starting, int ending, int varIndex)
 						if (findIter==checkForDuplicate.end())
 						{
 							checkForDuplicate.push_back(n_itr->second);
-							
+
 							stacks.push(EvaluateNext::getNextResult(n_itr->second, 0));
 
 						}
@@ -97,7 +97,7 @@ bool Affects::computeIsAffect(int starting, int ending, int varIndex)
 					{
 
 						checkForDuplicate.push_back(n_itr->second);
-					
+
 						stacks.push(EvaluateNext::getNextResult(n_itr->second, 0));
 
 					}
@@ -179,10 +179,10 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 		PROC_LIST::iterator p_itr;
 		for (p_itr=p_list->begin(); p_itr!=p_list->end(); p_itr++)
 		{
-			
+
 			for (int i=p_itr->getStartProgLine(); i<=p_itr->getEndProgLine(); i++)
 			{
-				
+
 				if (Helper::isStatementTypeOf(ASSIGNMENT, i))
 				{
 					//get the modifies variable
@@ -203,12 +203,12 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 							{
 								answer.push_back(make_pair(i, u_itr->first));
 							}
-							
+
 						}
 					}
 				}
 			}
-			
+
 		}
 	}
 	return answer;
@@ -226,32 +226,32 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 			{
 				if (EvaluateNext::isNextStarResult(stmt1, stmt2))
 				{	
-					
+
 						MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT, stmt1,0);
 						MODIFIES_LIST::iterator m_itr;
-						
+
 						int modVar=m_list.begin()->second;
 
 						list<int> checkDuplicate;
 
-						
+
 						NEXT_LIST::iterator n_itr;
-					
-					
+
+
 						stack<NEXT_LIST> stacks;
-						stacks.push(EvaluateNext::getNextResult(stmt1,0););
+						stacks.push(EvaluateNext::getNextResult(stmt1,0));
 						while (!stacks.empty())
 						{
-							
+
 							NEXT_LIST temp=stacks.top();
 							stacks.pop();
 							for (n_itr=temp.begin(); n_itr!=temp.end(); n_itr++)
 							{
-								
+
 							//	cout<<n_itr->first<< " "<<n_itr->second<< ". mod var: "<<pkb->getVarName(modVar)<< endl; 
 								if (n_itr->second==stmt2 )
 								{	
-									
+
 									if (pkb->isUses(ASSIGNMENT,stmt2,modVar))
 									{
 										//cout<<"hehe"<<endl;
@@ -271,11 +271,11 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 											{
 												checkDuplicate.push_back(n_itr->second);
 											}
-											
+
 											stacks.push(EvaluateNext::getNextResult(n_itr->second, 0));
 										}
 									}	
-									
+
 									else if(!pkb->isModifies(ASSIGNMENT,n_itr->second,modVar))
 									 { 
 										if (pkb->isUses(ASSIGNMENT, n_itr->second, modVar))
@@ -291,15 +291,15 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 											checkDuplicate.push_back(n_itr->second);			
 
 										}
-										
+
 										stacks.push(EvaluateNext::getNextResult(n_itr->second, 0));
-										
+
 									}
 								}
 							}
 						}		
 				}
-					
+
 			}
 		}
 		return false;
