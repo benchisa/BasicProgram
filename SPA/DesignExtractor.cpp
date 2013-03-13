@@ -1516,7 +1516,24 @@ list<bool> DesignExtractor::computeIsAffect(int starting, int ending, int varInd
 			}
 			else
 			{
-				if (!pkb->isModifies(ASSIGNMENT,n_itr->second,varIndex))
+				if (DesignExtractor::isStatementTypeOf(CALL, n_itr->second))
+				{
+					string callee=pkb->getCalleeName(n_itr->second);
+					int calleeIndex=pkb->getProcIndex(callee);
+					if (!pkb->isModifies(PROCEDURE,calleeIndex, varIndex))
+					{
+						list<int>::iterator findIter = find(checkForDuplicate.begin(), checkForDuplicate.end(), n_itr->second);
+						if (findIter==checkForDuplicate.end())
+						{
+
+							checkForDuplicate.push_back(n_itr->second);
+							NEXT_LIST temp=getNextResult(n_itr->second, 0);
+							stacks.push(temp);
+
+						}
+					}
+				}
+				else if (!pkb->isModifies(ASSIGNMENT,n_itr->second,varIndex))
 				{	
 
 					//this is for checking cycle
