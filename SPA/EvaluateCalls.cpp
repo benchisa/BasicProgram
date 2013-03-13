@@ -23,7 +23,7 @@ CALL_LIST  EvaluateCalls::getCallStarResult(PROC_NAME caller, PROC_NAME callee)
 		 for (it=caller.begin(); it!=caller.end(); it++)
 		 {
 
-			list<string> &result=computeCallStar(*it, " ");
+			list<string> result=EvalulateCalls::computeCallStar(*it, " ");
 			 if (result.size()>0)
 			 {
 				 list<string>::iterator itr;
@@ -38,7 +38,7 @@ CALL_LIST  EvaluateCalls::getCallStarResult(PROC_NAME caller, PROC_NAME callee)
 	}
 	else{
 
-		list<string> firstResult= computeCallStar(caller, callee );
+		list<string> firstResult= EvalulateCalls::computeCallStar(caller, callee );
 
 	   if (firstResult.size()>0)
 	   {
