@@ -133,7 +133,9 @@ void CFG::computeProgLines(PROG_LINE p1, PROG_LINE p2, int reverse)
 	
 	if(pLines.size() != 0)
 		pLines.clear();
-
+	
+	queue<PROG_LINE> q;
+	
 	int same = 0;
 	bool **visited = new bool*[size+1];
 	for(int i = 0; i <= size; ++i)
