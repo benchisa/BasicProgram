@@ -23,7 +23,7 @@ CALL_LIST  EvaluateCalls::getCallStarResult(PROC_NAME caller, PROC_NAME callee)
 		 for (it=caller.begin(); it!=caller.end(); it++)
 		 {
 
-			list<string> result=EvalulateCalls::computeCallStar(*it, " ");
+			list<string> result=EvaluateCalls::computeCallStar(*it, " ");
 			 if (result.size()>0)
 			 {
 				 list<string>::iterator itr;
@@ -38,7 +38,7 @@ CALL_LIST  EvaluateCalls::getCallStarResult(PROC_NAME caller, PROC_NAME callee)
 	}
 	else{
 
-		list<string> firstResult= EvalulateCalls::computeCallStar(caller, callee );
+		list<string> firstResult= EvaluateCalls::computeCallStar(caller, callee );
 
 	   if (firstResult.size()>0)
 	   {
@@ -67,7 +67,7 @@ CALL_LIST  EvaluateCalls::getCallStarResult(PROC_NAME caller, PROC_NAME callee)
 	return answer;
 
 }
-bool DesignExtractor::getIsCallResult(PROC_NAME caller, PROC_NAME callee)
+bool EvaluateCalls::getIsCallResult(PROC_NAME caller, PROC_NAME callee)
 {
 	return pkb->isExistsCall(caller, callee);
 }
@@ -76,9 +76,9 @@ bool EvaluateCalls::getIsCallStarResult(PROC_NAME caller, PROC_NAME callee)
 {
 	if (caller!=" " && callee!=" ")
 	{
-		if (pkb->isExistCall(caller, callee))
+		if (pkb->isExistsCall(caller, callee))
 		{
-			
+
 			return true;
 		}
 		CALL_LIST result=EvaluateCalls::getCallStarResult(caller," ");
@@ -103,9 +103,9 @@ list<string>  EvaluateCalls::computeCallStar(PROC_NAME caller, PROC_NAME callee)
 	list<string> result;
 	if (caller!=" " || callee!=" ")
 	{
-		
+
 		stack<CALL_LIST> stacks;
-		stacks.push(pkb->getCall(caller, callee););
+		stacks.push(pkb->getCall(caller, callee));
 		while (!stacks.empty())
 		{
 			CALL_LIST calls=stacks.top();
@@ -124,7 +124,7 @@ list<string>  EvaluateCalls::computeCallStar(PROC_NAME caller, PROC_NAME callee)
 						if (findIter==result.end())
 						{
 							result.push_back(itr->second);
-							stacks.push(pkb->getCall(itr->second, " "););
+							stacks.push(pkb->getCall(itr->second, " "));
 						}
 
 
@@ -135,7 +135,7 @@ list<string>  EvaluateCalls::computeCallStar(PROC_NAME caller, PROC_NAME callee)
 						if (findIter==result.end())
 						{
 							result.push_back(itr->first);
-							stacks.push(pkb->getCall(" ",itr->first););
+							stacks.push(pkb->getCall(" ",itr->first));
 						}
 
 					}
@@ -154,9 +154,9 @@ MODIFIES_LIST EvaluateCalls::computeCallModifies(STATEMENT_NUM callStmt,VAR_INDE
 
 	if(callStmt==0&&varIndex==0){
 
-		vector<int>* callStmt=pkb->getAllCallerStmt();
-		vector<int>::iterator s_itr;
-		for (s_itr=callStmt->begin();s_itr!=callStmt->end(); s_itr++)
+		DATA_LIST callStmt=pkb->getAllCallerStmt();
+		DATA_LIST::iterator s_itr;
+		for (s_itr=callStmt.begin();s_itr!=callStmt.end(); s_itr++)
 		{
 			string calleeName=pkb->getCalleeName(*s_itr);
 			if (calleeName!=" ")
@@ -233,9 +233,9 @@ USES_LIST EvaluateCalls::computeCallUses(STATEMENT_NUM callStmt,VAR_INDEX varInd
 
 	if(callStmt==0&&varIndex==0){
 
-		vector<int>* callStmt=pkb->getAllCallerStmt();
-		vector<int>::iterator s_itr;
-		for (s_itr=callStmt->begin();s_itr!=callStmt->end(); s_itr++)
+		DATA_LIST callStmt=pkb->getAllCallerStmt();
+		DATA_LIST::iterator s_itr;
+		for (s_itr=callStmt.begin();s_itr!=callStmt.end(); s_itr++)
 		{
 			string calleeName=pkb->getCalleeName(*s_itr);
 			if (calleeName!=" ")
