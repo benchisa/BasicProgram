@@ -13,6 +13,7 @@ public:
 
 	static bool			getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
 	static AFFECT_LIST	getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
+	static	bool getIsAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
 
 private:
 	
