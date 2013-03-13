@@ -99,39 +99,48 @@ bool EvaluateParents::getIsParentStarResult(STATEMENT_NUM s1, STATEMENT_NUM s2)
 	return false;
 }
 
-void EvaluateParents::computeParentStar(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2, list<int> &result)
+list<int> EvaluateParents::computeParentStar(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2 )
 {
+	list<int> result;
 	if (stmt1!=NULL || stmt2!=NULL)
 	{
-		list<pair<int,int>> parentChild=pkb->getParent(stmt1, stmt2);
-		if (parentChild.size()>0)
+		
+		stack<PARENT_LIST> stacks;
+		stacks.push(pkb->getParent(stmt1, stmt2)); //root
+		while (!stacks.empty())
 		{
-			list<pair<int,int>>::iterator itr;
-			for (itr=parentChild.begin(); itr!=parentChild.end(); itr++)
-			{	
-
-				if (stmt1!=0 && stmt2==0)
-
+			PARENT_LIST parentChild=stacks.top();
+			stacks.pop();
+			if (parentChild.size()>0)
+			{
+				PARENT_LIST::iterator itr;
+				for (itr=parentChild.begin(); itr!=parentChild.end(); itr++)
 				{	
-					result.push_back(itr->second);
-					EvaluateParents::computeParentStar(itr->second, 0,result);
-				}
-				else if (stmt1==0 && stmt2!=0)
-				{	
-					result.push_back(itr->first);
-					EvaluateParents::computeParentStar(0,itr->first,result);
+
+					if (stmt1!=0 && stmt2==0)
+
+					{	
+						result.push_back(itr->second);
+						stacks.push(pkb->getParent(itr->second, 0));
+					}
+					else if (stmt1==0 && stmt2!=0)
+					{	
+						result.push_back(itr->first);
+						stacks.push(pkb->getParent(0,itr->first));
+					}
 				}
 			}
 		}
-
+		
 	}
+	return result;
 }
+
 
 FOLLOWS_LIST EvaluateParents::getParentStar(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 {
 	list<pair<int,int>> finalResult;
-	list<int> firstResult;
-	EvaluateParents::computeParentStar(stmt1, stmt2, firstResult);
+	list<int> firstResult=EvaluateParents::computeParentStar(stmt1, stmt2);
 
 	if (firstResult.size()>0)
 	{   
