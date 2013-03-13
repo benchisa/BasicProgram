@@ -71,7 +71,11 @@ bool EvaluateCalls::getIsCallStarResult(PROC_NAME caller, PROC_NAME callee)
 {
 	if (caller!=" " && callee!=" ")
 	{
-
+		if (getIsCallResult(caller,callee))
+		{
+			
+			return true;
+		}
 		CALL_LIST result=EvaluateCalls::getCallStarResult(caller," ");
 		CALL_LIST::iterator itr;
 		if (!result.empty())
