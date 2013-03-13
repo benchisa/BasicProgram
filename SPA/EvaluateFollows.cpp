@@ -77,7 +77,7 @@ bool EvaluateFollows::getIsFollowsResult(STATEMENT_NUM s1, STATEMENT_NUM s2){
 bool EvaluateFollows::getIsFollowsStarResult(STATEMENT_NUM s1, STATEMENT_NUM s2){
 	if (s1!=NULL && s2!=NULL)
 	{
-		if (getIsFollowsResult(s1,s2))
+		if (EvaluateFollows::getIsFollowsResult(s1,s2))
 		{
 			return true;
 		}
