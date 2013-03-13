@@ -79,6 +79,10 @@ bool EvaluateParents::getIsParentStarResult(STATEMENT_NUM s1, STATEMENT_NUM s2)
 {
 	if (s1!=NULL && s2!=NULL)
 	{
+		if (EvaluateParents::getIsParentResult(s1,s2))
+		{
+			return true;
+		}
 		PARENT_LIST result=EvaluateParents::getParentStar(s1,NULL);
 		PARENT_LIST::iterator itr;
 		if (!result.empty())
