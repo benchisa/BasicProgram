@@ -11,6 +11,7 @@ EvaluateCalls::~EvaluateCalls(void)
 {
 }
 
+
 CALL_LIST  EvaluateCalls::getCallStarResult(PROC_NAME caller, PROC_NAME callee)
 {
 	set<pair<string,string>> finalResult;
@@ -66,12 +67,16 @@ CALL_LIST  EvaluateCalls::getCallStarResult(PROC_NAME caller, PROC_NAME callee)
 	return answer;
 
 }
+bool DesignExtractor::getIsCallResult(PROC_NAME caller, PROC_NAME callee)
+{
+	return pkb->isExistsCall(caller, callee);
+}
 
 bool EvaluateCalls::getIsCallStarResult(PROC_NAME caller, PROC_NAME callee)
 {
 	if (caller!=" " && callee!=" ")
 	{
-		if (getIsCallResult(caller,callee))
+		if (pkb->isExistCall(caller, callee))
 		{
 			
 			return true;
