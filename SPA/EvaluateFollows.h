@@ -20,7 +20,7 @@ public:
 
 private:
 	static FOLLOWS_LIST EvaluateFollows::getFollowsStar(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
-	static void computeFollowsStar(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2, list<int> &result);
+	static list<int> computeFollowsStar(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
 	static void computeFollows(FOLLOWS_LIST &result, FOLLOWS_LIST tmp, TYPE type, STATEMENT_NUM s1, STATEMENT_NUM s2);
 	
 };
