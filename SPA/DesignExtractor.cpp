@@ -1254,7 +1254,7 @@ void DesignExtractor::iterateAndStore(RELATION_LIST *result, RELATION_LIST list)
 list<string>  DesignExtractor::computeCallStar(PROC_NAME caller, PROC_NAME callee)
 
 {	
-	list<string> &result
+	list<string> result
 	if (caller!=" " || callee!=" ")
 	{
 		CALL_LIST root=pkb->getCall(caller, callee);
