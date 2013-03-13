@@ -101,8 +101,7 @@ bool EvaluateFollows::getIsFollowsStarResult(STATEMENT_NUM s1, STATEMENT_NUM s2)
 FOLLOWS_LIST EvaluateFollows::getFollowsStar(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 {
 	list<pair<int,int>> finalResult;
-	list<int> firstResult;
-	EvaluateFollows::computeFollowsStar(stmt1, stmt2, firstResult);
+	list<int> firstResult=EvaluateFollows::computeFollowsStar(stmt1, stmt2);
 	if (firstResult.size()>0)
 	{
 		list<int>::iterator itr;
@@ -155,32 +154,42 @@ void EvaluateFollows::computeFollows(FOLLOWS_LIST &result, FOLLOWS_LIST tmp, TYP
 		}
 	}
 
-void  EvaluateFollows::computeFollowsStar(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2,list<int> &result)
-{
+list<int>  EvaluateFollows::computeFollowsStar(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
+{	
+	list<int> result;
 	if (stmt1!=NULL || stmt2!=NULL)
 	{
-		list<pair<int,int>> follows=pkb->getFollows(stmt1, stmt2);
-		if (follows.size()>0)
+		
+		stack<FOLLOWS_LIST> stacks;
+		stacks.push(pkb->getFollows(stmt1, stmt2)); //root
+		while(!stacks.empty())
 		{
-			list<pair<int, int>>::iterator itr;
-
-			for (itr=follows.begin(); itr!=follows.end(); itr++)
+			FOLLOWS_LIST follows=stacks.top();
+			stacks.pop();
+			if (follows.size()>0)
 			{
+				list<pair<int, int>>::iterator itr;
 
-				if (stmt1!=NULL && stmt2==NULL)
-				{	
-					result.push_back(itr->second);
-					EvaluateFollows::computeFollowsStar(itr->second, 0,result);
-				}
-				else if (stmt1==NULL && stmt2!=NULL)
+				for (itr=follows.begin(); itr!=follows.end(); itr++)
 				{
-					result.push_back(itr->first);
-					EvaluateFollows::computeFollowsStar(0,itr->first,result);
+
+					if (stmt1!=NULL && stmt2==NULL)
+					{	
+						result.push_back(itr->second);
+						
+						stacks.push(pkb->getFollows(itr->second, 0));
+					}
+					else if (stmt1==NULL && stmt2!=NULL)
+					{
+						result.push_back(itr->first);
+						stacks.push(pkb->getFollows(0,itr->first));
+					}
 				}
+
 			}
-
-
 		}
+		
 	}
+	return result;
 }
 
