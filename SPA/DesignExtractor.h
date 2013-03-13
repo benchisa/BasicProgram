@@ -11,7 +11,7 @@ public:
 	~DesignExtractor(void);
 
 	static PREFIXEXPR convertExprToPrefix(EXPRESSION expr);
-	
+
 	bool isStatementTypeOf(TYPE typeName, STATEMENT_NUM stmtNum);
 	DATA_LIST * getAllCallStmts();
 	DATA_LIST * getAllConstants();
@@ -26,7 +26,7 @@ public:
 	NEXT_LIST getAllPaths(PROG_LINE p1, PROG_LINE p2);
 	list<PROG_LINE> getAllProgLines(PROG_LINE p1, PROG_LINE p2);
 	int maxProgline;
-	
+
 	//call table
 	CALL_LIST  getCallResult(PROC_NAME caller, PROC_NAME callee);
 	bool getIsCallResult(PROC_NAME caller, PROC_NAME callee);
@@ -54,10 +54,10 @@ public:
 
 	 USES_LIST getUsesResult(TYPE type, int arg1, VAR_INDEX v1);
 	 bool getIsUsesResult(TYPE type, int arg1, VAR_INDEX v1);
-	
+
 	bool getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
 	AFFECT_LIST getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
-	
+
 private:
 	PKB* pkb;
 	CFG* cfg;
@@ -72,7 +72,7 @@ private:
 	 void computeParentStar(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2, list<int> &result);
 	 FOLLOWS_LIST getFollowsStar(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
 	 void computeFollowsStar(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2, list<int> &result);
-	
+
        	MODIFIES_LIST computeCallModifies(STATEMENT_NUM callStmt,VAR_INDEX varIndex);
 
 	 bool isCallModifies(STATEMENT_NUM callStmt,VAR_INDEX varIndex);
@@ -81,7 +81,7 @@ private:
 	 bool isCallUses(STATEMENT_NUM callStmt,VAR_INDEX varIndex);
 
 	 void iterateAndStore(list<pair<int, int>> &result, list<pair<int, int>> tmp, int v1);
-	 void computeCallStar(PROC_NAME caller, PROC_NAME callee);
+	 list<string> computeCallStar(PROC_NAME caller, PROC_NAME callee);
 	 //void iterateAndStore(RELATION_LIST *result, RELATION_LIST list);
 
 	// Helper for conversion
@@ -89,9 +89,8 @@ private:
 	static vector<pair<TYPE, TOKEN>> tokenize(EXPRESSION);
 	static OPERATOR operatorToString(TYPE type);
 	static EXPRESSION formExpression(stack<pair<TYPE, TOKEN>>& operators,stack<OPERAND>& operands);
-	
+
 	list<bool> computeIsAffect(int starting, int ending, int varIndex);
-	
+
 
 };
-
