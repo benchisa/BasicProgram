@@ -507,6 +507,9 @@ bool Parser::stmt_assign(){
 				//cout << "Expression: " << exp << "\n";
 				if(matchToken(";"))
 				{
+					while(!operators.empty())
+						createExprTree();
+
 					rightNode = operands.top();
 					if(!operands.empty()) operands.pop();
 
@@ -514,8 +517,6 @@ bool Parser::stmt_assign(){
 					pkb->addSibling(leftNode, rightNode);
 					curAST = assignNode;
 
-					// add to assigntable
-					//cout << "tmpVarIndex: " << tmpVarIndex << "\n";
 					pkb->insertAssign(stmt_num, tmpVarIndex, DesignExtractor::convertExprToPrefix(exp));
 					return true;	
 				}
@@ -540,8 +541,41 @@ bool Parser::expr(){
 	// expr: expr '+' term | expr '-' term | term
 	if(factor())
 	{
-		if(matchToken("+") || matchToken("-") || matchToken("*")){
+		if(matchToken("+")){
 			exp += prevToken;
+
+			if(operators.size() == 0){
+				operators.push(pkb->createAST(PLUS, prevProgLine,stmt_num, -1));
+			}
+			else if(pkb->getType(operators.top()) == MULTIPLY){
+				createExprTree();
+				operators.push(pkb->createAST(PLUS, prevProgLine,stmt_num, -1));
+			}
+			else{
+				operators.push(pkb->createAST(PLUS, prevProgLine,stmt_num, -1));
+			}
+		}
+
+		else if(matchToken("-")){
+			exp += prevToken;
+			if(operators.size() == 0){
+				operators.push(pkb->createAST(MINUS, prevProgLine,stmt_num, -1));
+			}
+			else if(pkb->getType(operators.top()) == MULTIPLY){
+				createExprTree();
+				operators.push(pkb->createAST(MINUS, prevProgLine,stmt_num, -1));
+			}
+			else{
+				operators.push(pkb->createAST(MINUS, prevProgLine,stmt_num, -1));
+			}
+
+		}
+
+		else if(matchToken("*")){
+			exp += prevToken;
+			
+			operators.push(pkb->createAST(MULTIPLY, prevProgLine,stmt_num, -1));
+
 		}
 
 		expr();
@@ -600,6 +634,9 @@ bool Parser::factor(){
 			if(closeBracket())
 			{
 				exp += prevToken;
+				while(pkb->getType(operators.top()) != BRACKET){
+					createExprTree();
+				}
 				// remove open bracket from operands stack
 				if(!operators.empty()) operators.pop();
 			}
@@ -706,6 +743,9 @@ void Parser::createExprTree(){
 	pkb->setFirstDescendant(oNode, leftNode);
 	pkb->addSibling(leftNode, rightNode);
 
+	//cout << pkb->getType(oNode) << "\n";
+	//cout << pkb->getType(leftNode) << "\n";
+	//cout << pkb->getType(rightNode) << "\n";
 	operands.push(oNode);
 }
 

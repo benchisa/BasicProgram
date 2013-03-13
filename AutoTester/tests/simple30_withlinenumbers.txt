@@ -1,4 +1,4 @@
-     procedure Alice{                                                            
+procedure Alice{                                                            
 1          apple = 0;                                                       
 2          banana = apple+1;                                                       
 3          carrot = banana;                                                       
@@ -230,4 +230,4 @@
      procedure Oppi{                                                            
 136          call Kingsley;
 137	     ant = elephant*fish;                                                       
-     }                                                            
+     }                   

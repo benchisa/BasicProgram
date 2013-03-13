@@ -3,11 +3,13 @@
 
 LinkedDataTable::LinkedDataTable(void)
 {
+
 }
 
 
 LinkedDataTable::~LinkedDataTable(void)
 {
+
 }
 
 bool LinkedDataTable::addEntry(int mergeAttrPos,INDEX oldQrVar,INDEX newQrVar,RELATION_LIST * newEntries){
@@ -18,17 +20,69 @@ bool LinkedDataTable::addEntry(int mergeAttrPos,INDEX oldQrVar,INDEX newQrVar,RE
 	}
 	return true;
 }
+hash_map<int,DATA_LIST> * LinkedDataTable::convertToHash(int mergeAttrPos,RELATION_LIST * newEntries){
+	hash_map<int,DATA_LIST> * returnResult = new hash_map<int,DATA_LIST>;
+	hash_map<int,DATA_LIST>::iterator mapItr;
+	RELATION_LIST::iterator lstItr;
+
+	if(mergeAttrPos==1){
+		for(lstItr = newEntries->begin();lstItr!=newEntries->end();lstItr++){
+			mapItr = returnResult->find(lstItr->first);
+
+			if(mapItr!=returnResult->end()){ //key exists,append the data to current key entry
+				mapItr->second.push_back(lstItr->second);
+			}else{	//key does not exist, create a new vector list
+				DATA_LIST newList;
+				newList.push_back(lstItr->second);
+				(*returnResult)[lstItr->first] = newList;
+			}
+		}
+	}else{
+		for(lstItr = newEntries->begin();lstItr!=newEntries->end();lstItr++){
+			mapItr = returnResult->find(lstItr->second);
+
+			if(mapItr!=returnResult->end()){ //key exists,append the data to current key entry
+				mapItr->second.push_back(lstItr->first);
+			}else{	//key does not exist, create a new vector list
+				DATA_LIST newList;
+				newList.push_back(lstItr->first);
+				(*returnResult)[lstItr->second] = newList;
+			}
+		}
+	}
+
+	return returnResult;
+}
 bool LinkedDataTable::addOneEntry(int mergeAttrPos,INDEX oldQrVar,INDEX newQrVar,RELATION_LIST * newEntries){
 	//create new column
 	if(newQrVar!=-1)
 		qrVarList.push_back(newQrVar);
 
 	//create a temporary row list
-	ROW_LIST tempRowList;
+	ROW_LIST * tempRowList = new ROW_LIST;
 	INDEX oldColNum = LinkedDataTable::getColNumOf(oldQrVar);
-	//INDEX newColNum = LinkedDataTable::getColNumOf(newQrVar);
+	
+	//convert the newEntries to hashmap
+	hash_map<int,DATA_LIST> * entryMap = LinkedDataTable::convertToHash(mergeAttrPos,newEntries);
+	hash_map<int,DATA_LIST>::iterator mapItr;
 
-	ROW_LIST::iterator currentRow;
+	for(int i=0;i<rowList.size();i++){	
+		mapItr = entryMap->find(rowList[i][oldColNum]);
+
+		if(mapItr!=entryMap->end()){  //the entry in database is also in incoming list
+			//expand the database
+			DATA_LIST::iterator newListItr;
+			DATA_LIST newList = mapItr->second;
+			//loop through the entryList with the same firstData
+			for(newListItr = newList.begin();newListItr!=newList.end();newListItr++){
+				ROW tempRow = rowList[i];
+				tempRow.push_back(*newListItr);
+				tempRowList->push_back(tempRow);
+			}
+		}
+	}
+	delete entryMap;
+	/*ROW_LIST::iterator currentRow;
 	currentRow = rowList.begin();
 	
 	//run until reach the last row
@@ -38,6 +92,7 @@ bool LinkedDataTable::addOneEntry(int mergeAttrPos,INDEX oldQrVar,INDEX newQrVar
 		currentEntry = currentRow->begin();
 		advance(currentEntry,oldColNum);
 
+		/*
 		//compare the oldEntry and newEntry value
 		RELATION_LIST::iterator newEntry;
 		for(newEntry= newEntries->begin();newEntry!=newEntries->end();newEntry++){
@@ -49,7 +104,7 @@ bool LinkedDataTable::addOneEntry(int mergeAttrPos,INDEX oldQrVar,INDEX newQrVar
 				if(mergeAttr==*currentEntry){
 					ROW tempRow = *currentRow;
 					if(newQrVar!=-1)tempRow.push_back(newEntry->second);
-					tempRowList.push_back(tempRow);
+					tempRowList->push_back(tempRow);
 				}
 			}else{
 				mergeAttr = newEntry->second;
@@ -57,21 +112,23 @@ bool LinkedDataTable::addOneEntry(int mergeAttrPos,INDEX oldQrVar,INDEX newQrVar
 				if(mergeAttr==*currentEntry){
 					ROW tempRow = *currentRow;
 					if(newQrVar!=-1)tempRow.push_back(newEntry->first);
-					tempRowList.push_back(tempRow);
+					tempRowList->push_back(tempRow);
 				}
 			}
 		}
-
+		
 		currentRow++;
-	}
+	}*/
 	//replace the old row list
-	if(tempRowList.size()<1){
+	if(tempRowList==NULL||tempRowList->size()<1){
+		delete tempRowList;
 		return false;
 	}
-	rowList = tempRowList;
+	rowList = *tempRowList;
+	delete tempRowList;
 	return true;
 }
-void LinkedDataTable::createEntry(INDEX firstQrVar,INDEX secondQrVar,RELATION_LIST * newEntries){
+bool LinkedDataTable::createEntry(INDEX firstQrVar,INDEX secondQrVar,RELATION_LIST * newEntries){
 	//create 2 new columns
 	if(firstQrVar !=-1){
 		qrVarList.push_back(firstQrVar);
@@ -84,17 +141,36 @@ void LinkedDataTable::createEntry(INDEX firstQrVar,INDEX secondQrVar,RELATION_LI
 	for(currentEntry = newEntries->begin();currentEntry!=newEntries->end();currentEntry++){
 		ROW newRow;
 
-		if(firstQrVar !=-1)
-			newRow.push_back(currentEntry->first);
-		if(secondQrVar != -1)
-			newRow.push_back(currentEntry->second);
+		if(firstQrVar !=-1)newRow.push_back(currentEntry->first);
+		if(secondQrVar != -1)newRow.push_back(currentEntry->second);
 		
 		rowList.push_back(newRow);
 	}
+	return true;
 }
 bool LinkedDataTable::mergeEntries(INDEX firstQrVar,INDEX secondQrVar,RELATION_LIST * mergeList){
 	//create a temporary row list
-	ROW_LIST tempRowList;
+	ROW_LIST * tempRowList = new ROW_LIST;
+	INDEX firstColNum = LinkedDataTable::getColNumOf(firstQrVar);
+	INDEX secondColNum = LinkedDataTable::getColNumOf(secondQrVar);
+	
+	//convert the newEntries to hashmap
+	hash_map<int,DATA_LIST> * entryMap1 = LinkedDataTable::convertToHash(1,mergeList);
+	hash_map<int,DATA_LIST> * entryMap2 = LinkedDataTable::convertToHash(2,mergeList);
+	hash_map<int,DATA_LIST>::iterator mapItr1;
+	hash_map<int,DATA_LIST>::iterator mapItr2;
+	for(int i=0;i<rowList.size();i++){		
+		mapItr1= entryMap1->find(rowList[i][firstColNum]);
+		mapItr2 = entryMap2->find(rowList[i][secondColNum]);
+
+		if(mapItr1!=entryMap1->end()&&mapItr2!=entryMap2->end()){  //the entry in database is also in incoming list
+				tempRowList->push_back(rowList[i]);	
+		}
+	}
+	delete entryMap1;
+	delete entryMap2;
+	//create a temporary row list
+/*	ROW_LIST * tempRowList= new ROW_LIST;
 	INDEX firstColNum = LinkedDataTable::getColNumOf(firstQrVar);
 	INDEX secondColNum = LinkedDataTable::getColNumOf(secondQrVar);
 
@@ -122,21 +198,23 @@ bool LinkedDataTable::mergeEntries(INDEX firstQrVar,INDEX secondQrVar,RELATION_L
 			//matched entry is found, add to temp table
 			if(firstOldEntry==firstMergeAttr&&secondOldEntry==secondMergeAttr){
 				ROW tempRow = *currentRow;
-				tempRowList.push_back(tempRow);
+				tempRowList->push_back(tempRow);
 			}
 		}
 		currentRow++;
-	}
+	}*/
 	//replace the old row list
-	if(tempRowList.size()>0){
-		rowList = tempRowList;
+	if(tempRowList->size()>0){
+		rowList = *tempRowList;
+		delete tempRowList;
 		return true;
 	}
+	delete tempRowList;
 	return false;
 }
 bool LinkedDataTable::mergeTable(INDEX firstQrVar,INDEX secondQrVar,LinkedDataTable * newTable){
 	//create a temporary row list
-	ROW_LIST tempRowList;
+	ROW_LIST * tempRowList = new ROW_LIST;
 	//find the location of the two qrVar in two tables
 	INDEX firstColNum1 = LinkedDataTable::getColNumOf(firstQrVar);
 	INDEX secondColNum1 = LinkedDataTable::getColNumOf(secondQrVar);
@@ -197,21 +275,23 @@ bool LinkedDataTable::mergeTable(INDEX firstQrVar,INDEX secondQrVar,LinkedDataTa
 					currentEntry++;
 				}
 				//add the updated temp row into temp row list
-				tempRowList.push_back(tempRow);
+				tempRowList->push_back(tempRow);
 			}
 		}
 		currentRow1++;
 	}
 	//replace the old row list
-	if(tempRowList.size()>0){
-		rowList = tempRowList;
+	if(tempRowList->size()>0){
+		rowList = *tempRowList;
+		delete tempRowList;
 		return true;
 	}
+	delete tempRowList;
 	return false;
 	
 }
 void LinkedDataTable::deleteRowBy(INDEX qrVar,int data){
-	INDEX colNum = LinkedDataTable::getColNumOf(qrVar);
+	/*INDEX colNum = LinkedDataTable::getColNumOf(qrVar);
 	ROW_LIST::iterator currentRow;
 	currentRow = rowList.begin();
 	
@@ -227,24 +307,27 @@ void LinkedDataTable::deleteRowBy(INDEX qrVar,int data){
 		}else{
 			currentRow++;
 		}
-	}
+	}*/
 	
 }
 INDEX_LIST * LinkedDataTable::getDataListOf(INDEX qrVar){
 	INDEX_LIST * returnList = new INDEX_LIST;
 	INDEX colNum = LinkedDataTable::getColNumOf(qrVar);
-	SIZE rowNum = rowList.size();
+//	SIZE rowNum = rowList.size();
 
 	ROW_LIST::iterator currentRow;
 	//loop through the row list 
-	for(currentRow = rowList.begin();currentRow!=rowList.end();currentRow++){
+	for(int i =0;i<rowList.size();i++){
+		returnList->push_back(rowList[i][colNum]);
+	}
+	/*for(currentRow = rowList.begin();currentRow!=rowList.end();currentRow++){
 		ROW::iterator currentEntry;
 		//locate the position of entry[row][col]
 		currentEntry = currentRow->begin();
 		advance(currentEntry,colNum);
 		//add the value in return list
 		returnList->push_back(*currentEntry);
-	}
+	}*/
 	
 	returnList->unique();
 	returnList->sort();
@@ -278,13 +361,17 @@ SIZE LinkedDataTable::getSize(){
 	return rowList.size();
 }
 ROW LinkedDataTable::getRow(INDEX rowNum){
+
+	return rowList[rowNum];/*
 	ROW_LIST::iterator currentRow;
 	currentRow = rowList.begin();
 	advance(currentRow, rowNum);
 
-	return *currentRow;
+	return *currentRow;*/
 }
 int LinkedDataTable::getEntryAt(INDEX row,INDEX col){
+	return rowList[row][col];
+	/*
 	ROW_LIST::iterator currentRow;
 	currentRow = rowList.begin();
 	advance(currentRow,row);
@@ -294,4 +381,5 @@ int LinkedDataTable::getEntryAt(INDEX row,INDEX col){
 	advance(currentEntry,col);
 
 	return *currentEntry;
+	*/
 }
