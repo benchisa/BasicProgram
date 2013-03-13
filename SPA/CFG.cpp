@@ -1,5 +1,5 @@
 #include "CFG.h"
-
+#include <stack>
 
 // all prog_line need to -1 due to array position
 CFG::CFG(int size)
@@ -38,10 +38,13 @@ bool CFG::addEdge(PROG_LINE p1, PROG_LINE p2)
 	if(p1 <= 0 && p2 <= 0)
 		return false;
 
+	//cout << "Inserting Next(" << p1 << ", " << p2 << ")\n";
 	cfg[p1-1][p2-1] = 1;
 
 	return true;
 }
+
+
 
 list<PROG_LINE> CFG::getAllProgLines(PROG_LINE p1, PROG_LINE p2)
 {
@@ -50,6 +53,12 @@ list<PROG_LINE> CFG::getAllProgLines(PROG_LINE p1, PROG_LINE p2)
 		computeProgLines(p1, p2, 0);
 	else
 		computeProgLines(p1, p2, 1);
+
+	// debug
+	list<PROG_LINE>::iterator itr = pLines.begin();
+	while(itr!=pLines.end()){
+		itr++;
+	}
 
 	return this->pLines;
 }
@@ -60,14 +69,7 @@ NEXT_LIST CFG::getAllPaths(PROG_LINE p1, PROG_LINE p2){
 	else
 		computeProgLines(p1, p2, 1);
 
-	NEXT_LIST::iterator itr = paths.begin();
-
-	/*cout << "GETALLPATHS====\n";
-	while(itr!=paths.end()){
-		cout << "Next(" << itr->first << ", " << itr->second << ")\n";
-		itr++;
-	}*/
-
+	
 	return paths;
 }
 
@@ -87,7 +89,7 @@ NEXT_LIST CFG::getNext(PROG_LINE p1, PROG_LINE p2){
 			for(int j = 1; j <= size; j++)
 			{
 				if(isConnected(i, j)){
-					tmp.push_back(createPair(i,j));
+					tmp.push_back(make_pair(i,j));
 				}
 			}
 		}
@@ -97,7 +99,7 @@ NEXT_LIST CFG::getNext(PROG_LINE p1, PROG_LINE p2){
 		for(int i = 1; i <= size; i++)
 		{
 			if(isConnected(p1, i)){
-				tmp.push_back(createPair(p1,i));
+				tmp.push_back(make_pair(p1,i));
 			}
 		}
 	}
@@ -106,14 +108,15 @@ NEXT_LIST CFG::getNext(PROG_LINE p1, PROG_LINE p2){
 		for(int i = 1; i <= size; i++)
 		{
 			if(isConnected(i, p2)){
-				tmp.push_back(createPair(i, p2));
+				tmp.push_back(make_pair(i, p2));
 			}
 		}
 	}
 	// this case shld never happen.. but for sake of error checking
 	else if(p1 != NULL && p2 != NULL){
-		tmp.push_back(createPair(p1,p2));
+		tmp.push_back(make_pair(p1,p2));
 	}
+	//cout << "GETNEXT IN CFG: " << tmp.size() << "\n";
 	return tmp;
 }
 
@@ -133,13 +136,19 @@ void CFG::computeProgLines(PROG_LINE p1, PROG_LINE p2, int reverse)
 	
 	if(pLines.size() != 0)
 		pLines.clear();
+
+	if(paths.size() != 0)
+		paths.clear();
+
 	
 	queue<PROG_LINE> q;
-	
+	//cout << "compute: " << p1 << ", " << p2 << "\n";
+
 	int same = 0;
 	bool **visited = new bool*[size+1];
-	for(int i = 0; i <= size; ++i)
+	for(int i = 0; i <= size; ++i){
 		visited[i] = new bool[size+1];
+	}
 
 	for(int i = 0; i <= size; ++i)
 	{
@@ -148,7 +157,7 @@ void CFG::computeProgLines(PROG_LINE p1, PROG_LINE p2, int reverse)
 			visited[i][j] = false;
 		}
 	}
-	
+	//cout << p1 << " ";
 	if(!reverse){
 		q.push(p1);
 		//visited[p1] = true;
@@ -167,7 +176,7 @@ void CFG::computeProgLines(PROG_LINE p1, PROG_LINE p2, int reverse)
 
 		// reach destination
 		if(p1 != NULL && p2 != NULL && tmpProg == p2 && p1 != p2)
-			return;
+			break;
 
 		for(int j = 1; j<=size; j++)
 		{
@@ -175,8 +184,9 @@ void CFG::computeProgLines(PROG_LINE p1, PROG_LINE p2, int reverse)
 				if(isConnected(j, tmpProg) && (j==p2||!visited[j][tmpProg]))
 				{
 					//cout << "(" << j << "," << tmpProg << ")\n";
+					
 					pLines.push_back(j);
-					paths.push_back(createPair(j, tmpProg));
+					paths.push_back(make_pair(j, tmpProg));
 
 					q.push(j);
 					visited[j][tmpProg] = true;
@@ -186,10 +196,12 @@ void CFG::computeProgLines(PROG_LINE p1, PROG_LINE p2, int reverse)
 			{
 				if(isConnected(tmpProg, j) && (j==p1 || !visited[tmpProg][j]) )
 				{
+					
 					//cout << "(" << tmpProg << "," << j << ")\n";
 					
+					//cout << j << " ";
 					pLines.push_back(j);
-					paths.push_back(createPair(tmpProg, j));
+					paths.push_back(make_pair(tmpProg, j));
 					
 					q.push(j);
 					visited[tmpProg][j] = true;
@@ -201,20 +213,10 @@ void CFG::computeProgLines(PROG_LINE p1, PROG_LINE p2, int reverse)
 			same = 0;
 		}
 	}
-
 	pLines.sort();
 	pLines.unique();
-	paths.sort();
+	//paths.sort();
 	paths.unique();
-
 	// free memory
 	delete [] visited;
-}
-
-pair <PROG_LINE, PROG_LINE> CFG::createPair(PROG_LINE p1, PROG_LINE p2){
-	pair<PROG_LINE, PROG_LINE> tResult;
-	tResult.first = p1;
-	tResult.second = p2;
-	
-	return tResult;
 }
