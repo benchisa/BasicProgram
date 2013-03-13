@@ -103,9 +103,9 @@ list<string>  EvaluateCalls::computeCallStar(PROC_NAME caller, PROC_NAME callee)
 	list<string> result;
 	if (caller!=" " || callee!=" ")
 	{
-		CALL_LIST root=pkb->getCall(caller, callee);
+		
 		stack<CALL_LIST> stacks;
-		stacks.push(root);
+		stacks.push(pkb->getCall(caller, callee););
 		while (!stacks.empty())
 		{
 			CALL_LIST calls=stacks.top();
@@ -124,8 +124,7 @@ list<string>  EvaluateCalls::computeCallStar(PROC_NAME caller, PROC_NAME callee)
 						if (findIter==result.end())
 						{
 							result.push_back(itr->second);
-							CALL_LIST temp=pkb->getCall(itr->second, " ");
-							stacks.push(temp);
+							stacks.push(pkb->getCall(itr->second, " "););
 						}
 
 
@@ -136,8 +135,7 @@ list<string>  EvaluateCalls::computeCallStar(PROC_NAME caller, PROC_NAME callee)
 						if (findIter==result.end())
 						{
 							result.push_back(itr->first);
-							CALL_LIST temp=pkb->getCall(" ",itr->first);
-							stacks.push(temp);
+							stacks.push(pkb->getCall(" ",itr->first););
 						}
 
 					}
