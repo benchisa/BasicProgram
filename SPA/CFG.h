@@ -20,7 +20,6 @@ private:
 	int size;
 	list<PROG_LINE> pLines;
 	NEXT_LIST paths;
-	queue<PROG_LINE> q;
 	bool isConnected(PROG_LINE p1, PROG_LINE p2);
 	void computeProgLines(PROG_LINE p1, PROG_LINE p2, int reverse);
 
