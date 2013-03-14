@@ -150,6 +150,7 @@ bool Parser::procedure(){
 				pkb->addSibling(curAST, newProc);
 				curAST = newProc;
 			}
+			//cout << prevToken << "\n";
 		}
 		else
 		{
@@ -159,6 +160,9 @@ bool Parser::procedure(){
 		if(matchToken("{")){
 			prevProc = curAST;
 			curAST = pkb->createAST(STMT_LIST, prevProgLine, 0, -1);
+			
+			pkb->insertStmtList(stmt_num+1, PROCEDURE);
+			
 			if(!pkb->setFirstDescendant(prevProc, curAST))
 				pkb->setAncestor(curAST, prevProc);
 
@@ -318,6 +322,7 @@ bool Parser::stmt_if(){
 		
 			if(matchToken("then") && matchToken("{"))
 			{
+				pkb->insertStmtList(stmt_num+1,THEN); 
 				thenNode = pkb->createAST(STMT_LIST, prevProgLine, stmt_num, THEN); // then node
 				
 				pkb->setFirstDescendant(ifNode, leftNode);
@@ -335,8 +340,7 @@ bool Parser::stmt_if(){
 				{
 					if(matchToken("else") && matchToken("{"))
 					{
-						//progLine++;
-						//??? do we need a progline, no right.
+						pkb->insertStmtList(stmt_num+1,ELSE);
 						elseNode = pkb->createAST(STMT_LIST, 0, 0, ELSE); // else node, no stmt_line
 						pkb->setAncestor(elseNode, ifNode);
 						pkb->addSibling(thenNode, elseNode);
@@ -427,6 +431,7 @@ bool Parser::stmt_while(){
 			//cout << "Last Container: " << containerIndex.back().first << "\n";
 
 			if(matchToken("{")){
+				pkb->insertStmtList(stmt_num+1,WHILE);
 				rightNode = pkb->createAST(STMT_LIST,prevProgLine, stmt_num, -1);
 				pkb->setAncestor(rightNode, whileNode);
 				pkb->addSibling(leftNode, rightNode);
