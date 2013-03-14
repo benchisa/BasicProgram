@@ -19,6 +19,7 @@
     <ClCompile Include="DesignExtractor.cpp" />
     <ClCompile Include="CFG.cpp" />
     <ClCompile Include="EvaluateCalls.cpp" />
+    <ClCompile Include="EvaluateContains.cpp" />
     <ClCompile Include="EvaluateFollows.cpp" />
     <ClCompile Include="EvaluateModifies.cpp" />
     <ClCompile Include="EvaluateNext.cpp" />
@@ -43,6 +44,7 @@
     <ClCompile Include="QueryFormatter.cpp" />
     <ClCompile Include="QueryPreprocessor.cpp" />
     <ClCompile Include="SPAController.cpp" />
+    <ClCompile Include="StmtListTable.cpp" />
     <ClCompile Include="SuchThat.cpp" />
     <ClCompile Include="SuchThatClause.cpp" />
     <ClCompile Include="Uses.cpp" />
@@ -60,6 +62,7 @@
     <ClInclude Include="DesignExtractor.h" />
     <ClInclude Include="CFG.h" />
     <ClInclude Include="EvaluateCalls.h" />
+    <ClInclude Include="EvaluateContains.h" />
     <ClInclude Include="EvaluateFollows.h" />
     <ClInclude Include="EvaluateModifies.h" />
     <ClInclude Include="EvaluateNext.h" />
@@ -80,6 +83,7 @@
     <ClInclude Include="QueryFormatter.h" />
     <ClInclude Include="QueryPreprocessor.h" />
     <ClInclude Include="SPAController.h" />
+    <ClInclude Include="StmtListTable.h" />
     <ClInclude Include="SuchThat.h" />
     <ClInclude Include="SuchThatClause.h" />
     <ClInclude Include="VarTable.h" />

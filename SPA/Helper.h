@@ -16,14 +16,18 @@ public:
 	// to set PKB
 	static PKB *pkb;
 	
-	static PREFIXEXPR convertExprToPrefix(EXPRESSION expr);
-	static bool isStatementTypeOf(TYPE typeName, STATEMENT_NUM stmtNum);
-	static DATA_LIST * getStmtListOf(TYPE nodeType);
-	static DATA_LIST * getAllConstants();
-	static DATA_LIST * getAllCallStmts();
+	static PREFIXEXPR	convertExprToPrefix(EXPRESSION expr);
+	static bool			isStatementTypeOf(TYPE typeName, STATEMENT_NUM stmtNum);
+	static bool			isStatementDescendantTypeOf(TYPE typeName, TYPE typeName2, STATEMENT_NUM stmtNum);
+	static bool			isStatementDescendantTypeDataOf(TYPE typeName, TYPE typeName2, int data, STATEMENT_NUM stmtNum);
+	static TYPE			getStatementType(STATEMENT_NUM stmtNum);
+	static AST_LIST *	getASTListTypeOf(TYPE typeName, STATEMENT_NUM stmtNum);
+	static DATA_LIST *	getStmtListOf(TYPE nodeType);
+	static DATA_LIST *	getAllConstants();
+	static DATA_LIST *	getAllCallStmts();
 
-	static void computeTypeOnly(list<pair<int, int>> &result, list<pair<int, int>> &listLst, TYPE type1, TYPE type2);
-	static void iterateAndStore(list<pair<int, int>> &result, list<pair<int, int>> tmpLst, int v1);
+	static void			computeTypeOnly(list<pair<int, int>> &result, list<pair<int, int>> &listLst, TYPE type1, TYPE type2);
+	static void			iterateAndStore(list<pair<int, int>> &result, list<pair<int, int>> tmpLst, int v1);
 
 private:
 	// Helper for conversion

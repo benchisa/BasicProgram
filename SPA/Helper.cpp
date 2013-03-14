@@ -53,7 +53,7 @@ PREFIXEXPR Helper::convertExprToPrefix(EXPRESSION expr){
 
 	// handle the leftover
 	while(!operators.empty()){
-			operands.push(formExpression(operators, operands));
+		operands.push(formExpression(operators, operands));
 	}
 
 	result = operands.top();
@@ -74,12 +74,81 @@ bool Helper::isStatementTypeOf(TYPE typeName,STATEMENT_NUM stmtNum){
 	return false;
 }
 
+// only for PLUS, MINUS, TIMES
+bool Helper::isStatementDescendantTypeDataOf(TYPE typeName, TYPE typeName2, int data, STATEMENT_NUM stmtNum){
+	if(stmtNum>0&&stmtNum <= pkb->getMaxStatementNum()){
+		cout << typeName << ", " << typeName2 << ", " << data << ", " << stmtNum << "\n";
+		AST_LIST* currentAST = pkb->getASTBy(stmtNum);
+		AST_LIST::iterator itr;
+		for(itr = currentAST->begin();itr!=currentAST->end();itr++){
+			if((*itr)->getRootType()==typeName){
+				// check descendant
+				AST * descendant = (*itr)->getFirstDescendant();
+				if(pkb->getType(descendant) == typeName2 && pkb->getData(descendant) == data){
+					return true;
+				}
+				else if(pkb->getType(descendant->getRightSibling()) == typeName2 && pkb->getData(descendant->getRightSibling()) == data){{
+					return true;
+				}
+				}
+			}
+		}
+	}
+	
+	return false;
+}
+
+bool Helper::isStatementDescendantTypeOf(TYPE typeName, TYPE typeName2,STATEMENT_NUM stmtNum){
+	//find the type of statement
+	if(stmtNum>0&&stmtNum <= pkb->getMaxStatementNum()){
+
+		AST_LIST* currentAST = pkb->getASTBy(stmtNum);
+		AST_LIST::iterator itr;
+		for(itr = currentAST->begin();itr!=currentAST->end();itr++){
+			if((*itr)->getRootType()==typeName && ((*itr)->getFirstDescendant()->getRootType()||(*itr)->getFirstDescendant()->getRightSibling()->getRootType())){
+				// check descendant
+
+			}
+		}
+	}
+	return false;
+}
+
+AST_LIST *	Helper::getASTListTypeOf(TYPE typeName, STATEMENT_NUM stmtNum){
+	AST_LIST* resultLst = NULL;
+
+	if(stmtNum>0&&stmtNum <= pkb->getMaxStatementNum()){
+
+		AST_LIST* currentAST = pkb->getASTBy(stmtNum);
+		AST_LIST::iterator itr;
+		for(itr = currentAST->begin();itr!=currentAST->end();itr++){
+			if((*itr)->getRootType()==typeName) {
+				cout << "Pushing: " << typeName << "\n";
+				resultLst->push_back((*itr)->getFirstDescendant());
+				resultLst->push_back((*itr)->getFirstDescendant()->getRightSibling());
+			}
+		}
+	}
+	return resultLst;
+}
+
+TYPE Helper::getStatementType(STATEMENT_NUM stmtNum){
+	//find the type of statement
+	if(stmtNum>0&&stmtNum <= pkb->getMaxStatementNum()){
+		AST_LIST* currentAST = pkb->getASTBy(stmtNum);
+		AST_LIST::iterator itr;
+		for(itr = currentAST->begin();itr!=currentAST->end();itr++){
+			return (*itr)->getRootType();
+		}
+	}
+}
+
 DATA_LIST* Helper::getAllCallStmts(){
 	return pkb->getAllCallerStmt();
 }
 
 DATA_LIST* Helper::getStmtListOf(TYPE nodeType){
-	DATA_LIST* returnList;
+	DATA_LIST* returnList = NULL;
 
 	int maxStmtNum = pkb->getMaxStatementNum();
 	int maxProgLineNum = pkb->getMaxProgLine();
@@ -132,6 +201,10 @@ DATA_LIST* Helper::getStmtListOf(TYPE nodeType){
 			}
 		}
 		break;
+	case STMT_LIST:
+		{
+			returnList = pkb->getAllStmtLst();
+		}
 	}
 	return returnList;
 }
@@ -148,86 +221,86 @@ DATA_LIST * Helper::getAllConstants(){
 
 // Computational Methods
 void Helper::computeTypeOnly(list<pair<int, int>> &result, list<pair<int, int>> &tmpLst, TYPE type1, TYPE type2){
-		PARENT_LIST::iterator tmpItr;
-		AST_LIST *astLst_t1, *astLst_t2;
-		AST_LIST::iterator astItr_t1, astItr_t2;
+	PARENT_LIST::iterator tmpItr;
+	AST_LIST *astLst_t1, *astLst_t2;
+	AST_LIST::iterator astItr_t1, astItr_t2;
 
-		// Parent(s1, s2)/ Parent(_, _)/Parent(ANY, s2)/Parent(s1, ANY)
-		if((type1 == STATEMENT && type2 == STATEMENT ) || (type1== ANY && type2 == ANY)
-			|| (type1 == STATEMENT && type2 == ANY) || (type1 == ANY && type2==STATEMENT)){
-				result = tmpLst;
-		}
+	// Parent(s1, s2)/ Parent(_, _)/Parent(ANY, s2)/Parent(s1, ANY)
+	if((type1 == STATEMENT && type2 == STATEMENT ) || (type1== ANY && type2 == ANY)
+		|| (type1 == STATEMENT && type2 == ANY) || (type1 == ANY && type2==STATEMENT)){
+			result = tmpLst;
+	}
 
-		// Parent(_, type2), Parent(type1, _)
-		// Parent(STATEMENT, type2)
-		else if(type1 == ANY || type2 == ANY 
-			|| type1 == STATEMENT || type2 == STATEMENT){
-
-				tmpItr = tmpLst.begin();
-				while(tmpItr != tmpLst.end()){
-
-					// Decide which statement to check with type
-					if(type1 == ANY || type1 == STATEMENT) 
-						astLst_t1 = pkb->getASTBy(tmpItr->second);
-					else if(type2 == ANY || type2 == STATEMENT) 
-						astLst_t1 = pkb->getASTBy(tmpItr->first);
-
-					astItr_t1 = astLst_t1->begin();
-					while(astItr_t1 != astLst_t1->end())
-					{
-						if(pkb->getType(*astItr_t1) == type2 || pkb->getType(*astItr_t1) == type1)
-							result.push_back(*tmpItr);
-
-						astItr_t1++;
-					}
-
-					tmpItr++;
-				}
-		}
-
-		else if(type1 == WHILE || type1 == ASSIGNMENT || type1 == IF){
+	// Parent(_, type2), Parent(type1, _)
+	// Parent(STATEMENT, type2)
+	else if(type1 == ANY || type2 == ANY 
+		|| type1 == STATEMENT || type2 == STATEMENT){
 
 			tmpItr = tmpLst.begin();
 			while(tmpItr != tmpLst.end()){
-				astLst_t1 = pkb->getASTBy(tmpItr->first);
+
+				// Decide which statement to check with type
+				if(type1 == ANY || type1 == STATEMENT) 
+					astLst_t1 = pkb->getASTBy(tmpItr->second);
+				else if(type2 == ANY || type2 == STATEMENT) 
+					astLst_t1 = pkb->getASTBy(tmpItr->first);
+
 				astItr_t1 = astLst_t1->begin();
-				while(astItr_t1 != astLst_t1->end()){
-					if(pkb->getType(*astItr_t1) == type1){
-						astLst_t2 = pkb->getASTBy(tmpItr->second);
-						astItr_t2 = astLst_t2->begin();
-						while(astItr_t2 != astLst_t2->end()){
-							if(pkb->getType(*astItr_t2) == type2)
-							{
-								// push this guy to our result
-								result.push_back(*tmpItr);
-							}
-							astItr_t2++;
-						}
-					}
+				while(astItr_t1 != astLst_t1->end())
+				{
+					if(pkb->getType(*astItr_t1) == type2 || pkb->getType(*astItr_t1) == type1)
+						result.push_back(*tmpItr);
+
 					astItr_t1++;
 				}
+
 				tmpItr++;
 			}
+	}
+
+	else if(type1 == WHILE || type1 == ASSIGNMENT || type1 == IF){
+
+		tmpItr = tmpLst.begin();
+		while(tmpItr != tmpLst.end()){
+			astLst_t1 = pkb->getASTBy(tmpItr->first);
+			astItr_t1 = astLst_t1->begin();
+			while(astItr_t1 != astLst_t1->end()){
+				if(pkb->getType(*astItr_t1) == type1){
+					astLst_t2 = pkb->getASTBy(tmpItr->second);
+					astItr_t2 = astLst_t2->begin();
+					while(astItr_t2 != astLst_t2->end()){
+						if(pkb->getType(*astItr_t2) == type2)
+						{
+							// push this guy to our result
+							result.push_back(*tmpItr);
+						}
+						astItr_t2++;
+					}
+				}
+				astItr_t1++;
+			}
+			tmpItr++;
 		}
 	}
+}
 
 void Helper::iterateAndStore(list<pair<int, int>> &result, list<pair<int, int>> tmpLst, int v1){
-		list<pair<int,int>>::iterator itr;
-		if(!tmpLst.empty())
-		{
-			itr = tmpLst.begin();
+	list<pair<int,int>>::iterator itr;
+	if(!tmpLst.empty())
+	{
+		itr = tmpLst.begin();
 
-			while(itr != tmpLst.end()){
-				if(v1 != 0 && itr->second == v1){
-					result.push_back(*itr);
-				}
-				else if(v1 == 0){
-					result.push_back(*itr);
-				}
-				itr++;
-			}	
-		}
+		while(itr != tmpLst.end()){
+			if(v1 != 0 && itr->second == v1){
+				result.push_back(*itr);
+			}
+			else if(v1 == 0){
+				result.push_back(*itr);
+			}
+			itr++;
+		}	
 	}
+}
 
 /**** PRIVATE ****/
 
@@ -237,7 +310,7 @@ bool Helper::isHigherPrecedence(stack<pair<TYPE, TOKEN>>& operators, TOKEN t){
 		return true;
 	}
 	else{
-	return false;}
+		return false;}
 }
 
 vector<pair<TYPE, TOKEN>> Helper::tokenize(EXPRESSION expr){

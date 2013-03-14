@@ -5,6 +5,7 @@
 #include "EvaluateNext.h"
 #include "EvaluateParents.h"
 #include "EvaluateUses.h"
+#include "EvaluateContains.h"
 #include "Affects.h"
 #include "Helper.h"
 #include "CFG.h"
@@ -59,8 +60,9 @@ public:
 	bool			getIsUsesResult(TYPE type, int arg1, VAR_INDEX v1);
 
 	bool			getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
-	bool			getIsAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
 	AFFECT_LIST		getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
+
+	bool			getIsContainResult(TYPE, int, TYPE, int);
 
 private:
 	PKB *			pkb;

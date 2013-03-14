@@ -11,6 +11,7 @@ DesignExtractor::DesignExtractor(PKB* pkb)
 	EvaluateFollows::pkb = pkb;
 	EvaluateUses::pkb = pkb;
 	Affects::pkb = pkb;
+	EvaluateContains::pkb = pkb;
 
 	EvaluateNext::createCFG();
     EvaluateCalls::insertProcModifiesUses();
@@ -160,7 +161,6 @@ AFFECT_LIST DesignExtractor::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM 
 	return Affects::getAffectResult(stmt1, stmt2);
 }
 
-bool DesignExtractor::getIsAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2){
-
-	return Affects::getIsAffectStarResult(stmt1,stmt2);
+bool DesignExtractor::getIsContainResult(TYPE type, int arg1, TYPE type2, int arg2){
+	return EvaluateContains::getIsContainResult(type, arg1, type2, arg2);
 }
