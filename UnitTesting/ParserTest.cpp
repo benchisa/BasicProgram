@@ -22,7 +22,7 @@ void ParserTest::testComplex(){
 	std::string src;
 
 	src = " procedure xylo{\n"
-		/*1*/	"     apple=1;\n"
+		/*1*/	"     apple=apple+1+1;\n"
 		/*2*/	"     banana=apple+1;\n"
 		/*3*/	"     carrot=apple;\n"
 		/*4*/	"     banana=carrot*(egg+fish-apple);\n"
@@ -67,7 +67,11 @@ void ParserTest::testComplex(){
 		/*38*/	"		  carrot=banana;}\n"
 		/*39*/	"	 apple=1;\n"
 		/*40*/	"	 kimchi=apple+10;\n"
-		/*41*/	"	 call extra;}";
+		/*41*/	"	 call extra;}\n"
+		/**/	"	procedure extra{\n"
+		/*42*/	"	if a then{\n"
+		/*43*/	"	 b = c;}\n"
+		/*44*/	"	else{ b = c;}}\n";
 
 	p.setSource(src);
 	CPPUNIT_ASSERT_EQUAL(1, p.startParse());
@@ -75,6 +79,31 @@ void ParserTest::testComplex(){
 	AST *ast = pkb->getRootAST();
 	DesignExtractor *de = new DesignExtractor(pkb);
 	de->createCFG();
+
+	// known known
+	/*cout << de->getIsContainResult(PLUS, 0, VARIABLE, pkb->getVarIndex("apple")) << "\n"; // true
+	cout << de->getIsContainResult(PLUS, 0, PLUS, 0) << "\n"; //true
+	cout << de->getIsContainResult(PLUS, 0, MINUS, 0) << "\n";  //true
+	cout << de->getIsContainResult(PLUS, 0, MULTIPLY, 0) << "\n"; //false,
+	cout << de->getIsContainResult(STMT_LIST, 0, STATEMENT,1) << "\n"; // true because procedure below is stmt1
+	cout << de->getIsContainResult(STMT_LIST, 0, STATEMENT,2) << "\n"; // false
+	*/
+	/*cout << de->getIsContainResult(STATEMENT, 1, STATEMENT, 2) << "\n"; // false
+	cout << de->getIsContainResult(STATEMENT, 29, STATEMENT, 38) << "\n"; //false
+	cout << de->getIsContainResult(STATEMENT, 33, STATEMENT, 34) << "\n"; //false
+	cout << de->getIsContainResult(STATEMENT, 36, STATEMENT, 37) << "\n"; //true
+	cout << de->getIsContainResult(STATEMENT, 36, STATEMENT, 38) << "\n"; //true
+	*/
+	// Contain("extra", 2)
+	// Contain("xylo", 1)
+	cout << de->getIsContainResult(PROCEDURE, 1, STATEMENT, 1) << "\n"; // true
+	cout << de->getIsContainResult(PROCEDURE, 1, STATEMENT, 2) << "\n"; // false
+	cout << de->getIsContainResult(PROCEDURE, 1, STMT_LIST, 0) << "\n"; //true
+	cout << de->getIsContainResult(PROCEDURE, 1, WHILE, 9) << "\n"; //false
+	cout << de->getIsContainResult(PROCEDURE, pkb->getProcIndex("extra"), STATEMENT, 42) << "\n"; //true
+	//cout << pkb->getStmtListSize() << "\n";
+	cout << "End of Program\n";
+
 
 	//cout << "Assign's Size: " << pkb->getAssignSize() << "\n";
 	// Test for Follows

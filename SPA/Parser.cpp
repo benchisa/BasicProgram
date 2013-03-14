@@ -160,8 +160,12 @@ bool Parser::procedure(){
 		if(matchToken("{")){
 			prevProc = curAST;
 			curAST = pkb->createAST(STMT_LIST, prevProgLine, 0, -1);
-			
-			pkb->insertStmtList(stmt_num+1, PROCEDURE);
+
+			STMTENTRY thisEntry;
+			thisEntry.ownerNo = curProcIndex;
+			thisEntry.type = PROCEDURE;
+			cout << "inserting: " << stmt_num+1 << " for " << curProcIndex << "\n";
+			pkb->insertStmtList(stmt_num+1, thisEntry);
 			
 			if(!pkb->setFirstDescendant(prevProc, curAST))
 				pkb->setAncestor(curAST, prevProc);
@@ -290,6 +294,7 @@ bool Parser::stmt_call(){
 bool Parser::stmt_if(){
 	// if: if var_name then '{' stmtlst '}' else '{' stmtlst '}'
 	TOKEN tmpToken = prevToken;
+	int ownerNo = 0;
 
 	if(matchToken("if")){
 		stmt_num++;
@@ -316,13 +321,18 @@ bool Parser::stmt_if(){
 			pkb->insertUses(IF, stmt_num, curVarIndex);
 
 			// insert to if table
+			ownerNo = stmt_num;
 			pkb->insertIf(stmt_num, curVarIndex);
 
 			leftNode = pkb->createAST(VARIABLE, prevProgLine, stmt_num, curVarIndex);
 		
 			if(matchToken("then") && matchToken("{"))
 			{
-				pkb->insertStmtList(stmt_num+1,THEN); 
+				STMTENTRY thisEntry;
+				thisEntry.ownerNo = ownerNo;
+				thisEntry.type = THEN;
+
+				pkb->insertStmtList(stmt_num+1,thisEntry); 
 				thenNode = pkb->createAST(STMT_LIST, prevProgLine, stmt_num, THEN); // then node
 				
 				pkb->setFirstDescendant(ifNode, leftNode);
@@ -340,7 +350,11 @@ bool Parser::stmt_if(){
 				{
 					if(matchToken("else") && matchToken("{"))
 					{
-						pkb->insertStmtList(stmt_num+1,ELSE);
+						thisEntry;
+						thisEntry.ownerNo = ownerNo;
+						thisEntry.type = ELSE;
+
+						pkb->insertStmtList(stmt_num+1,thisEntry);
 						elseNode = pkb->createAST(STMT_LIST, 0, 0, ELSE); // else node, no stmt_line
 						pkb->setAncestor(elseNode, ifNode);
 						pkb->addSibling(thenNode, elseNode);
@@ -431,7 +445,10 @@ bool Parser::stmt_while(){
 			//cout << "Last Container: " << containerIndex.back().first << "\n";
 
 			if(matchToken("{")){
-				pkb->insertStmtList(stmt_num+1,WHILE);
+				STMTENTRY thisEntry;
+				thisEntry.ownerNo = stmt_num;
+				thisEntry.type = THEN;
+				pkb->insertStmtList(stmt_num+1,thisEntry);
 				rightNode = pkb->createAST(STMT_LIST,prevProgLine, stmt_num, -1);
 				pkb->setAncestor(rightNode, whileNode);
 				pkb->addSibling(leftNode, rightNode);
