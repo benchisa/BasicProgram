@@ -63,6 +63,7 @@ public:
 	AFFECT_LIST		getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
 
 	bool			getIsContainResult(TYPE, int, TYPE, int);
+	CONTAIN_LIST	getContainResult(TYPE, int, TYPE, int);
 
 private:
 	PKB *			pkb;

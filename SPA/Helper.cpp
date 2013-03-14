@@ -74,64 +74,6 @@ bool Helper::isStatementTypeOf(TYPE typeName,STATEMENT_NUM stmtNum){
 	return false;
 }
 
-// only for PLUS, MINUS, TIMES
-bool Helper::isStatementDescendantTypeDataOf(TYPE typeName, TYPE typeName2, int data, STATEMENT_NUM stmtNum){
-	if(stmtNum>0&&stmtNum <= pkb->getMaxStatementNum()){
-		cout << typeName << ", " << typeName2 << ", " << data << ", " << stmtNum << "\n";
-		AST_LIST* currentAST = pkb->getASTBy(stmtNum);
-		AST_LIST::iterator itr;
-		for(itr = currentAST->begin();itr!=currentAST->end();itr++){
-			if((*itr)->getRootType()==typeName){
-				// check descendant
-				AST * descendant = (*itr)->getFirstDescendant();
-				if(pkb->getType(descendant) == typeName2 && pkb->getData(descendant) == data){
-					return true;
-				}
-				else if(pkb->getType(descendant->getRightSibling()) == typeName2 && pkb->getData(descendant->getRightSibling()) == data){{
-					return true;
-				}
-				}
-			}
-		}
-	}
-	
-	return false;
-}
-
-bool Helper::isStatementDescendantTypeOf(TYPE typeName, TYPE typeName2,STATEMENT_NUM stmtNum){
-	//find the type of statement
-	if(stmtNum>0&&stmtNum <= pkb->getMaxStatementNum()){
-
-		AST_LIST* currentAST = pkb->getASTBy(stmtNum);
-		AST_LIST::iterator itr;
-		for(itr = currentAST->begin();itr!=currentAST->end();itr++){
-			if((*itr)->getRootType()==typeName && ((*itr)->getFirstDescendant()->getRootType()||(*itr)->getFirstDescendant()->getRightSibling()->getRootType())){
-				// check descendant
-
-			}
-		}
-	}
-	return false;
-}
-
-AST_LIST *	Helper::getASTListTypeOf(TYPE typeName, STATEMENT_NUM stmtNum){
-	AST_LIST* resultLst = NULL;
-
-	if(stmtNum>0&&stmtNum <= pkb->getMaxStatementNum()){
-
-		AST_LIST* currentAST = pkb->getASTBy(stmtNum);
-		AST_LIST::iterator itr;
-		for(itr = currentAST->begin();itr!=currentAST->end();itr++){
-			if((*itr)->getRootType()==typeName) {
-				cout << "Pushing: " << typeName << "\n";
-				resultLst->push_back((*itr)->getFirstDescendant());
-				resultLst->push_back((*itr)->getFirstDescendant()->getRightSibling());
-			}
-		}
-	}
-	return resultLst;
-}
-
 TYPE Helper::getStatementType(STATEMENT_NUM stmtNum){
 	//find the type of statement
 	if(stmtNum>0&&stmtNum <= pkb->getMaxStatementNum()){

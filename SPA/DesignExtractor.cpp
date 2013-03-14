@@ -164,3 +164,7 @@ AFFECT_LIST DesignExtractor::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM 
 bool DesignExtractor::getIsContainResult(TYPE type, int arg1, TYPE type2, int arg2){
 	return EvaluateContains::getIsContainResult(type, arg1, type2, arg2);
 }
+
+CONTAIN_LIST DesignExtractor::getContainResult(TYPE type, int arg1, TYPE type2, int arg2){
+	return EvaluateContains::getContainResult(type, arg1, type2, arg2);
+}

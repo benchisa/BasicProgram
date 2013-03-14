@@ -18,10 +18,7 @@ public:
 	
 	static PREFIXEXPR	convertExprToPrefix(EXPRESSION expr);
 	static bool			isStatementTypeOf(TYPE typeName, STATEMENT_NUM stmtNum);
-	static bool			isStatementDescendantTypeOf(TYPE typeName, TYPE typeName2, STATEMENT_NUM stmtNum);
-	static bool			isStatementDescendantTypeDataOf(TYPE typeName, TYPE typeName2, int data, STATEMENT_NUM stmtNum);
 	static TYPE			getStatementType(STATEMENT_NUM stmtNum);
-	static AST_LIST *	getASTListTypeOf(TYPE typeName, STATEMENT_NUM stmtNum);
 	static DATA_LIST *	getStmtListOf(TYPE nodeType);
 	static DATA_LIST *	getAllConstants();
 	static DATA_LIST *	getAllCallStmts();

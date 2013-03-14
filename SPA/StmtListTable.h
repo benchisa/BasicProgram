@@ -6,10 +6,10 @@ public:
 	StmtListTable(void);
 	~StmtListTable(void);
 
-	typedef hash_map<int,TYPE> STMTLISTTABLE;
+	typedef hash_map<int,STMTENTRY> STMTLISTTABLE;
 	
 	SIZE getSize();
-	void insert(STATEMENT_NUM stmtNo,TYPE type);
+	void insert(STATEMENT_NUM stmtNo,STMTENTRY entry);
 	STMTENTRY getStmtListEntry(STATEMENT_NUM stmtNo);
 	DATA_LIST * getAllStmtLists();
 

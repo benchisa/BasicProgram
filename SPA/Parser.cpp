@@ -164,7 +164,7 @@ bool Parser::procedure(){
 			STMTENTRY thisEntry;
 			thisEntry.ownerNo = curProcIndex;
 			thisEntry.type = PROCEDURE;
-			cout << "inserting: " << stmt_num+1 << " for " << curProcIndex << "\n";
+			//cout << "inserting: " << stmt_num+1 << " for " << curProcIndex << "\n";
 			pkb->insertStmtList(stmt_num+1, thisEntry);
 			
 			if(!pkb->setFirstDescendant(prevProc, curAST))
@@ -447,7 +447,7 @@ bool Parser::stmt_while(){
 			if(matchToken("{")){
 				STMTENTRY thisEntry;
 				thisEntry.ownerNo = stmt_num;
-				thisEntry.type = THEN;
+				thisEntry.type = WHILE;
 				pkb->insertStmtList(stmt_num+1,thisEntry);
 				rightNode = pkb->createAST(STMT_LIST,prevProgLine, stmt_num, -1);
 				pkb->setAncestor(rightNode, whileNode);

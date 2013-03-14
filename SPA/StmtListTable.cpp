@@ -13,9 +13,9 @@ StmtListTable::~StmtListTable(void)
 SIZE StmtListTable::getSize(){
 	return stmtTable.size();
 }
-void StmtListTable::insert(STATEMENT_NUM stmtNo,TYPE type){
+void StmtListTable::insert(STATEMENT_NUM stmtNo,STMTENTRY entry){
 	//cout << stmtNo << ", " << type << "\n";
-	stmtTable[stmtNo] = type;
+	stmtTable[stmtNo] = entry;
 	stmtList.push_back(stmtNo);
 	
 }
@@ -31,8 +31,8 @@ STMTENTRY StmtListTable::getStmtListEntry(STATEMENT_NUM stmtNo){
 
 	if(itr!=stmtTable.end())
 	{
-		thisEntry.stmtNo = itr->first;
-		thisEntry.type = itr->second;
+		thisEntry.ownerNo = itr->second.ownerNo;
+		thisEntry.type = itr->second.type;
 	}
 
 	return thisEntry;
