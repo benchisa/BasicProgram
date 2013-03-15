@@ -19,7 +19,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION( ParserTest ); // Note 4
 
 void ParserTest::testComplex(){
 	Parser p;
-	std::string src;
+	std::string src, src1, src2, src3;
 
 	src = " procedure xylo{\n"
 		/*1*/	"     apple=apple+1+1;\n"
@@ -27,7 +27,7 @@ void ParserTest::testComplex(){
 		/*3*/	"     carrot=apple;\n"
 		/*4*/	"     banana=carrot*(egg+fish-apple);\n"
 		/*5*/	"     donut=0;\n"
-		/*6*/	"     egg=1;\n"
+		/*6*/	"     egg=11;\n"
 		/*7*/	"     fish=egg;\n"
 		/*8*/	"     call yellow;\n"
 		/*9*/	"     while apple{\n"
@@ -70,7 +70,7 @@ void ParserTest::testComplex(){
 		/*41*/	"	 call extra;}\n"
 		/**/	"	procedure extra{\n"
 		/*42*/	"	if a then{\n"
-		/*43*/	"	 b = c;}\n"
+		/*43*/	"	 b = c+1;}\n"
 		/*44*/	"	else{ b = c;}}\n";
 
 	p.setSource(src);
@@ -79,6 +79,211 @@ void ParserTest::testComplex(){
 	AST *ast = pkb->getRootAST();
 	DesignExtractor *de = new DesignExtractor(pkb);
 	de->createCFG();
+	cout << "\n=============ContainsStar=============\n";
+	cout << "============= UNKNOWN, UNKNOWN ===========\n";
+	cout << de->getContainStarResult(STATEMENT, 0, STATEMENT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(STATEMENT, 0, WHILE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(STATEMENT, 0, IF, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(STATEMENT, 0, ASSIGNMENT, 0).size() <<"\n"; 
+	cout << de->getContainStarResult(STATEMENT, 0, VARIABLE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(STATEMENT, 0, CONSTANT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(STATEMENT, 0, MULTIPLY, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(STATEMENT, 0, PLUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(STATEMENT, 0, MINUS, -1).size() <<"\n\n"; //
+
+	cout << de->getContainStarResult(ASSIGNMENT, 0, VARIABLE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(ASSIGNMENT, 0, CONSTANT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(ASSIGNMENT, 0, MULTIPLY, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(ASSIGNMENT, 0, PLUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(ASSIGNMENT, 0, MINUS, -1).size() <<"\n\n"; //
+
+	cout << de->getContainStarResult(WHILE, 0, STATEMENT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, WHILE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, IF, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, ASSIGNMENT, 0).size() <<"\n"; 
+	cout << de->getContainStarResult(WHILE, 0, VARIABLE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, CONSTANT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, MULTIPLY, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, PLUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, MINUS, -1).size() <<"\n\n"; //
+
+	cout << de->getContainStarResult(IF, 0, STATEMENT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, WHILE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, IF, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, ASSIGNMENT, 0).size() <<"\n"; 
+	cout << de->getContainStarResult(IF, 0, VARIABLE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, CONSTANT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, MULTIPLY, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, PLUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, MINUS, -1).size() <<"\n\n"; //
+
+	cout << "============= UNKNOWN, KNOWN ===========\n";
+	cout << de->getContainStarResult(STATEMENT, 0, STATEMENT, 13).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, STATEMENT, 13).size() <<"\n"; //
+	cout << de->getContainStarResult(ASSIGNMENT, 0, STATEMENT, 13).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, STATEMENT, 44).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, CONSTANT, pkb->getConstantIndex(1)).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, VARIABLE, pkb->getVarIndex("meat")).size() <<"\n\n"; //
+
+	cout << de->getContainStarResult(PROCEDURE, 0, STATEMENT, 13).size() <<"\n"; //
+	cout << de->getContainStarResult(PROCEDURE, 0, PLUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(PROCEDURE, 0, MINUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(PROCEDURE, 0, MULTIPLY, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(PROCEDURE, 0, VARIABLE, pkb->getVarIndex("b")).size() <<"\n"; //
+	cout << de->getContainStarResult(PROCEDURE, 0, CONSTANT, pkb->getConstantIndex(11)).size() <<"\n\n"; //
+	CONTAIN_LIST result =  de->getContainStarResult(PROCEDURE, 0, CONSTANT, pkb->getConstantIndex(11));
+	CONTAIN_LIST::iterator itr = result.begin();
+
+	while(itr!=result.end()){
+		cout << "Contain(" << itr->first << ", " << itr->second <<")\n";
+		itr++;
+	}
+	cout << "============= KNOWN, UNKNOWN ===========\n";
+	//CONTAIN_LIST result = de->getContainStarResult(STATEMENT, 9, VARIABLE, 0); correct
+	//CONTAIN_LIST result = de->getContainStarResult(STATEMENT, 9, CONSTANT, 0); correct
+	//CONTAIN_LIST result = de->getContainStarResult(STATEMENT, 9, PLUS, 0); // find this weird to return something. but nevertheless...
+	//CONTAIN_LIST result = de->getContainStarResult(PROCEDURE, 4, PLUS, -1); correct
+	//CONTAIN_LIST result = de->getContainStarResult(PROCEDURE, 1, PLUS, -1);
+	//CONTAIN_LIST result = de->getContainStarResult(PROCEDURE, 1, MINUS, -1);
+	/*CONTAIN_LIST result = de->getContainStarResult(PROCEDURE, 1, CONSTANT, -1);
+	CONTAIN_LIST::iterator itr = result.begin();
+
+	while(itr!=result.end()){
+		cout << "Contain(" << itr->first << ", " << itr->second <<")\n";
+		itr++;
+	}
+	cout << de->getContainStarResult(PLUS, -1, CONSTANT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(PLUS, -1, VARIABLE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(PLUS, -1, PLUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(PLUS, -1, MINUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(PLUS, -1, MULTIPLY, -1).size() <<"\n\n"; //
+	
+	cout << de->getContainStarResult(MINUS, -1, CONSTANT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(MINUS, -1, VARIABLE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(MINUS, -1, PLUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(MINUS, -1, MINUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(MINUS, -1, MULTIPLY, -1).size() <<"\n\n"; //
+	
+	cout << de->getContainStarResult(MULTIPLY, -1, CONSTANT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(MULTIPLY, -1, VARIABLE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(MULTIPLY, -1, PLUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(MULTIPLY, -1, MINUS, -1).size() <<"\n"; //*/
+	//cout << de->getContainStarResult(MULTIPLY, -1, MULTIPLY, -1).size() <<"\n"; //
+
+	/*cout << "============= KNOWN, KNOWN ===========\n";
+	cout << de->getIsContainStarResult(STATEMENT, 36, STATEMENT, 37) << "\n"; //true
+	cout << de->getIsContainStarResult(STATEMENT, 9, VARIABLE, pkb->getVarIndex("fish")) << "\n\n"; //true
+
+	cout << de->getIsContainStarResult(PROCEDURE, 1, VARIABLE,  pkb->getVarIndex("carrot")) << "\n"; //true
+	cout << de->getIsContainStarResult(PROCEDURE, 1, VARIABLE,  pkb->getVarIndex("asd")) << "\n"; //false
+	cout << de->getIsContainStarResult(PROCEDURE, 1, CONSTANT, pkb->getConstantIndex(1)) << "\n"; //true
+	cout << de->getIsContainStarResult(PROCEDURE, 1, STATEMENT, 2) << "\n"; //true
+	cout << de->getIsContainStarResult(PROCEDURE, 1, PLUS, -1) << "\n"; //true
+	cout << de->getIsContainStarResult(PROCEDURE, 1, MINUS, -1) << "\n"; //true
+	cout << de->getIsContainStarResult(PROCEDURE, 1, MULTIPLY, -1) << "\n\n"; //true
+	cout << de->getIsContainStarResult(PROCEDURE, 2, MINUS, -1) << "\n"; //false
+	cout << de->getIsContainStarResult(PROCEDURE, 2, STATEMENT, 1) << "\n\n"; //false
+
+	cout << de->getIsContainStarResult(PLUS, -1, VARIABLE, pkb->getVarIndex("carrot")) << "\n"; //false
+	cout << de->getIsContainStarResult(PLUS, -1, VARIABLE, pkb->getVarIndex("egg")) << "\n"; //true
+	cout << de->getIsContainStarResult(PLUS, -1, CONSTANT, pkb->getConstantIndex(1)) << "\n"; //true
+	cout << de->getIsContainStarResult(MINUS, -1, CONSTANT, pkb->getConstantIndex(1)) << "\n"; // false
+	cout << de->getIsContainStarResult(MULTIPLY, -1, VARIABLE, pkb->getVarIndex("carrot")) << "\n"; //true
+	cout << de->getIsContainStarResult(MULTIPLY, -1, VARIABLE, pkb->getVarIndex("egg")) << "\n"; //true
+	cout << de->getIsContainStarResult(PLUS, -1, PLUS,-1) << "\n"; //true
+	cout << de->getIsContainStarResult(PLUS, -1, MINUS,-1) << "\n"; //false
+	cout << de->getIsContainStarResult(PLUS, -1, MULTIPLY,-1) << "\n"; //false
+	cout << de->getIsContainStarResult(MINUS, -1, PLUS,-1) << "\n"; //true
+	cout << de->getIsContainStarResult(MULTIPLY, -1, PLUS,-1) << "\n"; //true
+	cout << de->getIsContainStarResult(MULTIPLY, -1, MINUS,-1) << "\n\n"; //true
+
+	cout << de->getIsContainStarResult(STMT_LIST, -1, STATEMENT,2) << "\n"; //true
+	cout << de->getIsContainStarResult(STMT_LIST, -1, PLUS,-1) << "\n"; //true
+	cout << de->getIsContainStarResult(STMT_LIST, -1, MINUS,-1) << "\n"; //true
+	cout << de->getIsContainStarResult(STMT_LIST, -1, MULTIPLY,-1) << "\n"; //true
+	cout << de->getIsContainStarResult(STMT_LIST, -1, VARIABLE, pkb->getVarIndex("carrot")) << "\n"; //true
+	cout << de->getIsContainStarResult(STMT_LIST, -1, VARIABLE, pkb->getVarIndex("carr")) << "\n"; //false
+	cout << de->getIsContainStarResult(STMT_LIST, -1, STATEMENT,45) << "\n\n"; //false
+	
+
+
+
+	/*cout << "=============Contains=============\n";
+	cout << "============= KNOWN, KNOWN ===========\n";
+	cout << de->getIsContainResult(PLUS, 0, VARIABLE, pkb->getVarIndex("apple")) << "\n"; // true
+	cout << de->getIsContainResult(PLUS, 0, CONSTANT, pkb->getConstantIndex(22)) << "\n"; // true
+	cout << de->getIsContainResult(PLUS, 0, PLUS, 0) << "\n"; //true
+	cout << de->getIsContainResult(PLUS, 0, MINUS, 0) << "\n";  //true
+	cout << de->getIsContainResult(PLUS, 0, MULTIPLY, 0) << "\n"; //false,
+	cout << de->getIsContainResult(STMT_LIST, 0, STATEMENT,1) << "\n"; // true because procedure below is stmt1
+	cout << de->getIsContainResult(STMT_LIST, 0, STATEMENT,2) << "\n"; // false
+	cout << de->getIsContainResult(STATEMENT, 1, STATEMENT, 2) << "\n"; // false
+	cout << de->getIsContainResult(STATEMENT, 29, STATEMENT, 38) << "\n"; //false
+	cout << de->getIsContainResult(STATEMENT, 33, STATEMENT, 34) << "\n"; //false
+	cout << de->getIsContainResult(STATEMENT, 36, STATEMENT, 37) << "\n"; //true
+	cout << de->getIsContainResult(STATEMENT, 36, STATEMENT, 38) << "\n"; //true
+	cout << de->getIsContainResult(PROCEDURE, 1, STATEMENT, 1) << "\n"; // true
+	cout << de->getIsContainResult(PROCEDURE, 1, STATEMENT, 2) << "\n"; // false
+	cout << de->getIsContainResult(PROCEDURE, 1, STMT_LIST, 0) << "\n"; //true
+	cout << de->getIsContainResult(PROCEDURE, 1, WHILE, 9) << "\n"; //false
+	cout << de->getIsContainResult(PROCEDURE, pkb->getProcIndex("extra"), STATEMENT, 42) << "\n";
+	
+	
+	cout << "============= KNOWN, UNKNOWN ===========\n";
+	cout << de->getContainResult(STATEMENT, 1, STATEMENT, 0).size() << "\n"; // 0
+	cout << de->getContainResult(STATEMENT, 9, STATEMENT, 0).size() << "\n"; // 1
+	cout << de->getContainResult(STATEMENT, 21, STATEMENT, 0).size() << "\n"; // 2
+	
+	cout << de->getContainResult(STATEMENT, 29, ASSIGNMENT, 0).size() << "\n"; // 1
+	cout << de->getContainResult(STATEMENT, 21, ASSIGNMENT, 0).size() << "\n"; // 2
+	cout << de->getContainResult(STATEMENT, 21, WHILE, 0).size() << "\n"; // 0
+	cout << de->getContainResult(STATEMENT, 9, WHILE, 0).size() << "\n"; // 1
+	cout << de->getContainResult(STATEMENT, 42, IF, 0).size() << "\n"; // 0
+
+	cout << de->getContainResult(PROCEDURE, 1, STATEMENT, 0).size() << "\n"; // 1
+	cout << de->getContainResult(PROCEDURE, 1, WHILE, 0).size() << "\n"; // 0
+	cout << de->getContainResult(PROCEDURE, 1, ASSIGNMENT, 0).size() << "\n"; //1
+	cout << de->getContainResult(PROCEDURE, 1, CALL, 0).size() << "\n"; //0
+	cout << de->getContainResult(PROCEDURE, 1, IF, 0).size() << "\n"; //0
+	cout << de->getContainResult(PROCEDURE, 4, IF, 0).front().second << "\n"; //42
+	
+	cout << "============= UNKNOWN, KNOWN ===========\n";
+	cout <<de->getContainResult(STATEMENT, 0, STATEMENT, 2).size() << "\n"; // 0
+	cout <<de->getContainResult(STATEMENT, 0, STATEMENT, 15).size() << "\n"; // 1
+	cout <<de->getContainResult(WHILE, 0, STATEMENT, 2).size() << "\n"; // 0
+	cout <<de->getContainResult(IF, 0, STATEMENT, 22).size() << "\n"; // 1
+	
+	cout <<de->getContainResult(ASSIGNMENT, 0, PLUS, -1).size() << "\n"; // 
+	cout <<de->getContainResult(ASSIGNMENT, 0, MINUS, -1).size() << "\n"; // 0
+	cout <<de->getContainResult(ASSIGNMENT, 0, MULTIPLY, -1).size() << "\n"; // 1
+	cout <<de->getContainResult(ASSIGNMENT, 0, CONSTANT, pkb->getConstantIndex(11)).size() << "\n"; // 2
+	cout <<de->getContainResult(ASSIGNMENT, 0, VARIABLE, pkb->getVarIndex("kimchi")).size() << "\n"; //4
+	
+	cout <<de->getContainResult(WHILE, 0, VARIABLE, pkb->getVarIndex("leek")).size() << "\n"; // 1
+	cout <<de->getContainResult(IF, 0, VARIABLE, pkb->getVarIndex("meat")).size() << "\n"; // 1
+
+
+	cout << "============= UNKNOWN, UNKNOWN ===========\n";
+	cout <<de->getContainResult(STATEMENT, 0, STATEMENT,0).size() << "\n"; // 14
+
+	cout <<de->getContainResult(WHILE, 0, WHILE,0).size() << "\n"; // 1
+	cout <<de->getContainResult(WHILE, 0, ASSIGNMENT,0).size() << "\n"; // 5
+	cout <<de->getContainResult(WHILE, 0, IF,0).size() << "\n"; // 0
+	cout <<de->getContainResult(WHILE, 0, CALL,0).size() << "\n"; // 0
+	cout <<de->getContainResult(WHILE, 0, STATEMENT,0).size() << "\n"; // 6
+	cout << "\n";
+	cout << de->getContainResult(IF, 0, WHILE,0).size() << "\n"; // 0
+	cout << de->getContainResult(IF, 0, ASSIGNMENT,0).size() << "\n"; // 8
+	cout << de->getContainResult(IF, 0, IF,0).size() << "\n"; // 0
+	cout << de->getContainResult(IF, 0, CALL,0).size() << "\n"; // 0
+	cout << de->getContainResult(IF, 0, STATEMENT,0).size() << "\n"; // 8
+
+	cout << "============= SPECIAL CASE ===========\n";
+	cout <<de->getContainResult(PLUS, -1, PLUS,-1).size() << "\n"; // 1
+	cout <<de->getContainResult(PLUS, -1, MINUS,-1).size() << "\n"; // 1
+	cout <<de->getContainResult(PLUS, -1, VARIABLE,0).size() << "\n"; // 10
+	cout <<de->getContainResult(PLUS, -1, CONSTANT,0).size() << "\n"; // 10
+
 
 	// known known
 	/*cout << de->getIsContainResult(PLUS, 0, VARIABLE, pkb->getVarIndex("apple")) << "\n"; // true
@@ -96,12 +301,13 @@ void ParserTest::testComplex(){
 	*/
 	// Contain("extra", 2)
 	// Contain("xylo", 1)
-	cout << de->getIsContainResult(PROCEDURE, 1, STATEMENT, 1) << "\n"; // true
+	/*cout << de->getIsContainResult(PROCEDURE, 1, STATEMENT, 1) << "\n"; // true
 	cout << de->getIsContainResult(PROCEDURE, 1, STATEMENT, 2) << "\n"; // false
 	cout << de->getIsContainResult(PROCEDURE, 1, STMT_LIST, 0) << "\n"; //true
 	cout << de->getIsContainResult(PROCEDURE, 1, WHILE, 9) << "\n"; //false
-	cout << de->getIsContainResult(PROCEDURE, pkb->getProcIndex("extra"), STATEMENT, 42) << "\n"; //true
+	cout << de->getIsContainResult(PROCEDURE, pkb->getProcIndex("extra"), STATEMENT, 42) << "\n"; //true*/
 	//cout << pkb->getStmtListSize() << "\n";
+
 	cout << "End of Program\n";
 
 
