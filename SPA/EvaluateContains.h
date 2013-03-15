@@ -1,6 +1,7 @@
 #pragma once
 #include "Global_Data_Abstraction.h"
 #include "Helper.h"
+#include "EvaluateParents.h"
 
 class EvaluateContains
 {
@@ -16,11 +17,13 @@ public:
 
 
 private:
-	static void				computeContain();
-	static void				computeContainStar();
-	static DATA_LIST		getDataListTypeDescendantOf(TYPE typeName, TYPE typeName2, STATEMENT_NUM stmtNum);
-	static bool				isStatementDescendantTypeDataOf(TYPE typeName, TYPE typeName2, int data, STATEMENT_NUM stmtNum);
-	static DATA_LIST		getDataListTypeAncestorOf(TYPE typeName, TYPE typeName2, STATEMENT_NUM stmtNum);
-
+	static DATA_LIST		getDataListTypeDescendantOf(TYPE, TYPE , STATEMENT_NUM );
+	static DATA_LIST		getDataListTypeAncestorOf(TYPE, TYPE , STATEMENT_NUM );
+	static bool				isStatementDescendantTypeDataOf(TYPE, TYPE, int, STATEMENT_NUM);
+	
+	static int				findPrefixTreeMatch(TYPE, STATEMENT_NUM, int, int);
+	static DATA_LIST		getPrefixTreeVarIndexes(string, int);
+	static DATA_LIST		getPrefixTreeConstants(string, int);
+	static DATA_LIST		getPrefixTreeOperators(string, TYPE type, int);
 };
 

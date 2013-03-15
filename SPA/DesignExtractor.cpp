@@ -173,3 +173,7 @@ bool DesignExtractor::getIsContainStarResult(TYPE type, int arg1, TYPE type2, in
 CONTAIN_LIST DesignExtractor::getContainResult(TYPE type, int arg1, TYPE type2, int arg2){
 	return EvaluateContains::getContainResult(type, arg1, type2, arg2);
 }
+
+CONTAIN_LIST DesignExtractor::getContainStarResult(TYPE type, int arg1, TYPE type2, int arg2){
+	return EvaluateContains::getContainStarResult(type, arg1, type2, arg2);
+}

@@ -65,6 +65,7 @@ public:
 	bool			getIsContainResult(TYPE, int, TYPE, int);
 	bool			getIsContainStarResult(TYPE, int, TYPE, int);
 	CONTAIN_LIST	getContainResult(TYPE, int, TYPE, int);
+	CONTAIN_LIST	getContainStarResult(TYPE, int, TYPE, int);
 
 private:
 	PKB *			pkb;
