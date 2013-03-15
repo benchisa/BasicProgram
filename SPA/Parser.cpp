@@ -643,8 +643,8 @@ bool Parser::factor(){
 	else if(const_value())
 	{
 		exp += prevToken;
-		pkb->insertConst(atoi(prevToken.c_str()));
-		operands.push(pkb->createAST(CONSTANT, prevProgLine,stmt_num, atoi(prevToken.c_str())));
+		CONSTANT_INDEX cIndex = pkb->insertConst(atoi(prevToken.c_str()));
+		operands.push(pkb->createAST(CONSTANT, prevProgLine,stmt_num, cIndex));
 		return true;
 	}
 	else if(openBracket())

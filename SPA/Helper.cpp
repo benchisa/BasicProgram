@@ -58,6 +58,7 @@ PREFIXEXPR Helper::convertExprToPrefix(EXPRESSION expr){
 
 	result = operands.top();
 	operands.pop();
+	cout << "Expr: " << result << "\n";
 	return result;
 }
 
