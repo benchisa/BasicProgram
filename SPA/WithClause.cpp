@@ -148,9 +148,9 @@ RELATION_LIST* WithClause::findOneVariable(){
 	//returnList = NULL;
 	
 	//find name in procedure table, variable table and call table
-	if(rightAttributeType==PARAM||leftAttributeType==PARAM){
+	if(rightAttributeType==PARAM||leftAttributeType==PROCEDURE||leftAttributeType==CALL||leftAttributeType==VARIABLE){
 		returnList = WithClause::findOneString();
-	}else if(rightAttributeType==CONSTANT||leftAttributeType==CONSTANT){ //find integer value in constant, progline, statement
+	}else if(rightAttributeType==CONSTANT||leftAttributeType!=QUERYVAR){ //find integer value in constant, progline, statement
 		returnList = WithClause::findOneInteger();
 	}
 	if(returnList->size()<1) return NULL;
@@ -180,12 +180,19 @@ RELATION_LIST* WithClause::findOneString(){
 		itr2 = qrTable->find(unknownAttrIndex);
 		unknownAttrType = itr2->second;
 		isLR = true;
-	}else{
+	}else{//left is known
 		//To get the string value of known(left) attribute from Query parameter table
+	//	knownAttrIndex = leftAttribute->getData();
+	//	QUERYPARAM::iterator itr1;
+	//	itr1 = qrParam->find(knownAttrIndex);
 		knownAttrIndex = leftAttribute->getData();
-		QUERYPARAM::iterator itr1;
-		itr1 = qrParam->find(knownAttrIndex);
-		knownAttrValue = itr1->second;
+		if(leftAttributeType==PROCEDURE){
+			knownAttrValue = pkb->getProcedure(knownAttrIndex)->getProcName();
+		}else if(leftAttributeType ==CALL){
+			knownAttrValue = pkb->getCALLPair(knownAttrIndex).second;
+		}else if(leftAttributeType ==VARIABLE){
+			knownAttrValue = pkb->getConstantValue(knownAttrIndex);
+		}
 
 		//To detect the type of unknown(right) variable
 		int unknownAttrIndex = rightVariable->getData();
@@ -278,7 +285,7 @@ RELATION_LIST* WithClause::findOneInteger(){
 	switch(unknownAttrType){
 	case CONSTANT:
 		{int constantIndex = pkb->getConstantIndex(knownAttrValue);
-		if(constantIndex!=NULL){
+		if(constantIndex!=-1){
 			if(isLR)
 				returnList->push_back(pair<int,int>(constantIndex,knownAttrValue));
 			else
