@@ -267,7 +267,7 @@ void QueryPreprocessor::setQTree(){
 	for (int i=0; i<groupings.size(); i++){
 		if (!groupings[i].empty() && !isFlaggedGroup(i)){
 			//throw the whole list of clauses to be processed
-			processClauses(groupings[i]);
+			processClauses(groupings[i],0);
 		}
 	}
 
@@ -312,7 +312,8 @@ void QueryPreprocessor::setQTree(){
 			for (int k = 0; k<groupings[i].size(); k++){
 				if(hasConstantVar(groupings[i][k])){
 					currNode = clauses.at(groupings[i][k]);
-					if (currNode!=NULL){
+					if (currNode!=NULL){						
+						currNode->setData(1);
 						arrangeClauseByRel(currNode);//-------------Apply filters here
 						clauses.at(groupings[i][k]) = NULL;
 					}
@@ -350,7 +351,7 @@ void QueryPreprocessor::setQTree(){
 	for (int i=0; i<groupings.size(); i++){
 		if (!groupings[i].empty() && isFlaggedGroup(i)){
 			//throw the whole list of clauses to be processed
-			processClauses(groupings[i]);
+			processClauses(groupings[i],1);
 		}
 	}
 
@@ -587,7 +588,7 @@ vector<QTREE*> QueryPreprocessor::addToProbe(QTREE* currClause){
 	return queue;
 }
 
-void QueryPreprocessor::processClauses(vector<int> cl){
+void QueryPreprocessor::processClauses(vector<int> cl,int mode){
 	QTREE* currClause;
 	vector<QTREE*> queue;
 	vector<QTREE*> patternwith;
@@ -614,7 +615,9 @@ void QueryPreprocessor::processClauses(vector<int> cl){
 	TYPE relType;
 	for (int w=0; w< cl.size() ; w++){
 		currClause = clauses[cl[w]];
-		if(currClause!=NULL){			
+		if(currClause!=NULL){
+			if (mode == 1)
+				currClause->setData(1);
 			relType = currClause->getFirstDescendant()->getType();
 			//pattern,with
 			if (currClause->getType() == PATTERN || currClause->getType() == WITH){

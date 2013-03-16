@@ -211,7 +211,7 @@ private:
 	void setQTree();
 	void arrangeClauseByRel(QTREE*);
 	void joinClauses();
-	void processClauses(vector<int>);
+	void processClauses(vector<int>,int);
 	vector<QTREE*> addToProbe(QTREE*);
 	bool isFlaggedGroup(int);
 
