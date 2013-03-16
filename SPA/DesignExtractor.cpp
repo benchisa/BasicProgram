@@ -6,12 +6,14 @@ DesignExtractor::DesignExtractor(PKB* pkb)
 	this->pkb = pkb;
 	// Point all the sub-components to the same pkb
 	Helper::pkb = pkb;
+
 	EvaluateCalls::pkb = pkb;
 	EvaluateNext::pkb = pkb;
 	EvaluateFollows::pkb = pkb;
 	EvaluateUses::pkb = pkb;
 	EvaluateContains::pkb = pkb;
 	EvaluateParents::pkb = pkb;
+	EvaluateModifies::pkb = pkb;
 	Affects::pkb = pkb;
 
 	EvaluateNext::createCFG();
