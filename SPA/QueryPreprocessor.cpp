@@ -515,6 +515,7 @@ void QueryPreprocessor::setQTree(){
 
 vector<QTREE*> QueryPreprocessor::addToProbe(QTREE* currClause){
 	vector<QTREE*> queue;
+	if (currClause->getType() == SUCHTHAT){
 	//found in probed, add to queue
 	int first = currClause->getFirstDescendant()->getFirstDescendant()->getData();
 	int second = currClause->getFirstDescendant()->getLastDescendant()->getData();
@@ -534,12 +535,62 @@ vector<QTREE*> QueryPreprocessor::addToProbe(QTREE* currClause){
 		queue.push_back(currClause);
 		trackProbes.push_back(first);
 	}
+	}
+	else if (currClause->getType() == PATTERN){
+		int first = currClause->getFirstDescendant()->getData();
+		int second = currClause->getFirstDescendant()->getLastDescendant()->getData();
+		vector<int>::iterator posfirst = std::find(trackProbes.begin(),trackProbes.end(),first);
+		vector<int>::iterator possecond = std::find(trackProbes.begin(),trackProbes.end(),second);
+		//both arguments probed
+		if(posfirst!=trackProbes.end() && possecond!=trackProbes.end()){
+			queue.push_back(currClause);
+		}
+		//first argument probed
+		else if (posfirst!=trackProbes.end()){
+			queue.push_back(currClause);
+			trackProbes.push_back(second);
+		}
+		//second argument probed
+		else if (possecond!=trackProbes.end()){
+			queue.push_back(currClause);
+			trackProbes.push_back(first);
+		}
+	}
+	else if (currClause->getType() == WITH){
+		int first = currClause->getFirstDescendant()->getData();
+		int second = currClause->getFirstDescendant()->getRightSibling()->getRightSibling()->getData();
+		vector<int>::iterator posfirst = std::find(trackProbes.begin(),trackProbes.end(),first);
+		vector<int>::iterator possecond = std::find(trackProbes.begin(),trackProbes.end(),second);
+		if (second<0){
+			//is a constant on right side, ignore
+			if (posfirst!=trackProbes.end()){
+				queue.push_back(currClause);
+			}
+		}
+		else{
+			//both arguments probed
+			if(posfirst!=trackProbes.end() && possecond!=trackProbes.end()){
+				queue.push_back(currClause);
+			}
+			//first argument probed
+			else if (posfirst!=trackProbes.end()){
+				queue.push_back(currClause);
+				trackProbes.push_back(second);
+			}
+			//second argument probed
+			else if (possecond!=trackProbes.end()){
+				queue.push_back(currClause);
+				trackProbes.push_back(first);
+			}
+		}
+	}
 	return queue;
 }
 
 void QueryPreprocessor::processClauses(vector<int> cl){
 	QTREE* currClause;
 	vector<QTREE*> queue;
+	vector<QTREE*> patternwith;
 	vector<QTREE*> follows;	
 	vector<QTREE*> parent;	
 	vector<QTREE*> calls;
@@ -565,8 +616,12 @@ void QueryPreprocessor::processClauses(vector<int> cl){
 		currClause = clauses[cl[w]];
 		if(currClause!=NULL){			
 			relType = currClause->getFirstDescendant()->getType();
+			//pattern,with
+			if (currClause->getType() == PATTERN || currClause->getType() == WITH){
+				patternwith.push_back(currClause);
+			}
 			//follows
-			if (relType==FOLLOWS){
+			else if (relType==FOLLOWS){
 				follows.push_back(currClause);
 			}
 			//follows*
@@ -656,6 +711,11 @@ void QueryPreprocessor::processClauses(vector<int> cl){
 	}
 
 	//check for probes
+	for(int a = 0; a< patternwith.size(); a++){
+		currClause = patternwith[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
 	for(int a = 0; a< follows.size(); a++){
 		currClause = follows[a];
 		vector<QTREE*> temp = addToProbe(currClause);
@@ -758,6 +818,10 @@ void QueryPreprocessor::processClauses(vector<int> cl){
 	}
 
 	//chainup
+	for(int i=0;i< patternwith.size();i++){
+		if(std::find(queue.begin(),queue.end(),patternwith[i])==queue.end())
+			queue.push_back(patternwith[i]);
+	}
 	for(int i=0;i< follows.size();i++){
 		if(std::find(queue.begin(),queue.end(),follows[i])==queue.end())
 			queue.push_back(follows[i]);
@@ -861,7 +925,7 @@ void QueryPreprocessor::arrangeClauseByRel(QTREE* node){
 	relType = node->getFirstDescendant()->getType();
 	
 	//pattern, with
-	if (relType==PATTERN || relType==WITH){
+	if (node->getType()==PATTERN || node->getType()==WITH){
 		if (firstWithPatt->getType()==ANY){
 			firstWithPatt = node;
 		}
@@ -1029,7 +1093,16 @@ void QueryPreprocessor::arrangeClauseByRel(QTREE* node){
 					}
 					lastUsesMod_Proc = node;
 				}
-			}			
+			}
+			else{
+				if (firstUsesMod_Stmt->getType()==ANY){
+					firstUsesMod_Stmt = node;
+				}
+				else{
+					lastUsesMod_Stmt->setSibling(node);
+				}
+				lastUsesMod_Stmt = node;
+			}
 		}
 		
 	}
@@ -1444,20 +1517,26 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 		}
 		//can also be wildcards _
 		else if(currToken=="_"){
-			tokenType = ANY;
-			currNode = createQTREENode(ANY);
-			if (prevArgWild){
-				wildClauses.push_back(clauseCount);
-			}
+			if((relName=="Modifies_p"||relName=="Modifies_s"||relName=="Uses_p"||relName=="Uses_s")&&firstArg){
+				error(INVALID_ARGUMENT);
+				return false;	
+			}		
 			else{
-				prevArgWild = true;
+				tokenType = ANY;
+				currNode = createQTREENode(ANY);
+				if (prevArgWild){
+					wildClauses.push_back(clauseCount);
+				}
+				else{
+					prevArgWild = true;
+				}
+				if (prevArgConstant){
+					oneConstantClauses.push_back(clauseCount);
+				}
+				else if(firstArg){				
+					firstArg = false;
+				}	
 			}
-			if (prevArgConstant){
-				oneConstantClauses.push_back(clauseCount);
-			}
-			else if(firstArg){				
-				firstArg = false;
-			}			
 		}
 		//check is the synonym declared
 		else if (isDeclaredVar(currToken)){
@@ -1561,7 +1640,7 @@ bool QueryPreprocessor::processWith(TOKEN token){
 			i=i+2;
 		}
 	
-		if (isSyn){			
+		if (isSyn){	
 			if (!isDeclaredVar(currToken)){
 				error(INVALID_VARIABLE);
 				return false;
@@ -1584,11 +1663,11 @@ bool QueryPreprocessor::processWith(TOKEN token){
 						attrType = "string";
 					}
 					else if (synType==CALL){
-						if(attrType=="" && comparisons.at(i)=="procName"){
+						if((attrType=="string" || attrType=="") && comparisons.at(i)=="procName"){
 							currNode = createQTREENode(NAME);
 							attrType = "string";
 						}
-						else if (attrType=="" && comparisons.at(i)=="stmt#"){
+						else if ((attrType=="number" || attrType=="") && comparisons.at(i)=="stmt#"){
 							currNode = createQTREENode(ANY);
 							attrType = "number";
 						}
@@ -1717,6 +1796,7 @@ bool QueryPreprocessor::processPattern(TOKEN token){
 					return false;
 				}
 				currNode = createQTREENode(VARIABLE,pkb->getVarIndex(currToken));
+				oneConstantClauses.push_back(clauseCount);
 			}
 			else{
 				//if without inverted commas
