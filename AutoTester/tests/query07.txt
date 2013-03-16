@@ -153,7 +153,7 @@ c, d
 31 - pattern :: which variable is modified in assignment a and uses a?
 assign a;variable v;
 Select v  such that such that Uses(a,v) pattern a(v,_"a"_);
-c, d
+c
 5000
 32 - Parent, Typed :: Which statment is the parent of itself?
 stmt s; 
