@@ -79,7 +79,7 @@ DATA_LIST* Helper::getAllCallStmts(){
 }
 
 DATA_LIST* Helper::getStmtListOf(TYPE nodeType){
-	DATA_LIST* returnList;
+	DATA_LIST* returnList = new DATA_LIST;
 
 	int maxStmtNum = pkb->getMaxStatementNum();
 	int maxProgLineNum = pkb->getMaxProgLine();

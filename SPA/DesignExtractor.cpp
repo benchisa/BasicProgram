@@ -10,6 +10,8 @@ DesignExtractor::DesignExtractor(PKB* pkb)
 	EvaluateNext::pkb = pkb;
 	EvaluateFollows::pkb = pkb;
 	EvaluateUses::pkb = pkb;
+	EvaluateParents::pkb = pkb;
+	EvaluateModifies::pkb = pkb;
 	Affects::pkb = pkb;
 
 	EvaluateNext::createCFG();

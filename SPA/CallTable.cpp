@@ -229,7 +229,7 @@ string CallTable::getCalleeName(STATEMENT_NUM cIndex)
 
 DATA_LIST* CallTable::getAllCallerStmt()
 {
-	DATA_LIST* answer;
+	DATA_LIST* answer = new DATA_LIST;
 	callItr c_itr;
 	for (c_itr=callDictionary->begin(); c_itr!=callDictionary->end(); c_itr++)
 	{
