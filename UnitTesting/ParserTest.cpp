@@ -79,6 +79,9 @@ void ParserTest::testComplex(){
 	AST *ast = pkb->getRootAST();
 	DesignExtractor *de = new DesignExtractor(pkb);
 	de->createCFG();
+
+	cout << de->getFollowsResult(ANY, ANY).size() << "\n";
+
 	cout << "\n=============ContainsStar=============\n";
 	cout << "============= UNKNOWN, UNKNOWN ===========\n";
 	cout << de->getContainStarResult(STATEMENT, 0, STATEMENT, 0).size() <<"\n"; //
