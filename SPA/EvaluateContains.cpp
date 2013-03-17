@@ -11,9 +11,6 @@ EvaluateContains::EvaluateContains(void)
 EvaluateContains::~EvaluateContains(void)
 {
 }
-bool sameIndex (pair<int,int> first, pair<int,int> second)
-{ return ( int(first.second)==int(second.second) ); }
-
 CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE type2, int arg2){
 	// =============================== Contain*(KNOWN, UNKNOWN)/Contain*(UNKNOWN, KNOWN) =========================//
 	CONTAIN_LIST resultList;
@@ -66,7 +63,7 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 	}
 
 	// Contain*(1, v), Contain*(1, c): if 1 is while or if
-	else if(type == STATEMENT && (Helper::getStatementType(arg1) == WHILE || Helper::getStatementType(arg1) == IF) && arg1 != 0 && arg2 == 0  && (type2 == VARIABLE || type2 == CONSTANT)){
+	else if(type == STATEMENT && (Helper::getStatementType(arg1) == WHILE || Helper::getStatementType(arg1) == IF) && arg1 != 0 && arg2 == 0  && (type2 == VARIABLE || type2 == CONSTANT || type2 == PLUS || type2 == MINUS || type2 == MULTIPLY)){
 		PARENT_LIST parentList;
 
 		// Get Parent* (1, x)
@@ -80,26 +77,23 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 			if(parentListItr->first = arg1){
 				// check and add contorl variable
 				if(Helper::getStatementType(arg1) == WHILE &&type2 == VARIABLE){
-					cout <<"1Push\n";
 					resultList.push_back(make_pair(arg1, pkb->getWhileCtrVar(arg1)));
 				}
 				
 				else if(Helper::getStatementType(arg1) == IF &&type2 == VARIABLE){
-					cout <<"2Push\n";
+					
 					resultList.push_back(make_pair(arg1, pkb->getIfCtrVar(arg1)));
 				}
 				
 				// check child
 				if(Helper::getStatementType(parentListItr->second) == WHILE){
 					if(type2 == VARIABLE){
-						cout <<"1Push\n";
 						resultList.push_back(make_pair(arg1, pkb->getWhileCtrVar(parentListItr->second)));
 					}
 				}
 				else if(Helper::getStatementType(parentListItr->second) == IF){
 					
 					if(type2 == VARIABLE){
-						cout <<"Push\n";
 						resultList.push_back(make_pair(arg1, pkb->getIfCtrVar(parentListItr->second)));
 					}
 				}
@@ -110,7 +104,6 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 						DATA_LIST allConstants = EvaluateContains::getPrefixTreeConstants(prefix,0);
 						DATA_LIST::iterator cItr = allConstants.begin();
 						while(cItr != allConstants.end()){
-							cout <<"Push\n";
 							resultList.push_back(make_pair(arg1, *cItr));
 							cItr++;
 						}
@@ -120,7 +113,6 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 						DATA_LIST allVariables = EvaluateContains::getPrefixTreeVarIndexes(prefix,0);
 						DATA_LIST::iterator vItr = allVariables.begin();
 						while(vItr != allVariables.end()){
-							cout <<"Push\n";
 							resultList.push_back(make_pair(arg1, *vItr));
 							vItr++;
 						}
@@ -130,7 +122,6 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 						DATA_LIST::iterator allOperatorsItr = allOperators.begin();
 						while(allOperatorsItr != allOperators.end()){
 							
-							cout <<"Push\n";
 							resultList.push_back(make_pair(arg1, *allOperatorsItr));
 							allOperatorsItr++;
 						}
@@ -145,7 +136,7 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 	}
 	//============================================= END OF STATEMENT =======================================/
 	// Contains("procName", *)
-	else if((type == PROCEDURE && arg1 != 0 && arg2 == 0))
+	else if((type == PROCEDURE && arg1 != 0))
 	{
 		int start, end;
 		// restrict the check
@@ -166,7 +157,7 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 				}
 			}
 		}
-		else if(type2 == VARIABLE || type2 == CONSTANT || type == PLUS || type == MINUS || type == MULTIPLY){
+		else if(type2 == VARIABLE || type2 == CONSTANT || type2 == PLUS || type2 == MINUS || type2 == MULTIPLY){
 			// Contain*("procName", v/c),
 			DATA_LIST *assignList = pkb->getAllAssigns();
 			DATA_LIST::iterator assignListItr = assignList->begin();
@@ -209,11 +200,11 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 	}
 
 	// Contain("x", ...)
-	else if((type == VARIABLE || type == CONSTANT || type == PLUS || type == MINUS || type == MULTIPLY) && arg1 != 0 && arg2 == 0){
+	else if((type == VARIABLE || type == CONSTANT || type == PLUS || type == MINUS || type == MULTIPLY) && arg1 != 0 && (arg2 == -1 || arg2 == 0)){
 
 		DATA_LIST *assignList = pkb->getAllAssigns();
 		DATA_LIST::iterator assignListItr = assignList->begin();
-
+		
 		while(assignListItr!=assignList->end()){
 			int operPos = EvaluateContains::findPrefixTreeMatch(type, *assignListItr,arg1,0);
 
@@ -223,7 +214,7 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 
 				if(type2 == CONSTANT){
 					// start findin constants after "x"
-					DATA_LIST allConstants = EvaluateContains::getPrefixTreeConstants(prefix, operPos);
+					DATA_LIST allConstants = EvaluateContains::getPrefixTreeConstants(prefix, operPos+1);
 					DATA_LIST::iterator cItr = allConstants.begin();
 					while(cItr != allConstants.end()){
 						resultList.push_back(make_pair(arg1, *cItr));
@@ -231,9 +222,9 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 					}
 				}
 
-				if(type2 == VARIABLE){
+				else if(type2 == VARIABLE){
 					// start findin constants after "x"
-					DATA_LIST allVariables = EvaluateContains::getPrefixTreeVarIndexes(prefix, operPos);
+					DATA_LIST allVariables = EvaluateContains::getPrefixTreeVarIndexes(prefix, operPos+1);
 					DATA_LIST::iterator vItr = allVariables.begin();
 					while(vItr != allVariables.end()){
 						resultList.push_back(make_pair(arg1, *vItr));
@@ -241,13 +232,14 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 					}
 				}
 
-				if(type2 == PLUS || type2 == MINUS || type2 == MULTIPLY){
-					DATA_LIST allOperators = EvaluateContains::getPrefixTreeOperators(prefix, type2,operPos);
+				else{
+					DATA_LIST allOperators = EvaluateContains::getPrefixTreeOperators(prefix, type2,operPos+1);
 					if(allOperators.size()!=0){
 						resultList.push_back(make_pair(arg1, type2));
 					}
 				}
 			}
+			assignListItr++;
 		}
 	}
 	
@@ -257,7 +249,7 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 	//Contain*(a, "v"), Contain*(a, "1"), 
 	//Contain*(w, "v"), Contain*(w, "1"),
 	//Contain*(if, "v"), Contain*(if, "1")
-	else if(arg1 == 0 && arg2 !=0 && (type2 == CONSTANT || type2 == VARIABLE || type2 == PLUS ||  type2 == MINUS || type2 == MULTIPLY)){
+	else if(type!=PROCEDURE && arg1 == 0 && arg2 !=0 && (type2 == CONSTANT || type2 == VARIABLE || type2 == PLUS ||  type2 == MINUS || type2 == MULTIPLY)){
 		DATA_LIST *assignList = pkb->getAllAssigns();
 		DATA_LIST::iterator assignListItr = assignList->begin();
 
@@ -284,10 +276,11 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 					}
 				}
 			}
+			assignListItr++;
 		}
 	}
 
-	else if(type == PROCEDURE && arg1 == 0 && arg2 != 0){
+	else if(type == PROCEDURE && arg1 == 0 && (arg2 != 0 || arg2==-1)){
 		PROC_LIST *procList = pkb->getAllProc();
 		PROC_LIST::iterator procListItr = procList->begin();
 		
@@ -304,7 +297,7 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 		}
 
 		// O(n2)
-		if(type2 == CONSTANT || type2 == VARIABLE || type2 == PLUS ||  type2 == MINUS || type2 == MULTIPLY){
+		else if(type2 == CONSTANT || type2 == VARIABLE || type2 == PLUS ||  type2 == MINUS || type2 == MULTIPLY){
 			DATA_LIST *assignList = pkb->getAllAssigns();
 			DATA_LIST::iterator assignListItr = assignList->begin();
 
@@ -322,6 +315,7 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 						procListItr++;
 					}
 				}
+				assignListItr++;
 			}
 		}
 	}
@@ -392,8 +386,9 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 						allOperatorsItr++;
 					}
 				}
+				
+			assignListItr++;
 			}
-
 		}
 		else{
 			PARENT_LIST parentList = EvaluateParents::getParentStarResult(type, type2);
@@ -454,7 +449,7 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 				}
 			}
 			else{
-				DATA_LIST allOperators = EvaluateContains::getPrefixTreeOperators(prefix, type2, 0);
+ 				DATA_LIST allOperators = EvaluateContains::getPrefixTreeOperators(prefix, type2, 0);
 				DATA_LIST::iterator allOperatorsItr = allOperators.begin();
 				while(allOperatorsItr != allOperators.end()){
 					resultList.push_back(make_pair(*assignListItr, *allOperatorsItr));
@@ -466,7 +461,8 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 			assignListItr++;
 		}
 	}
-	resultList.unique(sameIndex);
+	resultList.sort();
+	resultList.unique();
 	return resultList;
 }
 
@@ -568,7 +564,6 @@ bool EvaluateContains::getIsContainStarResult(TYPE type, int arg1, TYPE type2, i
 			// for Contain*(PLUS, PLUS)
 			int pos = EvaluateContains::findPrefixTreeMatch(type2, *assignListItr,  arg2, 0);
 			vector<int> operandPos;
-			
 			// find all positions behind
 			while(pos != -1){
 				operandPos.push_back(pos);
@@ -1104,7 +1099,6 @@ DATA_LIST	EvaluateContains::getPrefixTreeConstants(string prefix, int offset){
 			resultList.push_back(pkb->getConstantIndex(atoi(token.c_str())));
 		}
 	}
-	cout <<"\n";
 	return resultList;
 }
 
