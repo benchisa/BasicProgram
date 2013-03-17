@@ -214,10 +214,13 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 	return answer;
 }
 
+
 	bool Affects::getIsAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 	{
+
 		if(stmt1!=0 && stmt2!=0)
-		{
+		{ 
+			
 			if (Affects::getIsAffectResult(stmt1,stmt2))
 			{
 						return true;
@@ -226,81 +229,55 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 			{
 				if (EvaluateNext::isNextStarResult(stmt1, stmt2))
 				{	
-
-						MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT, stmt1,0);
-						MODIFIES_LIST::iterator m_itr;
-
-						int modVar=m_list.begin()->second;
-
-						list<int> checkDuplicate;
-
-
-						NEXT_LIST::iterator n_itr;
-
-
-						stack<NEXT_LIST> stacks;
-						stacks.push(EvaluateNext::getNextResult(stmt1,0));
-						while (!stacks.empty())
-						{
-
-							NEXT_LIST temp=stacks.top();
-							stacks.pop();
-							for (n_itr=temp.begin(); n_itr!=temp.end(); n_itr++)
-							{
-
-							//	cout<<n_itr->first<< " "<<n_itr->second<< ". mod var: "<<pkb->getVarName(modVar)<< endl; 
-								if (n_itr->second==stmt2 )
-								{	
-
-									if (pkb->isUses(ASSIGNMENT,stmt2,modVar))
-									{
-										//cout<<"hehe"<<endl;
-										return true;
-									}
-								}
-								else
-								{	
-									if (Helper::isStatementTypeOf(CALL, n_itr->second))
-									{
-										string callee=pkb->getCalleeName(n_itr->second);
-										int calleeIndex=pkb->getProcIndex(callee);
-										if (!pkb->isModifies(PROCEDURE,calleeIndex, modVar))
-										{
-											list<int>::iterator findIter = find(checkDuplicate.begin(), checkDuplicate.end(), n_itr->second);
-											if (findIter==checkDuplicate.end())
-											{
-												checkDuplicate.push_back(n_itr->second);
-											}
-
-											stacks.push(EvaluateNext::getNextResult(n_itr->second, 0));
-										}
-									}	
-
-									else if(!pkb->isModifies(ASSIGNMENT,n_itr->second,modVar))
-									 { 
-										if (pkb->isUses(ASSIGNMENT, n_itr->second, modVar))
-										{
-											MODIFIES_LIST m_temp=pkb->getModifies(ASSIGNMENT, n_itr->second,0);
-
-											modVar=m_temp.begin()->second;
-										}
-
-										list<int>::iterator findIter = find(checkDuplicate.begin(), checkDuplicate.end(), n_itr->second);
-										if (findIter==checkDuplicate.end())
-										{
-											checkDuplicate.push_back(n_itr->second);			
-
-										}
-
-										stacks.push(EvaluateNext::getNextResult(n_itr->second, 0));
-
-									}
-								}
-							}
-						}		
+						
+						
+						return computeIsAffectStar(stmt1,stmt2);					
 				}
 
 			}
+		
+		
 		}
+
 		return false;
 	}
+
+	 
+	bool Affects::computeIsAffectStar(int starting, int ending)
+	{
+	
+		MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT,starting,0);
+		int modVar=m_list.begin()->second;
+		int startingx=starting;
+
+		USES_LIST u_list=pkb->getUsesIndexInSameProc(starting,ending,modVar);
+		USES_LIST::iterator u_itr;
+		stack<USES_LIST> stacks;
+		stacks.push(u_list);
+
+		while (!stacks.empty())
+		{
+			USES_LIST root=stacks.top();
+			stacks.pop();
+			for (u_itr=root.begin();u_itr!=root.end(); u_itr++)
+			{
+				if (Affects::getIsAffectResult(startingx,u_itr->first))
+				{
+					if (u_itr->first==ending)
+					{
+						return true;
+					}
+					else
+					{	
+						m_list=pkb->getModifies(ASSIGNMENT,u_itr->first,0);
+						modVar=m_list.begin()->second;
+						startingx=u_itr->first;
+						USES_LIST temp=pkb->getUsesIndexInSameProc(u_itr->first,ending,modVar);
+						stacks.push(temp);
+					}
+				}
+			}
+		}
+	return false;
+	
+}
