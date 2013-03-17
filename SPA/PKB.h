@@ -93,7 +93,7 @@ class PKB
 		bool insertUses(USES_TYPE type, USES_INDEX index, VAR_INDEX varIndex);
 		USES_LIST getUses(USES_TYPE type, USES_INDEX index, VAR_INDEX varIndex);
 		bool isUses(USES_TYPE type, USES_INDEX index, VAR_INDEX varIndex);
-
+		USES_LIST getUsesIndexInSameProc(STATEMENT_NUM starting, STATEMENT_NUM ending,VAR_INDEX varIndex);
 
 		//Functions of Call Table
 		CALL_INDEX insertCall(PROC_NAME caller,STATEMENT_NUM callStmt, PROC_NAME callee);
