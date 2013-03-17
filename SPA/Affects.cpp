@@ -215,12 +215,11 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 }
 
 
-	bool Affects::getIsAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
-	{
-
-		if(stmt1!=0 && stmt2!=0)
+bool Affects::getIsAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
+{
+        if(stmt1!=0 && stmt2!=0)
 		{ 
-			
+			//cout<< stmt1 << " " <<stmt2<< endl;
 			if (Affects::getIsAffectResult(stmt1,stmt2))
 			{
 						return true;
@@ -229,55 +228,44 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 			{
 				if (EvaluateNext::isNextStarResult(stmt1, stmt2))
 				{	
-						
-						
 						return computeIsAffectStar(stmt1,stmt2);					
 				}
-
 			}
-		
-		
 		}
-
-		return false;
-	}
+    	return false;
+}
 
 	 
-	bool Affects::computeIsAffectStar(int starting, int ending)
+bool Affects::computeIsAffectStar(int starting, int ending)
+{
+	MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT,starting,0);
+	int modVar=m_list.begin()->second;
+	stack<USES_LIST> stacks;
+	stacks.push(pkb->getUses(ASSIGNMENT,0,modVar));
+	USES_LIST::iterator u_itr;
+
+	while (!stacks.empty())
 	{
-	
-		MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT,starting,0);
-		int modVar=m_list.begin()->second;
-		int startingx=starting;
-
-		USES_LIST u_list=pkb->getUses(ASSIGNMENT,0,modVar);
-		USES_LIST::iterator u_itr;
-		stack<USES_LIST> stacks;
-		stacks.push(u_list);
-
-		while (!stacks.empty())
+		USES_LIST root=stacks.top();
+		stacks.pop();
+		for (u_itr=root.begin();u_itr!=root.end(); u_itr++)
 		{
-			USES_LIST root=stacks.top();
-			stacks.pop();
-			for (u_itr=root.begin();u_itr!=root.end(); u_itr++)
+			if (Affects::getIsAffectResult(starting,u_itr->first))
 			{
-				if (Affects::getIsAffectResult(startingx,u_itr->first))
+				if (u_itr->first==ending)
 				{
-					if (u_itr->first==ending)
-					{
-						return true;
-					}
-					else
-					{	
-						m_list=pkb->getModifies(ASSIGNMENT,u_itr->first,0);
-						modVar=m_list.begin()->second;
-						startingx=u_itr->first;
-						USES_LIST temp=pkb->getUses(ASSIGNMENT,0,modVar);
-						stacks.push(temp);
-					}
+					return true;
+				}
+				else
+				{	
+					m_list=pkb->getModifies(ASSIGNMENT,u_itr->first,0);
+					modVar=m_list.begin()->second;
+					starting=u_itr->first;
+					stacks.push(pkb->getUses(ASSIGNMENT,0,modVar));
 				}
 			}
 		}
+	}
 	return false;
 	
 }
