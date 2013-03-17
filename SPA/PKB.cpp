@@ -282,6 +282,10 @@ bool PKB::isUses(USES_TYPE type, USES_INDEX index, VAR_INDEX varIndex)
 	return  (*uses).isUses(type, index, varIndex);
 }
 
+USES_LIST PKB::getUsesIndexInSameProc(STATEMENT_NUM starting, STATEMENT_NUM ending,VAR_INDEX varIndex)
+{
+	return uses->getUsesIndexInSameProc(starting,ending,varIndex);
+}
 //Functions of VarTable
 VAR_INDEX PKB::insertVar(VAR_NAME varName)
 {
