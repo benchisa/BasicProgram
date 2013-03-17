@@ -17,6 +17,7 @@ public:
 	//3. getUses(type,empty, empty)
 	USES_LIST getUses(TYPE type, USES_INDEX index,VAR_INDEX varIndex);
 	bool isUses(TYPE type, USES_INDEX index,VAR_INDEX varIndex);
+	USES_LIST getUsesIndexInSameProc(STATEMENT_NUM starting, STATEMENT_NUM ending,VAR_INDEX varIndex);
 	void debug();
 
 private:
