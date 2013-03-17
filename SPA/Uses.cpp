@@ -12,6 +12,29 @@ Uses::~Uses(void)
 	delete usesDictionary;
 }
 
+USES_LIST Uses::getUsesIndexInSameProc(STATEMENT_NUM starting, STATEMENT_NUM ending,VAR_INDEX varIndex)
+{
+	USES_LIST result;
+	
+	multimap<int,multimap<int, int>>::iterator first_itr;
+	
+	for (first_itr=usesDictionary->begin(); first_itr!=usesDictionary->end(); first_itr++)
+	{
+		if (first_itr->first==ASSIGNMENT)
+		{
+			multimap<int,int> inner=first_itr->second;
+			multimap<int,int>::iterator innerItr;
+			for (innerItr=inner.begin(); innerItr!=inner.end(); innerItr++)
+			{
+				if (innerItr->first>starting && innerItr->first<=ending && innerItr->second==varIndex)
+				{
+					result.push_back(make_pair(innerItr->first,varIndex));
+				}
+			}
+		}
+	}
+	return result;
+}
 
 bool Uses::insertUses(TYPE type, int index, int varIndex)
 {
