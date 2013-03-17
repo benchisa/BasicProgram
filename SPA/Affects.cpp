@@ -250,7 +250,7 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 		int modVar=m_list.begin()->second;
 		int startingx=starting;
 
-		USES_LIST u_list=pkb->getUsesIndexInSameProc(starting,ending,modVar);
+		USES_LIST u_list=pkb->getUses(ASSIGNMENT,0,modVar);
 		USES_LIST::iterator u_itr;
 		stack<USES_LIST> stacks;
 		stacks.push(u_list);
@@ -272,7 +272,7 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 						m_list=pkb->getModifies(ASSIGNMENT,u_itr->first,0);
 						modVar=m_list.begin()->second;
 						startingx=u_itr->first;
-						USES_LIST temp=pkb->getUsesIndexInSameProc(u_itr->first,ending,modVar);
+						USES_LIST temp=pkb->getUses(ASSIGNMENT,0,modVar);
 						stacks.push(temp);
 					}
 				}
