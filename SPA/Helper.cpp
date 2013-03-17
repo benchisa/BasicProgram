@@ -323,3 +323,15 @@ EXPRESSION Helper::formExpression(stack<pair<TYPE, TOKEN>>& operators, stack<OPE
 
 	return resExpr;
 }
+bool Helper::isStatement(TYPE typeName){
+	if(typeName==STATEMENT||typeName == WHILE||typeName==IF||typeName==ASSIGNMENT||typeName==CALL){
+		return true;
+	}
+	return false;
+}
+bool Helper::isExprElement(TYPE typeName){
+	if(typeName == VARIABLE||typeName ==PLUS||typeName==MINUS||typeName==MULTIPLY||typeName==CONSTANT){
+		return true;
+	}
+	return false;
+}

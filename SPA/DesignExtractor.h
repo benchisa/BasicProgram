@@ -6,6 +6,7 @@
 #include "EvaluateParents.h"
 #include "EvaluateUses.h"
 #include "EvaluateContains.h"
+#include "EvaluateSibling.h"
 #include "Affects.h"
 #include "Helper.h"
 #include "CFG.h"
@@ -66,6 +67,9 @@ public:
 	bool			getIsContainStarResult(TYPE, int, TYPE, int);
 	CONTAIN_LIST	getContainResult(TYPE, int, TYPE, int);
 	CONTAIN_LIST	getContainStarResult(TYPE, int, TYPE, int);
+
+	//sibling
+	bool			getIsSiblingResult(TYPE type1,TYPE type2,INDEX index1,INDEX index2);
 
 private:
 	PKB *			pkb;

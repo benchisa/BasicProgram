@@ -179,12 +179,12 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 				//cout<<"First Rel: "<< firstRel->getType();
 				//cout<<"First Data: "<<firstRel->getData();
 				tmpList = extractor->getModifiesResult(firstRel->getType(),firstRel->getData(),0);
-				filterResult(relList,tmpList,firstType,secondType);
+				iterateAndStore(relList, tmpList);
 			}
 			//uses, now need to narrow down
 			if(relType==USES){
 				tmpList = extractor->getUsesResult(firstRel->getType(),firstRel->getData(),0);
-				filterResult(relList,tmpList,firstType,secondType);
+				iterateAndStore(relList, tmpList);
 			}
 			if(relType==NEXT){
 				tmpList = extractor->getNextResult(firstRel->getData(),0);
@@ -259,14 +259,14 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 			//	cout<<"First Rel: "<< firstType;
 			//	cout<<"Second Data: "<<secondRel->getData();
 				tmpList = extractor->getModifiesResult(firstType,0,secondRel->getData());
-				filterResult(relList,tmpList,firstType,secondType);
+				iterateAndStore(relList, tmpList);
 			}
 			//uses, narrow down
 			if(relType==USES){
 				//cout<<"First Rel: "<< firstType;
 				//cout<<"Second Data: "<<secondRel->getData();
 				tmpList = extractor->getUsesResult(firstType,0,secondRel->getData());
-				filterResult(relList,tmpList,firstType,secondType);
+				iterateAndStore(relList, tmpList);
 			}
 			if(relType==NEXT){
 				tmpList = extractor->getNextResult(0,secondRel->getData());
@@ -380,12 +380,12 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 				//modifies, narrow down first rel
 				if(relType==MODIFIES){
 					tmpList = extractor->getModifiesResult(firstType,0,0);
-					filterResult(relList,tmpList,firstType,secondType);
+					iterateAndStore(relList, tmpList);
 				}
 				//uses, narrow down first rel
 				if(relType==USES){
 					tmpList = extractor->getUsesResult(firstType,0,0);
-					filterResult(relList,tmpList,firstType,secondType);
+					iterateAndStore(relList, tmpList);
 				}
 				if(relType==NEXT){
 					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){

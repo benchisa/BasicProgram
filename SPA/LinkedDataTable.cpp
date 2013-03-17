@@ -149,26 +149,29 @@ bool LinkedDataTable::createEntry(INDEX firstQrVar,INDEX secondQrVar,RELATION_LI
 	return true;
 }
 bool LinkedDataTable::mergeEntries(INDEX firstQrVar,INDEX secondQrVar,RELATION_LIST * mergeList){
-	//create a temporary row list
+//create a temporary row list
 	ROW_LIST * tempRowList = new ROW_LIST;
 	INDEX firstColNum = LinkedDataTable::getColNumOf(firstQrVar);
 	INDEX secondColNum = LinkedDataTable::getColNumOf(secondQrVar);
 	
 	//convert the newEntries to hashmap
 	hash_map<int,DATA_LIST> * entryMap1 = LinkedDataTable::convertToHash(1,mergeList);
-	hash_map<int,DATA_LIST> * entryMap2 = LinkedDataTable::convertToHash(2,mergeList);
 	hash_map<int,DATA_LIST>::iterator mapItr1;
-	hash_map<int,DATA_LIST>::iterator mapItr2;
-	for(int i=0;i<rowList.size();i++){		
-		mapItr1= entryMap1->find(rowList[i][firstColNum]);
-		mapItr2 = entryMap2->find(rowList[i][secondColNum]);
+	ROW::iterator rowItr;
 
-		if(mapItr1!=entryMap1->end()&&mapItr2!=entryMap2->end()){  //the entry in database is also in incoming list
-				tempRowList->push_back(rowList[i]);	
+	for(int i=0;i<rowList.size();i++){	
+		ROW curRow= rowList[i];
+		mapItr1= entryMap1->find(curRow[firstColNum]);
+
+		if(mapItr1!=entryMap1->end()){ //first data is matched
+			//check if second field data is matched
+			DATA_LIST hashedList = mapItr1->second;
+			if(find(hashedList.begin(),hashedList.end(),curRow[secondColNum])!=hashedList.end()){
+				tempRowList->push_back(curRow);	
+			}				
 		}
 	}
 	delete entryMap1;
-	delete entryMap2;
 	//create a temporary row list
 /*	ROW_LIST * tempRowList= new ROW_LIST;
 	INDEX firstColNum = LinkedDataTable::getColNumOf(firstQrVar);
