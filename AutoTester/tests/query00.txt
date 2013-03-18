@@ -48,7 +48,7 @@ Select a such that Modifies(a, _)
 11 - Modifies, Placeholder :: Which variable(s) is/are modified?
 variable v;
 Select v such that Modifies(_, v)
-a, c, d
+
 1000
 13 - Uses, Typed :: Which statement(s) used variable y?
 assign a;
@@ -63,12 +63,12 @@ Select s such that Uses(s, "y");
 15 - Uses, Placeholder :: Which variable(s) is/are used?
 variable v;
 Select v such that Uses(_, v);
-a, c, b, x, y, z
+
 5000
 16 - Uses, Placeholder :: Select all statements if there exists a use relationship.
 stmt s;
 Select s such that Uses(_,_);
-1, 2, 3
+
 5000
 17 - Uses, Placeholder :: Which assignment(s) use(s) a variable?
 assign a;

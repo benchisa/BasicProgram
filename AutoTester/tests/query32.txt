@@ -63,7 +63,7 @@ Select p1   such that  Calls* ( p1 , p1 ) and Modifies ( p1 , v1 ) ;
 181 - calls, parent* :: calls (known,unknown) and parent* (unknown,unknown)
 procedure p1,p2; stmt s1,s2;
 Select p2   such that  Calls ( "xylo" , p2 ) and Parent* ( s1 , s2 ) ;
-yello,zebra,extra
+yello
 5000
 182 - calls*, parent* :: calls* (known,unknown) and parent* (unknown,unknown)
 procedure p1,p2; stmt s1,s2;
