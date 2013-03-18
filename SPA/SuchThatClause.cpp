@@ -56,6 +56,7 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 	QTREE * secondRel;
 	RELATION_LIST * relList = new RELATION_LIST;
 	RELATION_LIST tmpList;
+	int unknownValue;
 
 	//get the relation type, firstRel and secondRel
 	relType= currentNode->getType();
@@ -135,6 +136,32 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
 				}
 			}
+			if(relType==AFFECTS){
+				if(extractor->getIsAffectResult(firstRel->getData(),secondRel->getData())){
+					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
+				}
+			}
+			if(relType==AFFECTST){
+				if(extractor->getIsAffectStarResult(firstRel->getData(),secondRel->getData())){
+					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
+				}
+			}
+			if(relType==SIBLING){
+				if(extractor->getIsSiblingResult(firstRel->getType(),secondRel->getType(),firstRel->getData(),secondRel->getData())){
+					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
+				}
+			}
+			if(relType==CONTAINS){
+				if(extractor->getIsContainResult(firstRel->getType(),firstRel->getData(),secondRel->getType(),secondRel->getData())){
+					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
+				}
+			}
+			if(relType==CONTAINST){
+				if(extractor->getIsContainStarResult(firstRel->getType(),firstRel->getData(),secondRel->getType(),secondRel->getData())){
+					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
+				}
+			}
+
 		}
 		//first is known ,second is unknown
 		if((firstRel->getType()!=QUERYVAR&&firstRel->getType()!=ANY)&&(secondRel->getType()==QUERYVAR||secondRel->getType()==ANY)){
@@ -220,6 +247,36 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 				}
 				iterateAndStore(relList, tmpList);
 			}
+			if(relType==AFFECTS){
+				tmpList = extractor->getAffectResult(firstRel->getData(),0);
+				iterateAndStore(relList, tmpList);
+			}
+			if(relType==AFFECTST){
+				
+			}
+			if(relType==SIBLING){
+				tmpList = extractor->getSiblingResult(firstType,secondType,firstRel->getData(),-2);
+				filterResult(relList,tmpList,firstType,secondType);
+			}
+			if(relType==CONTAINS){
+				if(secondType==PLUS||secondType==MINUS||secondType==MULTIPLY||secondType==STMT_LIST){
+					unknownValue = -1;
+				}else{
+					unknownValue = 0;
+				}
+				tmpList = extractor->getContainResult(firstType,firstRel->getData(),secondType,unknownValue);
+				iterateAndStore(relList,tmpList);
+			}
+			if(relType==CONTAINST){
+				if(secondType==PLUS||secondType==MINUS||secondType==MULTIPLY||secondType==STMT_LIST){
+					unknownValue = -1;
+				}else{
+					unknownValue = 0;
+				}
+				tmpList = extractor->getContainStarResult(firstType,firstRel->getData(),secondType,unknownValue);
+				iterateAndStore(relList,tmpList);
+			}
+			
 		}
 		//first is unknown, second is known
 		if((firstRel->getType()==QUERYVAR||firstRel->getType()==ANY)&&(secondRel->getType()!=QUERYVAR&&secondRel->getType()!=ANY)){
@@ -301,6 +358,35 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 					tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
 				}
 				iterateAndStore(relList, tmpList);
+			}
+			if(relType==AFFECTS){
+				tmpList = extractor->getAffectResult(0,secondRel->getData());
+				iterateAndStore(relList, tmpList);
+			}
+			if(relType==AFFECTST){
+				
+			}
+			if(relType==SIBLING){
+				tmpList = extractor->getSiblingResult(firstType,secondType,-2,secondRel->getData());
+				filterResult(relList,tmpList,firstType,secondType);
+			}
+			if(relType==CONTAINS){
+				if(firstType==PLUS||firstType==MINUS||firstType==MULTIPLY||firstType==STMT_LIST){
+					unknownValue = -1;
+				}else{
+					unknownValue = 0;
+				}
+				tmpList = extractor->getContainResult(firstType,unknownValue,secondType,secondRel->getData());
+				iterateAndStore(relList,tmpList);
+			}
+			if(relType==CONTAINST){
+				if(firstType==PLUS||firstType==MINUS||firstType==MULTIPLY||firstType==STMT_LIST){
+					unknownValue = -1;
+				}else{
+					unknownValue = 0;
+				}
+				tmpList = extractor->getContainStarResult(firstType,unknownValue,secondType,secondRel->getData());
+				iterateAndStore(relList,tmpList);
 			}
 		}
 		//first is unkown, second is unknown
@@ -443,6 +529,48 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 						iterateAndStore(relList, tmpList);
 					}
 				}
+				if(relType==AFFECTS){
+					tmpList = extractor->getAffectResult(0,0);
+					iterateAndStore(relList, tmpList);
+				}
+				if(relType==AFFECTST){
+				
+				}
+				if(relType==SIBLING){
+					tmpList = extractor->getSiblingResult(firstType,secondType,-2,-2);
+					filterResult(relList,tmpList,firstType,secondType);
+				}
+				if(relType==CONTAINS){
+					int unknownValue1,unknownValue2;
+					if(firstType==PLUS||firstType==MINUS||firstType==MULTIPLY||firstType==STMT_LIST){
+						unknownValue1 = -1;
+					}else{
+						unknownValue1 = 0;
+					}
+					if(secondType==PLUS||secondType==MINUS||secondType==MULTIPLY||secondType==STMT_LIST){
+						unknownValue2 = -1;
+					}else{
+						unknownValue2 = 0;
+					}
+					tmpList = extractor->getContainResult(firstType,unknownValue1,secondType,unknownValue2);
+					iterateAndStore(relList,tmpList);
+				}
+				if(relType==CONTAINST){
+					int unknownValue1,unknownValue2;
+					if(firstType==PLUS||firstType==MINUS||firstType==MULTIPLY||firstType==STMT_LIST){
+						unknownValue1 = -1;
+					}else{
+						unknownValue1 = 0;
+					}
+					if(secondType==PLUS||secondType==MINUS||secondType==MULTIPLY||secondType==STMT_LIST){
+						unknownValue2 = -1;
+					}else{
+						unknownValue2 = 0;
+					}
+					tmpList = extractor->getContainStarResult(firstType,unknownValue1,secondType,unknownValue2);
+					iterateAndStore(relList,tmpList);
+				}
+
 		}
 
 	

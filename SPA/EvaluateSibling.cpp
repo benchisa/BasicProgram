@@ -90,9 +90,9 @@ bool EvaluateSibling::getIsSibling(TYPE type1,TYPE type2,INDEX index1,INDEX inde
 }
 
 RELATION_LIST EvaluateSibling::getSiblingResult(TYPE type1,TYPE type2,INDEX index1,INDEX index2){
-	if(index1=-1&&index2!=-1){ //sibling(unknown,known)
+	if(index1=-2&&index2!=-2){ //sibling(unknown,known)
 		return getOneSibling(type2,type1,index2,2);
-	}else if(index1!=-1&&index2==-1){ //sibling(known,unknown)
+	}else if(index1!=-2&&index2==-2){ //sibling(known,unknown)
 		return getOneSibling(type1,type2,index1,1);
 	}else {
 		return getSiblingUnknown(type1,type2);

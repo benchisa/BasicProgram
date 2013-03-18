@@ -15,9 +15,11 @@ DesignExtractor::DesignExtractor(PKB* pkb)
 	EvaluateContains::pkb = pkb;
 	EvaluateSibling::pkb = pkb;
 	Affects::pkb = pkb;
+	EvaluateSibling::pkb = pkb;
 
 	EvaluateNext::createCFG();
     EvaluateCalls::insertProcModifiesUses();
+	
 }
 
 
@@ -169,7 +171,6 @@ bool DesignExtractor::getIsAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM s
 	return Affects::getIsAffectStarResult(stmt1,stmt2);
 }
 
-
 bool DesignExtractor::getIsContainResult(TYPE type, int arg1, TYPE type2, int arg2){
 	return EvaluateContains::getIsContainResult(type, arg1, type2, arg2);
 }
@@ -189,4 +190,7 @@ CONTAIN_LIST DesignExtractor::getContainStarResult(TYPE type, int arg1, TYPE typ
 //=================================Sibling============================
 bool DesignExtractor::getIsSiblingResult(TYPE type1,TYPE type2,INDEX index1,INDEX index2){
 	return EvaluateSibling::getIsSibling(type1,type2,index1,index2);
+}
+RELATION_LIST DesignExtractor::getSiblingResult(TYPE type1,TYPE type2,INDEX index1,INDEX index2){
+	return EvaluateSibling::getSiblingResult(type1,type2,index1,index2);
 }
