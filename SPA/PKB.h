@@ -15,6 +15,7 @@
 #include "WhileTable.h"
 #include "IfTable.h"
 #include "AssignTable.h"
+#include "StmtListTable.h"
 
 class PKB
 {	
@@ -145,6 +146,12 @@ class PKB
 		void insertAssign(STATEMENT_NUM stmtNo,INDEX ctrVarIndex,string prefixTree);
 		ASSIGNENTRY getAssignEntry(STATEMENT_NUM stmtNo);
 		DATA_LIST * getAllAssigns();
+		
+		//stmt table
+		SIZE getStmtListSize();
+		void insertStmtList(STATEMENT_NUM stmtNo,STMTENTRY type);
+		STMTENTRY getStmtEntry(STATEMENT_NUM stmtNo);
+		DATA_LIST * getAllStmtLst();
 private:
 		//Abastract Data Types stored in PKB
 		AST* rootAST;
@@ -162,6 +169,7 @@ private:
 		WhileTable * whileTable;
 		IfTable * ifTable;
 		AssignTable * assignTable;
+		StmtListTable * stmtListTable;
 	
 		
 };

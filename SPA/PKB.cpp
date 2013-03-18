@@ -18,6 +18,7 @@ PKB::PKB(void){
 	whileTable = new WhileTable;
 	ifTable = new IfTable;
 	assignTable = new AssignTable;
+	stmtListTable = new StmtListTable;
 }
 PKB::~PKB(void){
 	delete rootAST;
@@ -461,4 +462,21 @@ ASSIGNENTRY PKB::getAssignEntry(STATEMENT_NUM stmtNo){
 }
 DATA_LIST * PKB::getAllAssigns(){
 	return assignTable->getAllAssigns();
+}
+
+// stmt_list table
+SIZE PKB::getStmtListSize(){
+	return stmtListTable->getSize();
+}
+
+void PKB::insertStmtList(STATEMENT_NUM stmtNo, STMTENTRY entry){
+	stmtListTable->insert(stmtNo, entry);
+}
+
+STMTENTRY PKB::getStmtEntry(STATEMENT_NUM stmtNo){
+	return stmtListTable->getStmtListEntry(stmtNo);
+}
+
+DATA_LIST * PKB::getAllStmtLst(){
+	return stmtListTable->getAllStmtLists();
 }

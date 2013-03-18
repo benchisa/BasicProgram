@@ -62,6 +62,7 @@ enum CONTENT{
 	EMPTY,
 	ALL,
 };
+
 typedef TYPE ASTNODE_TYPE,QTREENODE_TYPE, MODIFIES_TYPE,USES_TYPE;
 
 typedef list<pair<int, int>> MODIFIES_LIST;
@@ -71,6 +72,7 @@ typedef list<pair<int, int>> PARENT_LIST;
 typedef list<pair<int, int>> RELATION_LIST;
 typedef list<pair<int, int>> NEXT_LIST;
 typedef list<pair<int, int>> AFFECT_LIST;
+typedef list<pair<int, int>> CONTAIN_LIST;
 typedef list<int> STATEMENT_LIST;
 typedef list<int> INDEX_LIST;
 typedef std::list<int> CONSTANT_LIST;
@@ -95,6 +97,7 @@ typedef int STATEMENT_NUM,VAR_INDEX,SIZE, PROC_INDEX,PROG_LINE,USES_INDEX,MODIFI
 typedef string EXPRESSION,PREFIXEXPR, VAR_NAME,PROC_NAME, OPERAND, OPERATOR;
 typedef string REPORT_MSG, QUERY, SOURCE, ERROR_MSG, TOKEN;
 
+
 //for new prog line
 struct ProgLine
 {
@@ -107,3 +110,7 @@ struct ASSIGNENTRY{
 	string prefixTree;
 };
 
+struct STMTENTRY{
+	int ownerNo;
+	TYPE type;
+};

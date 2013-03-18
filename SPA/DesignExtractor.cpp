@@ -12,6 +12,8 @@ DesignExtractor::DesignExtractor(PKB* pkb)
 	EvaluateUses::pkb = pkb;
 	EvaluateParents::pkb = pkb;
 	EvaluateModifies::pkb = pkb;
+	EvaluateContains::pkb = pkb;
+	EvaluateSibling::pkb = pkb;
 	Affects::pkb = pkb;
 
 	EvaluateNext::createCFG();
@@ -165,4 +167,26 @@ AFFECT_LIST DesignExtractor::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM 
 bool DesignExtractor::getIsAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2){
 
 	return Affects::getIsAffectStarResult(stmt1,stmt2);
+}
+
+
+bool DesignExtractor::getIsContainResult(TYPE type, int arg1, TYPE type2, int arg2){
+	return EvaluateContains::getIsContainResult(type, arg1, type2, arg2);
+}
+
+bool DesignExtractor::getIsContainStarResult(TYPE type, int arg1, TYPE type2, int arg2){
+	return EvaluateContains::getIsContainStarResult(type, arg1, type2, arg2);
+}
+
+CONTAIN_LIST DesignExtractor::getContainResult(TYPE type, int arg1, TYPE type2, int arg2){
+	return EvaluateContains::getContainResult(type, arg1, type2, arg2);
+}
+
+CONTAIN_LIST DesignExtractor::getContainStarResult(TYPE type, int arg1, TYPE type2, int arg2){
+	return EvaluateContains::getContainStarResult(type, arg1, type2, arg2);
+}
+
+//=================================Sibling============================
+bool DesignExtractor::getIsSiblingResult(TYPE type1,TYPE type2,INDEX index1,INDEX index2){
+	return EvaluateSibling::getIsSibling(type1,type2,index1,index2);
 }

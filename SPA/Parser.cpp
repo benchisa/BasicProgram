@@ -150,6 +150,7 @@ bool Parser::procedure(){
 				pkb->addSibling(curAST, newProc);
 				curAST = newProc;
 			}
+			//cout << prevToken << "\n";
 		}
 		else
 		{
@@ -159,6 +160,13 @@ bool Parser::procedure(){
 		if(matchToken("{")){
 			prevProc = curAST;
 			curAST = pkb->createAST(STMT_LIST, prevProgLine, 0, -1);
+
+			STMTENTRY thisEntry;
+			thisEntry.ownerNo = curProcIndex;
+			thisEntry.type = PROCEDURE;
+			//cout << "inserting: " << stmt_num+1 << " for " << curProcIndex << "\n";
+			pkb->insertStmtList(stmt_num+1, thisEntry);
+			
 			if(!pkb->setFirstDescendant(prevProc, curAST))
 				pkb->setAncestor(curAST, prevProc);
 
@@ -286,6 +294,7 @@ bool Parser::stmt_call(){
 bool Parser::stmt_if(){
 	// if: if var_name then '{' stmtlst '}' else '{' stmtlst '}'
 	TOKEN tmpToken = prevToken;
+	int ownerNo = 0;
 
 	if(matchToken("if")){
 		stmt_num++;
@@ -312,12 +321,18 @@ bool Parser::stmt_if(){
 			pkb->insertUses(IF, stmt_num, curVarIndex);
 
 			// insert to if table
+			ownerNo = stmt_num;
 			pkb->insertIf(stmt_num, curVarIndex);
 
 			leftNode = pkb->createAST(VARIABLE, prevProgLine, stmt_num, curVarIndex);
 		
 			if(matchToken("then") && matchToken("{"))
 			{
+				STMTENTRY thisEntry;
+				thisEntry.ownerNo = ownerNo;
+				thisEntry.type = THEN;
+
+				pkb->insertStmtList(stmt_num+1,thisEntry); 
 				thenNode = pkb->createAST(STMT_LIST, prevProgLine, stmt_num, THEN); // then node
 				
 				pkb->setFirstDescendant(ifNode, leftNode);
@@ -335,8 +350,11 @@ bool Parser::stmt_if(){
 				{
 					if(matchToken("else") && matchToken("{"))
 					{
-						//progLine++;
-						//??? do we need a progline, no right.
+						thisEntry;
+						thisEntry.ownerNo = ownerNo;
+						thisEntry.type = ELSE;
+
+						pkb->insertStmtList(stmt_num+1,thisEntry);
 						elseNode = pkb->createAST(STMT_LIST, 0, 0, ELSE); // else node, no stmt_line
 						pkb->setAncestor(elseNode, ifNode);
 						pkb->addSibling(thenNode, elseNode);
@@ -427,6 +445,10 @@ bool Parser::stmt_while(){
 			//cout << "Last Container: " << containerIndex.back().first << "\n";
 
 			if(matchToken("{")){
+				STMTENTRY thisEntry;
+				thisEntry.ownerNo = stmt_num;
+				thisEntry.type = WHILE;
+				pkb->insertStmtList(stmt_num+1,thisEntry);
 				rightNode = pkb->createAST(STMT_LIST,prevProgLine, stmt_num, -1);
 				pkb->setAncestor(rightNode, whileNode);
 				pkb->addSibling(leftNode, rightNode);
@@ -516,7 +538,6 @@ bool Parser::stmt_assign(){
 					pkb->setAncestor(rightNode, assignNode);
 					pkb->addSibling(leftNode, rightNode);
 					curAST = assignNode;
-
 					pkb->insertAssign(stmt_num, tmpVarIndex, DesignExtractor::convertExprToPrefix(exp));
 					return true;	
 				}
@@ -621,8 +642,8 @@ bool Parser::factor(){
 	else if(const_value())
 	{
 		exp += prevToken;
-		pkb->insertConst(atoi(prevToken.c_str()));
-		operands.push(pkb->createAST(CONSTANT, prevProgLine,stmt_num, atoi(prevToken.c_str())));
+		CONSTANT_INDEX cIndex = pkb->insertConst(atoi(prevToken.c_str()));
+		operands.push(pkb->createAST(CONSTANT, prevProgLine,stmt_num, cIndex));
 		return true;
 	}
 	else if(openBracket())

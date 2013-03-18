@@ -168,6 +168,15 @@
     <ClCompile Include="Affects.cpp">
       <Filter>Source Files\DE</Filter>
     </ClCompile>
+    <ClCompile Include="EvaluateContains.cpp">
+      <Filter>Source Files\DE</Filter>
+    </ClCompile>
+    <ClCompile Include="EvaluateSibling.cpp">
+      <Filter>Source Files\DE</Filter>
+    </ClCompile>
+    <ClCompile Include="StmtListTable.cpp">
+      <Filter>Source Files\PKB</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Follows.h">
@@ -289,6 +298,15 @@
     </ClInclude>
     <ClInclude Include="Affects.h">
       <Filter>Header Files\DE</Filter>
+    </ClInclude>
+    <ClInclude Include="EvaluateContains.h">
+      <Filter>Header Files\DE</Filter>
+    </ClInclude>
+    <ClInclude Include="EvaluateSibling.h">
+      <Filter>Header Files\DE</Filter>
+    </ClInclude>
+    <ClInclude Include="StmtListTable.h">
+      <Filter>Header Files\PKB</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

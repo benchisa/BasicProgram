@@ -11,6 +11,19 @@ Helper::~Helper(void)
 {
 }
 /*** PUBLIC ***/
+bool Helper::isStatement(TYPE typeName){
+	if(typeName==STATEMENT||typeName == WHILE||typeName==IF||typeName==ASSIGNMENT||typeName==CALL){
+		return true;
+	}
+	return false;
+}
+bool Helper::isExprElement(TYPE typeName){
+	if(typeName == VARIABLE||typeName ==PLUS||typeName==MINUS||typeName==MULTIPLY||typeName==CONSTANT){
+		return true;
+	}
+	return false;
+}
+
 PREFIXEXPR Helper::convertExprToPrefix(EXPRESSION expr){
 	PREFIXEXPR result;
 
@@ -73,6 +86,18 @@ bool Helper::isStatementTypeOf(TYPE typeName,STATEMENT_NUM stmtNum){
 	}
 	return false;
 }
+
+TYPE Helper::getStatementType(STATEMENT_NUM stmtNum){
+	//find the type of statement
+	if(stmtNum>0&&stmtNum <= pkb->getMaxStatementNum()){
+		AST_LIST* currentAST = pkb->getASTBy(stmtNum);
+		AST_LIST::iterator itr;
+		for(itr = currentAST->begin();itr!=currentAST->end();itr++){
+			return (*itr)->getRootType();
+		}
+	}
+}
+
 
 DATA_LIST* Helper::getAllCallStmts(){
 	return pkb->getAllCallerStmt();

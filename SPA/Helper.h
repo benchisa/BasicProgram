@@ -16,14 +16,17 @@ public:
 	// to set PKB
 	static PKB *pkb;
 	
-	static PREFIXEXPR convertExprToPrefix(EXPRESSION expr);
-	static bool isStatementTypeOf(TYPE typeName, STATEMENT_NUM stmtNum);
-	static DATA_LIST * getStmtListOf(TYPE nodeType);
-	static DATA_LIST * getAllConstants();
-	static DATA_LIST * getAllCallStmts();
+	static PREFIXEXPR	convertExprToPrefix(EXPRESSION expr);
+	static bool			isStatementTypeOf(TYPE typeName, STATEMENT_NUM stmtNum);
+	static DATA_LIST *	getStmtListOf(TYPE nodeType);
+	static TYPE			getStatementType(STATEMENT_NUM stmtNum);
+	static DATA_LIST *	getAllConstants();
+	static DATA_LIST *	getAllCallStmts();
+	static bool			isStatement(TYPE typeName);
+	static bool			isExprElement(TYPE typeName);
 
-	static void computeTypeOnly(list<pair<int, int>> &result, list<pair<int, int>> &listLst, TYPE type1, TYPE type2);
-	static void iterateAndStore(list<pair<int, int>> &result, list<pair<int, int>> tmpLst, int v1);
+	static void			computeTypeOnly(list<pair<int, int>> &result, list<pair<int, int>> &listLst, TYPE type1, TYPE type2);
+	static void			iterateAndStore(list<pair<int, int>> &result, list<pair<int, int>> tmpLst, int v1);
 
 private:
 	// Helper for conversion
