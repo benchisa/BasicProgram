@@ -11,6 +11,7 @@
 #include "Helper.h"
 #include "CFG.h"
 #include "PKB.h"
+#include "EvaluateSibling.h"
 #include <stack>
 
 class DesignExtractor
@@ -71,6 +72,7 @@ public:
 
 	//sibling
 	bool			getIsSiblingResult(TYPE type1,TYPE type2,INDEX index1,INDEX index2);
+	 RELATION_LIST getSiblingResult(TYPE type1,TYPE type2,INDEX index1,INDEX index2);
 
 private:
 	PKB *			pkb;
