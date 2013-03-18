@@ -243,25 +243,66 @@ bool Affects::computeIsAffectStar(int starting, int ending)
 	stack<USES_LIST> stacks;
 	stacks.push(pkb->getUses(ASSIGNMENT,0,modVar));
 	USES_LIST::iterator u_itr;
-
+	map<int,bool> allModVars;
+	
 	while (!stacks.empty())
 	{
 		USES_LIST root=stacks.top();
 		stacks.pop();
 		for (u_itr=root.begin();u_itr!=root.end(); u_itr++)
 		{
-			if (Affects::getIsAffectResult(starting,u_itr->first))
+			
+			
+			if (Affects::getIsAffectResult(starting,u_itr->first) )
 			{
-				if (u_itr->first==ending)
-				{
-					return true;
-				}
-				else
-				{	
+				
 					m_list=pkb->getModifies(ASSIGNMENT,u_itr->first,0);
+					
 					modVar=m_list.begin()->second;
+					MODIFIES_LIST temp=pkb->getModifies(ASSIGNMENT, 0, modVar);
+					MODIFIES_LIST::iterator m_itr;
+					bool test=true;
+					for (m_itr=temp.begin(); m_itr!=temp.end(); m_itr++)
+					{
+						
+						if (pkb->isInSameProc(u_itr->first,m_itr->first))
+						{
+							if (u_itr->first!=m_itr->first)
+							{
+								if (EvaluateNext::isNextStarResult(u_itr->first,m_itr->first)&&Affects::getIsAffectResult(m_itr->first,ending ))
+								{
+									test=false;
+									break;
+								
+								}
+							}
+							
+						}
+					}
+					if (test)
+					{
+						allModVars.insert(make_pair(modVar, true));
+					}
+					else
+					{
+						allModVars.insert(make_pair(modVar, false));
+					}
 					starting=u_itr->first;
 					stacks.push(pkb->getUses(ASSIGNMENT,0,modVar));
+						
+				
+			}
+		
+			if (u_itr->first==ending)
+			{
+				
+				map<int,bool>::iterator testAffectItr;
+				for (testAffectItr=allModVars.begin(); testAffectItr!=allModVars.end(); testAffectItr++)
+				{
+					if (testAffectItr->second==true && u_itr->second==testAffectItr->first)
+					{
+						return true;
+					}
 				}
 			}
 		}
