@@ -37,14 +37,22 @@ public:
 		ATTRIBUTE attr;
 	};
 
-	struct entTable eTable[10];
-	struct syntaxTable rTable[14];
-	struct syntaxTable pTable[3];
-	struct argTable aTable[12];
-	struct attrTable atTable[9];
+	struct nodeTable{
+		TYPE left;
+		vector<TYPE> right;
+	};
 
+	struct entTable eTable[10];
+	struct syntaxTable rTable[17];
+	struct syntaxTable pTable[3];
+	struct argTable aTable[15];
+	struct attrTable atTable[9];
+	struct nodeTable containsValTable[12];//NEW extension
+	struct nodeTable containSTInvTable[12];//NEW extension
+	struct nodeTable siblingValTable[12];//NEW extension
+	
 	string compulsoryOne,optional,or,plus,minus,times,invComma,letter,digit,underscore,hash,ident,synonym,integer,op;
-	string stmtRef,entRef,lineRef,varRef,expr,wildexpr,expr_spec;
+	string stmtRef,entRef,lineRef,nodeRef,varRef,expr,wildexpr,expr_spec;
 
 	GrammarTable(void);
 	~GrammarTable(void);
@@ -75,4 +83,19 @@ public:
 	void createAttrTable();
 	vector<ATTRIBUTE> getAttr(TYPE);
 	void printAllAttr();
+	
+	//check valid
+	void createContainsValNodeTable();
+	vector<TYPE> getContainsValNodes(TYPE);
+	void printAllContainsValNodes();
+	
+	//check invalid
+	void createContainSTInvNodeTable();
+	vector<TYPE> getContainSTInvNodes(TYPE);
+	void printAllContainSTInvNodes();
+
+	//check valid
+	void createSiblingValNodeTable();
+	vector<TYPE> getSiblingValNodes(TYPE);
+	void printAllSiblingValNodes();
 };

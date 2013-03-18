@@ -129,6 +129,7 @@ private:
 	QTREE* firstAffectSt;
 	QTREE* firstNext;
 	QTREE* firstNextSt;
+	QTREE* firstContainSibling;
 	QTREE* lastWithPatt;
 	QTREE* lastFollows; 
 	QTREE* lastFollowsSt;
@@ -150,13 +151,14 @@ private:
 	QTREE* lastAffectSt;
 	QTREE* lastNext;
 	QTREE* lastNextSt;
+	QTREE* lastContainSibling;
 	
 
 	QueryPreprocessor::ERROR_MSG errorMsg;
 
 	//regex
 	string compulsoryOne,optional,or,underscore,hash,invComma,letter,digit,plus,minus,times;
-	string op,integer,ident,synonym,rel,ref;
+	string op,integer,ident,synonym,rel,ref,nodeRef;
 	string attrName,attrRef,attrCompare;
 	string designEnt,elem,tuple;
 	string declare,result_cl,suchthat_cl,with_cl,pattern_cl;

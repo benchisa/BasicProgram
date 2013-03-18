@@ -27,7 +27,7 @@ QueryPreprocessor::QueryPreprocessor(PKB* pkb){
 	integer			= "["+digit+"]"+compulsoryOne;
 	ident			= "["+letter+"]"+compulsoryOne+"["+letter+digit+hash+"]"+optional;
 	synonym			= ident;
-	rel				= "Uses|Modifies|Follows\\*|Follows|Parent\\*|Parent|Affects\\*|Affects|Calls\\*|Calls|Next\\*|Next";
+	rel				= "Uses|Modifies|Follows\\*|Follows|Parent\\*|Parent|Affects\\*|Affects|Calls\\*|Calls|Next\\*|Next|Contains\\*|Contains|Sibling";
 	ref				= synonym+or+underscore+or+integer+or+invComma+ident+invComma;
 	attrName		= "procName|varName|value|stmt#";
 	attrRef			= synonym+"\\s*\\.\\s*("+attrName+")";
@@ -116,6 +116,8 @@ void QueryPreprocessor::createGrammarTables(){
 	grammarTable.createPattTable();	
 	grammarTable.createArgTable();
 	grammarTable.createAttrTable();
+	grammarTable.createContainSTInvNodeTable();
+	grammarTable.createContainsValNodeTable();
 }
 
 bool QueryPreprocessor::validate(){
@@ -194,6 +196,7 @@ void QueryPreprocessor::setQTree(){
 	firstAffectSt= createQTREENode(ANY);
 	firstNext= createQTREENode(ANY);
 	firstNextSt= createQTREENode(ANY);
+	firstContainSibling= createQTREENode(ANY);
 
 	//prepare sort
 	//sortQVarTable();
@@ -612,7 +615,10 @@ void QueryPreprocessor::processClauses(vector<int> cl,int mode){
 	vector<QTREE*> nextst;
 	vector<QTREE*> affects;
 	vector<QTREE*> affectst;
+	vector<QTREE*> consib;
+
 	TYPE relType;
+
 	for (int w=0; w< cl.size() ; w++){
 		currClause = clauses[cl[w]];
 		if(currClause!=NULL){
@@ -661,7 +667,11 @@ void QueryPreprocessor::processClauses(vector<int> cl,int mode){
 			}
 			//affect*
 			else if (relType==AFFECTST){
-				affects.push_back(currClause);
+				affectst.push_back(currClause);
+			}
+			//contains,contains*,sibling
+			else if (relType==CONTAINS||relType==CONTAINST||relType==SIBLING){
+				consib.push_back(currClause);
 			}
 			//modifies
 			else if (relType==MODIFIES){
@@ -819,6 +829,11 @@ void QueryPreprocessor::processClauses(vector<int> cl,int mode){
 		vector<QTREE*> temp = addToProbe(currClause);
 		queue.insert(queue.end(),temp.begin(),temp.end());
 	}
+	for(int a = 0; a< consib.size(); a++){
+		currClause = consib[a];
+		vector<QTREE*> temp = addToProbe(currClause);
+		queue.insert(queue.end(),temp.begin(),temp.end());
+	}
 
 	//chainup
 	for(int i=0;i< patternwith.size();i++){
@@ -912,6 +927,10 @@ void QueryPreprocessor::processClauses(vector<int> cl,int mode){
 	for(int i=0;i< affectst.size();i++){
 		if(std::find(queue.begin(),queue.end(),affectst[i])==queue.end())
 			queue.push_back(affectst[i]);
+	}
+	for(int i=0;i< consib.size();i++){
+		if(std::find(queue.begin(),queue.end(),consib[i])==queue.end())
+			queue.push_back(consib[i]);
 	}
 
 	//finally can add to final node
@@ -1149,7 +1168,16 @@ void QueryPreprocessor::arrangeClauseByRel(QTREE* node){
 		}
 		lastAffectSt = node;
 	}
-
+	//Contains,Contains*,Sibling
+	else if (relType==CONTAINS||relType==CONTAINST||relType==SIBLING){
+		if (firstContainSibling->getType()==ANY){
+			firstContainSibling = node;
+		}
+		else{
+			lastContainSibling->setSibling(node);
+		}
+		lastContainSibling = node;
+	}
 
 }
 
@@ -1260,7 +1288,11 @@ void QueryPreprocessor::joinClauses(){
 		firstNode->getLastSibling()->setSibling(firstAffectSt);
 		firstNode->setLastSibling(lastAffectSt);		
 	}
-	
+	//contains,contains*,sibling
+	if (firstContainSibling->getType()!=ANY){
+		firstNode->getLastSibling()->setSibling(firstContainSibling);
+		firstNode->setLastSibling(lastContainSibling);		
+	}
 	
 	firstWithPatt = createQTREENode(ANY);
 	firstFollows= createQTREENode(ANY); 
@@ -1283,6 +1315,7 @@ void QueryPreprocessor::joinClauses(){
 	firstAffectSt= createQTREENode(ANY);
 	firstNext= createQTREENode(ANY);
 	firstNextSt= createQTREENode(ANY);
+	firstContainSibling= createQTREENode(ANY);
 }
 
 bool QueryPreprocessor::isFlaggedGroup(int grpNum){
@@ -1520,7 +1553,8 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 		}
 		//can also be wildcards _
 		else if(currToken=="_"){
-			if((relName=="Modifies_p"||relName=="Modifies_s"||relName=="Uses_p"||relName=="Uses_s")&&firstArg){
+			if(((relName=="Modifies_p"||relName=="Modifies_s"||relName=="Uses_p"||relName=="Uses_s")&&firstArg)||
+				(relName=="Contains*"||relName=="Contains"||relName=="Sibling")){
 				error(INVALID_ARGUMENT);
 				return false;	
 			}		
@@ -1594,19 +1628,40 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 		}
 
 		//check argument's type
-		validArgType = grammarTable.getArgument(relType,i);
-		correctArg = false;
-		for(int j = 0; j < validArgType.size(); j++){
-			if (tokenType == validArgType.at(j)){
-				correctArg = true;
-				break;
+		if(relName=="Contains*"){
+			validArgType = grammarTable.getContainSTInvNodes(relType);
+			correctArg = true;
+			for(int j = 0; j < validArgType.size(); j++){
+				if (tokenType == validArgType.at(j)){
+					correctArg = false;
+					break;
+				}
+			}
+		}
+		else {
+			if (relName=="Contains"){
+				validArgType = grammarTable.getContainsValNodes(relType);
+			}
+			else if (relName=="Sibling"){
+				validArgType = grammarTable.getSiblingValNodes(relType);
+			}
+			else{
+				validArgType = grammarTable.getArgument(relType,i);
+			}
+
+			correctArg = false;
+			for(int j = 0; j < validArgType.size(); j++){
+				if (tokenType == validArgType.at(j)){
+					correctArg = true;
+					break;
+				}
 			}
 		}
 		if (!correctArg){
 			error(INVALID_ARGUMENT);
 			return false;
 		}
-						
+
 		setChild(prevNode,currNode);		
 		
 	}

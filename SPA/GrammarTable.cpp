@@ -23,6 +23,7 @@ GrammarTable::GrammarTable(void){
 	entRef			= synonym+or+underscore+or+integer+or+invComma+ident+invComma;
 	lineRef			= synonym+or+underscore+or+integer;
 	varRef			= synonym+or+underscore+or+invComma+ident+invComma;
+	nodeRef			= synonym+or+integer+or+invComma+ident+invComma;
 	expr			= "\\(*("+synonym+or+integer+")("+op+"("+synonym+or+integer+")"+"\\)*)"+optional;
 	wildexpr		= underscore+invComma+expr+invComma+underscore;
 	expr_spec		= invComma+expr+invComma+or+wildexpr;
@@ -168,10 +169,29 @@ void GrammarTable::createRelTable(){
 	rTable[13].arg1		=stmtRef;
 	rTable[13].arg2		=stmtRef;
 	rTable[13].type		=AFFECTST;
+
+	rTable[14].relName	="Contains";
+	rTable[14].numArg	=2;
+	rTable[14].arg1		=nodeRef;
+	rTable[14].arg2		=nodeRef;
+	rTable[14].type		=CONTAINS;
+
+	rTable[15].relName	="Contains*";
+	rTable[15].numArg	=2;
+	rTable[15].arg1		=nodeRef;
+	rTable[15].arg2		=nodeRef;
+	rTable[15].type		=CONTAINST;
+
+	rTable[16].relName	="Sibling";
+	rTable[16].numArg	=2;
+	rTable[16].arg1		=nodeRef;
+	rTable[16].arg2		=nodeRef;
+	rTable[16].type		=SIBLING;
+
 }
 
 int GrammarTable::getRelArgCount(RELATIONSHIP rel){
-	for(int i=0;i<14; i++){
+	for(int i=0;i<17; i++){
 		if(rel==rTable[i].relName){
 			return rTable[i].numArg;
 		}
@@ -179,7 +199,7 @@ int GrammarTable::getRelArgCount(RELATIONSHIP rel){
 }
 
 string GrammarTable::getRelArg(RELATIONSHIP rel,int argPosition){
-	for(int i=0;i<14; i++){
+	for(int i=0;i<17; i++){
 		if(rel==rTable[i].relName){
 			if(argPosition==1){
 				return rTable[i].arg1;
@@ -191,7 +211,7 @@ string GrammarTable::getRelArg(RELATIONSHIP rel,int argPosition){
 }
 
 TYPE GrammarTable::getRelType(RELATIONSHIP rel){
-	for(int i=0;i<14; i++){
+	for(int i=0;i<17; i++){
 		if(rel==rTable[i].relName){
 			return rTable[i].type;
 		}
@@ -199,7 +219,7 @@ TYPE GrammarTable::getRelType(RELATIONSHIP rel){
 }
 
 bool GrammarTable::isRelExists(RELATIONSHIP rel){
-	for(int i=0;i<14; i++){
+	for(int i=0;i<17; i++){
 		if(rel==rTable[i].relName){
 			return true;
 		}
@@ -268,7 +288,7 @@ bool GrammarTable::isPattExists(PATTERN patt){
 }
 
 void GrammarTable::createArgTable(){
-	vector<TYPE> case1,case2,case3,case4,case5,case6,case7;
+	vector<TYPE> case1,case2,case3,case4,case5,case6,case7,case8;
 
 	case1.push_back(STATEMENT);
 	case1.push_back(WHILE);
@@ -301,6 +321,19 @@ void GrammarTable::createArgTable(){
 	
 	case7.push_back(PROCEDURE);
 	case7.push_back(ANY);
+
+	case8.push_back(PROCEDURE);
+	case8.push_back(STMT_LIST);
+	case8.push_back(STATEMENT);
+	case8.push_back(ASSIGNMENT);
+	case8.push_back(CALL);
+	case8.push_back(WHILE);
+	case8.push_back(IF);
+	case8.push_back(PLUS);
+	case8.push_back(MINUS);
+	case8.push_back(MULTIPLY);
+	case8.push_back(VARIABLE);
+	case8.push_back(CONSTANT);
 
 	aTable[0].type = FOLLOWS;
 	aTable[0].arg1 = case2;
@@ -350,10 +383,21 @@ void GrammarTable::createArgTable(){
 	aTable[11].arg1 = case7;
 	aTable[11].arg2 = case7;
 
+	aTable[12].type = CONTAINS;
+	aTable[12].arg1 = case8;
+	aTable[12].arg2 = case8;
+
+	aTable[13].type = CONTAINST;
+	aTable[13].arg1 = case8;
+	aTable[13].arg2 = case8;
+
+	aTable[14].type = SIBLING;
+	aTable[14].arg1 = case8;
+	aTable[14].arg2 = case8;
 }
 
 vector<TYPE> GrammarTable::getArgument(TYPE rel, int argPosition){
-	for(int i=0;i<12; i++){
+	for(int i=0;i<15; i++){
 		if(rel==aTable[i].type){
 			if(argPosition==1){
 				return aTable[i].arg1;
@@ -401,6 +445,317 @@ vector<GrammarTable::ATTRIBUTE> GrammarTable::getAttr(TYPE ent){
 		}
 	}
 	return res;
+}
+
+void GrammarTable::createContainsValNodeTable(){
+	vector<TYPE> temp;
+
+	containsValTable[0].left=ASSIGNMENT;
+	temp.push_back(VARIABLE);
+	temp.push_back(PLUS);
+	temp.push_back(MINUS);
+	temp.push_back(MULTIPLY);
+	containsValTable[0].right=temp;
+	temp.clear();
+
+	containsValTable[1].left=IF;
+	temp.push_back(VARIABLE);
+	temp.push_back(STMT_LIST);
+	containsValTable[1].right=temp;
+	temp.clear();
+
+	containsValTable[2].left=WHILE;
+	temp.push_back(VARIABLE);
+	temp.push_back(STMT_LIST);
+	containsValTable[2].right=temp;
+	temp.clear();
+
+	containsValTable[3].left=PROCEDURE;
+	temp.push_back(STMT_LIST);
+	containsValTable[3].right=temp;
+	temp.clear();
+
+	containsValTable[4].left=STMT_LIST;
+	temp.push_back(STATEMENT);
+	temp.push_back(ASSIGNMENT);
+	temp.push_back(WHILE);
+	temp.push_back(IF);
+	temp.push_back(CALL);
+	containsValTable[4].right=temp;
+	temp.clear();
+	
+	containsValTable[5].left=STATEMENT;
+	temp.push_back(VARIABLE);
+	temp.push_back(STMT_LIST);
+	temp.push_back(PLUS);
+	temp.push_back(MINUS);
+	temp.push_back(MULTIPLY);
+	containsValTable[5].right=temp;
+	temp.clear();
+
+	containsValTable[6].left=CALL;
+	//should not have anything under CALL
+	containsValTable[6].right=temp;
+	temp.clear();
+
+	containsValTable[7].left=CONSTANT;
+	//should not have anything under CONSTANT
+	containsValTable[7].right=temp;
+	temp.clear();
+
+	containsValTable[8].left=VARIABLE;
+	//should not have anything under VARIABLE
+	containsValTable[8].right=temp;
+	temp.clear();
+
+	containsValTable[9].left=PLUS;
+	temp.push_back(CONSTANT);
+	temp.push_back(VARIABLE);
+	temp.push_back(PLUS);
+	temp.push_back(MINUS);
+	temp.push_back(MULTIPLY);
+	containsValTable[9].right=temp;
+	temp.clear();
+
+	containsValTable[10].left=MINUS;
+	temp.push_back(CONSTANT);
+	temp.push_back(VARIABLE);
+	temp.push_back(PLUS);
+	temp.push_back(MINUS);
+	temp.push_back(MULTIPLY);
+	containsValTable[10].right=temp;
+	temp.clear();
+
+	containsValTable[11].left=MULTIPLY;
+	temp.push_back(CONSTANT);
+	temp.push_back(VARIABLE);
+	temp.push_back(PLUS);
+	temp.push_back(MINUS);
+	temp.push_back(MULTIPLY);
+	containsValTable[11].right=temp;
+	temp.clear();
+
+}
+
+vector<TYPE> GrammarTable::getContainsValNodes(TYPE left){
+	for(int i=0;i<12; i++){
+		if(left==containsValTable[i].left){
+			return containsValTable[i].right;
+		}
+	}	
+}
+
+void GrammarTable::createContainSTInvNodeTable(){
+	vector<TYPE> temp;
+
+	containSTInvTable[0].left=ASSIGNMENT;
+	temp.push_back(PROCEDURE);	
+	temp.push_back(STMT_LIST);
+	temp.push_back(STATEMENT);
+	temp.push_back(ASSIGNMENT);
+	temp.push_back(WHILE);
+	temp.push_back(IF);
+	temp.push_back(CALL);
+	containSTInvTable[0].right=temp;
+	temp.clear();
+
+	containSTInvTable[1].left=IF;
+	temp.push_back(PROCEDURE);
+	containSTInvTable[1].right=temp;
+	temp.clear();
+
+	containSTInvTable[2].left=WHILE;
+	temp.push_back(PROCEDURE);
+	containSTInvTable[2].right=temp;
+	temp.clear();
+
+	containSTInvTable[3].left=PROCEDURE;
+	temp.push_back(PROCEDURE);
+	containSTInvTable[3].right=temp;
+	temp.clear();
+
+	containSTInvTable[4].left=STMT_LIST;
+	temp.push_back(PROCEDURE);
+	containSTInvTable[4].right=temp;
+	temp.clear();
+	
+	containSTInvTable[5].left=STATEMENT;
+	temp.push_back(PROCEDURE);
+	containSTInvTable[5].right=temp;
+	temp.clear();
+
+	containSTInvTable[6].left=CALL;
+	//should not have anything under CALL
+	containSTInvTable[6].right=temp;
+	temp.clear();
+
+	containSTInvTable[7].left=CONSTANT;
+	//should not have anything under CONSTANT
+	containSTInvTable[7].right=temp;
+	temp.clear();
+
+	containSTInvTable[8].left=VARIABLE;
+	//should not have anything under VARIABLE
+	containSTInvTable[8].right=temp;
+	temp.clear();
+
+	containSTInvTable[9].left=PLUS;	
+	temp.push_back(PROCEDURE);
+	temp.push_back(STMT_LIST);
+	temp.push_back(STATEMENT);
+	temp.push_back(WHILE);
+	temp.push_back(IF);
+	temp.push_back(ASSIGNMENT);
+	temp.push_back(CALL);
+	containSTInvTable[9].right=temp;
+	temp.clear();
+
+	containSTInvTable[10].left=MINUS;
+	temp.push_back(PROCEDURE);
+	temp.push_back(STMT_LIST);
+	temp.push_back(STATEMENT);
+	temp.push_back(WHILE);
+	temp.push_back(IF);
+	temp.push_back(ASSIGNMENT);
+	temp.push_back(CALL);
+	containSTInvTable[10].right=temp;
+	temp.clear();
+
+	containSTInvTable[11].left=MULTIPLY;
+	temp.push_back(PROCEDURE);
+	temp.push_back(STMT_LIST);
+	temp.push_back(STATEMENT);
+	temp.push_back(WHILE);
+	temp.push_back(IF);
+	temp.push_back(ASSIGNMENT);
+	temp.push_back(CALL);
+	containSTInvTable[11].right=temp;
+	temp.clear();
+
+}
+
+vector<TYPE> GrammarTable::getContainSTInvNodes(TYPE left){
+	for(int i=0;i<12; i++){
+		if(left==containSTInvTable[i].left){
+			return containSTInvTable[i].right;
+		}
+	}	
+}
+
+void GrammarTable::createSiblingValNodeTable(){
+	vector<TYPE> temp;
+
+	siblingValTable[0].left=ASSIGNMENT;	
+	temp.push_back(ASSIGNMENT);
+	temp.push_back(WHILE);
+	temp.push_back(IF);
+	temp.push_back(STATEMENT);
+	temp.push_back(CALL);
+	siblingValTable[0].right=temp;
+	temp.clear();
+
+	siblingValTable[1].left=IF;
+	temp.push_back(ASSIGNMENT);
+	temp.push_back(WHILE);
+	temp.push_back(IF);
+	temp.push_back(STATEMENT);
+	temp.push_back(CALL);
+	siblingValTable[1].right=temp;
+	temp.clear();
+
+	siblingValTable[2].left=WHILE;
+	temp.push_back(ASSIGNMENT);
+	temp.push_back(WHILE);
+	temp.push_back(IF);
+	temp.push_back(STATEMENT);
+	temp.push_back(CALL);
+	siblingValTable[2].right=temp;
+	temp.clear();
+
+	siblingValTable[3].left=PROCEDURE;
+	temp.push_back(PROCEDURE);
+	siblingValTable[3].right=temp;
+	temp.clear();
+
+	siblingValTable[4].left=STMT_LIST;
+	temp.push_back(STMT_LIST);
+	temp.push_back(VARIABLE);
+	temp.push_back(CONSTANT);
+	siblingValTable[4].right=temp;
+	temp.clear();
+	
+	siblingValTable[5].left=STATEMENT;
+	temp.push_back(ASSIGNMENT);
+	temp.push_back(WHILE);
+	temp.push_back(IF);
+	temp.push_back(STATEMENT);
+	temp.push_back(CALL);
+	siblingValTable[5].right=temp;
+	temp.clear();
+
+	siblingValTable[6].left=CALL;
+	temp.push_back(ASSIGNMENT);
+	temp.push_back(WHILE);
+	temp.push_back(IF);
+	temp.push_back(STATEMENT);
+	temp.push_back(CALL);
+	siblingValTable[6].right=temp;
+	temp.clear();
+
+	siblingValTable[7].left=CONSTANT;
+	temp.push_back(MULTIPLY);
+	temp.push_back(PLUS);
+	temp.push_back(MINUS);
+	temp.push_back(VARIABLE);
+	temp.push_back(CONSTANT);
+	siblingValTable[7].right=temp;
+	temp.clear();
+
+	siblingValTable[8].left=VARIABLE;
+	temp.push_back(STMT_LIST);
+	temp.push_back(MULTIPLY);
+	temp.push_back(PLUS);
+	temp.push_back(MINUS);
+	temp.push_back(VARIABLE);
+	temp.push_back(CONSTANT);
+	siblingValTable[8].right=temp;
+	temp.clear();
+
+	siblingValTable[9].left=PLUS;	
+	temp.push_back(MULTIPLY);
+	temp.push_back(PLUS);
+	temp.push_back(MINUS);
+	temp.push_back(VARIABLE);
+	temp.push_back(CONSTANT);
+	siblingValTable[9].right=temp;
+	temp.clear();
+
+	siblingValTable[10].left=MINUS;
+	temp.push_back(MULTIPLY);
+	temp.push_back(PLUS);
+	temp.push_back(MINUS);
+	temp.push_back(VARIABLE);
+	temp.push_back(CONSTANT);
+	siblingValTable[10].right=temp;
+	temp.clear();
+
+	siblingValTable[11].left=MULTIPLY;
+	temp.push_back(MULTIPLY);
+	temp.push_back(PLUS);
+	temp.push_back(MINUS);
+	temp.push_back(VARIABLE);
+	temp.push_back(CONSTANT);
+	siblingValTable[11].right=temp;
+	temp.clear();
+
+}
+
+vector<TYPE> GrammarTable::getSiblingValNodes(TYPE left){
+	for(int i=0;i<12; i++){
+		if(left==siblingValTable[i].left){
+			return siblingValTable[i].right;
+		}
+	}	
 }
 
 void GrammarTable::printAllEnt(){
@@ -453,3 +808,29 @@ void GrammarTable::printAllArg(){
 	}
 }
 
+void GrammarTable::printAllContainsValNodes(){
+	cout<<"====================All VALID CONTAINS======================"<<endl;
+	for(int i=0;i<12; i++){
+		for (int j=0;j<containsValTable[i].right.size();j++){
+			cout<<"Contains( " << containsValTable[i].left << " , " << containsValTable[i].right[j] <<" )"<<endl;
+		}
+	}
+}
+
+void GrammarTable::printAllContainSTInvNodes(){
+	cout<<"====================All VALID CONTAINS======================"<<endl;
+	for(int i=0;i<12; i++){
+		for (int j=0;j<containsValTable[i].right.size();j++){
+			cout<<"Contains( " << containsValTable[i].left << " , " << containsValTable[i].right[j] <<" )"<<endl;
+		}
+	}
+}
+
+void GrammarTable::printAllSiblingValNodes(){
+	cout<<"====================All VALID CONTAINS======================"<<endl;
+	for(int i=0;i<12; i++){
+		for (int j=0;j<siblingValTable[i].right.size();j++){
+			cout<<"Contains( " << siblingValTable[i].left << " , " << siblingValTable[i].right[j] <<" )"<<endl;
+		}
+	}
+}
