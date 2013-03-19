@@ -1,0 +1,68 @@
+procedure xylo{
+apple=1;
+banana=apple+1;
+carrot=apple;
+banana=carrot+1;
+donut=0;
+egg=1;
+fish=egg;
+call yello;
+while apple{
+while egg{
+innard = 0; 
+while donut{
+gummy=egg+1;
+innard=gummy*donut;
+}
+while fish{
+gummy=0;
+while innard{
+fish=innard;
+}
+}
+ham=gummy;
+}
+gummy=apple+9;
+}
+apple=11;
+if innard then{
+jam=apple;
+}
+else{
+jam=gummy;
+if egg then{
+gummy=33;}
+else{
+gummy=99;}
+}
+}
+procedure yello{
+kimchi = 88;
+leek=0;
+while leek{
+kimchi=kimchi+1;
+}
+call zebra;
+apple=kimchi;
+jam=egg+2;
+}
+procedure zebra{
+meat=1;
+banana=meat+10;
+if meat then{
+carrot=banana+22;}
+else{
+carrot=banana;}
+apple=1;
+kimchi=apple+10;
+call extra;
+}
+procedure extra{
+ingredients=1;
+a=ingredients;
+while ingredients{
+b=a;
+c=b;
+a=c;
+}
+}

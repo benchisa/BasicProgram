@@ -1,0 +1,77 @@
+14
+cat: with cases
+1 - with, Typed :: 
+stmt s1;
+Select  s1 with s1.stmt# = 10;
+10
+5000
+2 - with, Typed :: 
+stmt s1; constant c;
+Select  c with s1.stmt# = c.value;
+0,1,2,9,10,11,22,33
+5000
+3 - with, Typed :: 
+stmt s1,s2;
+Select  s2 with s1.stmt# = s2.stmt#;
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47
+5000
+4 - with, Typed :: 
+constant c;
+Select  c with c.value = 1;
+1
+5000
+5 - with, Typed :: 
+stmt s1; constant c;
+Select  s1 with c.value = s1.stmt#;
+0,1,2,9,10,11,22,33
+5000
+6 - with, Typed :: 
+assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
+Select  v with v.varName = "apple";
+apple
+5000
+7 - with, Typed :: 
+assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
+Select  p with p.procName = "zebra";
+zebra
+5000
+8 - with, Typed :: 
+assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
+Select  v with v.varName = "orange";
+
+5000
+9 - with, Typed :: 
+assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
+Select  BOOLEAN with p.procName = "procedure";
+false
+5000
+10 - with, Typed :: 
+assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
+Select  BOOLEAN with v.varName = p.procName;
+false
+5000
+12 - with, Typed :: 
+assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;
+Select  p with cl.procName = p.procName;
+yello,zebra,extra
+5000
+225 - with, Typed :: stmt#=value
+call cl; constant c;
+Select  c with cl.stmt# = c.value;
+
+5000
+226 - with, Typed :: stmt#=value
+while w; constant c;
+Select  w with w.stmt# = c.value;
+9,10
+5000
+227 - with, Typed :: stmt#=value
+if i; constant c;
+Select  i with i.stmt# = c.value;
+
+5000
+228 - with, Typed :: stmt#=value
+assign a; constant c;
+Select  BOOLEAN with a.stmt# = c.value;
+true
+5000

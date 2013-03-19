@@ -1,0 +1,542 @@
+108 
+cat: such that cases 
+ 1 - follows (known,known) 
+ 
+ select  BOOLEAN such that Follows ( 4 , 5 )
+ TRUE 
+ 5000 
+ 2 - follows* (known,known) 
+ 
+ select BOOLEAN such that Follows* ( 4 , 9 )
+ TRUE 
+ 5000 
+ 3 - follows (known,unknown) 
+ stmt s1,s2; 
+ select s2 such that Follows ( 4 , s2 )
+ 
+ 5000 
+ 4 - follows* (known,unknown) 
+ stmt s1,s2; 
+ select s2 such that Follows* ( 4 , s2 )
+ 
+ 5000 
+ 5 - follows (unknown,known) 
+ stmt s1,s2; 
+ select s1 such that Follows ( s1 , 9 )
+ 
+ 5000 
+ 6 - follows* (unknown,known) 
+ stmt s1,s2; 
+ select s1 such that Follows* ( s1 , 9 )
+ 
+ 5000 
+ 7 - follows (unknown,unknown) 
+ 
+ select s1 such that Follows ( s1 , s2 )
+ 
+ 5000 stmt s1,s2; 
+ 8 - follows* (unknown,unknown) 
+ 
+ select s1 such that Follows* ( s1 , s2 )
+ 
+ 5000 
+ 9 - follows (unknown,unknown) 
+ stmt s1,s2; 
+ select s2 such that Follows ( s1 , s2 )
+ 
+ 5000 
+ 10 - follows* (unknown,unknown) 
+ stmt s1,s2; 
+ select s2 such that Follows* ( s1 , s2 )
+ 
+ 5000 
+ 11 - follows (unknown,unknown) 
+ stmt s1,s2; 
+ select s1 such that Follows ( s1 , s1 )
+ 
+ 5000 
+ 12 - follows* (unknown,unknown) 
+ stmt s1,s2; 
+ select s1 such that Follows* ( s1 , s1 )
+ 
+ 5000 
+ 13 - parent (known,known) 
+ 
+ select BOOLEAN such that Parent ( 9 , 10 )
+ TRUE 
+ 5000 
+ 14 - parent* (known,known) 
+ 
+ select BOOLEAN such that Parent* ( 9 , 12 )
+ TRUE 
+ 5000 
+ 15 - parent (known,unknown) 
+ stmt s1,s2; 
+ select s2 such that Parent ( 9 , s2 )
+ 
+ 5000 
+ 16 - parent* (known,unknown) 
+ stmt s1,s2; 
+ select s2 such that Parent* ( 9 , s2 )
+ 
+ 5000 
+ 17 - parent (unknown,known) 
+ stmt s1,s2; 
+ select s1 such that Parent ( s1 , 14 )
+ 
+ 5000 
+ 18 - parent* (unknown,known) 
+ stmt s1,s2; 
+ select s1 such that Parent* ( s1 , 14 )
+ 
+ 5000 
+ 19 - parent (unknown,unknown) 
+ stmt s1,s2; 
+ select s1 such that Parent ( s1 , s2 )
+ 
+ 5000 
+ 20 - parent* (unknown,unknown) 
+ stmt s1,s2; 
+ select s1 such that Parent* ( s1 , s2 )
+ 
+ 5000 
+ 21 - parent (unknown,unknown) 
+ stmt s1,s2; 
+ select s2 such that Parent ( s1 , s2 )
+ 
+ 5000 
+ 22 - parent* (unknown,unknown) 
+ stmt s1,s2; 
+ select s2 such that Parent* ( s1 , s2 )
+ 
+ 5000 
+ 23 - parent (unknown,unknown) 
+ stmt s1,s2; 
+ select s1 such that Parent ( s1 , s1 )
+ 
+ 5000 
+ 24 - parent* (unknown,unknown) 
+ stmt s1,s2; 
+ select s1 such that Parent* ( s1 , s1 )
+ 
+ 5000 
+ 25 - calls (known,known) 
+ 
+ select BOOLEAN such that Calls ( "xylo" , "yello" )
+ TRUE 
+ 5000 
+ 26 - calls* (known,known) 
+ 
+ select BOOLEAN such that Calls* ( "xylo" , "yello" )
+ TRUE 
+ 5000 
+ 27 - calls (known,unknown) 
+ proc p1,p2; 
+ select p2 such that Calls ( "xylo" , p2 )
+ 
+ 5000 
+ 28 - calls* (known,unknown) 
+ proc p1,p2; 
+ select p2 such that Calls* ( "xylo" , p2 )
+ 
+ 5000 
+ 29 - calls (unknown,known) 
+ proc p1,p2; 
+ select p1 such that Calls ( p1 , "zebra" )
+ 
+ 5000 
+ 30 - calls* (unknown,known) 
+ proc p1,p2; 
+ select p1 such that Calls* ( p1 , "zebra" )
+ 
+ 5000 
+ 31 - calls (unknown,unknown) 
+ proc p1,p2; 
+ select p1 such that Calls ( p1 , p2 )
+ 
+ 5000 
+ 32 - calls* (unknown,unknown) 
+ proc p1,p2; 
+ select p1 such that Calls* ( p1 , p2 )
+ 
+ 5000 
+ 33 - calls (unknown,unknown) 
+ proc p1,p2; 
+ select p2 such that Calls ( p1 , p2 )
+ 
+ 5000 
+ 34 - calls* (unknown,unknown) 
+ proc p1,p2; 
+ select p2 such that Calls* ( p1 , p2 )
+ 
+ 5000 
+ 35 - calls (unknown,unknown) 
+ proc p1,p2; 
+ select p1 such that Calls ( p1 , p1 )
+ 
+ 5000 
+ 36 - calls* (unknown,unknown) 
+ proc p1,p2; 
+ select p1 such that Calls* ( p1 , p1 )
+ 
+ 5000 
+ 37 - next (known,known) 
+ 
+ select BOOLEAN such that Next ( 21 , 22 )
+ TRUE 
+ 5000 
+ 38 - next* (known,known) 
+ 
+ select BOOLEAN such that Next* ( 21 , 24 )
+ TRUE 
+ 5000 
+ 39 - next (known,unknown) 
+ stmt s1,s2; 
+ select s2 such that Next ( 21 , s2 )
+ 
+ 5000 
+ 40 - next* (known,unknown) 
+ stmt s1,s2; 
+ select s2 such that Next* ( 21 , s2 )
+ 
+ 5000 
+ 41 - next (unknown,known) 
+ stmt s1,s2; 
+ select s1 such that Next ( s1 , 24 )
+ 
+ 5000 
+ 42 - next* (unknown,known) 
+ stmt s1,s2; 
+ select s1 such that Next* ( s1 , 24 )
+ 
+ 5000 
+ 43 - next (unknown,unknown) 
+ stmt s1,s2; 
+ select s1 such that Next ( s1 , s2 )
+ 
+ 5000 
+ 44 - next* (unknown,unknown) 
+ stmt s1,s2; 
+ select s1 such that Next* ( s1 , s2 )
+ 
+ 5000 
+ 45 - next (unknown,unknown) 
+ stmt s1,s2; 
+ select s1 such that Next ( s1 , s1 )
+ 
+ 5000 
+ 46 - next* (unknown,unknown) 
+ stmt s1,s2; 
+ select s1 such that Next* ( s1 , s1 )
+ 
+ 5000 
+ 47 - next (unknown,unknown) 
+ stmt s1,s2; 
+ select s2 such that Next ( s1 , s2 )
+ 
+ 5000 
+ 48 - next* (unknown,unknown) 
+ stmt s1,s2; 
+ select s2 such that Next* ( s1 , s2 )
+ 
+ 5000 
+ 49 - affects (known,known) 
+ 
+ select BOOLEAN such that Affects ( 13 , 18 )
+ TRUE 
+ 5000 
+ 50 - affects* (known,known) 
+ 
+ select BOOLEAN such that Affects* ( 13 , 18 )
+ TRUE 
+ 5000 
+ 51 - affects (known,unknown) 
+ stmt s1,s2; 
+ select s2 such that Affects ( 13 , s2 )
+ 
+ 5000 
+ 52 - affects* (known,unknown) 
+ stmt s1,s2; 
+ select s2 such that Affects* ( 13 , s2 )
+ 
+ 5000 
+ 53 - affects (unknown,known) 
+ stmt s1,s2; 
+ select s1 such that Affects ( s1 , 18 )
+ 
+ 5000 
+ 54 - affects* (unknown,known) 
+ stmt s1,s2; 
+ select s1 such that Affects* ( s1 , 18 )
+ 
+ 5000 
+ 55 - affects (unknown,unknown) 
+ stmt s1,s2; 
+ select s1 such that Affects ( s1 , s2 )
+ 
+ 5000 
+ 56 - affects* (unknown,unknown) 
+ stmt s1,s2; 
+ select s1 such that Affects* ( s1 , s2 )
+ 
+ 5000 
+ 57 - affects (unknown,unknown) 
+ stmt s1,s2; 
+ select s2 such that Affects ( s1 , s2 )
+ 
+ 5000 
+ 58 - affects* (unknown,unknown) 
+ stmt s1,s2; 
+ select s2 such that Affects* ( s1 , s2 )
+ 
+ 5000 
+ 59 - affects (unknown,unknown) 
+ stmt s1,s2; 
+ select s1 such that Affects ( s1 , s1 )
+ 
+ 5000 
+ 60 - affects* (unknown,unknown) 
+ stmt s1,s2; 
+ select s1 such that Affects* ( s1 , s1 )
+ 
+ 5000 
+ 61 - uses (known_statement,known_var) 
+ 
+ select BOOLEAN such that Uses ( 3 , "apple" )
+ TRUE 
+ 5000 
+ 62 - modifies (known_statement,known_var) 
+ 
+ select BOOLEAN such that Modifies ( 1 , "apple" )
+ TRUE 
+ 5000 
+ 63 - uses (known_assignment,known_var) 
+ 
+ select BOOLEAN such that Uses ( 3 , "orange" )
+ FALSE 
+ 5000 
+ 64 - modifies (known_assignment,known_var) 
+ 
+ select BOOLEAN such that Modifies ( 1 , "orange" )
+ FALSE 
+ 5000 
+ 65 - uses (known_while,known_var) 
+ 
+ select BOOLEAN such that Uses ( 9 , "apple" )
+ TRUE 
+ 5000 
+ 66 - modifies (known_while,known_var) 
+ 
+ select BOOLEAN such that Modifies ( 9 , "gummy" )
+ TRUE 
+ 5000 
+ 67 - uses (known_if,known_var) 
+ 
+ select BOOLEAN such that Uses ( 21 , "apple" )
+ TRUE 
+ 5000 
+ 68 - modifies (known_if,known_var) 
+ 
+ select BOOLEAN such that Modifies ( 21 , "jam" )
+ TRUE 
+ 5000 
+ 69 - uses (known_call,known_var) 
+ 
+ select BOOLEAN such that Uses ( 8 , "kimchi" )
+ TRUE 
+ 5000 
+ 70 - modifies (known_call,known_var) 
+ 
+ select BOOLEAN such that Modifies ( 8 , "kimchi" )
+ TRUE 
+ 5000 
+ 71 - uses (known_proc,known_var) 
+ 
+ select BOOLEAN such that Uses ( "xylo" , "apple" )
+ TRUE 
+ 5000 
+ 72 - modifies (known_proc,known_var) 
+ 
+ select BOOLEAN such that Modifies ( "xylo" , "apple" )
+ TRUE 
+ 5000 
+ 73 - uses (unknown_statement,known_var) 
+ stmt s1; 
+ select such that Uses ( s1 , "apple" )
+ 
+ 5000 
+ 74 - modifies (unknown_statement,known_var) 
+ stmt s1; 
+ select such that Modifies ( s1 , "apple" )
+ 
+ 5000 
+ 75 - uses (unknown_assignment,known_var) 
+ assign a1; 
+ select such that Uses ( a1 , "apple" )
+ 
+ 5000 
+ 76 - modifies (unknown_assignment,known_var) 
+ assign a1; 
+ select such that Modifies ( a1 , "apple" )
+ 
+ 5000 
+ 77 - uses (unknown_while,known_var) 
+ while w1; 
+ select such that Uses ( w1 , "apple" )
+ 
+ 5000 
+ 78 - modifies (unknown_while,known_var) 
+ while w1; 
+ select such that Modifies ( w1 , "apple" )
+ 
+ 5000 
+ 79 - uses (unknown_if,known_var) 
+ if i1; 
+ select such that Uses ( i1 , "apple" )
+ 
+ 5000 
+ 80 - modifies (unknown_if,known_var) 
+ if i1; 
+ select such that Modifies ( i1 , "apple" )
+ 
+ 5000 
+ 81 - uses (unknown_call,known_var) 
+ call c; 
+ select such that Uses ( c , "apple" )
+ 
+ 5000 
+ 82 - modifies (unknown_call,known_var) 
+ call c; 
+ select such that Modifies ( c , "apple" )
+ 
+ 5000 
+ 83 - uses (unknown_proc,known_var) 
+ proc p; 
+ select such that Uses ( p , "apple" )
+ 
+ 5000 
+ 84 - modifies (unknown_proc,known_var) 
+ proc p; 
+ select such that Modifies ( p , "apple" )
+ 
+ 5000 
+ 85 - uses (known_statement,unknown_var) 
+ var v1; 
+ select such that Uses ( 22 , v1 )
+ 
+ 5000 
+ 86 - modifies (known_statement,unknown_var) 
+ var v1; 
+ select such that Modifies ( 22 , v1 )
+ 
+ 5000 
+ 87 - uses (known_assignment,unknown_var) 
+ var v1; 
+ select such that Uses ( 13 , v1 )
+ 
+ 5000 
+ 88 - modifies (known_assignment,unknown_var) 
+ var v1; 
+ select such that Modifies ( 13 , v1 )
+ 
+ 5000 
+ 89 - uses (known_while,unknown_var) 
+ var v1; 
+ select such that Uses ( 10 , v1 )
+ 
+ 5000 
+ 90 - modifies (known_while,unknown_var) 
+ var v1; 
+ select such that Modifies ( 10 , v1 )
+ 
+ 5000 
+ 91 - uses (known_if,unknown_var) 
+ var v1; 
+ select such that Uses ( 21 , v1 )
+ 
+ 5000 
+ 92 - modifies (known_if,unknown_var) 
+ var v1; 
+ select such that Modifies ( 21 , v1 )
+ 
+ 5000 
+ 93 - uses (known_call,unknown_var) 
+ var v1; 
+ select such that Uses ( 8 , v1 )
+ 
+ 5000 
+ 94 - modifies (known_call,unknown_var) 
+ var v1; 
+ select such that Modifies ( 8 , v1 )
+ 
+ 5000 
+ 95 - uses (known_proc,unknown_var) 
+ var v1; 
+ select such that Uses ( "xylo" , v1 )
+ 
+ 5000 
+ 96 - modifies (known_proc,unknown_var) 
+ var v1; 
+ select such that Modifies ( "xylo" , v1 )
+ 
+ 5000 
+ 97 - uses (unknown_statement,unknown_var) 
+ stmt s1; var v1; 
+ select such that Uses ( s1 , v1 )
+ 
+ 5000 
+ 98 - modifies (unknown_statement,unknown_var) 
+ stmt s1; var v1; 
+ select such that Modifies ( s1 , v1 )
+ 
+ 5000 
+ 99 - uses (unknown_assignment,unknown_var) 
+ assign a1; var v1; 
+ select such that Uses ( a1 , v1 )
+ 
+ 5000 
+ 100 - modifies (unknown_assignment,unknown_var) 
+ assign a1; var v1; 
+ select such that Modifies ( a1 , v1 )
+ 
+ 5000 
+ 101 - uses (unknown_while,unknown_var) 
+ while w1; var v1; 
+ select such that Uses ( w1 , v1 )
+ 
+ 5000 
+ 102 - modifies (unknown_while,unknown_var) 
+ while w1; var v1; 
+ select such that Modifies ( w1 , v1 )
+ 
+ 5000 
+ 103 - uses (unknown_if,unknown_var) 
+ if i1; var v1; 
+ select such that Uses ( i1 , v1 )
+ 
+ 5000 
+ 104 - modifies (unknown_if,unknown_var) 
+ if i1; var v1; 
+ select such that Modifies ( i1 , v1 )
+ 
+ 5000 
+ 105 - uses (unknown_call,unknown_var) 
+ call c; var v1; 
+ select such that Uses ( c , v1 )
+ 
+ 5000 
+ 106 - modifies (unknown_call,unknown_var) 
+ call c; var v1; 
+ select such that Modifies ( c , v1 )
+ 
+ 5000 
+ 107 - uses (unknown_proc,unknown_var) 
+ proc p1; var v1; 
+ select such that Uses ( p1 , v1 )
+ 
+ 5000 
+ 108 - modifies (unknown_proc,unknown_var) 
+ proc p1; var v1; 
+ select such that Modifies ( p1 , v1 )
+ 
+ 5000 

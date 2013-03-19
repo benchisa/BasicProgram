@@ -1,0 +1,152 @@
+30
+cat: Test for such that and calls modifies uses parent
+25 - modifies , calls :: calls (known,known) and modifies (known,unknown)
+variable v1;
+Select BOOLEAN   such that  Calls ( "xylo" , "yello" ) and Modifies ( "xylo" , v1 ) ;
+true
+5000
+26 - modifies , calls* :: calls* (known,known) and modifies (known,unknown)
+variable v1;
+Select BOOLEAN   such that  Calls* ( "xylo" , "yello" ) and Modifies ( "yello" , v1 ) ;
+true
+5000
+27 - modifies , calls :: calls (known,unknown) and modifies (known,unknown)
+procedure p1,p2; variable v1;
+Select p2   such that  Calls ( "xylo" , p2 ) and Modifies ( "xylo" , v1 ) ;
+yello
+5000
+28 - modifies , calls* :: calls* (known,unknown) and modifies (unknown,unknown)
+procedure p1,p2; variable v1;
+Select p2   such that  Calls* ( "xylo" , p2 ) and Modifies ( p2 , v1 ) ;
+yello,zebra,extra
+5000
+29 - modifies , calls :: calls (unknown,known) and modifies (unknown,unknown)
+procedure p1,p2; variable v1;
+Select p1   such that  Calls ( p1 , "zebra" ) and Modifies ( p1 , v1 ) ;
+yello
+5000
+30 - modifies , calls* :: calls* (unknown,known) and modifies (known,known)
+procedure p1,p2; variable v1;
+Select p1   such that  Calls* ( p1 , "zebra" ) and Modifies ( "zebra" , "apple" ) ;
+xylo,yello
+5000
+31 - modifies , calls :: calls (unknown,unknown) and modifies (unknown,unknown)
+procedure p1,p2; variable v1;
+Select p1   such that  Calls ( p1 , p2 ) and Modifies ( p1 , v1 ) ;
+xylo,yello,zebra
+5000
+32 - modifies , calls* :: calls* (unknown,unknown) and modifies (unknown,unknown)
+procedure p1,p2; variable v1;
+Select p1   such that  Calls* ( p1 , p2 ) and Modifies ( p1 , v1 ) ;
+xylo,yello,zebra
+5000
+33 - modifies , calls :: calls (unknown,unknown) and modifies (unknown,unknown)
+procedure p1,p2; variable v1;
+Select p2   such that  Calls ( p1 , p2 ) and Modifies ( p1 , v1 ) ;
+yello,zebra,extra
+5000
+34 - modifies , calls* :: calls* (unknown,unknown) and modifies (unknown,unknown)
+procedure p1,p2; variable v1;
+Select p2   such that  Calls* ( p1 , p2 ) and Modifies ( p1 , v1 ) ;
+yello,zebra,extra
+5000
+35 - modifies , calls :: calls (unknown,unknown) and modifies (unknown,unknown)
+procedure p1,p2; variable v1;
+Select p1   such that  Calls ( p1 , p1 ) and Modifies ( p1 , v1 ) ;
+
+5000
+36 - modifies , calls* :: calls* (unknown,unknown) and modifies (unknown,unknown)
+procedure p1,p2; variable v1;
+Select p1   such that  Calls* ( p1 , p1 ) and Modifies ( p1 , v1 ) ;
+
+5000
+181 - calls, parent* :: calls (known,unknown) and parent* (unknown,unknown)
+procedure p1,p2; stmt s1,s2;
+Select p2   such that  Calls ( "xylo" , p2 ) and Parent* ( s1 , s2 ) ;
+yello
+5000
+182 - calls*, parent* :: calls* (known,unknown) and parent* (unknown,unknown)
+procedure p1,p2; stmt s1,s2;
+Select p2   such that  Calls* ( "xylo" , p2 ) and Parent* ( s1 , s2 ) ;
+yello,zebra,extra
+5000
+183 - calls, parent* :: calls (unknown,known) and parent* (unknown,unknown)
+procedure p1,p2;
+Select p1   such that  Calls ( p1 , "zebra" ) and Parent* ( s1 , s2 ) ;
+
+5000
+184 - calls*, parent* :: calls* (unknown,known) and parent* (unknown,unknown)
+procedure p1,p2;
+Select p1   such that  Calls* ( p1 , "zebra" ) and Parent* ( s1 , s2 ) ;
+
+5000
+124 - calls, uses :: calls (known,unknown) and uses (known,unknown)
+procedure p1,p2;variable v1;
+Select p2   such that  Calls ( "xylo" , p2 ) and Uses ( "xylo" , v1 ) ;
+yello
+5000
+125 - calls*, uses :: calls* (known,unknown) and uses (known,unknown)
+procedure p1,p2;variable v1;
+Select p2   such that  Calls* ( "xylo" , p2 ) and Uses ( "xylo" , v1 ) ;
+yello,zebra,extra
+5000
+126 - calls, uses :: calls (unknown,known) and uses (known,unknown)
+procedure p1,p2;variable v1;
+Select p1   such that  Calls ( p1 , "zebra" ) and Uses ( "zebra" , v1 ) ;
+yello
+5000
+127 - calls*, uses :: calls* (unknown,known) and uses (unknown,unknown)
+procedure p1,p2;variable v1;
+Select p1   such that  Calls* ( p1 , "zebra" ) and Uses ( p1 , v1 ) ;
+xylo,yello
+5000
+128 - calls, uses :: calls (unknown,unknown) and uses (unknown,unknown)
+procedure p1,p2;variable v1;
+Select p1   such that  Calls ( p1 , p2 ) and Uses ( p2 , v1 ) ;
+xylo,yello,zebra
+5000
+129 - calls*, uses :: calls* (unknown,unknown) and uses (unknown,unknown)
+procedure p1,p2;variable v1;
+Select p1   such that  Calls* ( p1 , p2 ) and Uses ( p2 , v1 ) ;
+xylo,yello,zebra
+5000
+130 - calls, uses :: calls (unknown,unknown) and uses (unknown,unknown)
+procedure p1,p2;variable v1;
+Select p2   such that  Calls ( p1 , p2 ) and Uses ( p2 , v1 ) ;
+yello,zebra,extra
+5000
+131 - calls*, uses :: calls* (unknown,unknown) and uses (unknown,unknown)
+procedure p1,p2;variable v1;
+Select p2   such that  Calls* ( p1 , p2 ) and Uses ( p2 , v1 ) ;
+yello,zebra,extra
+5000
+132 - calls, uses :: calls (unknown,unknown) and uses (unknown,unknown)
+procedure p1,p2;variable v1;
+Select p1   such that  Calls ( p1 , p1 ) and Uses ( p1 , v1 ) ;
+
+5000
+133 - calls*, uses :: calls* (unknown,unknown) and uses (unknown,unknown)
+procedure p1,p2;variable v1;
+Select p1   such that  Calls* ( p1 , p1 ) and Uses ( p1 , v1 ) ;
+
+5000
+179 - calls , parent* :: calls (known,known) and parent* (unknown,unknown)
+stmt s1,s2;
+Select BOOLEAN   such that  Calls ( "xylo" , "yello" ) and Parent* ( s1 , s2 ) ;
+true
+5000
+180 - calls* , parent* :: calls* (known,known) and parent* (unknown,unknown)
+stmt s1,s2;
+Select BOOLEAN   such that  Calls* ( "xylo" , "yello" ) and Parent* ( s1 , s2 ) ;
+true
+5000
+122 - calls , uses :: calls (known,known) and uses (known,unknown)
+variable v1;
+Select BOOLEAN   such that  Calls ( "xylo" , "yello" ) and Uses ( "xylo" , v1 ) ;
+true
+5000
+123 - calls* , uses :: calls* (known,known) and uses (known,unknown)
+variable v1;
+Select BOOLEAN   such that  Calls* ( "xylo" , "yello" ) and Uses ( "xylo" , v1 ) ;
+true
+5000

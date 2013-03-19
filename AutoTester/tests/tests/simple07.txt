@@ -1,0 +1,14 @@
+procedure Code7{
+z = 10;
+x = z+5;
+while a{
+c = c+a;
+c = x+y+z;
+while b{
+d = a;
+c = q+1;}
+e = y+z;
+while f{
+i = i+1;
+z = x+z;}
+c = z+2;}}

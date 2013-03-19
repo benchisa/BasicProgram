@@ -1,0 +1,117 @@
+224
+cat: such that with follows parent modifies uses
+4- follows* , with :: follows* (known,unknown) with
+stmt s1,s2;constant c;
+Select s2   such that  Follows* ( 4 , s2 ) with s2.stmt# = c.value ;
+9
+5000
+5- follows* , with :: follows* (unknown,known) with
+stmt s1,s2;constant c;
+Select s1   such that  Follows* ( s1 , 9 ) with s1.stmt# = c.value ;
+1,2
+5000
+6- follows , with :: follows (unknown,unknown)  with
+stmt s1,s2;variable v1;
+Select s1   such that  Follows ( s1 , s2 ) with s1.stmt# =10   ;
+10
+5000
+7- follows* , with :: follows* (unknown,unknown)  with
+stmt s1,s2;variable v1;
+Select s1   such that  Follows* ( s1 , s2 ) with s2.stmt# =10   ;
+
+5000
+32 - follows , with :: follows (known,known) with
+variable v1;
+Select BOOLEAN   such that  Follows ( 4 , 5 ) with v1 . varName = "apple"   ;
+true
+5000
+33 - follows* , with :: follows* (known,known) with
+variable v1;
+Select BOOLEAN   such that  Follows* ( 4 , 9 ) with v1 . varName = 9   ;
+false
+5000
+34 - follows , with :: follows (known,unknown) with
+stmt s1,s2;variable v1;
+Select s2 such that Follows ( 4 , s2 ) with s2.stmt# = s1.stmt# ;
+5
+5000
+10- parent , with :: parent (known,unknown) with
+stmt s1,s2;variable v1;
+Select s2   such that  Parent ( 9 , s2 ) with s2.stmt# =10   ;
+10
+5000
+11- parent* , with :: parent* (known,unknown) with
+stmt s1,s2;variable v1;
+Select s2   such that  Parent* ( 9 , s2 ) with s2.stmt# =10   ;
+10
+5000
+12- parent , with :: parent (unknown,unknown) with
+stmt s1,s2;variable v1;
+Select s1   such that  Parent ( s1 , s2 ) with s2.stmt# = s1.stmt#;
+
+5000
+13- parent* , with :: parent* (unknown,unknown) with
+stmt s1,s2;variable v1;
+Select s1   such that  Parent* ( s1 , s2 ) with s2.stmt# = s1.stmt#;
+
+5000
+35 - parent , with :: parent (known,known) with
+procedure p;
+Select BOOLEAN   such that  Parent ( 9 ,10 ) with p . procName = "yello"   ;
+true
+5000
+36 - parent* , with :: parent* (known,known) with
+call c;
+Select BOOLEAN   such that  Parent* ( 9 ,12 ) with c . procName = "yello"   ;
+true
+5000
+22- uses , with :: uses (known_statement,known_var) with
+stmt s1,s2;variable v1;
+Select BOOLEAN   such that  Uses ( 3 , "apple" ) with v1.varName = "apple";
+true
+5000
+23- modifies , with :: modifies (known_statement,known_var) with
+stmt s1,s2;variable v1;
+Select BOOLEAN   such that  Modifies (1 , "apple" ) with v1.varName = "apple";
+true
+5000
+24- uses , with :: uses (unknown_while,known_var) with
+while w1; variable v1,v2;
+Select w1   such that  Uses ( w1 , "apple" ) with v1.varName = v2.varName;
+9
+5000
+25- modifies , with :: modifies (unknown_if,known_var) with
+if i1;variable v1,v2;
+Select i1   such that  Modifies ( i1 , "apple" ) with v1.varName = v2.varName;
+
+5000
+26- uses , with :: uses (known_statement,unknown_var) with
+variable v1;
+Select v1   such that  Uses (22 , v1 ) with v1.varName = "apple";
+apple
+5000
+27- modifies , with :: modifies (known_assignment,unknown_var) with
+variable v1;
+Select v1   such that  Modifies (13 , v1 ) with v1.varName = "apple";
+
+5000
+28- uses , with :: uses (unknown_assignment,unknown_var) with
+assign a1; variable v1; constant c;
+Select a1   such that  Uses ( a1 , v1 ) with a1.stmt# = c.value;
+2,22,33
+5000
+29- modifies , with :: modifies (unknown_while,unknown_var) with
+while w1; variable v1;constant c;
+Select w1   such that  Modifies ( w1 , v1 ) with w1.stmt# = c.value;
+9,10
+5000
+30- uses , with :: uses (unknown_proc,unknown_var) with
+procedure p1; variable v1;
+Select p1   such that  Uses ( p1 , v1 ) with p1.procName = v1.varName;
+
+5000
+31- modifies , with :: modifies (unknown_proc,unknown_var) with
+procedure p1; variable v1;
+Select p1   such that  Modifies ( p1 , v1 ) with p1.procName = v1.varName;
+
+5000

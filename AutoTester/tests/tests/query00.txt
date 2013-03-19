@@ -1,0 +1,82 @@
+20
+cat: Test Case 1, Follows/Uses/Modifies for Assignment
+1 - Follows, Typed :: Which statement follows statement #2?
+stmt s; 
+Select s such that Follows(2,s);
+3
+5000
+2 - Follows, Typed :: Which statement is followed by statement #2?
+stmt s; 
+Select s such that Follows(s,2);
+1
+5000
+3 - Follows, Placeholder :: If Follows(_,_) is true, return all the statements.
+stmt s;
+Select s such that Follows(_,_);
+1, 2, 3
+5000
+4 - Follows*, Typed :: Which statement(s) follows statement #1?
+stmt s;
+Select s such that Follows*(1, s);
+2, 3
+5000
+5 - Follows*, Typed :: Which statement(s) is/are followed by statement #3?
+stmt s;
+Select s such that Follows*(s, 3);
+1, 2
+5000
+6 - Follows*, Placeholder :: Which statement(s) is/are followed by statement #2?
+stmt s;
+Select s such that Follows*(s, 2);
+1
+5000
+7 - Modifies, Typed :: Which variable is modified at statement #1?
+variable v;
+Select v such that Modifies(1, v);
+a
+5000
+8 - Modifies, Typed :: Which is the statement # in which variable c is modified?
+assign a;
+Select a such that Modifies(a, "c");
+2
+5000
+10 - Modifies, Placeholder :: Which assignment(s) is/are modified?
+assign a;
+Select a such that Modifies(a, _)
+1, 2, 3
+5000
+11 - Modifies, Placeholder :: Which variable(s) is/are modified?
+variable v;
+Select v such that Modifies(_, v)
+
+1000
+13 - Uses, Typed :: Which statement(s) used variable y?
+assign a;
+Select a such that Uses(a, "y");
+3
+5000
+14 - Uses, Typed :: Which statement(s) used variable y?
+stmt s;
+Select s such that Uses(s, "y");
+3
+5000
+15 - Uses, Placeholder :: Which variable(s) is/are used?
+variable v;
+Select v such that Uses(_, v);
+
+5000
+16 - Uses, Placeholder :: Select all statements if there exists a use relationship.
+stmt s;
+Select s such that Uses(_,_);
+
+5000
+17 - Uses, Placeholder :: Which assignment(s) use(s) a variable?
+assign a;
+Select a such that Uses(a, _)
+1, 2, 3
+5000
+18 - Follows, Typed :: Which statement follows after a statement?
+stmt s1, s2;
+Select s1 such that Follows(s1, s2);
+1, 2
+5000

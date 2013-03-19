@@ -1,0 +1,87 @@
+17
+cat: Pattern
+1 - Pattern, Typed :: Which is the assignment that modifies c?
+assign a;
+Select a pattern a("c",_);
+2, 3, 6
+5000
+2 - Pattern, Typed :: Which is the assignment that modifies some variables?
+assign a;
+Select a pattern a(_,_);
+2, 3, 5, 6
+5000
+3 - Pattern, Typed :: Which is the assignment that d = a?
+assign a;
+Select a pattern a("d","a");
+5
+5000
+4 - Pattern, Typed :: Which is the assignment that modifies d uses a?
+assign a;
+Select a pattern a("d",_"a"_);
+5
+5000
+5 - Pattern, Typed :: Which is the assignment that modifies c uses x?
+assign a;
+Select a pattern a("c",_"x"_);
+3
+5000
+6 - Pattern, Typed :: Which is the assignment that modifies c uses b?
+assign a;
+Select a pattern a("c",_"b"_);
+
+5000
+7 - Pattern, Typed :: Which is the assignment that c = q?
+assign a;
+Select a pattern a("c","q");
+
+5000
+8 - Pattern, Typed :: Which is the assignment that has expression a?
+assign a;
+Select a pattern a(_,"a");
+5
+5000
+9 - Pattern, Typed :: Which is the assignment that has expression q?
+assign a;
+Select a pattern a(_,"q");
+
+5000
+10 - Pattern, Typed :: Which is the assignment that has expression q?
+assign a;
+Select a pattern a(_,_"q"_);
+6
+5000
+11 - Pattern, Typed :: Which is the while that has control variable b?
+while w;
+Select w pattern w("b",_);
+4
+5000
+12 - Pattern, Typed :: Which are the while statements?
+while w;
+Select w pattern w(_,_);
+1, 4
+5000
+13 - Pattern, Typed :: Which is the assigment modifies c uses q?
+assign a;
+Select a such that Modifies(a,"c") pattern a("c",_"q"_);
+6
+5000
+14 - Pattern, Typed :: Which is the assignment modifies c uses x and z?
+assign a;
+Select a such that Uses(a,"x") pattern a("c",_"z"_);
+3
+5000
+15 - Pattern, Typed :: Which is the assignment modifies c and follows some statements?
+assign a;
+Select a such that Follows*(_,a) pattern a("c",_);
+3, 6
+5000
+16 - Pattern, Typed :: Which is the assignment modifies c and follows some statements?
+while w;assign a;
+Select w such that Parent(w,a) pattern w("b",_);
+4
+5000
+17 - Pattern, Typed :: Which is the assignment with a constant that modifies c?
+assign a;
+Select a pattern a("c",_"1"_);
+6
+5000

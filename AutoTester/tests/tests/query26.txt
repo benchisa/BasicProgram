@@ -1,0 +1,62 @@
+100
+cat: such that affects
+49 - affects , Typed :: (known,known)
+
+Select BOOLEAN  such that Affects (13 ,18 );
+true
+5000
+50 - affects* , Typed :: (known,known)
+
+Select BOOLEAN  such that Affects* (13 ,18 );
+true
+5000
+51 - affects , Typed :: (known,unknown)
+stmt s1,s2;
+Select s2  such that Affects (13 , s2 );
+
+5000
+52 - affects* , Typed :: (known,unknown)
+stmt s1,s2;
+Select s2  such that Affects* (13 , s2 );
+
+5000
+53 - affects , Typed :: (unknown,known)
+stmt s1,s2;
+Select s1  such that Affects ( s1 ,18 );
+
+5000
+54 - affects* , Typed :: (unknown,known)
+stmt s1,s2;
+Select s1  such that Affects* ( s1 ,18 );
+
+5000
+55 - affects , Typed :: (unknown,unknown)
+stmt s1,s2;
+Select s1  such that Affects ( s1 , s2 );
+
+5000
+56 - affects* , Typed :: (unknown,unknown)
+stmt s1,s2;
+Select s1  such that Affects* ( s1 , s2 );
+
+5000
+57 - affects , Typed :: (unknown,unknown)
+stmt s1,s2;
+Select s2  such that Affects ( s1 , s2 );
+
+5000
+58 - affects* , Typed :: (unknown,unknown)
+stmt s1,s2;
+Select s2  such that Affects* ( s1 , s2 );
+
+5000
+59 - affects , Typed :: (unknown,unknown)
+stmt s1,s2;
+Select s1  such that Affects ( s1 , s1 );
+
+5000
+60 - affects* , Typed :: (unknown,unknown)
+stmt s1,s2;
+Select s1  such that Affects* ( s1 , s1 );
+
+5000

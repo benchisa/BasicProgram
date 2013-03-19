@@ -1,0 +1,17 @@
+100
+cat: complex queries
+1 - all, Typed :: 1 set of interrelated 9 such that clauses, single select
+assign a1,a2,a3;stmt s1,s2,s3;while w1,w2;variable v1;
+Select a3 such that Follows(a1,a2) and Modifies(a3,v1) and Uses(w2,v1) and Parent*(w2,w1) and Parent*(w1,s1) and Parent(s1,a2) and Follows*(a3,s2) and Parent(108,a1) and Modifies(s2,"dinosaur");
+101,107,83,84,85,86,88,89,90,92
+5000
+2 - all, Typed :: 1 set of interrelated 9 such that clauses, 2-tuple select
+assign a1,a2;stmt s1,s2,s3;while w1,w2;variable v1;
+Select a1 such that Follows(a1,a2) and Modifies(a3,v1) and Uses(w2,v1) and Parent*(w2,w1) and Parent*(w1,s1) and Parent(s1,a2) and Follows*(a3,s2) and Parent(108,a1) and Modifies(s2,"dinosaur");
+
+5000
+3 - all, Typed :: 1 set of interrelated 9 such that clauses, many-tuple select
+assign a1,a2;stmt s1,s2,s3;while w1,w2;variable v1;
+Select <a1,w2,v1> such that Follows(a1,a2) and Modifies(a3,v1) and Uses(w2,v1) and Parent*(w2,w1) and Parent*(w1,s1) and Parent(s1,a2) and Follows*(a3,s2) and Parent(108,a1) and Modifies(s2,"dinosaur") and Parent(s1,a1);
+
+5000
