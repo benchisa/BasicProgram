@@ -15,32 +15,23 @@ SOURCE SampleSimpleSources::sampleSource2 = "procedure Code2{\n"
 									/*3*/	"d = x + y + z;}}";
 
 
-// Purpose: Test for Follows, Parent, Modifies, Uses for two consecutives while loop, same as simple 7
-SOURCE SampleSimpleSources::sampleSource3 = "procedure Code7{\n"
-											"z = 10;\n"				//1
-											"x = z+5;\n"			//2
-											"while a{\n"			//3
-												"c = c+a;\n"		//4
-												"c = x+y+z;\n"		//5
-												"while b{\n"		//6
-													"d = a;\n"		//7
-													"c = q+1;\n"	//8
-												"}\n"			
-													"e = y+z;\n"	//9
-													"while f{\n"	//10
-													"i = i+1;\n"	//11
-													"z = x+z;}\n"	//12
-													"c = z+2;}}";	//13
-	
+// Purpose: Test for Follows, Parent, Modifies, Uses for two consecutives while loop
+SOURCE SampleSimpleSources::sampleSource3 = "procedure Code3{\n"
+									/*1*/	"while a{\n"
+									/*2*/	"c = c + a;\n"
+									/*3*/	"d = x + y + z;}\n"
+									/*4*/	"while b{\n"
+									/*5*/	"y = a;\n"
+									/*6*/	"b = q+1;}}\n";
 
-// Purpose: Test for Follows, Parent, Modifies, Uses for nested while loop,same as simple 5
+// Purpose: Test for Follows, Parent, Modifies, Uses for nested while loop
 SOURCE SampleSimpleSources::sampleSource4 = "procedure Code4{\n"
 									/*1*/	"while a{\n"
 									/*2*/	"c = c + a;\n"
 									/*3*/	"d = x + y + z;\n"
 									/*4*/	"while b{\n"
-									/*5*/	"d = a;\n"
-									/*6*/	"c = q+1;}}}\n";
+									/*5*/	"y = a;\n"
+									/*6*/	"b = q+1;}}}\n";
 
 SOURCE SampleSimpleSources::sampleSource5 ="procedure xylo{\n"		
 											 "apple=1;\n"						//1
@@ -56,59 +47,74 @@ SOURCE SampleSimpleSources::sampleSource5 ="procedure xylo{\n"
 											       "innard = 0;\n"				//11
                                                    "while donut{\n"				//12
 														"gummy=egg+1;\n"		//13
+														"innard=gummy*donut;"   //14
 													"}\n"
-												   "while fish{\n"				//14
-														"gummy=0;\n"			//15
-														"while innard{\n"		//16
-															"fish=innard;\n"	//17
+												   "while fish{\n"				//15
+														"gummy=0;\n"			//16
+														"while innard{\n"		//17
+															"fish=innard;\n"	//18
 													    "}\n"			
 												   "}\n"
-												   "ham=gummy;\n"				//18
+												   "ham=gummy;\n"				//19
 												"}\n"
-												"gummy=apple+9;\n"				//19
+												"gummy=apple+9;\n"				//20
 											  "}\n"	
-											 "apple=11;\n"						//20
-											 "if innard then{\n"				//21
-													"jam=apple;}\n"				//22
+											 "apple=11;\n"						//21
+											 "if innard then{\n"				//22
+													"jam=apple;}\n"				//23
 											 "else{\n"			
-													"jam=gummy;\n"				//23
-													"if egg then{\n"			//24
-														"gummy=33;}\n"			//25
+													"jam=gummy;\n"				//24
+													"if egg then{\n"			//25
+														"gummy=33;}\n"			//26
 													"else{\n"
-														"gummy=99;}\n"			//26
+														"gummy=99;}\n"			//27
 													"}\n"
 											 "}\n"
 									 "procedure yello{\n"	
-										"kimchi = 88;\n"						//27
-										"leek=0;\n"								//28
-										"while leek{\n"							//29
-											"kimchi=kimchi+1;\n"				//30
+										"kimchi = 88;\n"						//28
+										"leek=0;\n"								//29
+										"while leek{\n"							//30
+											"kimchi=kimchi+1;\n"				//31
 										"}\n"
-										"call zebra;\n"							//31
-										"apple=kimchi;\n"						//32
-										"jam=egg+2;\n"							//33
+										"call zebra;\n"							//32
+										"apple=kimchi;\n"						//33
+										"jam=egg+2;\n"							//34
 									"}\n"
 									"procedure zebra{\n"
-										"meat=1;\n"								//34
-										"banana=meat+10;\n"						//35
-										"if meat then{\n"						//36
-												"carrot=banana+22;}\n"			//37
+										"meat=1;\n"								//35
+										"banana=meat+10;\n"						//36
+										"if meat then{\n"						//37
+												"carrot=banana+22;}\n"			//38
 										"else{\n"
-												"carrot=banana;}\n"				//38
-												"apple=1;\n"					//39
-												"kimchi=apple+10;\n"			//40
-												"call extra;\n"					//41
+												"carrot=banana;}\n"				//39
+												"apple=1;\n"					//40
+												"kimchi=apple+10;\n"			//41
+												"call extra;\n"					//42
 										"}\n"
 									"procedure extra{\n"
-										"ingredients=1;\n"						//42
-										"a=ingredients;\n"						//43
-										"while ingredients{\n"					//44
-												"b=a;\n"						//45
-												"c=b;\n"						//46
-												"a=c;\n"						//47
+										"ingredients=1;\n"						//43
+										"a=ingredients;\n"						//44
+										"while ingredients{\n"					//45
+												"b=a;\n"						//46
+												"c=b;\n"						//47
+												"a=c;\n"						//48
 										"}\n"
 									"}\n";
 
+SOURCE SampleSimpleSources::sampleSource7 = "procedure Code7{\n"	
+												"z = 10;\n"			//1
+												"x = z+5;\n"		//2
+												"while a{\n"		//3
+												"	c = c+a;\n"		//4
+												"	c = x+y+z;\n"	//5
+												"while b{\n"		//6
+												"	d = a;\n"		//7
+												"	c = q+1;}\n"	//8
+												"	e = y+z;\n"		//9
+												"while f{\n"		//10
+												"	i = i+1;\n"		//11
+												"	z = x+z;}\n"	//12
+												"	c = z+2;}}\n";	//13
 
 // Purpose: Test for missing {
 SOURCE SampleSimpleSources::sampleInvalidSource1 = "procedure InvalidCode1\n"
@@ -148,23 +154,23 @@ SOURCE SampleSimpleSources::sampleInvalidSource5 = "InvalidCode3{\n"
 // Not sure if you people need this... feel free to add a class for this if needed.
 
 //===============Test for Follows =================== PKB5
-QUERY SampleQueries::sampleQuery1 = "stmt s1,s2; Select <s1,s2> such that Follows*(1,s1) ;";
-QUERY SampleQueries::sampleQuery2 = "Select BOOLEAN  such that Uses ( \"xylo\" , \"apple\" );";//pass
-QUERY SampleQueries::sampleQuery3 = "prog_line s1,s2; Select s1  such that Next* ( s1 , s1 );"; //pass
-QUERY SampleQueries::sampleQuery4 = "call c; Select BOOLEAN   such that  Parent* ( 9 ,12 ) with c . procName = \"yello\";"; //pass
+QUERY SampleQueries::sampleQuery1 = "stmt s; Select s such that Follows(s,4);";//pass
+QUERY SampleQueries::sampleQuery2 = "stmt s; Select s such that Follows (2,s);";//pass
+QUERY SampleQueries::sampleQuery3 = "stmt s1,s2,s Select <s1,s2> such that Follows (s1,s2);"; //pass
+QUERY SampleQueries::sampleQuery4 = "stmt s1,s2; Select s2 such that Follows (s1,s2)"; //pass
 QUERY SampleQueries::sampleQuery5 = "stmt s1,s2,s3; Select <s1,s2,s3> such that Follows (s1,s2) and Follows(s2,s3)";//pass
 QUERY SampleQueries::sampleQuery6 = "stmt s1,s2,s3; Select s3 such that Follows (s1,s2) and Follows(s2,s3)";//pass
 QUERY SampleQueries::sampleQuery7 = "stmt s;Select s with s.stmt#=2;"; //pass
 QUERY SampleQueries::sampleQuery8 = "call c; procedure p; variable v;Select p with p.procName = \"Code5\";";
 QUERY SampleQueries::sampleQuery9 = "while w; callc; Select w with w.stmt#=4;"; //pass
 QUERY SampleQueries::sampleQuery10 = "variable v; Select v with v.varName = \"x\";"; //pass
-QUERY SampleQueries::sampleQuery11 = "stmt s; constant c; Select <s,c> with c.value=s.stmt#;"; //pass
+QUERY SampleQueries::sampleQuery11 = "stmt s; while w; Select <s,w> with s.stmt#=w.stmt#;"; //pass
 QUERY SampleQueries::sampleQuery12 = "variable v;Select v such that Modifies(_, v);"; 
 QUERY SampleQueries::sampleQuery13 = "variable v; Select v such that Modifies(1, v);"; //fixed
 QUERY SampleQueries::sampleQuery14 = "stmt s; Select s such that Uses(s, \"y\");"; 
 QUERY SampleQueries::sampleQuery15 = "assign a; while w;Select a such that Follows* (a,w);"; // <-- this one suppose to return none right..
 QUERY SampleQueries::sampleQuery16 = "while w; constant c;Select <w,c> with w.stmt#=c.value;"; //fixed
-QUERY SampleQueries::sampleQuery17 = "constant c; Select c;"; //fixed
+QUERY SampleQueries::sampleQuery17 = "assign a; Select a;"; //fixed
 QUERY SampleQueries::sampleQuery18 = "stmt s; constant c;Select s with c.value=s.stmt#;";
 QUERY SampleQueries::sampleQuery19 = "assign a; if i; while w; stmt s; variable v; procedure p; call cl; constant c;Select BOOLEAN with p.procName = \"procedure\";";
 QUERY SampleQueries::sampleQuery20 = "stmt s1,s2;Select s1 such that Follows* ( s1 , s2 );";
@@ -202,22 +208,24 @@ QUERY SampleQueries::sampleQuery41 = "while w;Select w such that Modifies(_,_);"
 
 //===============Test for Pattern=================== PKB5
 QUERY SampleQueries::sampleQuery42 = "assign a;Select a  pattern a(\"banana\",\"apple+1\");"; //pass
-QUERY SampleQueries::sampleQuery43 = "assign a;variable v;Select v pattern a(\"banana\", \"blah\");";     //pass 
-QUERY SampleQueries::sampleQuery44 = "assign a;variable v;Select <a,v>  pattern a(v, _\"apple\"_);";     //pass 
+QUERY SampleQueries::sampleQuery43 = "assign a;variable v;Select v pattern a(v, _\"blah\"_);";     //pass 
+QUERY SampleQueries::sampleQuery44 = "assign a;variable v;Select <a,v>  pattern a(v, _\"apple+10\"_);";     //pass 
 QUERY SampleQueries::sampleQuery45 = "assign a;Select a  pattern a(\"banana\", _);";     
 QUERY SampleQueries::sampleQuery46 = "while w;variable v;Select w  pattern w(v,_);";  //pass
 QUERY SampleQueries::sampleQuery47 = "while w;Select w  pattern w(_,_);"; 
 QUERY SampleQueries::sampleQuery48 = "while w;Select w  pattern w(w,_);";  
 QUERY SampleQueries::sampleQuery49 = "if f;Select f pattern f(_,_)";  
 QUERY SampleQueries::sampleQuery50 = "if f; variable v;Select f pattern f(v,_)"; 
-QUERY SampleQueries::sampleQuery51 = "assign a; variable v;Select a such that pattern a(v,_\"1\"_);";  
-QUERY SampleQueries::sampleQuery52 = "assign a;variable v;Select v  pattern a(v,_\"a\"_);"; //pass
-QUERY SampleQueries::sampleQuery53 = "assign a;Select BOOLEAN pattern a(\"d\",_\"z\"_);";  
+QUERY SampleQueries::sampleQuery51 = "assign a;variable v;Select v  pattern a(v,_\"apple\"_);";  //no prob with qtree
+
+//===============Test for mix of suchthat and pattern=================== PKB5
+QUERY SampleQueries::sampleQuery52 = "assign a;Select a such that Modifies(a,\"carrot\") pattern a(\"carrot\",_);"; //pass
+QUERY SampleQueries::sampleQuery53 = "assign a;Select a such that Uses(a,\"kimchi\") pattern a(\"donut\",_);";    //pass
 QUERY SampleQueries::sampleQuery54 = "assign a;variable v;Select v such that Uses(a,v) pattern a(v,_\"apple\"_);";  //pass
 QUERY SampleQueries::sampleQuery55 = "assign a1,a2;Select a2 such that Parent(_,a1) pattern a1(\"carrot\",_);";  //pass
 
 //===============Test for Boolean=================== PKB5	
-QUERY SampleQueries::sampleQuery56 = "assign a1,a2;Select a1 such that Follows*(a1,a2) pattern a2(\"i\",_\"i\"_);";
+QUERY SampleQueries::sampleQuery56 = "Select BOOLEAN such that Parent(2,3);";
 //two clauses have relation and need to take intersection
 QUERY SampleQueries::sampleQuery57 = "assign a;Select BOOLEAN such that Modifies(a,\"carrot\") pattern a(\"carrot\",_\"egg\"_);";
 //two clauses have no relation
