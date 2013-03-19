@@ -12,7 +12,6 @@ while egg{
 innard = 0; 
 while donut{
 gummy=egg+1;
-innard=gummy*donut;
 }
 while fish{
 gummy=0;

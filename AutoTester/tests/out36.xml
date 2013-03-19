@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>197.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>264.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" Test for such that and follows uses">
@@ -9,84 +9,84 @@
 <id follows="1" uses="1" comment="follows (known,known) and uses (known,unknown)" >98</id><querystr><![CDATA[variable v1; Select BOOLEAN   such that  Follows (4 ,5 ) and Uses (4 , v1 ) ;]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>112.000000</time_taken>
+<time_taken>91.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id follows="1" uses="1" comment="follows* (known,known) and uses (known,unknown)" >99</id><querystr><![CDATA[variable v1; Select BOOLEAN   such that  Follows* (4 ,9 ) and Uses (4 , v1 ) ;]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>81.000000</time_taken>
+<time_taken>85.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id follows="1" uses="1" comment="follows (known,unknown) and uses (unknown,unknown)" >100</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s2   such that  Follows (6 , s2 ) and Uses ( s2 , v1 ) ;]]></querystr>
 <stuans>7</stuans>
 <correct>7</correct>
-<time_taken>82.000000</time_taken>
+<time_taken>98.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id followsstar="1" uses="1" comment="follows* (known,unknown) and uses (unknown,unknown)" >101</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s2   such that  Follows* (4 , s2 ) and Uses ( s2 , v1 ) ;]]></querystr>
 <stuans>7,8,9,21</stuans>
 <correct>7,8,9,21</correct>
-<time_taken>90.000000</time_taken>
+<time_taken>147.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id follows="1" uses="1" comment="follows (unknown,known) and uses (unknown,unknown)" >102</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Follows ( s1 ,9 ) and Uses ( s1 , v1 ) ;]]></querystr>
 <stuans>8</stuans>
 <correct>8</correct>
-<time_taken>94.000000</time_taken>
+<time_taken>134.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id followsstar="1" uses="1" comment="follows* (unknown,known) and uses (unknown,unknown)" >103</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Follows* ( s1 ,9 ) and Uses ( s1 , v1 ) ;]]></querystr>
 <stuans>8,7,4,3,2</stuans>
 <correct>2,3,4,7,8</correct>
-<time_taken>87.000000</time_taken>
+<time_taken>121.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id follows="1" uses="1" comment="follows (unknown,unknown)  and uses (unknown,unknown)" >104</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Follows ( s1 , s2 ) and Uses ( s1 , v1 ) ;]]></querystr>
 <stuans>2,3,4,12,7,8,14,45,9,10,23,29,31,32,35,36,40,43,46</stuans>
 <correct>2,3,4,7,8,9,10,12,14,23,29,31,32,35,36,40,43,45,46</correct>
-<time_taken>111.000000</time_taken>
+<time_taken>141.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id followsstar="1" uses="1" comment="follows* (unknown,unknown)  and uses (unknown,unknown)" >105</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Follows* ( s1 , s2 ) and Uses ( s1 , v1 ) ;]]></querystr>
 <stuans>2,3,4,12,7,8,14,45,9,10,23,29,31,32,35,36,40,43,46</stuans>
 <correct>2,3,4,7,8,9,10,12,14,23,29,31,32,35,36,40,43,45,46</correct>
-<time_taken>125.000000</time_taken>
+<time_taken>168.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id follows="1" uses="1" comment="follows (unknown,unknown) and uses (unknown,unknown)" >106</id><querystr><![CDATA[stmt s1,s2; variable v1; Select s2   such that  Follows ( s1 , s2 ) and Uses ( s1 , v1 ) ;]]></querystr>
 <stuans>3,19,4,18,20,5,8,14,24,9,31,32,33,36,39,41,44,46,47</stuans>
 <correct>3,4,5,8,9,14,18,19,20,24,31,32,33,36,39,41,44,46,47</correct>
-<time_taken>107.000000</time_taken>
+<time_taken>121.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id followsstar="1" uses="1" comment="follows* (unknown,unknown) and uses (unknown,unknown)" >107</id><querystr><![CDATA[stmt s1,s2; variable v1; Select s2   such that  Follows* ( s1 , s2 ) and Uses ( s1 , v1 ) ;]]></querystr>
 <stuans>3,4,20,5,21,46,6,7,8,9,19,14,24,18,31,32,33,36,39,40,41,44,47</stuans>
 <correct>3,4,5,6,7,8,9,14,18,19,20,21,24,31,32,33,36,39,40,41,44,46,47</correct>
-<time_taken>121.000000</time_taken>
+<time_taken>150.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id follows="1" uses="1" comment="follows (unknown,unknown) and uses (unknown,unknown)" >108</id><querystr><![CDATA[stmt s1,s2; variable v1; Select s1   such that  Follows ( s1 , s1 ) and Uses ( s1 , v1 ) ;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>100.000000</time_taken>
+<time_taken>109.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id followsstar="1" uses="1" comment="follows* (unknown,unknown) and uses (unknown,unknown)" >109</id><querystr><![CDATA[stmt s1,s2; variable v1; Select s1   such that  Follows* ( s1 , s1 ) and Uses ( s1 , v1 ) ;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>96.000000</time_taken>
+<time_taken>133.000000</time_taken>
 <passed/>
 </query>
 </category>

@@ -12,57 +12,56 @@
  11             innard = 0; 
  12              while donut{
  13                  gummy=egg+1;
- 14				     innard=gummy*donut;
                  }
- 15              while fish{
- 16                   gummy=0;
- 17                   while innard{
- 18                        fish=innard;
+ 14              while fish{
+ 15                   gummy=0;
+ 16                   while innard{
+ 17                        fish=innard;
                     }
 				 }
- 19              ham=gummy;
+ 18              ham=gummy;
             }
- 20         gummy=apple+9;
+ 19         gummy=apple+9;
      }
- 21  apple=11;
- 22  if innard then{
- 23       jam=apple;
+ 20  apple=11;
+ 21  if innard then{
+ 22       jam=apple;
      }
      else{
- 24       jam=gummy;
- 25       if egg then{
- 26            gummy=33;}
+ 23       jam=gummy;
+ 24       if egg then{
+ 25            gummy=33;}
           else{
- 27            gummy=99;}
+ 26            gummy=99;}
      }
 }
 procedure yello{
- 28  kimchi = 88;
- 29  leek=0;
- 30  while leek{
- 31       kimchi=kimchi+1;
+ 27  kimchi = 88;
+ 28  leek=0;
+ 29  while leek{
+ 30       kimchi=kimchi+1;
      }
- 32  call zebra;
- 33  apple=kimchi;
- 34  jam=egg+2;
+ 31  call zebra;
+ 32  apple=kimchi;
+ 33  jam=egg+2;
 }
 procedure zebra{
- 35  meat=1;
- 36  banana=meat+10;
- 37  if meat then{
- 38       carrot=banana+22;}
+ 34  meat=1;
+ 35  banana=meat+10;
+ 36  if meat then{
+ 37       carrot=banana+22;}
      else{
- 39       carrot=banana;}
- 40  apple=1;
- 41  kimchi=apple+10;
- 42  call extra;
+ 38       carrot=banana;}
+ 39  apple=1;
+ 40  kimchi=apple+10;
+ 41  call extra;
 }
 procedure extra{
- 43  ingredients=1;
- 44  a=ingredients;
- 45  while ingredients{
- 46     b=a;
- 47     c=b;
- 48     a=c;
+ 42  ingredients=1;
+ 43  a=ingredients;
+ 44  while ingredients{
+ 45     b=a;
+ 46     c=b;
+ 47     a=c;
      }
 }
