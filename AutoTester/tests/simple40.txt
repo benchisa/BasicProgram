@@ -191,6 +191,7 @@ procedure Goneril{
 
 procedure Henry{
 	pear = cloud + cloud - ham;
+	call James;
 
 }
 
@@ -199,15 +200,18 @@ procedure Illidan{
 }
 
 procedure James{
+	call Oppi;
 	elephant = fish*fish;
 }
 
 procedure Kingsley{
-	apple = orange;
+	call Henry;
+	call Merril;
 }
 
 procedure Lucas{
 	ant = elephant*fish*hamster*goat;
+	call Eliza;
 }
 
 procedure Merril{
@@ -216,12 +220,14 @@ procedure Merril{
 	} else{
 		lamp = 888;
 	}
+	call Nancy;
 }
 
 procedure Nancy{
-	apple = orange;
+	call Danny;
 }
 
 procedure Oppi{
+	call Kingsley;
         ant = elephant*fish;
 }

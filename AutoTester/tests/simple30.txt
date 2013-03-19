@@ -81,7 +81,6 @@ procedure Danny{
 		call Alice;
 		pear = ham+egg+fish+mango*egg;
 		while mango{
-			call Charlie;
 			fish = fish-mango;
 		}
 	}	
@@ -98,6 +97,8 @@ procedure Eliza{
 			door = aeroplane + basin;
 			if door then{
 				elevator = door - cloud;
+				cloud = door;
+				door = elevator;
 			}
 			else{
 				fan = door*cloud;
@@ -116,6 +117,7 @@ procedure Eliza{
 							jumper = cloud-garbage;
 							while jumper{
 								keep = cloud*garbage;
+								garbage = keep - 1;
 							}
 						}
 						keep = keep + 103;
@@ -128,106 +130,4 @@ procedure Eliza{
 		}
 	}
 	lamp = cloud + 2;
-}
-
-procedure Fred{
-	ant = 0;
-	beetle = 1;
-	cockroach = 2;
-	dinosaur = 3;
-	elephant = 4;
-	fox = 5;
-	goat = 6;
-	hamster = 7;
-	jaguar = 8;
-	kangeroo = 9;
-	lion = 10;
-	monkey = 11;
-	newt = 12;
-	owl = 13;
-	penguin = 14;
-	quail = 15;
-	while ant{
-		while beetle{
-			cockroach = 0;
-			while cockroach{
-				dinosaur = 1;
-				while dinosaur{
-					fox = cockroach;
-					while fox{
-						goat = dinosaur -1;
-						while goat{
-							hamster = goat;
-							jaguar = beetle+1;
-							while hamster{
-								kangeroo = beetle+1;
-								while kangeroo{
-									ant = 1;
-									while ant{
-										while aeroplane{
-											if hamster then{
-												aeroplane = ant;
-											}
-											else{
-												aeroplane = kangeroo;
-											}
-										}
-									}
-								}
-							}
-						}
-						call Kingsley;
-					}
-				}
-			}
-		}
-	}
-
-}
-
-procedure Goneril{
-	apple = pear;
-}
-
-procedure Henry{
-	pear = cloud + cloud - ham;
-	call James;
-
-}
-
-procedure Illidan{
-	dinosaur = egg*2;
-}
-
-procedure James{
-	call Oppi;
-	elephant = fish*fish;
-}
-
-procedure Kingsley{
-	call Henry;
-	call Merril;
-}
-
-procedure Lucas{
-	ant = elephant*fish*hamster*goat;
-	call Eliza;
-}
-
-procedure Merril{
-	if kangeroo then{
-		lamp = 999;
-	} else{
-		lamp = 888;
-	}
-	call Nancy;
-}
-
-procedure Nancy{
-	call Danny;
-}
-
-procedure Oppi{
-	call Kingsley;
-        ant = elephant*fish;
 }

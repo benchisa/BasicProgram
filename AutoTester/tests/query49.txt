@@ -533,12 +533,12 @@ Select i1 such that Parent*(i1,w1);
 107 - Parent, Typed :: check parent
 if i1;while w1;
 Select <i1,i1> such that Parent(i1,w1);
-
+22 22,70 70
 5000
 108 - Parent, Typed :: check parent
 if i1;while w1;
 Select <i1,i1> such that Parent*(i1,w1);
-
+22 22,61 61,64 64,67 67,70 70
 5000
 109 - Parent, Typed :: check parent
 if i1;

@@ -1,9 +1,86 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>AutoTester</name><parsing_time_taken>2329.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>2279.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" Pattern Queries">
 <query>
-<id all="1" Typed="1" comment="check pattern" >1</id>
+<id all="1" Typed="1" comment="check pattern" >1</id><querystr><![CDATA[assign a1; variable v1; Select a1 pattern a1(v1,_);]]></querystr>
+<stuans>1,2,3,4,5,6,8,10,11,12,14,16,18,19,20,21,24,25,26,27,31,32,33,34,35,37,38,39,42,43,44,45,46,49,50,52,54,57,58,59,62,63,65,66,68,69,71,72,73,75,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,101,103,105,107,109,110,112,114,118,119,121,122,124,126,129,132,133,137</stuans>
+<correct>1,10,101,103,105,107,109,11,110,112,114,118,119,12,121,122,124,126,129,132,133,137,14,16,18,19,2,20,21,24,25,26,27,3,31,32,33,34,35,37,38,39,4,42,43,44,45,46,49,5,50,52,54,57,58,59,6,62,63,65,66,68,69,71,72,73,75,77,78,79,8,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98</correct>
+<time_taken>780.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="check pattern" >2</id><querystr><![CDATA[assign a1; variable v1; Select a1 pattern a1(v1,"banana");]]></querystr>
+<stuans>3</stuans>
+<correct>3</correct>
+<time_taken>1169.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="check pattern" >3</id><querystr><![CDATA[assign a1; variable v1; Select a1 pattern a1(v1,_"banana"_);]]></querystr>
+<stuans>3,39,50</stuans>
+<correct>3,39,50</correct>
+<time_taken>1139.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="check pattern" >4</id><querystr><![CDATA[assign a1; variable v1; Select a1 pattern a1(v1,"elephant*fish");]]></querystr>
+<stuans>137</stuans>
+<correct>137</correct>
+<time_taken>1174.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="check pattern" >5</id><querystr><![CDATA[assign a1; variable v1; Select a1 pattern a1(v1,_"elephant*fish"_);]]></querystr>
+<stuans>129,137</stuans>
+<correct>129,137</correct>
+<time_taken>1169.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="check pattern" >6</id><querystr><![CDATA[assign a1; variable v1; Select a1 pattern a1(v1,"fish*fish");]]></querystr>
+<stuans>126</stuans>
+<correct>126</correct>
+<time_taken>1141.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="check pattern" >7</id><querystr><![CDATA[assign a1; variable v1; Select BOOLEAN pattern a1(v1,_"fish/fish"_);]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>1151.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="check pattern" >8</id><querystr><![CDATA[assign a1; variable v1; Select BOOLEAN pattern a1(v1,_"ham/banana"_);]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>1125.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="check pattern" >9</id><querystr><![CDATA[assign a1; variable v1; Select a1 pattern a1(v1,_"egg+fish"_);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1137.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="check pattern" >10</id><querystr><![CDATA[assign a1; variable v1; Select a1 pattern a1(v1,_"orange/carrot"_);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>1116.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="check pattern" >11</id><querystr><![CDATA[assign a1; variable v1; Select <a1,v1> pattern a1(v1,_);]]></querystr>
+<stuans>1 apple,2 banana,3 carrot,4 donut,5 egg,6 fish,8 gummy,10 ham,11 innard,12 jam,14 egg,16 fish,18 carrot,19 kimchi,20 carrot,21 kimchi,24 kimchi,25 leek,26 leek,27 apple,31 mango,32 nachos,33 mango,34 nachos,35 banana,37 ham,38 jam,39 carrot,42 ham,43 ham,44 orange,45 orange,46 leek,49 pear,50 pear,52 mango,54 pear,57 fish,58 aeroplane,59 basin,62 cloud,63 door,65 elevator,66 fan,68 garbage,69 hanger,71 igloo,72 fan,73 igloo,75 jumper,77 keep,78 keep,79 hanger,80 aeroplane,81 aeroplane,82 lamp,83 ant,84 beetle,85 cockroach,86 dinosaur,87 elephant,88 fox,89 goat,90 hamster,91 jaguar,92 kangeroo,93 lion,94 monkey,95 newt,96 owl,97 penguin,98 quail,101 cockroach,103 dinosaur,105 fox,107 goat,109 hamster,110 jaguar,112 kangeroo,114 ant,118 aeroplane,119 aeroplane,121 apple,122 pear,124 dinosaur,126 elephant,129 ant,132 lamp,133 lamp,137 ant</stuans>
+<correct>1 apple,10 ham,101 cockroach,103 dinosaur,105 fox,107 goat,109 hamster,11 innard,110 jaguar,112 kangeroo,114 ant,118 aeroplane,119 aeroplane,12 jam,121 apple,122 pear,124 dinosaur,126 elephant,129 ant,132 lamp,133 lamp,137 ant,14 egg,16 fish,18 carrot,19 kimchi,2 banana,20 carrot,21 kimchi,24 kimchi,25 leek,26 leek,27 apple,3 carrot,31 mango,32 nachos,33 mango,34 nachos,35 banana,37 ham,38 jam,39 carrot,4 donut,42 ham,43 ham,44 orange,45 orange,46 leek,49 pear,5 egg,50 pear,52 mango,54 pear,57 fish,58 aeroplane,59 basin,6 fish,62 cloud,63 door,65 elevator,66 fan,68 garbage,69 hanger,71 igloo,72 fan,73 igloo,75 jumper,77 keep,78 keep,79 hanger,8 gummy,80 aeroplane,81 aeroplane,82 lamp,83 ant,84 beetle,85 cockroach,86 dinosaur,87 elephant,88 fox,89 goat,90 hamster,91 jaguar,92 kangeroo,93 lion,94 monkey,95 newt,96 owl,97 penguin,98 quail</correct>
+<time_taken>1187.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="check pattern" >12</id>

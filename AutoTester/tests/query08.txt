@@ -18,7 +18,7 @@ c, d, e, f, g, i, x, y, z
 4 - Modifies, Typed, Placeholder :: Which variable(s) is/are modified?
 variable v;
 Select v such that Modifies(_, v);
-c, d, e, f, g, i, x, y, z
+
 5000
 5 - Modifies, Typed, Placeholder :: Which variable(s) is/are modified in while loop?
 while w;variable v;
@@ -48,7 +48,7 @@ Select a such that Modifies(a, "vcz");
 10 - Modifies, Typed :: Select all while if there exists a Modifies relationship.
 while w;
 Select w such that Modifies(_,_);
-3, 6, 10, 15
+
 5000
 11 - Modifies, Typed :: Select all variables modified in statement 6.
 variable v;
@@ -73,7 +73,7 @@ a, c, i, q, x, y, z
 15 - Uses, Typed, Placeholder :: Which variable(s) is/are used?
 variable v;
 Select v such that Uses(_, v);
-a, b, c, f, i, k, q, x, y, z
+
 5000
 16 - Uses, Typed :: Which statement uses variable f?
 stmt s;
@@ -98,7 +98,7 @@ Select a such that Uses(a, "vcz");
 20 - Uses, Typed :: Select all while if there exists a Uses relationship.
 while w;
 Select w such that Uses(_,_);
-3, 6, 10, 15
+
 5000
 21 - Pattern, Typed :: Which is the assignment that modifies c?
 assign a;

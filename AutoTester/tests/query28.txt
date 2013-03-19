@@ -3,7 +3,7 @@ cat: such that with follows parent modifies uses
 4- follows* , with :: follows* (known,unknown) with
 stmt s1,s2;constant c;
 Select s2   such that  Follows* ( 4 , s2 ) with s2.stmt# = c.value ;
-
+9
 5000
 5- follows* , with :: follows* (unknown,known) with
 stmt s1,s2;constant c;
@@ -33,7 +33,7 @@ false
 34 - follows , with :: follows (known,unknown) with
 stmt s1,s2;variable v1;
 Select s2 such that Follows ( 4 , s2 ) with s2.stmt# = s1.stmt# ;
-
+5
 5000
 10- parent , with :: parent (known,unknown) with
 stmt s1,s2;variable v1;
