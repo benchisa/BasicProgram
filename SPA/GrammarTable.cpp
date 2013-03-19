@@ -314,6 +314,11 @@ void GrammarTable::createArgTable(){
 	case4.push_back(ANY);
 
 	case5.push_back(PROGLINE);
+	case5.push_back(STATEMENT);
+	case5.push_back(ASSIGNMENT);
+	case5.push_back(CALL);
+	case5.push_back(WHILE);
+	case5.push_back(IF);
 	case5.push_back(ANY);
 
 	case6.push_back(ASSIGNMENT);
@@ -820,8 +825,8 @@ void GrammarTable::printAllContainsValNodes(){
 void GrammarTable::printAllContainSTInvNodes(){
 	cout<<"====================All VALID CONTAINS======================"<<endl;
 	for(int i=0;i<12; i++){
-		for (int j=0;j<containsValTable[i].right.size();j++){
-			cout<<"Contains( " << containsValTable[i].left << " , " << containsValTable[i].right[j] <<" )"<<endl;
+		for (int j=0;j<containSTInvTable[i].right.size();j++){
+			cout<<"Contains( " << containSTInvTable[i].left << " , " << containSTInvTable[i].right[j] <<" )"<<endl;
 		}
 	}
 }

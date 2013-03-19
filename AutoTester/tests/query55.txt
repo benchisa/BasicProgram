@@ -8,7 +8,7 @@ jam
 2 - all, Typed :: 2 sets of interrelated such that clauses, two tuple select
 procedure p1,p2;stmt s1,s2,s3,s4; variable v1,v2; if i1;
 Select <s3,v2> such that Uses(s1,v1) and Modifies(s1,"carrot") and Follows(s3,s4) and Parent*(i1,s4) and Modifies(s3,v2) and Follows*(s3,25);
-
+24 jam
 5000
 3 - all, Typed :: 2 sets of interrelated such that clauses, many tuple select
 procedure p1,p2;stmt s1,s2,s3,s4; variable v1,v2; if i1;
@@ -17,8 +17,8 @@ Select <s3,s4,v1,v2> such that Uses(s1,v1) and Modifies(s1,"carrot") and Follows
 5000
 4 - all, Typed :: 3 sets of interrelated such that clauses, single select
 procedure p1,p2;stmt s1,s2,s3,s4; variable v1,v2; if i1;
-Select v2 such that Calls(p1,p2) and Uses(s1,v1) and Modifies(s1,"carrot") and Follows(s3,s4) and Parent*(i1,s4) and Modifies(s3,v2) and Follows*(s3,25);
-
+Select v1 such that Calls(p1,p2) and Uses(s1,v1) and Modifies(s1,"carrot") and Follows(s3,s4) and Parent*(i1,s4) and Modifies(s3,v2) and Follows*(s3,25);
+jam
 5000
 5 - all, Typed :: 3 sets of interrelated such that clauses, two tuple select
 procedure p1,p2;stmt s1,s2,s3,s4; variable v1,v2; if i1;

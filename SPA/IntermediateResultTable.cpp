@@ -405,11 +405,11 @@ RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_L
 		}
 
 		//merge entries 
-		SIZE rawRowNum = rawData[0].size()-1;
+		SIZE rawRowNum = rawData->at(0).size()-1;
 		SIZE rawColNum = rawData->size();
 		
 		for(int i =1;i<=rawRowNum;i++){
-			for(int j =0;j<tableSize;i++){
+			for(int j =0;j<tableSize;j++){
 				//first step: copy the old qrVar data
 				for(int k=0;k<rawColNum;k++){
 					tempRaw[k].push_back(rawData->at(k).at(i));
@@ -419,7 +419,7 @@ RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_L
 				int count =0;
 				for(selectedVar = selectedVarList->begin();selectedVar!=selectedVarList->end();selectedVar++){
 					int currentColNum = currentTable->getColNumOf(*selectedVar);
-					int currentEntry = currentTable->getEntryAt(i,currentColNum);
+					int currentEntry = currentTable->getEntryAt(j,currentColNum);
 					
 					tempRaw[rawColNum+count].push_back(currentEntry);
 					count++;

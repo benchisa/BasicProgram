@@ -1,187 +1,169 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>204.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>218.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" such that with follows parent modifies uses">
 <query>
 <id followsstar="1" with="1" comment="follows* (known,unknown) with" >4</id><querystr><![CDATA[stmt s1,s2;constant c; Select s2   such that  Follows* ( 4 , s2 ) with s2.stmt# = c.value ;]]></querystr>
 <stuans>9</stuans>
-<correct></correct>
-<time_taken>95.000000</time_taken>
-<failed>
-<missing></missing>
-<additional>9</additional>
-<summary>
-<expected>0</expected>
-<matched>0</matched>
-<missing>0</missing>
-<additional>1</additional>
-</summary>
-</failed>
+<correct>9</correct>
+<time_taken>119.000000</time_taken>
+<passed/>
 </query>
 <query>
 <id followsstar="1" with="1" comment="follows* (unknown,known) with" >5</id><querystr><![CDATA[stmt s1,s2;constant c; Select s1   such that  Follows* ( s1 , 9 ) with s1.stmt# = c.value ;]]></querystr>
 <stuans>2,1</stuans>
 <correct>1,2</correct>
-<time_taken>108.000000</time_taken>
+<time_taken>103.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id follows="1" with="1" comment="follows (unknown,unknown)  with" >6</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Follows ( s1 , s2 ) with s1.stmt# =10   ;]]></querystr>
 <stuans>10</stuans>
 <correct>10</correct>
-<time_taken>100.000000</time_taken>
+<time_taken>104.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id followsstar="1" with="1" comment="follows* (unknown,unknown)  with" >7</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Follows* ( s1 , s2 ) with s2.stmt# =10   ;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>106.000000</time_taken>
+<time_taken>107.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id follows="1" with="1" comment="follows (known,known) with" >32</id><querystr><![CDATA[variable v1; Select BOOLEAN   such that  Follows ( 4 , 5 ) with v1 . varName = "apple"   ;]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>101.000000</time_taken>
+<time_taken>102.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id followsstar="1" with="1" comment="follows* (known,known) with" >33</id><querystr><![CDATA[variable v1; Select BOOLEAN   such that  Follows* ( 4 , 9 ) with v1 . varName = 9   ;]]></querystr>
 <stuans>false</stuans>
 <correct>false</correct>
-<time_taken>102.000000</time_taken>
+<time_taken>108.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id follows="1" with="1" comment="follows (known,unknown) with" >34</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s2 such that Follows ( 4 , s2 ) with s2.stmt# = s1.stmt# ;]]></querystr>
 <stuans>5</stuans>
-<correct></correct>
-<time_taken>131.000000</time_taken>
-<failed>
-<missing></missing>
-<additional>5</additional>
-<summary>
-<expected>0</expected>
-<matched>0</matched>
-<missing>0</missing>
-<additional>1</additional>
-</summary>
-</failed>
+<correct>5</correct>
+<time_taken>105.000000</time_taken>
+<passed/>
 </query>
 <query>
 <id parent="1" with="1" comment="parent (known,unknown) with" >10</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s2   such that  Parent ( 9 , s2 ) with s2.stmt# =10   ;]]></querystr>
 <stuans>10</stuans>
 <correct>10</correct>
-<time_taken>102.000000</time_taken>
+<time_taken>107.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id parentstar="1" with="1" comment="parent* (known,unknown) with" >11</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s2   such that  Parent* ( 9 , s2 ) with s2.stmt# =10   ;]]></querystr>
 <stuans>10</stuans>
 <correct>10</correct>
-<time_taken>101.000000</time_taken>
+<time_taken>105.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id parent="1" with="1" comment="parent (unknown,unknown) with" >12</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Parent ( s1 , s2 ) with s2.stmt# = s1.stmt#;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>119.000000</time_taken>
+<time_taken>118.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id parentstar="1" with="1" comment="parent* (unknown,unknown) with" >13</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Parent* ( s1 , s2 ) with s2.stmt# = s1.stmt#;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>116.000000</time_taken>
+<time_taken>125.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id parent="1" with="1" comment="parent (known,known) with" >35</id><querystr><![CDATA[procedure p; Select BOOLEAN   such that  Parent ( 9 ,10 ) with p . procName = "yello"   ;]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>104.000000</time_taken>
+<time_taken>105.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id parentstar="1" with="1" comment="parent* (known,known) with" >36</id><querystr><![CDATA[call c; Select BOOLEAN   such that  Parent* ( 9 ,12 ) with c . procName = "yello"   ;]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>109.000000</time_taken>
+<time_taken>127.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id uses="1" with="1" comment="uses (known_statement,known_var) with" >22</id><querystr><![CDATA[stmt s1,s2;variable v1; Select BOOLEAN   such that  Uses ( 3 , "apple" ) with v1.varName = "apple";]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>119.000000</time_taken>
+<time_taken>118.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" with="1" comment="modifies (known_statement,known_var) with" >23</id><querystr><![CDATA[stmt s1,s2;variable v1; Select BOOLEAN   such that  Modifies (1 , "apple" ) with v1.varName = "apple";]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>119.000000</time_taken>
+<time_taken>131.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id uses="1" with="1" comment="uses (unknown_while,known_var) with" >24</id><querystr><![CDATA[while w1; variable v1,v2; Select w1   such that  Uses ( w1 , "apple" ) with v1.varName = v2.varName;]]></querystr>
 <stuans>9</stuans>
 <correct>9</correct>
-<time_taken>155.000000</time_taken>
+<time_taken>125.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" with="1" comment="modifies (unknown_if,known_var) with" >25</id><querystr><![CDATA[if i1;variable v1,v2; Select i1   such that  Modifies ( i1 , "apple" ) with v1.varName = v2.varName;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>122.000000</time_taken>
+<time_taken>127.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id uses="1" with="1" comment="uses (known_statement,unknown_var) with" >26</id><querystr><![CDATA[variable v1; Select v1   such that  Uses (22 , v1 ) with v1.varName = "apple";]]></querystr>
 <stuans>apple</stuans>
 <correct>apple</correct>
-<time_taken>109.000000</time_taken>
+<time_taken>110.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" with="1" comment="modifies (known_assignment,unknown_var) with" >27</id><querystr><![CDATA[variable v1; Select v1   such that  Modifies (13 , v1 ) with v1.varName = "apple";]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>102.000000</time_taken>
+<time_taken>108.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id uses="1" with="1" comment="uses (unknown_assignment,unknown_var) with" >28</id><querystr><![CDATA[assign a1; variable v1; constant c; Select a1   such that  Uses ( a1 , v1 ) with a1.stmt# = c.value;]]></querystr>
 <stuans>2,33,22</stuans>
 <correct>2,22,33</correct>
-<time_taken>122.000000</time_taken>
+<time_taken>121.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" with="1" comment="modifies (unknown_while,unknown_var) with" >29</id><querystr><![CDATA[while w1; variable v1;constant c; Select w1   such that  Modifies ( w1 , v1 ) with w1.stmt# = c.value;]]></querystr>
 <stuans>9,10</stuans>
 <correct>9,10</correct>
-<time_taken>124.000000</time_taken>
+<time_taken>127.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id uses="1" with="1" comment="uses (unknown_proc,unknown_var) with" >30</id><querystr><![CDATA[procedure p1; variable v1; Select p1   such that  Uses ( p1 , v1 ) with p1.procName = v1.varName;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>116.000000</time_taken>
+<time_taken>126.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" with="1" comment="modifies (unknown_proc,unknown_var) with" >31</id><querystr><![CDATA[procedure p1; variable v1; Select p1   such that  Modifies ( p1 , v1 ) with p1.procName = v1.varName;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>118.000000</time_taken>
+<time_taken>119.000000</time_taken>
 <passed/>
 </query>
 </category>

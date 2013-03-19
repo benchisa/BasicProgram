@@ -215,11 +215,11 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 			}
 			if(relType==NEXT){
 				tmpList = extractor->getNextResult(firstRel->getData(),0);
-				iterateAndStore(relList, tmpList);
+				filterResult(relList,tmpList,firstType,secondType);
 			}
 			if(relType==NEXTST){
 				tmpList = extractor->getNextStarResult(firstRel->getData(),0);
-				iterateAndStore(relList, tmpList);
+				filterResult(relList,tmpList,firstType,secondType);
 			}
 			if(relType==CALL){
 				PROC_NAME callerName = pkb->getProcedure(firstRel->getData())->getProcName();
@@ -327,11 +327,11 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 			}
 			if(relType==NEXT){
 				tmpList = extractor->getNextResult(0,secondRel->getData());
-				iterateAndStore(relList, tmpList);
+				filterResult(relList,tmpList,firstType,secondType);
 			}
 			if(relType==NEXTST){
 				tmpList = extractor->getNextStarResult(0,secondRel->getData());
-				iterateAndStore(relList, tmpList);
+				filterResult(relList,tmpList,firstType,secondType);
 			}
 			if(relType==CALL){
 				PROC_NAME calleeName = pkb->getProcedure(secondRel->getData())->getProcName();
@@ -471,14 +471,14 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 				//uses, narrow down first rel
 				if(relType==USES){
 					tmpList = extractor->getUsesResult(firstType,0,0);
-					iterateAndStore(relList,tmpList);
+					filterResult(relList,tmpList,firstType,secondType);
 				}
 				if(relType==NEXT){
 					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
 						relList = NULL;
 					}else{
 						tmpList = extractor->getNextResult(0,0);
-						iterateAndStore(relList, tmpList);
+						filterResult(relList,tmpList,firstType,secondType);
 					}
 				}
 				if(relType==NEXTST){
