@@ -568,11 +568,11 @@ bool Parser::expr(){
 			if(operators.size() == 0){
 				operators.push(pkb->createAST(PLUS, prevProgLine,stmt_num, -1));
 			}
-			else if(pkb->getType(operators.top()) == MULTIPLY){
-				createExprTree();
+			else if(pkb->getType(operators.top()) == MULTIPLY || pkb->getType(operators.top()) == BRACKET){\
 				operators.push(pkb->createAST(PLUS, prevProgLine,stmt_num, -1));
 			}
 			else{
+				createExprTree();
 				operators.push(pkb->createAST(PLUS, prevProgLine,stmt_num, -1));
 			}
 		}
@@ -582,11 +582,11 @@ bool Parser::expr(){
 			if(operators.size() == 0){
 				operators.push(pkb->createAST(MINUS, prevProgLine,stmt_num, -1));
 			}
-			else if(pkb->getType(operators.top()) == MULTIPLY){
-				createExprTree();
+			else if(pkb->getType(operators.top()) == MULTIPLY|| pkb->getType(operators.top()) == BRACKET){
 				operators.push(pkb->createAST(MINUS, prevProgLine,stmt_num, -1));
 			}
 			else{
+				createExprTree();
 				operators.push(pkb->createAST(MINUS, prevProgLine,stmt_num, -1));
 			}
 
@@ -763,10 +763,6 @@ void Parser::createExprTree(){
 
 	pkb->setFirstDescendant(oNode, leftNode);
 	pkb->addSibling(leftNode, rightNode);
-
-	//cout << pkb->getType(oNode) << "\n";
-	//cout << pkb->getType(leftNode) << "\n";
-	//cout << pkb->getType(rightNode) << "\n";
 	operands.push(oNode);
 }
 
