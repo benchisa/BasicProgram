@@ -618,8 +618,6 @@ bool EvaluateContains::getIsContainStarResult(TYPE type, int arg1, TYPE type2, i
 				}
 				vItr++;
 			}
-
-
 			assignListItr++;
 		}
 	}
@@ -629,85 +627,104 @@ bool EvaluateContains::getIsContainStarResult(TYPE type, int arg1, TYPE type2, i
 
 CONTAIN_LIST EvaluateContains::getContainResult(TYPE type, int arg1, TYPE type2, int arg2){	
 	// =============================== Contain(KNOWN, UNKNOWN) =========================//
-
 	CONTAIN_LIST resultList;
 
-	// Contain(1, s2), Contain(1, a), Contain(1, w), Contain(1, if)
-	// For statement to contain some unknown type, must be valid in StmtListTable
-	if(type == STATEMENT && arg1!=NULL && arg2 == NULL && Helper::getStatementType(arg1) != ASSIGNMENT){
-		// Go through all the stmt_list, find one that matches arg1, return (arg1, stmtList)
-		DATA_LIST * stmtList =pkb->getAllStmtLst();
-		DATA_LIST::iterator stmtListItr = stmtList->begin();
-		while(stmtListItr!=stmtList->end()){
+	// Contain(1, s2), Contain(1, a), Contain(1, w), Contain(1, if), 1 can be stmt# or stmtList
+	if(type == STATEMENT && (type2 != VARIABLE || type2 != CONSTANT)&& arg1!=NULL && arg2 == NULL && !Helper::isStatementTypeOf(ASSIGNMENT, arg1)){
+		AST_LIST *nodes = pkb->getASTBy(arg1);
+		AST *startNode = nodes->front();
 
-			// If type2 is statement, push everything regardless of its type
-			if(pkb->getStmtEntry(*stmtListItr).ownerNo == arg1 && type2 == STATEMENT)
-				resultList.push_back(make_pair(arg1, *stmtListItr));
-				
-			// If type2 is a specific type, push the stmtline only that type
-			else if(pkb->getStmtEntry(*stmtListItr).ownerNo == arg1 && Helper::getStatementType(*stmtListItr) == type2)
-				resultList.push_back(make_pair(arg1, *stmtListItr));
-
-			stmtListItr++;
+		// If 1 is stmtList
+		if(startNode->getRootType() == STMT_LIST){
+			startNode = startNode->getFirstDescendant();
+			cout << startNode->getRootData() << "\n";
+			while(startNode!=NULL){
+				// If type2 is statement, add everything
+				if(type2 == STATEMENT || startNode->getRootType() == type2){
+					resultList.push_back(make_pair(arg1, startNode->getRootData()));
+				}
+				startNode = startNode->getRightSibling();
+			}
+		}
+		// if node is WHILE or IF, we're looking for STMT_LIST
+		else if(startNode->getRootType() == WHILE || startNode->getRootType() == IF){
+			startNode = startNode->getFirstDescendant()->getRightSibling()->getFirstDescendant();
+			if(startNode!=NULL){
+				if(type2 == STATEMENT || startNode->getRootType() == type2){
+					resultList.push_back(make_pair(arg1, startNode->getRootData()));
+				}
+				// Special Case because of THEN, ELSE
+				if(type2 == IF){
+					resultList.push_back(make_pair(arg1, startNode->getRightSibling()->getRootData()));
+				}
+			}
+		}
+	}
+	// Contain(1, variable), Contain(1, constant) where 1 is assignment
+	else if(type == STATEMENT && ( type2 == VARIABLE ||  type2 == CONSTANT) && arg1!=NULL && arg2 == NULL && Helper::isStatementTypeOf(ASSIGNMENT, arg1)){
+		AST_LIST *nodes = pkb->getASTBy(arg1);
+		AST *startNode = nodes->front()->getFirstDescendant();
+		while(startNode != NULL){
+			if(startNode->getRootType() == type2){
+				// (arg1, varIndex/constantIndex)
+				resultList.push_back(make_pair(arg1, startNode->getRootData()));
+			}
+			startNode = startNode->getRightSibling();
 		}
 	}
 
-	// Contain("xylo", a), Contain("xylo", s), Contain("xylo", w), Contain("xylo", if)
+	// Contain("xylo", s)
 	// For procedure to contain some unknown type, must be valid type PROCEDURE in StmtListTable
-	if(type == PROCEDURE && arg1!=NULL && arg2 == NULL){
-		// If type2 is statement, push eveyrthing regardless of its type
-		if(type2 == STATEMENT)
-		{
-			DATA_LIST * stmtList =pkb->getAllStmtLst();
-			DATA_LIST::iterator stmtListItr = stmtList->begin();
-			while(stmtListItr!=stmtList->end()){
-				if(pkb->getStmtEntry(*stmtListItr).ownerNo == arg1)
-					resultList.push_back(make_pair(arg1, *stmtListItr));
-				stmtListItr++;
-			}
+	else if(type == PROCEDURE && type2 == STATEMENT && arg1!=NULL && arg2 == NULL){
+		DATA_LIST * stmtList =pkb->getAllStmtLst();
+		DATA_LIST::iterator stmtListItr = stmtList->begin();
+		while(stmtListItr!=stmtList->end()){
+			// find the matching ProcIndex
+			if(pkb->getStmtEntry(*stmtListItr).type == type && pkb->getStmtEntry(*stmtListItr).ownerNo == arg1)
+				resultList.push_back(make_pair(arg1, *stmtListItr));
+			stmtListItr++;
 		}
-		
-		// If type2 is specified, push the respective one
-		if(type2 == ASSIGNMENT || type2 == WHILE || type2 == IF || type2 == CALL){
-			DATA_LIST * stmtList =pkb->getAllStmtLst();
-			DATA_LIST::iterator stmtListItr = stmtList->begin();
-			while(stmtListItr!=stmtList->end()){
-				if(pkb->getStmtEntry(*stmtListItr).ownerNo == arg1 &&
-					Helper::getStatementType(*stmtListItr) == type2){
-					resultList.push_back(make_pair(arg1, *stmtListItr));
-				}
-				stmtListItr++;
+	}
+	//Contain("xylo", while), Contain("xylo", if), Contain("xylo", call), Contain("xylo", assignment)
+	else if(type == PROCEDURE && (type2 == ASSIGNMENT || type2 == WHILE || type2 == IF || type2 == CALL) && arg1!=NULL && arg2 == NULL){
+		DATA_LIST * stmtList =pkb->getAllStmtLst();
+		DATA_LIST::iterator stmtListItr = stmtList->begin();
+		while(stmtListItr!=stmtList->end()){
+			if(pkb->getStmtEntry(*stmtListItr).type == type && pkb->getStmtEntry(*stmtListItr).ownerNo == arg1 && Helper::isStatementTypeOf(type2, *stmtListItr)){
+				resultList.push_back(make_pair(arg1, *stmtListItr));
 			}
+			stmtListItr++;
 		}
 	}
 
 	// =============================== Contain(UNKNOWN, KNOWN) =========================//
-	// Contain(s1, 2), Contain(w, 4), Contain(if, 4)
-	if(type2 == STATEMENT && arg2!=NULL && arg1 == NULL){
-		DATA_LIST * stmtList =pkb->getAllStmtLst();
-		DATA_LIST::iterator stmtListItr = stmtList->begin();
-		while(stmtListItr!=stmtList->end()){
-			// If type is statement, push everything
-			if(arg2 == *stmtListItr && type == STATEMENT)
-				resultList.push_back(make_pair(pkb->getStmtEntry(*stmtListItr).ownerNo, arg2));
-
-			// if type is specified, push only the specified ones
-			else if(arg2 == *stmtListItr && type == pkb->getStmtEntry(*stmtListItr).type)
-				resultList.push_back(make_pair(pkb->getStmtEntry(*stmtListItr).ownerNo, arg2));
-
-			// special case for it
-			else if(arg2 == *stmtListItr && type == IF)
-				resultList.push_back(make_pair(pkb->getStmtEntry(*stmtListItr).ownerNo, arg2));
-
-			stmtListItr++;
+	// Contain(s, 4), Contain(w, 4), Contain(if, 4), where 4 is stmt_list
+	// Contain(proc, 4), where 4 is stmt_list
+	else if((type == STATEMENT || type == PROCEDURE || type == IF || type == WHILE) && type2 == STATEMENT && Helper::isStatementTypeOf(STMT_LIST, arg2) && arg2 != NULL && arg1 == NULL){
+		AST_LIST *nodeLst = pkb->getASTBy(arg2);
+		AST *startNode = nodeLst->front();
+		// push everything or specific type, no procedure here
+		if((type == STATEMENT || startNode->getAncestor()->getRootType() == type)){
+			resultList.push_back(make_pair(startNode->getAncestor()->getRootData(), arg2));
+		}
+	}
+	// Contain(stmtlist, 4), where 4 is assignment, if, while or call
+	else if((type == STATEMENT) && type2 == STATEMENT && !Helper::isStatementTypeOf(STMT_LIST, arg2) && arg2!=NULL && arg1 == NULL){
+		AST_LIST *nodeLst = pkb->getASTBy(arg2);
+		AST *startNode = nodeLst->front();
+		// only stmt_list is possible here
+		if(startNode->getRootType() == STMT_LIST){
+			resultList.push_back(make_pair(startNode->getAncestor()->getRootData(), arg2));
 		}
 	}
 
-	// Contain(a, VARIABLE/CONSTANT)
+	// Contain(a, "v"/"c")
+	// Whether the variable or constant is directly under the assignNode
 	// Get all asignments from assignTable, check its descendant for type2 and arg2
-	if(type == ASSIGNMENT && (type2 == VARIABLE || type2 == CONSTANT)){
+	else if(type == ASSIGNMENT && arg1 == NULL && arg2 != NULL&& (type2 == VARIABLE || type2 == CONSTANT)){
 		DATA_LIST *assignList = pkb->getAllAssigns();
 		DATA_LIST::iterator assignListItr = assignList->begin();
+
 		while(assignListItr!=assignList->end()){
 			if(EvaluateContains::isStatementDescendantTypeDataOf(type, type2, arg2, *assignListItr)){
 				resultList.push_back(make_pair(*assignListItr, arg2));
@@ -715,10 +732,22 @@ CONTAIN_LIST EvaluateContains::getContainResult(TYPE type, int arg1, TYPE type2,
 			assignListItr++;
 		}
 	}
-
-	// Contain(w, VARIABLE)
+	
+	// Contain(a, PLUS/MINUS/MULTIPLY)
+	// Go to assignTable, find whether if any assignNode has PLUS, MINUS, MuLTIPLY
+	else if(type == ASSIGNMENT && arg1 == 0 && ( type2 == PLUS ||  type2 == MINUS ||  type2 == MULTIPLY)){
+		DATA_LIST * assignList = pkb->getAllAssigns();
+		DATA_LIST::iterator assignListItr = assignList->begin();
+		while(assignListItr!=assignList->end()){
+			if(EvaluateContains::isStatementDescendantTypeDataOf(type, type2, -1, *assignListItr)){
+				resultList.push_back(make_pair(*assignListItr, type));
+			}
+			assignListItr++;
+		}
+	}
+	// Contain(w, "v")
 	// Get all while stmts that match arg2 from whileTable
-	if(type == WHILE && arg1 == 0 && type2 == VARIABLE && arg2 != NULL){
+	else if(type == WHILE && arg1 == 0 && type2 == VARIABLE && arg2 != NULL){
 		// whileTable
 		DATA_LIST * whileList = pkb->getWhiles(arg2);
 		DATA_LIST::iterator whileListItr = whileList->begin();
@@ -727,9 +756,9 @@ CONTAIN_LIST EvaluateContains::getContainResult(TYPE type, int arg1, TYPE type2,
 			whileListItr++;
 		}
 	}
-	// Contain(if VARIABLE)
+	// Contain(if, "v")
 	// Get all if stmts that match arg2 from ifTable
-	if(type == IF && arg1 == 0 && type2 == VARIABLE && arg2 != NULL){
+	else if(type == IF && arg1 == 0 && type2 == VARIABLE && arg2 != NULL){
 		DATA_LIST * ifList = pkb->getIfs(arg2);
 		DATA_LIST::iterator ifListItr = ifList->begin();
 		while(ifListItr!=ifList->end()){
@@ -739,49 +768,40 @@ CONTAIN_LIST EvaluateContains::getContainResult(TYPE type, int arg1, TYPE type2,
 	}
 
 	// =============================== Contain(UNKNOWN, UNKNOWN) =========================//
-	// Contain(s1, s2)
-	// Get all StmtLst from StmtListTable, return all (owner stmt#, stmt#) 
-	if(type == STATEMENT && arg1 == 0 && type2 == STATEMENT && arg2 == 0){
+	// Contain(statement, stmt_list)
+	// Contain(w, stmt_list), Contain(if, stmt_list)
+	else if(((type == STATEMENT || type == WHILE || type == IF) && arg1 == 0 && type2 == STMT_LIST) && arg2 == 0){
 		DATA_LIST * stmtList =pkb->getAllStmtLst();
 		DATA_LIST::iterator stmtListItr = stmtList->begin();
 		while(stmtListItr!=stmtList->end()){
-			if(pkb->getStmtEntry(*stmtListItr).type != PROCEDURE){
+			if(pkb->getStmtEntry(*stmtListItr).type == type){
 				resultList.push_back(make_pair(pkb->getStmtEntry(*stmtListItr).ownerNo, *stmtListItr));
 			}
 			stmtListItr++;
 		}
 	}
-
-	if((type == WHILE || type == IF) && arg1 == 0 && arg2 == 0)
-	{
+	// Contain(stmt_list, any type)
+	else if(type == STMT_LIST && (type2 == STATEMENT || type2 == WHILE || type2 == IF || type2 == CALL || type2 == ASSIGNMENT) && arg1 == 0 && arg2 == 0){
 		DATA_LIST * stmtList =pkb->getAllStmtLst();
 		DATA_LIST::iterator stmtListItr = stmtList->begin();
 		while(stmtListItr!=stmtList->end()){
-			// Contain(w, s), 
-			if(type == WHILE && (type2 == STATEMENT || type2 == STMT_LIST) && (pkb->getStmtEntry(*stmtListItr).type == type)){
-				resultList.push_back(make_pair(pkb->getStmtEntry(*stmtListItr).ownerNo, *stmtListItr));
+			AST_LIST *astList = pkb->getASTBy(*stmtListItr);
+			AST *startNode = astList->front()->getFirstDescendant();
+
+			while(startNode != NULL){
+				if((type2 == STATEMENT || startNode->getRootType() == type2)){
+					resultList.push_back(make_pair(*stmtListItr, startNode->getRootData()));
+				}
+				startNode = startNode->getRightSibling();
 			}
-
-			// Contain(w, specific type)
-			if(type == WHILE && pkb->getStmtEntry(*stmtListItr).type == type && Helper::getStatementType(*stmtListItr) == type2){
-					resultList.push_back(make_pair(pkb->getStmtEntry(*stmtListItr).ownerNo, *stmtListItr));
-			}
-
-			// Contain(if, s)
-			if(type == IF && (type2 == STATEMENT || type2 == STMT_LIST)  && (pkb->getStmtEntry(*stmtListItr).type == THEN || pkb->getStmtEntry(*stmtListItr).type == ELSE))
-				resultList.push_back(make_pair(pkb->getStmtEntry(*stmtListItr).ownerNo, *stmtListItr));
-
-			// Contain(if, specific type)
-			if(type == IF && Helper::getStatementType(*stmtListItr) == type2 && (pkb->getStmtEntry(*stmtListItr).type == THEN || pkb->getStmtEntry(*stmtListItr).type == ELSE))
-				resultList.push_back(make_pair(pkb->getStmtEntry(*stmtListItr).ownerNo, *stmtListItr));
 
 
 			stmtListItr++;
 		}
 	}
-
+	
 	// Contain(w, v)
-	if(type == WHILE && type2 == VARIABLE  && arg1 == 0 && arg2 == 0){
+	else if(type == WHILE && type2 == VARIABLE  && arg1 == 0 && arg2 == 0){
 		DATA_LIST * whileList = pkb->getAllWhiles();
 		DATA_LIST::iterator whileListItr = whileList->begin();
 
@@ -792,7 +812,7 @@ CONTAIN_LIST EvaluateContains::getContainResult(TYPE type, int arg1, TYPE type2,
 	}
 
 	// Contain(if, v)
-	if(type == IF && type2 == VARIABLE && arg1 == 0 && arg2 == 0){
+	else if(type == IF && type2 == VARIABLE && arg1 == 0 && arg2 == 0){
 		DATA_LIST * ifList = pkb->getAllIfs();
 		DATA_LIST::iterator ifListItr =  ifList->begin();
 
@@ -802,17 +822,15 @@ CONTAIN_LIST EvaluateContains::getContainResult(TYPE type, int arg1, TYPE type2,
 		}
 	}
 
-	if(type == PROCEDURE && (type2 != VARIABLE || type2 != CONSTANT) && arg1==0 && arg2==0){
+
+	// Contain(procedure, stmt_list)
+	// Find all the first PROCEDURE stmtList in table
+	else if(type == PROCEDURE && type2 == STMT_LIST && arg1==0 && arg2==0){
 		DATA_LIST * stmtList =pkb->getAllStmtLst();
 		DATA_LIST::iterator stmtListItr = stmtList->begin();
+
 		while(stmtListItr!=stmtList->end()){
-			// No specific type2
-			if(pkb->getStmtEntry(*stmtListItr).type == type && (type2 == STMT_LIST || type2 == STATEMENT)){
-				// return (ProcIndex, Stmt#)
-				resultList.push_back(make_pair(pkb->getStmtEntry(*stmtListItr).ownerNo,*stmtListItr));
-			}
-			// Specific type
-			else if(pkb->getStmtEntry(*stmtListItr).type == type && Helper::isStatementTypeOf(type2, *stmtListItr)){
+			if(pkb->getStmtEntry(*stmtListItr).type == type){
 				// return (ProcIndex, Stmt#)
 				resultList.push_back(make_pair(pkb->getStmtEntry(*stmtListItr).ownerNo,*stmtListItr));
 			}
@@ -821,12 +839,14 @@ CONTAIN_LIST EvaluateContains::getContainResult(TYPE type, int arg1, TYPE type2,
 	}
 
 	// Contain(a, v), Contain(a, c) [The only O(n2)]
-	if(type == ASSIGNMENT && (type2 == VARIABLE || type2 == CONSTANT) && arg1 == 0 && arg2 == 0){
+	else if(type == ASSIGNMENT && (type2 == VARIABLE || type2 == CONSTANT) && arg1 == 0 && arg2 == 0){
 		DATA_LIST * assignList = pkb->getAllAssigns();
 		DATA_LIST::iterator assignListItr = assignList->begin();
+		
 		while(assignListItr!=assignList->end()){
 			DATA_LIST arg2List = EvaluateContains::getDataListTypeDescendantOf(type, type2, *assignListItr);
 			DATA_LIST::iterator arg2ListItr = arg2List.begin();
+			
 			while(arg2ListItr!=arg2List.end()){
 				resultList.push_back(make_pair(*assignListItr,*arg2ListItr));
 				arg2ListItr++;
@@ -835,78 +855,31 @@ CONTAIN_LIST EvaluateContains::getContainResult(TYPE type, int arg1, TYPE type2,
 			assignListItr++;
 		}
 	}
-
-	// =============================== Contain Special Cases =========================//
-	// Contain(a, PLUS/MINUS/MULTIPLY)
-	if(arg1 == 0 && type == ASSIGNMENT && ( type2 == PLUS ||  type2 == MINUS ||  type2 == MULTIPLY)){
-		DATA_LIST * assignList = pkb->getAllAssigns();
-		DATA_LIST::iterator assignListItr = assignList->begin();
-		while(assignListItr!=assignList->end()){
-			if(EvaluateContains::isStatementDescendantTypeDataOf(type, type2, -1, *assignListItr)){
-				resultList.push_back(make_pair(*assignListItr, type));
-			}
-			assignListItr++;
-		}
-	}
-
-	// Contain(PLUS/MINUS/MULTIPLY, PLUS/MINUS/MULTIPLY/)
-	if((type == PLUS ||type == MINUS ||type == MULTIPLY) && (type2 == PLUS || type2 == MINUS ||type2 == MULTIPLY))
-	{
-		DATA_LIST * assignList = pkb->getAllAssigns();
-		DATA_LIST::iterator assignListItr = assignList->begin();
-		while(assignListItr!=assignList->end()){
-			if(EvaluateContains::isStatementDescendantTypeDataOf(type, type2, arg2, *assignListItr)){
-				resultList.push_back(make_pair(*assignListItr, arg2));
-			}
-			assignListItr++;
-		}
-	}
-	
-	// Contain(PLUS/MINUS/VARIABLES/CONSTANT, v/c)
-	if(type == PLUS || type == MINUS || type == MULTIPLY || type == VARIABLE || type == CONSTANT){
-		// UNKNOWN, KNOWN
-		if(arg2 != 0 && (type2 == VARIABLE || type2 == CONSTANT)){
-			DATA_LIST * assignList = pkb->getAllAssigns();
-			DATA_LIST::iterator assignListItr = assignList->begin();
-			while(assignListItr!=assignList->end()){
-				if(EvaluateContains::isStatementDescendantTypeDataOf(type, type2, arg2, *assignListItr)){
-					resultList.push_back(make_pair(*assignListItr, arg2));
-				}
-
-				assignListItr++;
-			}
-		}
-		
-		// UNKNOWN, UNKNOWN
-		// KNOWN, UNKNOWN
-		if(arg2 == 0 && (type2 == VARIABLE || type2 == CONSTANT)){
-			// get all assignment, find PLUS, add all its descendant of equal type
-			DATA_LIST * assignList = pkb->getAllAssigns();
-			DATA_LIST::iterator assignListItr = assignList->begin();
-			while(assignListItr!=assignList->end()){
-				DATA_LIST dataLst = EvaluateContains::getDataListTypeDescendantOf(type, type2, *assignListItr);
-				DATA_LIST::iterator dataItrList = dataLst.begin();
-				// push_back all the answer
-				while(dataItrList != dataLst.end()){
-					resultList.push_back(make_pair(*assignListItr, *dataItrList));
-					dataItrList++;
-				}
-
-				assignListItr++;
-			}
-		}
-	}
-
 	return resultList;
 }
 
 bool EvaluateContains::getIsContainResult(TYPE type, int arg1, TYPE type2, int arg2)
 {
 	// Contain(1,2)
-	// If argument 1 is not WHILE or IF, this is false
-	// Else, Check if argument 2 is directly below the WHILE or IF
 	if(type == STATEMENT && type2 == STATEMENT && arg1 != 0 && arg2 != 0){
-		if(Helper::getStatementType(arg1) == WHILE || Helper::getStatementType(arg1) == IF){
+		// Contain(STMT_LIST, whatever's below)
+		if(Helper::isStatementTypeOf(STMT_LIST, arg1)){
+			AST_LIST *aList = pkb->getASTBy(arg1);
+			AST *startNode = aList->front()->getFirstDescendant();
+
+			while(startNode != NULL){
+				if(startNode->getRootData() == arg2)
+					return true;
+				else
+					startNode = startNode->getRightSibling();
+			}
+		}
+		// Assignment has no child of type statement
+		else if(Helper::isStatementTypeOf(ASSIGNMENT, arg1)){
+			return false;
+		}
+		// WHILE/IF, from StmtListTable, look whether any stmt# belongs to arg1
+		else if(Helper::isStatementTypeOf(WHILE, arg1) || Helper::isStatementTypeOf(IF, arg1)){
 			DATA_LIST * stmtList =pkb->getAllStmtLst();
 			DATA_LIST::iterator stmtListItr = stmtList->begin();
 			while(stmtListItr!=stmtList->end()){
@@ -920,69 +893,39 @@ bool EvaluateContains::getIsContainResult(TYPE type, int arg1, TYPE type2, int a
 		return false;
 	}
 
-	// Contain(1, "x") -> control variable
-	if(arg1 != 0 && arg2!= 0 && type == STATEMENT){
-		if((Helper::getStatementType(arg1) == WHILE || Helper::getStatementType(arg1) == IF) && type2 == VARIABLE){
-			DATA_LIST * assignList = pkb->getAllAssigns();
-			DATA_LIST::iterator assignListItr = assignList->begin();
-			while(assignListItr!=assignList->end()){
-				if(EvaluateContains::isStatementDescendantTypeDataOf(type, type2, arg2, *assignListItr)){
-					return true;
-				}
-				assignListItr++;
-			}
-		}
-		// for Contain(1, "x") where 1 refers to assignmentnode
-		else if(Helper::getStatementType(arg1) == ASSIGNMENT && (type2 == PLUS  || type2 == MINUS || type2 == MULTIPLY)){
-			DATA_LIST * assignList = pkb->getAllAssigns();
-			DATA_LIST::iterator assignListItr = assignList->begin();
-			while(assignListItr!=assignList->end()){
-				if(EvaluateContains::isStatementDescendantTypeDataOf(type, type2, arg2, *assignListItr)){
-					return true;
-				}
+	// Contain(1, "x") -> control variable, where 1 is either WHILE or IF
+	if(type == STATEMENT && type2 == VARIABLE && arg1 != NULL && arg2 != NULL
+		&& (Helper::isStatementTypeOf(WHILE, arg1) || Helper::isStatementTypeOf(IF, arg1))){
 
-				assignListItr++;
-			}
+		if(EvaluateContains::isStatementDescendantTypeDataOf(WHILE, type2, arg2, arg1)){
+			return true;
 		}
-		return false;
+		else if(EvaluateContains::isStatementDescendantTypeDataOf(IF, type2, arg2, arg1)){
+			return true;
+		}
+	}
+
+	// for Contain(1, v/c/PLUS/MINUS/MULTIPLY) where 1 is Assignment Statement	
+	if(type == STATEMENT && arg1 != NULL && arg2 != NULL &&
+		Helper::isStatementTypeOf(ASSIGNMENT, arg1) && (type2 == CONSTANT || type2 == VARIABLE || type2 == PLUS  || type2 == MINUS || type2 == MULTIPLY)){
+			if(EvaluateContains::isStatementDescendantTypeDataOf(ASSIGNMENT, type2, arg2, arg1)){
+				return true;
+			}
 	}
 
 	//Contain("extra", 1)
-	if(type == PROCEDURE){
-		if(type2 == STMT_LIST) // definitely true
+	if(type == PROCEDURE && type2 == STATEMENT && arg1 != NULL && arg2 != NULL){
+		// If the stmt_list has the same stmt# as the procedure's first stmt#
+		if(Helper::isStatementTypeOf(STMT_LIST, arg2) && pkb->getProcedure(arg1)->getStartProgLine() == arg2){
 			return true;
-		if(type2 == STATEMENT){
-			DATA_LIST * stmtList =pkb->getAllStmtLst();
-			DATA_LIST::iterator stmtListItr = stmtList->begin();
-			while(stmtListItr!=stmtList->end()){
-				// make sure we're referring to the correct procedure
-				if(pkb->getStmtEntry(*stmtListItr).ownerNo == arg1 && *stmtListItr == arg2)
-					return true;
-
-				stmtListItr++;
-			}
 		}
-		return false;
-	}
-
-
-	// Contains(STMTLISTREF, 1)
-	if(type == STMT_LIST && type2 == STATEMENT){
-		DATA_LIST * stmtList =pkb->getAllStmtLst();
-		DATA_LIST::iterator stmtListItr = stmtList->begin();
-		while(stmtListItr!=stmtList->end()){
-			if(*stmtListItr==arg2)
-				return true;
-
-			stmtListItr++;
-		}
-
 		return false;
 	}
 
 	// Contain(PLUS, "apple")
 	// Contain(PLUS, "1")
 	if((type == PLUS  || type == MINUS || type == MULTIPLY)&& (type2 == VARIABLE ||type2 ==  CONSTANT)){
+		
 		DATA_LIST * assignList = pkb->getAllAssigns();
 		DATA_LIST::iterator assignListItr = assignList->begin();
 		while(assignListItr!=assignList->end()){
@@ -1002,6 +945,8 @@ bool EvaluateContains::getIsContainResult(TYPE type, int arg1, TYPE type2, int a
 		DATA_LIST::iterator assignListItr = assignList->begin();
 
 		while(assignListItr!=assignList->end()){
+			//cout << pkb->getAssignEntry(*assignListItr).prefixTree << "\n";
+			
 			if(EvaluateContains::isStatementDescendantTypeDataOf(type, type2, -1, *assignListItr)){
 				return true;
 			}
@@ -1071,10 +1016,13 @@ bool EvaluateContains::isStatementDescendantTypeDataOf(TYPE typeName, TYPE typeN
 	if(stmtNum>0&&stmtNum <= pkb->getMaxStatementNum()){
 		AST_LIST* currentAST = pkb->getASTBy(stmtNum);
 		AST_LIST::iterator itr;
+			
+		// search if RHS and LHS has type2 and data
 		for(itr = currentAST->begin();itr!=currentAST->end();itr++){
 			if((*itr)->getRootType()==typeName){
 				// check descendant
 				AST * descendant = (*itr)->getFirstDescendant();
+				
 				if(pkb->getType(descendant) == typeName2 && pkb->getData(descendant) == data){
 					return true;
 				}
