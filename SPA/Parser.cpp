@@ -159,7 +159,7 @@ bool Parser::procedure(){
 		}
 		if(matchToken("{")){
 			prevProc = curAST;
-			curAST = pkb->createAST(STMT_LIST, prevProgLine, 0, -1);
+			curAST = pkb->createAST(STMT_LIST, prevProgLine, stmt_num+1, -1);
 
 			STMTENTRY thisEntry;
 			thisEntry.ownerNo = curProcIndex;
@@ -333,7 +333,7 @@ bool Parser::stmt_if(){
 				thisEntry.type = THEN;
 
 				pkb->insertStmtList(stmt_num+1,thisEntry); 
-				thenNode = pkb->createAST(STMT_LIST, prevProgLine, stmt_num, THEN); // then node
+				thenNode = pkb->createAST(STMT_LIST, prevProgLine, stmt_num+1, THEN); // then node
 				
 				pkb->setFirstDescendant(ifNode, leftNode);
 				pkb->setAncestor(thenNode, ifNode);
@@ -355,7 +355,7 @@ bool Parser::stmt_if(){
 						thisEntry.type = ELSE;
 
 						pkb->insertStmtList(stmt_num+1,thisEntry);
-						elseNode = pkb->createAST(STMT_LIST, 0, 0, ELSE); // else node, no stmt_line
+						elseNode = pkb->createAST(STMT_LIST, prevProgLine, stmt_num+1, ELSE); // else node, no stmt_line
 						pkb->setAncestor(elseNode, ifNode);
 						pkb->addSibling(thenNode, elseNode);
 						
@@ -449,7 +449,7 @@ bool Parser::stmt_while(){
 				thisEntry.ownerNo = stmt_num;
 				thisEntry.type = WHILE;
 				pkb->insertStmtList(stmt_num+1,thisEntry);
-				rightNode = pkb->createAST(STMT_LIST,prevProgLine, stmt_num, -1);
+				rightNode = pkb->createAST(STMT_LIST,prevProgLine, stmt_num+1, -1);
 				pkb->setAncestor(rightNode, whileNode);
 				pkb->addSibling(leftNode, rightNode);
 
