@@ -323,6 +323,41 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 
 	// =============================== Contain*(UNKNOWN, UNKNOWN) =========================//
 	else if((type!=PROCEDURE && type2!=PROCEDURE) && arg1 == 0 && arg2 == 0){
+		if(type == STMT_LIST && type2 == STMT_LIST){
+
+
+			PARENT_LIST parentList = EvaluateParents::getParentStarResult(WHILE, WHILE);
+			PARENT_LIST::iterator parentListItr = parentList.begin();
+
+			while(parentListItr != parentList.end()){
+				resultList.push_back(make_pair(parentListItr->first, parentListItr->second));
+				parentListItr++;
+			}
+
+			parentList = EvaluateParents::getParentStarResult(WHILE, IF);
+			parentListItr = parentList.begin();
+
+			while(parentListItr != parentList.end()){
+				resultList.push_back(make_pair(parentListItr->first, parentListItr->second));
+				parentListItr++;
+			}
+
+			parentList = EvaluateParents::getParentStarResult(IF, IF);
+			parentListItr = parentList.begin();
+
+			while(parentListItr != parentList.end()){
+				resultList.push_back(make_pair(parentListItr->first, parentListItr->second));
+				parentListItr++;
+			}
+
+			parentList = EvaluateParents::getParentStarResult(IF, WHILE);
+			parentListItr = parentList.begin();
+
+			while(parentListItr != parentList.end()){
+				resultList.push_back(make_pair(parentListItr->first, parentListItr->second));
+				parentListItr++;
+			}
+		}
 		// Contain*(s1, v)
 		// Contain*(s1, c)
 		// Contain*(if, v)
@@ -331,7 +366,7 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 		// Contain*(w, c)
 		// Contain*(a, v)
 		// Contain*(a, c)
-		if(type2 == CONSTANT || type2 == VARIABLE || type2 == PLUS ||  type2 == MINUS || type2 == MULTIPLY){
+		else if(type2 == CONSTANT || type2 == VARIABLE || type2 == PLUS ||  type2 == MINUS || type2 == MULTIPLY){
 			DATA_LIST *assignList = pkb->getAllAssigns();
 			DATA_LIST::iterator assignListItr = assignList->begin();
 			// control variable
@@ -565,6 +600,8 @@ bool EvaluateContains::getIsContainStarResult(TYPE type, int arg1, TYPE type2, i
 			// for Contain*(PLUS, PLUS)
 			int pos = EvaluateContains::findPrefixTreeMatch(type2, *assignListItr,  arg2, 0);
 			vector<int> operandPos;
+
+			// must chekc precedence here.
 			// find all positions behind
 			while(pos != -1){
 				operandPos.push_back(pos);
@@ -574,7 +611,10 @@ bool EvaluateContains::getIsContainStarResult(TYPE type, int arg1, TYPE type2, i
 			vector<int>::iterator vItr = operandPos.begin();
 			while(vItr!=operandPos.end()){
 				if(operPos != -1 && operPos < *vItr){
-					return true;
+					// check precednece
+					if(type2 != MULTIPLY && pkb->getAssignEntry(*assignListItr).prefixTree.substr(*vItr, (*vItr)+1) != "*" ){
+						return true;
+					}
 				}
 				vItr++;
 			}
