@@ -1,0 +1,42 @@
+224
+cat: such that with calls affects
+16- calls, with :: calls (known,unknown) with
+procedure p1,p2; call c;
+Select p2   such that  Calls ( "xylo" , p2 ) with p1.procName = c.procName;
+yello
+5000
+17- calls, with :: calls* (known,unknown) with
+procedure p1,p2; call c;
+Select p2   such that  Calls* ( "xylo" , p2 ) with p2.procName = c.procName;
+yello,zebra,extra
+5000
+18- calls, with :: calls (unknown,known) with
+procedure p1,p2; 
+Select p1   such that  Calls ( p1 , "zebra" ) with p2.procName = "zebra";
+yello
+5000
+19- calls, with :: calls* (unknown,known) with
+procedure p1,p2; 
+Select p1   such that  Calls* ( p1 , "zebra" ) with p1.procName = "zebra";
+
+5000
+20- calls, with :: calls (unknown,unknown) with
+procedure p1,p2; variable v1;
+Select p1   such that  Calls ( p1 , p2 ) with p1.procName = p2.procName;
+
+5000
+21- calls, with :: calls* (unknown,unknown) with
+procedure p1,p2; variable v1;
+Select p1   such that  Calls* ( p1 , p2 ) with p1.procName = p2.procName;
+
+5000
+37 - calls, with :: calls (known,known) with
+procedure p;
+Select BOOLEAN   such that  Calls ( "xylo" , "yello" ) with p . procName = "xylo"   ;
+true
+5000
+38 - calls, with :: calls* (known,known) with
+procedure p;
+Select BOOLEAN   such that  Calls* ( "xylo" , "yello" ) with p . procName = "xylo"   ;
+true
+5000

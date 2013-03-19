@@ -1,0 +1,62 @@
+5
+cat: Test Case 5, Follows, Parent, Modifies, Uses for multiple procedures
+1 - Follows, Typed :: Is statement 3 following any other statement?
+assign a;
+Select a such that Follows(a, 3);
+
+5000
+2 - Parent, Typed :: Is statement 3 a child of any statement?
+stmt s;
+Select s such that Parent(s, 3);
+
+5000
+3 - Uses, Typed :: Is our while loop using b?
+while w;
+Select w such that Uses(w, "b")
+
+5000
+4 - Follows, Typed :: Is statement 3 followed by other statements?
+stmt s;
+Select s such that Follows(3, s);
+4
+5000
+5 - Modifies, Typed :: Is variable b modified by any while loop?
+while w;
+Select w such that Modifies(w, "b");
+
+5000
+6 - Modifies, Typed :: Is variable b modified by any statements?
+stmt s;
+Select s such that Modifies(s, "b");
+3
+5000
+7 - Parent*, Typed :: Which is/are the child/grandchild of statement 1?
+stmt s;
+Select s such that Parent*(1, s);
+2
+5000
+8 - Follows*, Typed :: Which statement(s) follow(s) statement 1?
+stmt s;
+Select s such that Follows*(1, s);
+
+5000
+9 - Follows*, Typed :: Which statement(s) follow(s) statement 3?
+stmt s;
+Select s such that Follows*(3, s);
+4
+5000
+10 - Modifies, Typed :: Which statement(s) modifies variable a?
+stmt s;
+Select s such that Modifies(s, "a");
+1, 2, 5, 6
+5000
+11 - Uses, Typed :: Which statement(s) uses variable a?
+stmt s;
+Select s such that Uses(s, "a");
+1, 2, 5, 6
+5000
+12 - Uses, Typed :: Which statement(s) uses variable z?
+stmt s;
+Select s such that Uses(s, "z");
+5
+5000

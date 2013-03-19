@@ -1,0 +1,62 @@
+108
+cat: such that parent
+13 - parent , Typed :: (known,known)
+
+Select BOOLEAN  such that Parent (9 ,10 );
+true
+5000
+14 - parent* , Typed :: (known,known)
+
+Select BOOLEAN  such that Parent* (9 ,12 );
+true
+5000
+15 - parent , Typed :: (known,unknown)
+stmt s1,s2;
+Select s2  such that Parent (9 , s2 );
+10,19            
+5000
+16 - parent* , Typed :: (known,unknown)//answer may be inaccurate        
+stmt s1,s2;
+Select s2  such that Parent* (9 , s2 );
+10,11,12,13,14,15,16,17,18,19            
+5000
+17 - parent , Typed :: (unknown,known)//answer may be inaccurate        
+stmt s1,s2;
+Select s1  such that Parent ( s1 ,14 );
+10            
+5000
+18 - parent* , Typed :: (unknown,known)//answer may be inaccurate        
+stmt s1,s2;
+Select s1  such that Parent* ( s1 ,14 );
+9,10            
+5000
+19 - parent , Typed :: (unknown,unknown)//answer may be inaccurate        
+stmt s1,s2;
+Select s1  such that Parent ( s1 , s2 );
+9,10,12,14,16,21,24,29,36,44          
+5000
+20 - parent* , Typed :: (unknown,unknown)//answer may be inaccurate        
+stmt s1,s2;
+Select s1  such that Parent* ( s1 , s2 );
+9,10,12,14,16,21,24,29,36,44            
+5000
+21 - parent , Typed :: (unknown,unknown)
+stmt s1,s2;
+Select s2  such that Parent ( s1 , s2 );
+10,11,12,13,14,15,16,17,18,19,22,23,24,25,26,30,37,38,45,46,47
+5000
+22 - parent* , Typed :: (unknown,unknown)
+stmt s1,s2;
+Select s2  such that Parent* ( s1 , s2 );
+10,11,12,13,14,15,16,17,18,19,22,23,24,25,26,30,37,38,45,46,47
+5000
+23 - parent , Typed :: (unknown,unknown)
+stmt s1,s2;
+Select s1  such that Parent ( s1 , s1 );
+
+5000
+24 - parent* , Typed :: (unknown,unknown)
+stmt s1,s2;
+Select s1  such that Parent* ( s1 , s1 );
+
+5000

@@ -1,0 +1,8 @@
+procedure Code6{
+while a{
+c = c+a;
+c = x+y+z;
+while b{
+d = a;
+c = q+1;}
+c = x+2;}}

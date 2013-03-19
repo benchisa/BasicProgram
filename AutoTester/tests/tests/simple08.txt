@@ -1,0 +1,20 @@
+procedure Code8{
+z = 10;
+x = z+5;
+while a{
+c = c+a;
+c = x+y+z;
+while b{
+d = a;
+c = q+1;}
+e = y+z;
+while f{
+i = i+1;
+z = x+z;}
+c = z+2;}
+g = y+z+i;
+while k{
+e = i+1;
+y = x+z;}
+f = z+2;
+}

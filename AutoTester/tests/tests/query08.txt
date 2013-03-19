@@ -1,0 +1,147 @@
+30
+cat: Test for Follows(*), Parent(*), Modifies, Uses,pattern
+1 - Modifies, Typed :: Which variable(s) is/are modified by statement 1?
+variable v;
+Select v such that Modifies(1, v);
+z
+5000
+2 - Modifies, Typed :: Which variable(s) is/are modified by a statement?
+variable v;stmt s;
+Select v such that Modifies(s, v);
+c, d, e, f, g, i, x, y, z
+5000
+3 - Modifies, Typed :: Which variable(s) is/are modified in an assignment?
+variable v;assign a;
+Select v such that Modifies(a, v);
+c, d, e, f, g, i, x, y, z
+5000
+4 - Modifies, Typed, Placeholder :: Which variable(s) is/are modified?
+variable v;
+Select v such that Modifies(_, v);
+
+5000
+5 - Modifies, Typed, Placeholder :: Which variable(s) is/are modified in while loop?
+while w;variable v;
+Select v such that Modifies(w, v);
+c, d, e, i, y, z
+5000
+6 - Modifies, Typed :: Which statement modifies variable q?
+stmt s;
+Select s such that Modifies(s,"e");
+3, 9, 15, 16
+5000
+7 - Modifies, Typed :: Which while statement modifies variable z?
+while w;
+Select w such that Modifies(w,"i");
+3, 10
+5000
+8 - Modifies, Typed :: Which assignment modifies variable b?
+assign a;
+Select a such that Modifies(a,"f");
+18
+5000
+9 - Modifies, Placeholder :: Which assignment modifies variable vcz?
+assign a;
+Select a such that Modifies(a, "vcz");
+
+2000
+10 - Modifies, Typed :: Select all while if there exists a Modifies relationship.
+while w;
+Select w such that Modifies(_,_);
+
+5000
+11 - Modifies, Typed :: Select all variables modified in statement 6.
+variable v;
+Select v such that Modifies(6,v);
+c, d
+5000
+12 - Uses, Typed :: Which variable(s) is/are used by statement 3?
+variable v;
+Select v such that Uses(16, v);
+i
+5000
+13 - Uses, Typed :: Which variable(s) is/are used by a statement?
+variable v;stmt s;
+Select v such that Uses(s, v);
+a, b, c, f, i, k, q, x, y, z
+5000
+14 - Uses, Typed :: Which variable(s) is/are used in an assignment?
+variable v;assign a;
+Select v such that Uses(a, v);
+a, c, i, q, x, y, z
+5000
+15 - Uses, Typed, Placeholder :: Which variable(s) is/are used?
+variable v;
+Select v such that Uses(_, v);
+
+5000
+16 - Uses, Typed :: Which statement uses variable f?
+stmt s;
+Select s such that Uses(s,"f");
+3, 10
+5000
+17 - Uses, Typed :: Which while statement uses variable i?
+while w;
+Select w such that Uses(w,"i");
+3, 10, 15
+5000
+18 - Uses, Typed :: Which assignment uses variable a?
+assign a;
+Select a such that Uses(a,"e");
+
+5000
+19 - Uses, Placeholder :: Which assignment Uses variable vcz?
+assign a;
+Select a such that Uses(a, "vcz");
+
+2000
+20 - Uses, Typed :: Select all while if there exists a Uses relationship.
+while w;
+Select w such that Uses(_,_);
+
+5000
+21 - Pattern, Typed :: Which is the assignment that modifies c?
+assign a;
+Select a pattern a("c",_);
+4, 5, 8, 13
+5000
+23 - Pattern, Typed :: Which is the assignment that modifies some variables?
+assign a;
+Select a pattern a(_,_);
+1, 2, 4, 5, 7, 8, 9, 11, 12, 13, 14, 16, 17, 18
+5000
+24 - Pattern, Typed :: Which is the assignment that d = a?
+assign a;
+Select a pattern a("d","a");
+7
+5000
+25 - Pattern, Typed :: Which is the assignment that modifies z uses z?
+assign a;
+Select a pattern a("z",_"z"_);
+12
+5000
+26 - Pattern, Typed :: Which is the assignment that modifies c uses x?
+assign a;
+Select a pattern a("c",_"x"_);
+5
+5000
+27 - Pattern, Typed :: Which is the assignment that modifies c uses 1?
+assign a;
+Select a pattern a("c",_"1"_);
+8
+5000
+28 - Pattern, Typed :: Which is the assignment that z = 10?
+assign a;
+Select a pattern a("z","10");
+1
+5000
+29 - Pattern, Typed :: Which is the assignment that has expression a?
+assign a;
+Select a pattern a(_,"a");
+7
+5000
+30 - Pattern, Typed :: Which is the assignment that has expression q?
+assign a;
+Select a pattern a(_,_"1"_);
+8, 11, 16
+5000

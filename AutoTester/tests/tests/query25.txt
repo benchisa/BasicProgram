@@ -1,0 +1,57 @@
+108
+cat: such that calls
+25 - calls , Typed :: (known,known)
+
+Select BOOLEAN  such that Calls ( "xylo" , "yello" );
+true
+5000
+26 - calls* , Typed :: (known,known)
+
+Select BOOLEAN  such that Calls* ( "xylo" , "yello" );
+true
+5000
+27 - calls , Typed :: (known,unknown)
+procedure p1,p2;
+Select p2  such that Calls ( "xylo" , p2 );
+yello
+5000
+28 - calls* , Typed :: (known,unknown)
+procedure p1,p2;
+Select p2  such that Calls* ( "xylo" , p2 );
+yello,zebra,extra
+5000
+29 - calls , Typed :: (unknown,known)
+procedure p1,p2;
+Select p1  such that Calls ( p1 , "zebra" );
+yello
+5000
+30 - calls* , Typed :: (unknown,known)
+procedure p1,p2;
+Select p1  such that Calls* ( p1 , "zebra" );
+xylo,yello
+5000
+31 - calls , Typed :: (unknown,unknown)
+procedure p1,p2;
+Select p1  such that Calls ( p1 , p2 );
+xylo,yello,zebra
+5000
+32 - calls* , Typed :: (unknown,unknown)
+procedure p1,p2;
+Select p1  such that Calls* ( p1 , p2 );
+xylo,yello,zebra
+5000
+33 - calls , Typed :: (unknown,unknown)
+procedure p1,p2;
+Select p2  such that Calls ( p1 , p2 );
+yello,zebra,extra
+5000
+34 - calls* , Typed :: (unknown,unknown)
+procedure p1,p2;
+Select p2  such that Calls* ( p1 , p2 );
+yello,zebra,extra
+5000
+35 - calls , Typed :: (unknown,unknown)
+procedure c1,c2;
+Select c1 such that Calls(c1,c2);
+xylo,yello,zebra
+5000

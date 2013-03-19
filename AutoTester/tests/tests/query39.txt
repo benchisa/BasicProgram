@@ -1,0 +1,47 @@
+100
+cat:such that and parent
+170 - parent, parent* :: parent (known,known) and parent* (unknown,unknown)
+stmt s1,s2;
+Select BOOLEAN   such that  Parent (9 ,10 ) and Parent* ( s1 , s2 ) ;
+true
+5000
+171 - parent* :: parent* (known,known) and parent* (unknown,unknown)
+stmt s1,s2;
+Select BOOLEAN   such that  Parent* (9 ,12 ) and Parent* ( s1 , s2 ) ;
+true
+5000
+172 - parent, parent* :: parent (known,unknown) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s2   such that  Parent (9 , s2 ) and Parent* ( s1 , s2 ) ;
+10,19
+5000
+173 - parent* :: parent* (known,unknown) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s2   such that  Parent* (9 , s2 ) and Parent* ( s1 , s2 ) ;
+10,11,12,13,14,15,16,17,18,19
+5000
+174 - parent, parent* :: parent (unknown,known) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Parent ( s1 ,14 ) and Parent* ( s1 , s2 ) ;
+10
+5000
+175 - parent* :: parent* (unknown,known) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Parent* ( s1 ,14 ) and Parent* ( s1 , s2 ) ;
+9,10
+5000
+176 - parent, parent* :: parent (unknown,unknown) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Parent ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
+9,10,12,14,16,21,24,29,36,44
+5000
+177 - parent* :: parent* (unknown,unknown) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s2   such that  Parent* ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
+10,11,12,13,14,15,16,17,18,19,22,23,24,25,26,30,37,38,45,46,47
+5000
+178 - parent* :: parent* (unknown,unknown) and parent* (unknown,unknown)
+stmt s1,s2;
+Select s1   such that  Parent* ( s1 , s1 ) and Parent* ( s1 , s2 ) ;
+
+5000

@@ -1,0 +1,18 @@
+procedure xylo{
+	apple=1;
+	banana=apple+1;
+	carrot=apple;
+	banana=carrot+1;
+	donut=0;
+	egg=1;
+	fish=egg;
+	if egg then
+		jam=apple;
+	else
+		jam=banana;
+		if apple then 
+			gummy=33;
+		else
+			gummy=99;
+
+}

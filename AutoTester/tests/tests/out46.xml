@@ -1,0 +1,80 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>CS3202</name><parsing_time_taken>2357.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" Modifies Queries">
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >1</id><querystr><![CDATA[assign a1; variable v1;  Select a1 such that Modifies(a1,v1);]]></querystr>
+<stuans>1,2,3,4,5,6,8,10,11,12,14,16,18,19,20,21,24,25,26,27,31,32,33,34,35,37,38,39,42,43,44,45,46,49,50,52,54,57,58,59,62,63,65,66,68,69,71,72,73,75,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,101,103,105,107,109,110,112,114,118,119,121,122,124,126,129,132,133,137</stuans>
+<correct>1,10,101,103,105,107,109,11,110,112,114,118,119,12,121,122,124,126,129,132,133,137,14,16,18,19,2,20,21,24,25,26,27,3,31,32,33,34,35,37,38,39,4,42,43,44,45,46,49,5,50,52,54,57,58,59,6,62,63,65,66,68,69,71,72,73,75,77,78,79,8,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98</correct>
+<time_taken>822.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >2</id><querystr><![CDATA[while w1; variable v1; Select w1 such that Modifies(w1,v1);]]></querystr>
+<stuans>7,9,13,15,23,29,36,51,55,60,74,76,99,100,102,104,106,108,111,113,115,116</stuans>
+<correct>100,102,104,106,108,111,113,115,116,13,15,23,29,36,51,55,60,7,74,76,9,99</correct>
+<time_taken>1195.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >3</id><querystr><![CDATA[if i1; variable v1; Select i1 such that Modifies(i1,v1);]]></querystr>
+<stuans>17,22,30,41,48,61,64,67,70,117,131</stuans>
+<correct>117,131,17,22,30,41,48,61,64,67,70</correct>
+<time_taken>1162.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >4</id><querystr><![CDATA[call c1; variable v1; Select c1 such that Modifies(c1,v1);]]></querystr>
+<stuans>127,128,28,125,40,53,56,47,120,123,130,134,135,136</stuans>
+<correct>120,123,125,127,128,130,134,135,136,28,40,47,53,56</correct>
+<time_taken>1252.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >5</id><querystr><![CDATA[procedure p1; variable v1; Select p1 such that Modifies(p1,v1);]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Eliza,Fred,Goneril,Henry,Illidan,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Goneril,Henry,Illidan,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>1287.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >6</id><querystr><![CDATA[assign a1; variable v1;  Select v1 such that Modifies(a1,v1);]]></querystr>
+<stuans>apple,banana,carrot,donut,egg,fish,gummy,ham,innard,jam,kimchi,leek,mango,nachos,orange,pear,aeroplane,basin,cloud,door,elevator,fan,garbage,hanger,igloo,jumper,keep,lamp,ant,beetle,cockroach,dinosaur,elephant,fox,goat,hamster,jaguar,kangeroo,lion,monkey,newt,owl,penguin,quail</stuans>
+<correct>aeroplane,ant,apple,banana,basin,beetle,carrot,cloud,cockroach,dinosaur,donut,door,egg,elephant,elevator,fan,fish,fox,garbage,goat,gummy,ham,hamster,hanger,igloo,innard,jaguar,jam,jumper,kangeroo,keep,kimchi,lamp,leek,lion,mango,monkey,nachos,newt,orange,owl,pear,penguin,quail</correct>
+<time_taken>1137.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >7</id><querystr><![CDATA[while w1; variable v1; Select v1 such that Modifies(w1,v1);]]></querystr>
+<stuans>apple,carrot,egg,fish,gummy,ham,innard,jam,kimchi,leek,banana,mango,nachos,pear,aeroplane,cloud,door,elevator,fan,garbage,hanger,igloo,jumper,keep,ant,cockroach,dinosaur,fox,goat,hamster,jaguar,kangeroo</stuans>
+<correct>aeroplane,ant,apple,banana,carrot,cloud,cockroach,dinosaur,door,egg,elevator,fan,fish,fox,garbage,goat,gummy,ham,hamster,hanger,igloo,innard,jaguar,jam,jumper,kangeroo,keep,kimchi,leek,mango,nachos,pear</correct>
+<time_taken>1123.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >8</id><querystr><![CDATA[if i1; variable v1; Select v1 such that Modifies(i1,v1);]]></querystr>
+<stuans>carrot,kimchi,leek,mango,nachos,ham,pear,aeroplane,cloud,door,elevator,fan,garbage,hanger,igloo,jumper,keep,lamp</stuans>
+<correct>aeroplane,carrot,cloud,door,elevator,fan,garbage,ham,hanger,igloo,jumper,keep,kimchi,lamp,leek,mango,nachos,pear</correct>
+<time_taken>1126.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >9</id><querystr><![CDATA[call c1; variable v1; Select v1 such that Modifies(c1,v1);]]></querystr>
+<stuans>apple,banana,carrot,donut,egg,fish,gummy,ham,innard,jam,kimchi,leek,mango,nachos,orange,pear,aeroplane,basin,cloud,door,elevator,fan,garbage,hanger,igloo,jumper,keep,lamp,ant,beetle,cockroach,dinosaur,elephant,fox,goat,hamster,jaguar,kangeroo,lion,monkey,newt,owl,penguin,quail</stuans>
+<correct>aeroplane,ant,apple,banana,basin,beetle,carrot,cloud,cockroach,dinosaur,donut,door,egg,elephant,elevator,fan,fish,fox,garbage,goat,gummy,ham,hamster,hanger,igloo,innard,jaguar,jam,jumper,kangeroo,keep,kimchi,lamp,leek,lion,mango,monkey,nachos,newt,orange,owl,pear,penguin,quail</correct>
+<time_taken>1155.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >10</id><querystr><![CDATA[procedure p1; variable v1; Select v1 such that Modifies(p1,v1);]]></querystr>
+<stuans>apple,banana,carrot,donut,egg,fish,gummy,ham,innard,jam,kimchi,leek,mango,nachos,orange,pear,aeroplane,basin,cloud,door,elevator,fan,garbage,hanger,igloo,jumper,keep,lamp,ant,beetle,cockroach,dinosaur,elephant,fox,goat,hamster,jaguar,kangeroo,lion,monkey,newt,owl,penguin,quail</stuans>
+<correct>aeroplane,ant,apple,banana,basin,beetle,carrot,cloud,cockroach,dinosaur,donut,door,egg,elephant,elevator,fan,fish,fox,garbage,goat,gummy,ham,hamster,hanger,igloo,innard,jaguar,jam,jumper,kangeroo,keep,kimchi,lamp,leek,lion,mango,monkey,nachos,newt,orange,owl,pear,penguin,quail</correct>
+<time_taken>1162.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

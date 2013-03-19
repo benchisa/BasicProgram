@@ -1,0 +1,62 @@
+108
+cat: such that next
+37 - next , Typed :: (known,known)
+
+Select BOOLEAN  such that Next (21 ,22 );
+true
+5000
+38 - next* , Typed :: (known,known)
+
+Select BOOLEAN  such that Next* (21 ,24 );
+true
+5000
+39 - next , Typed :: (known,unknown)
+prog_line s1,s2;
+Select s2  such that Next (21 , s2 );
+22,23
+5000
+40 - next* , Typed :: (known,unknown)
+prog_line s1,s2;
+Select s2  such that Next* (21 , s2 );
+22,23,24,25,26
+5000
+41 - next , Typed :: (unknown,known)
+prog_line s1,s2;
+Select s1  such that Next ( s1 ,24 );
+23
+5000
+42 - next* , Typed :: (unknown,known)
+prog_line s1,s2;
+Select s1  such that Next* ( s1 ,24 );
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,23
+5000
+43 - next , Typed :: (unknown,unknown)
+prog_line s1,s2;
+Select s1  such that Next ( s1 , s2 );
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,23,24,27,28,29,30,31,32,34,35,36,37,38,39,40,42,43,44,45,46,47
+5000
+44 - next* , Typed :: (unknown,unknown)
+prog_line s1,s2;
+Select s1  such that Next* ( s1 , s2 );
+1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,23,24,27,28,29,30,31,32,34,35,36,37,38,39,40,42,43,44,45,46,47
+5000
+45 - next , Typed :: (unknown,unknown)
+prog_line s1,s2;
+Select s1  such that Next ( s1 , s1 );
+
+5000
+46 - next* , Typed :: (unknown,unknown)
+prog_line s1,s2;
+Select s1  such that Next* ( s1 , s1 );
+9,10,11,12,13,14,15,16,17,18,19,29,30,44,45,46,47
+5000
+47 - next , Typed :: (unknown,unknown)
+prog_line s1,s2;
+Select s2  such that Next ( s1 , s2 );
+2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,28,29,30,31,32,33,35,36,37,38,39,40,41,43,44,45,46,47
+5000
+48 - next* , Typed :: (unknown,unknown)
+prog_line s1,s2;
+Select s2  such that Next* ( s1 , s2 );
+2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,28,29,30,31,32,33,35,36,37,38,39,40,41,43,44,45,46,47
+5000

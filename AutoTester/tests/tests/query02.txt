@@ -1,0 +1,72 @@
+15
+cat: Test Case 3, Follows, Parent, Modifies, Uses for two consecutives while loop
+1 - Follows, Typed :: Which while loop follows another while loop?
+while w1, w2;
+Select w2 such that Follows(w1,w2);
+4
+5000
+2 - Follows, Typed :: Which is/are the statements following statement #2?
+stmt s; 
+Select s such that Follows (2,s);
+3
+5000
+3 - Follows, Typed :: Which is/are the statement(s) following another statement?
+stmt s1,s2; 
+Select s2 such that Follows (s1,s2);
+3, 4, 6
+5000
+4 - Follows, Placeholder :: Which is the statement followed by other statements?
+stmt s1; 
+Select s1 such that Follows (s1,_);
+1, 2, 5
+5000
+5 - Follows, PlaceHolder ::  Select all statements if there exists a follow relationship
+stmt s1; 
+Select s1 such that Follows (_,_);
+1, 2, 3, 4, 5, 6
+5000
+6 - Follows, PlaceHolder :: Which is/are the statement(s) following another statement?
+stmt s1; 
+Select s1 such that Follows (_,s1);
+3, 4, 6
+5000
+7 - Follows, Typed :: Which is/are the assignment(s) following another assignment?
+assign a1,a2;
+Select a2 such that Follows (a1,a2);
+3, 6
+5000
+8 - Follows*, Typed :: Which is/are the statement(s) followed by statement 3?
+stmt s; 
+Select s such that Follows*(s,3);
+2
+5000
+9 - Follows*, Typed :: Which is/are the statement(s) following statement 1?
+stmt s; 
+Select s such that Follows* (1,s);
+4
+5000
+10 - Follows*, Typed :: Statements follow Statements
+stmt s1,s2; 
+Select s2 such that Follows* (s1,s2);
+3, 4, 6
+5000
+11 - Follows*, Typed :: Which are the statements followed by other statements?
+stmt s1; 
+Select s1 such that Follows* (s1,_);
+1, 2, 5
+5000
+12 - Follows*, Placeholder :: Select all statements is there exists a follow relationship.
+stmt s1; 
+Select s1 such that Follows* (_,_);
+1, 2, 3, 4, 5, 6
+5000
+13 - Follows*, Placeholder :: Which are the statements following another statements?
+stmt s1; 
+Select s1 such that Follows* (_,s1);
+3, 4, 6
+5000
+14 - Follows*, Typed :: Which are the assignments following another assignments?
+assign a1,a2;
+Select a2 such that Follows* (a1,a2);
+3, 6
+5000

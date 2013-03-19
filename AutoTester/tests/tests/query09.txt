@@ -1,0 +1,52 @@
+10
+cat: Test for Follows(*), Parent(*), Modifies, Uses,pattern
+1 - Follow, pattern :: Select while loops that are nested in other while when an assignment modifies l and uses 9.
+while w; assign a;
+Select w such that Follows(_,w) pattern a("l",_"9"_);
+3, 6, 10, 16, 19
+5000
+2 - Follow*, pattern :: Select assignment a1 that is followed by assignment a2 modifies i and uses i.
+assign a1,a2;
+Select a1 such that Follows*(a1,a2) pattern a2("i",_"i"_);
+
+5000
+3 - Parent, Typed :: Select BOOLEAN if there exists a Uses relationship.
+while w;
+Select BOOLEAN such that Parent(w,10) pattern w("f",_);
+false
+5000
+4 - Parent*, pattern :: Select statement s if it modifies y when there is while loop has control var k.
+stmt s;while w;
+Select s such that Modifies(s,"y") pattern w("k",_);
+16, 18
+2000
+5 - Modifies, pattern :: Select assignment a1 if there exists an assignment a2 with d =10?
+assign a1,a2;
+Select a1 such that Modifies(a2,"d") pattern a2("d","10");
+1, 2, 4, 5, 7, 8, 9, 11, 12, 13, 14, 15, 17, 18, 20, 21, 22
+2000
+6 - Modifies, pattern :: Select while if it modifies l and there exists an assignment modifies variable y and uses y?
+assign a; while w;
+Select w such that Modifies(w,"l") pattern a("y",_"y"_);
+
+2000
+7 - Modifies, pattern :: Select BOOLEAN if there exists an assignment modifies variable c and there exists while loop using x as control variable?
+stmt s; while w;
+Select BOOLEAN such that Modifies(s,"c") pattern w("x",_);
+true
+2000
+8 - Uses,Pattern :: Which is the assigment modifies c uses e and z?
+assign a;
+Select a such that Uses(a,"e") pattern a("e",_"z"_);
+
+5000
+9 - Uses,Pattern:: Which is the while uses x as control variable?
+while w;
+Select w such that Uses(w,"x") pattern w("x",_);
+19
+5000
+10 - Uses,Pattern:: Which is the assignment modifies c and follows some statements?
+stmt s; assign a;
+Select s such that Uses(s,"q") pattern a("f",_"2"_);
+3, 6, 8
+5000

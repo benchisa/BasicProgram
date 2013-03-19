@@ -1,0 +1,73 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>CS3202</name><parsing_time_taken>202.000000</parsing_time_taken>
+</info>
+<queries>
+<category name="such that and parent">
+<query>
+<id parent="1" parentstar="1" comment="parent (known,known) and parent* (unknown,unknown)" >170</id><querystr><![CDATA[stmt s1,s2; Select BOOLEAN   such that  Parent (9 ,10 ) and Parent* ( s1 , s2 ) ;]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>121.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id parentstar="1" comment="parent* (known,known) and parent* (unknown,unknown)" >171</id><querystr><![CDATA[stmt s1,s2; Select BOOLEAN   such that  Parent* (9 ,12 ) and Parent* ( s1 , s2 ) ;]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>84.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id parent="1" parentstar="1" comment="parent (known,unknown) and parent* (unknown,unknown)" >172</id><querystr><![CDATA[stmt s1,s2; Select s2   such that  Parent (9 , s2 ) and Parent* ( s1 , s2 ) ;]]></querystr>
+<stuans>10,19</stuans>
+<correct>10,19</correct>
+<time_taken>89.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id parentstar="1" comment="parent* (known,unknown) and parent* (unknown,unknown)" >173</id><querystr><![CDATA[stmt s1,s2; Select s2   such that  Parent* (9 , s2 ) and Parent* ( s1 , s2 ) ;]]></querystr>
+<stuans>10,18,11,19,12,14,15,16,17,13</stuans>
+<correct>10,11,12,13,14,15,16,17,18,19</correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id parent="1" parentstar="1" comment="parent (unknown,known) and parent* (unknown,unknown)" >174</id><querystr><![CDATA[stmt s1,s2; Select s1   such that  Parent ( s1 ,14 ) and Parent* ( s1 , s2 ) ;]]></querystr>
+<stuans>10</stuans>
+<correct>10</correct>
+<time_taken>92.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id parentstar="1" comment="parent* (unknown,known) and parent* (unknown,unknown)" >175</id><querystr><![CDATA[stmt s1,s2; Select s1   such that  Parent* ( s1 ,14 ) and Parent* ( s1 , s2 ) ;]]></querystr>
+<stuans>10,9</stuans>
+<correct>9,10</correct>
+<time_taken>85.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id parent="1" parentstar="1" comment="parent (unknown,unknown) and parent* (unknown,unknown)" >176</id><querystr><![CDATA[stmt s1,s2; Select s1   such that  Parent ( s1 , s2 ) and Parent* ( s1 , s2 ) ;]]></querystr>
+<stuans>14,24,9,10,12,36,16,21,29,44</stuans>
+<correct>9,10,12,14,16,21,24,29,36,44</correct>
+<time_taken>97.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id parentstar="1" comment="parent* (unknown,unknown) and parent* (unknown,unknown)" >177</id><querystr><![CDATA[stmt s1,s2; Select s2   such that  Parent* ( s1 , s2 ) and Parent* ( s1 , s2 ) ;]]></querystr>
+<stuans>10,18,11,19,12,14,24,45,15,23,16,26,17,25,13,22,47,30,37,38,46</stuans>
+<correct>10,11,12,13,14,15,16,17,18,19,22,23,24,25,26,30,37,38,45,46,47</correct>
+<time_taken>104.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id parentstar="1" comment="parent* (unknown,unknown) and parent* (unknown,unknown)" >178</id><querystr><![CDATA[stmt s1,s2; Select s1   such that  Parent* ( s1 , s1 ) and Parent* ( s1 , s2 ) ;]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>92.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

@@ -1,0 +1,87 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>CS3202</name><parsing_time_taken>202.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" such that calls">
+<query>
+<id calls="1" Typed="1" comment="(known,known)" >25</id><querystr><![CDATA[ Select BOOLEAN  such that Calls ( "xylo" , "yello" );]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>86.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id callsstar="1" Typed="1" comment="(known,known)" >26</id><querystr><![CDATA[ Select BOOLEAN  such that Calls* ( "xylo" , "yello" );]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>91.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id calls="1" Typed="1" comment="(known,unknown)" >27</id><querystr><![CDATA[procedure p1,p2; Select p2  such that Calls ( "xylo" , p2 );]]></querystr>
+<stuans>yello</stuans>
+<correct>yello</correct>
+<time_taken>86.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id callsstar="1" Typed="1" comment="(known,unknown)" >28</id><querystr><![CDATA[procedure p1,p2; Select p2  such that Calls* ( "xylo" , p2 );]]></querystr>
+<stuans>extra,yello,zebra</stuans>
+<correct>yello,zebra,extra</correct>
+<time_taken>83.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id calls="1" Typed="1" comment="(unknown,known)" >29</id><querystr><![CDATA[procedure p1,p2; Select p1  such that Calls ( p1 , "zebra" );]]></querystr>
+<stuans>yello</stuans>
+<correct>yello</correct>
+<time_taken>85.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id callsstar="1" Typed="1" comment="(unknown,known)" >30</id><querystr><![CDATA[procedure p1,p2; Select p1  such that Calls* ( p1 , "zebra" );]]></querystr>
+<stuans>xylo,yello</stuans>
+<correct>xylo,yello</correct>
+<time_taken>81.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id calls="1" Typed="1" comment="(unknown,unknown)" >31</id><querystr><![CDATA[procedure p1,p2; Select p1  such that Calls ( p1 , p2 );]]></querystr>
+<stuans>xylo,yello,zebra</stuans>
+<correct>xylo,yello,zebra</correct>
+<time_taken>84.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id callsstar="1" Typed="1" comment="(unknown,unknown)" >32</id><querystr><![CDATA[procedure p1,p2; Select p1  such that Calls* ( p1 , p2 );]]></querystr>
+<stuans>xylo,yello,zebra</stuans>
+<correct>xylo,yello,zebra</correct>
+<time_taken>84.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id calls="1" Typed="1" comment="(unknown,unknown)" >33</id><querystr><![CDATA[procedure p1,p2; Select p2  such that Calls ( p1 , p2 );]]></querystr>
+<stuans>yello,zebra,extra</stuans>
+<correct>yello,zebra,extra</correct>
+<time_taken>84.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id callsstar="1" Typed="1" comment="(unknown,unknown)" >34</id><querystr><![CDATA[procedure p1,p2; Select p2  such that Calls* ( p1 , p2 );]]></querystr>
+<stuans>extra,yello,zebra</stuans>
+<correct>yello,zebra,extra</correct>
+<time_taken>84.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id calls="1" Typed="1" comment="(unknown,unknown)" >35</id><querystr><![CDATA[procedure c1,c2; Select c1 such that Calls(c1,c2);]]></querystr>
+<stuans>xylo,yello,zebra</stuans>
+<correct>xylo,yello,zebra</correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

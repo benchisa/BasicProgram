@@ -1,0 +1,47 @@
+20
+cat: Test Case 2, Follows, Parent, Modifies, Uses for single while loop
+1 - Follows*, Typed :: Which statement follows statement #2?
+stmt s;
+Select s such that Follows*(2, s);
+3
+5000
+2 - Follows, Typed :: Which statement follows statement #2?
+stmt s; 
+Select s such that Follows(2,s);
+3
+1000
+3 - Parent, Typed :: Which statement is a parent of statement #2?
+stmt s; 
+Select s such that Parent(s,2);
+1
+5000
+4 - Parent, Typed :: Which statement(s) is/are the child of statement #1?
+stmt s; 
+Select s such that Parent(1,s);
+2, 3
+5000
+5 - Parent*, Typed :: Which statement(s) is/are the child/grandchild of statement #1?
+stmt s;
+Select s such that Parent*(1, s);
+2, 3
+5000
+7 - Parent, PlaceHolder :: Select all the parents
+stmt s1,s2;
+Select s1 such that Parent(s1, s2);
+1
+5000
+8 - Parent, Typed :: Children, which are assignments
+assign a; stmt s;
+Select a such that Parent(s, a);
+2, 3
+5000
+9 - Modifies, Typed :: What variable(s) is/are modified by statement #1?
+variable v;
+Select v such that Modifies(1, v);
+c, d
+5000s
+10 - Uses, Typed :: What variable(s) is/are used by statement #1?
+variable v;
+Select v such that Uses(1, v);
+c, a, x, y, z, q
+5000
