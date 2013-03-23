@@ -236,57 +236,34 @@ bool Affects::getIsAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 }
 
 	 
-bool Affects::computeIsAffectStar(int starting, int ending)
+	bool Affects::computeIsAffectStar(int starting, int ending)
 {
 	MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT,starting,0);
 	int modVar=m_list.begin()->second;
 	stack<USES_LIST> stacks;
 	stacks.push(pkb->getUses(ASSIGNMENT,0,modVar));
 	USES_LIST::iterator u_itr;
-	map<int,bool> allModVars;
+	set<int> allModVarStmt;
 	
 	while (!stacks.empty())
 	{
 		USES_LIST root=stacks.top();
 		stacks.pop();
+		//for every subsequent statement that use modify variable
 		for (u_itr=root.begin();u_itr!=root.end(); u_itr++)
 		{
 			
-			
+			//check if it is affected by the statement that contains modify variable
 			if (Affects::getIsAffectResult(starting,u_itr->first) )
 			{
-				
+			
 					m_list=pkb->getModifies(ASSIGNMENT,u_itr->first,0);
 					
 					modVar=m_list.begin()->second;
 					MODIFIES_LIST temp=pkb->getModifies(ASSIGNMENT, 0, modVar);
 					MODIFIES_LIST::iterator m_itr;
 					bool test=true;
-					for (m_itr=temp.begin(); m_itr!=temp.end(); m_itr++)
-					{
-						
-						if (pkb->isInSameProc(u_itr->first,m_itr->first))
-						{
-							if (u_itr->first!=m_itr->first)
-							{
-								if (EvaluateNext::isNextStarResult(u_itr->first,m_itr->first)&&Affects::getIsAffectResult(m_itr->first,ending ))
-								{
-									test=false;
-									break;
-								
-								}
-							}
-							
-						}
-					}
-					if (test)
-					{
-						allModVars.insert(make_pair(modVar, true));
-					}
-					else
-					{
-						allModVars.insert(make_pair(modVar, false));
-					}
+					allModVarStmt.insert(u_itr->first);
 					starting=u_itr->first;
 					stacks.push(pkb->getUses(ASSIGNMENT,0,modVar));
 						
@@ -295,14 +272,16 @@ bool Affects::computeIsAffectStar(int starting, int ending)
 		
 			if (u_itr->first==ending)
 			{
-				
-				map<int,bool>::iterator testAffectItr;
-				for (testAffectItr=allModVars.begin(); testAffectItr!=allModVars.end(); testAffectItr++)
+				set<int>::iterator s_itr;
+				//cout<<ending<<" "<<pkb->getVarName(modVar)<<endl;;
+				for (s_itr=allModVarStmt.begin(); s_itr!=allModVarStmt.end(); s_itr++)
 				{
-					if (testAffectItr->second==true && u_itr->second==testAffectItr->first)
+					if (Affects::getIsAffectResult(*s_itr,ending))
 					{
 						return true;
 					}
+					
+					
 				}
 			}
 		}
