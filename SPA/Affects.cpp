@@ -289,3 +289,104 @@ bool Affects::getIsAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 	return false;
 	
 }
+
+AFFECT_LIST	Affects::getAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
+{
+	AFFECT_LIST result;
+	stack<AFFECT_LIST> stacks;
+	AFFECT_LIST::iterator a_itr;
+	AFFECT_LIST::iterator findItr;
+	if (stmt1!=0 && stmt2==0)
+	{
+		stacks.push(Affects::getAffectResult(stmt1,0));
+		while (!stacks.empty())
+		{
+			AFFECT_LIST root=stacks.top();
+			stacks.pop();
+			for (a_itr=root.begin(); a_itr!=root.end(); a_itr++)
+			{
+				pair<int,int> temp_pair=make_pair(stmt1, a_itr->second);
+				AFFECT_LIST::iterator findIter = find(result.begin(), result.end(), temp_pair);
+				if (findIter==result.end())
+				{
+					result.push_back(temp_pair);
+					stacks.push(Affects::getAffectResult(a_itr->second,0));
+				}
+				
+			}
+		}
+	}
+	else if (stmt1==0&& stmt2!=0)
+	{
+		stacks.push(Affects::getAffectResult(0,stmt2));
+		while (!stacks.empty())
+		{
+			AFFECT_LIST root=stacks.top();
+			stacks.pop();
+			for (a_itr=root.begin(); a_itr!=root.end(); a_itr++)
+			{
+				pair<int,int> temp_pair=make_pair(a_itr->first, stmt2);
+				AFFECT_LIST::iterator findIter = find(result.begin(), result.end(), temp_pair);
+				if (findIter==result.end())
+				{
+					result.push_back(temp_pair);
+					stacks.push(Affects::getAffectResult(0,a_itr->first));
+				}
+				
+			}
+		}
+	}
+	else if (stmt1==0 && stmt2==0)
+	{
+		PROC_LIST * p_list=pkb->getAllProc();
+		PROC_LIST::iterator p_itr;
+		set<int,int> tempResult;
+		
+		for (p_itr=p_list->begin(); p_itr!=p_list->end(); p_itr++)
+		{
+
+			for (int i=p_itr->getStartProgLine(); i<=p_itr->getEndProgLine(); i++)
+			{
+				if (Helper::isStatementTypeOf(ASSIGNMENT, i))
+				{
+					stacks.push(Affects::getAffectResult(i,0));
+					while (!stacks.empty())
+					{
+						AFFECT_LIST root=stacks.top();
+						stacks.pop();
+						for (a_itr=root.begin(); a_itr!=root.end(); a_itr++)
+						{
+							pair<int,int> temp_pair=make_pair(i, a_itr->second);
+							AFFECT_LIST::iterator findIter = find(result.begin(), result.end(), temp_pair);
+							if (findIter==result.end())
+							{
+								result.push_back(temp_pair);
+								stacks.push(Affects::getAffectResult(a_itr->second,0));
+							}
+							
+						}
+					}
+
+					stacks.push(Affects::getAffectResult(0,i));
+					while (!stacks.empty())
+					{
+						AFFECT_LIST root=stacks.top();
+						stacks.pop();
+						for (a_itr=root.begin(); a_itr!=root.end(); a_itr++)
+						{
+							pair<int,int> temp_pair=make_pair(a_itr->first, i);
+							AFFECT_LIST::iterator findIter = find(result.begin(), result.end(), temp_pair);
+							if (findIter==result.end())
+							{
+								result.push_back(temp_pair);
+								stacks.push(Affects::getAffectResult(0,a_itr->first));
+							}
+							
+						}
+					}
+				}
+			}
+
+		}
+		
+	}
