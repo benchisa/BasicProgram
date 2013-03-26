@@ -67,7 +67,7 @@ bool EvaluateSibling::getIsSibling(TYPE type1,TYPE type2,INDEX index1,INDEX inde
 			}
 		} 
 		AST * stmtListNode2=NULL;
-		AST_LIST * nodeList = pkb->getASTBy(index2);
+		nodeList = pkb->getASTBy(index2);
 		for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr){
 			if((**astItr).getRootType()==STMT_LIST){
 				stmtListNode2 = *astItr;
