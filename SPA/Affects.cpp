@@ -390,3 +390,8 @@ AFFECT_LIST	Affects::getAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt
 		}
 		
 	}
+	return result;
+}
+		
+	}
+}
