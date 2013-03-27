@@ -241,7 +241,7 @@ bool Affects::computeIsAffectStar(int starting, int ending)
 	
 	MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT,starting,0);
 	int modVar=m_list.begin()->second;
-	cout<<"the modifies variable is: "<<pkb->getVarName(modVar)<<endl;;
+
 
 	stack<USES_LIST> stacks;
 	stacks.push(pkb->getUses(ASSIGNMENT,0,modVar));
