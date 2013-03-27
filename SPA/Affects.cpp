@@ -340,7 +340,7 @@ AFFECT_LIST	Affects::getAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt
 	{
 		PROC_LIST * p_list=pkb->getAllProc();
 		PROC_LIST::iterator p_itr;
-		set<int,int> tempResult;
+	
 		
 		for (p_itr=p_list->begin(); p_itr!=p_list->end(); p_itr++)
 		{
@@ -367,23 +367,7 @@ AFFECT_LIST	Affects::getAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt
 						}
 					}
 
-					stacks.push(Affects::getAffectResult(0,i));
-					while (!stacks.empty())
-					{
-						AFFECT_LIST root=stacks.top();
-						stacks.pop();
-						for (a_itr=root.begin(); a_itr!=root.end(); a_itr++)
-						{
-							pair<int,int> temp_pair=make_pair(a_itr->first, i);
-							AFFECT_LIST::iterator findIter = find(result.begin(), result.end(), temp_pair);
-							if (findIter==result.end())
-							{
-								result.push_back(temp_pair);
-								stacks.push(Affects::getAffectResult(0,a_itr->first));
-							}
-							
-						}
-					}
+				
 				}
 			}
 
