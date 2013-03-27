@@ -171,6 +171,11 @@ bool DesignExtractor::getIsAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM s
 	return Affects::getIsAffectStarResult(stmt1,stmt2);
 }
 
+AFFECT_LIST DesignExtractor::getAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2){
+	return Affects::getAffectStarResult(stmt1, stmt2);
+	
+}
+
 bool DesignExtractor::getIsContainResult(TYPE type, int arg1, TYPE type2, int arg2){
 	return EvaluateContains::getIsContainResult(type, arg1, type2, arg2);
 }

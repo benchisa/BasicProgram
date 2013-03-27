@@ -32,8 +32,8 @@ void SuchThatClause::filterResult(RELATION_LIST * result,RELATION_LIST list,TYPE
 		}else{
 			    RELATION_LIST::iterator itr = list.begin();
 				while(itr!=list.end()){
-					bool firstCond = cond1==ANY||cond1==STATEMENT||extractor->isStatementTypeOf(cond1,itr->first);
-					bool secondCond = cond2==ANY||cond2 ==STATEMENT||extractor->isStatementTypeOf(cond2,itr->second);
+					bool firstCond = cond1==ANY||cond1==STATEMENT||cond1==PROGLINE||extractor->isStatementTypeOf(cond1,itr->first);
+					bool secondCond = cond2==ANY||cond2 ==STATEMENT||cond2==PROGLINE||extractor->isStatementTypeOf(cond2,itr->second);
 					if(firstCond&&secondCond){
 						result->push_back(*itr);
 					}
@@ -252,11 +252,12 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 				iterateAndStore(relList, tmpList);
 			}
 			if(relType==AFFECTST){
-				
+				tmpList = extractor->getAffectStarResult(firstRel->getData(),0);
+				iterateAndStore(relList, tmpList);
 			}
 			if(relType==SIBLING){
 				tmpList = extractor->getSiblingResult(firstType,secondType,firstRel->getData(),-2);
-				filterResult(relList,tmpList,firstType,secondType);
+				//filterResult(relList,tmpList,firstType,secondType);
 			}
 			if(relType==CONTAINS){
 				if(secondType==PLUS||secondType==MINUS||secondType==MULTIPLY||secondType==STMT_LIST){
@@ -364,7 +365,8 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 				iterateAndStore(relList, tmpList);
 			}
 			if(relType==AFFECTST){
-				
+				tmpList = extractor->getAffectStarResult(0,secondRel->getData());
+				iterateAndStore(relList, tmpList);
 			}
 			if(relType==SIBLING){
 				tmpList = extractor->getSiblingResult(firstType,secondType,-2,secondRel->getData());
@@ -471,7 +473,7 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 				//uses, narrow down first rel
 				if(relType==USES){
 					tmpList = extractor->getUsesResult(firstType,0,0);
-					filterResult(relList,tmpList,firstType,secondType);
+					iterateAndStore(relList,tmpList);
 				}
 				if(relType==NEXT){
 					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
@@ -534,7 +536,8 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 					iterateAndStore(relList, tmpList);
 				}
 				if(relType==AFFECTST){
-				
+					tmpList = extractor->getAffectStarResult(0,0);
+					iterateAndStore(relList, tmpList);
 				}
 				if(relType==SIBLING){
 					tmpList = extractor->getSiblingResult(firstType,secondType,-2,-2);

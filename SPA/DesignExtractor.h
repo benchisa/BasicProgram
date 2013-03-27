@@ -64,6 +64,7 @@ public:
 	bool			getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
 	bool			getIsAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
 	AFFECT_LIST		getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
+	AFFECT_LIST		getAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
 
 	bool			getIsContainResult(TYPE, int, TYPE, int);
 	bool			getIsContainStarResult(TYPE, int, TYPE, int);
