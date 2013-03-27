@@ -54,7 +54,7 @@ bool Affects::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 
 bool Affects::computeIsAffect(int starting, int ending, int varIndex)
 {
-	list<int> checkForDuplicate;
+	unordered_map<int,int> checkForDuplicate;
 
 	stack<NEXT_LIST> stacks;
 	stacks.push(EvaluateNext::getNextResult(starting,0));
@@ -78,10 +78,10 @@ bool Affects::computeIsAffect(int starting, int ending, int varIndex)
 					int calleeIndex=pkb->getProcIndex(callee);
 					if (!pkb->isModifies(PROCEDURE,calleeIndex, varIndex))
 					{
-						list<int>::iterator findIter = find(checkForDuplicate.begin(), checkForDuplicate.end(), n_itr->second);
-						if (findIter==checkForDuplicate.end())
+						
+						if (checkForDuplicate.find(n_itr->second)==checkForDuplicate.end())
 						{
-							checkForDuplicate.push_back(n_itr->second);
+							checkForDuplicate.insert(make_pair(n_itr->second,n_itr->second));
 
 							stacks.push(EvaluateNext::getNextResult(n_itr->second, 0));
 
@@ -92,11 +92,11 @@ bool Affects::computeIsAffect(int starting, int ending, int varIndex)
 				{	
 
 					//this is for checking cycle
-					list<int>::iterator findIter = find(checkForDuplicate.begin(), checkForDuplicate.end(), n_itr->second);
-					if (findIter==checkForDuplicate.end())
+					
+					if (checkForDuplicate.find(n_itr->second)==checkForDuplicate.end())
 					{
 
-						checkForDuplicate.push_back(n_itr->second);
+						checkForDuplicate.insert(make_pair(n_itr->second,n_itr->second));
 
 						stacks.push(EvaluateNext::getNextResult(n_itr->second, 0));
 
@@ -109,7 +109,6 @@ bool Affects::computeIsAffect(int starting, int ending, int varIndex)
 	}
 	return false;
 }
-
 AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 {
 	AFFECT_LIST answer;
