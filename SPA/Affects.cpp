@@ -275,8 +275,7 @@ bool Affects::computeIsAffectStar(int starting, int ending)
 					}
 					else
 					{
-						s_itr=allModVarStmt.erase(s_itr);
-						s_itr++;
+						s_itr=allModVarStmt.erase(s_itr++);
 					}
 				}
 			}
