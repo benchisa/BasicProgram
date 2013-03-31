@@ -3,12 +3,12 @@
 
 
 //methods
-QueryEvaluator::QueryEvaluator(PKB* pkb){
+QueryEvaluator::QueryEvaluator(PKB* pkb,DesignExtractor * de){
 	this->pkb = pkb;
-	extractor = new DesignExtractor(pkb);
+	extractor = de;
 }
 QueryEvaluator::~QueryEvaluator(void){
-	delete extractor;
+
 	delete rawData;
 	delete resultTable;
 }	

@@ -2,6 +2,7 @@
 #include "QueryEvaluator.h"
 #include "QueryPreprocessor.h"
 #include "QueryFormatter.h"
+#include "DesignExtractor.h"
 
 class PKB;
 class PQLController
@@ -17,6 +18,7 @@ private:
 	QueryEvaluator* queryEval;
 	QueryPreprocessor* queryProcessor;
 	QueryFormatter* queryFormatter;
+	DesignExtractor* extractor;
 };
 
 
