@@ -15,7 +15,7 @@ class QueryEvaluator{
 public:
 
 	//methods
-	QueryEvaluator(PKB* pkb);
+	QueryEvaluator(PKB* pkb,DesignExtractor * de);
 	~QueryEvaluator(void);
 
 	bool evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrParam);

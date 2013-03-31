@@ -302,6 +302,7 @@ FINALRAW * IntermediateResultTable::uniqueRaw(RAWDATA * currentRaw){
 			//create the final raw value
 			int currentData = currentRaw->at(col).at(row);
 			key.append(static_cast<ostringstream*>( &(ostringstream() << currentData))->str());
+			key.append(",");
 			value.push_back(currentData);
 		}
 		//check unique of current entry

@@ -490,7 +490,7 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 							if(tmpItr->first==tmpItr->second) relList->push_back(pair<int,int>(tmpItr->first,tmpItr->second));
 						}
 					}else{
-						iterateAndStore(relList, tmpList);
+						filterResult(relList,tmpList,firstType,secondType);
 					}
 				}
 				if(relType==CALL){
