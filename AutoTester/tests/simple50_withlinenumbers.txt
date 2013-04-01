@@ -1,0 +1,51 @@
+procedure ABC
+{
+1.	i=1;
+2.	b=200 ;
+3.	c= a   ;
+4.	if a then{
+5.	while beta {
+6.	oSCar  = 1 * beta + tmp;
+7.	while tmp {
+8.	oSCar = I - (k + j1k * chArlie); }	}
+9.	while x {
+10.	x = x + 1;
+11.	if left then {
+12.	call Second;
+13.	if right then {
+14.	Romeo = Romeo - 1;
+15.	b = 0;
+16.	c = delta    + l  * width + Romeo; }
+	else {
+17.	while c {
+18.	call    Init;
+19.	c = c -1   	; } 
+20.	x = x+ 1; }}
+	else   {
+21.	call Init; } } }
+	else{
+22.	call Init; 
+}
+}
+
+procedure Second{
+23.	if x   then  {
+24.	Y1   	= 0;}
+	else  { 
+25.	if left then {
+26.	call Second;
+27.	if right then {
+28.	Romeo = Romeo - 1;
+29.	b =0;
+30.	c = delta  + l  * width + Romeo; }
+	else {
+31.	while c {
+32.	call    Init;
+33.	c = c -1   ;} 
+34.	x = x+ 1; }		}
+	else   {
+35.	call Init; }	
+} }
+procedure Init {
+36.	while a{
+37.	x1   = 0; } 	}
