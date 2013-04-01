@@ -41,13 +41,13 @@ void SuchThatClause::filterResult(RELATION_LIST * result,RELATION_LIST list,TYPE
 				}	
 		}
 }
-RELATION_LIST* SuchThatClause::evaluateSuchThatTree(QTREE* suchThatTree){
+RELATION_LIST * SuchThatClause::evaluateSuchThatTree(QTREE* suchThatTree){
 	this->suchThatTree = suchThatTree;
 	
 
 	return SuchThatClause::evaluateSuchThat();
 }
-RELATION_LIST* SuchThatClause::evaluateSuchThat(){
+RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 	
 	QTREE * currentNode;
 	currentNode = suchThatTree->getFirstDescendant();
@@ -533,11 +533,25 @@ RELATION_LIST* SuchThatClause::evaluateSuchThat(){
 				}
 				if(relType==AFFECTS){
 					tmpList = extractor->getAffectResult(0,0);
-					iterateAndStore(relList, tmpList);
+
+					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
+						for(RELATION_LIST::iterator tmpItr = tmpList.begin();tmpItr!=tmpList.end();tmpItr++){
+							if(tmpItr->first==tmpItr->second) relList->push_back(pair<int,int>(tmpItr->first,tmpItr->second));
+						}
+					}else{
+						iterateAndStore(relList, tmpList);
+					}
+					
 				}
 				if(relType==AFFECTST){
 					tmpList = extractor->getAffectStarResult(0,0);
-					iterateAndStore(relList, tmpList);
+					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
+						for(RELATION_LIST::iterator tmpItr = tmpList.begin();tmpItr!=tmpList.end();tmpItr++){
+							if(tmpItr->first==tmpItr->second) relList->push_back(pair<int,int>(tmpItr->first,tmpItr->second));
+						}
+					}else{
+						iterateAndStore(relList, tmpList);
+					}
 				}
 				if(relType==SIBLING){
 					tmpList = extractor->getSiblingResult(firstType,secondType,-2,-2);
