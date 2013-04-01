@@ -165,51 +165,6 @@ assign a;
 Select BOOLEAN such that Contains("xylo", a);
 true
 1000
-23 - Contains, Typed :: Contains(procName, variable)?
-variable v;
-Select BOOLEAN such that Contains("xylo", v);
-true
-1000
-24 - Contains, Typed :: Contains(procName, if)?
-if f;
-Select BOOLEAN such that Contains("xylo", f)
-true
-1000
-25 - Contains, Typed :: Contains(procName, stmtList)?
-stmtList st; 
-Select BOOLEAN such that Contains("xylo", st);
-true
-1000
-26 - Contains, Typed :: Contains(procName, procedure)?
-procedure p; 
-Select BOOLEAN such that Contains("xylo", p);
-true
-1000
-27 - Contains, Typed :: Contains(procName, plus)?
-plus pl;
-Select BOOLEAN such that Contains("xylo", pl);
-true
-1000
-28 - Contains, Typed :: Contains(procName, minus)?
-minus m;
-Select BOOLEAN such that Contains("xylo", m)
-false
-1000
-29 - Contains, Typed :: Contains(procName, multiply)?
-multiply ml; 
-Select BOOLEAN such that Contains("xylo", ml)
-false
-1000
-30 - Contains, Typed :: Contains(procName, constant)?
-constant c; 
-Select BOOLEAN such that Contains("xylo", c)
-true
-1000
-31 - Contains, Typed :: Contains(ifStmt, assign)?
-if f; assign a; stmt s;
-Select s such that Contains(f, a);
-22,23,25,26,37,38
-1000
 32 - Contains, Typed :: Contains(ifStmt, variable)?
 if f; variable v; stmt s;
 Select s such that Contains(f, v);

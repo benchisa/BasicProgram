@@ -1,0 +1,122 @@
+24
+cat: Test Case 1, Contains(unknown, known)
+1 - Contains, Typed :: Contains(stmt, stmt#)?
+stmt s; 
+Select s such that Contains(s, 1);
+1
+1000
+2 - Contains, Typed :: Contains(stmtList, stmt#)?
+stmtList st; 
+Select st such that Contains(st, 1);
+1
+1000
+3 - Contains, Typed :: Contains(assign, varName)?
+stmt s; assign a;
+Select s such that Contains(a, "apple");
+1,2,3,20,22,32,39,40
+1000
+4 - Contains, Typed :: Contains(if, varName)?
+stmt s; if f;
+Select s such that Contains(f, "innard")
+21
+1000
+5 - Contains, Typed :: Contains(stmtList, varName)?
+stmt s; stmtList st; 
+Select st such that Contains(st, "apple");
+1,22,27,34
+1000
+6 - Contains, Typed :: Contains*(procedure, varName)?
+procedure p; 
+Select p such that Contains*(p, "apple");
+xylo,yello,zebra
+1000
+7 - Contains, Typed :: Contains*(plus, varName)?
+stmt s; plus pl;
+Select s such that Contains*(pl, "apple");
+2,19,40
+1000
+8 - Contains, Typed :: Contains*(minus, varName)?
+stmt s; minus m;
+Select s such that Contains*(m, "b")
+0
+1000
+9 - Contains, Typed :: Contains*(multiply, varName)?
+stmt s; multiply ml; 
+Select s such that Contains*(ml, "b")
+0
+1000
+10 - Contains, Typed :: Contains(ifStmt, varName)?
+if f; stmt s;
+Select f such that Contains(f, "innard")
+21
+1000
+11 - Contains, Typed :: Contains*(stmtList, ifStmt)?
+if f; stmtList st; stmt s;
+Select s such that Contains*(st, f);
+1,23
+1000
+12 - Contains, Typed :: Contains*(while, ifStmt)?
+if f; while w; stmt s;
+Select s such that Contains*(w, f)
+0
+1000
+13 - Contains, Typed :: Contains*(ifStmt, else)?
+else e; if f; stmt s;
+Select s such that Contains*(f, e)
+21,24,36
+1000
+14 - Contains, Typed :: Contains*(while, else)?
+else e; while w; stmt s;
+Select s such that Contains*(w, e)
+0
+1000
+15 - Contains, Typed :: Contains*(ifStmt, then)?
+then t; if f; stmt s;
+Select s such that Contains*(f, t)
+21,24,36
+1000
+16 - Contains, Typed :: Contains*(while, then)?
+then t; while w; stmt s;
+Select s such that Contains*(w, t)
+0
+1000
+17 - Contains, Typed :: Contains*(ifStmt, while)?
+while w; if f;
+Select w such that Contains*(f, w)
+0
+1000
+18 - Contains, Typed :: Contains*(stmtList, while)?
+while w; stmtList st;
+Select st such that Contains*(st, w);
+1,10,11,27,42
+1000
+19 - Contains, Typed :: Contains*(plus, varName)?
+plus pl; stmt s;
+Select s such that Contains*(pl, "apple");
+2,19,40
+1000
+20 - Contains, Typed :: Contains*(minus, varName)?
+minus m; stmt s;
+Select s such that Contains*(m, "apple")
+0
+1000
+21 - Contains, Typed :: Contains*(multiply, varName)?
+multiply ml; stmt s;
+Select s such that Contains*(pl, "apple")
+0
+1000
+22 - Contains, Typed :: Contains*(plus, constant)?
+plus pl;
+Select s such that Contains*(pl, 1);
+1,6,34,39
+1000
+23 - Contains, Typed :: Contains*(minus, constant)?
+minus m; stmt s;
+Select s such that Contains*(m, 1)
+0
+1000
+24 - Contains, Typed :: Contains*(multiply, constant)?
+multiply ml; stmt s;
+Select s such that Contains*(ml, 1)
+0
+1000
