@@ -54,7 +54,6 @@ QueryPreprocessor::QueryPreprocessor(PKB* pkb){
 }
 
 QueryPreprocessor::~QueryPreprocessor(void){
-	delete paramTable;
 	delete qVarTable;
 	delete dVarTable;
 }
