@@ -322,7 +322,6 @@ void GrammarTable::createArgTable(){
 	case5.push_back(ANY);
 
 	case6.push_back(ASSIGNMENT);
-	case6.push_back(STATEMENT);
 	case6.push_back(ANY);
 	
 	case7.push_back(PROCEDURE);
