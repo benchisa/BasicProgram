@@ -54,7 +54,7 @@ bool Affects::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 
 bool Affects::computeIsAffect(int starting, int ending, int varIndex)
 {
-	list<int> checkForDuplicate;
+	unordered_map<int,int> checkForDuplicate;
 
 	stack<NEXT_LIST> stacks;
 	stacks.push(EvaluateNext::getNextResult(starting,0));
@@ -78,10 +78,10 @@ bool Affects::computeIsAffect(int starting, int ending, int varIndex)
 					int calleeIndex=pkb->getProcIndex(callee);
 					if (!pkb->isModifies(PROCEDURE,calleeIndex, varIndex))
 					{
-						list<int>::iterator findIter = find(checkForDuplicate.begin(), checkForDuplicate.end(), n_itr->second);
-						if (findIter==checkForDuplicate.end())
+						
+						if (checkForDuplicate.find(n_itr->second)==checkForDuplicate.end())
 						{
-							checkForDuplicate.push_back(n_itr->second);
+							checkForDuplicate.insert(make_pair(n_itr->second,n_itr->second));
 
 							stacks.push(EvaluateNext::getNextResult(n_itr->second, 0));
 
@@ -92,11 +92,11 @@ bool Affects::computeIsAffect(int starting, int ending, int varIndex)
 				{	
 
 					//this is for checking cycle
-					list<int>::iterator findIter = find(checkForDuplicate.begin(), checkForDuplicate.end(), n_itr->second);
-					if (findIter==checkForDuplicate.end())
+					
+					if (checkForDuplicate.find(n_itr->second)==checkForDuplicate.end())
 					{
 
-						checkForDuplicate.push_back(n_itr->second);
+						checkForDuplicate.insert(make_pair(n_itr->second,n_itr->second));
 
 						stacks.push(EvaluateNext::getNextResult(n_itr->second, 0));
 
@@ -109,7 +109,6 @@ bool Affects::computeIsAffect(int starting, int ending, int varIndex)
 	}
 	return false;
 }
-
 AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 {
 	AFFECT_LIST answer;
@@ -236,12 +235,17 @@ bool Affects::getIsAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 }
 
 	 
-	bool Affects::computeIsAffectStar(int starting, int ending)
+bool Affects::computeIsAffectStar(int starting, int ending)
 {
+	
 	MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT,starting,0);
 	int modVar=m_list.begin()->second;
+
+
 	stack<USES_LIST> stacks;
 	stacks.push(pkb->getUses(ASSIGNMENT,0,modVar));
+	stack<int> startingx;
+	startingx.push(starting);
 	USES_LIST::iterator u_itr;
 	set<int> allModVarStmt;
 	
@@ -249,47 +253,55 @@ bool Affects::getIsAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 	{
 		USES_LIST root=stacks.top();
 		stacks.pop();
+		int tempStarting=startingx.top();
+		startingx.pop();
 		//for every subsequent statement that use modify variable
 		for (u_itr=root.begin();u_itr!=root.end(); u_itr++)
 		{
 			
-			//check if it is affected by the statement that contains modify variable
-			if (Affects::getIsAffectResult(starting,u_itr->first) )
-			{
-			
-					m_list=pkb->getModifies(ASSIGNMENT,u_itr->first,0);
-					
-					modVar=m_list.begin()->second;
-					MODIFIES_LIST temp=pkb->getModifies(ASSIGNMENT, 0, modVar);
-					MODIFIES_LIST::iterator m_itr;
-					bool test=true;
-					allModVarStmt.insert(u_itr->first);
-					starting=u_itr->first;
-					stacks.push(pkb->getUses(ASSIGNMENT,0,modVar));
-						
-				
-			}
-		
 			if (u_itr->first==ending)
 			{
-				set<int>::iterator s_itr;
+				
+				set<int>::iterator s_itr=allModVarStmt.begin();
+				
 				//cout<<ending<<" "<<pkb->getVarName(modVar)<<endl;;
-				for (s_itr=allModVarStmt.begin(); s_itr!=allModVarStmt.end(); s_itr++)
+				while (s_itr!=allModVarStmt.end())
 				{
+					
 					if (Affects::getIsAffectResult(*s_itr,ending))
 					{
 						return true;
 					}
-					
-					
+					else
+					{
+						s_itr=allModVarStmt.erase(s_itr++);
+					}
 				}
 			}
+			
+			//check if it is affected by the statement that contains modify variable
+			else if (Affects::getIsAffectResult(tempStarting,u_itr->first) )
+			{
+					
+					MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT,u_itr->first,0);
+					modVar=m_list.begin()->second;
+					
+					
+					startingx.push(u_itr->first);
+					allModVarStmt.insert(u_itr->first);
+					stacks.push(pkb->getUses(ASSIGNMENT,0,modVar));
+					
+						
+				
+			}
+			
+		
+			
 		}
 	}
 	return false;
 	
 }
-
 AFFECT_LIST	Affects::getAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 {
 	AFFECT_LIST result;

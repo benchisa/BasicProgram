@@ -1,0 +1,112 @@
+22
+cat: Test Case 1, Contains(known, unknown)
+1 - Contains, Typed :: Contains(stmt#, stmt#)?
+stmt s; 
+Select s such that Contains(1, s);
+1
+5000
+2 - Contains, Typed :: Contains(stmt#, stmtList)?
+stmt s; stmtList st; 
+Select s such that Contains(1, st);
+2
+5000
+3 - Contains, Typed :: Contains(stmt#, variable)?
+stmt s; variable v;
+Select s such that Contains(1, v);
+0
+5000
+4 - Contains, Typed :: Contains(stmt#, procedure)?
+stmt s; procedure p;
+Select s such that Contains(1, p);
+1
+5000
+5 - Contains, Typed :: Contains(stmt#, assignment)?
+stmt s; assign a;
+Select a such that Contains(1, a);
+0
+5000
+6 - Contains, Typed :: Contains(stmt#, if)?
+stmt s; if f;
+Select s such that Contains(1, f);
+0
+5000
+7 - Contains, Typed :: Contains(stmt#, while)?
+stmt s; while w;
+Select s such that Contains(1, w);
+0
+5000
+8 - Contains, Typed :: Contains(stmt#, plus)?
+stmt s; plus pl;
+Select s such that Contains(1, pl);
+0
+5000
+9 - Contains, Typed :: Contains(stmt#, minus)?
+stmt s; minus m;
+Select s such that Contains(1, m)
+0
+5000
+10 - Contains, Typed :: Contains(stmt#, multiply)?
+stmt s; multiply ml; 
+Select s such that Contains(1, ml)
+0
+1000
+11 - Contains, Typed :: Contains(stmt#, divide)?
+stmt s; divide d;
+Select s such that Contains(1, d);
+0
+5000
+12 - Contains, Typed :: Contains(stmt#, call)?
+stmt s; call c;
+Select s such that Contains(1, c);
+0
+5000
+13 - Contains, Typed :: Contains(varName, assign)?
+stmt s; assign a;
+Select s such that Contains("b", a);
+2
+5000
+14 - Contains, Typed :: Contains(varName, variable)?
+stmt s; variable v;
+Select s such that Contains("b", variable);
+2
+5000
+15 - Contains, Typed :: Contains(varName, if)?
+stmt s; if f;
+Select s such that Contains("b", f)
+0
+5000
+16 - Contains, Typed :: Contains(varName, stmtList)?
+stmt s; stmtList st; 
+Select s such that Contains("b", st);
+2
+5000
+17 - Contains, Typed :: Contains(varName, procedure)?
+stmt s; procedure p; 
+Select s such that Contains("b", p);
+1
+5000
+18 - Contains, Typed :: Contains(varName, plus)?
+stmt s; plus pl;
+Select s such that Contains("b", pl);
+2
+5000
+19 - Contains, Typed :: Contains(varName, minus)?
+stmt s; minus m;
+Select s such that Contains("b", m)
+0
+5000
+20 - Contains, Typed :: Contains(stmt#, multiply)?
+stmt s; multiply ml; 
+Select s such that Contains("b", ml)
+0
+1000
+21 - Contains, Typed :: Contains(stmt#, divide)?
+stmt s; divide d;
+Select s such that Contains("b", d);
+0
+5000
+22 - Contains, Typed :: Contains(stmt#, call)?
+stmt s; call c;
+Select s such that Contains("b", c);
+0
+5000

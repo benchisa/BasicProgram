@@ -40,7 +40,7 @@ QueryPreprocessor::QueryPreprocessor(PKB* pkb){
 	suchthat_cl		= "such that\\s+("+rel+")\\s*\\(\\s*("+ref+")\\s*,\\s*("+ref+")\\s*\\)(\\s+and\\s+("+rel+")\\s*\\(\\s*("+ref+")\\s*,\\s*("+ref+")\\s*\\))"+optional;
 	with_cl			= "with\\s+("+attrCompare+")(\\s+and\\s+("+attrCompare+"))"+optional;
 	pattern_cl		= "pattern\\s+"+synonym+"\\s*\\(.+,.+,*\\)(\\s+and\\s+"+synonym+"\\s*\\(.+,.+,*\\))"+optional;
-		
+
 	/*
 	cout<<"result_cl==============="<<endl;
 	cout<<result_cl<<endl;
@@ -54,7 +54,6 @@ QueryPreprocessor::QueryPreprocessor(PKB* pkb){
 }
 
 QueryPreprocessor::~QueryPreprocessor(void){
-	delete paramTable;
 	delete qVarTable;
 	delete dVarTable;
 }
@@ -79,7 +78,7 @@ bool QueryPreprocessor::preProcess(){
 
 	bool validated = validate();
 	cleanUp();
-	
+
 	return validated;
 }
 
@@ -126,13 +125,13 @@ bool QueryPreprocessor::validate(){
 	selectBool=false;	
 	clauseCount=0;
 	groupCount=0;
-	
+
 	bool selectOK = false;
 	bool conditionOK = false;
 
 	for(int i=0;i<(*tokens).size();i++){
 		currToken = (*tokens).at(i);
-		
+
 		//cout<<"i= "<< i<< endl;
 		//cout<<currToken<<endl;
 
@@ -164,7 +163,7 @@ bool QueryPreprocessor::validate(){
 	else{
 		return false;
 	}
-	
+
 
 }
 
@@ -200,7 +199,7 @@ void QueryPreprocessor::setQTree(){
 
 	//prepare sort
 	//sortQVarTable();
-	
+
 	//initialise grouping
 	for (int i=0;i<groupCount;i++){
 		groupings.push_back(vector<int>());
@@ -222,7 +221,7 @@ void QueryPreprocessor::setQTree(){
 				flagGroups.push_back(grpNum);
 			}	
 		}
-		
+
 		//get groupings right
 		vector<int> cN = var.clauseNum;
 		for (int v = 0; v<cN.size(); v++){
@@ -235,7 +234,7 @@ void QueryPreprocessor::setQTree(){
 
 	//want to further rearrange the clauses in the groups
 
-	
+
 	//insert the clauses NOT participating in results
 
 	//1. add clauses with two constants
@@ -277,22 +276,22 @@ void QueryPreprocessor::setQTree(){
 	/*
 	//3. add clause with two unknowns
 	for (int i=0; i<sorted_qVarTable.size(); i++){
-		dpair = getQVar(sorted_qVarTable.at(i).first);
-		//choose those not flagged for selected
-		if(!isFlaggedGroup(dpair.second.groupNum)){
-			//retrieve the clause number
-			clauseNums = dpair.second.clauseNum;
-			for (int i=0; i<clauseNums.size(); i++){
-				if (!hasConstantVar(clauseNums.at(i))){
-					currNode = clauses.at(clauseNums.at(i));
-					if (currNode!=NULL){
-						arrangeClauseByRel(currNode);//-------------Apply filters here
-						clauses.at(clauseNums.at(i)) = NULL;
-					}
-				}
+	dpair = getQVar(sorted_qVarTable.at(i).first);
+	//choose those not flagged for selected
+	if(!isFlaggedGroup(dpair.second.groupNum)){
+	//retrieve the clause number
+	clauseNums = dpair.second.clauseNum;
+	for (int i=0; i<clauseNums.size(); i++){
+	if (!hasConstantVar(clauseNums.at(i))){
+	currNode = clauses.at(clauseNums.at(i));
+	if (currNode!=NULL){
+	arrangeClauseByRel(currNode);//-------------Apply filters here
+	clauses.at(clauseNums.at(i)) = NULL;
+	}
+	}
 
-			}
-		}
+	}
+	}
 	}
 	joinClauses();
 	*/
@@ -326,26 +325,26 @@ void QueryPreprocessor::setQTree(){
 		}
 	}
 	joinClauses();
-	
+
 	/*
 	//6. add clause with two unknowns
 	for (int i=0; i<sorted_qVarTable.size(); i++){
-		dpair = getQVar(sorted_qVarTable.at(i).first);
-			//choose those flagged for selected
-			if(isFlaggedGroup(dpair.second.groupNum)){
-				//retrieve the clause number
-				clauseNums = dpair.second.clauseNum;
-				for (int i=0; i<clauseNums.size(); i++){
-					if (!hasConstantVar(clauseNums.at(i))){
-						currNode = clauses.at(clauseNums.at(i));
-						if (currNode!=NULL){
-							arrangeClauseByRel(currNode);//-------------Apply filters here
-							clauses.at(clauseNums.at(i)) = NULL;
-						}
-					}
-				
-			}
-		}
+	dpair = getQVar(sorted_qVarTable.at(i).first);
+	//choose those flagged for selected
+	if(isFlaggedGroup(dpair.second.groupNum)){
+	//retrieve the clause number
+	clauseNums = dpair.second.clauseNum;
+	for (int i=0; i<clauseNums.size(); i++){
+	if (!hasConstantVar(clauseNums.at(i))){
+	currNode = clauses.at(clauseNums.at(i));
+	if (currNode!=NULL){
+	arrangeClauseByRel(currNode);//-------------Apply filters here
+	clauses.at(clauseNums.at(i)) = NULL;
+	}
+	}
+
+	}
+	}
 	}
 	joinClauses();
 	*/
@@ -361,84 +360,84 @@ void QueryPreprocessor::setQTree(){
 	/*
 	//7. add everything else (make sure everything is added)
 	for (int i=0; i<clauses.size(); i++){
-		currNode = clauses.at(i);
-		if (currNode!=NULL){
-			arrangeClauseByRel(currNode);
-			clauses.at(i) = NULL;
-		}
+	currNode = clauses.at(i);
+	if (currNode!=NULL){
+	arrangeClauseByRel(currNode);
+	clauses.at(i) = NULL;
+	}
 	}
 
 	joinClauses();	
-	
+
 	*/
 
 	//old function
 	/*for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
-		
-		if(!isFlaggedGroup(dVarIter->second.groupNum)){
-			//retrieve the clause number
-			clauseNums = dVarIter->second.clauseNum;
-			for (int i=0; i<clauseNums.size(); i++){
-				currNode = clauses.at(clauseNums.at(i));
-				if (currNode!=NULL){
-					arrangeClauseByRel(currNode);
-					clauses.at(clauseNums.at(i)) = NULL;
-				}
-			}
-		}		
+
+	if(!isFlaggedGroup(dVarIter->second.groupNum)){
+	//retrieve the clause number
+	clauseNums = dVarIter->second.clauseNum;
+	for (int i=0; i<clauseNums.size(); i++){
+	currNode = clauses.at(clauseNums.at(i));
+	if (currNode!=NULL){
+	arrangeClauseByRel(currNode);
+	clauses.at(clauseNums.at(i)) = NULL;
 	}
-	
+	}
+	}		
+	}
+
 
 	//insert into QTREE the clauses with the variables NOT from those flagged groups 
 	//insert those with 1 constant first
 	for (int i=0; i<sorted_qVarTable.size(); i++){
-		dpair = getQVar(sorted_qVarTable.at(i).first);
-		//choose those not flagged for selected
-		if(!isFlaggedGroup(dpair.second.groupNum)){
-			//retrieve the clause number
-			clauseNums = dpair.second.clauseNum;
-			for (int i=0; i<clauseNums.size(); i++){
-				if (hasConstantVar(clauseNums.at(i))){
-					currNode = clauses.at(clauseNums.at(i));
-					if (currNode!=NULL){
-						arrangeClauseByRel(currNode);
-						clauses.at(clauseNums.at(i)) = NULL;
-					}
-				}
-			}
-		}
+	dpair = getQVar(sorted_qVarTable.at(i).first);
+	//choose those not flagged for selected
+	if(!isFlaggedGroup(dpair.second.groupNum)){
+	//retrieve the clause number
+	clauseNums = dpair.second.clauseNum;
+	for (int i=0; i<clauseNums.size(); i++){
+	if (hasConstantVar(clauseNums.at(i))){
+	currNode = clauses.at(clauseNums.at(i));
+	if (currNode!=NULL){
+	arrangeClauseByRel(currNode);
+	clauses.at(clauseNums.at(i)) = NULL;
 	}
-	
+	}
+	}
+	}
+	}
+
 	joinClauses();
-	
+
 	//insert those with two unknowns
 	for (int i=0; i<sorted_qVarTable.size(); i++){
-		dpair = getQVar(sorted_qVarTable.at(i).first);
-		//choose those not flagged for selected
-		if(!isFlaggedGroup(dpair.second.groupNum)){
-			//retrieve the clause number
-			clauseNums = dpair.second.clauseNum;
-			for (int i=0; i<clauseNums.size(); i++){
-				if (!hasConstantVar(clauseNums.at(i))){
-					currNode = clauses.at(clauseNums.at(i));
-					if (currNode!=NULL){
-						arrangeClauseByRel(currNode);
-						clauses.at(clauseNums.at(i)) = NULL;
-					}
-				}
-			}
-		}
+	dpair = getQVar(sorted_qVarTable.at(i).first);
+	//choose those not flagged for selected
+	if(!isFlaggedGroup(dpair.second.groupNum)){
+	//retrieve the clause number
+	clauseNums = dpair.second.clauseNum;
+	for (int i=0; i<clauseNums.size(); i++){
+	if (!hasConstantVar(clauseNums.at(i))){
+	currNode = clauses.at(clauseNums.at(i));
+	if (currNode!=NULL){
+	arrangeClauseByRel(currNode);
+	clauses.at(clauseNums.at(i)) = NULL;
+	}
+	}
+	}
+	}
 	}
 
 	joinClauses();
 
 	//insert those clauses with wildcards
 	for (int i=0; i<wildClauses.size(); i++){
-		currNode = clauses.at(wildClauses.at(i));
-		if (currNode!=NULL){
-			arrangeClauseByRel(currNode);
-			clauses.at(wildClauses.at(i)) = NULL;
-		}
+	currNode = clauses.at(wildClauses.at(i));
+	if (currNode!=NULL){
+	arrangeClauseByRel(currNode);
+	clauses.at(wildClauses.at(i)) = NULL;
+	}
 	}
 
 	joinClauses();
@@ -446,71 +445,71 @@ void QueryPreprocessor::setQTree(){
 	//then insert the rest (participating in result)
 	//with 1 constant
 	for (int i=0; i<sorted_qVarTable.size(); i++){
-		dpair = getQVar(sorted_qVarTable.at(i).first);
-		//choose those flagged for selected
-		if(isFlaggedGroup(dpair.second.groupNum)){
-			//retrieve the clause number
-			clauseNums = dpair.second.clauseNum;
-			for (int i=0; i<clauseNums.size(); i++){
-				if (hasConstantVar(clauseNums.at(i))){
-					currNode = clauses.at(clauseNums.at(i));
-					if (currNode!=NULL){
-						currNode->setData(1);
-						arrangeClauseByRel(currNode);
-						clauses.at(clauseNums.at(i)) = NULL;
-					}
-				}
-			}
-		}
+	dpair = getQVar(sorted_qVarTable.at(i).first);
+	//choose those flagged for selected
+	if(isFlaggedGroup(dpair.second.groupNum)){
+	//retrieve the clause number
+	clauseNums = dpair.second.clauseNum;
+	for (int i=0; i<clauseNums.size(); i++){
+	if (hasConstantVar(clauseNums.at(i))){
+	currNode = clauses.at(clauseNums.at(i));
+	if (currNode!=NULL){
+	currNode->setData(1);
+	arrangeClauseByRel(currNode);
+	clauses.at(clauseNums.at(i)) = NULL;
+	}
+	}
+	}
+	}
 	}
 
 	joinClauses();
 
 	//with two unknowns
 	for (int i=0; i<sorted_qVarTable.size(); i++){
-		dpair = getQVar(sorted_qVarTable.at(i).first);
-		//choose those not flagged for selected
-		if(isFlaggedGroup(dpair.second.groupNum)){
-			//retrieve the clause number
-			clauseNums = dpair.second.clauseNum;
-			for (int i=0; i<clauseNums.size(); i++){
-				if (!hasConstantVar(clauseNums.at(i))){
-					currNode = clauses.at(clauseNums.at(i));
-					if (currNode!=NULL){
-						currNode->setData(1);
-						arrangeClauseByRel(currNode);
-						clauses.at(clauseNums.at(i)) = NULL;
-					}
-				}
-			}
-		}
+	dpair = getQVar(sorted_qVarTable.at(i).first);
+	//choose those not flagged for selected
+	if(isFlaggedGroup(dpair.second.groupNum)){
+	//retrieve the clause number
+	clauseNums = dpair.second.clauseNum;
+	for (int i=0; i<clauseNums.size(); i++){
+	if (!hasConstantVar(clauseNums.at(i))){
+	currNode = clauses.at(clauseNums.at(i));
+	if (currNode!=NULL){
+	currNode->setData(1);
+	arrangeClauseByRel(currNode);
+	clauses.at(clauseNums.at(i)) = NULL;
+	}
+	}
+	}
+	}
 	}
 
 	joinClauses();
 
 	//old function
 	for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
-		if(isFlaggedGroup(dVarIter->second.groupNum)){
-			clauseNums = dVarIter->second.clauseNum;
-			for (int i=0; i<clauseNums.size(); i++){
-				currNode = clauses.at(clauseNums.at(i));
-				if (currNode!=NULL){
-					currNode->setData(1);
-					arrangeClauseByRel(currNode);
-					clauses.at(clauseNums.at(i)) = NULL;
-				}
-			}
-		}		
+	if(isFlaggedGroup(dVarIter->second.groupNum)){
+	clauseNums = dVarIter->second.clauseNum;
+	for (int i=0; i<clauseNums.size(); i++){
+	currNode = clauses.at(clauseNums.at(i));
+	if (currNode!=NULL){
+	currNode->setData(1);
+	arrangeClauseByRel(currNode);
+	clauses.at(clauseNums.at(i)) = NULL;
 	}
-	
-	
+	}
+	}		
+	}
+
+
 
 	for (int i=0; i<clauses.size(); i++){
-		currNode = clauses.at(i);
-		if (currNode!=NULL){
-			arrangeClauseByRel(currNode);
-			clauses.at(i) = NULL;
-		}
+	currNode = clauses.at(i);
+	if (currNode!=NULL){
+	arrangeClauseByRel(currNode);
+	clauses.at(i) = NULL;
+	}
 	}
 
 	joinClauses();
@@ -520,25 +519,25 @@ void QueryPreprocessor::setQTree(){
 vector<QTREE*> QueryPreprocessor::addToProbe(QTREE* currClause){
 	vector<QTREE*> queue;
 	if (currClause->getType() == SUCHTHAT){
-	//found in probed, add to queue
-	int first = currClause->getFirstDescendant()->getFirstDescendant()->getData();
-	int second = currClause->getFirstDescendant()->getLastDescendant()->getData();
-	vector<int>::iterator posfirst = std::find(trackProbes.begin(),trackProbes.end(),first);
-	vector<int>::iterator possecond = std::find(trackProbes.begin(),trackProbes.end(),second);
-	//both arguments probed
-	if(posfirst!=trackProbes.end() && possecond!=trackProbes.end()){
-		queue.push_back(currClause);
-	}
-	//first argument probed
-	else if (posfirst!=trackProbes.end()){
-		queue.push_back(currClause);
-		trackProbes.push_back(second);
-	}
-	//second argument probed
-	else if (possecond!=trackProbes.end()){
-		queue.push_back(currClause);
-		trackProbes.push_back(first);
-	}
+		//found in probed, add to queue
+		int first = currClause->getFirstDescendant()->getFirstDescendant()->getData();
+		int second = currClause->getFirstDescendant()->getLastDescendant()->getData();
+		vector<int>::iterator posfirst = std::find(trackProbes.begin(),trackProbes.end(),first);
+		vector<int>::iterator possecond = std::find(trackProbes.begin(),trackProbes.end(),second);
+		//both arguments probed
+		if(posfirst!=trackProbes.end() && possecond!=trackProbes.end()){
+			queue.push_back(currClause);
+		}
+		//first argument probed
+		else if (posfirst!=trackProbes.end()){
+			queue.push_back(currClause);
+			trackProbes.push_back(second);
+		}
+		//second argument probed
+		else if (possecond!=trackProbes.end()){
+			queue.push_back(currClause);
+			trackProbes.push_back(first);
+		}
 	}
 	else if (currClause->getType() == PATTERN){
 		int first = currClause->getFirstDescendant()->getData();
@@ -942,10 +941,10 @@ void QueryPreprocessor::processClauses(vector<int> cl,int mode){
 
 void QueryPreprocessor::arrangeClauseByRel(QTREE* node){
 	TYPE relType;	
-	
+
 
 	relType = node->getFirstDescendant()->getType();
-	
+
 	//pattern, with
 	if (node->getType()==PATTERN || node->getType()==WITH){
 		if (firstWithPatt->getType()==ANY){
@@ -1046,53 +1045,53 @@ void QueryPreprocessor::arrangeClauseByRel(QTREE* node){
 	else if (relType==MODIFIES||relType==USES){
 		if (node->getFirstDescendant()->getFirstDescendant()->getType()==QUERYVAR){
 			//(unknown,known)
-				//find out what is the first unknown: stmt,while/if,assign,call,proc?
-				if(getQVarType(node->getFirstDescendant()->getFirstDescendant()->getData())==STATEMENT){
-					if (firstUsesMod_Stmt->getType()==ANY){
-						firstUsesMod_Stmt = node;
-					}
-					else{
-						lastUsesMod_Stmt->setSibling(node);
-					}
-					lastUsesMod_Stmt = node;
+			//find out what is the first unknown: stmt,while/if,assign,call,proc?
+			if(getQVarType(node->getFirstDescendant()->getFirstDescendant()->getData())==STATEMENT){
+				if (firstUsesMod_Stmt->getType()==ANY){
+					firstUsesMod_Stmt = node;
 				}
-				else if(getQVarType(node->getFirstDescendant()->getFirstDescendant()->getData())==ASSIGNMENT){
-					if (firstUsesMod_Assign->getType()==ANY){
-						firstUsesMod_Assign = node;
-					}
-					else{
-						lastUsesMod_Assign->setSibling(node);
-					}
-					lastUsesMod_Assign = node;
+				else{
+					lastUsesMod_Stmt->setSibling(node);
 				}
-				else if(getQVarType(node->getFirstDescendant()->getFirstDescendant()->getData())==PROCEDURE){
-					if (firstUsesMod_Proc->getType()==ANY){
-						firstUsesMod_Proc = node;
-					}
-					else{
-						lastUsesMod_Proc->setSibling(node);
-					}
-					lastUsesMod_Proc = node;
+				lastUsesMod_Stmt = node;
+			}
+			else if(getQVarType(node->getFirstDescendant()->getFirstDescendant()->getData())==ASSIGNMENT){
+				if (firstUsesMod_Assign->getType()==ANY){
+					firstUsesMod_Assign = node;
 				}
-				else if(getQVarType(node->getFirstDescendant()->getFirstDescendant()->getData())==CALL){
-					if (firstUsesMod_Call->getType()==ANY){
-						firstUsesMod_Call = node;
-					}
-					else{
-						lastUsesMod_Call->setSibling(node);
-					}
-					lastUsesMod_Call = node;
+				else{
+					lastUsesMod_Assign->setSibling(node);
 				}
-				else if(getQVarType(node->getFirstDescendant()->getFirstDescendant()->getData())==WHILE || getQVarType(node->getFirstDescendant()->getFirstDescendant()->getData())==IF){
-					if (firstUsesMod_Container->getType()==ANY){
-						firstUsesMod_Container = node;
-					}
-					else{
-						lastUsesMod_Container->setSibling(node);
-					}
-					lastUsesMod_Container = node;
+				lastUsesMod_Assign = node;
+			}
+			else if(getQVarType(node->getFirstDescendant()->getFirstDescendant()->getData())==PROCEDURE){
+				if (firstUsesMod_Proc->getType()==ANY){
+					firstUsesMod_Proc = node;
 				}
-			
+				else{
+					lastUsesMod_Proc->setSibling(node);
+				}
+				lastUsesMod_Proc = node;
+			}
+			else if(getQVarType(node->getFirstDescendant()->getFirstDescendant()->getData())==CALL){
+				if (firstUsesMod_Call->getType()==ANY){
+					firstUsesMod_Call = node;
+				}
+				else{
+					lastUsesMod_Call->setSibling(node);
+				}
+				lastUsesMod_Call = node;
+			}
+			else if(getQVarType(node->getFirstDescendant()->getFirstDescendant()->getData())==WHILE || getQVarType(node->getFirstDescendant()->getFirstDescendant()->getData())==IF){
+				if (firstUsesMod_Container->getType()==ANY){
+					firstUsesMod_Container = node;
+				}
+				else{
+					lastUsesMod_Container->setSibling(node);
+				}
+				lastUsesMod_Container = node;
+			}
+
 		}
 		else{
 			//(known,unknown)
@@ -1126,7 +1125,7 @@ void QueryPreprocessor::arrangeClauseByRel(QTREE* node){
 				lastUsesMod_Stmt = node;
 			}
 		}
-		
+
 	}
 	//next
 	else if (relType==NEXT){
@@ -1293,7 +1292,7 @@ void QueryPreprocessor::joinClauses(){
 		firstNode->getLastSibling()->setSibling(firstContainSibling);
 		firstNode->setLastSibling(lastContainSibling);		
 	}
-	
+
 	firstWithPatt = createQTREENode(ANY);
 	firstFollows= createQTREENode(ANY); 
 	firstFollowsSt= createQTREENode(ANY);
@@ -1401,7 +1400,7 @@ bool QueryPreprocessor::verifySelect(TOKEN token){
 }
 
 bool QueryPreprocessor::verifyCondition(TOKEN token){
-	
+
 	vector<TOKEN> conditions;
 	if (regex_match(token,regex(suchthat_cl))){
 		conditions = tokenize(token,"("+rel+")\\s*\\(\\s*("+ref+")\\s*,\\s*("+ref+")\\s*\\)");
@@ -1440,7 +1439,7 @@ bool QueryPreprocessor::verifyCondition(TOKEN token){
 		error(INVALID_QUERY_SYNTAX);
 		return false;
 	}
-	
+
 	return true;
 }
 
@@ -1455,9 +1454,11 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 	bool prevArgWild;
 	bool prevArgConstant;
 	bool firstArg;
+	bool firstArgConstant;
 	string relName;
 	TYPE relType;
 	TYPE tokenType;
+	TYPE prevTokenType = ANY;
 
 	headNode = createQTREENode(SUCHTHAT);
 	insertClause(headNode);
@@ -1555,8 +1556,8 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 		else if(currToken=="_"){
 			if(((relName=="Modifies_p"||relName=="Modifies_s"||relName=="Uses_p"||relName=="Uses_s")&&firstArg)||
 				(relName=="Contains*"||relName=="Contains"||relName=="Sibling")){
-				error(INVALID_ARGUMENT);
-				return false;	
+					error(INVALID_ARGUMENT);
+					return false;	
 			}		
 			else{
 				tokenType = ANY;
@@ -1592,7 +1593,7 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 			}			
 		}
 		//even if not declared,could be a constant statement number
-		else if (isConstant(currToken)){
+		else if (isConstant(currToken)){			
 			if (relName=="Next"||relName=="Next*"){
 				tokenType = PROGLINE;
 				currNode = createQTREENode(PROGLINE,atoi(currToken.c_str()));
@@ -1620,7 +1621,7 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 				}
 			}
 		}
-		
+
 		//not declared, not constant
 		else{
 			error(INVALID_ARGUMENT);
@@ -1628,34 +1629,112 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 		}
 
 		//check argument's type
+
 		if(relName=="Contains*"){
-			validArgType = grammarTable.getContainSTInvNodes(relType);
-			correctArg = true;
-			for(int j = 0; j < validArgType.size(); j++){
-				if (tokenType == validArgType.at(j)){
-					correctArg = false;
-					break;
+			if (prevTokenType==ANY){
+				prevTokenType = tokenType;
+				correctArg = true;
+				if (isConstant(currToken)){
+					firstArgConstant = true;
 				}
+			}
+			else{
+				validArgType = grammarTable.getContainSTInvNodes(prevTokenType);
+				correctArg = true;
+				for(int j = 0; j < validArgType.size(); j++){
+					if (tokenType == validArgType.at(j)){
+						correctArg = false;
+						break;
+					}
+
+				}
+				if (!correctArg && firstArgConstant){
+					validArgType = grammarTable.getContainSTInvNodes(STMT_LIST);
+					correctArg = true;
+					for(int j = 0; j < validArgType.size(); j++){
+						if (tokenType == validArgType.at(j)){
+							correctArg = false;
+							break;
+						}
+
+					}
+				}
+				
+
 			}
 		}
 		else {
 			if (relName=="Contains"){
-				validArgType = grammarTable.getContainsValNodes(relType);
+				if (prevTokenType==ANY){
+					prevTokenType = tokenType;
+					correctArg = true;
+					if (isConstant(currToken)){
+						firstArgConstant = true;
+					}
+				}
+				else{
+					validArgType = grammarTable.getContainsValNodes(tokenType);
+					correctArg = false;
+					for(int j = 0; j < validArgType.size(); j++){
+						if (tokenType == validArgType.at(j)){
+							correctArg = true;
+							break;
+						}
+					}
+					if (!correctArg && firstArgConstant){
+					validArgType = grammarTable.getContainsValNodes(STMT_LIST);
+					correctArg = false;
+					for(int j = 0; j < validArgType.size(); j++){
+						if (tokenType == validArgType.at(j)){
+							correctArg = true;
+							break;
+						}
+
+					}
+				}
+				}
 			}
 			else if (relName=="Sibling"){
-				validArgType = grammarTable.getSiblingValNodes(relType);
+				if (prevTokenType==ANY){
+					prevTokenType = tokenType;
+					correctArg = true;
+					if (isConstant(currToken)){
+						firstArgConstant = true;
+					}
+				}
+				else{
+					validArgType = grammarTable.getSiblingValNodes(tokenType);
+					correctArg = false;
+					for(int j = 0; j < validArgType.size(); j++){
+						if (tokenType == validArgType.at(j)){
+							correctArg = true;
+							break;
+						}
+					}
+					if (!correctArg && firstArgConstant){
+					validArgType = grammarTable.getSiblingValNodes(STMT_LIST);
+					correctArg = false;
+					for(int j = 0; j < validArgType.size(); j++){
+						if (tokenType == validArgType.at(j)){
+							correctArg = true;
+							break;
+						}
+
+					}
+				}
+				}
 			}
 			else{
 				validArgType = grammarTable.getArgument(relType,i);
-			}
-
-			correctArg = false;
-			for(int j = 0; j < validArgType.size(); j++){
-				if (tokenType == validArgType.at(j)){
-					correctArg = true;
-					break;
+				correctArg = false;
+				for(int j = 0; j < validArgType.size(); j++){
+					if (tokenType == validArgType.at(j)){
+						correctArg = true;
+						break;
+					}
 				}
-			}
+			}			
+
 		}
 		if (!correctArg){
 			error(INVALID_ARGUMENT);
@@ -1663,7 +1742,7 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 		}
 
 		setChild(prevNode,currNode);		
-		
+
 	}
 
 	if (!syn.empty()){
@@ -1697,7 +1776,7 @@ bool QueryPreprocessor::processWith(TOKEN token){
 			isSyn=true;
 			i=i+2;
 		}
-	
+
 		if (isSyn){	
 			if (!isDeclaredVar(currToken)){
 				error(INVALID_VARIABLE);
@@ -1707,7 +1786,7 @@ bool QueryPreprocessor::processWith(TOKEN token){
 			synType = getQVarType(currToken);
 			currNode = createQTREENode(QUERYVAR,getQVarIndex(currToken));			
 			setChild(headNode,currNode);
-			
+
 			attrAllowed = grammarTable.getAttr(synType);
 			for (int j = 0; j< attrAllowed.size(); j++){
 				if(comparisons.at(i)==attrAllowed.at(j)){
@@ -1757,7 +1836,7 @@ bool QueryPreprocessor::processWith(TOKEN token){
 			}
 		}
 		else if (regex_match(currToken,regex("\".+\""))){
-		//not syn: is string
+			//not syn: is string
 			//want to remove the inverted commas
 			currToken.erase(currToken.begin());	
 			currToken.resize(currToken.size()-1);
@@ -1772,7 +1851,7 @@ bool QueryPreprocessor::processWith(TOKEN token){
 			}
 		}
 		else if (isConstant(currToken)){		
-		//not syn: is constant
+			//not syn: is constant
 			currNode = createQTREENode(ANY);
 			setChild(headNode,currNode);			
 			currNode = createQTREENode(CONSTANT,atoi(currToken.c_str()));
@@ -1784,20 +1863,20 @@ bool QueryPreprocessor::processWith(TOKEN token){
 		}
 		setChild(headNode,currNode);
 	}
-	
+
 	setQVarGroup(syn);
 	return true;
 }
 
 bool QueryPreprocessor::processPattern(TOKEN token){
-	
+
 	vector<TOKEN> patterns;
 	vector<TYPE> validArgType;
 	vector<TOKEN> syn;
 	TOKEN currToken;
 	TYPE synType;
 	int argCount;
-	
+
 	string expr			= "\\(*("+synonym+or+integer+")("+op+"("+synonym+or+integer+")"+"\\)*)"+optional;
 	string wildexpr		= underscore+invComma+expr+invComma+underscore;
 
@@ -1877,46 +1956,46 @@ bool QueryPreprocessor::processPattern(TOKEN token){
 			setChild(prevNode,currNode);
 			/*
 			if(regex_match(currToken,regex(underscore))){
-				//if underscore
-				currNode = createQTREENode(ANY);
+			//if underscore
+			currNode = createQTREENode(ANY);
 			}
 			else if(regex_match(currToken,regex(wildexpr))){
-				//if with inverted commas with underscore _"x+y"_
+			//if with inverted commas with underscore _"x+y"_
 
-				//remove underscore and inverted commas
-				currToken.erase(currToken.begin());
-				currToken.erase(currToken.begin());	
-				currToken.resize(currToken.size()-2);
-				
-				//build expression subtree
-				//currNode = createExprTree(currToken);
+			//remove underscore and inverted commas
+			currToken.erase(currToken.begin());
+			currToken.erase(currToken.begin());	
+			currToken.resize(currToken.size()-2);
+
+			//build expression subtree
+			//currNode = createExprTree(currToken);
 			}
 			else if(regex_match(currToken,regex(invComma+expr+invComma))){				
-				//if with inverted commas without underscore "x+y"				
-				currNode = createQTREENode(synType);
-				setChild(prevNode,currNode);
-				prevNode=currNode;
-				currNode = createQTREENode(prevNode->getLeftSibling()->getType(),prevNode->getLeftSibling()->getData());
-				setChild(prevNode,currNode);
-				
-				//remove inverted commas
-				currToken.erase(currToken.begin());	
-				currToken.resize(currToken.size()-1);	
-				//continue with building expression subtree				
-				currNode = createExprTree(currToken);
-				if (currNode==NULL){
-					error(INVALID_ARGUMENT);
-					return false;
-				}
+			//if with inverted commas without underscore "x+y"				
+			currNode = createQTREENode(synType);
+			setChild(prevNode,currNode);
+			prevNode=currNode;
+			currNode = createQTREENode(prevNode->getLeftSibling()->getType(),prevNode->getLeftSibling()->getData());
+			setChild(prevNode,currNode);
+
+			//remove inverted commas
+			currToken.erase(currToken.begin());	
+			currToken.resize(currToken.size()-1);	
+			//continue with building expression subtree				
+			currNode = createExprTree(currToken);
+			if (currNode==NULL){
+			error(INVALID_ARGUMENT);
+			return false;
+			}
 			}
 			setChild(prevNode,currNode);
 			*/
 		}
-		
-		
+
+
 
 	}
-	
+
 	setQVarGroup(syn);
 	return true;
 }
@@ -1998,7 +2077,7 @@ void QueryPreprocessor::setQVarGroup(vector<TOKEN> arguments){
 			}
 			updateQVarGroup(arg,groupNum);
 		}
-		
+
 		prevExplored=true;
 		updateQVarClause(arg);
 	}
@@ -2155,101 +2234,101 @@ void QueryPreprocessor::setChild(QTREE* parent, QTREE* child){
 //Used in Old Implementation Pattern Subtree
 /*
 QTREE* QueryPreprocessor::createExprTree(TOKEN expr){
-	QTREE* exprTree;
-	exprPieces = tokenize(expr,"\\("+or+"\\)"+or+plus+or+minus+or+times+or+synonym+or+integer);
-	next = exprPieces.begin();
-	end = exprPieces.end();
-	
-	if (next!=end)
-		exprTree=extractPlusMinus();
+QTREE* exprTree;
+exprPieces = tokenize(expr,"\\("+or+"\\)"+or+plus+or+minus+or+times+or+synonym+or+integer);
+next = exprPieces.begin();
+end = exprPieces.end();
 
-	return exprTree;
+if (next!=end)
+exprTree=extractPlusMinus();
+
+return exprTree;
 }
 
 QTREE* QueryPreprocessor::extractPlusMinus(){
-	QTREE* exprtree;
-	QTREE* subtree;
-	QTREE* node;	
-	if (next!=end)
-		exprtree = extractTimes();
+QTREE* exprtree;
+QTREE* subtree;
+QTREE* node;	
+if (next!=end)
+exprtree = extractTimes();
 
-	if (exprtree == NULL){
-		return NULL;
-	}
+if (exprtree == NULL){
+return NULL;
+}
 
-	while (next!=end && (*next=="+"||*next=="-")){
-		if (*next=="+"){
-			node = createQTREENode(PLUS);
-		}
-		else{
-			node = createQTREENode(MINUS);
-		}
-		next++;
-		subtree = extractTimes();
-		
-		if (subtree == NULL){
-			return NULL;
-		}
+while (next!=end && (*next=="+"||*next=="-")){
+if (*next=="+"){
+node = createQTREENode(PLUS);
+}
+else{
+node = createQTREENode(MINUS);
+}
+next++;
+subtree = extractTimes();
 
-		exprtree = createSubTree(node,exprtree,subtree);
-	}
+if (subtree == NULL){
+return NULL;
+}
 
-	return exprtree;
+exprtree = createSubTree(node,exprtree,subtree);
+}
+
+return exprtree;
 }
 
 QTREE* QueryPreprocessor::extractTimes(){
-	QTREE* exprtree;
-	QTREE* subtree;
-	QTREE* node;
-	if (next!=end)
-		exprtree = extractAll();
-	
-	if (exprtree == NULL){
-		return NULL;
-	}
+QTREE* exprtree;
+QTREE* subtree;
+QTREE* node;
+if (next!=end)
+exprtree = extractAll();
 
-   	while (next!=end && *next=="*"){		
-		node = createQTREENode(MULTIPLY);
-		next++;
-		subtree = extractAll();
+if (exprtree == NULL){
+return NULL;
+}
 
-		if (subtree == NULL){
-			return NULL;
-		}
+while (next!=end && *next=="*"){		
+node = createQTREENode(MULTIPLY);
+next++;
+subtree = extractAll();
 
-		exprtree = createSubTree(node,exprtree,subtree);
-	}
-	return exprtree;
+if (subtree == NULL){
+return NULL;
+}
+
+exprtree = createSubTree(node,exprtree,subtree);
+}
+return exprtree;
 }
 
 QTREE* QueryPreprocessor::extractAll(){
-	QTREE* node;
-	if (regex_match(*next,regex(synonym))){
-		if (!pkb->isVarExists(*next)){
-			error(INVALID_VARIABLE);
-			return false;
-		}
-		node = createQTREENode(VARIABLE,pkb->getVarIndex(*next));
-		next++;
-	}
-	else if (regex_match(*next,regex(integer))){
-		node = createQTREENode(CONSTANT,atoi((*next).c_str()));
-		next++;
-	}
-	else if (regex_match(*next,regex("\\("))){
-		next++;
-		node = extractPlusMinus();
-		if (!regex_match(*next,regex("\\)"))){
-			error(INVALID_ARGUMENT);
-			return NULL;
-		}
-		next++;
-	}
-	else{
-		return NULL;
-	}
-	
-	return node;
+QTREE* node;
+if (regex_match(*next,regex(synonym))){
+if (!pkb->isVarExists(*next)){
+error(INVALID_VARIABLE);
+return false;
+}
+node = createQTREENode(VARIABLE,pkb->getVarIndex(*next));
+next++;
+}
+else if (regex_match(*next,regex(integer))){
+node = createQTREENode(CONSTANT,atoi((*next).c_str()));
+next++;
+}
+else if (regex_match(*next,regex("\\("))){
+next++;
+node = extractPlusMinus();
+if (!regex_match(*next,regex("\\)"))){
+error(INVALID_ARGUMENT);
+return NULL;
+}
+next++;
+}
+else{
+return NULL;
+}
+
+return node;
 }
 */
 
