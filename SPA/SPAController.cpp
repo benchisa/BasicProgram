@@ -8,8 +8,7 @@ SPAController::SPAController(void)
 }
 
 
-SPAController::~SPAController(void)
-{
+SPAController::~SPAController(void){
 	delete frontEnd;
 	delete pql;
 }

@@ -6,12 +6,9 @@ PQLController::PQLController(void)
 }
 
 
-PQLController::~PQLController(void)
-{
-	delete queryProcessor; 
+PQLController::~PQLController(void){
 	delete extractor;
-	delete queryEval; 
-	delete queryFormatter;
+
 }
 
 FINAL_RESULT PQLController::getQueryResult(QUERY newQuery){
