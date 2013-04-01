@@ -162,6 +162,9 @@ public:
 					//cout << "2: " << tmp.first << ", " << tmp.second << "\n";
 					// put { into the token
 					rxItr++;
+					while(rxItr->str() == "\n"){
+						rxItr++;
+					}
 					tmp.first = rxItr->str();
 					tmp.second = 0;
 					tokens.push_back(tmp);
