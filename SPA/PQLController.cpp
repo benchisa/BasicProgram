@@ -7,7 +7,7 @@ PQLController::PQLController(void)
 
 
 PQLController::~PQLController(void){
-	delete extractor;
+
 
 }
 
@@ -49,9 +49,8 @@ FINAL_RESULT PQLController::getQueryResult(QUERY newQuery){
 	return returnResult;
 	
 }
-void PQLController::setPKB(PKB* pkb){
+void PQLController::setPKB(PKB* pkb,DesignExtractor * extractor){
 	queryProcessor = new QueryPreprocessor(pkb);
-	extractor = new DesignExtractor(pkb);
 	queryEval = new QueryEvaluator(pkb,extractor);
 	queryFormatter= new QueryFormatter(pkb);
 }

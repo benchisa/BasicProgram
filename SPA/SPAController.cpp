@@ -11,6 +11,7 @@ SPAController::SPAController(void)
 SPAController::~SPAController(void){
 	delete frontEnd;
 	delete pql;
+	delete extractor;
 }
 REPORT_MSG SPAController::enterProgram(SOURCE source){
 	//parse the source program
@@ -21,6 +22,7 @@ REPORT_MSG SPAController::enterProgram(SOURCE source){
 	if(returnVal!=-1){
 		//parse successfully
 		isParsed = true;
+		extractor = new DesignExtractor(frontEnd->getPKB());
 		return "Parse the program Successfully!";
 
 	}else{
@@ -36,7 +38,7 @@ FINAL_RESULT SPAController::getQueryResult(QUERY newQuery){
 	
 	if(isParsed){
 		//pass the pkb pointer to query processer
-		pql->setPKB(frontEnd->getPKB());
+		pql->setPKB(frontEnd->getPKB(),extractor);
 		//let PQL to evaluate the query, and return the result found
 		return pql->getQueryResult(newQuery);
 	}

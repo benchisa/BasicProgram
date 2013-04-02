@@ -2,6 +2,7 @@
 #include "Global_Data_Abstraction.h"
 #include "FrontEndController.h"
 #include "PQLController.h"
+#include "DesignExtractor.h"
 
 class FrontEndController;
 class PQLController;
@@ -17,6 +18,7 @@ public:
 private:
 	FrontEndController* frontEnd;
 	PQLController* pql;
+	DesignExtractor* extractor;
 	bool isParsed;
 };
 

@@ -12,13 +12,13 @@ public:
 	~PQLController(void);
 
 	FINAL_RESULT getQueryResult(QUERY newQuery);
-	void setPKB(PKB* pkb);
+	void setPKB(PKB* pkb,DesignExtractor * extractor);
 	
 private:
 	QueryEvaluator* queryEval;
 	QueryPreprocessor* queryProcessor;
 	QueryFormatter* queryFormatter;
-	DesignExtractor* extractor;
+	
 };
 
 
