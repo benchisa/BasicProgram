@@ -159,25 +159,25 @@ bool IntermediateResultTable::joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,IND
 			advance(table1,tableNum1);
 
 			//failed to merge into the first table
-			if(!table1->addEntry(1,firstQrVar,secondQrVar,newList)){
+			/*if(!table1->addEntry(1,firstQrVar,secondQrVar,newList)){
 				return false;
-			}
+			}*/
 
 			//merge the new list to second table
 			int tableNum2 = qrVarTable[1][secondQrVar];
 			table2 = database.begin();
 			advance(table2,tableNum2);
-			
+			/*
 			//failed to merge into the second table
 			if(!table2->addEntry(2,secondQrVar,firstQrVar,newList)){
 				return false;
-			}
+			}*/
 
 			LinkedDataTable  table2Pointer;
 			table2Pointer = *table2;
 
 			//merge two tables
-			if(!table1->mergeTable(firstQrVar,secondQrVar,&table2Pointer))return false;
+			if(!table1->mergeTable(firstQrVar,secondQrVar,&table2Pointer,newList))return false;
 
 			//update qrVar info (table num)
 			for(int i =0;i<tableSize;i++){
@@ -186,7 +186,7 @@ bool IntermediateResultTable::joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,IND
 				}
 			}
 
-			qrVarTable[1][secondQrVar] = tableNum1;
+		//	qrVarTable[1][secondQrVar] = tableNum1;
 		}
 		
 	}
