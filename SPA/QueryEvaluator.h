@@ -36,6 +36,10 @@ private:
 	DesignExtractor * extractor;
 	IntermediateResultTable * resultTable ;
 	DATA_LIST * resultVarList;
+	bool needCache;
+
+	typedef hash_map<TYPE,RELATION_LIST> CACHE;
+	CACHE cache;
 
 	IntermediateResultTable * computeIntermediateResult(QTREE* relationTree);
 	IntermediateResultTable * evaluateClause(IntermediateResultTable * resultTable, QTREE* clause);
@@ -45,6 +49,6 @@ private:
 	bool findResult(QTREE * resultNode,IntermediateResultTable * resultTable);
 	void generateRaw(QTREE* resultNode );
 	RELATION_LIST * appendRelationLists(RELATION_LIST* list1,RELATION_LIST* list2);
-	void replaceValue(QTREE* probRel,QTREE* replaceRel,INDEX_LIST * probedList);
+	RELATION_LIST * getSuchThatResult(QTREE* suchThatTree);
 	    
 };
