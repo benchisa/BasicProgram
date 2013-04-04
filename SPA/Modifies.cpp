@@ -98,7 +98,7 @@ list<pair<int,int>> Modifies::getModifies(TYPE type, int index, int varIndex)
 	if (type==ASSIGNMENT|| type==WHILE|| type==IF|| type==PROCEDURE)
 	{
 		
-	unordered_multimap<int,unordered_multimap<int, int>>::const_iterator firstItr;
+	unordered_multimap<int,unordered_multimap<int, int>>::iterator firstItr;
 	unordered_multimap<int,unordered_multimap<int,int>>::const_iterator first_end_itr=modifiesDictionary->cend();
 	 unordered_multimap<int,int>::const_iterator secondItr;
 	 unordered_multimap<int,int>::const_iterator second_end_itr;
@@ -233,7 +233,7 @@ bool Modifies::isModifies(TYPE type, int index, int varIndex)
 {	//check only allowed type
 	if (type==ASSIGNMENT|| type==WHILE|| type==IF|| type==PROCEDURE)
 	{
-		unordered_multimap<int,unordered_multimap<int, int>>::const_iterator firstItr;
+		unordered_multimap<int,unordered_multimap<int, int>>::iterator firstItr;
 		unordered_multimap<int,unordered_multimap<int, int>>::const_iterator first_end_itr=modifiesDictionary->cend();
 		unordered_multimap<int,int>::const_iterator secondItr;
 		unordered_multimap<int,int>::const_iterator second_end_itr;
