@@ -115,7 +115,7 @@ bool Uses::insertUses(TYPE type, int index, int varIndex)
 list<pair<int,int>> Uses::getUses(TYPE type, int index, int varIndex)
 {
 	list<pair<int,int>> result;
-	unordered_multimap<int,unordered_multimap<int, int>>::const_iterator firstItr;
+	unordered_multimap<int,unordered_multimap<int, int>>::iterator firstItr;
 	unordered_multimap<int,unordered_multimap<int, int>>::const_iterator first_end_itr=usesDictionary->cend();
 	 unordered_multimap<int,int>::const_iterator secondItr;
 	 unordered_multimap<int,int>::const_iterator second_end_itr;
@@ -242,7 +242,7 @@ bool Uses::isUses(TYPE type, int index, int varIndex)
 {	//check only allowed type
 	if (type==ASSIGNMENT|| type==WHILE|| type==IF|| type==PROCEDURE)
 	{
-		unordered_multimap<int,unordered_multimap<int, int>>::const_iterator firstItr;
+		unordered_multimap<int,unordered_multimap<int, int>>::iterator firstItr;
 	   unordered_multimap<int,unordered_multimap<int, int>>::const_iterator first_end_itr=usesDictionary->cend();
 	   unordered_multimap<int,int>::const_iterator secondItr;
 	   unordered_multimap<int,int>::const_iterator second_end_itr;
