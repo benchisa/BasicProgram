@@ -1,7 +1,6 @@
 #pragma once 
 #include "Global_Data_Abstraction.h"
-#include <map>
-#include <utility>
+
 
 
 class Uses
@@ -21,8 +20,8 @@ public:
 	void debug();
 
 private:
-	multimap<int,multimap<int, int>> *usesDictionary;
-	 multimap<int,multimap<int, int>>::iterator firstItr;
-	 multimap<int,int>::iterator secondItr;
+	unordered_multimap<int,unordered_multimap<int, int>> *usesDictionary;
+	 unordered_multimap<int,unordered_multimap<int, int>>::iterator firstItr;
+	 unordered_multimap<int,int>::iterator secondItr;
 	
 };
