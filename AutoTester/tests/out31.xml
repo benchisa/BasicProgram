@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>248.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>252.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" Test for such that and parent modifies">
@@ -9,84 +9,84 @@
 <id modifies="1" parent="1" comment="parent (known,known) and modifies (known,unknown)" >13</id><querystr><![CDATA[variable v1; Select BOOLEAN   such that  Parent (9 ,10 ) and Modifies (10 , v1 ) ;]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>100.000000</time_taken>
+<time_taken>93.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" parentstar="1" comment="parent* (known,known) and modifies (known,unknown)" >14</id><querystr><![CDATA[variable v1; Select BOOLEAN   such that  Parent* (9 ,12 ) and Modifies (9 , v1 ) ;]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>93.000000</time_taken>
+<time_taken>89.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" parent="1" comment="parent (known,unknown) and modifies (unknown,unknown)" >15</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s2   such that  Parent (9 , s2 ) and Modifies ( s2 , v1 ) ;]]></querystr>
 <stuans>10,19</stuans>
 <correct>10,19</correct>
-<time_taken>104.000000</time_taken>
+<time_taken>90.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" parentstar="1" comment="parent* (known,unknown) and modifies (unknown,unknown)" >16</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s2   such that  Parent* (9 , s2 ) and Modifies (9 , v1 ) ;]]></querystr>
-<stuans>10,18,11,19,12,14,15,16,17,13</stuans>
+<stuans>10,16,11,18,19,12,14,15,17,13</stuans>
 <correct>10,11,12,13,14,15,16,17,18,19</correct>
-<time_taken>121.000000</time_taken>
+<time_taken>94.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" parent="1" comment="parent (unknown,known) and modifies (unknown,unknown)" >17</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Parent ( s1 ,14 ) and Modifies ( s1 , v1 ) ;]]></querystr>
 <stuans>10</stuans>
 <correct>10</correct>
-<time_taken>114.000000</time_taken>
+<time_taken>87.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" parentstar="1" comment="parent* (unknown,known) and modifies (unknown,unknown)" >18</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Parent* ( s1 ,14 ) and Modifies ( s1 , v1 ) ;]]></querystr>
 <stuans>10,9</stuans>
 <correct>9,10</correct>
-<time_taken>118.000000</time_taken>
+<time_taken>87.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" parent="1" comment="parent (unknown,unknown) and modifies (unknown,unknown)" >19</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Parent ( s1 , s2 ) and Modifies ( s1 , v1 ) ;]]></querystr>
-<stuans>14,24,9,10,12,36,16,21,29,44</stuans>
+<stuans>21,9,10,16,12,36,14,24,29,44</stuans>
 <correct>9,10,12,14,16,21,24,29,36,44</correct>
-<time_taken>121.000000</time_taken>
+<time_taken>104.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" parentstar="1" comment="parent* (unknown,unknown) and modifies (unknown,unknown)" >20</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Parent* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;]]></querystr>
-<stuans>14,24,9,10,12,36,16,21,29,44</stuans>
+<stuans>21,9,10,16,12,36,14,24,29,44</stuans>
 <correct>9,10,12,14,16,21,24,29,36,44</correct>
-<time_taken>137.000000</time_taken>
+<time_taken>110.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" parent="1" comment="parent (unknown,unknown) and modifies (unknown,unknown)" >21</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s2   such that  Parent ( s1 , s2 ) and Modifies ( s2 , v1 ) ;]]></querystr>
-<stuans>10,18,11,19,12,14,24,45,13,15,23,16,26,17,25,22,47,30,37,38,46</stuans>
+<stuans>10,16,11,18,19,12,37,13,14,15,17,22,23,24,25,26,30,38,45,46,47</stuans>
 <correct>10,11,12,13,14,15,16,17,18,19,22,23,24,25,26,30,37,38,45,46,47</correct>
-<time_taken>129.000000</time_taken>
+<time_taken>146.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" parentstar="1" comment="parent* (unknown,unknown) and modifies (unknown,unknown)" >22</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s2   such that  Parent* ( s1 , s2 ) and Modifies ( s2 , v1 ) ;]]></querystr>
-<stuans>10,18,11,19,12,14,24,45,15,23,16,26,17,25,13,22,47,30,37,38,46</stuans>
+<stuans>10,16,11,18,19,12,37,14,15,17,13,22,23,24,25,26,30,38,45,46,47</stuans>
 <correct>10,11,12,13,14,15,16,17,18,19,22,23,24,25,26,30,37,38,45,46,47</correct>
-<time_taken>183.000000</time_taken>
+<time_taken>116.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" parent="1" comment="parent (unknown,unknown) and modifies (unknown,unknown)" >23</id><querystr><![CDATA[stmt s1,s2;variable v1; Select v1   such that  Parent ( s1 , s1 ) and Modifies ( s1 , v1 ) ;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>135.000000</time_taken>
+<time_taken>94.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" parentstar="1" comment="parent* (unknown,unknown) and modifies (unknown,unknown)" >24</id><querystr><![CDATA[stmt s1,s2;variable v1; Select v1   such that  Parent* ( s1 , s1 ) and Modifies ( s1 , v1 ) ;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>117.000000</time_taken>
+<time_taken>93.000000</time_taken>
 <passed/>
 </query>
 </category>

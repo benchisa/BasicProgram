@@ -1,0 +1,9 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>CS3202</name><parsing_time_taken>150.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" Test Case 1, Contains(known, unknown)">
+<query>
+<id Contains="1" Typed="1" comment="Contains(stmt#, stmt#)" >1</id>

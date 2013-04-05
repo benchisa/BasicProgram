@@ -5,18 +5,31 @@ procedure ABC
 	c= a   ;
 if a then{
    while beta {
-        oSCar  = 1 * beta + tmp;
-        while tmp {
+      
+
+  oSCar  = 1 * beta + tmp;
+      
+  while tmp {
           oSCar = I - (k + j1k * chArlie); }	}
-	while x {
+	
+while x {
         x = x + 1;
         if left then {
           call Second;
           if right then {
+
             Romeo = Romeo - 1;
+
             b = 0;
+
             c = delta    + l  * width + Romeo; }
+
           else {
+
+
+
+
+
             while c {
               call    Init;
               c = c -1   	; } 
@@ -24,12 +37,19 @@ if a then{
       else   {
           call Init; } } }
 	else{
+
+
+
+
   call Init; 
+
 }
 }
 
 procedure Second{
 if x   then  {
+
+
   	Y1   	= 0;}
 else  { 
   if left then {
@@ -37,15 +57,26 @@ else  {
           if right then {
             Romeo = Romeo - 1;
             b =0;
+
             c = delta  + l  * width + Romeo; }
           else {
+
+
+
             while c {
               call    Init;
               c = c -1   ;} 
-            x = x+ 1; }		}
+           
+
+
+
+ x = x+ 1; }		}
       else   {
           call Init; }	
 } }
 procedure Init {
-	while a{
+	
+
+
+while a{
   x1   = 0; } 	}

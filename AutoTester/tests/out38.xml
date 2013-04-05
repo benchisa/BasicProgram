@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>225.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>189.000000</parsing_time_taken>
 </info>
 <queries>
 <category name="such that and follows parent">
@@ -9,133 +9,133 @@
 <id follows="1" parentstar="1" comment="follows (known,known) and parent* (unknown,unknown)" >158</id><querystr><![CDATA[stmt s1,s2; Select BOOLEAN   such that  Follows (4 ,5 ) and Parent* (4 , s1 ) ;]]></querystr>
 <stuans>false</stuans>
 <correct>false</correct>
-<time_taken>80.000000</time_taken>
+<time_taken>69.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id followsstar="1" parentstar="1" comment="follows* (known,known) and parent* (unknown,unknown)" >159</id><querystr><![CDATA[stmt s1,s2; Select BOOLEAN   such that  Follows* (4 ,9 ) and Parent* (9 , s1 ) ;]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>90.000000</time_taken>
+<time_taken>82.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id follows="1" parentstar="1" comment="follows (known,unknown) and parent* (unknown,unknown)" >160</id><querystr><![CDATA[stmt s1,s2; Select s2   such that  Follows (12 , s2 ) and Parent* ( s2 , s1 ) ;]]></querystr>
 <stuans>14</stuans>
 <correct>14</correct>
-<time_taken>95.000000</time_taken>
+<time_taken>85.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id followsstar="1" parentstar="1" comment="follows* (known,unknown) and parent* (unknown,unknown)" >161</id><querystr><![CDATA[stmt s1,s2; Select s2   such that  Follows* (4 , s2 ) and Parent* ( s2 , s1 ) ;]]></querystr>
-<stuans>9,21</stuans>
+<stuans>21,9</stuans>
 <correct>9,21</correct>
-<time_taken>118.000000</time_taken>
+<time_taken>84.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id follows="1" parentstar="1" comment="follows (unknown,known) and parent* (unknown,unknown)" >162</id><querystr><![CDATA[stmt s1,s2; Select s1   such that  Follows ( s1 ,14 ) and Parent* ( s1 , s2 ) ;]]></querystr>
 <stuans>12</stuans>
 <correct>12</correct>
-<time_taken>98.000000</time_taken>
+<time_taken>84.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id followsstar="1" parentstar="1" comment="follows* (unknown,known) and parent* (unknown,unknown)" >163</id><querystr><![CDATA[stmt s1,s2; Select s1   such that  Follows* ( s1 ,9 ) and Parent* ( s1 , s1 ) ;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>98.000000</time_taken>
+<time_taken>82.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id follows="1" parentstar="1" comment="follows (unknown,unknown)  and parent* (unknown,unknown)" >164</id><querystr><![CDATA[stmt s1,s2; Select s1   such that  Follows ( s1 , s2 ) and Parent* ( s1 , s2 ) ;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>112.000000</time_taken>
+<time_taken>797.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id followsstar="1" parentstar="1" comment="follows* (unknown,unknown)  and parent* (unknown,unknown)" >165</id><querystr><![CDATA[stmt s1,s2; Select s1   such that  Follows* ( s1 , s2 ) and Parent* ( s1 , s2 ) ;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>109.000000</time_taken>
+<time_taken>102.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id follows="1" parentstar="1" comment="follows (unknown,unknown) and parent* (unknown,unknown)" >166</id><querystr><![CDATA[stmt s1,s2; Select s2   such that  Follows ( s1 , s2 ) and Parent* ( s1 , s2 ) ;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>111.000000</time_taken>
+<time_taken>94.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id followsstar="1" parentstar="1" comment="follows* (unknown,unknown) and parent* (unknown,unknown)" >167</id><querystr><![CDATA[stmt s1,s2; Select s2   such that  Follows* ( s1 , s2 ) and Parent* ( s1 , s2 ) ;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>115.000000</time_taken>
+<time_taken>97.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id follows="1" parentstar="1" comment="follows (unknown,unknown) and parent* (unknown,unknown)" >168</id><querystr><![CDATA[stmt s1,s2; Select s1   such that  Follows ( s1 , s1 ) and Parent* ( s1 , s2 ) ;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>100.000000</time_taken>
+<time_taken>86.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id followsstar="1" parentstar="1" comment="follows* (unknown,unknown) and parent* (unknown,unknown)" >169</id><querystr><![CDATA[stmt s1,s2; Select s1   such that  Follows* ( s1 , s1 ) and Parent* ( s1 , s2 ) ;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>127.000000</time_taken>
+<time_taken>100.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id follows="1" followsstar="1" comment="follows (known,unknown) and follows* (unknown,unknown)" >209</id><querystr><![CDATA[stmt s1,s2; Select s2   such that  Follows (4 , s2 ) and Follows* (4 , s2 ) ;]]></querystr>
 <stuans>5</stuans>
 <correct>5</correct>
-<time_taken>95.000000</time_taken>
+<time_taken>86.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id parent="1" followsstar="1" comment="parent (known,known) and follows* (unknown,unknown)" >210</id><querystr><![CDATA[ Select BOOLEAN   such that  Parent (9 ,10 ) and Follows* (9 ,10 ) ;]]></querystr>
 <stuans>false</stuans>
 <correct>false</correct>
-<time_taken>101.000000</time_taken>
+<time_taken>82.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id parentstar="1" followsstar="1" comment="parent* (known,known) and follows* (unknown,unknown)" >211</id><querystr><![CDATA[ Select BOOLEAN   such that  Parent* (9 ,12 ) and Follows* (12 ,9 ) ;]]></querystr>
 <stuans>false</stuans>
 <correct>false</correct>
-<time_taken>94.000000</time_taken>
+<time_taken>82.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id parent="1" followsstar="1" comment="parent (known,unknown) and follows* (unknown,unknown)" >212</id><querystr><![CDATA[stmt s1,s2; Select s2   such that  Parent (9 , s2 ) and Follows* ( s2 ,9 ) ;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>100.000000</time_taken>
+<time_taken>88.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id parentstar="1" followsstar="1" comment="parent* (known,unknown) and follows* (unknown,unknown)" >213</id><querystr><![CDATA[stmt s1,s2; Select s2   such that  Parent* (9 , s2 ) and Follows* (9 , s2 ) ;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>102.000000</time_taken>
+<time_taken>92.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id follows="1" followsstar="1" comment="follows (known,known) and follows* (unknown,unknown)" >207</id><querystr><![CDATA[ Select BOOLEAN   such that  Follows (4 ,5 ) and Follows* (4 ,5 ) ;]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>99.000000</time_taken>
+<time_taken>83.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id followsstar="1" comment="follows* (known,known) and follows* (unknown,unknown)" >208</id><querystr><![CDATA[ Select BOOLEAN   such that  Follows* (4 ,9 ) and Follows* (4 ,5 ) ;]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>96.000000</time_taken>
+<time_taken>80.000000</time_taken>
 <passed/>
 </query>
 </category>

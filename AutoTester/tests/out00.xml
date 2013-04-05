@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>15.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>56.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" Test Case 1, Follows/Uses/Modifies for Assignment">
@@ -9,112 +9,112 @@
 <id Follows="1" Typed="1" comment="Which statement follows statement #2?" >1</id><querystr><![CDATA[stmt s;  Select s such that Follows(2,s);]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>625.000000</time_taken>
+<time_taken>101.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Follows="1" Typed="1" comment="Which statement is followed by statement #2?" >2</id><querystr><![CDATA[stmt s;  Select s such that Follows(s,2);]]></querystr>
 <stuans>1</stuans>
 <correct>1</correct>
-<time_taken>161.000000</time_taken>
+<time_taken>100.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Follows="1" Placeholder="1" comment="If Follows(_,_) is true, return all the statements." >3</id><querystr><![CDATA[stmt s; Select s such that Follows(_,_);]]></querystr>
 <stuans>1,2,3</stuans>
 <correct>1,2,3</correct>
-<time_taken>60.000000</time_taken>
+<time_taken>72.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Followsstar="1" Typed="1" comment="Which statement(s) follows statement #1?" >4</id><querystr><![CDATA[stmt s; Select s such that Follows*(1, s);]]></querystr>
 <stuans>2,3</stuans>
 <correct>2,3</correct>
-<time_taken>61.000000</time_taken>
+<time_taken>65.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Followsstar="1" Typed="1" comment="Which statement(s) is/are followed by statement #3?" >5</id><querystr><![CDATA[stmt s; Select s such that Follows*(s, 3);]]></querystr>
-<stuans>2,1</stuans>
+<stuans>1,2</stuans>
 <correct>1,2</correct>
-<time_taken>64.000000</time_taken>
+<time_taken>67.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Followsstar="1" Placeholder="1" comment="Which statement(s) is/are followed by statement #2?" >6</id><querystr><![CDATA[stmt s; Select s such that Follows*(s, 2);]]></querystr>
 <stuans>1</stuans>
 <correct>1</correct>
-<time_taken>63.000000</time_taken>
+<time_taken>60.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Modifies="1" Typed="1" comment="Which variable is modified at statement #1?" >7</id><querystr><![CDATA[variable v; Select v such that Modifies(1, v);]]></querystr>
 <stuans>a</stuans>
 <correct>a</correct>
-<time_taken>96.000000</time_taken>
+<time_taken>75.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Modifies="1" Typed="1" comment="Which is the statement # in which variable c is modified?" >8</id><querystr><![CDATA[assign a; Select a such that Modifies(a, "c");]]></querystr>
 <stuans>2</stuans>
 <correct>2</correct>
-<time_taken>66.000000</time_taken>
+<time_taken>70.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Modifies="1" Placeholder="1" comment="Which assignment(s) is/are modified?" >10</id><querystr><![CDATA[assign a; Select a such that Modifies(a, _)]]></querystr>
 <stuans>1,2,3</stuans>
 <correct>1,2,3</correct>
-<time_taken>64.000000</time_taken>
+<time_taken>63.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Modifies="1" Placeholder="1" comment="Which variable(s) is/are modified?" >11</id><querystr><![CDATA[variable v; Select v such that Modifies(_, v)]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>63.000000</time_taken>
+<time_taken>69.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Uses="1" Typed="1" comment="Which statement(s) used variable y?" >13</id><querystr><![CDATA[assign a; Select a such that Uses(a, "y");]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>65.000000</time_taken>
+<time_taken>73.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Uses="1" Typed="1" comment="Which statement(s) used variable y?" >14</id><querystr><![CDATA[stmt s; Select s such that Uses(s, "y");]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>69.000000</time_taken>
+<time_taken>77.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Uses="1" Placeholder="1" comment="Which variable(s) is/are used?" >15</id><querystr><![CDATA[variable v; Select v such that Uses(_, v);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>65.000000</time_taken>
+<time_taken>70.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Uses="1" Placeholder="1" comment="Select all statements if there exists a use relationship." >16</id><querystr><![CDATA[stmt s; Select s such that Uses(_,_);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>65.000000</time_taken>
+<time_taken>69.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Uses="1" Placeholder="1" comment="Which assignment(s) use(s) a variable?" >17</id><querystr><![CDATA[assign a; Select a such that Uses(a, _)]]></querystr>
 <stuans>1,2,3</stuans>
 <correct>1,2,3</correct>
-<time_taken>69.000000</time_taken>
+<time_taken>75.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Follows="1" Typed="1" comment="Which statement follows after a statement?" >18</id><querystr><![CDATA[stmt s1, s2; Select s1 such that Follows(s1, s2);]]></querystr>
 <stuans>1,2</stuans>
 <correct>1,2</correct>
-<time_taken>69.000000</time_taken>
+<time_taken>74.000000</time_taken>
 <passed/>
 </query>
 </category>

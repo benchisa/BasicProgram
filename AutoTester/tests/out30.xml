@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>225.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>200.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" Test for such that and follows modifies">
@@ -9,77 +9,77 @@
 <id modifies="1" follows="1" comment="follows (known,known) and modifies (unknown,unknown)" >1</id><querystr><![CDATA[stmt s1; variable v1; Select BOOLEAN   such that  Follows (4 ,5 ) and Modifies ( s1 , v1 ) ;]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>132.000000</time_taken>
+<time_taken>156.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" followsstar="1" comment="follows* (known,known) and modifies (known,unknown)" >2</id><querystr><![CDATA[variable v1; Select BOOLEAN   such that  Follows* (4 ,9 ) and Modifies (9 , v1 ) ;]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>84.000000</time_taken>
+<time_taken>87.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" follows="1" comment="follows (known,unknown) and modifies (unknown,unknown)" >3</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s2   such that  Follows (4 , s2 ) and Modifies ( s2 , v1 ) ;]]></querystr>
 <stuans>5</stuans>
 <correct>5</correct>
-<time_taken>95.000000</time_taken>
+<time_taken>89.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" follows="1" comment="follows (unknown,known) and modifies (unknown,unknown)" >5</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Follows ( s1 ,9 ) and Modifies ( s1 , v1 ) ;]]></querystr>
 <stuans>8</stuans>
 <correct>8</correct>
-<time_taken>103.000000</time_taken>
+<time_taken>87.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" followsstar="1" comment="follows* (unknown,known) and modifies (known,unknown)" >6</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Follows* ( s1 ,9 ) and Modifies (9 , v1 ) ;]]></querystr>
-<stuans>8,7,6,5,4,3,2,1</stuans>
+<stuans>7,8,4,5,6,1,2,3</stuans>
 <correct>1,2,3,4,5,6,7,8</correct>
-<time_taken>97.000000</time_taken>
+<time_taken>88.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" follows="1" comment="follows (unknown,unknown)  and modifies (unknown,unknown)" >7</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Follows ( s1 , s2 ) and Modifies ( s1 , v1 ) ;]]></querystr>
-<stuans>1,2,11,27,40,4,3,5,6,7,8,12,15,23,14,45,10,9,20,28,29,31,32,34,35,36,39,42,43,46</stuans>
+<stuans>1,2,3,11,32,4,6,20,43,5,7,8,12,15,14,27,10,31,9,23,28,29,34,35,36,39,40,42,45,46</stuans>
 <correct>1,2,3,4,5,6,7,8,9,10,11,12,14,15,20,23,27,28,29,31,32,34,35,36,39,40,42,43,45,46</correct>
-<time_taken>124.000000</time_taken>
+<time_taken>105.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" followsstar="1" comment="follows* (unknown,unknown)  and modifies (unknown,unknown)" >8</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s1   such that  Follows* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;]]></querystr>
-<stuans>1,9,2,3,4,5,6,7,8,10,11,27,40,12,14,45,15,23,20,28,29,31,32,34,35,36,39,42,43,46</stuans>
+<stuans>1,2,3,4,6,20,43,5,7,8,9,10,31,11,32,12,14,27,15,23,28,29,34,35,36,39,40,42,45,46</stuans>
 <correct>1,2,3,4,5,6,7,8,9,10,11,12,14,15,20,23,27,28,29,31,32,34,35,36,39,40,42,43,45,46</correct>
-<time_taken>162.000000</time_taken>
+<time_taken>137.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" follows="1" comment="follows (unknown,unknown) and modifies (unknown,unknown)" >9</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s2   such that  Follows ( s1 , s2 ) and Modifies ( s1 , v1 ) ;]]></querystr>
-<stuans>2,3,12,7,4,5,6,8,9,14,24,16,43,18,19,20,21,46,28,29,31,32,33,35,36,39,40,41,44,47</stuans>
+<stuans>2,3,12,4,6,20,43,5,41,7,8,9,14,16,31,18,19,21,40,24,28,29,32,33,35,36,39,44,46,47</stuans>
 <correct>2,3,4,5,6,7,8,9,12,14,16,18,19,20,21,24,28,29,31,32,33,35,36,39,40,41,43,44,46,47</correct>
-<time_taken>125.000000</time_taken>
+<time_taken>105.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" followsstar="1" comment="follows* (unknown,unknown) and modifies (unknown,unknown)" >10</id><querystr><![CDATA[stmt s1,s2;variable v1; Select s2   such that  Follows* ( s1 , s2 ) and Modifies ( s1 , v1 ) ;]]></querystr>
-<stuans>2,3,4,20,5,6,7,8,9,21,46,19,12,14,24,18,16,43,28,29,31,32,33,35,36,39,40,41,44,47</stuans>
+<stuans>2,3,20,43,5,4,6,41,7,8,9,21,40,19,12,14,18,16,31,24,28,29,32,33,35,36,39,44,46,47</stuans>
 <correct>2,3,4,5,6,7,8,9,12,14,16,18,19,20,21,24,28,29,31,32,33,35,36,39,40,41,43,44,46,47</correct>
-<time_taken>157.000000</time_taken>
+<time_taken>141.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" follows="1" comment="follows (unknown,unknown) and modifies (unknown,unknown)" >11</id><querystr><![CDATA[stmt s1,s2;variable v1; Select v1   such that  Follows ( s1 , s1 ) and Modifies ( s1 , v1 ) ;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>110.000000</time_taken>
+<time_taken>91.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" followsstar="1" comment="follows* (unknown,unknown) and modifies (unknown,unknown)" >12</id><querystr><![CDATA[stmt s1,s2;variable v1; Select v1   such that  Follows* ( s1 , s1 ) and Modifies ( s1 , v1 ) ;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>132.000000</time_taken>
+<time_taken>91.000000</time_taken>
 <passed/>
 </query>
 </category>

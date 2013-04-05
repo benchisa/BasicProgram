@@ -1,64 +1,64 @@
 30
 cat: Test for such that and affects modifies uses parent
 49 - modifies , affects :: affects (known,known) and modifies (known,unknown)
-stmt s1,s2;variable v1;
+assign a1,a2;variable v1;
 Select BOOLEAN   such that  Affects (13 ,18 ) and Modifies (18 , v1 ) ;
 true
 5000
 50 - modifies , affects* :: affects* (known,known) and modifies (known,unknown)
-stmt s1,s2;variable v1;
+assign a1,a2;variable v1;
 Select BOOLEAN   such that  Affects* (13 ,18 ) and Modifies (18 , v1 ) ;
 true
 5000
 51 - modifies , affects :: affects (known,unknown) and modifies (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Affects (13 , s2 ) and Modifies ( s2 , v1 ) ;
-
+assign a1,a2;variable v1;
+Select a2   such that  Affects (27 , a2 ) and Modifies ( a2 , v1 ) ;
+30
 5000
 52 - modifies , affects* :: affects* (known,unknown) and modifies (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Affects* (13 , s2 ) and Modifies ( s2 , v1 ) ;
-
+assign a1,a2;variable v1;
+Select a2   such that  Affects* (27 , a2 ) and Modifies ( a2 , v1 ) ;
+30
 5000
 53 - modifies , affects :: affects (unknown,known) and modifies (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects ( s1 ,18 ) and Modifies ( s1 , v1 ) ;
-
+assign a1,a2;variable v1;
+Select a1   such that  Affects ( a1 ,18 ) and Modifies ( a1 , v1 ) ;
+13,15,19
 5000
 54 - modifies , affects* :: affects* (unknown,known) and modifies (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects* ( s1 ,18 ) and Modifies ( s1 , v1 ) ;
-
+assign a1,a2;variable v1;
+Select a1   such that  Affects* ( a1 ,18 ) and Modifies ( a1 , v1 ) ;
+13,15,19,6
 5000
 55 - modifies , affects :: affects (unknown,unknown) and modifies (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
-
+assign a1,a2;variable v1;
+Select a1   such that  Affects ( a1 , a2 ) and Modifies ( a2 , v1 ) ;
+1,11,13,15,19,20,27,3,30,34,35,39,42,43,45,46,47,6
 5000
 56 - modifies , affects* :: affects* (unknown,unknown) and modifies (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects* ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
-
+assign a1,a2;variable v1;
+Select a1   such that  Affects* ( a1 , a2 ) and Modifies ( a2 , v1 ) ;
+1,11,13,15,19,20,27,3,30,34,35,39,42,43,45,46,47,6
 5000
 57 - modifies , affects :: affects (unknown,unknown) and modifies (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Affects ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
-
+assign a1,a2;variable v1;
+Select a2   such that  Affects ( a1 , a2 ) and Modifies ( a2 , v1 ) ;
+13,17,18,2,22,23,3,30,35,37,38,4,40,43,45,46,47,7
 5000
 58 - modifies , affects* :: affects* (unknown,unknown) and modifies (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Affects* ( s1 , s2 ) and Modifies ( s2 , v1 ) ;
-
+assign a1,a2;variable v1;
+Select a2   such that  Affects* ( a1 , a2 ) and Modifies ( a2 , v1 ) ;
+13,17,18,2,22,23,3,30,35,37,38,4,40,43,45,46,47,7
 5000
 59 - modifies , affects :: affects (unknown,unknown) and modifies (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects ( s1 , s1 ) and Modifies ( s2 , v1 ) ;
-
+assign a1,a2;variable v1;
+Select a1   such that  Affects ( a1 , a1 ) and Modifies ( a2 , v1 ) ;
+30
 5000
 60 - modifies , affects* :: affects* (unknown,unknown) and modifies (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects* ( s1 , s1 ) and Modifies ( s2 , v1 ) ;
-
+assign a1,a2;variable v1;
+Select a1   such that  Affects* ( a1 , a1 ) and Modifies ( a2 , v1 ) ;
+30,45,46,47
 5000
 146 - affects, uses :: affects (known,known) and uses (unknown,unknown)
 variable v1;
@@ -71,92 +71,92 @@ Select BOOLEAN   such that  Affects* (13 ,18 ) and Uses (13 , v1 ) ;
 true
 5000
 148 - affects, uses :: affects (known,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Affects (13 , s2 ) and Uses (13 , v1 ) ;
-
+assign a1,a2;variable v1;
+Select a2   such that  Affects (13 , a2 ) and Uses (13 , v1 ) ;
+18
 5000
 149 - affects*, uses :: affects* (known,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Affects* (13 , s2 ) and Uses ( s2 , v1 ) ;
-
+assign a1,a2;variable v1;
+Select a2   such that  Affects* (13 , a2 ) and Uses ( a2 , v1 ) ;
+18
 5000
 150 - affects, uses :: affects (unknown,known) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects ( s1 ,18 ) and Uses ( s1 , v1 ) ;
-
+assign a1,a2;variable v1;
+Select a1   such that  Affects ( a1 ,18 ) and Uses ( a1 , v1 ) ;
+13,19
 5000
 151 - affects*, uses :: affects* (unknown,known) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects* ( s1 ,18 ) and Uses ( s1 , v1 ) ;
-
+assign a1,a2;variable v1;
+Select a1   such that  Affects* ( a1 ,18 ) and Uses ( a1 , v1 ) ;
+13,19
 5000
 152 - affects, uses :: affects (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-
+assign a1,a2;variable v1;
+Select a1   such that  Affects ( a1 , a2 ) and Uses ( a1 , v1 ) ;
+13,19,3,30,35,43,45,46,47
 5000
 153 - affects*, uses :: affects* (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects* ( s1 , s2 ) and Uses ( s1 , v1 ) ;
-
+assign a1,a2;variable v1;
+Select a1   such that  Affects* ( a1 , a2 ) and Uses ( a1 , v1 ) ;
+13,19,3,30,35,43,45,46,47
 5000
 154 - affects, uses :: affects (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Affects ( s1 , s2 ) and Uses ( s2 , v1 ) ;
-
+assign a1,a2;variable v1;
+Select a2   such that  Affects ( a1 , a2 ) and Uses ( a2 , v1 ) ;
+13,17,18,2,22,23,3,30,35,37,38,4,40,43,45,46,47,7
 5000
 155 - affects*, uses :: affects* (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s2   such that  Affects* ( s1 , s2 ) and Uses ( s2 , v1 ) ;
-
+assign a1,a2;variable v1;
+Select a2   such that  Affects* ( a1 , a2 ) and Uses ( a2 , v1 ) ;
+13,17,18,2,22,23,3,30,35,37,38,4,40,43,45,46,47,7
 5000
 156 - affects, uses :: affects (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects ( s1 , s1 ) and Uses ( s1 , v1 ) ;
-
+assign a1,a2;variable v1;
+Select a1   such that  Affects ( a1 , a1 ) and Uses ( a1 , v1 ) ;
+30
 5000
 157 - affects*, uses :: affects* (unknown,unknown) and uses (unknown,unknown)
-stmt s1,s2;variable v1;
-Select s1   such that  Affects* ( s1 , s1 ) and Uses ( s1 , v1 ) ;
-
+assign a1,a2;variable v1;
+Select a1   such that  Affects* ( a1 , a1 ) and Uses ( a1 , v1 ) ;
+30,45,46,47
 5000
 195 - affects , parent* :: affects (known,known) and parent* (unknown,unknown)
-stmt s1,s2;
-Select BOOLEAN   such that  Affects (13 ,18 ) and Parent* (18 , s1 ) ;
-true
+assign a1,a2;
+Select BOOLEAN   such that  Affects (13 ,18 ) and Parent* (18 , a1 ) ;
+false
 5000
 196 -  affect* , parent* :: affects* (known,known) and parent* (unknown,unknown)
-stmt s1,s2;
-Select BOOLEAN   such that  Affects* (13 ,18 ) and Parent* (18 , s1 ) ;
-true
+assign a1,a2;
+Select BOOLEAN   such that  Affects* (13 ,18 ) and Parent* (18 , a1 ) ;
+false
 5000
 197 - affects, parent* :: affects (known,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s2   such that  Affects (13 , s2 ) and Parent* ( s1 , s2 ) ;
-
+stmt s1; assign a2;
+Select a2   such that  Affects (13 , a2 ) and Parent* ( s1 , a2 ) ;
+18
 5000
 198 - affects*, parent* :: affects* (known,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s2   such that  Affects* (13 , s2 ) and Parent* ( s1 , s2 ) ;
-
+stmt s1; assign a2;
+Select a2   such that  Affects* (13 , a2 ) and Parent* ( s1 , a2 ) ;
+18
 5000
 199 - affects, parent* :: affects (unknown,known) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Affects ( s1 ,18 ) and Parent* ( s1 , s2 ) ;
-
+stmt s1; assign a2;
+Select s1   such that  Affects ( a2 ,18 ) and Parent* ( s1 , a2 ) ;
+10,12,14,9
 5000
 200 - affects*, parent* :: affects* (unknown,known) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Affects* ( s1 ,18 ) and Parent* ( s1 , s2 ) ;
-
+stmt s1; assign a2;
+Select s1   such that  Affects* ( a2 ,18 ) and Parent* ( s1 , a2 ) ;
+10,12,14,9
 5000
 201 - affects, parent* :: affects (unknown,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Affects ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
-
+stmt s1; assign a2;
+Select s1   such that  Affects ( a2 , a2 ) and Parent* ( s1 , a2 ) ;
+29
 5000
 202 - affects*, parent* :: affects* (unknown,unknown) and parent* (unknown,unknown)
-stmt s1,s2;
-Select s1   such that  Affects* ( s1 , s2 ) and Parent* ( s1 , s2 ) ;
-
+stmt s1; assign a2;
+Select s1   such that  Affects* ( a2 , a2 ) and Parent* ( s1 , a2 ) ;
+29,44
 5000

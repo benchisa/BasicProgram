@@ -1,41 +1,35 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>235.000000</parsing_time_taken>
+<name>AutoTester</name><parsing_time_taken>203.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" complex queries">
 <query>
 <id all="1" Typed="1" comment="2 sets of interrelated such that clauses, single select" >1</id><querystr><![CDATA[procedure p1,p2;stmt s1,s2,s3,s4; variable v1,v2; if i1; Select v2 such that Uses(s1,v1) and Modifies(s1,"carrot") and Follows(s3,s4) and Parent*(i1,s4) and Modifies(s3,v2) and Follows*(s3,25);]]></querystr>
-<stuans>jam</stuans>
-<correct>jam</correct>
-<time_taken>147.000000</time_taken>
-<passed/>
+<timeout/>
 </query>
 <query>
 <id all="1" Typed="1" comment="2 sets of interrelated such that clauses, two tuple select" >2</id><querystr><![CDATA[procedure p1,p2;stmt s1,s2,s3,s4; variable v1,v2; if i1; Select <s3,v2> such that Uses(s1,v1) and Modifies(s1,"carrot") and Follows(s3,s4) and Parent*(i1,s4) and Modifies(s3,v2) and Follows*(s3,25);]]></querystr>
-<stuans>24 jam</stuans>
-<correct>24 jam</correct>
-<time_taken>154.000000</time_taken>
-<passed/>
+<timeout/>
 </query>
 <query>
-<id all="1" Typed="1" comment="2 sets of interrelated such that clauses, many tuple select" >3</id><exception/>
-<querystr><![CDATA[procedure p1,p2;stmt s1,s2,s3,s4; variable v1,v2; if i1; Select <s3,s4,v1,v2> such that Uses(s1,v1) and Modifies(s1,"carrot") and Follows(s3,s4) and Parent*(i1,s4) and Modifies(s3,v2) and Follows*(s3,25);]]></querystr>
+<id all="1" Typed="1" comment="2 sets of interrelated such that clauses, many tuple select" >3</id><querystr><![CDATA[procedure p1,p2;stmt s1,s2,s3,s4; variable v1,v2; if i1; Select <s3,s4,v1,v2> such that Uses(s1,v1) and Modifies(s1,"carrot") and Follows(s3,s4) and Parent*(i1,s4) and Modifies(s3,v2) and Follows*(s3,25);]]></querystr>
+<timeout/>
 </query>
 <query>
 <id all="1" Typed="1" comment="3 sets of interrelated such that clauses, single select" >4</id><querystr><![CDATA[procedure p1,p2;stmt s1,s2,s3,s4; variable v1,v2; if i1; Select v1 such that Calls(p1,p2) and Uses(s1,v1) and Modifies(s1,"carrot") and Follows(s3,s4) and Parent*(i1,s4) and Modifies(s3,v2) and Follows*(s3,25);]]></querystr>
-<stuans>apple,ingredients,banana,egg,kimchi,leek,meat,a,b,c</stuans>
+<stuans></stuans>
 <correct>jam</correct>
-<time_taken>160.000000</time_taken>
+<time_taken>1771.000000</time_taken>
 <failed>
 <missing>jam</missing>
-<additional>a,apple,b,banana,c,egg,ingredients,kimchi,leek,meat</additional>
+<additional></additional>
 <summary>
 <expected>1</expected>
 <matched>0</matched>
 <missing>1</missing>
-<additional>10</additional>
+<additional>0</additional>
 </summary>
 </failed>
 </query>
@@ -43,12 +37,15 @@
 <id all="1" Typed="1" comment="3 sets of interrelated such that clauses, two tuple select" >5</id><querystr><![CDATA[procedure p1,p2;stmt s1,s2,s3,s4; variable v1,v2; if i1; Select <v1,v2> such that Calls(p1,p2) and Uses(s1,v1) and Modifies(s1,"carrot") and Follows(s3,s4) and Parent*(i1,s4) and Modifies(s3,v2) and Follows*(s3,25);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>173.000000</time_taken>
+<time_taken>876.000000</time_taken>
 <passed/>
 </query>
 <query>
-<id all="1" Typed="1" comment="3 sets of interrelated such that clauses, many tuple select" >6</id><exception/>
-<querystr><![CDATA[procedure p1,p2;stmt s1,s2,s3,s4; variable v1,v2; if i1; Select <p1,v1,v2> such that Calls(p1,p2) and Uses(s1,v1) and Modifies(s1,"carrot") and Follows(s3,s4) and Parent*(i1,s4) and Modifies(s3,v2) and Follows*(s3,25);]]></querystr>
+<id all="1" Typed="1" comment="3 sets of interrelated such that clauses, many tuple select" >6</id><querystr><![CDATA[procedure p1,p2;stmt s1,s2,s3,s4; variable v1,v2; if i1; Select <p1,v1,v2> such that Calls(p1,p2) and Uses(s1,v1) and Modifies(s1,"carrot") and Follows(s3,s4) and Parent*(i1,s4) and Modifies(s3,v2) and Follows*(s3,25);]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>896.000000</time_taken>
+<passed/>
 </query>
 </category>
 </queries>
