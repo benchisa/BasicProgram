@@ -140,6 +140,9 @@ RELATION_LIST * QueryEvaluator::getSuchThatResult(QTREE* suchThatTree){
 		}else{//no cache stored
 			RELATION_LIST * tmpList;
 			tmpList = suchThatClause.evaluateSuchThatTree(suchThatTree);
+			if(tmpList==NULL||tmpList->size()==0){
+				return NULL;
+			}
 			cache[relationType]=*tmpList;
 
 			return tmpList;

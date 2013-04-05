@@ -24,9 +24,9 @@ hash_map<int,DATA_LIST> * LinkedDataTable::convertToHash(int mergeAttrPos,RELATI
 	hash_map<int,DATA_LIST> * returnResult = new hash_map<int,DATA_LIST>;
 	hash_map<int,DATA_LIST>::iterator mapItr;
 	RELATION_LIST::iterator lstItr;
-
+	RELATION_LIST::iterator endItr = newEntries->end();
 	if(mergeAttrPos==1){
-		for(lstItr = newEntries->begin();lstItr!=newEntries->end();lstItr++){
+		for(lstItr = newEntries->begin();lstItr!=endItr;lstItr++){
 			mapItr = returnResult->find(lstItr->first);
 
 			if(mapItr!=returnResult->end()){ //key exists,append the data to current key entry
@@ -38,7 +38,7 @@ hash_map<int,DATA_LIST> * LinkedDataTable::convertToHash(int mergeAttrPos,RELATI
 			}
 		}
 	}else{
-		for(lstItr = newEntries->begin();lstItr!=newEntries->end();lstItr++){
+		for(lstItr = newEntries->begin();lstItr!=endItr;lstItr++){
 			mapItr = returnResult->find(lstItr->second);
 
 			if(mapItr!=returnResult->end()){ //key exists,append the data to current key entry
@@ -72,10 +72,11 @@ bool LinkedDataTable::addOneEntry(int mergeAttrPos,INDEX oldQrVar,INDEX newQrVar
 
 		if(mapItr!=entryMap->end()){  //the entry in database is also in incoming list
 			//expand the database
-			DATA_LIST::iterator newListItr;
 			DATA_LIST newList = mapItr->second;
+			DATA_LIST::iterator newListItr;
+			DATA_LIST::iterator endItr = newList.end();
 			//loop through the entryList with the same firstData
-			for(newListItr = newList.begin();newListItr!=newList.end();newListItr++){
+			for(newListItr = newList.begin();newListItr!=endItr;newListItr++){
 				ROW tempRow = rowList[i];
 				tempRow.push_back(*newListItr);
 				tempRowList->push_back(tempRow);
@@ -103,7 +104,8 @@ bool LinkedDataTable::createEntry(INDEX firstQrVar,INDEX secondQrVar,RELATION_LI
 	}
 
 	RELATION_LIST::iterator currentEntry;
-	for(currentEntry = newEntries->begin();currentEntry!=newEntries->end();currentEntry++){
+	RELATION_LIST::iterator endItr = newEntries->end();
+	for(currentEntry = newEntries->begin();currentEntry!=endItr;currentEntry++){
 		ROW newRow;
 
 		if(firstQrVar !=-1)newRow.push_back(currentEntry->first);
@@ -157,6 +159,7 @@ bool LinkedDataTable::mergeTable(INDEX firstQrVar,INDEX secondQrVar,LinkedDataTa
 	//----------------------STEP1a: convert the new Table to hash table---------------------------------------
 	hash_map<int,ROW_LIST>  hashedTable; 
 	hash_map<int,ROW_LIST>::iterator hashTableItr;
+	
 
 	for(int i=0;i<newTable->getSize();i++){
 		ROW currentRow = newTable->getRow(i);
@@ -177,8 +180,9 @@ bool LinkedDataTable::mergeTable(INDEX firstQrVar,INDEX secondQrVar,LinkedDataTa
 	//------------------------STEP 1b: convert the newEntires to a hash table------------------------------
 	hash_map<int,DATA_LIST> * entryMap = LinkedDataTable::convertToHash(1,newEntries);
 	hash_map<int,DATA_LIST>::iterator entryMapItr;
-
-	//------------------------STEP 2:marge two tables, and store the merged table into current LinkedDataTable-----------------
+	hash_map<int,DATA_LIST>::iterator endEntryMap = entryMap->end();
+	hash_map<int,ROW_LIST>::iterator endHashTable = hashedTable.end();
+	//------------------------STEP 2:marge two tables, and store the merged table into current LinkedDataTable-----------------	
 	//------------the newEntries and newTable are hashed
 	for(int i=0;i<rowList.size();i++){	
 		ROW curRow= rowList[i];
@@ -189,7 +193,7 @@ bool LinkedDataTable::mergeTable(INDEX firstQrVar,INDEX secondQrVar,LinkedDataTa
 		//find if the first key exists in the hashed entry
 		entryMapItr= entryMap->find(key1);
 
-		if(entryMapItr!=entryMap->end()){ //the first key is found in entry map
+		if(entryMapItr!=endEntryMap){ //the first key is found in entry map
 			DATA_LIST secondKeyList= entryMapItr->second;
 			DATA_LIST::iterator key2Itr;
 
@@ -197,7 +201,7 @@ bool LinkedDataTable::mergeTable(INDEX firstQrVar,INDEX secondQrVar,LinkedDataTa
 			for(key2Itr=secondKeyList.begin();key2Itr!=secondKeyList.end();key2Itr++){
 				hashTableItr = hashedTable.find(*key2Itr);
 
-				if(hashTableItr!=hashedTable.end()){ //second key is found, merge entry
+				if(hashTableItr!=endHashTable){ //second key is found, merge entry
 					ROW_LIST listTobeMerged = hashTableItr->second;
 
 					//loop through the list to be merged and expand the current database
