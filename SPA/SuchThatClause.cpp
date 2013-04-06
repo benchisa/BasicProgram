@@ -269,7 +269,7 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 			}
 			if(relType==SIBLING){
 				tmpList = extractor->getSiblingResult(firstType,secondType,firstRel->getData(),-2);
-				//filterResult(relList,tmpList,firstType,secondType);
+				filterResult(relList,tmpList,firstType,secondType);
 			}
 			if(relType==CONTAINS){
 				if(secondType==PLUS||secondType==MINUS||secondType==MULTIPLY||secondType==STMT_LIST){
