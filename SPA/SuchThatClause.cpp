@@ -32,8 +32,20 @@ void SuchThatClause::filterResult(RELATION_LIST * result,RELATION_LIST list,TYPE
 		}else{
 			    RELATION_LIST::iterator itr = list.begin();
 				while(itr!=list.end()){
-					bool firstCond = cond1==ANY||cond1==STATEMENT||cond1==STMT_LIST||cond1==PROGLINE||extractor->isStatementTypeOf(cond1,itr->first);
-					bool secondCond = cond2==ANY||cond2 ==STATEMENT||cond2==STMT_LIST||cond2==PROGLINE||extractor->isStatementTypeOf(cond2,itr->second);
+					//bool firstCond = cond1==ANY||cond1==STATEMENT||cond1==STMT_LIST||cond1==PROGLINE||extractor->isStatementTypeOf(cond1,itr->first);
+					//bool secondCond = cond2==ANY||cond2 ==STATEMENT||cond2==STMT_LIST||cond2==PROGLINE||extractor->isStatementTypeOf(cond2,itr->second);
+					bool firstCond= true;
+					bool secondCond= true;
+
+					if(cond1==ASSIGNMENT||cond1==WHILE||cond1==CALL||cond1==IF){
+						if(!extractor->isStatementTypeOf(cond1,itr->first))
+							firstCond = false;
+					}
+					if(cond2==ASSIGNMENT||cond2==WHILE||cond2==CALL||cond2==IF){
+						if(!extractor->isStatementTypeOf(cond2,itr->second))
+							firstCond = false;
+					}
+
 					if(firstCond&&secondCond){
 						result->push_back(*itr);
 					}
