@@ -1,82 +1,92 @@
 100
 cat: complex queries
-31 - all, Typed :: 1 set of interrelated 9 such that pattern clauses, single select
-
-
-
+1 - all, Typed :: 1 set of interrelated 7 such that pattern clauses, single select
+assign a1,a2,a3; variable v1,v2; while w1; 
+Select a1 such that Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2);
+37
 5000
-32 - all, Typed :: 1 set of interrelated 9 such that pattern clauses, 2-tuple select
-
-
-
-
+2 - all, Typed :: 1 set of interrelated 7 such that pattern clauses, single select
+assign a1,a2,a3; variable v1,v2; while w1; 
+Select w1 such that Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2);
+36
 5000
-33 - all, Typed :: 1 set of interrelated 9 such that pattern clauses, many-tuple select
-
-
-
+3 - all, Typed :: 1 set of interrelated 7 such that pattern clauses, single select
+assign a1,a2,a3; variable v1,v2; while w1; 
+Select a2 such that Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2);
+38
 5000
-34 - all, Typed :: 2 sets of interrelated 4 such that pattern clauses, single select
-
-
-
+4 - all, Typed :: 1 set of interrelated 7 such that pattern clauses, single select
+assign a1,a2,a3; variable v1,v2; while w1; 
+Select a3 such that Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2);
+31,32,33,34,37
 5000
-35 - all, Typed :: 2 sets of interrelated 4 such that pattern clauses, 2-tuple select
-
-
-
-
+5 - all, Typed :: 1 set of interrelated 10 such that pattern clauses, single select
+assign a1,a2,a3; variable v1,v2; while w1; procedure p1;
+Select p1  such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);
+Bob
 5000
-36 - all, Typed :: 2 sets of interrelated 4 such that pattern clauses, many-tuple select
-
-
-
+6 - all, Typed :: 1 set of interrelated 10 such that pattern clauses, 2-tuple select
+assign a1,a2,a3; variable v1,v2; while w1; procedure p1;
+Select <a1,p1>  such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);
+37 Bob
 5000
-37 - all, Typed :: 3 sets of interrelated 9 such that pattern clauses, single select
-
-
-
+7 - all, Typed :: 1 set of interrelated 10 such that pattern clauses, single select
+assign a1,a2,a3,a4; variable v1,v2; while w1; procedure p1;
+Select a4 such that Next*(38,a4) and Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);
+31,32,33,34,35,37,38,39,42,43
 5000
-38 - all, Typed :: 3 sets of interrelated 9 such that pattern clauses, 2-tuple select
-
-
-
-
+8 - all, Typed :: 1 set of interrelated 10 such that pattern clauses, 2-tuple select
+assign a1,a2,a3,a4; variable v1,v2; while w1; procedure p1;
+Select <p1,a4> such that Next*(38,a4) and Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);
+Bob 31,Bob 32,Bob 33,Bob 34,Bob 35,Bob 37,Bob 38,Bob 39,Bob 42,Bob 43
 5000
-39 - all, Typed :: 3 sets of interrelated 9 such that pattern clauses, many-tuple select
-
-
-
+9 - all, Typed :: 2 set of interrelated 10 such that pattern clauses, single select
+assign a1,a2,a3,a4; variable v1,v2; while w1; procedure p1;
+Select a4 such that Next*(44,a4) and Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);
+45,46,49,50
 5000
-40 - all, Typed :: 4 sets of interrelated 12 such that pattern clauses, single select
-
-
-
+10 - all, Typed :: 2 set of interrelated 10 such that pattern clauses, 2-tuple select
+assign a1,a2,a3,a4; variable v1,v2; while w1; procedure p1;
+Select <p1,a4> such that Next*(44,a4) and Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);
+Bob 45,Bob 46,Bob 49,Bob 50
 5000
-41 - all, Typed :: 4 sets of interrelated 12 such that pattern clauses, 2-tuple select
-
-
-
-
+11 - all, Typed :: 2 set of interrelated 13 such that pattern clauses, many-tuple select
+assign a1,a2,a3,a4; variable v1,v2,v3,v4; while w1; procedure p1;
+Select <a1,a2,a3,a4> such that Next*(44,a4) and Uses(a4,v3) pattern a4(_,_"orange"_) such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);
+Bob 45
 5000
-42 - all, Typed :: 4 sets of interrelated 12 such that pattern clauses, many-tuple select
-
-
-
+12 - all, Typed :: 3 set of interrelated 15 such that pattern clauses, single select
+stmt s1,s2,s3; assign a1,a2,a3,a4; variable v1,v2,v3,v4; while w1; procedure p1;
+Select s1 such that Follows(s1,s2) and Parent(s3,s2) pattern a7("fan",_) such that Next*(44,a4) and Uses(a4,v3) pattern a4(_,_"orange"_) such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);
+64
 5000
-43 - all, Typed :: 5 sets of interrelated 25 such that pattern clauses, single select
-
-
-
+13 - all, Typed :: 3 set of interrelated 15 such that pattern clauses, single select
+stmt s1,s2,s3; assign a1,a2,a3,a4; variable v1,v2,v3,v4; while w1; procedure p1;
+Select a4 such that Follows(s1,s2) and Parent(s3,s2) pattern a7("fan",_) such that Next*(44,a4) and Uses(a4,v3) pattern a4(_,_"orange"_) such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);
+45,46,49,50
 5000
-44 - all, Typed :: 5 sets of interrelated 25 such that pattern clauses, 2-tuple select
-
-
-
-
+14 - all, Typed :: 3 set of interrelated 15 such that pattern clauses, single select
+stmt s1,s2,s3; assign a1,a2,a3,a4; variable v1,v2,v3,v4; while w1; procedure p1;
+Select a2 such that Follows(s1,s2) and Parent(s3,s2) pattern a7("fan",_) such that Next*(44,a4) and Uses(a4,v3) pattern a4(_,_"orange"_) such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);
+38
 5000
-45 - all, Typed :: 5 sets of interrelated 25 such that pattern clauses, many-tuple select
-
-
-
+15 - all, Typed :: 3 set of interrelated 15 such that pattern clauses, many-tuple select
+stmt s1,s2,s3; assign a1,a2,a3,a4; variable v1,v2,v3,v4; while w1; procedure p1;
+Select <s1,a4,a2> such that Follows(s1,s2) and Parent(s3,s2) pattern a7("fan",_) such that Next*(44,a4) and Uses(a4,v3) pattern a4(_,_"orange"_) such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);
+64 45 38,64 46 38,64 49 38,64 50 38
+5000
+16 - all, Typed :: 4 set of interrelated 20 such that pattern clauses, many-tuple select
+stmt s1,s2,s3; assign a1,a2,a3,a4,a5; variable v1,v2,v3,v4; while w1,w2,w3; procedure p1;
+Select <s1,a4,a2> such that Next*(w2,w3) and Parent*(w3,a5) and Affects*(a5,54) and Follows(s1,s2) and Parent(s3,s2) pattern a7("fan",_) such that Modifies(a4,v4) pattern a4("leek",_) such that Next*(44,a4) and Uses(a4,v3) pattern a4(_,_"orange"_) such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);
+64 46 38
+5000
+17 - all, Typed :: 4 set of interrelated 20 such that pattern clauses, many-tuple select
+stmt s1,s2,s3; assign a1,a2,a3,a4,a5; variable v1,v2,v3,v4; while w1,w2,w3; procedure p1;
+Select <a5,s1,a4,a2> such that Next*(w2,w3) and Parent*(w3,a5) and Affects*(a5,54) and Follows(s1,s2) and Parent(s3,s2) pattern a7("fan",_) such that Modifies(a4,v4) pattern a4("leek",_) such that Next*(44,a4) and Uses(a4,v3) pattern a4(_,_"orange"_) such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);
+52 64 46 38
+5000
+18 - all, Typed :: 5 set of interrelated 22 such that pattern clauses, many-tuple select
+stmt s1,s2,s3; assign a1,a2,a3,a4,a5,a6,a7; variable v1,v2,v3,v4; while w1,w2,w3; procedure p1;
+Select <a6, a5,s1,a4,a2> such that Affects*(a6,a7) and Modifies(a6,"orange") and Next*(w2,w3) and Parent* (w3,a5) and Affects*(a5,54) and Follows(s1,s2) and Parent(s3,s2) pattern a7("fan",_) such that Modifies(a4,v4) pattern a4("leek",_) such that Next*(44,a4) and Uses(a4,v3) pattern a4(_,_"orange"_) such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);
+44 52 64 46 38,45 52 64 46 38
 5000
