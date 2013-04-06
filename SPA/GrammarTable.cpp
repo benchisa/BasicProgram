@@ -591,16 +591,52 @@ void GrammarTable::createContainSTInvNodeTable(){
 
 	containSTInvTable[6].left=CALL;
 	//should not have anything under CALL
+	temp.push_back(PROCEDURE);
+	temp.push_back(STMT_LIST);
+	temp.push_back(STATEMENT);
+	temp.push_back(ASSIGNMENT);
+	temp.push_back(WHILE);
+	temp.push_back(IF);
+	temp.push_back(CALL);
+	temp.push_back(CONSTANT);
+	temp.push_back(VARIABLE);
+	temp.push_back(PLUS);
+	temp.push_back(MINUS);
+	temp.push_back(MULTIPLY);
 	containSTInvTable[6].right=temp;
 	temp.clear();
 
 	containSTInvTable[7].left=CONSTANT;
 	//should not have anything under CONSTANT
+	temp.push_back(PROCEDURE);
+	temp.push_back(STMT_LIST);
+	temp.push_back(STATEMENT);
+	temp.push_back(ASSIGNMENT);
+	temp.push_back(WHILE);
+	temp.push_back(IF);
+	temp.push_back(CALL);
+	temp.push_back(CONSTANT);
+	temp.push_back(VARIABLE);
+	temp.push_back(PLUS);
+	temp.push_back(MINUS);
+	temp.push_back(MULTIPLY);
 	containSTInvTable[7].right=temp;
 	temp.clear();
 
 	containSTInvTable[8].left=VARIABLE;
 	//should not have anything under VARIABLE
+	temp.push_back(PROCEDURE);
+	temp.push_back(STMT_LIST);
+	temp.push_back(STATEMENT);
+	temp.push_back(ASSIGNMENT);
+	temp.push_back(WHILE);
+	temp.push_back(IF);
+	temp.push_back(CALL);
+	temp.push_back(CONSTANT);
+	temp.push_back(VARIABLE);
+	temp.push_back(PLUS);
+	temp.push_back(MINUS);
+	temp.push_back(MULTIPLY);
 	containSTInvTable[8].right=temp;
 	temp.clear();
 
