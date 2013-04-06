@@ -1,462 +1,138 @@
-90
-cat: Test Case 1, Contains(known, unknown)
-1 - Contains, Typed :: Contains(stmt#, stmt)?
-stmt s; 
-Select s such that Contains(1, s);
-1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26
-1000
-2 - Contains, Typed :: Contains(stmt#, stmtList)?
-stmtList st; 
-Select st such that Contains(1, st);
-2
-1000
-3 - Contains, Typed :: Contains(stmt#, variable)?
-variable v;
-Select v such that Contains(1, v);
-apple
-1000
-4 - Contains, Typed :: Contains(stmt#, procedure)?
-procedure p;
-Select p such that Contains(1, p);
-xylo
-1000
-5 - Contains, Typed :: Contains(stmt#, assignment)?
-assign a;
-Select a such that Contains(1, a);
-apple
-1000
-6 - Contains, Typed :: Contains(stmt#, if)?
-if f;
-Select BOOLEAN such that Contains(21, f);
-true
-1000
-7 - Contains, Typed :: Contains(stmt#, then)?
-then t;
-Select BOOLEAN such that Contains(21, t);
-true
-1000
-8 - Contains, Typed :: Contains(stmt#, else)?
-else e;
-Select BOOLEAN such that Contains(23, e);
-true
-1000
-9 - Contains, Typed :: Contains(stmt#, while)?
-while w;
-Select BOOLEAN such that Contains(9, w);
-true
-1000
-10 - Contains, Typed :: Contains(stmt#, plus)?
-plus pl;
-Select BOOLEAN such that Contains(2, pl);
-true
-1000
-11 - Contains, Typed :: Contains(stmt#, minus)?
-minus m;
-Select BOOLEAN such that Contains(1, m)
-false
-1000
-12 - Contains, Typed :: Contains(stmt#, multiply)?
-multiply ml; 
-Select s such that Contains(1, ml)
-false
-1000
-13 - Contains, Typed :: Contains(stmt#, call)?
-call c;
-Select BOOLEAN such that Contains(8, c);
-true
-1000
-14 - Contains, Typed :: Contains(stmt#, constant)?
-constant c;
-Select BOOLEAN such that Contains(6, c);
-true
-1000
-13 - Contains, Typed :: Contains(varName, assign)?
-stmt s; assign a;
-Select s such that Contains("apple", a);
-1,3,20,22
-1000
-14 - Contains, Typed :: Contains(varName, variable)?
-stmt s; variable v;
-Select s such that Contains("apple", v);
-1,2,3,9,19,20,22
-1000
-15 - Contains, Typed :: Contains(varName, if)?
-stmt s; if f;
-Select s such that Contains("innard", f)
-21
-1000
-16 - Contains, Typed :: Contains(varName, stmtList)?
-stmt s; stmtList st; 
-Select s such that Contains("apple", st);
-1,10
-1000
-17 - Contains, Typed :: Contains(varName, procedure)?
-procedure p; 
-Select BOOLEAN such that Contains("xylo", p);
-true
-1000
-18 - Contains, Typed :: Contains(varName, plus)?
-stmt s; plus pl;
-Select s such that Contains("apple", pl);
-2
-1000
-19 - Contains, Typed :: Contains(varName, minus)?
-stmt s; minus m;
-Select s such that Contains("b", m)
-0
-1000
-20 - Contains, Typed :: Contains(varName, multiply)?
-stmt s; multiply ml; 
-Select s such that Contains("b", ml)
-0
-1000
-21 - Contains, Typed :: Contains(varName, constant)?
-constant c;
-Select s such that Contains("apple", c)
-1,20
-1000
-22 - Contains, Typed :: Contains(procName, assign)?
-assign a;
-Select BOOLEAN such that Contains("xylo", a);
-true
-1000
-23 - Contains, Typed :: Contains(procName, variable)?
-variable v;
-Select BOOLEAN such that Contains("xylo", v);
-true
-1000
-24 - Contains, Typed :: Contains(procName, if)?
-if f;
-Select BOOLEAN such that Contains("xylo", f)
-true
-1000
-25 - Contains, Typed :: Contains(procName, stmtList)?
-stmtList st; 
-Select BOOLEAN such that Contains("xylo", st);
-true
-1000
-26 - Contains, Typed :: Contains(procName, procedure)?
-procedure p; 
-Select BOOLEAN such that Contains("xylo", p);
-true
-1000
-27 - Contains, Typed :: Contains(procName, plus)?
-plus pl;
-Select BOOLEAN such that Contains("xylo", pl);
-true
-1000
-28 - Contains, Typed :: Contains(procName, minus)?
-minus m;
-Select BOOLEAN such that Contains("xylo", m)
-false
-1000
-29 - Contains, Typed :: Contains(procName, multiply)?
-multiply ml; 
-Select BOOLEAN such that Contains("xylo", ml)
-false
-1000
-30 - Contains, Typed :: Contains(procName, constant)?
-constant c; 
-Select BOOLEAN such that Contains("xylo", c)
-true
-1000
-31 - Contains, Typed :: Contains(ifStmt, assign)?
-assign a;
-Select BOOLEAN such that Contains("xylo", a);
-true
-1000
-32 - Contains, Typed :: Contains(ifStmt, variable)?
-if f; variable v; stmt s;
-Select s such that Contains(f, v);
-21,24,36
-1000
-33 - Contains, Typed :: Contains(ifStmt, ifStmt)?
-if f1, f2; stmt s;
-Select s such that Contains(f1, f2)
-21
-1000
-34 - Contains, Typed :: Contains(ifStmt, stmtList)?
-if f; stmtList st; stmt s;
-Select s such that Contains(f, st);
-21,24,36
-1000
-35 - Contains, Typed :: Contains(ifStmt, plus)?
-if f; plus pl; stmt s;
-Select s such that Contains(f, pl);
-36
-1000
-36 - Contains, Typed :: Contains(ifStmt, minus)?
-if f; minus m; statment s;
-Select s such that Contains(f, m)
-0
-1000
-37 - Contains, Typed :: Contains(ifStmt, multiply)?
-if f; multiply ml; stmt s;
-Select s such that Contains(f, ml)
-0
-1000
-38 - Contains, Typed :: Contains(ifStmt, constant)?
-if f; constant c; 
-Select s such that Contains(f, c)
-24
-1000
-39 - Contains, Typed :: Contains(ifStmt, while)?
-if f; while w; stmt s;
-Select s such that Contains(f, w)
-0
-1000
-40 - Contains, Typed :: Contains(ifStmt, call)?
-if f; call ca; stmt s;
-Select s such that Contains(f, ca)
-0
-1000
-41 - Contains, Typed :: Contains(else, assign)?
-else e; assign a; stmt s;
-Select s such that Contains(e, a);
-23,26,38
-1000
-42 - Contains, Typed :: Contains(else, variable)?
-else e; variable v; stmt s;
-Select v such that Contains(e, v);
-jam,gummy,egg
-1000
-43 - Contains, Typed :: Contains(else, ifStmt)?
-else e; if f; stmt s;
-Select s such that Contains(e, f)
-23
-1000
-44 - Contains, Typed :: Contains(else, stmtList)?
-else e; stmtList st; stmt s;
-Select st such that Contains(e, st);
-23,26,38
-1000
-45 - Contains, Typed :: Contains(else, plus)?
-else e; plus pl; stmt s;
-Select s such that Contains(e, pl);
-0
-1000
-46 - Contains, Typed :: Contains(else, minus)?
-else e; minus m; statment s;
-Select s such that Contains(e, m)
-0
-1000
-47 - Contains, Typed :: Contains(else, multiply)?
-else e; multiply ml; stmt s;
-Select s such that Contains(e, ml)
-0
-1000
-48 - Contains, Typed :: Contains(else, constant)?
-if f; constant c; 
-Select c such that Contains(f, c)
-33,99
-1000
-49 - Contains, Typed :: Contains(else, while)?
-else e; while w; stmt s;
-Select s such that Contains(f, w)
-0
-1000
-50 - Contains, Typed :: Contains(else, call)?
-else e; call ca; stmt s;
-Select s such that Contains(e, ca)
-0
-1000
-51 - Contains, Typed :: Contains(then, assign)?
-then t; assign a; stmt s;
-Select s such that Contains(t, a);
-21,24,36
-1000
-52 - Contains, Typed :: Contains(then, variable)?
-then t; variable v; stmt s;
-Select v such that Contains(t, v);
-jam,apple,gummy,egg,carrot,banana
-1000
-53 - Contains, Typed :: Contains(then, ifStmt)?
-then t; if f; stmt s;
-Select s such that Contains(t, f)
-0
-1000
-54 - Contains, Typed :: Contains(then, stmtList)?
-then t; stmtList st; stmt s;
-Select st such that Contains(t, st);
-22,25,37
-1000
-55 - Contains, Typed :: Contains(then, plus)?
-then t; plus pl; stmt s;
-Select s such that Contains(t, pl);
-36
-1000
-56 - Contains, Typed :: Contains(then, minus)?
-then t; minus m; statment s;
-Select s such that Contains(t, m)
-0
-1000
-57 - Contains, Typed :: Contains(then, multiply)?
-then t; multiply ml; stmt s;
-Select s such that Contains(t, ml)
-0
-1000
-58 - Contains, Typed :: Contains(then, constant)?
-then t; constant c; 
-Select c such that Contains(t, c)
-33
-1000
-59 - Contains, Typed :: Contains(then, while)?
-then t; while w; stmt s;
-Select s such that Contains(t, w)
-0
-1000
-60 - Contains, Typed :: Contains(then, call)?
-then t; call ca; stmt s;
-Select s such that Contains(t, ca)
-0
-1000
-61 - Contains, Typed :: Contains(while, assign)?
-while w; assign a;
-Select w such that Contains(w, a);
-10,14,16,29,44
-1000
-62 - Contains, Typed :: Contains(while, variable)?
-while w; variable v;
-Select v such that Contains(w, v);
-apple,egg,fish,ingredients
-1000
-63 - Contains, Typed :: Contains(while, ifStmt)?
-while w; if f;
-Select w such that Contains(w, f)
-0
-1000
-64 - Contains, Typed :: Contains(while, stmtList)?
-while w; stmtList st;
-Select st such that Contains(w, st);
-10,11,13,15,30,45
-1000
-65 - Contains, Typed :: Contains(while, plus)?
-while w; plus pl; stmt s;
-Select w such that Contains(w, pl);
-9,12
-1000
-66 - Contains, Typed :: Contains(while, minus)?
-while w; minus m; statment s;
-Select w such that Contains(w, m)
-0
-1000
-67 - Contains, Typed :: Contains(while, multiply)?
-while w; multiply ml; stmt s;
-Select w such that Contains(w, ml)
-0
-1000
-68 - Contains, Typed :: Contains(while, constant)?
-while w; constant c; 
-Select w such that Contains(w, c)
-0
-1000
-69 - Contains, Typed :: Contains(while, while)?
-while w1, w2; 
-Select w2 such that Contains(w1, w2)
-10,12,14,16
-1000
-70 - Contains, Typed :: Contains(while, call)?
-while w; call ca;
-Select s such that Contains(w, ca)
-0
-1000
-71 - Contains, Typed :: Contains(assign, variable)?
-assign a; variable v;
-Select v such that Contains(a, v);
-apple,banana,carrot,donut,egg,fish,innard,gummy,ham,jam,kimchi,leek,meat,ingredients,a,b,c
-1000
-72 - Contains, Typed :: Contains(assign, plus)?
-assign a; plus pl; stmt s;
-Select s such that Contains(a, pl);
-2,4,13,19,30,33,37,40
-1000
-73 - Contains, Typed :: Contains(assign, minus)?
-assign a; minus m; stmt s;
-Select s such that Contains(a, m)
-0
-1000
-74 - Contains, Typed :: Contains(assign, multiply)?
-assign a; multiply ml; stmt s;
-Select a such that Contains(a, ml)
-0
-1000
-75 - Contains, Typed :: Contains(assign, constant)?
-assign a; constant c; stmt s;
-Select s such that Contains(a, c)
-1,5,6,11,15,20,25,26,27,28,34,39
-1000
-76 - Contains, Typed :: Contains(plus, variable)?
-plus pl; variable v; stmt s;
-Select v such that Contains(pl, v);
-apple,carrot,egg,kimchi,egg,meat,banana
-1000
-77 - Contains, Typed :: Contains(plus, plus)?
-plus pl1, pl2; stmt s;
-Select s such that Contains(pl1, pl2);
-0
-1000
-78 - Contains, Typed :: Contains(plus, minus)?
-plus pl; minus m; stmt s;
-Select s such that Contains(pl, m)
-0
-1000
-79 - Contains, Typed :: Contains(plus, multiply)?
-plus pl; multiply ml; stmt s;
-Select s such that Contains(pl, ml)
-0
-1000
-80 - Contains, Typed :: Contains(plus, constant)?
-plus pl; constant c; stmt s;
-Select s such that Contains(pl, c)
-2,4,13,19,30,33,35,37,40
-1000
-81 - Contains, Typed :: Contains(minus, variable)?
-minus m; variable v; stmt s;
-Select v such that Contains(m, v);
+100
+cat: valid contains(KNOWN,KNOWN) queries
+1 - contains, Typed :: contains(ASSIGNMENT,VARIABLE)
 
-1000
-82 - Contains, Typed :: Contains(minus, minus)?
-minus m1, m2; stmt s;
-Select s such that Contains(m1, m2);
-0
-1000
-83 - Contains, Typed :: Contains(minus, plus)?
-plus pl; minus m; stmt s;
-Select s such that Contains(m, pl)
-0
-1000
-84 - Contains, Typed :: Contains(minus, multiply)?
-minus m; multiply ml; stmt s;
-Select s such that Contains(m, ml)
-0
-1000
-85 - Contains, Typed :: Contains(minus, constant)?
-minus m; constant c; stmt s;
-Select s such that Contains(m, c)
-0
-1000
-86 - Contains, Typed :: Contains(multiply, variable)?
-multiply ml; variable v; stmt s;
-Select v such that Contains(ml, v);
+Select BOOLEAN such that Contains(1,"apple");
+5000
+2 - contains, Typed :: contains(ASSIGNMENT,PLUS)
+plus pl;
+Select BOOLEAN such that Contains(2,pl);
+5000
+3 - contains, Typed :: contains(ASSIGNMENT,MINUS)
+minus min;
+Select BOOLEAN such that Contains(38,min);
+5000
+4 - contains, Typed :: contains(ASSIGNMENT,MULTIPLY)
+times tm;
+Select BOOLEAN such that Contains(31,tm);
+5000
+5 - contains, Typed :: contains(IF,VARIABLE)
 
-1000
-87 - Contains, Typed :: Contains(multiply, multiply)?
-multiply mll, ml2; stmt s;
-Select s such that Contains(ml1, ml2);
-0
-1000
-88 - Contains, Typed :: Contains(multiply, plus)?
-multiply ml; minus m; stmt s;
-Select s such that Contains(ml, pl)
-0
-1000
-89 - Contains, Typed :: Contains(multiply, minus)?
-multiply ml; multiply ml; stmt s;
-Select s such that Contains(ml, m)
-0
-1000
-90 - Contains, Typed :: Contains(multiply, constant)?
-multiply ml; constant c; stmt s;
-Select s such that Contains(ml, c)
-0
-1000
+Select BOOLEAN such that Contains(30,"carrot");
+5000
+6 - contains, Typed :: contains(IF,STMT_LST)
+
+Select BOOLEAN such that Contains(30,31);
+5000
+7 - contains, Typed :: contains(WHILE,VARIABLE)
+
+Select BOOLEAN such that Contains(36,"banana");
+5000
+8 - contains, Typed :: contains(WHILE,STMT_LST)
+
+Select BOOLEAN such that Contains(36,37);
+5000
+9 - contains, Typed :: contains(PROCEDURE,STMT_LST)
+
+Select BOOLEAN such that Contains("Goneril",121);
+5000
+11 - contains, Typed :: contains(PLUS,CONSTANT)
+plus pls;
+Select BOOLEAN such that Contains(pls,"1");
+5000
+12 - contains, Typed :: contains(PLUS,VARIABLE)
+plus pls;
+Select BOOLEAN such that Contains(pls,"apple");
+5000
+13 - contains, Typed :: contains(PLUS,PLUS)
+plus pls1,pls2;
+Select BOOLEAN such that Contains(pls1,pls2);
+5000
+14 - contains, Typed :: contains(PLUS,MINUS)
+plus pls; minus min;
+Select BOOLEAN such that Contains(pls,min);
+5000
+15 - contains, Typed :: contains(PLUS,MULTIPLY)
+plus pls; times tm;
+Select BOOLEAN such that Contains(pls,tm);
+5000
+16 - contains, Typed :: contains(MULTIPLY,CONSTANT)
+times tm;
+Select BOOLEAN such that Contains(tm,"9");
+5000
+17 - contains, Typed :: contains(MULTIPLY,VARIABLE)
+times tm;
+Select BOOLEAN such that Contains(tm,"leek");
+5000
+18 - contains, Typed :: contains(MULTIPLY,PLUS)
+times tm; plus pls;
+Select BOOLEAN such that Contains(tm,pls);
+5000
+19 - contains, Typed :: contains(MULTIPLY,MINUS)
+times tm; minus min;
+Select BOOLEAN such that Contains(tm,min);
+5000
+20 - contains, Typed :: contains(MULTIPLY,MULTIPLY)
+times tm1,tm2;
+Select BOOLEAN such that Contains(tm1,tm2);
+5000
+21 - contains, Typed :: contains(MINUS,CONSTANT)
+minus min;
+Select BOOLEAN such that Contains(min,"9");
+5000
+22 - contains, Typed :: contains(MINUS,VARIABLE)
+minus min;
+Select BOOLEAN such that Contains(min,"ham");
+5000
+23 - contains, Typed :: contains(MINUS,PLUS)
+plus pls;minus min;
+Select BOOLEAN such that Contains(min,pls);
+5000
+24 - contains, Typed :: contains(MINUS,MINUS)
+minus min1,min2;
+Select BOOLEAN such that Contains(min1,min2);
+5000
+25 - contains, Typed :: contains(MINUS,MULTIPLY)
+minus min; times tm;
+Select BOOLEAN such that Contains(min,tm);
+5000
+26 - contains, Typed :: contains(STMT_LIST,STATEMENT)
+
+Select BOOLEAN such that Contains();
+5000
+27 - contains, Typed :: contains(STMT_LIST,ASSIGNMENT) 
+
+Select BOOLEAN such that Contains();
+5000
+28 - contains, Typed :: contains(STMT_LIST,WHILE)
+
+Select BOOLEAN such that Contains();
+5000
+29 - contains, Typed :: contains(STMT_LIST,IF)
+
+Select BOOLEAN such that Contains();
+5000
+30 - contains, Typed :: contains(STMT_LIST,CALL)
+
+Select BOOLEAN such that Contains();
+5000
+31 - contains, Typed :: contains(STATEMENT,VARIABLE)
+
+Select BOOLEAN such that Contains();
+5000
+32 - contains, Typed :: contains(STATEMENT,STMT_LIST)
+
+Select BOOLEAN such that Contains();
+5000
+33 - contains, Typed :: contains(STATEMENT,PLUS)
+
+Select BOOLEAN such that Contains();
+5000
+34 - contains, Typed :: contains(STATEMENT,MINUS)
+
+Select BOOLEAN such that Contains();
+5000
+35 - contains, Typed :: contains(STATEMENT,MULTIPLY)
+
+Select BOOLEAN such that Contains();
+5000

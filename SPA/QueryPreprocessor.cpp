@@ -1520,7 +1520,11 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 		//two scenarios: "<varName>" and "<procName>"
 		if(regex_match(currToken,regex(invComma+ident+invComma))){			
 			currToken.erase(currToken.begin());	
-			currToken.resize(currToken.size()-1);	
+			currToken.resize(currToken.size()-1);
+			if (isConstant(currToken)){
+				tokenType = CONSTANT;
+				currNode = createQTREENode(CONSTANT,atoi(currToken.c_str()));
+			}
 			if ((i==1&&(relName=="Modifies_p"||relName=="Uses_p"))||relName=="Calls"||relName=="Calls*"){
 				if (!pkb->isProcExists(currToken)){
 					error(INVALID_VARIABLE);
@@ -1528,6 +1532,21 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 				}
 				tokenType = PROCEDURE;
 				currNode = createQTREENode(PROCEDURE,pkb->getProcIndex(currToken));
+			}
+			else if(i==1&&(relName=="Contains"||relName=="Contains*"||relName=="Sibling")){
+				if (pkb->isProcExists(currToken)){
+					tokenType = PROCEDURE;
+					currNode = createQTREENode(PROCEDURE,pkb->getProcIndex(currToken));
+				}
+				else{
+					//not a procedure, could be a var
+					if (!pkb->isVarExists(currToken)){
+						error(INVALID_VARIABLE);
+						return false;
+					}
+					tokenType = VARIABLE;
+					currNode = createQTREENode(VARIABLE,pkb->getVarIndex(currToken));		
+				}
 			}
 			else{
 				if (!pkb->isVarExists(currToken)){
@@ -1597,6 +1616,10 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 			if (relName=="Next"||relName=="Next*"){
 				tokenType = PROGLINE;
 				currNode = createQTREENode(PROGLINE,atoi(currToken.c_str()));
+			}
+			else if(relName=="Affects"||relName=="Affects*"){
+				tokenType = ASSIGNMENT;
+				currNode = createQTREENode(ASSIGNMENT,atoi(currToken.c_str()));
 			}
 			else{
 				tokenType = STATEMENT;			
