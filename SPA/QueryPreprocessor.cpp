@@ -39,7 +39,7 @@ QueryPreprocessor::QueryPreprocessor(PKB* pkb){
 	result_cl		= "Select\\s+(BOOLEAN"+or+tuple+")";
 	suchthat_cl		= "such that\\s+("+rel+")\\s*\\(\\s*("+ref+")\\s*,\\s*("+ref+")\\s*\\)(\\s+and\\s+("+rel+")\\s*\\(\\s*("+ref+")\\s*,\\s*("+ref+")\\s*\\))"+optional;
 	with_cl			= "with\\s+("+attrCompare+")(\\s+and\\s+("+attrCompare+"))"+optional;
-	pattern_cl		= "pattern\\s+"+synonym+"\\s*\\(.+,.+,*\\)(\\s+and\\s+"+synonym+"\\s*\\(.+,.+,*\\))"+optional;
+	pattern_cl		= "pattern\\s+"+synonym+"\\s*\\(("+invComma+synonym+invComma+or+underscore+"),.*\\)";
 
 	/*
 	cout<<"result_cl==============="<<endl;
@@ -1425,7 +1425,7 @@ bool QueryPreprocessor::verifyCondition(TOKEN token){
 		}
 	}
 	else if (regex_match(token,regex(pattern_cl))){
-		conditions = tokenize(token,synonym+"\\s*\\(.+,.+,*\\)");
+		conditions = tokenize(token,synonym+"\\s*\\((\""+synonym+"\"|_),(\""+synonym+"\"|_\""+synonym+"\"_|_)(,_)*\\)");
 		for(int i=0;i<conditions.size();i++){		
 			if (processPattern(conditions.at(i))){
 				clauseCount++;
