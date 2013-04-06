@@ -158,35 +158,40 @@ bool IntermediateResultTable::joinList(JOIN_ATTR qrVarIndex,INDEX firstQrVar,IND
 			table1 = database.begin();
 			advance(table1,tableNum1);
 
-			//failed to merge into the first table
-			/*if(!table1->addEntry(1,firstQrVar,secondQrVar,newList)){
-				return false;
-			}*/
-
 			//merge the new list to second table
 			int tableNum2 = qrVarTable[1][secondQrVar];
 			table2 = database.begin();
 			advance(table2,tableNum2);
-			/*
-			//failed to merge into the second table
-			if(!table2->addEntry(2,secondQrVar,firstQrVar,newList)){
-				return false;
-			}*/
-
-			LinkedDataTable  table2Pointer;
-			table2Pointer = *table2;
 
 			//merge two tables
+				
+			LinkedDataTable  table2Pointer;
+			table2Pointer = *table2;
 			if(!table1->mergeTable(firstQrVar,secondQrVar,&table2Pointer,newList))return false;
 
 			//update qrVar info (table num)
 			for(int i =0;i<tableSize;i++){
-				if(qrVarTable[1][i]==tableNum2){
-					qrVarTable[1][i]= tableNum1;
+				int curTableNum = qrVarTable[1][i];
+
+				if(tableNum1<tableNum2){
+					if(curTableNum==tableNum2){
+						qrVarTable[1][i]= tableNum1;
+					}else if(curTableNum>tableNum2){
+						qrVarTable[1][i] = curTableNum-1;
+					}
+				}else if(tableNum1>tableNum2){
+					if(curTableNum==tableNum1){
+						qrVarTable[1][i]= tableNum2;
+					}
+					if(curTableNum>tableNum2){
+						qrVarTable[1][i] = curTableNum-1;
+					}
 				}
 			}
 
-		//	qrVarTable[1][secondQrVar] = tableNum1;
+			//after merging two tables,delete the second table
+			database.erase(table2);
+			
 		}
 		
 	}
@@ -392,7 +397,6 @@ RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_L
 	
 	return rawData;
 }
-
 RAWDATA * IntermediateResultTable::joinCombinations(RAWDATA* rawData, DATA_LIST * selectedVarList){
 	if(rawData==NULL){	
 		//create the rawData

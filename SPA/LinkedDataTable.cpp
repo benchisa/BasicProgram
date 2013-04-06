@@ -210,7 +210,7 @@ bool LinkedDataTable::mergeTable(INDEX firstQrVar,INDEX secondQrVar,LinkedDataTa
 						ROW curList = listTobeMerged.at(k); // the list in the hashed table
 						//append the mached entry one by one
 						for(int j=0;j<curList.size();j++){
-							if(j!=secondColNum2) tempRow.push_back(curList.at(j));
+							tempRow.push_back(curList.at(j));
 						}
 						//push the merged entry into a temp row  list
 						tempRowList->push_back(tempRow);
@@ -228,7 +228,6 @@ bool LinkedDataTable::mergeTable(INDEX firstQrVar,INDEX secondQrVar,LinkedDataTa
 		//update the qrVarList
 		ROW mergeQrVarList = newTable->getQrVarList();
 		for(int i =0;i<mergeQrVarList.size();i++){
-			if(i!=secondColNum2)
 				qrVarList.push_back(mergeQrVarList.at(i));
 		}
 		return true;
