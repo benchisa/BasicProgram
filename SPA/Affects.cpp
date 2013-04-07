@@ -333,8 +333,8 @@ AFFECT_LIST	Affects::getAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt
 			for (a_itr; a_itr!=a_end; a_itr++)
 			{
 				pair<int,int> temp_pair=make_pair(stmt1, a_itr->second);
-				AFFECT_LIST::iterator findIter = find(result.begin(), result.end(), temp_pair);
-				if (findIter==result.end())
+				AFFECT_LIST::const_iterator findIter = find(result.begin(), result.end(), temp_pair);
+				if (findIter==result.cend())
 				{
 					result.push_back(temp_pair);
 					stacks.push(Affects::getAffectResult(a_itr->second,0));
@@ -355,8 +355,8 @@ AFFECT_LIST	Affects::getAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt
 			for (a_itr; a_itr!=a_end; a_itr++)
 			{
 				pair<int,int> temp_pair=make_pair(a_itr->first, stmt2);
-				AFFECT_LIST::iterator findIter = find(result.begin(), result.end(), temp_pair);
-				if (findIter==result.end())
+				AFFECT_LIST::const_iterator findIter = find(result.begin(), result.end(), temp_pair);
+				if (findIter==result.cend())
 				{
 					result.push_back(temp_pair);
 					stacks.push(Affects::getAffectResult(0,a_itr->first));
@@ -388,8 +388,8 @@ AFFECT_LIST	Affects::getAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt
 						for (a_itr; a_itr!=a_end; a_itr++)
 						{
 							pair<int,int> temp_pair=make_pair(i, a_itr->second);
-							AFFECT_LIST::iterator findIter = find(result.begin(), result.end(), temp_pair);
-							if (findIter==result.end())
+							AFFECT_LIST::const_iterator findIter = find(result.begin(), result.end(), temp_pair);
+							if (findIter==result.cend())
 							{
 								result.push_back(temp_pair);
 								stacks.push(Affects::getAffectResult(a_itr->second,0));
@@ -397,6 +397,7 @@ AFFECT_LIST	Affects::getAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt
 							
 						}
 					}
+					
 
 				
 				}
