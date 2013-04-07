@@ -2,11 +2,6 @@
 cat: complex queries
 1 - all, Typed :: 1 set of interrelated 7 such that pattern clauses, single select
 assign a1,a2,a3; variable v1,v2; while w1; 
-Select a2 pattern a2("jam",_) and a2(_,_"ham"_);
-
-5000
-1 - all, Typed :: 1 set of interrelated 7 such that pattern clauses, single select
-assign a1,a2,a3; variable v1,v2; while w1; 
 Select a1 such that Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2);
 37
 5000
@@ -19,6 +14,16 @@ Select w1 such that Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(
 assign a1,a2,a3; variable v1,v2; while w1; 
 Select a2 such that Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2);
 38
+5000
+4 - all, Typed :: 1 set of interrelated 7 such that pattern clauses, single select
+assign a1,a2,a3; variable v1,v2; while w1; 
+Select a2 such that Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2);
+
+5000
+4 - all, Typed :: 1 set of interrelated 7 such that pattern clauses, single select
+assign a1,a2,a3; variable v1,v2; while w1; 
+Select v2 such that Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2);
+
 5000
 4 - all, Typed :: 1 set of interrelated 7 such that pattern clauses, single select
 assign a1,a2,a3; variable v1,v2; while w1; 
