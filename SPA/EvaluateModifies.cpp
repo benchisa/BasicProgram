@@ -72,7 +72,7 @@ MODIFIES_LIST EvaluateModifies::getModifiesResult(TYPE type, int arg1, VAR_INDEX
 	}
 
 
-	//cout << "SIZE OF RESULT (MODIFIES): " << result.size() << "\n";
+	//cout << "SIZEX OF RESULT (MODIFIES): " << result.size() << "\n";
 
 	return result;
 }

@@ -26,7 +26,7 @@ PROC_INDEX ProcTable::insertProc(Procedure * proc){
 	}
 
 }
-SIZE ProcTable::getProceTableSize(){
+SIZEX ProcTable::getProceTableSize(){
 	return (*procTable).size();
 }
 Procedure * ProcTable::getProcedure(PROC_INDEX index){

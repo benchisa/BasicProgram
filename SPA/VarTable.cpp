@@ -25,7 +25,7 @@ VAR_INDEX VarTable::insertVar(VAR_NAME varName){
 		return ((*varTable).size());
 	}
 }
-SIZE VarTable::getVarTableSize(){
+SIZEX VarTable::getVarTableSize(){
 	return (*varTable).size();
 }
  VAR_NAME  VarTable::getVarName(VAR_INDEX index){

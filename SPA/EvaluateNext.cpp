@@ -16,8 +16,8 @@ EvaluateNext::~EvaluateNext(void)
 }
 
 void EvaluateNext::createCFG(){
-	int size = pkb->getMaxProgLine();
-	cfg = new CFG(size);
+	int SIZEX = pkb->getMaxProgLine();
+	cfg = new CFG(SIZEX);
 	
 	// traverse AST and create the CFG
 	AST* cAST = pkb->getRootAST();
@@ -36,9 +36,9 @@ bool EvaluateNext::isNextResult(PROG_LINE p1, PROG_LINE p2){
 
 bool EvaluateNext::isNextStarResult(PROG_LINE p1, PROG_LINE p2)
 {
-	int size = pkb->getMaxProgLine();
+	int SIZEX = pkb->getMaxProgLine();
 
-	if(p1 > size || p2 > size || p1 <= 0 || p2 <=0)
+	if(p1 > SIZEX || p2 > SIZEX || p1 <= 0 || p2 <=0)
 		return false;
 
 	list<PROG_LINE> tmp = cfg->getAllProgLines(p1, p2);
@@ -58,11 +58,11 @@ bool EvaluateNext::isNextStarResult(PROG_LINE p1, PROG_LINE p2)
 NEXT_LIST EvaluateNext::getNextStarResult(PROG_LINE p1, PROG_LINE p2)
 {
 	NEXT_LIST result;
-	int size = pkb->getMaxProgLine();
+	int SIZEX = pkb->getMaxProgLine();
 
 	// Next*(n1, n2) --> findAll
 	if(p1 == 0 && p2 == 0){
-		for(int i = 1; i <=size; i++){
+		for(int i = 1; i <=SIZEX; i++){
 			list<PROG_LINE> tmp = cfg->getAllProgLines(i, i);
 
 			list<PROG_LINE>::iterator itr = tmp.begin();

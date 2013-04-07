@@ -8,7 +8,7 @@ class VarTable
 		VarTable(void);
 		~VarTable(void);
 		VAR_INDEX insertVar(VAR_NAME varName);
-		SIZE getVarTableSize();
+		SIZEX getVarTableSize();
 		VAR_NAME  getVarName(VAR_INDEX index);
 		VAR_INDEX getVarIndex(VAR_NAME varName);
 		bool isExists(VAR_NAME varName);

@@ -10,7 +10,7 @@ IfTable::~IfTable(void)
 {
 }
 
-SIZE IfTable::getSize(){
+SIZEX IfTable::getSize(){
 
 	return ifTable.size();
 }

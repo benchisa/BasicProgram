@@ -6,7 +6,7 @@
 class IntermediateResultTable
 {
 public:
-	IntermediateResultTable(SIZE tableSize,PKB* pkb,QUERYTABLE* qrTable,DesignExtractor * extractor);
+	IntermediateResultTable(SIZEX tableSize,PKB* pkb,QUERYTABLE* qrTable,DesignExtractor * extractor);
 	~IntermediateResultTable(void);
 	
 	//if joinAttr is 0, both of the two relations are not in the table
@@ -23,7 +23,7 @@ private:
 	typedef multimap<int,int> GROUP;
 	typedef pair<int,int> valuePair;
 
-	SIZE tableSize;
+	SIZEX tableSize;
 	//an array to store the qr variables
 	int ** qrVarTable;
 	PKB * pkb;

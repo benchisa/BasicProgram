@@ -7,7 +7,7 @@ public:
 	~ConstantTable(void);
 
 	CONSTANT_INDEX insertConst(int constantValue);
-	SIZE getConstantTableSize();
+	SIZEX getConstantTableSize();
 	int getConstantValue(CONSTANT_INDEX index);
 	CONSTANT_INDEX getConstantIndex(int constantValue);
 	bool isExists(int constantValue);

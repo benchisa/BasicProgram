@@ -8,7 +8,7 @@ public:
 	~CallTable(void);
 
 	CALL_INDEX insertCall(PROC_NAME caller, STATEMENT_NUM callStmt,PROC_NAME callee);
-	SIZE getCallTableSize();
+	SIZEX getCallTableSize();
 
 	//if caller is empty, return callee procedure
 	//if callee is empty, return caller procedure

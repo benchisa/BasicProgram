@@ -539,7 +539,7 @@ vector<QTREE*> QueryPreprocessor::addToProbe(QTREE* currClause){
 			trackProbes.push_back(first);
 		}
 	}
-	else if (currClause->getType() == PATTERN){
+	else if (currClause->getType() == PATTERNX){
 		int first = currClause->getFirstDescendant()->getData();
 		int second = currClause->getFirstDescendant()->getLastDescendant()->getData();
 		vector<int>::iterator posfirst = std::find(trackProbes.begin(),trackProbes.end(),first);
@@ -625,7 +625,7 @@ void QueryPreprocessor::processClauses(vector<int> cl,int mode){
 				currClause->setData(1);
 			relType = currClause->getFirstDescendant()->getType();
 			//pattern,with
-			if (currClause->getType() == PATTERN || currClause->getType() == WITH){
+			if (currClause->getType() == PATTERNX || currClause->getType() == WITH){
 				patternwith.push_back(currClause);
 			}
 			//follows
@@ -946,7 +946,7 @@ void QueryPreprocessor::arrangeClauseByRel(QTREE* node){
 	relType = node->getFirstDescendant()->getType();
 
 	//pattern, with
-	if (node->getType()==PATTERN || node->getType()==WITH){
+	if (node->getType()==PATTERNX || node->getType()==WITH){
 		if (firstWithPatt->getType()==ANY){
 			firstWithPatt = node;
 		}
@@ -1380,7 +1380,7 @@ bool QueryPreprocessor::verifySelect(TOKEN token){
 	for(int i=1;i<selections.size();i++){
 		currToken = selections.at(i);
 		if (regex_match(currToken,regex("BOOLEAN"))){
-			currNode = createQTREENode(BOOL);
+			currNode = createQTREENode(BOOLX);
 			selectBool=true;
 		}
 		else{
@@ -1903,7 +1903,7 @@ bool QueryPreprocessor::processPattern(TOKEN token){
 	string expr			= "\\(*("+synonym+or+integer+")("+op+"("+synonym+or+integer+")"+"\\)*)"+optional;
 	string wildexpr		= underscore+invComma+expr+invComma+underscore;
 
-	headNode = createQTREENode(PATTERN);
+	headNode = createQTREENode(PATTERNX);
 	insertClause(headNode);
 
 	patterns = tokenize(token,wildexpr+or+invComma+expr+invComma+or+underscore+or+synonym);
@@ -2157,7 +2157,8 @@ void QueryPreprocessor::updateQVarClause(TOKEN token,vector<int> newClauses){
 	(*dVarTable).insert(dVarPair(token,changeVar));
 }
 
-void QueryPreprocessor::mergeGroup(int grp1, int grp2){
+
+void QueryPreprocessor::mergeGroup(int group1 ,int group2){
 	//goal: merge grp2 into grp1
 	vector<dVarPair> updatedVar;
 	vector<hash_map<string,qVar>::const_iterator> marker;
@@ -2165,10 +2166,10 @@ void QueryPreprocessor::mergeGroup(int grp1, int grp2){
 	TOKEN varName;
 
 	for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
-		if(dVarIter->second.groupNum==grp2){			
+		if(dVarIter->second.groupNum==group2){			
 			changeVar = dVarIter->second;
 			varName = dVarIter->first;
-			changeVar.groupNum=grp1;
+			changeVar.groupNum=group1;
 			updatedVar.push_back(dVarPair(varName,changeVar));
 			marker.push_back(dVarIter);
 		}

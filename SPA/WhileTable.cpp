@@ -10,7 +10,7 @@ WhileTable::~WhileTable(void)
 {
 }
 
-SIZE WhileTable::getSize(){
+SIZEX WhileTable::getSize(){
 
 	return whileTable.size();
 }

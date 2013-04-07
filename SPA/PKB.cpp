@@ -193,7 +193,7 @@ PROC_INDEX PKB::insertProc(Procedure * proc)
 	return (*procTable).insertProc(proc);
 }
 
-SIZE PKB::getProceTableSize()
+SIZEX PKB::getProceTableSize()
 {
 	return (*procTable).getProceTableSize();
 }
@@ -292,7 +292,7 @@ VAR_INDEX PKB::insertVar(VAR_NAME varName)
 {
 	return (*varTable).insertVar(varName);
 }
-SIZE PKB::getVarTableSize()
+SIZEX PKB::getVarTableSize()
 {
 	return (*varTable).getVarTableSize();
 }
@@ -320,7 +320,7 @@ CALL_INDEX PKB::insertCall( PROC_NAME caller,STATEMENT_NUM callStmt, PROC_NAME c
 	return callTable->insertCall(caller,callStmt, callee);
 }
 
-SIZE PKB::getCallTableSize()
+SIZEX PKB::getCallTableSize()
 {
 	return callTable->getCallTableSize();
 }
@@ -383,7 +383,7 @@ CONSTANT_INDEX PKB::insertConst(int constantValue)
 {
 	return constantTable->insertConst(constantValue);
 }
-SIZE PKB::getConstantTableSize()
+SIZEX PKB::getConstantTableSize()
 {
 	return constantTable->getConstantTableSize();
 }
@@ -418,7 +418,7 @@ STATEMENT_NUM PKB::getMaxStatementNum()
 }
 
 //while table
-SIZE PKB::getWhileTableSize(){
+SIZEX PKB::getWhileTableSize(){
 	return whileTable->getSize();
 }
 void PKB::insertWhile(STATEMENT_NUM stmtNo,INDEX ctrVarIndex){
@@ -434,7 +434,7 @@ DATA_LIST * PKB::getAllWhiles(){
 	return whileTable->getAllWhiles();
 }
 //if table
-SIZE PKB::getIfSize(){
+SIZEX PKB::getIfSize(){
 	return ifTable->getSize();
 }
 void PKB::insertIf(STATEMENT_NUM stmtNo,INDEX ctrVarIndex){
@@ -451,7 +451,7 @@ DATA_LIST * PKB::getAllIfs(){
 }
 
 //assign table
-SIZE PKB::getAssignSize(){
+SIZEX PKB::getAssignSize(){
 	return assignTable->getSize();
 }
 void PKB::insertAssign(STATEMENT_NUM stmtNo,INDEX ctrVarIndex,string prefixTree){
@@ -465,7 +465,7 @@ DATA_LIST * PKB::getAllAssigns(){
 }
 
 // stmt_list table
-SIZE PKB::getStmtListSize(){
+SIZEX PKB::getStmtListSize(){
 	return stmtListTable->getSize();
 }
 

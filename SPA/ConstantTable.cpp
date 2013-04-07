@@ -29,7 +29,7 @@ CONSTANT_INDEX ConstantTable::insertConst(int constantValue)
 
 
 }
-SIZE ConstantTable::getConstantTableSize()
+SIZEX ConstantTable::getConstantTableSize()
 {
 	return constantList.size();
 }

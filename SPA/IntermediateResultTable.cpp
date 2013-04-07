@@ -1,7 +1,7 @@
 #include "IntermediateResultTable.h"
 
 
-IntermediateResultTable::IntermediateResultTable(SIZE tableSize,PKB* pkb,QUERYTABLE* qrTable,DesignExtractor * extractor)
+IntermediateResultTable::IntermediateResultTable(SIZEX tableSize,PKB* pkb,QUERYTABLE* qrTable,DesignExtractor * extractor)
 {
 	this->tableSize = tableSize;
 	this->pkb = pkb;
@@ -328,7 +328,7 @@ RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_L
 
 	currentTable = database.begin();
 	advance(currentTable,tableNum);
-	SIZE tableSize = currentTable->getSize();
+	SIZEX tableSize = currentTable->getSize();
 	
 	if(rawData==NULL){
 		
@@ -356,7 +356,7 @@ RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_L
 		
 		//expand the rawList
 		RAWDATA tempRaw;
-		//SIZE newSize = rawData->size()+selectedVarList->size();
+		//SIZEX newSize = rawData->size()+selectedVarList->size();
 		//copy the old col
 		for(int i =0;i<rawData->size();i++){
 			DATA_LIST newList;
@@ -371,8 +371,8 @@ RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_L
 		}
 
 		//merge entries 
-		SIZE rawRowNum = rawData->at(0).size()-1;
-		SIZE rawColNum = rawData->size();
+		SIZEX rawRowNum = rawData->at(0).size()-1;
+		SIZEX rawColNum = rawData->size();
 		
 		for(int i =1;i<=rawRowNum;i++){
 			for(int j =0;j<tableSize;j++){
@@ -428,8 +428,8 @@ RAWDATA * IntermediateResultTable::joinCombinations(RAWDATA* rawData, DATA_LIST 
 		
 
 		//merge entries 
-		SIZE rawRowNum = rawData->at(0).size()-1; //number of data sets
-		SIZE rawColNum = rawData->size(); //number of qrVars in raw
+		SIZEX rawRowNum = rawData->at(0).size()-1; //number of data sets
+		SIZEX rawColNum = rawData->size(); //number of qrVars in raw
 
 		TYPE resultVarType = qrTable->find(selectedVarList->at(0))->second;
 		DATA_LIST * selectedDataList;

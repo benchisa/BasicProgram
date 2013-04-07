@@ -1,11 +1,12 @@
 #include "Uses.h"
-
+#include <utility>
 using namespace std;
 
 
 Uses::Uses(void)
 {
-	usesDictionary=new unordered_multimap<int, unordered_multimap<int,int>>;
+	usesDictionary=new concurrent_unordered_multimap<int, concurrent_unordered_multimap<int,int>>;
+	
 }
 Uses::~Uses(void)
 {
@@ -16,14 +17,14 @@ USES_LIST Uses::getUsesIndexInSameProc(STATEMENT_NUM starting, STATEMENT_NUM end
 {
 	USES_LIST result;
 	
-	unordered_multimap<int,unordered_multimap<int, int>>::iterator first_itr;
+	concurrent_unordered_multimap<int,concurrent_unordered_multimap<int, int>>::iterator first_itr;
 	
 	for (first_itr=usesDictionary->begin(); first_itr!=usesDictionary->end(); first_itr++)
 	{
 		if (first_itr->first==ASSIGNMENT)
 		{
-			unordered_multimap<int,int> inner=first_itr->second;
-			unordered_multimap<int,int>::iterator innerItr;
+			concurrent_unordered_multimap<int,int> inner=first_itr->second;
+			concurrent_unordered_multimap<int,int>::iterator innerItr;
 			for (innerItr=inner.begin(); innerItr!=inner.end(); innerItr++)
 			{
 				if (innerItr->first>starting && innerItr->first<=ending && innerItr->second==varIndex)
@@ -35,27 +36,30 @@ USES_LIST Uses::getUsesIndexInSameProc(STATEMENT_NUM starting, STATEMENT_NUM end
 	}
 	return result;
 }
-
 bool Uses::insertUses(TYPE type, int index, int varIndex)
 {
 	//check type is allowed
 	if (type==ASSIGNMENT|| type==WHILE|| type==IF|| type==PROCEDURE)
-	{	//check  both type are not null
+
+	{	
+		concurrent_unordered_multimap<int,concurrent_unordered_multimap<int, int>>::iterator firstItr;
+	concurrent_unordered_multimap<int,int>::iterator secondItr;
+		//check  both type are not null
 		if (index!=NULL && varIndex!=NULL)
 		{
 			firstItr=usesDictionary->find(type);
 			//there is no such key "type" in the data structure
 			if (firstItr==usesDictionary->end())
 			{   //create a new element and insert it
-				unordered_multimap<int, int> inner;
+				concurrent_unordered_multimap<int, int> inner;
 				inner.insert(pair<int, int>(index, varIndex));
-				usesDictionary->insert(pair<int, unordered_multimap<int, int>>(type, inner));
+				usesDictionary->insert(pair<int, concurrent_unordered_multimap<int, int>>(type, inner));
 				return true;
 			}
 			else
 			{	//there exist a key of type
 				bool indexKeyExist=false;
-				unordered_multimap<int, int> *inner;
+				concurrent_unordered_multimap<int, int> *inner;
 				//so we loop through the data structure
 				while (firstItr!=usesDictionary->end())
 				{
@@ -74,12 +78,12 @@ bool Uses::insertUses(TYPE type, int index, int varIndex)
 					}
 					firstItr++;
 				}
-				//if index does not exist, then we create a unordered_multimap<index, varIndex) and insert into the data structure
+				//if index does not exist, then we create a concurrent_unordered_multimap<index, varIndex) and insert into the data structure
 				if (!indexKeyExist)
 				{
-					unordered_multimap<int, int> newInner;
+					concurrent_unordered_multimap<int, int> newInner;
 					newInner.insert(pair<int, int>(index, varIndex));
-					usesDictionary->insert(pair<int, unordered_multimap<int, int>>(type, newInner));
+					usesDictionary->insert(pair<int, concurrent_unordered_multimap<int, int>>(type, newInner));
 					return true;
 				}
 				else
@@ -115,10 +119,10 @@ bool Uses::insertUses(TYPE type, int index, int varIndex)
 list<pair<int,int>> Uses::getUses(TYPE type, int index, int varIndex)
 {
 	list<pair<int,int>> result;
-	unordered_multimap<int,unordered_multimap<int, int>>::iterator firstItr;
-	unordered_multimap<int,unordered_multimap<int, int>>::const_iterator first_end_itr=usesDictionary->cend();
-	 unordered_multimap<int,int>::const_iterator secondItr;
-	 unordered_multimap<int,int>::const_iterator second_end_itr;
+	concurrent_unordered_multimap<int,concurrent_unordered_multimap<int, int>>::const_iterator firstItr;
+	concurrent_unordered_multimap<int,concurrent_unordered_multimap<int, int>>::const_iterator first_end_itr=usesDictionary->cend();
+	 concurrent_unordered_multimap<int,int>::const_iterator secondItr;
+	 concurrent_unordered_multimap<int,int>::const_iterator second_end_itr;
 	//check only allowed type
 	if (type==ASSIGNMENT|| type==WHILE|| type==IF|| type==PROCEDURE)
 	{
@@ -130,7 +134,7 @@ list<pair<int,int>> Uses::getUses(TYPE type, int index, int varIndex)
 			if (firstItr!=first_end_itr)
 			{
 				bool indexKeyExist=false;
-				unordered_multimap<int, int> *inner;
+				concurrent_unordered_multimap<int, int> *inner;
 				//loop through the first layer to see if there exist a secondary key "index"
 				while (firstItr!=first_end_itr)
 				{
@@ -174,7 +178,7 @@ list<pair<int,int>> Uses::getUses(TYPE type, int index, int varIndex)
 				if (firstItr!=first_end_itr)
 				{
 					
-					unordered_multimap<int, int> *inner;
+					concurrent_unordered_multimap<int, int> *inner;
 					//loop through everything, see if value=varIndex. if it is, add the secondary key(index) to the result
 					while (firstItr!=first_end_itr)
 					{
@@ -212,10 +216,10 @@ list<pair<int,int>> Uses::getUses(TYPE type, int index, int varIndex)
 			{
 				for (firstItr;firstItr!=first_end_itr; firstItr++)
 				{
-					//add the unordered_multimap belong to key type
+					//add the concurrent_unordered_multimap belong to key type
 					if (firstItr->first==type)
 					{
-						unordered_multimap<int, int> inner=firstItr->second;
+						concurrent_unordered_multimap<int, int> inner=firstItr->second;
 						secondItr=inner.cbegin();
 						second_end_itr=inner.cend();
 						for (secondItr; secondItr!=second_end_itr; secondItr++)
@@ -242,10 +246,10 @@ bool Uses::isUses(TYPE type, int index, int varIndex)
 {	//check only allowed type
 	if (type==ASSIGNMENT|| type==WHILE|| type==IF|| type==PROCEDURE)
 	{
-		unordered_multimap<int,unordered_multimap<int, int>>::iterator firstItr;
-	   unordered_multimap<int,unordered_multimap<int, int>>::const_iterator first_end_itr=usesDictionary->cend();
-	   unordered_multimap<int,int>::const_iterator secondItr;
-	   unordered_multimap<int,int>::const_iterator second_end_itr;
+		concurrent_unordered_multimap<int,concurrent_unordered_multimap<int, int>>::const_iterator firstItr;
+	   concurrent_unordered_multimap<int,concurrent_unordered_multimap<int, int>>::const_iterator first_end_itr=usesDictionary->cend();
+	   concurrent_unordered_multimap<int,int>::const_iterator secondItr;
+	   concurrent_unordered_multimap<int,int>::const_iterator second_end_itr;
 		//check both not null
 		if (index!=NULL && varIndex!=NULL)
 		{
@@ -254,7 +258,7 @@ bool Uses::isUses(TYPE type, int index, int varIndex)
 			if (firstItr!=first_end_itr)
 			{
 				bool indexKeyExist=false;
-				unordered_multimap<int, int> *inner;
+				concurrent_unordered_multimap<int, int> *inner;
 				//loop to check if index is available
 				while (firstItr!=first_end_itr)
 				{
@@ -279,6 +283,8 @@ bool Uses::isUses(TYPE type, int index, int varIndex)
 				//if it is, check if the one of the value==varIndex. if it is, return true;
 				if (indexKeyExist)
 				{
+					
+
 					while (secondItr!=second_end_itr)
 					{
 						if (secondItr->second==varIndex)
@@ -297,14 +303,14 @@ bool Uses::isUses(TYPE type, int index, int varIndex)
 }
 void Uses::debug()
 {
-	unordered_multimap<int, unordered_multimap<int, int>>::iterator firstItr=usesDictionary->begin();
+	concurrent_unordered_multimap<int, concurrent_unordered_multimap<int, int>>::iterator firstItr=usesDictionary->begin();
 
 	while (firstItr!=usesDictionary->end())
 	{
 
 
-		unordered_multimap<int, int> inner=(*firstItr).second;
-		unordered_multimap<int, int>::iterator secondItr=inner.begin();
+		concurrent_unordered_multimap<int, int> inner=(*firstItr).second;
+		concurrent_unordered_multimap<int, int>::iterator secondItr=inner.begin();
 		if (secondItr!=inner.end())
 		{
 

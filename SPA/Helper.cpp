@@ -164,8 +164,8 @@ DATA_LIST* Helper::getStmtListOf(TYPE nodeType){
 DATA_LIST * Helper::getAllConstants(){
 	DATA_LIST * returnList = new DATA_LIST();
 
-	int size = pkb->getConstantTableSize();
-	for(int i =1;i<=size;i++){
+	int SIZEX = pkb->getConstantTableSize();
+	for(int i =1;i<=SIZEX;i++){
 		returnList->push_back(pkb->getConstantValue(i));
 	}
 	return returnList;

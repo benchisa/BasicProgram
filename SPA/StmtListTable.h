@@ -8,7 +8,7 @@ public:
 
 	typedef hash_map<int,STMTENTRY> STMTLISTTABLE;
 	
-	SIZE getSize();
+	SIZEX getSize();
 	void insert(STATEMENT_NUM stmtNo,STMTENTRY entry);
 	STMTENTRY getStmtListEntry(STATEMENT_NUM stmtNo);
 	DATA_LIST * getAllStmtLists();

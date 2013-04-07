@@ -6,7 +6,7 @@
 class CFG
 {
 public:
-	CFG(int size);
+	CFG(int SIZEX);
 	~CFG(void);
 	bool addEdge(PROG_LINE p1, PROG_LINE p2);
 	bool isNext(PROG_LINE p1, PROG_LINE p2);
@@ -17,7 +17,7 @@ public:
 private:
 	// 2D array
 	int **cfg;
-	int size;
+	int SIZEX;
 	list<PROG_LINE> pLines;
 	NEXT_LIST paths;
 	bool isConnected(PROG_LINE p1, PROG_LINE p2);

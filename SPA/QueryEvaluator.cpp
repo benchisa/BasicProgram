@@ -53,7 +53,7 @@ bool QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrPa
 }	/*
 void QueryEvaluator::generateRaw(QTREE* resultNode){
 		//select bool
-		if(resultNode->getType()==BOOL){
+		if(resultNode->getType()==BOOLX){
 			DATA_LIST result;
 		
 			result.push_back(-1);
@@ -115,7 +115,7 @@ IntermediateResultTable * QueryEvaluator::evaluateClause(IntermediateResultTable
 		if(!QueryEvaluator::executeSuchThat(resultTable, clause))
 			return NULL;
 	}
-	if(clauseType == PATTERN){
+	if(clauseType == PATTERNX){
 		if(!QueryEvaluator::executePattern(resultTable,clause))
 			return NULL;
 	}
@@ -503,14 +503,14 @@ bool QueryEvaluator::findResult(QTREE* resultNode,IntermediateResultTable* resul
 	
 	//translate the qrVar to its real type
 	QUERYTABLE::iterator itr;
-	if(headNode->getType()!=BOOL){
+	if(headNode->getType()!=BOOLX){
 		itr = qrTable->find(headNode->getData());
 		headNodeType = itr->second;
 	}else{
 		headNodeType = headNode->getType();
 	}
 		
-	if((headNodeType!=BOOL) && (resultTable==NULL)){ //empty intersection/one of the condition is false
+	if((headNodeType!=BOOLX) && (resultTable==NULL)){ //empty intersection/one of the condition is false
 		/*DATA_LIST resultType;
 		DATA_LIST content;
 		
@@ -520,7 +520,7 @@ bool QueryEvaluator::findResult(QTREE* resultNode,IntermediateResultTable* resul
 		rawData->push_back(content);*/
 
 		return false;
-	}else if((headNodeType==BOOL) && (resultTable==NULL)){//special case:--return type is boolean
+	}else if((headNodeType==BOOLX) && (resultTable==NULL)){//special case:--return type is boolean
 		/*DATA_LIST result;
 
 		result.push_back(-1);
@@ -531,7 +531,7 @@ bool QueryEvaluator::findResult(QTREE* resultNode,IntermediateResultTable* resul
 		value.push_back(0);
 		(*rawData)[key]= value;
 		return true;
-	}else if((headNodeType==BOOL) && (resultTable!=NULL)){
+	}else if((headNodeType==BOOLX) && (resultTable!=NULL)){
 	/*	DATA_LIST result;
 		
 		result.push_back(-1);

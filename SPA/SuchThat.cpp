@@ -223,7 +223,7 @@ MODIFIES_LIST SuchThat::getModifiesResult(TYPE type, int arg1, VAR_INDEX v1){
 	}
 
 
-	//cout << "SIZE OF RESULT (MODIFIES): " << result.size() << "\n";
+	//cout << "SIZEX OF RESULT (MODIFIES): " << result.size() << "\n";
 	
 	return result;
 }
@@ -304,7 +304,7 @@ USES_LIST SuchThat::getUsesResult(TYPE type, int arg1, VAR_INDEX v1){
 		}
 	}
 
-	//cout << "SIZE OF RESULT (USES): " << result.size() << "\n";
+	//cout << "SIZEX OF RESULT (USES): " << result.size() << "\n";
 	return result;
 }
 

@@ -50,7 +50,7 @@ class PKB
 
 		//Functions of VarTable
 		VAR_INDEX insertVar(VAR_NAME varName);
-		SIZE getVarTableSize();
+		SIZEX getVarTableSize();
 		VAR_NAME getVarName(VAR_INDEX index);
 		VAR_INDEX getVarIndex(VAR_NAME varName);
 		bool isVarExists(VAR_NAME varName);
@@ -61,7 +61,7 @@ class PKB
 		Procedure * createProc(PROC_NAME procName, PROG_LINE startProgLine);
 		void setEndProgLine(Procedure * currentProc,PROG_LINE endProgLine);
 		PROC_INDEX insertProc(Procedure * proc);
-		SIZE getProceTableSize();
+		SIZEX getProceTableSize();
 		Procedure * getProcedure(PROC_INDEX index);
 		PROC_INDEX getProcIndex(PROC_NAME name);
 		bool isProcExists(PROC_NAME procName);
@@ -98,7 +98,7 @@ class PKB
 
 		//Functions of Call Table
 		CALL_INDEX insertCall(PROC_NAME caller,STATEMENT_NUM callStmt, PROC_NAME callee);
-		SIZE getCallTableSize();
+		SIZEX getCallTableSize();
 
 		//if caller is empty, return callee procedure
 		//if callee is empty, return caller procedure
@@ -116,7 +116,7 @@ class PKB
 		
 		//Functions of constant table
 		CONSTANT_INDEX insertConst(int constantValue);
-		SIZE getConstantTableSize();
+		SIZEX getConstantTableSize();
 		int getConstantValue(CONSTANT_INDEX index);
 		CONSTANT_INDEX getConstantIndex(int constantValue);
 		bool isExists(int constantValue);
@@ -128,27 +128,27 @@ class PKB
 		STATEMENT_NUM getMaxStatementNum();
 
 		//while table
-		SIZE getWhileTableSize();
+		SIZEX getWhileTableSize();
 		void insertWhile(STATEMENT_NUM stmtNo,INDEX ctrVarIndex);
 		INDEX getWhileCtrVar(STATEMENT_NUM stmtNo);
 		DATA_LIST * getWhiles(INDEX ctrVarIndex);
 		DATA_LIST * getAllWhiles();
 
 		//if table
-		SIZE getIfSize();
+		SIZEX getIfSize();
 		void insertIf(STATEMENT_NUM stmtNo,INDEX ctrVarIndex);
 		INDEX getIfCtrVar(STATEMENT_NUM stmtNo);
 		DATA_LIST * getIfs(INDEX ctrVarIndex);
 		DATA_LIST * getAllIfs();
 
 		//assign table
-		SIZE getAssignSize();
+		SIZEX getAssignSize();
 		void insertAssign(STATEMENT_NUM stmtNo,INDEX ctrVarIndex,string prefixTree);
 		ASSIGNENTRY getAssignEntry(STATEMENT_NUM stmtNo);
 		DATA_LIST * getAllAssigns();
 		
 		//stmt table
-		SIZE getStmtListSize();
+		SIZEX getStmtListSize();
 		void insertStmtList(STATEMENT_NUM stmtNo,STMTENTRY type);
 		STMTENTRY getStmtEntry(STATEMENT_NUM stmtNo);
 		DATA_LIST * getAllStmtLst();

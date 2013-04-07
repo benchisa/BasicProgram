@@ -10,7 +10,7 @@ StmtListTable::~StmtListTable(void)
 {
 }
 
-SIZE StmtListTable::getSize(){
+SIZEX StmtListTable::getSize(){
 	return stmtTable.size();
 }
 void StmtListTable::insert(STATEMENT_NUM stmtNo,STMTENTRY entry){

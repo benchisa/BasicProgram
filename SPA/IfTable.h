@@ -9,7 +9,7 @@ public:
 		
 	typedef RAWDATA IFTABLE;
 
-	SIZE getSize();
+	SIZEX getSize();
 	void insert(STATEMENT_NUM stmtNo,INDEX ctrVarIndex);
 	INDEX getCtrVar(STATEMENT_NUM stmtNo);
 	DATA_LIST * getIfs(INDEX ctrVarIndex);

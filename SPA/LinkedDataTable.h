@@ -21,7 +21,7 @@ public:
 	bool isExists(INDEX qrVar);
 	ROW getRow(INDEX rowNum);
 	ROW getQrVarList();
-	SIZE getSize();
+	SIZEX getSize();
 	int getEntryAt(INDEX row,INDEX col);
 
 private:

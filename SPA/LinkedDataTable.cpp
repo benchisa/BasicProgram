@@ -282,7 +282,7 @@ INDEX_LIST * LinkedDataTable::getDataListOf(INDEX qrVar){
 	
 }
 int LinkedDataTable::getColNumOf(INDEX qrVar){
-	SIZE tableSize = qrVarList.size();
+	SIZEX tableSize = qrVarList.size();
 	ROW::iterator itr;
 	int count =0;
 	//count the col number where qrVar locates
@@ -303,7 +303,7 @@ bool LinkedDataTable::isExists(INDEX qrVar){
 ROW LinkedDataTable::getQrVarList(){
 	return qrVarList;
 }
-SIZE LinkedDataTable::getSize(){
+SIZEX LinkedDataTable::getSize(){
 	return rowList.size();
 }
 ROW LinkedDataTable::getRow(INDEX rowNum){

@@ -371,7 +371,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 	switch(leftVariableType){
 	//p.ProcName = 
 	case PROCEDURE:
-		{SIZE procTableSize = pkb->getProceTableSize();
+		{SIZEX procTableSize = pkb->getProceTableSize();
 		//inner switch
 		switch(rightVariableType){
 		case PROCEDURE:
@@ -381,7 +381,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			}
 			break;
 		case VARIABLE:
-			{SIZE varTableSize = pkb->getVarTableSize();
+			{SIZEX varTableSize = pkb->getVarTableSize();
 			for(int i=1;i<=procTableSize;i++){
 				for(int j=1;j<=varTableSize;j++){
 					string currentProcName = pkb->getProcedure(i)->getProcName();
@@ -395,7 +395,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			}
 			break;
 		case CALL:
-			{SIZE callTableSize = pkb->getCallTableSize();
+			{SIZEX callTableSize = pkb->getCallTableSize();
 			for(int i=1;i<=procTableSize;i++){
 				for(int j=1;j<=callTableSize;j++){
 					string currentProcName = pkb->getProcedure(i)->getProcName();
@@ -415,7 +415,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 		break;
 	//var.VarName = 
 	case VARIABLE:
-		{SIZE varTableSize = pkb->getVarTableSize();
+		{SIZEX varTableSize = pkb->getVarTableSize();
 		//inner switch
 		switch(rightVariableType){
 		case VARIABLE:
@@ -425,7 +425,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			}
 			break;
 		case PROCEDURE:
-			{SIZE procTableSize = pkb->getProceTableSize();
+			{SIZEX procTableSize = pkb->getProceTableSize();
 			for(int i=1;i<=varTableSize;i++){
 				for(int j=1;j<=procTableSize;j++){
 					string currentProcName = pkb->getProcedure(j)->getProcName();
@@ -439,7 +439,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			}
 			break;
 		case CALL:
-			{SIZE callTableSize = pkb->getCallTableSize();
+			{SIZEX callTableSize = pkb->getCallTableSize();
 			for(int i=1;i<=varTableSize;i++){
 				for(int j=1;j<=callTableSize;j++){
 					string currentVarName = pkb->getVarName(i);
@@ -459,7 +459,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 		break;
 	//c.callName = or c.stmt#=
 	case CALL:
-		{SIZE callTableSize = pkb->getCallTableSize();
+		{SIZEX callTableSize = pkb->getCallTableSize();
 		//inner switch
 		switch(rightVariableType){
 		case CALL:
@@ -503,7 +503,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			}
 			break;
 		case VARIABLE:
-			{SIZE varTableSize = pkb->getVarTableSize();
+			{SIZEX varTableSize = pkb->getVarTableSize();
 			for(int i=1;i<=callTableSize;i++){
 				for(int j=1;j<=varTableSize;j++){
 					PROC_NAME currentCalleeName = pkb->getCALLPair(i).second;
@@ -520,7 +520,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			}
 			break;
 		case PROCEDURE:
-			{SIZE procTableSize = pkb->getProceTableSize();
+			{SIZEX procTableSize = pkb->getProceTableSize();
 			for(int i=1;i<=procTableSize;i++){
 				for(int j=1;j<=callTableSize;j++){
 					string currentProcName = pkb->getProcedure(i)->getProcName();
@@ -548,7 +548,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			}
 			break;
 		case CONSTANT:
-			{SIZE consTableSize = pkb->getConstantTableSize();
+			{SIZEX consTableSize = pkb->getConstantTableSize();
 
 			if(consTableSize>0){
 				for(int i =1;i<=consTableSize;i++){
@@ -665,7 +665,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			}
 			break;
 		case CONSTANT:
-			{SIZE constantTableSize = pkb->getConstantTableSize();
+			{SIZEX constantTableSize = pkb->getConstantTableSize();
 			if (constantTableSize!=0){
 				for(int i =1;i<=constantTableSize;i++){
 					int currentConstantValue = pkb->getConstantValue(i);
@@ -733,7 +733,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			}
 			break;
 		case CONSTANT:
-			{SIZE constantTableSize = pkb->getConstantTableSize();
+			{SIZEX constantTableSize = pkb->getConstantTableSize();
 			if (constantTableSize!=0){
 				for(int i =1;i<=constantTableSize;i++){
 					int currentConstantValue = pkb->getConstantValue(i);
@@ -820,7 +820,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			}
 			break;
 		case CONSTANT:
-			{SIZE constantTableSize = pkb->getConstantTableSize();
+			{SIZEX constantTableSize = pkb->getConstantTableSize();
 			if(constantTableSize!=0){
 				for(int i =1;i<=constantTableSize;i++){
 					int currentConstantValue = pkb->getConstantValue(i);
@@ -875,7 +875,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			}
 			break;
 		case CONSTANT:
-			{SIZE constantTableSize = pkb->getConstantTableSize();
+			{SIZEX constantTableSize = pkb->getConstantTableSize();
 			if(constantTableSize!=0){
 				for(int i =1;i<=constantTableSize;i++){
 					int currentConstantValue = pkb->getConstantValue(i);
@@ -930,7 +930,7 @@ RELATION_LIST* WithClause::findMatchedPairs(){
 			}
 			break;
 		case CONSTANT:
-			{SIZE constantTableSize = pkb->getConstantTableSize();
+			{SIZEX constantTableSize = pkb->getConstantTableSize();
 			if(constantTableSize!=0){
 				for(int i =1;i<=constantTableSize;i++){
 					int currentConstantValue = pkb->getConstantValue(i);

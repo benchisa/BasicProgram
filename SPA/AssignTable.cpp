@@ -11,7 +11,7 @@ AssignTable::~AssignTable(void)
 {
 }
 
-SIZE AssignTable::getSize(){
+SIZEX AssignTable::getSize(){
 	return assignTable.size();
 }
 void AssignTable::insert(STATEMENT_NUM stmtNo,INDEX ctrVarIndex,string prefixTree){

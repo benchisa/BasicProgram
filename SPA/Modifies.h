@@ -1,5 +1,7 @@
 #include "Global_Data_Abstraction.h"
 using namespace std;
+#include <utility>
+#include <list>
 
 class Modifies
 {
@@ -19,8 +21,8 @@ public:
 	void debug();
 
 private:
-	unordered_multimap<int,unordered_multimap<int, int>> *modifiesDictionary;
-	 unordered_multimap<int,unordered_multimap<int, int>>::iterator firstItr;
-	 unordered_multimap<int,int>::iterator secondItr;
+	concurrent_unordered_multimap<int,concurrent_unordered_multimap<int, int>> *modifiesDictionary;
+	 
+	
 	
 };

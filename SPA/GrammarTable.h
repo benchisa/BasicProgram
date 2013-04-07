@@ -8,7 +8,7 @@ public:
 
 	typedef std::string ENTITY;
 	typedef std::string RELATIONSHIP;
-	typedef std::string PATTERN;
+	typedef std::string PATTERNX;
 	typedef std::string ATTRIBUTE;
 
 	struct entTable{
@@ -18,7 +18,7 @@ public:
 	
 	struct syntaxTable{
 		RELATIONSHIP relName;
-		PATTERN pattName;
+		PATTERNX pattName;
 		int numArg;
 		TYPE type;
 		string arg1;
@@ -72,8 +72,8 @@ public:
 	void createPattTable();
 	int getPattArgCount(TYPE);
 	string getPattArg(TYPE, int);
-	TYPE getPattType(PATTERN);
-	bool isPattExists(PATTERN);
+	TYPE getPattType(PATTERNX);
+	bool isPattExists(PATTERNX);
 	void printAllPatt();
 
 	void createArgTable();

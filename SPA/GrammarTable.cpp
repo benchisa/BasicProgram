@@ -270,7 +270,7 @@ string GrammarTable::getPattArg(TYPE pattType,int argPosition){
 	}
 }
 
-TYPE GrammarTable::getPattType(PATTERN patt){
+TYPE GrammarTable::getPattType(PATTERNX patt){
 	for(int i=0;i<3; i++){
 		if(patt==pTable[i].pattName){
 			return pTable[i].type;
@@ -278,7 +278,7 @@ TYPE GrammarTable::getPattType(PATTERN patt){
 	}
 }
 
-bool GrammarTable::isPattExists(PATTERN patt){
+bool GrammarTable::isPattExists(PATTERNX patt){
 	for(int i=0;i<3; i++){
 		if(patt==pTable[i].pattName){
 			return true;

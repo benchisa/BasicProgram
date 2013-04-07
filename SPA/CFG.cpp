@@ -2,18 +2,18 @@
 #include <stack>
 
 // all prog_line need to -1 due to array position
-CFG::CFG(int size)
+CFG::CFG(int SIZEX)
 {
 	int i,j;
-	this->size = size;
+	this->SIZEX = SIZEX;
 
-	//initiate a graph base on the size
-	cfg = new int*[this->size];
-	for(i = 0; i < this->size; i++)
-		cfg[i] = new int[this->size];
-	for(i = 0; i < this->size; i++)
+	//initiate a graph base on the SIZEX
+	cfg = new int*[this->SIZEX];
+	for(i = 0; i < this->SIZEX; i++)
+		cfg[i] = new int[this->SIZEX];
+	for(i = 0; i < this->SIZEX; i++)
 	{
-		for(j = 0; j < this->size; j++)
+		for(j = 0; j < this->SIZEX; j++)
 		{
 			//cout << "[" << i << "][" << j << "]\n";
 			cfg[i][j] = 0;
@@ -24,7 +24,7 @@ CFG::CFG(int size)
 
 CFG::~CFG(void)
 {
-	for(int i = 0; i < this->size; ++i)
+	for(int i = 0; i < this->SIZEX; ++i)
 		delete [] cfg[i];
 
 	delete [] cfg;
@@ -32,7 +32,7 @@ CFG::~CFG(void)
 
 bool CFG::addEdge(PROG_LINE p1, PROG_LINE p2)
 {
-	if(p1 > size || p2 > size)
+	if(p1 > SIZEX || p2 > SIZEX)
 		return false;
 
 	if(p1 <= 0 && p2 <= 0)
@@ -75,7 +75,7 @@ NEXT_LIST CFG::getAllPaths(PROG_LINE p1, PROG_LINE p2){
 
 bool CFG::isNext(PROG_LINE p1, PROG_LINE p2)
 {
-	if(p1 > size || p2 > size || p1 <= 0 || p2 <= 0) return false;
+	if(p1 > SIZEX || p2 > SIZEX || p1 <= 0 || p2 <= 0) return false;
 	return isConnected(p1, p2);
 }
 
@@ -84,9 +84,9 @@ NEXT_LIST CFG::getNext(PROG_LINE p1, PROG_LINE p2){
 	
 	// Next(n1, n2)
 	if(p1 == NULL && p2 == NULL){
-		for(int i = 1; i <= size; i++)
+		for(int i = 1; i <= SIZEX; i++)
 		{
-			for(int j = 1; j <= size; j++)
+			for(int j = 1; j <= SIZEX; j++)
 			{
 				if(isConnected(i, j)){
 					tmp.push_back(make_pair(i,j));
@@ -96,7 +96,7 @@ NEXT_LIST CFG::getNext(PROG_LINE p1, PROG_LINE p2){
 	}
 	// Next(1, n1)
 	else if (p1 != NULL && p2 == NULL){
-		for(int i = 1; i <= size; i++)
+		for(int i = 1; i <= SIZEX; i++)
 		{
 			if(isConnected(p1, i)){
 				tmp.push_back(make_pair(p1,i));
@@ -105,7 +105,7 @@ NEXT_LIST CFG::getNext(PROG_LINE p1, PROG_LINE p2){
 	}
 	// Next(n1, 2)
 	else if (p1 == NULL && p2 != NULL){
-		for(int i = 1; i <= size; i++)
+		for(int i = 1; i <= SIZEX; i++)
 		{
 			if(isConnected(i, p2)){
 				tmp.push_back(make_pair(i, p2));
@@ -131,7 +131,7 @@ bool CFG::isConnected(PROG_LINE p1, PROG_LINE p2)
 void CFG::computeProgLines(PROG_LINE p1, PROG_LINE p2, int reverse)
 {
 	// save time strategy
-	if(p1 > size || p2 > size) return; // invalid case
+	if(p1 > SIZEX || p2 > SIZEX) return; // invalid case
 	if(p1 <= 0 && p2 <= 0) return; // invalid case
 	
 	if(pLines.size() != 0)
@@ -145,14 +145,14 @@ void CFG::computeProgLines(PROG_LINE p1, PROG_LINE p2, int reverse)
 	//cout << "compute: " << p1 << ", " << p2 << "\n";
 
 	int same = 0;
-	bool **visited = new bool*[size+1];
-	for(int i = 0; i <= size; ++i){
-		visited[i] = new bool[size+1];
+	bool **visited = new bool*[SIZEX+1];
+	for(int i = 0; i <= SIZEX; ++i){
+		visited[i] = new bool[SIZEX+1];
 	}
 
-	for(int i = 0; i <= size; ++i)
+	for(int i = 0; i <= SIZEX; ++i)
 	{
-		for(int j = 0; j <= size; ++j)
+		for(int j = 0; j <= SIZEX; ++j)
 		{
 			visited[i][j] = false;
 		}
@@ -178,7 +178,7 @@ void CFG::computeProgLines(PROG_LINE p1, PROG_LINE p2, int reverse)
 		if(p1 != NULL && p2 != NULL && tmpProg == p2 && p1 != p2)
 			break;
 
-		for(int j = 1; j<=size; j++)
+		for(int j = 1; j<=SIZEX; j++)
 		{
 			if(reverse){
 				if(isConnected(j, tmpProg) && (j==p2||!visited[j][tmpProg]))

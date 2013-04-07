@@ -11,8 +11,9 @@
 #include <hash_map>
 #include <unordered_map>
 #include <set>
-
+#include "tbb.h"
 using namespace std;
+using namespace tbb;
 
 class Procedure;
 class AST;
@@ -36,12 +37,12 @@ enum TYPE{
 	MULTIPLY,
 	MINUS,
 	BRACKET,
-	BOOL,
+	BOOLX,
 	STRING,
 	SELECT,
 	WITH,
 	SUCHTHAT,
-	PATTERN,
+	PATTERNX,
 	RESULT,
 	QUERYVAR,
 	PARAM,
@@ -96,7 +97,7 @@ typedef vector<DATA_LIST> RAWDATA;
 typedef hash_map<string,DATA_LIST> FINALRAW;
 
 
-typedef int STATEMENT_NUM,VAR_INDEX,SIZE, PROC_INDEX,PROG_LINE,USES_INDEX,MODIFIES_INDEX,INDEX,CONSTANT_INDEX,CALL_INDEX,JOIN_ATTR;
+typedef int STATEMENT_NUM,VAR_INDEX,SIZEX, PROC_INDEX,PROG_LINE,USES_INDEX,MODIFIES_INDEX,INDEX,CONSTANT_INDEX,CALL_INDEX,JOIN_ATTR;
 typedef string EXPRESSION,PREFIXEXPR, VAR_NAME,PROC_NAME, OPERAND, OPERATOR;
 typedef string REPORT_MSG, QUERY, SOURCE, ERROR_MSG, TOKEN;
 

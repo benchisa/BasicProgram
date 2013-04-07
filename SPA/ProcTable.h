@@ -10,7 +10,7 @@ class ProcTable
 		~ProcTable(void);
 		bool inRange(int num,int start,int end);
 		PROC_INDEX insertProc(Procedure * proc);
-		SIZE getProceTableSize();
+		SIZEX getProceTableSize();
 		Procedure * getProcedure(PROC_INDEX index);
 		PROC_INDEX getProcIndex(PROC_NAME procName);
 		bool isExists(PROC_NAME procName);

@@ -9,7 +9,7 @@ public:
 
 	typedef RAWDATA WHILETABLE;
 
-	SIZE getSize();
+	SIZEX getSize();
 	void insert(STATEMENT_NUM stmtNo,INDEX ctrVarIndex);
 	INDEX getCtrVar(STATEMENT_NUM stmtNo);
 	DATA_LIST * getWhiles(INDEX ctrVarIndex);

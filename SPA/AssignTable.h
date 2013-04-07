@@ -9,7 +9,7 @@ public:
 	typedef pair<int,ASSIGNENTRY> ASSIGNROW;
 	typedef hash_map<int,ASSIGNENTRY> ASSIGNTABLE;
 	
-	SIZE getSize();
+	SIZEX getSize();
 	void insert(STATEMENT_NUM stmtNo,INDEX ctrVarIndex,string prefixTree);
 	ASSIGNENTRY getAssignEntry(STATEMENT_NUM stmtNo);
 	DATA_LIST * getAllAssigns();
