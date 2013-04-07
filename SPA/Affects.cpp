@@ -54,16 +54,20 @@ bool Affects::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 
 bool Affects::computeIsAffect(int starting, int ending, int varIndex)
 {
-	unordered_map<int,int> checkForDuplicate;
+	set<int> checkForDuplicate;
 
 	stack<NEXT_LIST> stacks;
+					
 	stacks.push(EvaluateNext::getNextResult(starting,0));
-	while (stacks.size()>0)
+	while (!stacks.empty())
 	{
 		NEXT_LIST n_list=stacks.top();
-		NEXT_LIST::iterator n_itr;
 		stacks.pop();
-		for (n_itr=n_list.begin(); n_itr!=n_list.end(); n_itr++)
+				
+	    NEXT_LIST::const_iterator n_itr=n_list.cbegin();
+		NEXT_LIST::const_iterator n_end_itr=n_list.cend();
+						
+		for (n_itr; n_itr!=n_end_itr; n_itr++)
 
 		{
 			if (n_itr->second==ending)
@@ -78,34 +82,33 @@ bool Affects::computeIsAffect(int starting, int ending, int varIndex)
 					int calleeIndex=pkb->getProcIndex(callee);
 					if (!pkb->isModifies(PROCEDURE,calleeIndex, varIndex))
 					{
-						
+					
 						if (checkForDuplicate.find(n_itr->second)==checkForDuplicate.end())
 						{
-							checkForDuplicate.insert(make_pair(n_itr->second,n_itr->second));
+							checkForDuplicate.insert(n_itr->second);
+
+							stacks.push(EvaluateNext::getNextResult(n_itr->second, 0));
+						}
+					}
+				}
+          			else if (!pkb->isModifies(ASSIGNMENT,n_itr->second,varIndex))
+					{	
+
+						//this is for checking cycle
+		
+         				if (checkForDuplicate.find(n_itr->second)==checkForDuplicate.end())
+						{
+
+		      				checkForDuplicate.insert(n_itr->second);
 
 							stacks.push(EvaluateNext::getNextResult(n_itr->second, 0));
 
 						}
 					}
+
 				}
-				else if (!pkb->isModifies(ASSIGNMENT,n_itr->second,varIndex))
-				{	
-
-					//this is for checking cycle
-					
-					if (checkForDuplicate.find(n_itr->second)==checkForDuplicate.end())
-					{
-
-						checkForDuplicate.insert(make_pair(n_itr->second,n_itr->second));
-
-						stacks.push(EvaluateNext::getNextResult(n_itr->second, 0));
-
-					}
-				}
-
 			}
-		}
-
+							
 	}
 	return false;
 }
