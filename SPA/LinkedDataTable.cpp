@@ -75,10 +75,15 @@ bool LinkedDataTable::addOneEntry(int mergeAttrPos,INDEX oldQrVar,INDEX newQrVar
 			DATA_LIST newList = mapItr->second;
 			DATA_LIST::iterator newListItr;
 			DATA_LIST::iterator endItr = newList.end();
-			//loop through the entryList with the same firstData
-			for(newListItr = newList.begin();newListItr!=endItr;newListItr++){
+			if(newQrVar!=-1){
+				//loop through the entryList with the same firstData
+				for(newListItr = newList.begin();newListItr!=endItr;newListItr++){
+					ROW tempRow = rowList[i];
+					tempRow.push_back(*newListItr);
+					tempRowList->push_back(tempRow);
+				}
+			}else{
 				ROW tempRow = rowList[i];
-				tempRow.push_back(*newListItr);
 				tempRowList->push_back(tempRow);
 			}
 		}
