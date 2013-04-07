@@ -128,10 +128,11 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 
 			//get all the statement that uses modVar
 			USES_LIST u_list=pkb->getUses(ASSIGNMENT, 0, modVar);
-			USES_LIST::iterator u_itr;
+			USES_LIST::const_iterator u_itr=u_list.cbegin();
+			USES_LIST::const_iterator u_end=u_list.cend();
 
 			//check one by one if isaffect
-			for (u_itr=u_list.begin(); u_itr!=u_list.end(); u_itr++)
+			for (u_itr; u_itr!=u_end; u_itr++)
 			{
 				if (pkb->isInSameProc(stmt1, u_itr->first))
 				{
@@ -152,15 +153,18 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 		{
 			//get all the uses variable
 			USES_LIST u_list=pkb->getUses(ASSIGNMENT, stmt2, 0);
-			USES_LIST::iterator u_itr;
+			USES_LIST::const_iterator u_itr=u_list.cbegin();
+			USES_LIST::const_iterator u_end=u_list.cend();
 
 			//for each of the uses variable, get the modifies index
-			for (u_itr=u_list.begin(); u_itr!=u_list.end(); u_itr++)
+			for (u_itr; u_itr!=u_end; u_itr++)
 			{
 				MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT, 0, u_itr->second);
-				MODIFIES_LIST::iterator m_itr;
+				MODIFIES_LIST::const_iterator m_itr=m_list.cbegin();
+				MODIFIES_LIST::const_iterator m_end=m_list.cend();
+				
 				//for each of the modifies index, check if they are in same proc and affect each other
-				for (m_itr=m_list.begin(); m_itr!=m_list.end(); m_itr++)
+				for (m_itr; m_itr!=m_end; m_itr++)
 				{
 					if (pkb->isInSameProc(m_itr->first, stmt2))
 					{
@@ -194,10 +198,11 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 
 					//get all the statement that uses modVar
 					USES_LIST u_list=pkb->getUses(ASSIGNMENT, 0, modVar);
-					USES_LIST::iterator u_itr;
+					USES_LIST::const_iterator u_itr=u_list.cbegin();
+					USES_LIST::const_iterator u_end=u_list.cend();
 
 					//check one by one if isaffect
-					for (u_itr=u_list.begin(); u_itr!=u_list.end(); u_itr++)
+					for (u_itr; u_itr!=u_end; u_itr++)
 					{
 						if (pkb->isInSameProc(i, u_itr->first))
 						{
@@ -249,7 +254,9 @@ bool Affects::computeIsAffectStar(int starting, int ending)
 	stacks.push(pkb->getUses(ASSIGNMENT,0,modVar));
 	stack<int> startingx;
 	startingx.push(starting);
-	USES_LIST::iterator u_itr;
+	USES_LIST::const_iterator u_itr;
+	USES_LIST::const_iterator u_end;
+	
 	set<int> allModVarStmt;
 	
 	while (!stacks.empty())
@@ -258,8 +265,10 @@ bool Affects::computeIsAffectStar(int starting, int ending)
 		stacks.pop();
 		int tempStarting=startingx.top();
 		startingx.pop();
+		u_itr=root.cbegin();
+		u_end=root.cend();
 		//for every subsequent statement that use modify variable
-		for (u_itr=root.begin();u_itr!=root.end(); u_itr++)
+		for (u_itr;u_itr!=u_end; u_itr++)
 		{
 			
 			if (u_itr->first==ending)
@@ -309,7 +318,8 @@ AFFECT_LIST	Affects::getAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt
 {
 	AFFECT_LIST result;
 	stack<AFFECT_LIST> stacks;
-	AFFECT_LIST::iterator a_itr;
+	AFFECT_LIST::const_iterator a_itr;
+	AFFECT_LIST::const_iterator a_end;
 	AFFECT_LIST::iterator findItr;
 	if (stmt1!=0 && stmt2==0)
 	{
@@ -318,7 +328,9 @@ AFFECT_LIST	Affects::getAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt
 		{
 			AFFECT_LIST root=stacks.top();
 			stacks.pop();
-			for (a_itr=root.begin(); a_itr!=root.end(); a_itr++)
+			a_itr=root.cbegin();
+			a_end=root.cend();
+			for (a_itr; a_itr!=a_end; a_itr++)
 			{
 				pair<int,int> temp_pair=make_pair(stmt1, a_itr->second);
 				AFFECT_LIST::iterator findIter = find(result.begin(), result.end(), temp_pair);
@@ -338,7 +350,9 @@ AFFECT_LIST	Affects::getAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt
 		{
 			AFFECT_LIST root=stacks.top();
 			stacks.pop();
-			for (a_itr=root.begin(); a_itr!=root.end(); a_itr++)
+			a_itr=root.cbegin();
+			a_end=root.cend();
+			for (a_itr; a_itr!=a_end; a_itr++)
 			{
 				pair<int,int> temp_pair=make_pair(a_itr->first, stmt2);
 				AFFECT_LIST::iterator findIter = find(result.begin(), result.end(), temp_pair);
@@ -369,7 +383,9 @@ AFFECT_LIST	Affects::getAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt
 					{
 						AFFECT_LIST root=stacks.top();
 						stacks.pop();
-						for (a_itr=root.begin(); a_itr!=root.end(); a_itr++)
+						a_itr=root.cbegin();
+						a_end=root.cend();
+						for (a_itr; a_itr!=a_end; a_itr++)
 						{
 							pair<int,int> temp_pair=make_pair(i, a_itr->second);
 							AFFECT_LIST::iterator findIter = find(result.begin(), result.end(), temp_pair);
