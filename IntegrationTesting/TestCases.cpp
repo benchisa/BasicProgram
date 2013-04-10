@@ -101,20 +101,7 @@ SOURCE SampleSimpleSources::sampleSource5 ="procedure xylo{\n"
 										"}\n"
 									"}\n";
 
-SOURCE SampleSimpleSources::sampleSource7 = "procedure Code7{\n"	
-												"z = 10;\n"			//1
-												"x = z+5;\n"		//2
-												"while a{\n"		//3
-												"	c = c+a;\n"		//4
-												"	c = x+y+z;\n"	//5
-												"while b{\n"		//6
-												"	d = a;\n"		//7
-												"	c = q+1;}\n"	//8
-												"	e = y+z;\n"		//9
-												"while f{\n"		//10
-												"	i = i+1;\n"		//11
-												"	z = x+z;}\n"	//12
-												"	c = z+2;}}\n";	//13
+
 
 // Purpose: Test for missing {
 SOURCE SampleSimpleSources::sampleInvalidSource1 = "procedure InvalidCode1\n"
