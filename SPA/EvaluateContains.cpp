@@ -802,12 +802,12 @@ bool EvaluateContains::getIsContainStarResult(TYPE type, int arg1, TYPE type2, i
 	else if((type == PLUS || type == MINUS || type == MULTIPLY || type == VARIABLE || type == CONSTANT) && (type2 == PLUS || type2 == MINUS || type2 == MULTIPLY || type2 == VARIABLE || type2 == CONSTANT)){
 		DATA_LIST *assignList = pkb->getAllAssigns();
 		DATA_LIST::iterator assignListItr = assignList->begin();
+
 		while(assignListItr!=assignList->end()){
 			// for this to be true, PLUS must appear before variable/constant in prefix
 			int check,check2;
 			
 			check = EvaluateContains::findPrefixTreeMatch(type, *assignListItr, arg1, 0);
-
 			if(check != -1){
 				int operPos;
 				operPos = EvaluateContains::findPrefixTreeMatch(type, *assignListItr, arg2, 0);
@@ -825,13 +825,23 @@ bool EvaluateContains::getIsContainStarResult(TYPE type, int arg1, TYPE type2, i
 
 				vector<int>::iterator vItr = operandPos.begin();
 				while(vItr!=operandPos.end()){
-					if(operPos != -1 && operPos < *vItr){
-						// check precednece
+					if(operPos == 0 && operPos < *vItr){
 						return true;
+					}
 
-						/*if(type2 != MULTIPLY && pkb->getAssignEntry(*assignListItr).prefixTree.substr(*vItr, (*vItr)+1) != "*" ){
+					else if(operPos != -1 && operPos < *vItr){
+						// check precedence
+						if(type == type2 || (type2 == MULTIPLY && (type == PLUS || type == MINUS))){
+							if(*vItr-operPos == 2){
+								return true;
+							}
+							else{
+								operPos = *vItr;
+							}
+						}
+						else{
 							return true;
-						}*/
+						}
 					}
 					vItr++;
 				}
