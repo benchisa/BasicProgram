@@ -191,9 +191,11 @@ void EvaluateParents::computeParent(PARENT_LIST &result,PARENT_LIST tmpLst, TYPE
 
 					while(astItr!=astLst->end()){
 						if(pkb->getType(*astItr) == type){
-							result = tmpLst;
+							if(s1 == 0)
+								result.push_back(make_pair(pkb->getStatementNum(*astItr), s2));
+							if(s2 == 0)
+								result.push_back(make_pair(s1, pkb->getStatementNum(*astItr)));
 							//result = tmp;
-							break; // does not need to go through all the nodes.
 						}
 
 						astItr++;
@@ -204,7 +206,6 @@ void EvaluateParents::computeParent(PARENT_LIST &result,PARENT_LIST tmpLst, TYPE
 			else if(type == STATEMENT || type == ANY)
 			{
 				// just want the pair of statement.
-
 				result = tmpLst;
 			}
 		}
