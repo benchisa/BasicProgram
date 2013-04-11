@@ -14,7 +14,7 @@ void PatternTest::tearDown()
 }
 
 // Registers the fixture into the 'registry'
-CPPUNIT_TEST_SUITE_REGISTRATION( PatternTest ); // Note 4 
+//CPPUNIT_TEST_SUITE_REGISTRATION( PatternTest ); // Note 4 
 
 void PatternTest::testEvaluatePattern(){
 	Parser p;

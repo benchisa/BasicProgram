@@ -19,11 +19,11 @@ CPPUNIT_TEST_SUITE_REGISTRATION( ParserTest ); // Note 4
 
 void ParserTest::testComplex(){
 	Parser p;
-	std::string src;
+	std::string src,src2;
 
 	src = " procedure xylo{\n"
-		/*1*/	"     apple=1;\n"
-		/*2*/	"     banana=apple+1;\n"
+		/*1*/	"     apple=apple + 1 + 3;\n"
+		/*2*/	"     banana=apple+1-1;\n"
 		/*3*/	"     carrot=apple;\n"
 		/*4*/	"     banana=carrot*(egg+fish-apple);\n"
 		/*5*/	"     donut=0;\n"
@@ -54,7 +54,7 @@ void ParserTest::testComplex(){
 		/*27*/	"	kimchi = 88;\n"
 		/*28*/	"	leek=0;\n"
 		/*29*/	"	while leek{\n"
-		/*30*/	"      kimchi=kimchi+1;}\n"
+		/*30*/	"      kimchi=kimchi+1-3;}\n"
 		/*31*/	"	call zebra;\n"
 		/*32*/	"	apple=kimchi;\n"
 		/*33*/	"	jam=egg+2;}"
@@ -69,37 +69,690 @@ void ParserTest::testComplex(){
 		/*40*/	"	 kimchi=apple+10;\n"
 		/*41*/	"	 call extra;}";
 
-	p.setSource(src);
+	
+	string line;
+	ifstream file("simple40.txt");
+	if(file.is_open()){
+		while(file.good()){
+			getline(file, line);
+			src2+= line + "\n";
+		}
+
+		file.close();
+	}
+	string src3 = "procedure main{  a = (a*b+e)-(k*h);}";
+
+	p.setSource(src2);
 	CPPUNIT_ASSERT_EQUAL(1, p.startParse());
 	PKB *pkb = p.getPKB();
 	AST *ast = pkb->getRootAST();
 	DesignExtractor *de = new DesignExtractor(pkb);
 	de->createCFG();
+	cout << "\n";
+	
+	// Query 60
+	cout << "Query 60: \n";
+	cout << de->getIsContainResult(PLUS, -1, MINUS, -1) << "\n";
+	cout << de->getIsContainResult(MINUS, -1, PLUS, -1) << "\n";
+	cout << de->getIsContainResult(PLUS, -1, CONSTANT, pkb->getConstantIndex(1)) << "\n";
+	cout << de->getIsContainResult(MULTIPLY, -1, CONSTANT, pkb->getConstantIndex(9)) << "\n";
+	cout << de->getIsContainResult(MINUS, -1, CONSTANT, pkb->getConstantIndex(9)) << "\n";
 
+	// Query 61
+	cout << "Query 61: \n";
+	cout << de->getIsContainStarResult(PLUS, -1, CONSTANT, pkb->getConstantIndex(8)) << "\n";
+	cout << de->getIsContainStarResult(PLUS, -1, MINUS, -1) << "\n";
+	cout << de->getIsContainStarResult(PLUS, -1, PLUS, -1) << "\n";
+	cout << de->getIsContainStarResult(MINUS, -1, CONSTANT, pkb->getConstantIndex(9)) << "\n";
+	cout << de->getIsContainStarResult(MULTIPLY, -1, CONSTANT, pkb->getConstantIndex(8)) << "\n";
+
+	// Query 63
+	cout << "Query 63: \n";
+	cout << de->getContainResult(PLUS, -1, CONSTANT, 0).size() << "\n"; 
+	cout << de->getContainResult(PLUS, -1, VARIABLE, 0).size() << "\n";  
+	cout << de->getContainResult(MINUS, -1, CONSTANT, 0).size() << "\n"; 
+	cout << de->getContainResult(MINUS, -1, VARIABLE, 0).size() << "\n";
+	cout << de->getContainResult(MULTIPLY, -1, CONSTANT, 0).size() << "\n"; 
+	cout << de->getContainResult(MULTIPLY, -1, VARIABLE, 0).size() << "\n";
+
+
+	/*CONTAIN_LIST a =  de->getContainStarResult(PROCEDURE, 0, ASSIGNMENT, 0);
+	CONTAIN_LIST::iterator itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain(" << itr->first << ", " << itr->second << ")\n";
+	}
+
+
+
+	/*
+	cout << de->getIsContainResult(PLUS, -1, MINUS, -1) << "\n";
+	cout << de->getIsContainStarResult(PLUS, -1, MINUS, -1) << "\n";
+
+	
+	cout << de->getIsContainResult(MINUS, -1, PLUS, -1) << "\n";
+	cout << de->getIsContainStarResult(MINUS, -1, PLUS, -1) << "\n";
+	/*
+	// Query 60
+	cout << "Query 60: \n";
+	cout << de->getIsContainResult(PLUS, -1, MINUS, -1) << "\n";
+	cout << de->getIsContainResult(MINUS, -1, PLUS, -1) << "\n";
+	cout << de->getIsContainResult(PLUS, -1, CONSTANT, pkb->getConstantIndex(1)) << "\n";
+	cout << de->getIsContainResult(MULTIPLY, -1, CONSTANT, pkb->getConstantIndex(9)) << "\n";
+	cout << de->getIsContainResult(MINUS, -1, CONSTANT, pkb->getConstantIndex(9)) << "\n";
+
+	// Query 61
+	cout << "Query 61: \n";
+	cout << de->getIsContainStarResult(PLUS, -1, CONSTANT, pkb->getConstantIndex(8)) << "\n";
+	cout << de->getIsContainStarResult(PLUS, -1, MINUS, -1) << "\n";
+	cout << de->getIsContainStarResult(PLUS, -1, PLUS, -1) << "\n";
+	cout << de->getIsContainStarResult(MINUS, -1, CONSTANT, pkb->getConstantIndex(9)) << "\n";
+	cout << de->getIsContainStarResult(MULTIPLY, -1, CONSTANT, pkb->getConstantIndex(8)) << "\n";
+
+	// Query 63
+	cout << "Query 63: \n";
+	cout << de->getContainResult(PLUS, -1, CONSTANT, 0).size() << "\n"; 
+	cout << de->getContainResult(PLUS, -1, VARIABLE, 0).size() << "\n";  
+	cout << de->getContainResult(MINUS, -1, CONSTANT, 0).size() << "\n"; 
+	cout << de->getContainResult(MINUS, -1, VARIABLE, 0).size() << "\n";
+	cout << de->getContainResult(MULTIPLY, -1, CONSTANT, 0).size() << "\n"; 
+	cout << de->getContainResult(MULTIPLY, -1, VARIABLE, 0).size() << "\n";
+
+	//Contains(30,sl), Contains("Goneril",sl)
+	cout <<"Query 63 (STMT_LIST): \n";
+	cout << de->getContainResult(STATEMENT, 30, STMT_LIST, 0).size() << "\n";
+	cout << de->getContainResult(STATEMENT, 36, STMT_LIST, 0).size() << "\n";
+	cout << de->getContainResult(PROCEDURE, pkb->getProcIndex("Goneril"), STMT_LIST, 0).size() << "\n";
+	cout << de->getContainResult(STATEMENT, 99, STMT_LIST, 0).size() << "\n";
+
+	cout << "Query 64: \n";
+	CONTAIN_LIST a =  de->getContainStarResult(ASSIGNMENT, 0, CONSTANT, pkb->getConstantIndex(12));
+	CONTAIN_LIST::iterator itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain(" << itr->first << ", " << pkb->getConstantValue(itr->second) << ")\n";
+	}
+	cout << "\n";
+	a =  de->getContainStarResult(IF, 0, CALL, 47);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain(" << itr->first << ", " << pkb->getConstantValue(itr->second) << ")\n";
+	}
+	
+	cout << "\n";
+	a =  de->getContainStarResult(IF, 0, VARIABLE, pkb->getVarIndex("jam"));
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << pkb->getVarName(itr->second) << ")\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(IF, 0, PLUS, -1);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ",PLUS)\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(IF, 0, MINUS, -1);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ",MINUS)\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(IF, 0, MULTIPLY, -1);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ",MULTIPLY)\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(IF, 0, CONSTANT, pkb->getConstantIndex(9));
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << pkb->getConstantValue(itr->second) << ")\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(WHILE, 0, PLUS, -1);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ",PLUS)\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(WHILE, 0, MINUS, -1);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ",MINUS)\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(WHILE, 0, MULTIPLY, -1);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ",MULTIPLY)\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(WHILE, 0, CONSTANT, pkb->getConstantIndex(4));
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << pkb->getConstantValue(itr->second) << ")\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(PROCEDURE, 0, PLUS, -1);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << pkb->getProcedure(itr->first)->getProcName() << ",PLUS)\n";
+	}
+	cout << "\n";
+
+	
+	a =  de->getContainStarResult(PROCEDURE, 0, MINUS, -1);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << pkb->getProcedure(itr->first)->getProcName() << ",MINUS)\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(PROCEDURE, 0, MULTIPLY, -1);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << pkb->getProcedure(itr->first)->getProcName() << ",MULTIPLY)\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(STATEMENT, 0, VARIABLE, pkb->getVarIndex("mango"));
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << "," << pkb->getVarName(itr->second) << ")\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(STATEMENT, 0, PLUS, -1);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ",PLUS)\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(STATEMENT, 0, MINUS, -1);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ",MINUS)\n";
+	}
+	cout << "\n";
+
+
+	a =  de->getContainStarResult(STATEMENT, 0, MULTIPLY, -1);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ",MULTIPLY)\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(STATEMENT, 0, CONSTANT, pkb->getConstantIndex(103));
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << pkb->getConstantValue(itr->second) << ")\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(STMT_LIST, 0, STATEMENT,31);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << itr->second << ")\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(STMT_LIST, 0, STATEMENT,36);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << itr->second << ")\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(STMT_LIST, 0, STATEMENT,30);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << itr->second << ")\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(STMT_LIST, 0, STATEMENT,56);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << itr->second << ")\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(STMT_LIST, 0, VARIABLE,pkb->getVarIndex("fish"));
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << pkb->getVarName( itr->second) << ")\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(STMT_LIST, 0, PLUS, -1);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << "PLUS)\n";
+	}
+	cout << "\n";
+
+	
+	a =  de->getContainStarResult(STMT_LIST, 0, MINUS, -1);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << "MINUS)\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(STMT_LIST, 0, MULTIPLY, -1);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << "MULTIPLY)\n";
+	}
+	cout << "\n";
+
+	
+	a =  de->getContainStarResult(STMT_LIST, 0, CONSTANT, pkb->getConstantIndex(13));
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << pkb->getConstantValue(itr->second) << ")\n";
+	}
+	cout << "\n";
+
+	
+	a =  de->getContainStarResult(STATEMENT, 0, STATEMENT, 56);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << itr->second << ")\n";
+	}
+	cout << "\n";
+
+	
+	a =  de->getContainStarResult(STATEMENT, 38, VARIABLE, 0);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << pkb->getVarName(itr->second) << ")\n";
+	}
+	cout << "\n";
+	
+	
+	a =  de->getContainStarResult(STATEMENT, 61, IF, 0);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << itr->second << ")\n";
+	}
+	cout << "\n";
+	
+	a =  de->getContainStarResult(STATEMENT, 48, CALL, 0);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << itr->second << ")\n";
+	}
+	cout << "\n";
+	
+	a =  de->getContainStarResult(STATEMENT, 22, VARIABLE, 0);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << pkb->getVarName(itr->second) << ")\n";
+	}
+	cout << "\n";
+	
+	a =  de->getContainStarResult(STATEMENT, 7, CONSTANT, 0);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << pkb->getConstantValue(itr->second) << ")\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(STATEMENT, 51, CALL, 0);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " <<itr->second << ")\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(STATEMENT, 51, VARIABLE, 0);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " <<pkb->getVarName(itr->second) << ")\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(PROCEDURE, pkb->getProcIndex("Bob"), VARIABLE, 0);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " <<pkb->getVarName(itr->second) << ")\n";
+	}
+	cout << "\n";
+
+	
+	a =  de->getContainStarResult(STATEMENT,51, STATEMENT, 0);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " <<itr->second << ")\n";
+	}
+	cout << "\n";
+
+	
+	a =  de->getContainStarResult(STATEMENT,51, CALL, 0);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " <<itr->second << ")\n";
+	}
+	cout << "\n";
+	
+	
+	a =  de->getContainStarResult(STATEMENT, 51, VARIABLE, 0);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " <<pkb->getVarName(itr->second) << ")\n";
+	}
+	cout << "\n";
+	
+	
+	a =  de->getContainStarResult(STATEMENT, 61, CONSTANT, 0);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " <<pkb->getConstantValue(itr->second) << ")\n";
+	}
+	cout << "\n";
+
+	
+	
+	a =  de->getContainStarResult(STATEMENT, 9, STMT_LIST, 0);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << itr->second<< ")\n";
+	}
+	cout << "\n";
+	
+
+	a =  de->getContainStarResult(PROCEDURE, pkb->getProcIndex("Bob"), STMT_LIST, 0);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << pkb->getProcedure(itr->first)->getProcName() << ", " << itr->second<< ")\n";
+	}
+	cout << "\n";
+
+	a =  de->getContainStarResult(STATEMENT, 51, STMT_LIST, 0);
+	itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain*(" << itr->first << ", " << itr->second<< ")\n";
+	}
+	cout << "\n";
+	*/
+	/*CONTAIN_LIST a =  de->getContainResult(PLUS, -1, VARIABLE, 0);
+	CONTAIN_LIST::iterator itr = a.begin();
+	for(itr = a.begin(); itr!=a.end(); itr++){
+		cout << "Contain(" << itr->first << ", " << pkb->getVarName(itr->second) << ")\n";
+	}
+	*/
+	
+	/* check tree*/
+	
+	/*
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()) == ASSIGNMENT);
+	
+	AST_LIST *tmp = pkb->getASTBy(33);
+	AST *tmpAST = tmp->front()->getFirstDescendant();
+
+
+
+	
+	cout << "ASSIGN NODE: " << pkb->getType(tmpAST) << "\n";
+	cout << "LHS: " <<  pkb->getVarName(pkb->getData(tmpAST->getFirstDescendant())) << "\n";
+	cout << "RHS TYPE: " << pkb->getType(tmpAST->getFirstDescendant()->getRightSibling()) << "\n";
+	cout << "RHS's LHS: " << pkb->getType(tmpAST->getFirstDescendant()->getRightSibling()->getFirstDescendant()) << "\n";
+	cout << "RHS's LHS's LHS's varName: " << pkb->getVarName(pkb->getData(tmpAST->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getFirstDescendant())) << "\n";
+	cout << "RHS's LHS's RHS's constant value: " << pkb->getConstantValue(pkb->getData(tmpAST->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getFirstDescendant()->getRightSibling())) << "\n";
+	cout << "RHS's RHS's constant value" << pkb->getConstantValue(pkb->getData(tmpAST->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling())) << "\n";
+
+
+	tmp = pkb->getASTBy(34);
+	tmpAST = tmp->front();
+
+	cout << "ASSIGN NODE: " << pkb->getType(tmpAST) << "\n";
+	cout << "LHS: " <<  pkb->getVarName(pkb->getData(tmpAST->getFirstDescendant())) << "\n";
+	cout << "RHS TYPE: " << pkb->getType(tmpAST->getFirstDescendant()->getRightSibling()) << "\n";
+	cout << "RHS's LHS's varName: " << pkb->getVarName(pkb->getData(tmpAST->getFirstDescendant()->getRightSibling()->getFirstDescendant())) << "\n";
+	cout << "RHS's RHS's LHS's constantValue: " << pkb->getConstantValue(pkb->getData(tmpAST->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()->getFirstDescendant())) << "\n";
+	cout << "RHS's RHS's RHS's constantValue: " << pkb->getConstantValue(pkb->getData(tmpAST->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling())) << "\n";
+	cout << "asd: " << de->getIsContainStarResult(PLUS, -1, MULTIPLY, -1) << "\n";
+	cout << "asd: " << de->getIsContainStarResult(MINUS, -1, PLUS, -1) << "\n";
+	cout << "asd: " << de->getIsContainStarResult(PLUS, -1, PLUS, -1) << "\n";
+	cout << "asd: " << de->getIsContainStarResult(MINUS, -1, MULTIPLY, -1) << "\n";
+	cout << "asd: " << de->getIsContainStarResult(MINUS, -1, MINUS, -1) << "\n";
+	cout << "asd: " << de->getIsContainStarResult(MULTIPLY, -1, MULTIPLY, -1) << "\n";
+	cout << "asd: " << de->getIsContainStarResult(VARIABLE, pkb->getVarIndex("lamp"), CONSTANT, pkb->getConstantIndex(999)) << "\n";
+	/*CPPUNIT_ASSERT(de->getIsContainResult(STATEMENT, 1, PLUS, -1) == true);
+	CPPUNIT_ASSERT(de->getIsContainResult(STATEMENT, 1, MINUS, -1) == false);
+	CPPUNIT_ASSERT(de->getIsContainResult(STATEMENT, 1, VARIABLE, pkb->getVarIndex("apple")) == true);
+	CPPUNIT_ASSERT(de->getIsContainResult(STATEMENT, 1, VARIABLE, pkb->getConstantIndex(1))== true);
+	CPPUNIT_ASSERT(de->getIsContainResult(STATEMENT, 1, STATEMENT, 2) == false);
+
+	CPPUNIT_ASSERT(de->getIsContainResult(PROCEDURE, 1, STATEMENT, 1) == true);
+	CPPUNIT_ASSERT(de->getIsContainResult(PROCEDURE, 2, STATEMENT, 27) == true);
+	CPPUNIT_ASSERT(de->getIsContainResult(PROCEDURE, 1, STATEMENT, 2) == false);
+	
+	CPPUNIT_ASSERT(de->getIsContainResult(PLUS, -1, PLUS, -1) == true);
+	CPPUNIT_ASSERT(de->getIsContainResult(MINUS, -1, PLUS, -1) == true);
+	
+	//CONTAIN_LIST cList = de->getContainResult(PROCEDURE, 1, WHILE, 0);
+	//CONTAIN_LIST cList = de->getContainResult(PROCEDURE, 1, STMT_LIST, 0);
+	//CONTAIN_LIST cList = de->getContainResult(PROCEDURE, 1, IF, 0);
+	
+	
+	//CONTAIN_LIST cList = de->getContainResult(STATEMENT, 0, STMT_LIST, 0);
+	//CONTAIN_LIST cList = de->getContainResult(PROCEDURE, 0, STMT_LIST, 0);
+	//CONTAIN_LIST cList = de->getContainResult(WHILE, 0, STMT_LIST, 0);
+	//CONTAIN_LIST cList = de->getContainResult(IF, 0, STMT_LIST, 0);
+	//CONTAIN_LIST cList = de->getContainResult(STMT_LIST, 0, STATEMENT, 0);
+	//CONTAIN_LIST cList = de->getContainResult(IF, 0, VARIABLE, 0);
+	//CONTAIN_LIST cList = de->getContainResult(WHILE, 0, VARIABLE, 0);
+	//CONTAIN_LIST cList = de->getContainResult(STATEMENT, 0, VARIABLE, 0);
+	//CONTAIN_LIST cList = de->getContainResult(ASSIGNMENT, 0, VARIABLE, 0);
+	//CONTAIN_LIST cList = de->getContainResult(ASSIGNMENT, 0, CONSTANT, 0);
+	//CONTAIN_LIST cList = de->getContainResult(STATEMENT, 0, CONSTANT, 0);
+	
+
+	//CONTAIN_LIST cList = de->getContainResult(IF, 0, VARIABLE, pkb->getVarIndex("innard"));
+	//CONTAIN_LIST cList = de->getContainResult(WHILE, 0, VARIABLE, pkb->getVarIndex("apple"));
+	//CONTAIN_LIST cList = de->getContainResult(STATEMENT, 0, VARIABLE, pkb->getVarIndex("apple"));
+	//CONTAIN_LIST cList = de->getContainResult(ASSIGNMENT, 0, PLUS, -1);
+	//CONTAIN_LIST cList = de->getContainResult(ASSIGNMENT, 0, MINUS, -1);
+	//CONTAIN_LIST cList = de->getContainResult(ASSIGNMENT, 0, MULTIPLY, -1);
+	//CONTAIN_LIST cList = de->getContainResult(ASSIGNMENT, 0, VARIABLE, pkb->getVarIndex("apple"));
+	//CONTAIN_LIST cList = de->getContainResult(ASSIGNMENT, 0, CONSTANT, pkb->getConstantIndex(88));
+	//CONTAIN_LIST cList = de->getContainResult(STMT_LIST, 0, STATEMENT, 10);
+	//CONTAIN_LIST cList = de->getContainResult(STMT_LIST, 0, CALL, 8);
+	//CONTAIN_LIST cList = de->getContainResult(STMT_LIST, 0, ASSIGNMENT, 11);
+	//CONTAIN_LIST cList = de->getContainResult(STMT_LIST, 0, IF, 24);
+	//CONTAIN_LIST cList = de->getContainResult(STMT_LIST, 0, WHILE, 16);
+	//CONTAIN_LIST cList = de->getContainResult(STATEMENT, 0, STMT_LIST, 15);
+	//CONTAIN_LIST cList = de->getContainResult(PROCEDURE, 0, STMT_LIST, 1);
+	//CONTAIN_LIST cList = de->getContainResult(WHILE, 0, STMT_LIST, 17);
+	//CONTAIN_LIST cList = de->getContainResult(IF, 0, STMT_LIST, 23);
+
+	//CONTAIN_LIST cList = de->getContainResult(STATEMENT, 1, STATEMENT, 0);
+	//CONTAIN_LIST cList = de->getContainResult(STATEMENT, 2, STATEMENT, 0);
+	//CONTAIN_LIST cList = de->getContainResult(STATEMENT, 11, STATEMENT, 0);
+	//CONTAIN_LIST cList = de->getContainResult(STATEMENT, 11, WHILE, 0);
+	//CONTAIN_LIST cList = de->getContainResult(STATEMENT, 11, ASSIGNMENT, 0);
+	//CONTAIN_LIST cList = de->getContainResult(STMT_LIST, 11, ASSIGNMENT, 0);
+	//CONTAIN_LIST cList = de->getContainResult(STATEMENT, 22, STATEMENT, 0);
+
+	//CONTAIN_LIST cList = de->getContainResult(STATEMENT, 1, VARIABLE, 0);
+	//CONTAIN_LIST cList = de->getContainResult(STATEMENT, 27, CONSTANT, 0);
+	//CONTAIN_LIST cList = de->getContainResult(STATEMENT, 21, VARIABLE, 0);
+	//CONTAIN_LIST cList = de->getContainResult(IF, 21, VARIABLE, 0);
+	//CONTAIN_LIST cList = de->getContainResult(IF, 21, STMT_LIST, 0);
+
+	//CONTAIN_LIST cList = de->getContainResult(STATEMENT, 10, VARIABLE, 0);
+	//CONTAIN_LIST cList = de->getContainResult(WHILE, 10, VARIABLE, 0);
+	/*CONTAIN_LIST cList = de->getContainStarResult(STMT_LIST, 0, STMT_LIST, 0);
+	CONTAIN_LIST::iterator cListItr = cList.begin();
+
+	cout << "\n";
+	while(cListItr!=cList.end()){
+		cout << "(" << cListItr->first << "," << cListItr->second << ")\n";
+		cListItr++;
+	}
+	
+	cout << "\n=============ContainsStar=============\n";
+	cout << "============= UNKNOWN, UNKNOWN ===========\n";
+	cout << de->getContainStarResult(STMT_LIST, 0, STMT_LIST, 0).size() << "\n";
+	cout << de->getContainStarResult(STMT_LIST, 10, STMT_LIST, 0).size() << "\n";
+	cout << de->getContainStarResult(STMT_LIST, 0, STMT_LIST, 13).size() << "\n";
+
+	cout << de->getContainStarResult(STATEMENT, 0, STATEMENT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(STATEMENT, 0, WHILE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(STATEMENT, 0, IF, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(STATEMENT, 0, ASSIGNMENT, 0).size() <<"\n"; 
+
+	cout << de->getContainStarResult(STATEMENT, 0, VARIABLE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(STATEMENT, 0, CONSTANT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(STATEMENT, 0, MULTIPLY, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(STATEMENT, 0, PLUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(STATEMENT, 0, MINUS, -1).size() <<"\n\n"; //
+
+	cout << de->getContainStarResult(ASSIGNMENT, 0, VARIABLE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(ASSIGNMENT, 0, CONSTANT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(ASSIGNMENT, 0, MULTIPLY, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(ASSIGNMENT, 0, PLUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(ASSIGNMENT, 0, MINUS, -1).size() <<"\n\n"; //
+
+	cout << de->getContainStarResult(WHILE, 0, STATEMENT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, WHILE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, IF, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, ASSIGNMENT, 0).size() <<"\n"; 
+	cout << de->getContainStarResult(WHILE, 0, VARIABLE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, CONSTANT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, MULTIPLY, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, PLUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, MINUS, -1).size() <<"\n\n"; //
+
+	cout << de->getContainStarResult(IF, 0, STATEMENT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, WHILE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, IF, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, ASSIGNMENT, 0).size() <<"\n"; 
+	cout << de->getContainStarResult(IF, 0, VARIABLE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, CONSTANT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, MULTIPLY, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, PLUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, MINUS, -1).size() <<"\n\n"; //
+
+	cout << "============= UNKNOWN, KNOWN ===========\n";
+	cout << de->getContainStarResult(STATEMENT, 0, STATEMENT, 13).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, STATEMENT, 13).size() <<"\n"; //
+	cout << de->getContainStarResult(ASSIGNMENT, 0, STATEMENT, 13).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, STATEMENT, 44).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, CONSTANT, pkb->getConstantIndex(1)).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, VARIABLE, pkb->getVarIndex("meat")).size() <<"\n\n"; //
+
+	cout << de->getContainStarResult(PROCEDURE, 0, STATEMENT, 13).size() <<"\n"; //
+	cout << de->getContainStarResult(PROCEDURE, 0, PLUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(PROCEDURE, 0, MINUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(PROCEDURE, 0, MULTIPLY, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(PROCEDURE, 0, VARIABLE, pkb->getVarIndex("b")).size() <<"\n"; //
+	cout << de->getContainStarResult(PROCEDURE, 0, CONSTANT, pkb->getConstantIndex(11)).size() <<"\n\n"; //
+	*/
+	/*
+	cout << DesignExtractor::convertExprToPrefix("x*y+z*b") << "\n";
+	cout << DesignExtractor::convertExprToPrefix("x*y+z+b") << "\n";
+	
+	cout << de->getIsContainStarResult(MULTIPLY, -1, MULTIPLY, -1) <<"\n";
+	
+	/*MODIFIES_LIST modifiesResult = de->getFollowsStarResult(STATEMENT,0,24);
+	MODIFIES_LIST::iterator itr = modifiesResult.begin();
+	while(itr!=modifiesResult.end()){
+		cout << "Statement " << itr->first << " uses " << pkb->getVarName(itr->second) << "\n";
+		itr++;
+	}
+
+	cout << "\n=============ContainsStar=============\n";
+	cout << "============= UNKNOWN, UNKNOWN ===========\n";
+	//cout << de->getContainStarResult(STATEMENT, 0, STATEMENT, 0).size() <<"\n"; //
+	//cout << de->getContainStarResult(STATEMENT, 0, WHILE, 0).size() <<"\n"; //
+	//cout << de->getContainStarResult(STATEMENT, 0, IF, 0).size() <<"\n"; //
+	//cout << de->getContainStarResult(STATEMENT, 0, ASSIGNMENT, 0).size() <<"\n"; 
+
+	cout << de->getContainStarResult(STATEMENT, 0, VARIABLE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(STATEMENT, 0, CONSTANT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(STATEMENT, 0, MULTIPLY, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(STATEMENT, 0, PLUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(STATEMENT, 0, MINUS, -1).size() <<"\n\n"; //
+
+	cout << de->getContainStarResult(ASSIGNMENT, 0, VARIABLE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(ASSIGNMENT, 0, CONSTANT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(ASSIGNMENT, 0, MULTIPLY, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(ASSIGNMENT, 0, PLUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(ASSIGNMENT, 0, MINUS, -1).size() <<"\n\n"; //
+
+	cout << de->getContainStarResult(WHILE, 0, STATEMENT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, WHILE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, IF, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, ASSIGNMENT, 0).size() <<"\n"; 
+	cout << de->getContainStarResult(WHILE, 0, VARIABLE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, CONSTANT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, MULTIPLY, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, PLUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, MINUS, -1).size() <<"\n\n"; //
+
+	cout << de->getContainStarResult(IF, 0, STATEMENT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, WHILE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, IF, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, ASSIGNMENT, 0).size() <<"\n"; 
+	cout << de->getContainStarResult(IF, 0, VARIABLE, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, CONSTANT, 0).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, MULTIPLY, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, PLUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, MINUS, -1).size() <<"\n\n"; //
+
+	cout << "============= UNKNOWN, KNOWN ===========\n";
+	cout << de->getContainStarResult(STATEMENT, 0, STATEMENT, 13).size() <<"\n"; //
+	cout << de->getContainStarResult(WHILE, 0, STATEMENT, 13).size() <<"\n"; //
+	cout << de->getContainStarResult(ASSIGNMENT, 0, STATEMENT, 13).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, STATEMENT, 44).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, CONSTANT, pkb->getConstantIndex(1)).size() <<"\n"; //
+	cout << de->getContainStarResult(IF, 0, VARIABLE, pkb->getVarIndex("meat")).size() <<"\n\n"; //
+
+	cout << de->getContainStarResult(PROCEDURE, 0, STATEMENT, 13).size() <<"\n"; //
+	cout << de->getContainStarResult(PROCEDURE, 0, PLUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(PROCEDURE, 0, MINUS, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(PROCEDURE, 0, MULTIPLY, -1).size() <<"\n"; //
+	cout << de->getContainStarResult(PROCEDURE, 0, VARIABLE, pkb->getVarIndex("b")).size() <<"\n"; //
+	cout << de->getContainStarResult(PROCEDURE, 0, CONSTANT, pkb->getConstantIndex(11)).size() <<"\n\n"; //
+	CONTAIN_LIST result =  de->getContainStarResult(PROCEDURE, 0, CONSTANT, pkb->getConstantIndex(11));
+	CONTAIN_LIST::iterator itr = result.begin();
+
+	while(itr!=result.end()){
+		cout << "Contain(" << itr->first << ", " << itr->second <<")\n";
+		itr++;
+	}
+	cout << "End of Parser Unit Test\n";
+	*/
 	//cout << "Assign's Size: " << pkb->getAssignSize() << "\n";
 	// Test for Follows
 	/*FOLLOWS_LIST result = pkb->getFollows(0,0);
 	FOLLOWS_LIST::iterator itr = result.begin();
 	while(itr!=result.end()){
-		//cout << itr->first << "," << itr->second << "\n";
+		cout << itr->first << "," << itr->second << "\n";
 		itr++;
 	}
-	NEXT_LIST nxtResult = pkb->getNext(0,0);
-	NEXT_LIST::iterator nxtItr = nxtResult.begin();
-
-	while(nxtItr!=nxtResult.end()){
-		cout << nxtItr->first << ", " << nxtItr->second << "\n";
-		nxtItr++;
-	}
 	
-	MODIFIES_LIST modifiesResult = pkb->getModifies(PROCEDURE,0,0);
+/*	MODIFIES_LIST modifiesResult = pkb->getModifies(STATEMENT,0,0);
 	MODIFIES_LIST::iterator itr = modifiesResult.begin();
 	while(itr!=modifiesResult.end()){
 		cout << "Procedure " << itr->first << " modifies " << pkb->getVarName(itr->second) << "\n";
 		itr++;
 	}
 
-	USES_LIST usesResult = pkb->getUses(PROCEDURE,0,0);
+	USES_LIST usesResult = pkb->getUses(STATEMENT,0,0);
 	USES_LIST::iterator uitr = usesResult.begin();
 	while(uitr!=usesResult.end()){
 		cout << "Procedure " << uitr->first << " uses " << pkb->getVarName(uitr->second) << "\n";
@@ -345,8 +998,8 @@ void ParserTest::testOperators(){
 	CPPUNIT_ASSERT(ast->getRootData() == 1);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()) == STMT_LIST);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()) == ASSIGNMENT);
-	//CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
-	//CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == CONSTANT);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == CONSTANT);
 	
 
 	src = "procedure main{\n"
@@ -358,8 +1011,8 @@ void ParserTest::testOperators(){
 	CPPUNIT_ASSERT(ast->getRootData() == 1);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()) == STMT_LIST);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()) == ASSIGNMENT);
-	//CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
-	//CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == MULTIPLY);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == MULTIPLY);
 	
 	src = "procedure main{\n"
 		"a = y+1;}\n";
@@ -370,8 +1023,8 @@ void ParserTest::testOperators(){
 	CPPUNIT_ASSERT(ast->getRootData() == 1);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()) == STMT_LIST);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()) == ASSIGNMENT);
-	//CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
-	//CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == PLUS);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == PLUS);
 
 	src = "procedure main{\n"
 		"a = y-1;}\n";
@@ -382,8 +1035,8 @@ void ParserTest::testOperators(){
 	CPPUNIT_ASSERT(ast->getRootData() == 1);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()) == STMT_LIST);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()) == ASSIGNMENT);
-	//CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
-	//CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == MINUS);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == MINUS);
 
 	
 	src = "procedure main{\n"
@@ -395,8 +1048,8 @@ void ParserTest::testOperators(){
 	CPPUNIT_ASSERT(ast->getRootData() == 1);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()) == STMT_LIST);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()) == ASSIGNMENT);
-	//CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
-	//CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == PLUS);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == PLUS);
 	
 	
 	src = "procedure main{\n"
@@ -408,8 +1061,8 @@ void ParserTest::testOperators(){
 	CPPUNIT_ASSERT(ast->getRootData() == 1);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()) == STMT_LIST);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()) == ASSIGNMENT);
-	//CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
-	//CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == MINUS);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == MINUS);
 	
 	src = "procedure main{\n"
 		"a = (y*1);}\n";
@@ -420,8 +1073,8 @@ void ParserTest::testOperators(){
 	CPPUNIT_ASSERT(ast->getRootData() == 1);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()) == STMT_LIST);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()) == ASSIGNMENT);
-	//CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
-	//CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == MULTIPLY);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == MULTIPLY);
 	
 
 	src = "procedure main{\n"
@@ -430,7 +1083,7 @@ void ParserTest::testOperators(){
 	p.startParse();
 	pkb = p.getPKB();
 	ast = pkb->getRootAST();
-	/*CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()) == ASSIGNMENT);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()) == ASSIGNMENT);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == PLUS);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()) == VARIABLE);
@@ -440,7 +1093,7 @@ void ParserTest::testOperators(){
 	CPPUNIT_ASSERT(pkb->getVarName(pkb->getData(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()->getFirstDescendant()))=="c");
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()) == VARIABLE);
 	CPPUNIT_ASSERT(pkb->getVarName(pkb->getData(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()))=="d");
-	*/
+	
 	src = "procedure main{\n"
 		"a = b - c * d;}\n";
 	p.setSource(src);
@@ -448,8 +1101,8 @@ void ParserTest::testOperators(){
 	pkb = p.getPKB();
 	ast = pkb->getRootAST();
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()) == ASSIGNMENT);
-	//CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
-	//CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == MINUS);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == MINUS);
 	
 	src = "procedure main{\n"
 		"a = b * c + d;}\n";
@@ -459,12 +1112,12 @@ void ParserTest::testOperators(){
 	ast = pkb->getRootAST();
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()) == ASSIGNMENT);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
-	/*CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == PLUS);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == PLUS);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()) == MULTIPLY);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()) == VARIABLE);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getFirstDescendant()) == VARIABLE);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == VARIABLE);
-	*/
+	
 	
 	src = "procedure main{\n"
 		"a = b * c - d;}\n";
@@ -490,7 +1143,17 @@ void ParserTest::testOperators(){
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == VARIABLE);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()) == VARIABLE);
 
+	src = "procedure main{\n"
+		"a = (c + d) * (d * e) ;}\n";
+	p.setSource(src);
+	p.startParse();
+	pkb = p.getPKB();
+	ast = pkb->getRootAST();
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == MULTIPLY);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()) == PLUS);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()) == MULTIPLY);
 
+	
 	src = "procedure main{\n"
 		"a = b + c + d;}\n";
 	p.setSource(src);
@@ -499,6 +1162,23 @@ void ParserTest::testOperators(){
 	ast = pkb->getRootAST();
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == PLUS);
 	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()) == PLUS);
+
+	src = "procedure main{\n"
+		"a = (b * c - d) * a + (t + e * f * e * g);}\n";
+	p.setSource(src);
+	p.startParse();
+	pkb = p.getPKB();
+	ast = pkb->getRootAST();
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()) == PLUS);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()) == MULTIPLY);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getFirstDescendant()) == MINUS);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()) == MULTIPLY);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()) == PLUS);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()) == MULTIPLY);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()->getFirstDescendant()) == MULTIPLY);
+	CPPUNIT_ASSERT(pkb->getType(ast->getFirstDescendant()->getFirstDescendant()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getRightSibling()->getFirstDescendant()->getFirstDescendant()) == MULTIPLY);
+
+	
 }
 
 // method to test whether parser can parse different source code
