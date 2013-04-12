@@ -21,6 +21,7 @@ private:
 	static DATA_LIST		getDataListTypeAncestorOf(TYPE, TYPE , STATEMENT_NUM );
 	static bool				isStatementDescendantTypeDataOf(TYPE, TYPE, int, STATEMENT_NUM);
 	static void				isStatementDescendantTypeOf(CONTAIN_LIST*, TYPE, TYPE, int, STATEMENT_NUM);
+	static void				getTypeInsertAll(CONTAIN_LIST*, TYPE, STATEMENT_NUM, STATEMENT_NUM);
 	
 	static int				findPrefixTreeMatch(TYPE, STATEMENT_NUM, int, int);
 	static DATA_LIST		getPrefixTreeVarIndexes(string, int);

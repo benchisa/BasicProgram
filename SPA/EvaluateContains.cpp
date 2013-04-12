@@ -47,44 +47,26 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 					resultList.push_back(make_pair(*stmtListItr, arg2));
 				}
 			}
-			if(pkb->getStmtEntry(*stmtListItr).type!= ELSE && EvaluateParents::getIsParentStarResult( pkb->getStmtEntry(*stmtListItr).ownerNo, arg2)){
+			if(pkb->getStmtEntry(*stmtListItr).type == THEN &&  EvaluateParents::getIsParentStarResult( pkb->getStmtEntry(*stmtListItr).ownerNo, arg2))
+			{
+				AST *tmp = pkb->getASTBy(*stmtListItr)->front()->getRightSibling(); // else node
+				if(arg2 < pkb->getStatementNum(tmp)){
+					resultList.push_back(make_pair(*stmtListItr, arg2));
+				}
+			}
+			else if(pkb->getStmtEntry(*stmtListItr).type == ELSE &&  EvaluateParents::getIsParentStarResult( pkb->getStmtEntry(*stmtListItr).ownerNo, arg2))
+			{
+				AST *tmp = pkb->getASTBy(*stmtListItr)->front()->getLeftSibling(); // else node
+				if(arg2 >= pkb->getStatementNum(tmp)){
+					resultList.push_back(make_pair(*stmtListItr, arg2));
+				}
+			}
+			else if((pkb->getStmtEntry(*stmtListItr).type != ELSE || pkb->getStmtEntry(*stmtListItr).type != THEN) && EvaluateParents::getIsParentStarResult( pkb->getStmtEntry(*stmtListItr).ownerNo, arg2)){
 				resultList.push_back(make_pair(*stmtListItr, arg2));
 			}
 
 			stmtListItr++;
 		}
-	}
-	// Contain*(stmtlist, stmtlist)
-	else if(type == STMT_LIST && type2 == STMT_LIST && arg1 == NULL && arg2 == NULL){
-		// all stmtlists are stmtlist of procedure's
-		PROC_LIST * procList = pkb->getAllProc();
-		PROC_LIST::iterator procListItr = procList->begin();
-
-		while(procListItr!=procList->end()){
-			int start = procListItr->getStartProgLine();
-			int end = procListItr->getEndProgLine();
-			DATA_LIST * stmtList = pkb->getAllStmtLst();
-			DATA_LIST::iterator stmtListItr = stmtList->begin();
-			while(stmtListItr!=stmtList->end()){
-				if(*stmtListItr>= start && *stmtListItr <= end){
-					resultList.push_back(make_pair(start, *stmtListItr));
-				}
-				stmtListItr++;
-			}
-			procListItr++;
-		}
-
-		// check all other stmtlists by using parent
-		PARENT_LIST pList = EvaluateParents::getParentStarResult(STATEMENT, STATEMENT);
-		PARENT_LIST::iterator pListItr = pList.begin();
-
-		while(pListItr!=pList.end()){
-			if(Helper::isStatementTypeOf(STMT_LIST, pListItr->first) && Helper::isStatementTypeOf(STMT_LIST, pListItr->second)){
-				resultList.push_back(*pListItr);
-			}
-			pListItr++;
-		}
-
 	}
 	// Contain*(1, s2), Contain*(1, a), Contain*(1, w), Contain*(1, if), Contain*(1, call)
 	// Contain*(s, 2), Contains*(a, 2), Contains*(2, 2), Contains*(if, 2), 
@@ -340,19 +322,26 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 	else if(type!=PROCEDURE && arg1 == 0 && arg2 !=0 && (type2 == CONSTANT || type2 == VARIABLE || type2 == PLUS ||  type2 == MINUS || type2 == MULTIPLY)){
 		DATA_LIST *assignList = pkb->getAllAssigns();
 		DATA_LIST::iterator assignListItr = assignList->begin();
-
 		// find assignment statement
 		while(assignListItr!=assignList->end()){
 			int operPos = EvaluateContains::findPrefixTreeMatch(type2, *assignListItr,arg2,0);
+
 			if(operPos!=-1){
 				if(type==STATEMENT || type == ASSIGNMENT){
 					resultList.push_back(make_pair(*assignListItr, arg2));
 
 				}
 				if(type == WHILE || type == IF || type == STATEMENT){
+
+					if(*assignListItr == 63){
+						PARENT_LIST t = EvaluateParents::getParentStarResult(WHILE, 0, 63);
+					
+					}
+
 					PARENT_LIST parentLst = EvaluateParents::getParentStarResult(type, 0, *assignListItr);
 					PARENT_LIST::iterator parentLstitr = parentLst.begin();
 					while(parentLstitr!=parentLst.end()){
+						//cout << "("<<parentLstitr->first << "," << parentLstitr->second << ")" << "\n";
 						resultList.push_back(make_pair(parentLstitr->first, arg2));
 						parentLstitr++;
 					}
@@ -488,55 +477,142 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 
 	// =============================== Contain*(UNKNOWN, UNKNOWN) =========================//
 	else if((type!=PROCEDURE && type2!=PROCEDURE) && arg1 == 0 && arg2 == 0){
-		if(type == STATEMENT && type2 == VARIABLE){
+		// Contain*(Stmt_list, stmt#), Contains*(stmt_list, while), Contains*(stmt_list, if)...
+		if(type == STMT_LIST && (type2 == STATEMENT || type2 == WHILE || type2 == IF || type2 == CALL || type2 == ASSIGNMENT)){
+			DATA_LIST *stmtList = pkb->getAllStmtLst();
+			DATA_LIST::iterator stmtListItr = stmtList->begin();
+
+			while(stmtListItr != stmtList->end()){
+				// procedure
+				if(pkb->getStmtEntry(*stmtListItr).type == PROCEDURE){
+					Procedure *p = pkb->getProcedure(pkb->getStmtEntry(*stmtListItr).ownerNo);
+					int start = p->getStartProgLine();
+					int end = p->getEndProgLine();
+
+					for(int i = start; i<=end; i++){
+						if(type2 == STATEMENT || Helper::isStatementTypeOf(type2, i)){
+							resultList.push_back(make_pair(*stmtListItr, i));
+						}
+					}
+				}
+				else{
+					PARENT_LIST pList = EvaluateParents::getParentStarResult(type2, pkb->getStmtEntry( *stmtListItr).ownerNo, 0);
+					PARENT_LIST::iterator pListItr = pList.begin();
+					
+					while(pListItr!=pList.end()){
+						if(pkb->getStmtEntry(*stmtListItr).type == THEN)
+						{
+							AST *tmp = pkb->getASTBy(*stmtListItr)->front()->getRightSibling(); // else node
+							if(pListItr->second < pkb->getStatementNum(tmp)){
+								resultList.push_back(make_pair(*stmtListItr, pListItr->second));
+							}
+						}
+						else if(pkb->getStmtEntry(*stmtListItr).type == ELSE)
+						{
+							AST *tmp = pkb->getASTBy(*stmtListItr)->front()->getLeftSibling(); // else node
+							if(pListItr->second >= pkb->getStatementNum(tmp)){
+								resultList.push_back(make_pair(*stmtListItr, pListItr->second));
+							}
+						}
+						else if((pkb->getStmtEntry(*stmtListItr).type != ELSE || pkb->getStmtEntry(*stmtListItr).type != THEN)){
+							resultList.push_back(make_pair(*stmtListItr, pListItr->second));
+						}
+						pListItr++;
+					}
+				}
+				// others
+				stmtListItr++;
+			}
+		}
+		
+		// Contain*(stmtlist, stmtlist)
+		else if(type == STMT_LIST && type2 == STMT_LIST && arg1 == NULL && arg2 == NULL){
+			// all stmtlists are stmtlist of procedure's
+			PROC_LIST * procList = pkb->getAllProc();
+			PROC_LIST::iterator procListItr = procList->begin();
+
+			while(procListItr!=procList->end()){
+				int start = procListItr->getStartProgLine();
+				int end = procListItr->getEndProgLine();
+				DATA_LIST * stmtList = pkb->getAllStmtLst();
+				DATA_LIST::iterator stmtListItr = stmtList->begin();
+				while(stmtListItr!=stmtList->end()){
+					if(*stmtListItr>= start && *stmtListItr <= end){
+						resultList.push_back(make_pair(start, *stmtListItr));
+					}
+					stmtListItr++;
+				}
+				procListItr++;
+			}
+
+			// check all other stmtlists by using parent
+			PARENT_LIST pList = EvaluateParents::getParentStarResult(STATEMENT, STATEMENT);
+			PARENT_LIST::iterator pListItr = pList.begin();
+
+			while(pListItr!=pList.end()){
+				if(Helper::isStatementTypeOf(STMT_LIST, pListItr->first) && Helper::isStatementTypeOf(STMT_LIST, pListItr->second)){
+					resultList.push_back(*pListItr);
+				}
+				pListItr++;
+			}
 
 		}
-		else if(type == STMT_LIST && type2 == STMT_LIST){
-			PARENT_LIST parentList = EvaluateParents::getParentStarResult(WHILE, WHILE);
-			PARENT_LIST::iterator parentListItr = parentList.begin();
+		else if(type == STMT_LIST &&( type2 == VARIABLE || type2 == CONSTANT)){
+			DATA_LIST * stmtList =pkb->getAllStmtLst();
+			DATA_LIST::iterator stmtListItr = stmtList->begin();
+			while(stmtListItr!=stmtList->end()){
 
-			while(parentListItr != parentList.end()){
-				resultList.push_back(make_pair(parentListItr->first, parentListItr->second));
-				parentListItr++;
+				// if this is PROCEDURE, add all variables and constant
+				if(pkb->getStmtEntry(*stmtListItr).type == PROCEDURE){
+					Procedure *p = pkb->getProcedure(pkb->getStmtEntry(*stmtListItr).ownerNo);
+					int start = p->getStartProgLine();
+					int end = p->getEndProgLine();
+
+					for(int i = start; i <=end; i++){
+						EvaluateContains::getTypeInsertAll(&resultList, type2, i, *stmtListItr);
+					}
+				}
+				else if(pkb->getStmtEntry(*stmtListItr).type == THEN){
+						int start = *stmtListItr;
+						int end = pkb->getStatementNum(pkb->getASTBy(*stmtListItr)->front()->getRightSibling())-1;
+						for(int i = start; i <=end; i++){
+							EvaluateContains::getTypeInsertAll(&resultList, type2, i, *stmtListItr);
+						}
+				}
+				else if(pkb->getStmtEntry(*stmtListItr).type == ELSE){
+					PARENT_LIST parentList = EvaluateParents::getParentStarResult(STATEMENT, pkb->getStmtEntry(*stmtListItr).ownerNo, 0);
+					PARENT_LIST::iterator parentListItr = parentList.begin();
+
+					while(parentListItr != parentList.end()){
+						if(parentListItr->second >= *stmtListItr){
+							EvaluateContains::getTypeInsertAll(&resultList, type2, parentListItr->second, *stmtListItr);
+						}
+						parentListItr++;
+					}
+				}
+				// WHILE's STMT_LIST
+				else{
+					PARENT_LIST parentList = EvaluateParents::getParentStarResult(STATEMENT, pkb->getStmtEntry(*stmtListItr).ownerNo, 0);
+					PARENT_LIST::iterator parentListItr = parentList.begin();
+
+					while(parentListItr != parentList.end()){
+						EvaluateContains::getTypeInsertAll(&resultList, type2, parentListItr->second, *stmtListItr);
+						parentListItr++;
+					}
+				}
+					
+					
+				stmtListItr++;
 			}
-
-			parentList = EvaluateParents::getParentStarResult(WHILE, IF);
-			parentListItr = parentList.begin();
-
-			while(parentListItr != parentList.end()){
-				resultList.push_back(make_pair(parentListItr->first, parentListItr->second));
-				parentListItr++;
-			}
-
-			parentList = EvaluateParents::getParentStarResult(IF, IF);
-			parentListItr = parentList.begin();
-
-			while(parentListItr != parentList.end()){
-				resultList.push_back(make_pair(parentListItr->first, parentListItr->second));
-				parentListItr++;
-			}
-
-			parentList = EvaluateParents::getParentStarResult(IF, WHILE);
-			parentListItr = parentList.begin();
-
-			while(parentListItr != parentList.end()){
-				resultList.push_back(make_pair(parentListItr->first, parentListItr->second));
-				parentListItr++;
-			}
+				
 		}
-		// Contain*(s1, v)
-		// Contain*(s1, c)
-		// Contain*(if, v)
-		// Contain*(if, c)
-		// Contain*(w, v)
-		// Contain*(w, c)
-		// Contain*(a, v)
-		// Contain*(a, c)
+		// ===== end of stmt_list =====//
+		// Contains(, constant/variable/plus/minus/multiply)
 		else if(type2 == CONSTANT || type2 == VARIABLE || type2 == PLUS ||  type2 == MINUS || type2 == MULTIPLY){
 			DATA_LIST *assignList = pkb->getAllAssigns();
 			DATA_LIST::iterator assignListItr = assignList->begin();
 			// control variable
-			if(type == WHILE && type2 == VARIABLE){
+			if((type == STATEMENT || type == WHILE) && type2 == VARIABLE){
 				DATA_LIST *ctrlList = pkb->getAllWhiles();
 				DATA_LIST::iterator ctrlItr = ctrlList->begin();
 				while(ctrlItr!=ctrlList->end()){
@@ -545,7 +621,7 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 				}
 			}
 
-			if(type == IF && type2 == VARIABLE){
+			if((type == IF || type == STATEMENT) && type2 == VARIABLE){
 				DATA_LIST *ctrlList = pkb->getAllIfs();
 				DATA_LIST::iterator ctrlItr = ctrlList->begin();
 				while(ctrlItr!=ctrlList->end()){
@@ -563,19 +639,38 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 					DATA_LIST allConstant = EvaluateContains::getPrefixTreeConstants(prefix, 0);
 					DATA_LIST::iterator allConstantItr = allConstant.begin();
 					while(allConstantItr != allConstant.end()){
-						resultList.push_back(make_pair(*assignListItr, *allConstantItr));
+						if(type == ASSIGNMENT)
+							resultList.push_back(make_pair(*assignListItr, *allConstantItr));
+						else if(type == WHILE || type == IF || type == STATEMENT){
+							PARENT_LIST parentLst = EvaluateParents::getParentStarResult(type, 0, *assignListItr);
+							PARENT_LIST::iterator parentLstItr = parentLst.begin();
+							
+							while(parentLstItr!=parentLst.end()){
+								resultList.push_back(make_pair(parentLstItr->first, *allConstantItr));
+								parentLstItr++;
+							}
+						}
 						allConstantItr++;
 					}
 				}
 
 				else if(type2 == VARIABLE){
-					// control variable
-					resultList.push_back(make_pair(*assignListItr, varIndex));
-					
 					DATA_LIST allVariable = EvaluateContains::getPrefixTreeVarIndexes(prefix, 0);
 					DATA_LIST::iterator allVariableItr = allVariable.begin();
 					while(allVariableItr != allVariable.end()){
-						resultList.push_back(make_pair(*assignListItr, *allVariableItr));
+						if(type == ASSIGNMENT){
+							resultList.push_back(make_pair(*assignListItr, varIndex));
+							resultList.push_back(make_pair(*assignListItr, *allVariableItr));
+						}
+						else if(type == WHILE || type == IF || type == STATEMENT){
+							PARENT_LIST parentLst = EvaluateParents::getParentStarResult(type, 0, *assignListItr);
+							PARENT_LIST::iterator parentLstItr = parentLst.begin();
+							while(parentLstItr!=parentLst.end()){
+								resultList.push_back(make_pair(parentLstItr->first, *allVariableItr));
+								resultList.push_back(make_pair(parentLstItr->first, varIndex));
+								parentLstItr++;
+							}
+						}
 						allVariableItr++;
 					}
 				}
@@ -584,12 +679,21 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 					DATA_LIST allOperators = EvaluateContains::getPrefixTreeOperators(prefix, type2, 0);
 					DATA_LIST::iterator allOperatorsItr = allOperators.begin();
 					while(allOperatorsItr != allOperators.end()){
-						resultList.push_back(make_pair(*assignListItr, *allOperatorsItr));
+						if(type == ASSIGNMENT)
+							resultList.push_back(make_pair(*assignListItr, *allOperatorsItr));
+						else if(type == WHILE || type == IF || type == STATEMENT){
+							PARENT_LIST parentLst = EvaluateParents::getParentStarResult(type, 0, *assignListItr);
+							PARENT_LIST::iterator parentLstItr = parentLst.begin();
+							while(parentLstItr!=parentLst.end()){
+								resultList.push_back(make_pair(parentLstItr->first, *allOperatorsItr));
+								parentLstItr++;
+							}
+						}
 						allOperatorsItr++;
 					}
 				}
 				
-			assignListItr++;
+				assignListItr++;
 			}
 		}
 		else{
@@ -607,21 +711,53 @@ CONTAIN_LIST EvaluateContains::getContainStarResult(TYPE type, int arg1, TYPE ty
 		PROC_LIST *procList = pkb->getAllProc();
 		PROC_LIST::iterator procListItr = procList->begin();
 		
-		if(type2 == ASSIGNMENT || type2 == WHILE || type2 == IF || type2 == CALL){
-				while(procListItr!=procList->end()){
-					int start = procListItr->getStartProgLine();
-					int end = procListItr->getEndProgLine();
-					for(int i = start; i <= end; i++){
-						if(type2 == STATEMENT){
-							// push all
-							resultList.push_back(make_pair(pkb->getProcIndex(procListItr->getProcName()), i));
+		while(procListItr!=procList->end()){
+			int start = procListItr->getStartProgLine();
+			int end = procListItr->getEndProgLine();
+			for(int i = start; i <= end; i++){
+				if(type2 == STATEMENT){
+					// push all
+					resultList.push_back(make_pair(pkb->getProcIndex(procListItr->getProcName()), i));
+				}
+				else if(type2 == PLUS || type2 == MINUS || type2 == MULTIPLY){
+					if(EvaluateContains::findPrefixTreeMatch(type2, i, -1, 0)){
+						resultList.push_back(make_pair(pkb->getProcIndex(procListItr->getProcName()), type2));
+					}
+				}
+				else if(type2 == VARIABLE){
+						if(Helper::isStatementTypeOf(WHILE, i))
+							resultList.push_back(make_pair(pkb->getProcIndex(procListItr->getProcName()), pkb->getWhileCtrVar(i)));
+						
+						if(Helper::isStatementTypeOf(IF, i))
+							resultList.push_back(make_pair(pkb->getProcIndex(procListItr->getProcName()), pkb->getIfCtrVar(i)));
+							
+						if(Helper::isStatementTypeOf(ASSIGNMENT, i)){
+							string prefix = pkb->getAssignEntry(i).prefixTree;
+							DATA_LIST allVariable = EvaluateContains::getPrefixTreeVarIndexes(prefix, 0);
+							DATA_LIST::iterator allVariableItr = allVariable.begin();
+							while(allVariableItr != allVariable.end()){
+								resultList.push_back(make_pair(pkb->getProcIndex(procListItr->getProcName()), *allVariableItr));
+								allVariableItr++;
+							}
 						}
-						else if(Helper::isStatementTypeOf(type2, i)){
-							resultList.push_back(make_pair(pkb->getProcIndex(procListItr->getProcName()), i));
+				}
+				else if(type2 == CONSTANT){
+					if(Helper::isStatementTypeOf(ASSIGNMENT, i)){
+						string prefix = pkb->getAssignEntry(i).prefixTree;
+						DATA_LIST allConstant = EvaluateContains::getPrefixTreeConstants(prefix, 0);
+						DATA_LIST::iterator allConstantItr = allConstant.begin();
+						while(allConstantItr != allConstant.end()){
+							resultList.push_back(make_pair(pkb->getProcIndex(procListItr->getProcName()), *allConstantItr));
+							allConstantItr++;
 						}
 					}
-					procListItr++;
 				}
+				else if(Helper::isStatementTypeOf(type2, i)){
+					resultList.push_back(make_pair(pkb->getProcIndex(procListItr->getProcName()), i));
+				}
+				
+			}
+			procListItr++;
 		}
 	}
 
@@ -1000,6 +1136,10 @@ CONTAIN_LIST EvaluateContains::getContainResult(TYPE type, int arg1, TYPE type2,
 
 		while(assignListItr!=assignList->end()){
 			if(EvaluateContains::isStatementDescendantTypeDataOf(ASSIGNMENT, type2, arg2, *assignListItr)){
+				
+				AST *ast = pkb->getASTBy(*assignListItr)->front();
+				//cout << pkb->getConstantValue(pkb->getData(ast->getFirstDescendant()->getRightSibling())) << "\n";
+				cout << pkb->getData(ast->getFirstDescendant()) << "\n";
 				resultList.push_back(make_pair(*assignListItr, arg2));
 			}
 			assignListItr++;
@@ -1008,11 +1148,12 @@ CONTAIN_LIST EvaluateContains::getContainResult(TYPE type, int arg1, TYPE type2,
 	
 	// Contain(a, PLUS/MINUS/MULTIPLY)
 	// Go to assignTable, find whether if any assignNode has PLUS, MINUS, MuLTIPLY
-	else if(type == ASSIGNMENT && arg1 == 0 && ( type2 == PLUS ||  type2 == MINUS ||  type2 == MULTIPLY)){
+	else if((type == ASSIGNMENT || type == STATEMENT) && arg1 == 0 && arg2 == -1 && ( type2 == PLUS ||  type2 == MINUS ||  type2 == MULTIPLY)){
 		DATA_LIST * assignList = pkb->getAllAssigns();
 		DATA_LIST::iterator assignListItr = assignList->begin();
 		while(assignListItr!=assignList->end()){
-			if(EvaluateContains::isStatementDescendantTypeDataOf(type, type2, -1, *assignListItr)){
+
+			if(EvaluateContains::isStatementDescendantTypeDataOf(ASSIGNMENT, type2, -1, *assignListItr)){
 				resultList.push_back(make_pair(*assignListItr, type2));
 			}
 			assignListItr++;
@@ -1358,12 +1499,21 @@ void EvaluateContains::isStatementDescendantTypeOf(CONTAIN_LIST* dList, TYPE typ
 				AST * descendant = (*itr)->getFirstDescendant();
 				
 				if(pkb->getType(descendant) == typeName2){
+					if(typeName == PROCEDURE){
+						dList->push_back(make_pair(data, pkb->getData(descendant)));
+					}
 					// add data to answer
-					dList->push_back(make_pair(typeName, pkb->getData(descendant)));
+					else
+						dList->push_back(make_pair(typeName, pkb->getData(descendant)));
+
 				}
 				if(pkb->getType(descendant->getRightSibling()) == typeName2){
 					// add data to answer
-					dList->push_back(make_pair(typeName, pkb->getData(descendant->getRightSibling())));
+					if(typeName == PROCEDURE){
+						dList->push_back(make_pair(data, pkb->getData(descendant->getRightSibling())));
+					}
+					else
+						dList->push_back(make_pair(typeName, pkb->getData(descendant->getRightSibling())));
 				}
 			}
 		}
@@ -1382,14 +1532,21 @@ bool EvaluateContains::isStatementDescendantTypeDataOf(TYPE typeName, TYPE typeN
 				// check descendant
 				AST * descendant = (*itr)->getFirstDescendant();
 				
-				if(pkb->getType(descendant) == typeName2 && pkb->getData(descendant) == data){
-					//cout << stmtNum << " ?\n";
-					return true;
+				if(pkb->getType(descendant) == typeName2){
+					if(typeName2 == CONSTANT && pkb->getConstantValue( pkb->getData(descendant)) == data){
+						return true;
+					}
+					else if(typeName2 != CONSTANT && pkb->getData(descendant) == data){
+						return true;
+					}
 				}
-				if(pkb->getType(descendant->getRightSibling()) == typeName2 && pkb->getData(descendant->getRightSibling()) == data){
-					
-					//cout << stmtNum << " ?\n";
-					return true;
+				if(pkb->getType(descendant->getRightSibling()) == typeName2){
+					if(typeName2 == CONSTANT && pkb->getConstantValue( pkb->getData(descendant->getRightSibling())) == data){
+						return true;
+					}
+					else if(typeName2 != CONSTANT && pkb->getData(descendant->getRightSibling()) == data){
+						return true;
+					}
 				}
 			}
 		}
@@ -1423,9 +1580,9 @@ bool EvaluateContains::isStatementDescendantTypeDataOf(TYPE typeName, TYPE typeN
 		}
 	}
 	 
-	if(type2 == CONSTANT && pkb->getAssignEntry(stmt).prefixTree.find(static_cast<ostringstream*>( &(ostringstream() << pkb->getConstantValue(data)) )->str(),offset) != pkb->getAssignEntry(stmt).prefixTree.npos){
-		int o = pkb->getAssignEntry(stmt).prefixTree.find(static_cast<ostringstream*>( &(ostringstream() << pkb->getConstantValue(data)) )->str(),offset);
-		int length = static_cast<ostringstream*>( &(ostringstream() << pkb->getConstantValue(data)) )->str().length();
+	if(type2 == CONSTANT && pkb->getAssignEntry(stmt).prefixTree.find(static_cast<ostringstream*>( &(ostringstream() << data) )->str(),offset) != pkb->getAssignEntry(stmt).prefixTree.npos){
+		int o = pkb->getAssignEntry(stmt).prefixTree.find(static_cast<ostringstream*>( &(ostringstream() << data) )->str(),offset);
+		int length = static_cast<ostringstream*>( &(ostringstream() << data) )->str().length();
 		// 1 number only
 		
 		// only 1 digit
@@ -1517,4 +1674,38 @@ DATA_LIST	EvaluateContains::getPrefixTreeOperators(string prefix, TYPE type, int
 	}
 
 	return resultList;
+}
+
+// Check all Statement (typed) and Insert VARIABLES or CONSTANT in dList with rootI
+void EvaluateContains::getTypeInsertAll(CONTAIN_LIST* dList, TYPE type, STATEMENT_NUM i, STATEMENT_NUM rootI){
+	if(Helper::isStatementTypeOf(ASSIGNMENT, i) && type == VARIABLE){
+		dList->push_back(make_pair(rootI, pkb->getAssignEntry(i).varIndex));
+
+		string prefix = pkb->getAssignEntry(i).prefixTree;
+		DATA_LIST varIndexes =  EvaluateContains::getPrefixTreeVarIndexes(prefix, 0);
+		DATA_LIST::iterator varItr = varIndexes.begin();
+
+		while(varItr!=varIndexes.end()){
+			dList->push_back(make_pair(rootI, *varItr));
+			varItr++;
+		}
+	}
+
+	if(Helper::isStatementTypeOf(ASSIGNMENT, i) && type == CONSTANT){
+		string prefix = pkb->getAssignEntry(i).prefixTree;
+		DATA_LIST constantIndexes =  EvaluateContains::getPrefixTreeConstants(prefix, 0);
+		DATA_LIST::iterator constantItr = constantIndexes.begin();
+
+		while(constantItr!=constantIndexes.end()){
+			dList->push_back(make_pair(rootI, *constantItr));
+			constantItr++;
+		}
+	}
+	if(Helper::isStatementTypeOf(WHILE, i) && type == VARIABLE){
+		dList->push_back(make_pair(rootI, pkb->getWhileCtrVar(i)));
+	}
+
+	if(Helper::isStatementTypeOf(IF, i) && type == VARIABLE){
+		dList->push_back(make_pair(rootI, pkb->getIfCtrVar(i)));
+	}
 }

@@ -181,25 +181,29 @@ void EvaluateParents::computeParent(PARENT_LIST &result,PARENT_LIST tmpLst, TYPE
 				tmpItr = tmpLst.begin(); // should have only 1 pair
 				// Deciding which is empty
 
-				if(s1 == 0) astLst = pkb->getASTBy(tmpItr->first);
-				else astLst = pkb->getASTBy(tmpItr->second);
-
-				//cout << tmp << "\n";
-				if(!astLst->empty())
+				while(tmpItr != tmpLst.end())
 				{
-					astItr = astLst->begin();
+					if(s1 == 0) astLst = pkb->getASTBy(tmpItr->first);
+					else astLst = pkb->getASTBy(tmpItr->second);
 
-					while(astItr!=astLst->end()){
-						if(pkb->getType(*astItr) == type){
-							if(s1 == 0)
-								result.push_back(make_pair(pkb->getStatementNum(*astItr), s2));
-							if(s2 == 0)
-								result.push_back(make_pair(s1, pkb->getStatementNum(*astItr)));
-							//result = tmp;
+					if(!astLst->empty())
+					{
+						astItr = astLst->begin();
+
+						while(astItr!=astLst->end()){
+							if(pkb->getType(*astItr) == type){
+								if(s1 == 0)
+									result.push_back(make_pair(tmpItr->first, s2));
+								if(s2 == 0)
+									result.push_back(make_pair(s1,tmpItr->second));
+								//result = tmp;
+							}
+
+							astItr++;
 						}
-
-						astItr++;
 					}
+
+					tmpItr++;
 				}
 			}
 			//Parent(_, 2) or Parent(s1, 2) is the same.
