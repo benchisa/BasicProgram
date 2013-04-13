@@ -86,7 +86,7 @@ private:
 	typedef pair<int,string> paramPair;	
 	typedef pair<string,qVar> dVarPair;	
 	
-	vector<QTREE*> clauses; //keeps 'SUCHTHAT','WITH' and 'PATTERNX' headNodes
+	vector<QTREE*> clauses; //keeps 'SUCHTHAT','WITH' and 'PATTERN' headNodes
 	vector<int> wildClauses; //keeps the clause numbers of the clauses that has two wilds "_"
 	vector<int> twoConstantClauses; //keeps the clause numbers of the clauses that has two constants
 	vector<int> oneConstantClauses;
@@ -190,7 +190,7 @@ private:
 	void updateQVarClause(TOKEN);
 	void updateQVarClause(TOKEN,vector<int>);
 	void updateRelatedVar(TOKEN,TOKEN);
-	void mergeGroup(int , int );
+	void mergeGroup(int,int);
 	dVarPair getQVar(int);
 	int getQVarGroup(TOKEN);
 	TYPE getQVarType(TOKEN);

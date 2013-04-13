@@ -23,7 +23,7 @@ GrammarTable::GrammarTable(void){
 	entRef			= synonym+or+underscore+or+integer+or+invComma+ident+invComma;
 	lineRef			= synonym+or+underscore+or+integer;
 	varRef			= synonym+or+underscore+or+invComma+ident+invComma;
-	nodeRef			= synonym+or+integer+or+invComma+ident+invComma;
+	nodeRef			= invComma+ident+invComma+or+invComma+integer+invComma+or+synonym+or+integer;
 	expr			= "\\(*("+synonym+or+integer+")("+op+"("+synonym+or+integer+")"+"\\)*)"+optional;
 	wildexpr		= underscore+invComma+expr+invComma+underscore;
 	expr_spec		= invComma+expr+invComma+or+wildexpr;
@@ -59,16 +59,25 @@ void GrammarTable::createEntTable(){
 	eTable[7].entName	="call";
 	eTable[7].type		=CALL;
 
-	eTable[8].entName	="stmtlst";
+	eTable[8].entName	="stmtLst";
 	eTable[8].type		=STMT_LIST;
 
 	eTable[9].entName	="prog_line";
 	eTable[9].type		=PROGLINE;
+
+	eTable[10].entName	="plus";
+	eTable[10].type		=PLUS;
+
+	eTable[11].entName	="minus";
+	eTable[11].type		=MINUS;
+
+	eTable[12].entName	="times";
+	eTable[12].type		=MULTIPLY;
 }
 
 TYPE GrammarTable::getEntType(ENTITY ent){
 	//find the entity's formal type number
-	for(int i=0;i<10; i++){
+	for(int i=0;i<13; i++){
 		if(ent==eTable[i].entName){
 			return eTable[i].type;
 		}
@@ -76,7 +85,7 @@ TYPE GrammarTable::getEntType(ENTITY ent){
 }
 
 bool GrammarTable::isEntExists(ENTITY ent){
-	for(int i=0;i<10; i++){
+	for(int i=0;i<13; i++){
 		if(ent==eTable[i].entName){			
 			return true;
 		}
@@ -270,7 +279,7 @@ string GrammarTable::getPattArg(TYPE pattType,int argPosition){
 	}
 }
 
-TYPE GrammarTable::getPattType(PATTERNX patt){
+TYPE GrammarTable::getPattType(PATTERN patt){
 	for(int i=0;i<3; i++){
 		if(patt==pTable[i].pattName){
 			return pTable[i].type;
@@ -278,7 +287,7 @@ TYPE GrammarTable::getPattType(PATTERNX patt){
 	}
 }
 
-bool GrammarTable::isPattExists(PATTERNX patt){
+bool GrammarTable::isPattExists(PATTERN patt){
 	for(int i=0;i<3; i++){
 		if(patt==pTable[i].pattName){
 			return true;
@@ -801,7 +810,7 @@ vector<TYPE> GrammarTable::getSiblingValNodes(TYPE left){
 
 void GrammarTable::printAllEnt(){
 	cout<<"====================All Entities======================"<<endl;
-	for(int i=0;i<9; i++){
+	for(int i=0;i<13; i++){
 		cout<<"ENTITY NAME: " << eTable[i].entName<<endl;
 		cout<<"ENTITY TYPE: " << eTable[i].type<<endl;
 	}

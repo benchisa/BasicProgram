@@ -33,6 +33,7 @@ private:
 	RAWDATA * joinRaw(RAWDATA * rawData,int tableNum,DATA_LIST * selectedVarList);
 	RAWDATA * joinCombinations(RAWDATA* rawData, DATA_LIST * selectedVarList);
 	FINALRAW * uniqueRaw(RAWDATA* currentRaw);
+	RAWDATA * IntermediateResultTable::simplifyRaw(RAWDATA * currentRaw);
 	DesignExtractor * extractor;
 };
 
