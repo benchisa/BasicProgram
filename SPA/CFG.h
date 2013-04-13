@@ -6,7 +6,7 @@
 class CFG
 {
 public:
-	CFG(int SIZEX);
+	CFG(int size);
 	~CFG(void);
 	bool addEdge(PROG_LINE p1, PROG_LINE p2);
 	bool isNext(PROG_LINE p1, PROG_LINE p2);
@@ -17,11 +17,16 @@ public:
 private:
 	// 2D array
 	int **cfg;
-	int SIZEX;
+	int size;
 	list<PROG_LINE> pLines;
 	NEXT_LIST paths;
+	queue<PROG_LINE> q;
 	bool isConnected(PROG_LINE p1, PROG_LINE p2);
-	void computeProgLines(PROG_LINE p1, PROG_LINE p2, int reverse);
-	
-};
+	void computeProgLines(PROG_LINE p1, PROG_LINE p2, int reverse,list<PROG_LINE> * pLines,NEXT_LIST * paths);
 
+	// Helpers
+	pair <PROG_LINE, PROG_LINE> createPair(PROG_LINE p1, PROG_LINE p2);
+	
+	
+
+};
