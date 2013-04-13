@@ -20,6 +20,15 @@ private:
 	
 	static bool			computeIsAffect(int starting, int ending, int varIndex);
 	static bool         		computeIsAffectStar(int starting, int ending); 
+	static unsigned __stdcall  computeGetAffect(void* pParam);
+	struct affectParam
+	{
+		int starting;
+		int ending;
+		AFFECT_LIST *result;
+		
+		
+	};
 
 
 };
