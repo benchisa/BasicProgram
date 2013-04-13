@@ -127,7 +127,7 @@ void EvaluateFollows::computeFollows(FOLLOWS_LIST &result, FOLLOWS_LIST tmp, TYP
 		if(!tmp.empty()){
 
 			// Check TYPE for WHILE or ASSIGNMENT
-			if(type == WHILE || type == ASSIGNMENT || type == IF){
+			if(type == WHILE || type == ASSIGNMENT || type == IF || type == CALL){
 				followItr = tmp.begin(); 
 				while (followItr!=tmp.end())
 				{
