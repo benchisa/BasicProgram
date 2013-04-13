@@ -4,7 +4,7 @@
 
 PKB * Affects::pkb = NULL;
 CRITICAL_SECTION CriticalSection;
-
+CRITICAL_SECTION CriticalSection2;
 
 
 Affects::Affects(void)
@@ -381,42 +381,51 @@ AFFECT_LIST	Affects::getAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt
 	}
 	else if (stmt1==0 && stmt2==0)
 	{
+		SYSTEM_INFO sysinfo;
+		GetSystemInfo( &sysinfo );
+		InitializeCriticalSection(&CriticalSection2);
+
+		int numCPU = sysinfo.dwNumberOfProcessors;
 		PROC_LIST * p_list=pkb->getAllProc();
-		PROC_LIST::iterator p_itr;
-	
+		PROC_LIST::iterator p_itr=p_list->begin();
+		int size=p_list->size();
 		
-		for (p_itr=p_list->begin(); p_itr!=p_list->end(); p_itr++)
+		HANDLE * hThr=new HANDLE[numCPU];
+		
+		affectParam  *param;
+		int noLoop=size/numCPU;
+		for (int i=1; i<=noLoop; i++)
 		{
-
-			for (int i=p_itr->getStartProgLine(); i<=p_itr->getEndProgLine(); i++)
+			for (int j=1; j<=numCPU; j++)
 			{
-				if (Helper::isStatementTypeOf(ASSIGNMENT, i))
+				if ((j*i)<size)
 				{
-					stacks.push(Affects::getAffectResult(i,0));
-					while (!stacks.empty())
-					{
-						AFFECT_LIST root=stacks.top();
-						stacks.pop();
-						a_itr=root.cbegin();
-						a_end=root.cend();
-						for (a_itr; a_itr!=a_end; a_itr++)
-						{
-							pair<int,int> temp_pair=make_pair(i, a_itr->second);
-							AFFECT_LIST::const_iterator findIter = find(result.begin(), result.end(), temp_pair);
-							if (findIter==result.cend())
-							{
-								result.push_back(temp_pair);
-								stacks.push(Affects::getAffectResult(a_itr->second,0));
-							}
-							
-						}
-					}
-					
-
-				
+					param=new affectParam;
+					param->starting=p_itr->getStartProgLine();
+					param->ending=p_itr->getEndProgLine();
+					param->result=&result;
+					hThr[j-1]=(HANDLE) _beginthreadex( 0,0,computeGetAffectStar,  (void*)param, CREATE_SUSPENDED, 0);
+					p_itr++;
+				}else
+				{
+					break;
 				}
-			}
+				
 
+			}
+			 for (int x=0; x<numCPU; x++)
+			 {
+				ResumeThread(hThr[x]);
+			}
+			WaitForMultipleObjects(numCPU,hThr,TRUE,INFINITE);
+			for (int x=0; x<numCPU; x++)
+			 {
+				CloseHandle(hThr[x]);
+		
+			}
+			  
+			 
+		
 		}
 		
 	}
@@ -472,5 +481,45 @@ unsigned __stdcall Affects::computeGetAffect(void * pParam)
 	
 	return 1;
 }
-		
+unsigned __stdcall Affects::computeGetAffectStar(void * pParam)
+{
+	affectParam *x=static_cast<affectParam*>(pParam);
+	int starting=x->starting;
+	int ending=x->ending;
+	AFFECT_LIST *answer=x->result;
+
+	stack<AFFECT_LIST> stacks;
+	AFFECT_LIST::const_iterator a_itr;
+	AFFECT_LIST::const_iterator a_end;
+
+	for (int i=starting; i<=ending; i++)
+	{
+		if (Helper::isStatementTypeOf(ASSIGNMENT, i))
+		{
+			stacks.push(Affects::getAffectResult(i,0));
+			while (!stacks.empty())
+			{
+				AFFECT_LIST root=stacks.top();
+				stacks.pop();
+				a_itr=root.cbegin();
+				a_end=root.cend();
+				for (a_itr; a_itr!=a_end; a_itr++)
+				{
+					pair<int,int> temp_pair=make_pair(i, a_itr->second);
+					AFFECT_LIST::const_iterator findIter = find(answer->begin(), answer->end(), temp_pair);
+					if (findIter==answer->cend())
+					{
+						EnterCriticalSection(&CriticalSection2);
+						answer->push_back(temp_pair);
+						LeaveCriticalSection(&CriticalSection2);
+						stacks.push(Affects::getAffectResult(a_itr->second,0));
+					}
+							
+				}
+			}
+				
+		}
+	}
+return 1;
+}		
 
