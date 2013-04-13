@@ -1,6 +1,6 @@
 #include "Affects.h"
 #include "Helper.h"
- #include <process.h>
+#include <process.h>
 
 PKB * Affects::pkb = NULL;
 CRITICAL_SECTION CriticalSection;
