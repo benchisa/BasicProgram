@@ -196,12 +196,13 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 		HANDLE * hThr=new HANDLE[numCPU];
 		
 		affectParam  *param;
-		int noLoop=size/numCPU;
+		int noLoop=(size/numCPU)+ (size%numCPU!=0) ;
 		for (int i=1; i<=noLoop; i++)
 		{
+			bool filter=true;
 			for (int j=1; j<=numCPU; j++)
 			{
-				if ((j*i)<size)
+				if ((j*i)<=size)
 				{
 					param=new affectParam;
 					param->starting=p_itr->getStartProgLine();
@@ -212,20 +213,24 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 					p_itr++;
 				}else
 				{
+					filter=false;
 					break;
 				}
 				
 
 			}
-			 for (int x=0; x<numCPU; x++)
-			 {
-				ResumeThread(hThr[x]);
-			}
-			WaitForMultipleObjects(numCPU,hThr,TRUE,INFINITE);
-			for (int x=0; x<numCPU; x++)
-			 {
-				CloseHandle(hThr[x]);
+			if (filter)
+			{
+				for (int x=0; x<numCPU; x++)
+				{
+					ResumeThread(hThr[x]);
+				}
+				WaitForMultipleObjects(numCPU,hThr,TRUE,INFINITE);
+				for (int x=0; x<numCPU; x++)
+				{
+					CloseHandle(hThr[x]);
 		
+				}
 			}
 			  
 			 
@@ -393,12 +398,13 @@ AFFECT_LIST	Affects::getAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt
 		HANDLE * hThr=new HANDLE[numCPU];
 		
 		affectParam  *param;
-		int noLoop=size/numCPU;
+		int noLoop=(size/numCPU)+ (size%numCPU!=0) ;
 		for (int i=1; i<=noLoop; i++)
 		{
+			bool filter=true;
 			for (int j=1; j<=numCPU; j++)
 			{
-				if ((j*i)<size)
+				if ((j*i)<=size)
 				{
 					param=new affectParam;
 					param->starting=p_itr->getStartProgLine();
@@ -407,21 +413,25 @@ AFFECT_LIST	Affects::getAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt
 					hThr[j-1]=(HANDLE) _beginthreadex( 0,0,computeGetAffectStar,  (void*)param, CREATE_SUSPENDED, 0);
 					p_itr++;
 				}else
-				{
+				{       filter=false;
 					break;
 				}
 				
 
 			}
-			 for (int x=0; x<numCPU; x++)
-			 {
-				ResumeThread(hThr[x]);
-			}
-			WaitForMultipleObjects(numCPU,hThr,TRUE,INFINITE);
-			for (int x=0; x<numCPU; x++)
-			 {
-				CloseHandle(hThr[x]);
+			
+			if (filter)
+			{
+				for (int x=0; x<numCPU; x++)
+				{
+					ResumeThread(hThr[x]);
+				}
+				WaitForMultipleObjects(numCPU,hThr,TRUE,INFINITE);
+				for (int x=0; x<numCPU; x++)
+				{
+					CloseHandle(hThr[x]);
 		
+				}
 			}
 			  
 			 
