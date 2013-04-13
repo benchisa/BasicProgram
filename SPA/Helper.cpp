@@ -91,8 +91,9 @@ TYPE Helper::getStatementType(STATEMENT_NUM stmtNum){
 	//find the type of statement
 	if(stmtNum>0&&stmtNum <= pkb->getMaxStatementNum()){
 		AST_LIST* currentAST = pkb->getASTBy(stmtNum);
-		AST_LIST::iterator itr;
-		for(itr = currentAST->begin();itr!=currentAST->end();itr++){
+		AST_LIST::const_iterator itr=currentAST->cbegin();
+		AST_LIST::const_iterator itr_end=currentAST->cend();
+		for(itr;itr!=itr_end->end();itr++){
 			return (*itr)->getRootType();
 		}
 	}
