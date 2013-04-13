@@ -2197,7 +2197,7 @@ void QueryPreprocessor::updateQVarClause(TOKEN token,vector<int> newClauses){
 	(*dVarTable).insert(dVarPair(token,changeVar));
 }
 
-void QueryPreprocessor::mergeGroup(int grp1, int grp2){
+void QueryPreprocessor::mergeGroup(int grp1x, int grp2x){
 	//goal: merge grp2 into grp1
 	vector<dVarPair> updatedVar;
 	vector<hash_map<string,qVar>::const_iterator> marker;
@@ -2205,10 +2205,10 @@ void QueryPreprocessor::mergeGroup(int grp1, int grp2){
 	TOKEN varName;
 
 	for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
-		if(dVarIter->second.groupNum==grp2){			
+		if(dVarIter->second.groupNum==grp2x){			
 			changeVar = dVarIter->second;
 			varName = dVarIter->first;
-			changeVar.groupNum=grp1;
+			changeVar.groupNum=grp1x;
 			updatedVar.push_back(dVarPair(varName,changeVar));
 			marker.push_back(dVarIter);
 		}
