@@ -1,8 +1,11 @@
 #include "Affects.h"
 #include "Helper.h"
-
+ #include <process.h>
 
 PKB * Affects::pkb = NULL;
+CRITICAL_SECTION CriticalSection;
+
+
 
 Affects::Affects(void)
 {
@@ -181,41 +184,52 @@ AFFECT_LIST Affects::getAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 	//affect(unknown, unknown)
 	else if (stmt1==0 && stmt2==0)
 	{
+		SYSTEM_INFO sysinfo;
+		GetSystemInfo( &sysinfo );
+		InitializeCriticalSection(&CriticalSection);
+
+		int numCPU = sysinfo.dwNumberOfProcessors;
 		PROC_LIST * p_list=pkb->getAllProc();
-		PROC_LIST::iterator p_itr;
-		for (p_itr=p_list->begin(); p_itr!=p_list->end(); p_itr++)
+		PROC_LIST::iterator p_itr=p_list->begin();
+		int size=p_list->size();
+		
+		HANDLE * hThr=new HANDLE[numCPU];
+		
+		affectParam  *param;
+		int noLoop=size/numCPU;
+		for (int i=1; i<=noLoop; i++)
 		{
-
-			for (int i=p_itr->getStartProgLine(); i<=p_itr->getEndProgLine(); i++)
+			for (int j=1; j<=numCPU; j++)
 			{
-
-				if (Helper::isStatementTypeOf(ASSIGNMENT, i))
+				if ((j*i)<size)
 				{
-					//get the modifies variable
-					MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT, i, 0);
-					MODIFIES_LIST::iterator m_itr=m_list.begin();
-					int modVar=m_itr->second;
+					param=new affectParam;
+					param->starting=p_itr->getStartProgLine();
 
-					//get all the statement that uses modVar
-					USES_LIST u_list=pkb->getUses(ASSIGNMENT, 0, modVar);
-					USES_LIST::const_iterator u_itr=u_list.cbegin();
-					USES_LIST::const_iterator u_end=u_list.cend();
-
-					//check one by one if isaffect
-					for (u_itr; u_itr!=u_end; u_itr++)
-					{
-						if (pkb->isInSameProc(i, u_itr->first))
-						{
-							if (Affects::getIsAffectResult(i, u_itr->first) )
-							{
-								answer.push_back(make_pair(i, u_itr->first));
-							}
-
-						}
-					}
+					param->ending=p_itr->getEndProgLine();
+					param->result=&answer;
+					hThr[j-1]=(HANDLE) _beginthreadex( 0,0,computeGetAffect,  (void*)param, CREATE_SUSPENDED, 0);
+					p_itr++;
+				}else
+				{
+					break;
 				}
-			}
+				
 
+			}
+			 for (int x=0; x<numCPU; x++)
+			 {
+				ResumeThread(hThr[x]);
+			}
+			WaitForMultipleObjects(numCPU,hThr,TRUE,INFINITE);
+			for (int x=0; x<numCPU; x++)
+			 {
+				CloseHandle(hThr[x]);
+		
+			}
+			  
+			 
+		
 		}
 	}
 	return answer;
@@ -407,6 +421,56 @@ AFFECT_LIST	Affects::getAffectStarResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt
 		
 	}
 	return result;
+}
+unsigned __stdcall Affects::computeGetAffect(void * pParam)
+{
+	affectParam *x=static_cast<affectParam*>(pParam);
+	int starting=x->starting;
+	int ending=x->ending;
+	AFFECT_LIST *answer=x->result;
+	MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT, 1, 0);
+	
+	
+	for (int i=starting; i<=ending; i++)
+	{
+	    if (Helper::isStatementTypeOf(ASSIGNMENT, i))
+	    {
+		//get the modifies variable
+
+	  	
+		MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT, i, 0);
+
+		int modVar=m_list.cbegin()->second;
+
+		//get all the statement that uses modVar
+					
+		USES_LIST u_list=pkb->getUses(ASSIGNMENT, 0, modVar);
+			
+		USES_LIST::const_iterator u_itr=u_list.cbegin();
+	        USES_LIST::const_iterator u_end=u_list.cend();
+
+		//check one by one if isaffect
+		 		
+		for (u_itr; u_itr!=u_end; u_itr++)
+		{
+					
+							
+		    if ( Affects::getIsAffectResult(i, u_itr->first))
+		    {
+			EnterCriticalSection(&CriticalSection);
+			answer->push_back(make_pair(i, u_itr->first));
+			LeaveCriticalSection(&CriticalSection);
+								
+      		   } 
+  
+							
+		}
+					
+            }
+				
+	}
+	
+	return 1;
 }
 		
 
