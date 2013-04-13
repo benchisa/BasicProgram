@@ -17,5 +17,9 @@ class ProcTable
 		bool isInSameProc(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2);
 		PROC_LIST * getAllProc();
         
-};
+private:
 
+	typedef pair<Procedure*,int> procPair;
+	typedef pair<PROC_NAME,procPair> tablePair;
+	hash_map<PROC_NAME,procPair> *procTable;
+};
