@@ -8,17 +8,21 @@ vector<PROG_LINE> EvaluateNext::cfgWhileKeepers;
 
 EvaluateNext::EvaluateNext(void)
 {
+	
 }
 
 
 EvaluateNext::~EvaluateNext(void)
 {
 }
-
+NEXT_LIST EvaluateNext::getAllPaths(PROG_LINE p1, PROG_LINE p2)
+{
+	return cfg->getAllPaths(p1,p2);
+}
 void EvaluateNext::createCFG(){
-	int SIZEX = pkb->getMaxProgLine();
-	cfg = new CFG(SIZEX);
-	
+	int size = pkb->getMaxProgLine();
+	cfg = new CFG(size);
+
 	// traverse AST and create the CFG
 	AST* cAST = pkb->getRootAST();
 	AST* tmp = cAST;
@@ -36,16 +40,16 @@ bool EvaluateNext::isNextResult(PROG_LINE p1, PROG_LINE p2){
 
 bool EvaluateNext::isNextStarResult(PROG_LINE p1, PROG_LINE p2)
 {
-	int SIZEX = pkb->getMaxProgLine();
+	int size = pkb->getMaxProgLine();
 
-	if(p1 > SIZEX || p2 > SIZEX || p1 <= 0 || p2 <=0)
+	if(p1 > size || p2 > size || p1 <= 0 || p2 <=0)
 		return false;
 
 	list<PROG_LINE> tmp = cfg->getAllProgLines(p1, p2);
-
+	list<PROG_LINE>::const_iterator tmp_end=tmp.cend();
 	if(tmp.size() != 0){
-		list<PROG_LINE>::iterator itr = tmp.begin();
-		while(itr!=tmp.end()){
+		list<PROG_LINE>::const_iterator itr = tmp.cbegin();
+		while(itr!=tmp_end){
 			if(*itr==p2)
 				return true;
 
@@ -57,30 +61,38 @@ bool EvaluateNext::isNextStarResult(PROG_LINE p1, PROG_LINE p2)
 
 NEXT_LIST EvaluateNext::getNextStarResult(PROG_LINE p1, PROG_LINE p2)
 {
+	 
 	NEXT_LIST result;
-	int SIZEX = pkb->getMaxProgLine();
+	int size = pkb->getMaxProgLine();
 
 	// Next*(n1, n2) --> findAll
 	if(p1 == 0 && p2 == 0){
-		for(int i = 1; i <=SIZEX; i++){
+		for(int i = 1; i <=size; i++){
+			
 			list<PROG_LINE> tmp = cfg->getAllProgLines(i, i);
+			list<PROG_LINE>::const_iterator tmp_end=tmp.cend();
 
-			list<PROG_LINE>::iterator itr = tmp.begin();
-			while(itr!=tmp.end())
+			list<PROG_LINE>::const_iterator itr = tmp.cbegin();
+			while(itr!=tmp_end)
 			{
 				pair<PROG_LINE, PROG_LINE> tPair;
 				tPair.first = i;
 				tPair.second = *itr;
+				
 				result.push_back(tPair);
+				
 				itr++;
 			}
 		}
 	}
 	//Next*(n, n), Next*(1,n1), Next*(n1,2) --> findAll
 	else if(p1 == p2 || (p1 != 0 && p2 == 0) || (p1 == 0 && p2 != 0) || (p1 != 0 && p2 != 0)){
+		
 		list<PROG_LINE> tmp = cfg->getAllProgLines(p1, p2);
-		list<PROG_LINE>::iterator itr = tmp.begin();
-		while(itr!=tmp.end())
+		
+		list<PROG_LINE>::const_iterator itr = tmp.cbegin();
+		list<PROG_LINE>::const_iterator tmp_end=tmp.cend();
+		while(itr!=tmp_end)
 		{
 			pair<PROG_LINE, PROG_LINE> tPair;
 			if(p1 != 0) {
@@ -91,7 +103,9 @@ NEXT_LIST EvaluateNext::getNextStarResult(PROG_LINE p1, PROG_LINE p2)
 				tPair.first = *itr;
 				tPair.second = p2;
 			}
+				
 			result.push_back(tPair);
+				
 			itr++;
 		}
 	}
@@ -129,7 +143,7 @@ AST* EvaluateNext::buildCFG(AST * node)
 
 			if(pkb->getType(lastNode) != IF)
 				cfg->addEdge(pkb->getProgLine(lastNode), EvaluateNext::cfgWhileKeepers.back());
-			
+
 
 			// change to the correct last node
 			if(lastNode->getAncestor() && pkb->getType(lastNode->getAncestor()->getAncestor()) != IF)
