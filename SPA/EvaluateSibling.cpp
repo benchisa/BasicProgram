@@ -19,13 +19,13 @@ bool EvaluateSibling::getIsSibling(TYPE type1,TYPE type2,INDEX index1,INDEX inde
 	}
 	if(Helper::isStatement(type1)&&Helper::isStatement(type2)){//2. Sibling(1,5),Sibling(4,2) for stmt/w/a/if/call
 		if((type1==STATEMENT||Helper::isStatementTypeOf(type1,index1))&&(type2==STATEMENT||Helper::isStatementTypeOf(type2,index2))){
-			returnValue = (EvaluateFollows::getIsFollowsStarResult(index1,index2)||EvaluateFollows::getIsFollowsResult(index2,index1));
+			returnValue = (EvaluateFollows::getIsFollowsStarResult(index1,index2)||EvaluateFollows::getIsFollowsStarResult(index2,index1));
 		}
 	}
 	if(type1==VARIABLE&&(type2==STMT_LIST||type2==STATEMENT)){//3. a.Sibling("x",4) for while or if stmt,4 is stmtList
 		AST * stmtListNode =NULL;
 		AST_LIST * nodeList = pkb->getASTBy(index2);
-		for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr){
+		for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr++){
 			if((**astItr).getRootType()==STMT_LIST){
 				stmtListNode = *astItr;
 				break;
@@ -42,7 +42,7 @@ bool EvaluateSibling::getIsSibling(TYPE type1,TYPE type2,INDEX index1,INDEX inde
 	if(type2==VARIABLE&&(type1==STMT_LIST||type1==STATEMENT)){ //3. b.Sibling(4,"x") for while of if stmt
 		AST * stmtListNode = NULL;
 		AST_LIST * nodeList = pkb->getASTBy(index1);
-		for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr){
+		for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr++){
 			if((**astItr).getRootType()==STMT_LIST){
 				stmtListNode = *astItr;
 				break;
@@ -60,7 +60,7 @@ bool EvaluateSibling::getIsSibling(TYPE type1,TYPE type2,INDEX index1,INDEX inde
 	if((type1==STMT_LIST||type1==STATEMENT)&&(type2==STMT_LIST||type2==STATEMENT)){//3. c. Sibling( 22,23) for stmtList of if
 		AST * stmtListNode1 =NULL;
 		AST_LIST * nodeList = pkb->getASTBy(index1);
-		for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr){
+		for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr++){
 			if((**astItr).getRootType()==STMT_LIST){
 				stmtListNode1 = *astItr;
 				break;
@@ -68,7 +68,7 @@ bool EvaluateSibling::getIsSibling(TYPE type1,TYPE type2,INDEX index1,INDEX inde
 		} 
 		AST * stmtListNode2=NULL;
 		nodeList = pkb->getASTBy(index2);
-		for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr){
+		for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr++){
 			if((**astItr).getRootType()==STMT_LIST){
 				stmtListNode2 = *astItr;
 				break;
@@ -86,7 +86,7 @@ bool EvaluateSibling::getIsSibling(TYPE type1,TYPE type2,INDEX index1,INDEX inde
 			//get assignNode
 			AST * assignNode = NULL;
 			AST_LIST * nodeList = pkb->getASTBy(*itr);
-			for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr){
+			for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr++){
 				if((**astItr).getRootType()==ASSIGNMENT){
 					assignNode = *astItr;
 					break;
@@ -96,10 +96,14 @@ bool EvaluateSibling::getIsSibling(TYPE type1,TYPE type2,INDEX index1,INDEX inde
 			AST * leftVarNode = assignNode->getFirstDescendant();
 			AST * expressionRoot = leftVarNode->getRightSibling();
 			
+			int exprData = expressionRoot->getRootData();
+			if(expressionRoot->getRootType()==CONSTANT) exprData = pkb->getConstantValue(exprData);
+
 			//pattern is symmetric, find if x is matched with some elements in x=y+z+...
-			bool isPattern1 = (leftVarNode->getRootType()==type1&&leftVarNode->getRootData()==index1)&&(expressionRoot->getRootType()==type2&&expressionRoot->getRootData()==index2);
-			bool isPattern2 =(expressionRoot->getRootType()==type1&&expressionRoot->getRootData()==index1)&&(leftVarNode->getRootType()==type2&&leftVarNode->getRootData()==index2);
-			if(isPattern1||isPattern2) return true; // x = expression, x is matched with var or +,-,*
+			bool isPattern1 = (leftVarNode->getRootType()==type1&&leftVarNode->getRootData()==index1)&&(expressionRoot->getRootType()==type2&&exprData==index2);
+			bool isPattern2 =(expressionRoot->getRootType()==type1&&exprData==index1)&&(leftVarNode->getRootType()==type2&&leftVarNode->getRootData()==index2);
+			if(isPattern1||isPattern2) 
+				return true; // x = expression, x is matched with var or +,-,*
 
 			//traverse the tree and check matched pattern, search in left hand side x= y+z...
 			stack<AST *> exprStack;
@@ -107,7 +111,7 @@ bool EvaluateSibling::getIsSibling(TYPE type1,TYPE type2,INDEX index1,INDEX inde
 				exprStack.push(expressionRoot);
 				AST * left;
 				AST * right;
-
+				
 				while(!exprStack.empty()){
 					AST * curNode = exprStack.top();
 					exprStack.pop();
@@ -115,10 +119,16 @@ bool EvaluateSibling::getIsSibling(TYPE type1,TYPE type2,INDEX index1,INDEX inde
 					left = curNode->getFirstDescendant();
 					right = left->getRightSibling();
 
+					int leftData = left->getRootData();
+					if(left->getRootType()==CONSTANT) leftData = pkb->getConstantValue(leftData);
+
+					int rightData = right->getRootData();
+					if(right->getRootType()==CONSTANT) rightData = pkb->getConstantValue(rightData);
 					//pattern is symmetric
-					isPattern1 = (left->getRootType()==type1&&left->getRootData()==index1)&&(right->getRootType()==type2&&right->getRootData()==index2);
-					isPattern2 =(right->getRootType()==type1&&right->getRootData()==index1)&&(left->getRootType()==type2&&left->getRootData()==index2);
-					if(isPattern1||isPattern2) return true;
+					isPattern1 = (left->getRootType()==type1&&leftData==index1)&&(right->getRootType()==type2&&rightData==index2);
+					isPattern2 =(right->getRootType()==type1&&rightData==index1)&&(left->getRootType()==type2&&leftData==index2);
+					if(isPattern1||isPattern2)
+						return true;
 
 					//push the next operator into stack
 					if(left->getRootType()!=VARIABLE&&left->getRootType()!=CONSTANT) exprStack.push(left);
@@ -133,7 +143,7 @@ bool EvaluateSibling::getIsSibling(TYPE type1,TYPE type2,INDEX index1,INDEX inde
 }
 
 RELATION_LIST EvaluateSibling::getSiblingResult(TYPE type1,TYPE type2,INDEX index1,INDEX index2){
-	if(index1=-2&&index2!=-2){ //sibling(unknown,known)
+	if(index1==-2&&index2!=-2){ //sibling(unknown,known)
 		return getOneSibling(type2,type1,index2,2);
 	}else if(index1!=-2&&index2==-2){ //sibling(known,unknown)
 		return getOneSibling(type1,type2,index1,1);
@@ -147,7 +157,7 @@ RELATION_LIST EvaluateSibling::getOneSibling(TYPE known,TYPE unknown,INDEX known
 	if(known==PROCEDURE&&unknown==PROCEDURE){ //1. sibling ( "procName",p) or sibling ( p,"procName")
 		int procTableSize = pkb->getProceTableSize();
 
-		for(int i =1;i<procTableSize;i++){
+		for(int i =1;i<=procTableSize;i++){
 			if(knownIndex!=i){
 				if(knownPos==1){ //sibling (known,unknown)
 					returnList.push_back(pair<int,int>(knownIndex,i));
@@ -195,34 +205,34 @@ RELATION_LIST EvaluateSibling::getOneSibling(TYPE known,TYPE unknown,INDEX known
 		for(DATA_LIST::iterator itr=ifList->begin();itr!=ifList->end();itr++){
 			AST * ifNode = NULL;
 				AST_LIST * nodeList = pkb->getASTBy(*itr);
-				for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr){
+				for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr++){
 					if((**astItr).getRootType()==IF){
 						ifNode = *astItr;
 						break;
 					}
 				} 
 
-			AST * ifVarNode = ifNode->getFirstDescendant()->getFirstDescendant(); 
-			AST * elseNode = ifVarNode->getRightSibling();
-			AST * thenNode = elseNode->getRightSibling();
+			AST * ifVarNode = ifNode->getFirstDescendant(); 
+			AST * thenNode = ifVarNode->getRightSibling();
+			AST * elseNode = thenNode->getRightSibling();
 
 			if(ifVarNode->getRootData()==knownIndex){
 				if(knownIndex==1){
-					returnList.push_back(pair<int,int>(knownIndex,elseNode->getFirstDescendant()->getRootData()));
-					returnList.push_back(pair<int,int>(knownIndex,thenNode->getFirstDescendant()->getRootData()));
+					returnList.push_back(pair<int,int>(knownIndex,thenNode->getRootStatementNum()));
+					returnList.push_back(pair<int,int>(knownIndex,elseNode->getRootStatementNum()));
 				}else{
-					returnList.push_back(pair<int,int>(elseNode->getFirstDescendant()->getRootData(),knownIndex));
-					returnList.push_back(pair<int,int>(thenNode->getFirstDescendant()->getRootData(),knownIndex));
+					returnList.push_back(pair<int,int>(thenNode->getRootStatementNum(),knownIndex));
+					returnList.push_back(pair<int,int>(elseNode->getRootStatementNum(),knownIndex));
 				}
 			}
 		}
 		delete ifList;
 		
 	}
-	if((known==STMT_LIST||known==STATEMENT)&&unknown==VARIABLE){//3.b sibling(x,2) or sibling(2,x) where 2 is stmtList no.
+	if(known==STMT_LIST&&unknown==VARIABLE){//3.b sibling(x,2) or sibling(2,x) where 2 is stmtList no.
 		AST * stmtListNode = NULL;
 		AST_LIST * nodeList = pkb->getASTBy(knownIndex);
-		for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr){
+		for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr++){
 			if((**astItr).getRootType()==STMT_LIST){
 				stmtListNode = *astItr;
 				break;
@@ -239,33 +249,33 @@ RELATION_LIST EvaluateSibling::getOneSibling(TYPE known,TYPE unknown,INDEX known
 			}
 		}
 	}
-	if((known==STMT_LIST||known==STATEMENT)&&unknown==STMT_LIST){ //sibling (stmtList,2) or sibling(2,stmtList)
+	if(known==STMT_LIST&&unknown==STMT_LIST){ //sibling (stmtList,2) or sibling(2,stmtList)
 		//get all the ifs
 			DATA_LIST * ifList = pkb->getAllIfs();
 			for(DATA_LIST::iterator itr=ifList->begin();itr!=ifList->end();itr++){
 				AST * ifNode = NULL;
 				AST_LIST * nodeList = pkb->getASTBy(*itr);
-				for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr){
+				for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr++){
 					if((**astItr).getRootType()==IF){
 						ifNode = *astItr;
 						break;
 					}
 				} 
 
-				AST * ifVarNode = ifNode->getFirstDescendant()->getFirstDescendant();
-				AST * elseNode = ifVarNode->getRightSibling();
-				AST * thenNode = elseNode->getRightSibling();
+				AST * ifVarNode = ifNode->getFirstDescendant();
+				AST * thenNode = ifVarNode->getRightSibling();
+				AST * elseNode = thenNode->getRightSibling();
 
-				if(knownIndex==elseNode->getFirstDescendant()->getRootData()){
+				if(knownIndex==elseNode->getRootStatementNum()){
 					if(knownPos==1)
-						returnList.push_back(pair<int,int>(knownIndex,thenNode->getFirstDescendant()->getRootData()));
+						returnList.push_back(pair<int,int>(knownIndex,thenNode->getRootStatementNum()));
 					else
-						returnList.push_back(pair<int,int>(thenNode->getFirstDescendant()->getRootData(),knownIndex));
-				}else if(knownIndex= thenNode->getFirstDescendant()->getRootData()){
+						returnList.push_back(pair<int,int>(thenNode->getRootStatementNum(),knownIndex));
+				}else if(knownIndex= thenNode->getRootStatementNum()){
 					if(knownPos==1)
-						returnList.push_back(pair<int,int>(knownIndex,elseNode->getFirstDescendant()->getRootData()));
+						returnList.push_back(pair<int,int>(knownIndex,elseNode->getRootStatementNum()));
 					else
-						returnList.push_back(pair<int,int>(elseNode->getFirstDescendant()->getRootData(),knownIndex));
+						returnList.push_back(pair<int,int>(elseNode->getRootStatementNum(),knownIndex));
 				}
 			}
 			delete ifList;
@@ -278,7 +288,7 @@ RELATION_LIST EvaluateSibling::getOneSibling(TYPE known,TYPE unknown,INDEX known
 			//get assignNode
 			AST * assignNode = NULL;
 			AST_LIST * nodeList = pkb->getASTBy(*itr);
-			for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr){
+			for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr++){
 				if((**astItr).getRootType()==ASSIGNMENT){
 					assignNode = *astItr;
 					break;
@@ -289,6 +299,9 @@ RELATION_LIST EvaluateSibling::getOneSibling(TYPE known,TYPE unknown,INDEX known
 			AST * leftVarNode = assignNode->getFirstDescendant();
 			AST * expressionRoot = leftVarNode->getRightSibling();
 			
+			int exprData = expressionRoot->getRootData();
+			if(expressionRoot->getRootType()==CONSTANT) exprData = pkb->getConstantValue(exprData);
+
 			/*pattern is symmetric
 				if else pattern check is used to avoid repeated result
 				eg. x->x in expression tree, sibling("x",var)/sibling(var,"x")
@@ -297,16 +310,13 @@ RELATION_LIST EvaluateSibling::getOneSibling(TYPE known,TYPE unknown,INDEX known
 					if pattern1 is matched, pattern2 can't be matched
 			*/
 			bool isPattern1 = (leftVarNode->getRootType()==known&&leftVarNode->getRootData()==knownIndex)&&(expressionRoot->getRootType()==unknown);
-			bool isPattern2 =(expressionRoot->getRootType()==known&&expressionRoot->getRootData()==knownIndex)&&(leftVarNode->getRootType()==unknown);
+			bool isPattern2 =(expressionRoot->getRootType()==known&&exprData==knownIndex)&&(leftVarNode->getRootType()==unknown);
 			if(isPattern1){
-				int siblingValue =EvaluateSibling::getOperatorValue(expressionRoot->getRootType());
-				if(siblingValue==-1){
-					siblingValue==expressionRoot->getRootData();
-				}
+								
 				if(knownPos==1){
-					returnList.push_back(pair<int,int>(knownIndex,siblingValue));
+					returnList.push_back(pair<int,int>(knownIndex,expressionRoot->getRootData()));
 				}else{
-					returnList.push_back(pair<int,int>(siblingValue,knownIndex));
+					returnList.push_back(pair<int,int>(expressionRoot->getRootData(),knownIndex));
 				}
 			} else if(isPattern2){
 				if(knownPos==1){
@@ -330,31 +340,29 @@ RELATION_LIST EvaluateSibling::getOneSibling(TYPE known,TYPE unknown,INDEX known
 					left = curNode->getFirstDescendant();
 					right = left->getRightSibling();
 
+					int leftData = left->getRootData();
+					if(left->getRootType()==CONSTANT) leftData = pkb->getConstantValue(leftData);
+
+					int rightData = right->getRootData();
+					if(right->getRootType()==CONSTANT) rightData = pkb->getConstantValue(rightData);
+
 					//pattern is symmetric
-					isPattern1 = (left->getRootType()==known&&left->getRootData()==knownIndex)&&(right->getRootType()==unknown);
-					isPattern2 =(right->getRootType()==known&&right->getRootData()==knownIndex)&&(left->getRootType()==unknown);
+					isPattern1 = (left->getRootType()==known&&leftData==knownIndex)&&(right->getRootType()==unknown);
+					isPattern2 =(right->getRootType()==known&&rightData==knownIndex)&&(left->getRootType()==unknown);
 					if(isPattern1){
-						int rightValue = EvaluateSibling::getOperatorValue(right->getRootType());
-						
-						if(rightValue==-1){
-							rightValue==right->getRootData();
-						}
+																	
 						if(knownPos==1){
-							returnList.push_back(pair<int,int>(known,rightValue));
+							returnList.push_back(pair<int,int>(known,right->getRootData()));
 						}else{
-							returnList.push_back(pair<int,int>(rightValue,known));
+							returnList.push_back(pair<int,int>(right->getRootData(),known));
 						}
 						
 					} else if(isPattern2){
-						int leftValue =EvaluateSibling::getOperatorValue(left->getRootType());
-					
-						if(leftValue==-1){
-							leftValue==left->getRootData();
-						}
+		
 						if(knownPos==1){
-							returnList.push_back(pair<int,int>(knownIndex,leftValue));
+							returnList.push_back(pair<int,int>(knownIndex,left->getRootData()));
 						}else{
-							returnList.push_back(pair<int,int>(leftValue,knownIndex));
+							returnList.push_back(pair<int,int>(left->getRootData(),knownIndex));
 						}
 						
 					} // x = expression, x is matched with var or +,-,*
@@ -375,8 +383,8 @@ RELATION_LIST EvaluateSibling::getSiblingUnknown(TYPE type1,TYPE type2){
 	if(type1==PROCEDURE&&type2==PROCEDURE){ //1. sibling ( p1,p2)
 		int procTableSize = pkb->getProceTableSize();
 
-		for(int i =1;i<procTableSize;i++){
-			for(int j =2;j<procTableSize;j++){
+		for(int i =1;i<=procTableSize;i++){
+			for(int j =1;j<=procTableSize;j++){
 				if(i!=j) returnList.push_back(pair<int,int>(i,j));
 			}
 		}
@@ -391,7 +399,7 @@ RELATION_LIST EvaluateSibling::getSiblingUnknown(TYPE type1,TYPE type2){
 			returnList.push_back(pair<int,int>(itr->second,itr->first));
 		}
 	}
-	if(type1==VARIABLE&&(type2==STMT_LIST||type2==STATEMENT)){//3. a. sibling( x, stmtList)
+	if(type1==VARIABLE&&type2==STMT_LIST){//3. a. sibling( x, stmtList)
 		//get all the whiles
 		DATA_LIST * whileList = pkb->getAllWhiles();
 		for(DATA_LIST::iterator itr=whileList->begin();itr!=whileList->end();itr++){
@@ -404,23 +412,23 @@ RELATION_LIST EvaluateSibling::getSiblingUnknown(TYPE type1,TYPE type2){
 		for(DATA_LIST::iterator itr=ifList->begin();itr!=ifList->end();itr++){
 			AST * ifNode = NULL;
 			AST_LIST * nodeList = pkb->getASTBy(*itr);
-			for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr){
+			for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr++){
 				if((**astItr).getRootType()==IF){
 					ifNode = *astItr;
 					break;
 				}
 			} 
 
-			AST * ifVarNode = ifNode->getFirstDescendant()->getFirstDescendant();
+			AST * ifVarNode = ifNode->getFirstDescendant();
 			AST * elseNode = ifVarNode->getRightSibling();
 			AST * thenNode = elseNode->getRightSibling();
 
-			returnList.push_back(pair<int,int>(ifVarNode->getRootData(),elseNode->getFirstDescendant()->getRootData()));
-			returnList.push_back(pair<int,int>(ifVarNode->getRootData(),thenNode->getFirstDescendant()->getRootData()));
+			returnList.push_back(pair<int,int>(ifVarNode->getRootData(),elseNode->getRootStatementNum()));
+			returnList.push_back(pair<int,int>(ifVarNode->getRootData(),thenNode->getRootStatementNum()));
 		}
 		delete ifList;
 	}
-	if((type1==STMT_LIST||type1==STATEMENT)&&type2==VARIABLE){ //3.b sibling(stmtList,x)
+	if(type1==STMT_LIST&&type2==VARIABLE){ //3.b sibling(stmtList,x)
 		//get all the whiles
 		DATA_LIST * whileList = pkb->getAllWhiles();
 		for(DATA_LIST::iterator itr=whileList->begin();itr!=whileList->end();itr++){
@@ -433,43 +441,43 @@ RELATION_LIST EvaluateSibling::getSiblingUnknown(TYPE type1,TYPE type2){
 		for(DATA_LIST::iterator itr=ifList->begin();itr!=ifList->end();itr++){
 			AST * ifNode = NULL;
 			AST_LIST * nodeList = pkb->getASTBy(*itr);
-			for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr){
+			for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr++){
 				if((**astItr).getRootType()==IF){
 					ifNode = *astItr;
 					break;
 				}
 			} 
 
-			AST * ifVarNode = ifNode->getFirstDescendant()->getFirstDescendant();
-			AST * elseNode = ifVarNode->getRightSibling();
-			AST * thenNode = elseNode->getRightSibling();
+			AST * ifVarNode = ifNode->getFirstDescendant();
+			AST * thenNode = ifVarNode->getRightSibling();
+			AST * elseNode = thenNode->getRightSibling();
 
-			returnList.push_back(pair<int,int>(elseNode->getFirstDescendant()->getRootData(),ifVarNode->getRootData()));
-			returnList.push_back(pair<int,int>(thenNode->getFirstDescendant()->getRootData(),ifVarNode->getRootData()));
+			returnList.push_back(pair<int,int>(elseNode->getRootStatementNum(),ifVarNode->getRootData()));
+			returnList.push_back(pair<int,int>(thenNode->getRootStatementNum(),ifVarNode->getRootData()));
 		}
 		delete ifList;
 	}
-	if((type1==STMT_LIST||type1==STATEMENT)&&(type2==STMT_LIST||type2==STATEMENT)){ //sibling (stmtList,stmtList),only possible in If stmts
+	if(type1==STMT_LIST&&type2==STMT_LIST){ //sibling (stmtList,stmtList),only possible in If stmts
 		//get all the ifs
 		DATA_LIST * ifList = pkb->getAllIfs();
 		for(DATA_LIST::iterator itr=ifList->begin();itr!=ifList->end();itr++){
 			AST * ifNode = NULL;
 			AST_LIST * nodeList = pkb->getASTBy(*itr);
-			for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr){
+			for(AST_LIST::iterator astItr=nodeList->begin();astItr!=nodeList->end();astItr++){
 				if((**astItr).getRootType()==IF){
 					ifNode = *astItr;
 					break;
 				}
 			} 
 
-			AST * ifVarNode = ifNode->getFirstDescendant()->getFirstDescendant();
-			AST * elseNode = ifVarNode->getRightSibling();
-			AST * thenNode = elseNode->getRightSibling();
+			AST * ifVarNode = ifNode->getFirstDescendant();
+			AST * thenNode = ifVarNode->getRightSibling();
+			AST * elseNode = thenNode->getRightSibling();
 
 			//(else,then)
-			returnList.push_back(pair<int,int>(elseNode->getFirstDescendant()->getRootData(),thenNode->getFirstDescendant()->getRootData()));
+			returnList.push_back(pair<int,int>(elseNode->getRootStatementNum(),thenNode->getRootStatementNum()));
 			//(then,else)
-			returnList.push_back(pair<int,int>(thenNode->getFirstDescendant()->getRootData(),elseNode->getFirstDescendant()->getRootData()));
+			returnList.push_back(pair<int,int>(thenNode->getRootStatementNum(),elseNode->getRootStatementNum()));
 		}
 		delete ifList;
 	}
@@ -480,7 +488,7 @@ RELATION_LIST EvaluateSibling::getSiblingUnknown(TYPE type1,TYPE type2){
 			//get assignNode
 			AST_LIST * assignNodes = pkb->getASTBy(*itr);
 			AST * assignNode;
-			for(AST_LIST::iterator astItr=assignNodes->begin();astItr!=assignNodes->end();astItr){
+			for(AST_LIST::iterator astItr=assignNodes->begin();astItr!=assignNodes->end();astItr++){
 				if((**astItr).getRootType()==ASSIGNMENT){
 					assignNode = *astItr;
 					break;
@@ -499,17 +507,11 @@ RELATION_LIST EvaluateSibling::getSiblingUnknown(TYPE type1,TYPE type2){
 			bool isLeftRightEqual = (leftVarNode->getRootType()==expressionRoot->getRootType())&&(leftVarNode->getRootData()==expressionRoot->getRootData());
 			
 			if(isPattern1){  //type1 matched with left, type2 matched with right
-				int siblingValue =EvaluateSibling::getOperatorValue(expressionRoot->getRootType());
-				if(siblingValue==-1){ //check if the expressionNode is an operator
-					siblingValue==expressionRoot->getRootData();
-				}
-				returnList.push_back(pair<int,int>(leftVarNode->getRootData(),siblingValue));
+								
+				returnList.push_back(pair<int,int>(leftVarNode->getRootData(),expressionRoot->getRootData()));
 			}else if(isPattern2){	//to avoid duplicate result,type1 matched with right, type2 matched with left
-					int siblingValue = EvaluateSibling::getOperatorValue(expressionRoot->getRootType());
-					if(siblingValue==-1){
-						siblingValue==expressionRoot->getRootData();
-					}
-					returnList.push_back(pair<int,int>(siblingValue,leftVarNode->getRootData()));
+			
+					returnList.push_back(pair<int,int>(expressionRoot->getRootData(),leftVarNode->getRootData()));
 				 // x = expression, x is matched with var or +,-,*
 			}
 			//traverse the tree and check matched pattern
@@ -532,25 +534,9 @@ RELATION_LIST EvaluateSibling::getSiblingUnknown(TYPE type1,TYPE type2){
 					isLeftRightEqual = (left->getRootType()==right->getRootType())&&(left->getRootData()==right->getRootData());
 					
 					if(isPattern1){
-						int leftValue =EvaluateSibling::getOperatorValue(left->getRootType());
-						int rightValue = EvaluateSibling::getOperatorValue(right->getRootType());
-						if(leftValue==-1){
-							leftValue==left->getRootData();
-						}
-						if(rightValue==-1){
-							rightValue==right->getRootData();
-						}
-						returnList.push_back(pair<int,int>(leftValue,rightValue));
+							returnList.push_back(pair<int,int>(left->getRootData(),right->getRootData()));
 					} else if(isPattern2){
-							int leftValue =EvaluateSibling::getOperatorValue(left->getRootType());
-							int rightValue = EvaluateSibling::getOperatorValue(right->getRootType());
-							if(leftValue==-1){
-								leftValue==left->getRootData();
-							}
-							if(rightValue==-1){
-								rightValue==right->getRootData();
-							}
-							returnList.push_back(pair<int,int>(rightValue,leftValue));
+							returnList.push_back(pair<int,int>(right->getRootData(),left->getRootData()));
 						 // x = expression, x is matched with var or +,-,*
 					}
 					//push the next operator into stack

@@ -192,25 +192,29 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 			if(relType == PARENT){
 
 				tmpList = extractor->getParentResult(secondType,firstRel->getData(),0);
-				iterateAndStore(relList,tmpList);
+				//	iterateAndStore(relList,tmpList);
+				relList = new RELATION_LIST(tmpList);
 			}
 			//parent*, narrow down second
 
 			if(relType == PARENTST){
 				tmpList = extractor->getParentStarResult(secondType,firstRel->getData(),0);
-				iterateAndStore(relList,tmpList);
+				//iterateAndStore(relList,tmpList);
+				relList = new RELATION_LIST(tmpList);
 			}
 			//follow, narrow down second
 
 			if(relType==FOLLOWS){
 				tmpList = extractor->getFollowsResult(secondType,firstRel->getData(),0);
-				filterResult(relList,tmpList,firstType,secondType);
+				//filterResult(relList,tmpList,firstType,secondType);
+				relList = new RELATION_LIST(tmpList);
 			}
 			//follow* narrow down
 
 			if(relType==FOLLOWST){
 				tmpList = extractor->getFollowsStarResult(secondType,firstRel->getData(),0);
-				filterResult(relList,tmpList,firstType,secondType);
+				//filterResult(relList,tmpList,firstType,secondType);
+				relList = new RELATION_LIST(tmpList);
 			}
 			//modifies, no need to narrow down
 
@@ -218,20 +222,24 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 				//cout<<"First Rel: "<< firstRel->getType();
 				//cout<<"First Data: "<<firstRel->getData();
 				tmpList = extractor->getModifiesResult(firstRel->getType(),firstRel->getData(),0);
-				iterateAndStore(relList,tmpList);
+				//iterateAndStore(relList,tmpList);
+				relList = new RELATION_LIST(tmpList);
 			}
 			//uses, now need to narrow down
 			if(relType==USES){
 				tmpList = extractor->getUsesResult(firstRel->getType(),firstRel->getData(),0);
-				iterateAndStore(relList,tmpList);
+				//iterateAndStore(relList,tmpList);
+				relList = new RELATION_LIST(tmpList);
 			}
 			if(relType==NEXT){
 				tmpList = extractor->getNextResult(firstRel->getData(),0);
 				filterResult(relList,tmpList,firstType,secondType);
+				
 			}
 			if(relType==NEXTST){
 				tmpList = extractor->getNextStarResult(firstRel->getData(),0);
 				filterResult(relList,tmpList,firstType,secondType);
+				
 			}
 			if(relType==CALL){
 				PROC_NAME callerName = pkb->getProcedure(firstRel->getData())->getProcName();
@@ -244,7 +252,8 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 					calleeIndex = pkb->getProcIndex(callPair->second);
 					tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
 				}
-				iterateAndStore(relList, tmpList);
+				//iterateAndStore(relList, tmpList);
+				relList = new RELATION_LIST(tmpList);
 			}
 			if(relType==CALLST){
 				PROC_NAME callerName = pkb->getProcedure(firstRel->getData())->getProcName();
@@ -257,37 +266,43 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 					calleeIndex = pkb->getProcIndex(callPair->second);
 					tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
 				}
-				iterateAndStore(relList, tmpList);
+				//iterateAndStore(relList, tmpList);
+				relList = new RELATION_LIST(tmpList);
 			}
 			if(relType==AFFECTS){
 				tmpList = extractor->getAffectResult(firstRel->getData(),0);
-				iterateAndStore(relList, tmpList);
+				//iterateAndStore(relList, tmpList);
+				relList = new RELATION_LIST(tmpList);
 			}
 			if(relType==AFFECTST){
 				tmpList = extractor->getAffectStarResult(firstRel->getData(),0);
-				iterateAndStore(relList, tmpList);
+				//iterateAndStore(relList, tmpList);
+				relList = new RELATION_LIST(tmpList);
 			}
 			if(relType==SIBLING){
 				tmpList = extractor->getSiblingResult(firstType,secondType,firstRel->getData(),-2);
-				filterResult(relList,tmpList,firstType,secondType);
+				//filterResult(relList,tmpList,firstType,secondType);
+				relList = new RELATION_LIST(tmpList);
 			}
 			if(relType==CONTAINS){
-				if(secondType==PLUS||secondType==MINUS||secondType==MULTIPLY||secondType==STMT_LIST){
+				if(secondType==PLUS||secondType==MINUS||secondType==MULTIPLY){
 					unknownValue = -1;
 				}else{
 					unknownValue = 0;
 				}
 				tmpList = extractor->getContainResult(firstType,firstRel->getData(),secondType,unknownValue);
-				iterateAndStore(relList,tmpList);
+				//iterateAndStore(relList,tmpList);
+				relList = new RELATION_LIST(tmpList);
 			}
 			if(relType==CONTAINST){
-				if(secondType==PLUS||secondType==MINUS||secondType==MULTIPLY||secondType==STMT_LIST){
+				if(secondType==PLUS||secondType==MINUS||secondType==MULTIPLY){
 					unknownValue = -1;
 				}else{
 					unknownValue = 0;
 				}
 				tmpList = extractor->getContainStarResult(firstType,firstRel->getData(),secondType,unknownValue);
-				iterateAndStore(relList,tmpList);
+				//iterateAndStore(relList,tmpList);
+				relList = new RELATION_LIST(tmpList);
 			}
 			
 		}
@@ -307,40 +322,47 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 			//parent, narrow down
 			if(relType == PARENT){
 				tmpList = extractor->getParentResult(firstType,0,secondRel->getData());
-				iterateAndStore(relList,tmpList);
+				//iterateAndStore(relList,tmpList);
+				relList = new RELATION_LIST(tmpList);
 			}
 			//parent*, narrow down
 			if(relType == PARENTST){
 				tmpList = extractor->getParentStarResult(firstType,0,secondRel->getData());
-				iterateAndStore(relList,tmpList);
+				//iterateAndStore(relList,tmpList);
+				relList = new RELATION_LIST(tmpList);
 			}
 			//follow, narrow down
 			if(relType==FOLLOWS){ 
 				tmpList = extractor->getFollowsResult(firstType,0,secondRel->getData());
-				filterResult(relList,tmpList,firstType,secondType);
+				//filterResult(relList,tmpList,firstType,secondType);
+				relList = new RELATION_LIST(tmpList);
 			}
 			//follow* narrow down
 			if(relType==FOLLOWST){
 				tmpList = extractor->getFollowsStarResult(firstType,0,secondRel->getData());
-				filterResult(relList,tmpList,firstType,secondType);
+				//filterResult(relList,tmpList,firstType,secondType);
+				relList = new RELATION_LIST(tmpList);
 			}
 			//modifies, narrow down
 			if(relType==MODIFIES){
 			//	cout<<"First Rel: "<< firstType;
 			//	cout<<"Second Data: "<<secondRel->getData();
 				tmpList = extractor->getModifiesResult(firstType,0,secondRel->getData());
-				iterateAndStore(relList,tmpList);
+				//iterateAndStore(relList,tmpList);
+				relList = new RELATION_LIST(tmpList);
 			}
 			//uses, narrow down
 			if(relType==USES){
 				//cout<<"First Rel: "<< firstType;
 				//cout<<"Second Data: "<<secondRel->getData();
 				tmpList = extractor->getUsesResult(firstType,0,secondRel->getData());
-				iterateAndStore(relList,tmpList);
+				//iterateAndStore(relList,tmpList);
+				relList = new RELATION_LIST(tmpList);
 			}
 			if(relType==NEXT){
 				tmpList = extractor->getNextResult(0,secondRel->getData());
 				filterResult(relList,tmpList,firstType,secondType);
+
 			}
 			if(relType==NEXTST){
 				tmpList = extractor->getNextStarResult(0,secondRel->getData());
@@ -357,7 +379,8 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 					calleeIndex = pkb->getProcIndex(callPair->second);
 					tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
 				}
-				iterateAndStore(relList, tmpList);
+				//iterateAndStore(relList, tmpList);
+				relList = new RELATION_LIST(tmpList);
 			}
 			if(relType==CALLST){
 				PROC_NAME calleeName = pkb->getProcedure(secondRel->getData())->getProcName();
@@ -370,37 +393,43 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 					calleeIndex = pkb->getProcIndex(callPair->second);
 					tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
 				}
-				iterateAndStore(relList, tmpList);
+				//iterateAndStore(relList, tmpList);
+				relList = new RELATION_LIST(tmpList);
 			}
 			if(relType==AFFECTS){
 				tmpList = extractor->getAffectResult(0,secondRel->getData());
-				iterateAndStore(relList, tmpList);
+				//iterateAndStore(relList, tmpList);
+				relList = new RELATION_LIST(tmpList);
 			}
 			if(relType==AFFECTST){
 				tmpList = extractor->getAffectStarResult(0,secondRel->getData());
-				iterateAndStore(relList, tmpList);
+				//iterateAndStore(relList, tmpList);
+				relList = new RELATION_LIST(tmpList);
 			}
 			if(relType==SIBLING){
 				tmpList = extractor->getSiblingResult(firstType,secondType,-2,secondRel->getData());
-				filterResult(relList,tmpList,firstType,secondType);
+				//filterResult(relList,tmpList,firstType,secondType);
+				relList = new RELATION_LIST(tmpList);
 			}
 			if(relType==CONTAINS){
-				if(firstType==PLUS||firstType==MINUS||firstType==MULTIPLY||firstType==STMT_LIST){
+				if(firstType==PLUS||firstType==MINUS||firstType==MULTIPLY){
 					unknownValue = -1;
 				}else{
 					unknownValue = 0;
 				}
 				tmpList = extractor->getContainResult(firstType,unknownValue,secondType,secondRel->getData());
-				iterateAndStore(relList,tmpList);
+				//iterateAndStore(relList,tmpList);
+				relList = new RELATION_LIST(tmpList);
 			}
 			if(relType==CONTAINST){
-				if(firstType==PLUS||firstType==MINUS||firstType==MULTIPLY||firstType==STMT_LIST){
+				if(firstType==PLUS||firstType==MINUS||firstType==MULTIPLY){
 					unknownValue = -1;
 				}else{
 					unknownValue = 0;
 				}
 				tmpList = extractor->getContainStarResult(firstType,unknownValue,secondType,secondRel->getData());
-				iterateAndStore(relList,tmpList);
+				//iterateAndStore(relList,tmpList);
+				relList = new RELATION_LIST(tmpList);
 			}
 		}
 		//first is unkown, second is unknown
@@ -438,7 +467,8 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 						relList = NULL;
 					}else{
 						tmpList = extractor->getParentResult(firstType,secondType);
-						iterateAndStore(relList,tmpList);
+						//iterateAndStore(relList,tmpList);
+						relList = new RELATION_LIST(tmpList);
 					}
 				}
 				//parent*, narrow down both
@@ -449,7 +479,8 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 						relList = NULL;
 					}else{
 						tmpList = extractor->getParentStarResult(firstType,secondType);
-						iterateAndStore(relList,tmpList);
+						//iterateAndStore(relList,tmpList);
+						relList = new RELATION_LIST(tmpList);
 					}
 
 				}
@@ -461,7 +492,8 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 						relList = NULL;
 					}else{
 						tmpList = extractor->getFollowsResult(firstType,secondType);
-						filterResult(relList,tmpList,firstType,secondType);
+						//filterResult(relList,tmpList,firstType,secondType);
+						relList = new RELATION_LIST(tmpList);
 					}
 
 				}
@@ -473,19 +505,22 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 						relList = NULL;
 					}else{
 						tmpList = extractor->getFollowsStarResult(firstType,secondType);
-						filterResult(relList,tmpList,firstType,secondType);
+						//filterResult(relList,tmpList,firstType,secondType);
+						relList = new RELATION_LIST(tmpList);
 					}
 
 				}
 				//modifies, narrow down first rel
 				if(relType==MODIFIES){
 					tmpList = extractor->getModifiesResult(firstType,0,0);
-					iterateAndStore(relList,tmpList);
+					//iterateAndStore(relList,tmpList);
+					relList = new RELATION_LIST(tmpList);
 				}
 				//uses, narrow down first rel
 				if(relType==USES){
 					tmpList = extractor->getUsesResult(firstType,0,0);
-					iterateAndStore(relList,tmpList);
+					//iterateAndStore(relList,tmpList);
+					relList = new RELATION_LIST(tmpList);
 				}
 				if(relType==NEXT){
 					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
@@ -522,7 +557,8 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 							calleeIndex = pkb->getProcIndex(callPair->second);
 							tmpList.push_back(pair<int,int>(callerIndex,calleeIndex));
 						}
-						iterateAndStore(relList, tmpList);
+						//iterateAndStore(relList, tmpList);
+						relList = new RELATION_LIST(tmpList);
 					}
 				}
 				if(relType==CALLST){
@@ -540,7 +576,8 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 							if(tmpItr->first==tmpItr->second) relList->push_back(pair<int,int>(tmpItr->first,tmpItr->second));
 						}
 					}else{
-						iterateAndStore(relList, tmpList);
+						//iterateAndStore(relList, tmpList);
+						relList = new RELATION_LIST(tmpList);
 					}
 				}
 				if(relType==AFFECTS){
@@ -551,7 +588,8 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 							if(tmpItr->first==tmpItr->second) relList->push_back(pair<int,int>(tmpItr->first,tmpItr->second));
 						}
 					}else{
-						iterateAndStore(relList, tmpList);
+						//iterateAndStore(relList, tmpList);
+						relList = new RELATION_LIST(tmpList);
 					}
 					
 				}
@@ -562,42 +600,46 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 							if(tmpItr->first==tmpItr->second) relList->push_back(pair<int,int>(tmpItr->first,tmpItr->second));
 						}
 					}else{
-						iterateAndStore(relList, tmpList);
+						//iterateAndStore(relList, tmpList);
+						relList = new RELATION_LIST(tmpList);
 					}
 				}
 				if(relType==SIBLING){
 					tmpList = extractor->getSiblingResult(firstType,secondType,-2,-2);
-					filterResult(relList,tmpList,firstType,secondType);
+					//filterResult(relList,tmpList,firstType,secondType);
+					relList = new RELATION_LIST(tmpList);
 				}
 				if(relType==CONTAINS){
 					int unknownValue1,unknownValue2;
-					if(firstType==PLUS||firstType==MINUS||firstType==MULTIPLY||firstType==STMT_LIST){
+					if(firstType==PLUS||firstType==MINUS||firstType==MULTIPLY){
 						unknownValue1 = -1;
 					}else{
 						unknownValue1 = 0;
 					}
-					if(secondType==PLUS||secondType==MINUS||secondType==MULTIPLY||secondType==STMT_LIST){
+					if(secondType==PLUS||secondType==MINUS||secondType==MULTIPLY){
 						unknownValue2 = -1;
 					}else{
 						unknownValue2 = 0;
 					}
 					tmpList = extractor->getContainResult(firstType,unknownValue1,secondType,unknownValue2);
-					iterateAndStore(relList,tmpList);
+					//iterateAndStore(relList,tmpList);
+					relList = new RELATION_LIST(tmpList);
 				}
 				if(relType==CONTAINST){
 					int unknownValue1,unknownValue2;
-					if(firstType==PLUS||firstType==MINUS||firstType==MULTIPLY||firstType==STMT_LIST){
+					if(firstType==PLUS||firstType==MINUS||firstType==MULTIPLY){
 						unknownValue1 = -1;
 					}else{
 						unknownValue1 = 0;
 					}
-					if(secondType==PLUS||secondType==MINUS||secondType==MULTIPLY||secondType==STMT_LIST){
+					if(secondType==PLUS||secondType==MINUS||secondType==MULTIPLY){
 						unknownValue2 = -1;
 					}else{
 						unknownValue2 = 0;
 					}
 					tmpList = extractor->getContainStarResult(firstType,unknownValue1,secondType,unknownValue2);
-					iterateAndStore(relList,tmpList);
+					//iterateAndStore(relList,tmpList);
+					relList = new RELATION_LIST(tmpList);
 				}
 
 		}

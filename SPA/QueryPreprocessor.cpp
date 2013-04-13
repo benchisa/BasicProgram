@@ -28,19 +28,19 @@ QueryPreprocessor::QueryPreprocessor(PKB* pkb){
 	ident			= "["+letter+"]"+compulsoryOne+"["+letter+digit+hash+"]"+optional;
 	synonym			= ident;
 	rel				= "Uses|Modifies|Follows\\*|Follows|Parent\\*|Parent|Affects\\*|Affects|Calls\\*|Calls|Next\\*|Next|Contains\\*|Contains|Sibling";
-	ref				= synonym+or+underscore+or+integer+or+invComma+ident+invComma;
+	ref				= invComma+ident+invComma+or+invComma+integer+invComma+or+synonym+or+underscore+or+integer;
 	attrName		= "procName|varName|value|stmt#";
 	attrRef			= synonym+"\\s*\\.\\s*("+attrName+")";
 	attrCompare		= "("+attrRef+"\\s*=\\s*("+attrRef+or+"\""+ident+"\""+or+integer+")"+or+synonym+"\\s*=\\s*("+attrRef+or+integer+"))";
-	designEnt		= "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line)";
+	designEnt		= "(procedure|stmtLst|stmt|assign|call|while|if|variable|constant|prog_line|plus|minus|times)";
 	elem			= synonym+or+attrRef;
 	tuple			= elem+or+"\\s*<("+elem+")(\\s*,\\s*"+synonym+"|\\s*,\\s*"+attrRef+")"+compulsoryOne+"\\s*>";
 	declare			= designEnt+"\\s+"+synonym+"(\\s*,\\s*"+synonym+")*";
 	result_cl		= "Select\\s+(BOOLEAN"+or+tuple+")";
 	suchthat_cl		= "such that\\s+("+rel+")\\s*\\(\\s*("+ref+")\\s*,\\s*("+ref+")\\s*\\)(\\s+and\\s+("+rel+")\\s*\\(\\s*("+ref+")\\s*,\\s*("+ref+")\\s*\\))"+optional;
 	with_cl			= "with\\s+("+attrCompare+")(\\s+and\\s+("+attrCompare+"))"+optional;
-	pattern_cl		= "pattern\\s+"+synonym+"\\s*\\(("+invComma+synonym+invComma+or+underscore+"),.*\\)";
-
+	pattern_cl		= "pattern\\s+"+synonym+"\\s*\\(\\s*.*?\\s*,\\s*.*?\\)(\\s+and\\s+"+synonym+"\\s*\\(\\s*.*?\\s*,\\s*.*?\\))"+optional;
+	
 	/*
 	cout<<"result_cl==============="<<endl;
 	cout<<result_cl<<endl;
@@ -117,6 +117,7 @@ void QueryPreprocessor::createGrammarTables(){
 	grammarTable.createAttrTable();
 	grammarTable.createContainSTInvNodeTable();
 	grammarTable.createContainsValNodeTable();
+	grammarTable.createSiblingValNodeTable();
 }
 
 bool QueryPreprocessor::validate(){
@@ -1425,7 +1426,10 @@ bool QueryPreprocessor::verifyCondition(TOKEN token){
 		}
 	}
 	else if (regex_match(token,regex(pattern_cl))){
-		conditions = tokenize(token,synonym+"\\s*\\((\""+synonym+"\"|_),(\""+synonym+"\"|_\""+synonym+"\"_|_)(,_)*\\)");
+		conditions = tokenize(token,synonym+"\\s*\\(.*?,.*?(,_)*\\)");
+		if (conditions.empty()){
+			return false;
+		}
 		for(int i=0;i<conditions.size();i++){		
 			if (processPattern(conditions.at(i))){
 				clauseCount++;
@@ -1518,14 +1522,14 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 
 		//if with inverted commas
 		//two scenarios: "<varName>" and "<procName>"
-		if(regex_match(currToken,regex(invComma+ident+invComma))){			
+		if(regex_match(currToken,regex(invComma+ident+invComma+or+invComma+integer+invComma))){			
 			currToken.erase(currToken.begin());	
 			currToken.resize(currToken.size()-1);
 			if (isConstant(currToken)){
 				tokenType = CONSTANT;
 				currNode = createQTREENode(CONSTANT,atoi(currToken.c_str()));
 			}
-			if ((i==1&&(relName=="Modifies_p"||relName=="Uses_p"))||relName=="Calls"||relName=="Calls*"){
+			else if ((i==1&&(relName=="Modifies_p"||relName=="Uses_p"))||relName=="Calls"||relName=="Calls*"){
 				if (!pkb->isProcExists(currToken)){
 					error(INVALID_VARIABLE);
 					return false;
@@ -1533,7 +1537,7 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 				tokenType = PROCEDURE;
 				currNode = createQTREENode(PROCEDURE,pkb->getProcIndex(currToken));
 			}
-			else if(i==1&&(relName=="Contains"||relName=="Contains*"||relName=="Sibling")){
+			else if(relName=="Contains"||relName=="Contains*"||relName=="Sibling"){
 				if (pkb->isProcExists(currToken)){
 					tokenType = PROCEDURE;
 					currNode = createQTREENode(PROCEDURE,pkb->getProcIndex(currToken));
@@ -1598,8 +1602,13 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 		//check is the synonym declared
 		else if (isDeclaredVar(currToken)){
 			tokenType = getQVarType(currToken);			
-			syn.push_back(currToken);			
-			currNode = createQTREENode(QUERYVAR,getQVarIndex(currToken));
+			syn.push_back(currToken);		
+			if (tokenType == PLUS || tokenType == MINUS || tokenType == MULTIPLY){
+				currNode = createQTREENode(tokenType);
+			}
+			else{
+				currNode = createQTREENode(QUERYVAR,getQVarIndex(currToken));
+			}
 			if (prevArgConstant){
 				oneConstantClauses.push_back(clauseCount);		
 				int t = getQVarIndex(syn[0]);		
@@ -1652,7 +1661,8 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 		}
 
 		//check argument's type
-
+		
+		firstArgConstant = false;
 		if(relName=="Contains*"){
 			if (prevTokenType==ANY){
 				prevTokenType = tokenType;
@@ -1682,7 +1692,17 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 
 					}
 				}
-				
+
+				else if (!correctArg && isConstant(currToken)){
+					tokenType == STMT_LIST;
+					correctArg = false;
+					for(int j = 0; j < validArgType.size(); j++){
+						if (tokenType == validArgType.at(j)){
+							correctArg = true;
+							break;
+						}
+					}
+				}
 
 			}
 		}
@@ -1696,7 +1716,7 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 					}
 				}
 				else{
-					validArgType = grammarTable.getContainsValNodes(tokenType);
+					validArgType = grammarTable.getContainsValNodes(prevTokenType);
 					correctArg = false;
 					for(int j = 0; j < validArgType.size(); j++){
 						if (tokenType == validArgType.at(j)){
@@ -1705,16 +1725,25 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 						}
 					}
 					if (!correctArg && firstArgConstant){
-					validArgType = grammarTable.getContainsValNodes(STMT_LIST);
-					correctArg = false;
-					for(int j = 0; j < validArgType.size(); j++){
-						if (tokenType == validArgType.at(j)){
-							correctArg = true;
-							break;
+						validArgType = grammarTable.getContainsValNodes(STMT_LIST);
+						correctArg = false;
+						for(int j = 0; j < validArgType.size(); j++){
+							if (tokenType == validArgType.at(j)){
+								correctArg = true;
+								break;
+							}
 						}
-
 					}
-				}
+					else if (!correctArg && isConstant(currToken)){
+						tokenType == STMT_LIST;
+						correctArg = false;
+						for(int j = 0; j < validArgType.size(); j++){
+							if (tokenType == validArgType.at(j)){
+								correctArg = true;
+								break;
+							}
+						}
+					}
 				}
 			}
 			else if (relName=="Sibling"){
@@ -1726,7 +1755,7 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 					}
 				}
 				else{
-					validArgType = grammarTable.getSiblingValNodes(tokenType);
+					validArgType = grammarTable.getSiblingValNodes(prevTokenType);
 					correctArg = false;
 					for(int j = 0; j < validArgType.size(); j++){
 						if (tokenType == validArgType.at(j)){
@@ -1735,16 +1764,27 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 						}
 					}
 					if (!correctArg && firstArgConstant){
-					validArgType = grammarTable.getSiblingValNodes(STMT_LIST);
-					correctArg = false;
-					for(int j = 0; j < validArgType.size(); j++){
-						if (tokenType == validArgType.at(j)){
-							correctArg = true;
-							break;
-						}
+						validArgType = grammarTable.getSiblingValNodes(STMT_LIST);
+						correctArg = false;
+						for(int j = 0; j < validArgType.size(); j++){
+							if (tokenType == validArgType.at(j)){
+								correctArg = true;
+								break;
+							}
 
+						}
 					}
-				}
+
+					else if (!correctArg && isConstant(currToken)){
+						tokenType == STMT_LIST;
+						correctArg = false;
+						for(int j = 0; j < validArgType.size(); j++){
+							if (tokenType == validArgType.at(j)){
+								correctArg = true;
+								break;
+							}
+						}
+					}
 				}
 			}
 			else{
@@ -2157,8 +2197,7 @@ void QueryPreprocessor::updateQVarClause(TOKEN token,vector<int> newClauses){
 	(*dVarTable).insert(dVarPair(token,changeVar));
 }
 
-
-void QueryPreprocessor::mergeGroup(int group1 ,int group2){
+void QueryPreprocessor::mergeGroup(int grp1x, int grp2x){
 	//goal: merge grp2 into grp1
 	vector<dVarPair> updatedVar;
 	vector<hash_map<string,qVar>::const_iterator> marker;
@@ -2166,10 +2205,10 @@ void QueryPreprocessor::mergeGroup(int group1 ,int group2){
 	TOKEN varName;
 
 	for(dVarIter=(*dVarTable).begin();dVarIter!=(*dVarTable).end();dVarIter++){
-		if(dVarIter->second.groupNum==group2){			
+		if(dVarIter->second.groupNum==grp2x){			
 			changeVar = dVarIter->second;
 			varName = dVarIter->first;
-			changeVar.groupNum=group1;
+			changeVar.groupNum=grp1x;
 			updatedVar.push_back(dVarPair(varName,changeVar));
 			marker.push_back(dVarIter);
 		}

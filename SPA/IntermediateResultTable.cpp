@@ -266,33 +266,6 @@ FINALRAW *IntermediateResultTable::findResultOf(DATA_LIST resultNodeList){
 
 	return finalRaw;
 	
-//	returnRaw = IntermediateResultTable::uniqueRaw(tempRaw);
-	
-	/*
-	if(returnRaw->size()==1){
-		INDEX selectedQrVar = returnRaw->at(0).at(0);
-
-		DATA_LIST::iterator dataItr;
-		dataItr = returnRaw->at(0).begin();
-		dataItr++;
-		
-		DATA_LIST tempList;
-		for(dataItr;dataItr!=returnRaw->at(0).end();dataItr++){
-			DATA_LIST::iterator tmpItr;
-			tmpItr =find(tempList.begin(),tempList.end(),*dataItr);
-			if(tmpItr==tempList.end()){
-				tempList.push_back(*dataItr);
-			} 
-		}
-
-		//add qrVarIndex
-		dataItr = tempList.begin();
-		tempList.insert(dataItr,selectedQrVar);
-		returnRaw->erase(returnRaw->begin());
-		returnRaw->push_back(tempList);
-	}
-	return returnRaw;*/
-
 	
 }
 FINALRAW * IntermediateResultTable::uniqueRaw(RAWDATA * currentRaw){
@@ -317,8 +290,62 @@ FINALRAW * IntermediateResultTable::uniqueRaw(RAWDATA * currentRaw){
 			(*finalRaw)[key]=value; //add to final raw
 		}
 	}
-
+	
 	return finalRaw;
+
+}
+
+RAWDATA * IntermediateResultTable::simplifyRaw(RAWDATA * currentRaw){
+	FINALRAW * finalRaw = new FINALRAW;
+	FINALRAW::iterator finalRawItr;
+	int rowSize = currentRaw->at(0).size();
+	int colSize= currentRaw->size();
+
+	//get qrVarList
+	DATA_LIST qrVarList;
+	for(int i=0;i<colSize;i++){
+		qrVarList.push_back(currentRaw->at(i).at(0));
+	}
+	for(int row =1; row<rowSize; row++){
+		string key="";
+		DATA_LIST value;
+		for(int col=0;col<currentRaw->size();col++){
+			//create the final raw key
+			//create the final raw value
+			int currentData = currentRaw->at(col).at(row);
+			key.append(static_cast<ostringstream*>( &(ostringstream() << currentData))->str());
+			key.append(",");
+			value.push_back(currentData);
+		}
+		//check unique of current entry
+		finalRawItr = finalRaw->find(key);
+
+		if(finalRawItr==finalRaw->end()){
+			(*finalRaw)[key]=value; //add to final raw
+		}
+	}
+	delete currentRaw;
+	//convert it back to raw data structure
+	RAWDATA * returnRaw = new RAWDATA();
+	int newRowSize = finalRaw->size();
+
+	for(int i =0;i<colSize;i++){
+		ROW newRow;
+		newRow.push_back(qrVarList.at(i));
+		returnRaw->push_back(newRow);
+	}
+	//put the itr at the second row
+	finalRawItr = finalRaw->begin();
+
+	for(int i =0;i<newRowSize;i++){
+		for(int j=0;j<colSize;j++){
+			returnRaw->at(j).push_back(finalRawItr->second.at(j));
+		}
+		finalRawItr++;
+	}
+
+	delete finalRaw;
+	return returnRaw;
 
 }
 RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_LIST * selectedVarList){
@@ -351,12 +378,15 @@ RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_L
 				varNum++;
 			}
 		}
+	//unique result
+		rawData = IntermediateResultTable::simplifyRaw(rawData);
 	}else{
 		//merge the new data into existing rawData
 		
 		//expand the rawList
 		RAWDATA tempRaw;
-		//SIZEX newSize = rawData->size()+selectedVarList->size();
+		RAWDATA * simplifyRaw = new RAWDATA();
+
 		//copy the old col
 		for(int i =0;i<rawData->size();i++){
 			DATA_LIST newList;
@@ -368,13 +398,43 @@ RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_L
 			DATA_LIST newList;
 			newList.push_back(*selectedVar);
 			tempRaw.push_back(newList);
+			simplifyRaw->push_back(newList);
 		}
+
+		//extract the data of selected qrVar
+		for(int j =0;j<tableSize;j++){
+			DATA_LIST::iterator selectedVar;
+			int count =0;
+			for(selectedVar = selectedVarList->begin();selectedVar!=selectedVarList->end();selectedVar++){
+				int currentColNum = currentTable->getColNumOf(*selectedVar);
+				simplifyRaw->at(count).push_back(currentTable->getEntryAt(j,currentColNum));
+				count++;
+			}
+
+		}
+		//unique result
+		simplifyRaw = IntermediateResultTable::simplifyRaw(simplifyRaw);
 
 		//merge entries 
 		SIZEX rawRowNum = rawData->at(0).size()-1;
 		SIZEX rawColNum = rawData->size();
-		
+	
 		for(int i =1;i<=rawRowNum;i++){
+			for(int j =1;j<simplifyRaw->at(0).size();j++){
+				//first step: copy the old qrVar data
+				for(int k=0;k<rawColNum;k++){
+					tempRaw[k].push_back(rawData->at(k).at(i));
+				}
+				//second step: append new qrVar data
+			
+				for(int k =0;k<simplifyRaw->size();k++){
+					int  currentEntry = simplifyRaw->at(k).at(j);
+					tempRaw[rawColNum+k].push_back(currentEntry);
+				}
+			}
+		}
+		
+		/*for(int i =1;i<=rawRowNum;i++){
 			for(int j =0;j<tableSize;j++){
 				//first step: copy the old qrVar data
 				for(int k=0;k<rawColNum;k++){
@@ -391,7 +451,7 @@ RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_L
 					count++;
 				}
 			}
-		}
+		}*/
 		rawData = new RAWDATA(tempRaw);
 	}
 	
