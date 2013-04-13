@@ -1639,9 +1639,10 @@ void EvaluateContains::getParentInsertAll(CONTAIN_LIST* dList, TYPE type, int da
 
 // Insert (i, type2's data)
 void EvaluateContains::getTypeInsertAll(CONTAIN_LIST* dList, TYPE type, TYPE type2, STATEMENT_NUM i, STATEMENT_NUM rootI){
+	
 	if(Helper::isStatementTypeOf(ASSIGNMENT, i) && type2 == VARIABLE){
-		if(type == ASSIGNMENT || type == STATEMENT)
-			dList->push_back(make_pair(i, pkb->getAssignEntry(i).varIndex));
+		if(type == ASSIGNMENT || type == STATEMENT || type == STMT_LIST)
+			dList->push_back(make_pair(rootI, pkb->getAssignEntry(i).varIndex));
 		
 		EvaluateContains::getParentInsertAll(dList, type, pkb->getAssignEntry(i).varIndex, i);
 
@@ -1650,7 +1651,7 @@ void EvaluateContains::getTypeInsertAll(CONTAIN_LIST* dList, TYPE type, TYPE typ
 		DATA_LIST::iterator varItr = varIndexes.begin();
 
 		while(varItr!=varIndexes.end()){
-			if(type == ASSIGNMENT || type == STATEMENT)
+			if(type == ASSIGNMENT || type == STATEMENT || type == STMT_LIST)
 				dList->push_back(make_pair(rootI, *varItr));
 			EvaluateContains::getParentInsertAll(dList, type, *varItr, i);
 			varItr++;
@@ -1663,8 +1664,9 @@ void EvaluateContains::getTypeInsertAll(CONTAIN_LIST* dList, TYPE type, TYPE typ
 		DATA_LIST::iterator constantItr = constantIndexes.begin();
 
 		while(constantItr!=constantIndexes.end()){
-			if(type == ASSIGNMENT || type == STATEMENT)
+			if(type == ASSIGNMENT || type == STATEMENT || type == STMT_LIST)
 				dList->push_back(make_pair(rootI, *constantItr));
+
 			EvaluateContains::getParentInsertAll(dList, type, *constantItr, i);
 			constantItr++;
 		}
@@ -1676,7 +1678,7 @@ void EvaluateContains::getTypeInsertAll(CONTAIN_LIST* dList, TYPE type, TYPE typ
 		DATA_LIST::iterator operatorItr = operatorIndexes.begin();
 
 		while(operatorItr!=operatorIndexes.end()){
-			if(type == ASSIGNMENT || type == STATEMENT)
+			if(type == ASSIGNMENT || type == STATEMENT || type == STMT_LIST)
 				dList->push_back(make_pair(rootI, *operatorItr));
 			EvaluateContains::getParentInsertAll(dList, type, *operatorItr, i);
 			operatorItr++;
@@ -1684,13 +1686,13 @@ void EvaluateContains::getTypeInsertAll(CONTAIN_LIST* dList, TYPE type, TYPE typ
 	}
 
 	if(Helper::isStatementTypeOf(WHILE, i) && type2 == VARIABLE){
-		if(type == WHILE || type == STATEMENT)
+		if(type == WHILE || type == STATEMENT || type == STMT_LIST)
 			dList->push_back(make_pair(rootI, pkb->getWhileCtrVar(i)));
 		EvaluateContains::getParentInsertAll(dList, type, pkb->getWhileCtrVar(i), i);
 	}
 
 	if(Helper::isStatementTypeOf(IF, i) && type2 == VARIABLE){
-		if(type == IF || type == STATEMENT)
+		if(type == IF || type == STATEMENT || type == STMT_LIST)
 			dList->push_back(make_pair(rootI, pkb->getIfCtrVar(i)));
 		EvaluateContains::getParentInsertAll(dList, type, pkb->getIfCtrVar(i), i);
 	}
