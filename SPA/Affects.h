@@ -21,6 +21,7 @@ private:
 	static bool			computeIsAffect(int starting, int ending, int varIndex);
 	static bool         		computeIsAffectStar(int starting, int ending); 
 	static unsigned __stdcall  computeGetAffect(void* pParam);
+	static unsigned __stdcall  computeGetAffectStar(void* pParam);
 	struct affectParam
 	{
 		int starting;
