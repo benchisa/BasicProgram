@@ -378,8 +378,10 @@ RAWDATA * IntermediateResultTable::joinRaw(RAWDATA * rawData,int tableNum,DATA_L
 				varNum++;
 			}
 		}
-	//unique result
-		rawData = IntermediateResultTable::simplifyRaw(rawData);
+
+		//unique result
+		if(selectedVarList->size()!=currentTable->getQrVarList().size())
+			rawData = IntermediateResultTable::simplifyRaw(rawData);
 	}else{
 		//merge the new data into existing rawData
 		

@@ -93,7 +93,7 @@ TYPE Helper::getStatementType(STATEMENT_NUM stmtNum){
 		AST_LIST* currentAST = pkb->getASTBy(stmtNum);
 		AST_LIST::const_iterator itr=currentAST->cbegin();
 		AST_LIST::const_iterator itr_end=currentAST->cend();
-		for(itr;itr!=itr_end->end();itr++){
+		for(itr;itr!=itr_end;itr++){
 			return (*itr)->getRootType();
 		}
 	}
@@ -211,7 +211,7 @@ void Helper::computeTypeOnly(list<pair<int, int>> &result, list<pair<int, int>> 
 				}
 		}
 
-		else if(type1 == WHILE || type1 == ASSIGNMENT || type1 == IF){
+		else if(type1 == WHILE || type1 == ASSIGNMENT || type1 == IF||type1==CALL){
 
 			tmpItr = tmpLst.begin();
 			while(tmpItr != tmpLst.end()){
