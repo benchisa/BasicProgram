@@ -161,7 +161,7 @@ bool QueryEvaluator::executeSuchThat(IntermediateResultTable * resultTable, QTRE
 	firstRel = suchThatTree->getFirstDescendant()->getFirstDescendant();
 	secondRel = firstRel->getRightSibling();
 	TYPE relationType = suchThatTree->getFirstDescendant()->getType();
-	needCache = (relationType==NEXT)|| (relationType==NEXTST)|| (relationType==AFFECTS)|| (relationType==AFFECTST);
+	needCache =(firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&((relationType==NEXT)|| (relationType==NEXTST)|| (relationType==AFFECTS)|| (relationType==AFFECTST)||(relationType==FOLLOWST));
 
 	firstQrVar = firstRel->getData();
 	secondQrVar = secondRel->getData();
@@ -216,7 +216,7 @@ bool QueryEvaluator::executeSuchThat(IntermediateResultTable * resultTable, QTRE
 			use the list as probe to get the correct result
 			firstRel is computed in previous steps,second Rel is to be discovered
 		*/	
-			if(secondQrVar!=-1&&needCache){//(probed unknown, unknown) and need the cache result
+			if(needCache){//(probed unknown, unknown) and need the cache result
 				currentResultList = QueryEvaluator::getSuchThatResult(suchThatTree);
 			}else{
 				INDEX_LIST * currentVarResultList;
