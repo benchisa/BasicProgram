@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>41.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>24.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" Pattern">
@@ -9,21 +9,21 @@
 <id Pattern="1" Typed="1" comment="Which is the assignment that modifies c?" >1</id><querystr><![CDATA[assign a; Select a pattern a("c",_);]]></querystr>
 <stuans>2,3,6</stuans>
 <correct>2,3,6</correct>
-<time_taken>61.000000</time_taken>
+<time_taken>62.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Pattern="1" Typed="1" comment="Which is the assignment that modifies some variables?" >2</id><querystr><![CDATA[assign a; Select a pattern a(_,_);]]></querystr>
 <stuans>2,3,5,6</stuans>
 <correct>2,3,5,6</correct>
-<time_taken>66.000000</time_taken>
+<time_taken>61.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Pattern="1" Typed="1" comment="Which is the assignment that d = a?" >3</id><querystr><![CDATA[assign a; Select a pattern a("d","a");]]></querystr>
 <stuans>5</stuans>
 <correct>5</correct>
-<time_taken>66.000000</time_taken>
+<time_taken>63.000000</time_taken>
 <passed/>
 </query>
 <query>
@@ -37,91 +37,91 @@
 <id Pattern="1" Typed="1" comment="Which is the assignment that modifies c uses x?" >5</id><querystr><![CDATA[assign a; Select a pattern a("c",_"x"_);]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>71.000000</time_taken>
+<time_taken>62.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Pattern="1" Typed="1" comment="Which is the assignment that modifies c uses b?" >6</id><querystr><![CDATA[assign a; Select a pattern a("c",_"b"_);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>70.000000</time_taken>
+<time_taken>63.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Pattern="1" Typed="1" comment="Which is the assignment that c = q?" >7</id><querystr><![CDATA[assign a; Select a pattern a("c","q");]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>68.000000</time_taken>
+<time_taken>62.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Pattern="1" Typed="1" comment="Which is the assignment that has expression a?" >8</id><querystr><![CDATA[assign a; Select a pattern a(_,"a");]]></querystr>
 <stuans>5</stuans>
 <correct>5</correct>
-<time_taken>72.000000</time_taken>
+<time_taken>64.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Pattern="1" Typed="1" comment="Which is the assignment that has expression q?" >9</id><querystr><![CDATA[assign a; Select a pattern a(_,"q");]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>72.000000</time_taken>
+<time_taken>63.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Pattern="1" Typed="1" comment="Which is the assignment that has expression q?" >10</id><querystr><![CDATA[assign a; Select a pattern a(_,_"q"_);]]></querystr>
 <stuans>6</stuans>
 <correct>6</correct>
-<time_taken>69.000000</time_taken>
+<time_taken>68.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Pattern="1" Typed="1" comment="Which is the while that has control variable b?" >11</id><querystr><![CDATA[while w; Select w pattern w("b",_);]]></querystr>
 <stuans>4</stuans>
 <correct>4</correct>
-<time_taken>68.000000</time_taken>
+<time_taken>65.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Pattern="1" Typed="1" comment="Which are the while statements?" >12</id><querystr><![CDATA[while w; Select w pattern w(_,_);]]></querystr>
 <stuans>1,4</stuans>
 <correct>1,4</correct>
-<time_taken>73.000000</time_taken>
+<time_taken>66.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Pattern="1" Typed="1" comment="Which is the assigment modifies c uses q?" >13</id><querystr><![CDATA[assign a; Select a such that Modifies(a,"c") pattern a("c",_"q"_);]]></querystr>
 <stuans>6</stuans>
 <correct>6</correct>
-<time_taken>90.000000</time_taken>
+<time_taken>82.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Pattern="1" Typed="1" comment="Which is the assignment modifies c uses x and z?" >14</id><querystr><![CDATA[assign a; Select a such that Uses(a,"x") pattern a("c",_"z"_);]]></querystr>
 <stuans>3</stuans>
 <correct>3</correct>
-<time_taken>89.000000</time_taken>
+<time_taken>83.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Pattern="1" Typed="1" comment="Which is the assignment modifies c and follows some statements?" >15</id><querystr><![CDATA[assign a; Select a such that Follows*(_,a) pattern a("c",_);]]></querystr>
 <stuans>3,6</stuans>
 <correct>3,6</correct>
-<time_taken>91.000000</time_taken>
+<time_taken>86.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Pattern="1" Typed="1" comment="Which is the assignment modifies c and follows some statements?" >16</id><querystr><![CDATA[while w;assign a; Select w such that Parent(w,a) pattern w("b",_);]]></querystr>
 <stuans>4</stuans>
 <correct>4</correct>
-<time_taken>90.000000</time_taken>
+<time_taken>87.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Pattern="1" Typed="1" comment="Which is the assignment with a constant that modifies c?" >17</id><querystr><![CDATA[assign a; Select a pattern a("c",_"1"_);]]></querystr>
 <stuans>6</stuans>
 <correct>6</correct>
-<time_taken>77.000000</time_taken>
+<time_taken>71.000000</time_taken>
 <passed/>
 </query>
 </category>

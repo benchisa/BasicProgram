@@ -1,0 +1,257 @@
+15
+cat: Test Case for Sibling Known,Known
+1 - Sibling, Typed :: Sibling(ASSIGNMENT,ASSIGNMENT)
+
+Select BOOLEAN such that Sibling(109,110);
+true
+5000
+2 - Sibling, Typed :: Sibling(ASSIGNMENT,WHILE)
+
+Select BOOLEAN such that Sibling(98,99);
+true
+5000
+3 - Sibling, Typed :: Sibling(ASSIGNMENT,IF)
+
+Select BOOLEAN such that Sibling(44,48);
+true
+5000
+4 - Sibling, Typed :: Sibling(ASSIGNMENT,STATEMENT)
+
+Select BOOLEAN such that Sibling(44,49);
+false
+5000
+5 - Sibling, Typed :: Sibling(ASSIGNMENT,CALL)
+
+Select BOOLEAN such that Sibling(54,53);
+true
+5000
+6 - Sibling, Typed :: Sibling(IF,ASSIGNMENT)
+
+Select BOOLEAN such that Sibling(48,44);
+true
+5000
+7 - Sibling, Typed :: Sibling(IF,WHILE)
+
+Select BOOLEAN such that Sibling(17,15);
+true
+5000
+8 - Sibling, Typed :: Sibling(IF,IF)
+
+Select BOOLEAN such that Sibling(17,22);
+true
+5000
+9 - Sibling, Typed :: Sibling(IF,STATEMENT)
+
+Select BOOLEAN such that Sibling(17,27);
+true
+5000
+10 - Sibling, Typed :: Sibling(IF,CALL)
+
+Select BOOLEAN such that Sibling(41,40);
+true
+5000
+11 - Sibling, Typed :: Sibling(WHILE,ASSIGNMENT)
+
+Select BOOLEAN such that Sibling(36,39);
+true
+5000
+12 - Sibling, Typed :: Sibling(WHILE,WHILE)
+
+Select BOOLEAN such that Sibling(13,15);
+true
+5000
+13 - Sibling, Typed :: Sibling(WHILE,IF)
+
+Select BOOLEAN such that Sibling(13,17);
+true
+5000
+14 - Sibling, Typed :: Sibling(WHILE,STATEMENT)
+
+Select BOOLEAN such that Sibling(15,27);
+true
+5000
+15 - Sibling, Typed :: Sibling(WHILE,CALL)
+
+Select BOOLEAN such that Sibling(7,28);
+true
+5000
+16 - Sibling, Typed :: Sibling(PROCEDURE,PROCEDURE)
+
+Select BOOLEAN such that Sibling("Alice","Henry");
+true
+5000
+20 - Sibling, Typed :: Sibling(STATEMENT,ASSIGNMENT)
+
+Select BOOLEAN such that Sibling(1,6);
+true
+5000
+21 - Sibling, Typed :: Sibling(STATEMENT,WHILE)
+
+Select BOOLEAN such that Sibling(17,15);
+true
+5000
+22 - Sibling, Typed :: Sibling(STATEMENT,IF)
+
+Select BOOLEAN such that Sibling(22,17);
+true
+5000
+23 - Sibling, Typed :: Sibling(STATEMENT,STATEMENT)
+
+Select BOOLEAN such that Sibling(30,35);
+true
+5000
+24 - Sibling, Typed :: Sibling(STATEMENT,CALL)
+
+Select BOOLEAN such that Sibling(29,40);
+true
+5000
+25 - Sibling, Typed :: Sibling(CALL,ASSIGNMENT)
+
+Select BOOLEAN such that Sibling(47,46);
+true
+5000
+26 - Sibling, Typed :: Sibling(CALL,WHILE)
+
+Select BOOLEAN such that Sibling(53,55);
+true
+5000
+27 - Sibling, Typed :: Sibling(CALL,IF)
+
+Select BOOLEAN such that Sibling(47,48);
+true
+5000
+28 - Sibling, Typed :: Sibling(CALL,STATEMENT)
+
+Select BOOLEAN such that Sibling(47,44);
+true
+5000
+54 - Sibling, Typed :: Sibling(CALL,CALL)
+
+Select BOOLEAN such that Sibling(127,128);
+true
+5000
+29 - Sibling, Typed :: Sibling(CONSTANT,PLUS)
+plus pls;
+Select BOOLEAN such that Sibling("8",pls);
+false
+5000
+30 - Sibling, Typed :: Sibling(CONSTANT,MINUS)
+minus min;
+Select BOOLEAN such that Sibling("9",min);
+false
+5000
+31 - Sibling, Typed :: Sibling(CONSTANT,MULTIPLY)
+times tm;
+Select BOOLEAN such that Sibling("12",tm);
+true
+5000
+32 - Sibling, Typed :: Sibling(CONSTANT,VARIABLE)
+
+Select BOOLEAN such that Sibling("11","leek");
+true
+5000
+33 - Sibling, Typed :: Sibling(CONSTANT,CONSTANT)
+
+Select BOOLEAN such that Sibling("13","8");
+false
+5000
+34 - Sibling, Typed :: Sibling(VARIABLE,PLUS)
+plus pls;
+Select BOOLEAN such that Sibling("egg",pls);
+true
+5000
+35 - Sibling, Typed :: Sibling(VARIABLE,MINUS)
+minus min;
+Select BOOLEAN such that Sibling("egg",min);
+false
+5000
+36 - Sibling, Typed :: Sibling(VARIABLE,MULTIPLY)
+times tm;
+Select BOOLEAN such that Sibling("banana",tm);
+true
+5000
+37 - Sibling, Typed :: Sibling(VARIABLE,VARIABLE)
+
+Select BOOLEAN such that Sibling("orange","ham");
+true
+5000
+38 - Sibling, Typed :: Sibling(VARIABLE,CONSTANT)
+
+Select BOOLEAN such that Sibling("ham","9");
+true
+5000
+39 - Sibling, Typed :: Sibling(PLUS,PLUS)
+plus pls1,pls2;
+Select BOOLEAN such that Sibling(pls1,pls2);
+false
+5000
+40 - Sibling, Typed :: Sibling(PLUS,MINUS)
+plus pls;minus min;
+Select BOOLEAN such that Sibling(pls,min);
+false
+5000
+41 - Sibling, Typed :: Sibling(PLUS,MULTIPLY)
+plus pls; times tm;
+Select BOOLEAN such that Sibling(pls,tm);
+true
+5000
+42 - Sibling, Typed :: Sibling(PLUS,VARIABLE)
+plus pls;
+Select BOOLEAN such that Sibling(pls,"egg");
+true
+5000
+43 - Sibling, Typed :: Sibling(PLUS,CONSTANT)
+plus pls;
+Select BOOLEAN such that Sibling(pls,"8");
+false
+5000
+44 - Sibling, Typed :: Sibling(MINUS,PLUS)
+plus pls;minus min;
+Select BOOLEAN such that Sibling(min,pls);
+false
+5000
+45 - Sibling, Typed :: Sibling(MINUS,MINUS)
+minus min1,min2;
+Select BOOLEAN such that Sibling(min1,min2);
+false
+5000
+46 - Sibling, Typed :: Sibling(MINUS,MULTIPLY)
+minus min; times tm;
+Select BOOLEAN such that Sibling(min,tm);
+true
+5000
+47 - Sibling, Typed :: Sibling(MINUS,VARIABLE)
+minus min;
+Select BOOLEAN such that Sibling(min,"egg");
+false
+5000
+48 - Sibling, Typed :: Sibling(MINUS,CONSTANT)
+minus min;
+Select BOOLEAN such that Sibling(min,"9");
+false
+5000
+49 - Sibling, Typed :: Sibling(MULTIPLY,PLUS)
+times tm; plus pls;
+Select BOOLEAN such that Sibling(tm,pls);
+true
+5000
+50 - Sibling, Typed :: Sibling(MULTIPLY,MINUS)
+times tm; minus min;
+Select BOOLEAN such that Sibling(tm,min);
+true
+5000
+51 - Sibling, Typed :: Sibling(MULTIPLY,MULTIPLY)
+times tm1,tm2;
+Select BOOLEAN such that Sibling(tm1,tm2);
+false
+5000
+52 - Sibling, Typed :: Sibling(MULTIPLY,VARIABLE)
+times tm;
+Select BOOLEAN such that Sibling(tm,"banana");
+true
+5000
+53 - Sibling, Typed :: Sibling(MULTIPLY,CONSTANT)
+times tm;
+Select BOOLEAN such that Sibling(tm,"12");
+true
+5000

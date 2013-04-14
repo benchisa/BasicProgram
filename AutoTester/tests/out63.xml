@@ -1,0 +1,213 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>CS3202</name><parsing_time_taken>2162.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" Test Case for Contains (Known,Unknown) and (Unknown,Known)">
+<query>
+<id Contains="1" Typed="1" comment="contains(ASSIGNMENT,VARIABLE)" >1</id><querystr><![CDATA[variable v; Select v such that Contains(1,v);]]></querystr>
+<stuans>apple</stuans>
+<correct>apple</correct>
+<time_taken>56.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(ASSIGNMENT,PLUS)" >2</id><querystr><![CDATA[plus pl; assign a; Select a such that Contains(a,pl);]]></querystr>
+<stuans>18,19,82,2,44,63,5,11,21,24,50,54,59,78,81,110,112</stuans>
+<correct>11,110,112,18,19,2,21,24,44,5,50,54,59,63,78,81,82</correct>
+<time_taken>69.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(ASSIGNMENT,MINUS)" >3</id><querystr><![CDATA[minus min;assign a; Select a such that Contains(a,min);]]></querystr>
+<stuans>45,57,65,107,75,122</stuans>
+<correct>107,57,65,75,122,45</correct>
+<time_taken>70.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(ASSIGNMENT,MULTIPLY)" >4</id><querystr><![CDATA[times tm;assign a; Select a such that Contains(a,tm);]]></querystr>
+<stuans>31,32,33,34,37,38,69,39,73,42,62,43,126,66,77,124,129,137</stuans>
+<correct>124,126,129,137,31,32,33,34,37,38,39,42,43,62,66,69,73,77</correct>
+<time_taken>75.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(IF,VARIABLE)" >5</id><querystr><![CDATA[variable v; Select v such that Contains(30,v);]]></querystr>
+<stuans>carrot</stuans>
+<correct>carrot</correct>
+<time_taken>65.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(WHILE,VARIABLE)" >7</id><querystr><![CDATA[while w; Select w such that Contains(w,"banana");]]></querystr>
+<stuans>36</stuans>
+<correct>36</correct>
+<time_taken>67.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(PLUS,CONSTANT)" >11</id><querystr><![CDATA[plus pls; constant c; Select c such that Contains(pls,c);]]></querystr>
+<stuans>103,1,2,4,6,8,14,101</stuans>
+<correct>1,2,4,6,8,14,101,103</correct>
+<time_taken>77.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(PLUS,VARIABLE)" >12</id><querystr><![CDATA[plus pls; variable v; Select v such that Contains(pls,v);]]></querystr>
+<stuans>apple,carrot,donut,fish,egg,ham,kimchi,leek,nachos,keep,aeroplane,basin,cloud,beetle</stuans>
+<correct>aeroplane,apple,basin,beetle,carrot,cloud,donut,egg,fish,ham,keep,kimchi,leek,nachos</correct>
+<time_taken>75.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(MULTIPLY,CONSTANT)" >16</id><querystr><![CDATA[times tm;constant c; Select c such that Contains(tm,c);]]></querystr>
+<stuans>2,9,10,11,12,13</stuans>
+<correct>10,11,12,13,2,9</correct>
+<time_taken>80.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(MULTIPLY,VARIABLE)" >17</id><querystr><![CDATA[times tm;variable v; Select v such that Contains(tm,v);]]></querystr>
+<stuans>banana,carrot,door,egg,fish,ham,kimchi,leek,mango,orange,aeroplane,basin,cloud,elevator,fan,garbage,elephant,goat,hamster</stuans>
+<correct>aeroplane,banana,basin,carrot,cloud,door,egg,elephant,elevator,fan,fish,garbage,goat,ham,hamster,kimchi,leek,mango,orange</correct>
+<time_taken>82.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(MINUS,CONSTANT)" >21</id><querystr><![CDATA[minus min; constant c; Select c such that Contains(min,c);]]></querystr>
+<stuans>1,9</stuans>
+<correct>1,9</correct>
+<time_taken>76.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(MINUS,VARIABLE)" >22</id><querystr><![CDATA[minus min; variable v; Select v such that Contains(min,v);]]></querystr>
+<stuans>door,fish,garbage,ham,mango,cloud,dinosaur</stuans>
+<correct>cloud,dinosaur,door,fish,garbage,ham,mango</correct>
+<time_taken>81.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(STATEMENT,VARIABLE)" >31</id><querystr><![CDATA[stmt s; Select s such that Contains(s,"cockroach");]]></querystr>
+<stuans>102,105,85,101</stuans>
+<correct>101,102,105,85</correct>
+<time_taken>82.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(STATEMENT,PLUS)" >33</id><querystr><![CDATA[plus pls; stmt s; Select s such that Contains(s,pls);]]></querystr>
+<stuans>18,19,82,2,44,63,5,11,21,24,50,54,59,78,81,110,112</stuans>
+<correct>11,110,112,18,19,2,21,24,44,5,50,54,59,63,78,81,82</correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(STATEMENT,MINUS)" >34</id><querystr><![CDATA[minus min; stmt s; Select s such that Contains(s,min);]]></querystr>
+<stuans>45,57,65,107,75,122</stuans>
+<correct>107,122,45,57,65,75</correct>
+<time_taken>84.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(STATEMENT,MULTIPLY)" >35</id><querystr><![CDATA[times tm; stmt s; Select s such that Contains(s,tm);]]></querystr>
+<stuans>31,32,33,34,37,38,69,39,73,42,62,43,126,66,77,124,129,137</stuans>
+<correct>124,126,129,137,31,32,33,34,37,38,39,42,43,62,66,69,73,77</correct>
+<time_taken>95.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(IF,STMT_LST)" >6</id><querystr><![CDATA[stmtLst sl; Select sl such that Contains(30,sl);]]></querystr>
+<stuans>31,33</stuans>
+<correct>31,33</correct>
+<time_taken>98.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(WHILE,STMT_LST)" >8</id><querystr><![CDATA[stmtLst sl; Select sl such that Contains(36,sl);]]></querystr>
+<stuans>37</stuans>
+<correct>37</correct>
+<time_taken>73.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(PROCEDURE,STMT_LST)" >9</id><querystr><![CDATA[stmtLst sl; Select sl such that Contains("Goneril",sl);]]></querystr>
+<stuans>121</stuans>
+<correct>121</correct>
+<time_taken>90.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(STATEMENT,STMT_LIST)" >32</id><querystr><![CDATA[stmtLst sl; Select sl such that Contains(99,sl);]]></querystr>
+<stuans>100</stuans>
+<correct>100</correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(STMT_LIST,STATEMENT)" >26</id><querystr><![CDATA[stmtLst sl; Select sl such that Contains(sl,29);]]></querystr>
+<stuans>29</stuans>
+<correct>29</correct>
+<time_taken>76.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(STMT_LIST,ASSIGNMENT)" >27</id><querystr><![CDATA[stmtLst sl; Select sl such that Contains(sl,31);]]></querystr>
+<stuans>31</stuans>
+<correct>31</correct>
+<time_taken>76.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(STMT_LIST,WHILE)" >28</id><querystr><![CDATA[stmtLst sl; Select sl such that Contains(sl,100);]]></querystr>
+<stuans>100</stuans>
+<correct>100</correct>
+<time_taken>79.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(STMT_LIST,IF)" >29</id><querystr><![CDATA[stmtLst sl; Select sl such that Contains(sl,30);]]></querystr>
+<stuans>30</stuans>
+<correct>30</correct>
+<time_taken>102.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(STMT_LIST,CALL)" >30</id><querystr><![CDATA[stmtLst sl; Select sl such that Contains(sl,120);]]></querystr>
+<stuans>107</stuans>
+<correct>107</correct>
+<time_taken>76.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains(ASSIGNMENT,VARIABLE)" >36</id><querystr><![CDATA[assign a; Select a such that Contains(a,"apple");]]></querystr>
+<stuans>1,27,121</stuans>
+<correct>1,121,27</correct>
+<time_taken>81.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(IF,VARIABLE)" >37</id><querystr><![CDATA[if i; Select i such that Contains(i,"carrot");]]></querystr>
+<stuans>22,30</stuans>
+<correct>22,30</correct>
+<time_taken>79.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(WHILE,VARIABLE)" >38</id><querystr><![CDATA[variable v; Select v such that Contains(36,v);]]></querystr>
+<stuans>banana</stuans>
+<correct>banana</correct>
+<time_taken>83.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id contains="1" Typed="1" comment="contains(STATEMENT,VARIABLE)" >39</id><querystr><![CDATA[variable v; Select v such that Contains(101,v);]]></querystr>
+<stuans>cockroach</stuans>
+<correct>cockroach</correct>
+<time_taken>98.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

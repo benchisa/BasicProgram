@@ -76,17 +76,17 @@ Select <s1,a4,a2> such that Follows(s1,s2) and Parent(s3,s2) with s2.stmt#=67 su
 66 45 38,66 49 38,66 50 38
 5000
 16 - all, Typed :: 4 set of interrelated 20 such that with clauses, many-tuple select
-stmt s1,s2,s3; assign a1,a2,a3,a4,a5; variable v1,v2,v3,v4; while w1,w2,w3; procedure p1;call c;
-Select <s1,a4,a2> such that Parent*(w3,a5) and Affects*(a5,54) and Next*(a5,c) and Follows(s1,s2) and Parent(s3,s2) with s2.stmt#=67 such that Modifies(a4,v4) and v4.varName="leek" such that Next*(44,a4) and Uses(a4,v3) with v3.varName="orange" such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) with a2.stmt#=38 and v1.varName="ham" such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);
-64 46 38
+stmt s1,s2,s3; assign a1,a2,a3,a4,a5; variable v1,v2,v3,v4; while w1,w2,w3; procedure p1;call c;if i1;
+Select v4 such that Affects*(a5,45) and Next*(a5,c) and Follows(s1,s2) and Parent(s3,s2) with s2.stmt#=67 such that Modifies(a4,v4) with v4.varName="pear" such that Next*(53,a4) and Uses(a4,v3) with v3.varName="mango" such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) with a2.stmt#=38 and v1.varName="ham" such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);
+pear
 5000
 17 - all, Typed :: 4 set of interrelated 20 such that with clauses, many-tuple select
-stmt s1,s2,s3; assign a1,a2,a3,a4,a5; variable v1,v2,v3,v4; while w1,w2,w3; procedure p1; call c;
-Select <a5,s1,a4,a2> such that Next*(a5,c) and Parent*(w3,a5) and Affects*(a5,54) and Follows(s1,s2) and Parent(s3,s2) with s2.stmt#=67 such that Modifies(a4,v4) and v4.varName="leek" such that Next*(44,a4) and Uses(a4,v3) with v3.varName="orange" such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) with a2.stmt#=38 and v1.varName="ham" such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);
-52 64 46 38
+stmt s1,s2,s3; assign a1,a2,a3,a4,a5; variable v1,v2,v3,v4; while w1,w2,w3; procedure p1;call c;if i1;
+Select a5 such that Affects*(a5,45) and Next*(a5,c) and Follows(s1,s2) and Parent(s3,s2) with s2.stmt#=67 such that Modifies(a4,v4) with v4.varName="pear" such that Next*(53,a4) and Uses(a4,v3) with v3.varName="mango" such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) with a2.stmt#=38 and v1.varName="ham" such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);
+44
 5000
 18 - all, Typed :: 5 set of interrelated 22 such that with clauses, many-tuple select
-stmt s1,s2,s3; assign a1,a2,a3,a4,a5,a6,a7; variable v1,v2,v3,v4; while w1,w2,w3; procedure p1; call c;
-Select <a6, a5,s1,a4,a2> such that Affects*(a6,a7) and Modifies(a6,"orange") and Next*(a5,c) and Parent* (w3,a5) and Affects*(a5,54) and Follows(s1,s2) and Parent(s3,s2) with s2.stmt#=67 such that Modifies(a4,v4) and v4.varName="leek" such that Next*(44,a4) and Uses(a4,v3) with v3.varName="orange" such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) with a2.stmt#=38 and v1.varName="ham" such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);
-44 52 64 46 38,45 52 64 46 38
+stmt s1,s2,s3; assign a1,a2,a3,a4,a5; variable v1,v2,v3,v4; while w1,w2,w3; procedure p1;call c;if i1;
+Select <a5,v4> such that Affects*(a5,45) and Next*(a5,c) and Follows(s1,s2) and Parent(s3,s2) with s2.stmt#=67 such that Modifies(a4,v4) with v4.varName="pear" such that Next*(53,a4) and Uses(a4,v3) with v3.varName="mango" such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) with a2.stmt#=38 and v1.varName="ham" such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);
+44 pear
 5000

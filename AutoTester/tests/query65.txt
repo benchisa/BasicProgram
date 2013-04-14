@@ -1,0 +1,372 @@
+15
+cat: Test Case for Sibling (Known,unknown) and (Unknown,Known)
+18 - Sibling, Typed :: Sibling(STMT_LIST,VARIABLE)
+stmtLst sl;
+Select sl such that Sibling(sl,"ham");
+14,18,20
+5000
+19 - Sibling, Typed :: Sibling(STMT_LIST,CONSTANT)
+stmtLst sl;
+Select sl such that Sibling(sl,"6");
+
+5000
+42 - Sibling, Typed :: Sibling(PLUS,VARIABLE)
+variable v; plus pls;
+Select v such that Sibling(pls,v);
+aeroplane,banana,basin,carrot,door,egg,fish,ham,innard,jaguar,kangeroo,keep,kimchi,lamp,orange,pear
+5000
+43 - Sibling, Typed :: Sibling(PLUS,CONSTANT)
+constant c; plus pls;
+Select c such that Sibling(pls,c);
+
+5000
+1 - Sibling, Typed :: Sibling(ASSIGNMENT,ASSIGNMENT)
+assign a;
+Select a such that Sibling(a,110);
+109
+5000
+2 - Sibling, Typed :: Sibling(ASSIGNMENT,WHILE)
+assign a;
+Select a such that Sibling(a,99);
+83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98
+5000
+3 - Sibling, Typed :: Sibling(ASSIGNMENT,IF)
+assign a;
+Select a such that Sibling(a,48);
+44,45,46
+5000
+4 - Sibling, Typed :: Sibling(ASSIGNMENT,STATEMENT)
+assign a;
+Select a such that Sibling(a,49);
+
+5000
+5 - Sibling, Typed :: Sibling(ASSIGNMENT,CALL)
+assign a;
+Select a such that Sibling(a,53);
+52,54
+5000
+6 - Sibling, Typed :: Sibling(IF,ASSIGNMENT)
+if i;
+Select i such that Sibling(i,44);
+48
+5000
+7 - Sibling, Typed :: Sibling(IF,WHILE)
+if i;
+Select i such that Sibling(i,15);
+17,22
+5000
+8 - Sibling, Typed :: Sibling(IF,IF)
+if i;
+Select i such that Sibling(i,22);
+17
+5000
+9 - Sibling, Typed :: Sibling(IF,STATEMENT)
+if i;
+Select i such that Sibling(i,27);
+17,22
+5000
+10 - Sibling, Typed :: Sibling(IF,CALL)
+if i;
+Select i such that Sibling(i,40);
+41
+5000
+11 - Sibling, Typed :: Sibling(WHILE,ASSIGNMENT)
+while w;
+Select w such that Sibling(w,40);
+29
+5000
+12 - Sibling, Typed :: Sibling(WHILE,WHILE)
+while w;
+Select w such that Sibling(w,15);
+13
+5000
+13 - Sibling, Typed :: Sibling(WHILE,IF)
+while w;
+Select w such that Sibling(w,17);
+13,15
+5000
+14 - Sibling, Typed :: Sibling(WHILE,STATEMENT)
+while w;
+Select w such that Sibling(w,27);
+13,15
+5000
+15 - Sibling, Typed :: Sibling(WHILE,CALL)
+while w;
+Select w such that Sibling(w,28);
+7
+5000
+16 - Sibling, Typed :: Sibling(PROCEDURE,PROCEDURE)
+procedure p;
+Select p such that Sibling(p,"Henry");
+Alice,Bob,Charlie,Danny,Eliza,Fred,Goneril,Illidan,James,Kingsley,Lucas,Merril,Nancy,Oppi
+5000
+20 - Sibling, Typed :: Sibling(STATEMENT,ASSIGNMENT)
+stmt s;
+Select s such that Sibling(s,6);
+1,2,28,3,4,5,7
+5000
+21 - Sibling, Typed :: Sibling(STATEMENT,WHILE)
+stmt s;
+Select s such that Sibling(s,15);
+10,11,12,13,17,22,27
+5000
+22 - Sibling, Typed :: Sibling(STATEMENT,IF)
+stmt s;
+Select s such that Sibling(s,17);
+10,11,12,13,15,22,27
+5000
+23 - Sibling, Typed :: Sibling(STATEMENT,STATEMENT)
+stmt s;
+Select s such that Sibling(s,35);
+30,36,39
+5000
+24 - Sibling, Typed :: Sibling(STATEMENT,CALL)
+stmt s;
+Select s such that Sibling(s,40);
+29,41
+5000
+25 - Sibling, Typed :: Sibling(CALL,ASSIGNMENT)
+call c;
+Select c such that Sibling(c,46);
+47
+5000
+26 - Sibling, Typed :: Sibling(CALL,WHILE)
+call c;
+Select c such that Sibling(c,55);
+53
+5000
+27 - Sibling, Typed :: Sibling(CALL,IF)
+call c;
+Select c such that Sibling(c,48);
+47
+5000
+28 - Sibling, Typed :: Sibling(CALL,STATEMENT)
+call c;
+Select c such that Sibling(c,44);
+47
+5000
+2 - Sibling, Typed :: Sibling(CALL,CALL)
+call c;
+Select c such that Sibling(c,128);
+127
+5000
+29 - Sibling, Typed :: Sibling(CONSTANT,PLUS)
+plus pls;constant c;
+Select c such that Sibling(c,pls);
+
+5000
+30 - Sibling, Typed :: Sibling(CONSTANT,MINUS)
+minus min;constant c;
+Select c such that Sibling(c,min);
+
+5000
+31 - Sibling, Typed :: Sibling(CONSTANT,MULTIPLY)
+times tm;constant c;
+Select c such that Sibling(c,tm);
+12
+5000
+32 - Sibling, Typed :: Sibling(CONSTANT,VARIABLE)
+constant c;
+Select c such that Sibling(c,"leek");
+0,11,7,9
+5000
+33 - Sibling, Typed :: Sibling(CONSTANT,CONSTANT)
+constant c;
+Select c such that Sibling(c,"12");
+13
+5000
+34 - Sibling, Typed :: Sibling(VARIABLE,PLUS)
+plus pls;variable v;
+Select v such that Sibling(v,pls);
+aeroplane,banana,basin,carrot,door,egg,fish,ham,innard,jaguar,kangeroo,keep,kimchi,lamp,orange,pear
+5000
+35 - Sibling, Typed :: Sibling(VARIABLE,MINUS)
+minus min;variable v;
+Select v such that Sibling(v,min);
+elevator,fish,goat,jumper,orange,pear
+5000
+36 - Sibling, Typed :: Sibling(VARIABLE,MULTIPLY)
+times tm;variable v;
+Select v such that Sibling(v,tm);
+aeroplane,ant,banana,basin,carrot,cloud,dinosaur,donut,door,elephant,elevator,fan,goat,ham,hamster,hanger,igloo,jam,keep,leek,mango,nachos
+5000
+37 - Sibling, Typed :: Sibling(VARIABLE,VARIABLE)
+variable v;
+Select v such that Sibling(v,"ham");
+carrot,egg,kimchi,orange
+5000
+38 - Sibling, Typed :: Sibling(VARIABLE,CONSTANT)
+variable v;
+Select v such that Sibling(v,"9");
+ham,kangeroo,leek
+5000
+1 - Sibling, Typed :: Sibling(ASSIGNMENT,ASSIGNMENT)
+assign a;
+Select a such that Sibling(123,a);
+122
+5000
+2 - Sibling, Typed :: Sibling(ASSIGNMENT,WHILE)
+while w;
+Select w such that Sibling(98,w);
+99
+5000
+3 - Sibling, Typed :: Sibling(ASSIGNMENT,IF)
+if i;
+Select i such that Sibling(44,i);
+48
+5000
+4 - Sibling, Typed :: Sibling(ASSIGNMENT,STATEMENT)
+stmt s;
+Select s such that Sibling(44,s);
+45,46,47,48
+5000
+5 - Sibling, Typed :: Sibling(ASSIGNMENT,CALL)
+call c;
+Select c such that Sibling(54,c);
+53
+5000
+6 - Sibling, Typed :: Sibling(IF,ASSIGNMENT)
+assign a;
+Select a such that Sibling(48,a);
+44,45,46
+5000
+7 - Sibling, Typed :: Sibling(IF,WHILE)
+while w;
+Select w such that Sibling(17,w);
+13,15
+5000
+8 - Sibling, Typed :: Sibling(IF,IF)
+if i;
+Select i such that Sibling(17,i);
+22
+5000
+9 - Sibling, Typed :: Sibling(IF,STATEMENT)
+stmt s;
+Select s such that Sibling(17,s);
+10,11,12,13,15,22,27
+5000
+10 - Sibling, Typed :: Sibling(IF,CALL)
+call c;
+Select c such that Sibling(41,c);
+40
+5000
+11 - Sibling, Typed :: Sibling(WHILE,ASSIGNMENT)
+assign a;
+Select a such that Sibling(36,a);
+35,39
+5000
+12 - Sibling, Typed :: Sibling(WHILE,WHILE)
+while w;
+Select w such that Sibling(13,w);
+15
+5000
+13 - Sibling, Typed :: Sibling(WHILE,IF)
+if i;
+Select i such that Sibling(13,i);
+17,22
+5000
+14 - Sibling, Typed :: Sibling(WHILE,STATEMENT)
+stmt s;
+Select s such that Sibling(16,s);
+
+5000
+15 - Sibling, Typed :: Sibling(WHILE,CALL)
+call c;
+Select c such that Sibling(7,c);
+28
+5000
+16 - Sibling, Typed :: Sibling(PROCEDURE,PROCEDURE)
+procedure p;
+Select p such that Sibling("Alice",p);
+Bob,Charlie,Danny,Eliza,Fred,Goneril,Henry,Illidan,James,Kingsley,Lucas,Merril,Nancy,Oppi
+5000
+20 - Sibling, Typed :: Sibling(STATEMENT,ASSIGNMENT)
+assign a;
+Select a such that Sibling(1,a);
+2,3,4,5,6
+5000
+21 - Sibling, Typed :: Sibling(STATEMENT,WHILE)
+while w;
+Select w such that Sibling(22,w);
+13,15
+5000
+22 - Sibling, Typed :: Sibling(STATEMENT,IF)
+if i;
+Select i such that Sibling(22,i);
+17
+5000
+23 - Sibling, Typed :: Sibling(STATEMENT,STATEMENT)
+stmt s;
+Select s such that Sibling(30,s);
+35,36,39
+5000
+24 - Sibling, Typed :: Sibling(STATEMENT,CALL)
+call c;
+Select c such that Sibling(29,c);
+40
+5000
+25 - Sibling, Typed :: Sibling(CALL,ASSIGNMENT)
+assign a;
+Select a such that Sibling(47,a);
+44,45,46
+5000
+26 - Sibling, Typed :: Sibling(CALL,WHILE)
+while w;
+Select w such that Sibling(53,w);
+55
+5000
+27 - Sibling, Typed :: Sibling(CALL,IF)
+if i;
+Select i such that Sibling(47,i);
+48
+5000
+28 - Sibling, Typed :: Sibling(CALL,STATEMENT)
+stmt s;
+Select s such that Sibling(47,s);
+44,45,46,48
+5000
+2 - Sibling, Typed :: Sibling(CALL,CALL)
+call c;
+Select c such that Sibling(127,c);
+128
+5000
+32 - Sibling, Typed :: Sibling(CONSTANT,VARIABLE)
+variable v;
+Select v such that Sibling("11",v);
+leek,monkey
+5000
+33 - Sibling, Typed :: Sibling(CONSTANT,CONSTANT)
+constant c;
+Select c such that Sibling("13",c);
+12
+5000
+37 - Sibling, Typed :: Sibling(VARIABLE,VARIABLE)
+variable v;
+Select v such that Sibling("orange",v);
+carrot,ham,pear
+5000
+38 - Sibling, Typed :: Sibling(VARIABLE,CONSTANT)
+constant c;
+Select c such that Sibling("ham",c);
+1,4,9
+5000
+47 - Sibling, Typed :: Sibling(MINUS,VARIABLE)
+minus min;variable v;
+Select v such that Sibling(min,v);
+elevator,fish,goat,jumper,orange,pear
+5000
+48 - Sibling, Typed :: Sibling(MINUS,CONSTANT)
+minus min;constant c;
+Select c such that Sibling(min,c);
+
+5000
+52 - Sibling, Typed :: Sibling(MULTIPLY,VARIABLE)
+times tm;variable v;
+Select v such that Sibling(tm,v);
+aeroplane,ant,banana,basin,carrot,cloud,dinosaur,donut,door,elephant,elevator,fan,goat,ham,hamster,hanger,igloo,jam,keep,leek,mango,nachos
+5000
+53 - Sibling, Typed :: Sibling(MULTIPLY,CONSTANT)
+times tm;constant c;
+Select c such that Sibling(tm,c);
+12
+5000

@@ -1,0 +1,317 @@
+15
+cat: Test Case for Contains* Known,Known
+1 - Contains, Typed :: contains*(ASSIGNMENT,VARIABLE)
+
+Select BOOLEAN such that Contains*(38,"fish");
+true
+5000
+2 - Contains, Typed :: contains*(ASSIGNMENT,PLUS)
+plus pls;
+Select BOOLEAN such that Contains*(37,pls);
+true
+5000
+3 - Contains, Typed :: contains*(ASSIGNMENT,MINUS)
+minus min;
+Select BOOLEAN such that Contains*(38,min);
+true
+5000
+4 - Contains, Typed :: contains*(ASSIGNMENT,MULTIPLY)
+times tm;
+Select BOOLEAN such that Contains*(33,tm);
+true
+5000
+5 - Contains, Typed :: contains*(ASSIGNMENT,CONSTANT)
+
+Select BOOLEAN such that Contains*(34,"12");
+true
+5000
+8 - Contains, Typed :: contains*(IF,ASSIGNMENT)
+
+Select BOOLEAN such that Contains*(41,42);
+true
+5000
+9 - Contains, Typed :: contains*(IF,WHILE)
+
+Select BOOLEAN such that Contains*(70,74);
+true
+5000
+10 - Contains, Typed :: contains*(IF,IF)
+
+Select BOOLEAN such that Contains*(61,67);
+true
+5000
+11 - Contains, Typed :: contains*(IF,CALL)
+
+Select BOOLEAN such that Contains*(48,47);
+false
+5000
+12 - Contains, Typed :: contains*(IF,VARIABLE)
+
+Select BOOLEAN such that Contains*(22,"jam");
+true
+5000
+13 - Contains, Typed :: contains*(IF,PLUS)
+plus pls;
+Select BOOLEAN such that Contains*(22,pls);
+true
+5000
+14 - Contains, Typed :: contains*(IF,MINUS)
+minus min;
+Select BOOLEAN such that Contains*(64,min);
+true
+5000
+15 - Contains, Typed :: contains*(IF,MULTIPLY)
+times tm;
+Select BOOLEAN such that Contains*(61,tm);
+true
+5000
+16 - Contains, Typed :: contains*(IF,CONSTANT)
+
+Select BOOLEAN such that Contains*(30,"9");
+true
+5000
+18 - Contains, Typed :: contains*(WHILE,STATEMENT)
+
+Select BOOLEAN such that Contains*(9,15);
+true
+5000
+19 - Contains, Typed :: contains*(WHILE,ASSIGNMENT)
+
+Select BOOLEAN such that Contains*(9,16);
+true
+5000
+20 - Contains, Typed :: contains*(WHILE,WHILE)
+
+Select BOOLEAN such that Contains*(9,13);
+true
+5000
+21 - Contains, Typed :: contains*(WHILE,IF)
+
+Select BOOLEAN such that Contains*(9,17);
+true
+5000
+22 - Contains, Typed :: contains*(WHILE,CALL)
+
+Select BOOLEAN such that Contains*(51,56);
+true
+5000
+23 - Contains, Typed :: contains*(WHILE,VARIABLE)
+
+Select BOOLEAN such that Contains*(51,"mango");
+true
+5000
+24 - Contains, Typed :: contains*(WHILE,PLUS)
+plus pls;
+Select BOOLEAN such that Contains*(51,pls);
+true
+5000
+25 - Contains, Typed :: contains*(WHILE,MINUS)
+minus min
+Select BOOLEAN such that Contains*(51,min);
+true
+5000
+26 - Contains, Typed :: contains*(WHILE,MULTIPLY)
+times tm;
+Select BOOLEAN such that Contains*(51,tm);
+true
+5000
+27 - Contains, Typed :: contains*(WHILE,CONSTANT)
+
+Select BOOLEAN such that Contains*(7,"4");
+true
+5000
+29 - Contains, Typed :: contains*(PROCEDURE,STATEMENT)
+
+Select BOOLEAN such that Contains*("Bob",31);
+true
+5000
+30 - Contains, Typed :: contains*(PROCEDURE,ASSIGNMENT)
+
+Select BOOLEAN such that Contains*("Bob",32);
+true
+5000
+31 - Contains, Typed :: contains*(PROCEDURE,WHILE)
+
+Select BOOLEAN such that Contains*("Bob",36);
+true
+5000
+32 - Contains, Typed :: contains*(PROCEDURE,IF)
+
+Select BOOLEAN such that Contains*("Bob",41);
+true
+5000
+33 - Contains, Typed :: contains*(PROCEDURE,CALL)
+
+Select BOOLEAN such that Contains*("Bob",40);
+true
+5000
+34 - Contains, Typed :: contains*(PROCEDURE,VARIABLE)
+
+Select BOOLEAN such that Contains*("Bob","banana");
+true
+5000
+35 - Contains, Typed :: contains*(PROCEDURE,PLUS)
+plus pls;
+Select BOOLEAN such that Contains*("Bob",pls);
+true
+5000
+36 - Contains, Typed :: contains*(PROCEDURE,MINUS)
+minus min;
+Select BOOLEAN such that Contains*("Bob",min);
+true
+5000
+37 - Contains, Typed :: contains*(PROCEDURE,MULTIPLY)
+times tm;
+Select BOOLEAN such that Contains*("Bob",tm);
+true
+5000
+38 - Contains, Typed :: contains*(PROCEDURE,CONSTANT)
+
+Select BOOLEAN such that Contains*("Bob","13");
+true
+5000
+51 - Contains, Typed :: contains*(STATEMENT,STATEMENT)
+
+Select BOOLEAN such that Contains*(51,57);
+true
+5000
+52 - Contains, Typed :: contains*(STATEMENT,ASSIGNMENT)
+
+Select BOOLEAN such that Contains*(60,62);
+true
+5000
+53 - Contains, Typed :: contains*(STATEMENT,WHILE)
+
+Select BOOLEAN such that Contains*(70,74);
+true
+5000
+54 - Contains, Typed :: contains*(STATEMENT,IF)
+
+Select BOOLEAN such that Contains*(67,70);
+true
+5000
+55 - Contains, Typed :: contains*(STATEMENT,CALL)
+
+Select BOOLEAN such that Contains*(51,56);
+true
+5000
+56 - Contains, Typed :: contains*(STATEMENT,VARIABLE)
+
+Select BOOLEAN such that Contains*(51,"mango");
+true
+5000
+57 - Contains, Typed :: contains*(STATEMENT,PLUS)
+plus pls;
+Select BOOLEAN such that Contains*(61,pls);
+true
+5000
+58 - Contains, Typed :: contains*(STATEMENT,MINUS)
+minus min;
+Select BOOLEAN such that Contains*(61,min);
+true
+5000
+59 - Contains, Typed :: contains*(STATEMENT,MULTIPLY)
+times tm;
+Select BOOLEAN such that Contains*(61,tm);
+true
+5000
+60 - Contains, Typed :: contains*(STATEMENT,CONSTANT)
+
+Select BOOLEAN such that Contains*(61,"103");
+true
+5000
+61 - Contains, Typed :: contains*(PLUS,VARIABLE)
+plus pls;
+Select BOOLEAN such that Contains*(pls,"orange");
+true
+5000
+62 - Contains, Typed :: contains*(PLUS,CONSTANT)
+plus pls;
+Select BOOLEAN such that Contains*(pls,"8");
+true
+5000
+63 - Contains, Typed :: contains*(PLUS,MULTIPLY)
+plus pls; times tm;
+Select BOOLEAN such that Contains*(pls,tm);
+true
+5000
+64 - Contains, Typed :: contains*(PLUS,MINUS)
+plus pls; minus min;
+Select BOOLEAN such that Contains*(pls,min);
+false
+5000
+65 - Contains, Typed :: contains*(PLUS,PLUS)
+plus pls1,pls2;
+Select BOOLEAN such that Contains*(pls1,pls2);
+true
+5000
+66 - Contains, Typed :: contains*(MINUS,VARIABLE)
+minus min;
+Select BOOLEAN such that Contains*(min,"kimchi");
+true
+5000
+67 - Contains, Typed :: contains*(MINUS,CONSTANT)
+minus min;
+Select BOOLEAN such that Contains*(min,"9");
+true
+5000
+68 - Contains, Typed :: contains*(MINUS,MULTIPLY)
+minus min; times tm;
+Select BOOLEAN such that Contains*(min,tm);
+true
+5000
+70 - Contains, Typed :: contains*(MINUS,PLUS)
+minus min; plus pls;
+Select BOOLEAN such that Contains*(min,pls);
+true
+5000
+71 - Contains, Typed :: contains*(MULTIPLY,VARIABLE)
+times tm;
+Select BOOLEAN such that Contains*(tm,"egg");
+true
+5000
+72 - Contains, Typed :: contains*(MULTIPLY,CONSTANT)
+times tm;
+Select BOOLEAN such that Contains*(tm,"8");
+true
+5000
+73 - Contains, Typed :: contains*(MULTIPLY,MULTIPLY)
+times tm1,tm2;
+Select BOOLEAN such that Contains*(tm1,tm2);
+true
+5000
+74 - Contains, Typed :: contains*(MULTIPLY,MINUS)
+times tm; minus min;
+Select BOOLEAN such that Contains*(tm,min);
+true
+5000
+75 - Contains, Typed :: contains*(MULTIPLY,PLUS)
+times tm; plus pls;
+Select BOOLEAN such that Contains*(tm,pls);
+true
+5000
+76 - Contains, Typed :: contains*(CALL,ASSIGNMENT)
+
+Select BOOLEAN such that Contains*(125,126);
+false
+5000
+77 - Contains, Typed :: contains*(CONSTANT,VARIABLE)
+
+Select BOOLEAN such that Contains*("999","lamp");
+false
+5000
+78 - Contains, Typed :: contains*(VARIABLE,STATEMENT)
+
+Select BOOLEAN such that Contains*("lamp",132);
+false
+5000
+6 - Contains, Typed :: contains*(IF,STMT_LIST)
+
+Select BOOLEAN such that Contains*(41,42);
+true
+5000
+7 - Contains, Typed :: contains*(IF,STATEMENT)
+
+Select BOOLEAN such that Contains*(41,42);
+true
+5000

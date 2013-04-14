@@ -1,0 +1,3169 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>CS3202</name><parsing_time_taken>11270.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" Complex Simple">
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >1</id><querystr><![CDATA[assign a1; variable v1;  Select a1 such that Modifies(a1,v1);]]></querystr>
+<stuans>1,547,2,307,360,464,3,364,6,4,548,20,213,43,297,465,365,5,377,8,10,16,425,31,11,315,515,32,534,12,207,283,37,89,14,190,27,436,90,138,18,500,448,155,83,362,546,19,235,82,396,447,80,21,539,430,457,558,24,435,454,194,357,39,434,554,25,142,161,73,26,33,34,403,438,35,38,555,69,186,75,101,294,413,42,638,183,62,44,453,254,86,63,211,45,295,214,46,397,49,50,71,191,52,262,54,517,57,93,540,58,561,79,248,59,541,88,65,461,78,157,444,343,544,66,68,85,72,77,81,184,84,87,91,203,92,512,94,208,95,96,97,98,103,105,107,491,109,470,110,218,394,112,419,284,114,118,119,121,410,475,494,122,124,126,542,651,129,132,133,136,137,139,479,140,141,238,381,143,310,144,145,146,147,366,148,345,149,281,150,346,151,152,348,405,153,154,233,156,300,361,545,158,159,160,162,437,163,380,164,468,165,166,167,168,169,359,376,451,170,463,171,172,173,466,174,175,176,525,177,509,178,179,511,180,488,181,182,239,185,187,556,188,469,189,224,192,356,373,193,458,195,196,627,212,197,198,199,415,200,201,202,204,519,205,439,206,209,384,210,215,216,230,217,219,420,441,220,551,221,222,223,333,225,278,226,227,228,229,231,232,234,236,237,240,241,260,399,242,265,243,266,244,245,264,246,269,247,249,421,391,250,271,251,272,389,252,253,255,285,256,382,257,452,258,279,259,261,426,263,267,473,268,270,273,274,275,276,277,335,280,344,401,282,286,287,288,289,367,414,290,291,308,292,293,296,298,533,299,301,302,506,303,442,304,428,449,503,305,306,363,309,311,312,516,313,314,316,317,353,318,319,407,320,321,526,322,383,323,324,325,326,639,327,328,486,329,330,331,332,334,336,337,536,338,339,340,549,341,342,507,347,529,349,350,371,351,510,352,354,375,355,372,358,368,369,370,374,378,379,385,387,388,390,392,393,521,543,395,398,400,484,402,446,404,406,408,409,411,489,412,496,416,417,418,422,423,440,424,427,429,431,450,432,433,456,443,505,445,455,459,460,462,467,471,490,472,474,493,476,477,492,478,497,480,523,481,482,483,520,485,487,495,498,499,501,502,504,537,508,513,557,514,518,522,524,527,528,530,553,531,550,532,535,538,552,559,560,562,563,564,565,566,567,568,569,570,571,572,573,574,575,576,577,578,579,580,581,582,583,584,585,586,587,588,589,590,591,592,593,594,595,596,597,598,599,600,601,602,603,604,605,606,607,608,609,610,611,612,613,614,615,616,617,618,619,620,621,622,623,624,625,626,628,629,630,631,632,633,634,635,636,640,641,642,643,645,646,647,649,650,652</stuans>
+<correct>1,10,101,103,105,107,109,11,110,112,114,118,119,12,121,122,124,126,129,132,133,137,14,16,18,19,2,20,21,24,25,26,27,3,31,32,33,34,35,37,38,39,4,42,43,44,45,46,49,5,50,52,54,57,58,59,6,62,63,65,66,68,69,71,72,73,75,77,78,79,8,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,136,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,387,388,389,390,391,392,393,394,395,396,397,398,399,400,401,402,403,404,405,406,407,408,409,410,411,412,413,414,415,416,417,418,419,420,421,422,423,424,425,426,427,428,429,430,431,432,433,434,435,436,437,438,439,440,441,442,443,444,445,446,447,448,449,450,451,452,453,454,455,456,457,458,459,460,461,462,463,464,465,466,467,468,469,470,471,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,504,505,506,507,508,509,510,511,512,513,514,515,516,517,518,519,520,521,522,523,524,525,526,527,528,529,530,531,532,533,534,535,536,537,538,539,540,541,542,543,544,545,546,547,548,549,550,551,552,553,554,555,556,557,558,559,560,561,562,563,564,565,566,567,568,569,570,571,572,573,574,575,576,577,578,579,580,581,582,583,584,585,586,587,588,589,590,591,592,593,594,595,596,597,598,599,600,601,602,603,604,605,606,607,608,609,610,611,612,613,614,615,616,617,618,619,620,621,622,623,624,625,626,627,628,629,630,631,632,633,634,635,636,638,639,640,641,642,643,645,646,647,649,650,651,652</correct>
+<time_taken>424.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >2</id><querystr><![CDATA[while w1; variable v1; Select w1 such that Modifies(w1,v1);]]></querystr>
+<stuans>102,104,7,23,9,115,13,116,36,15,51,637,29,55,60,74,76,99,100,106,108,111,113,644,648</stuans>
+<correct>100,102,104,106,108,111,113,115,116,13,15,23,29,36,51,55,60,7,74,76,9,99,637,644,648</correct>
+<time_taken>82.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >3</id><querystr><![CDATA[if i1; variable v1; Select i1 such that Modifies(i1,v1);]]></querystr>
+<stuans>17,70,22,41,30,48,64,61,67,117,131</stuans>
+<correct>117,131,17,22,30,41,48,61,64,67,70</correct>
+<time_taken>74.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >4</id><querystr><![CDATA[call c1; variable v1; Select c1 such that Modifies(c1,v1);]]></querystr>
+<stuans>125,127,28,128,135,53,120,40,56,47,123,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,28,40,47,53,56,386</correct>
+<time_taken>740.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >5</id><querystr><![CDATA[procedure p1; variable v1; Select p1 such that Modifies(p1,v1);]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Goneril,Henry,Illidan,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Goneril,Henry,Illidan,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>654.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >6</id><querystr><![CDATA[assign a1; variable v1;  Select v1 such that Modifies(a1,v1);]]></querystr>
+<stuans>apple,cAeN195,eEwC553,banana,dSgA244,tSvF291,vLvW455,carrot,sHxK787,fish,donut,door,fQyZ791,penguin,yTdX740,yCoC222,oSpX526,egg,gCkR802,gummy,tVoL77,zPwY307,newt,oKgN698,ham,innard,jam,pear,dFjU746,cockroach,kimchi,lLtK602,lAyS476,dinosaur,mTvR446,leek,uGsJ754,xZfZ774,jaguar,mango,wSsG361,oWwF4,mEtX223,nJrH2,aMkZ333,nachos,hEkX373,keep,orange,aeroplane,qZeJ43,kKoR43,xEeG147,basin,aXmZ855,gFjJ203,cloud,eOsR422,mOaR162,z,rWhB737,zRkW105,cQjE457,elevator,nMsM875,monkey,qHpJ294,oCuS364,kOdR658,fan,rYjN166,lTnS64,garbage,lWxU53,hanger,mEhG497,gRoW570,iKuC151,wGiZ578,hVsT472,igloo,fXzU62,yLcJ287,lion,mKbJ14,jWkS55,xWjO114,cNlH131,jumper,lamp,vFhC604,ant,fox,xRyD162,hKyM613,beetle,kHsN220,rVcA926,pAfK338,gNqP615,elephant,goat,yZiE37,hamster,kangeroo,cUxV65,rQeG749,gYuI361,owl,eVdF177,rMaR886,quail,tJuR573,xWgB442,hUzH278,fExS590,rFeM285,cOgA336,rCxB766,hPtO722,fFaT657,p,sZkP243,ePtK115,t,dKkS285,tLaB218,pLjF613,oZwC845,yNuT380,uMfC466,aGeK401,sZcM205,lEyC960,hUdY836,dWkX968,xRmO234,iVkZ787,lVfH988,aTbO966,sXzX982,rYsJ539,xLjZ812,aJqZ17,sCxD14,wUjC252,cMaW943,aIdR679,lRlP26,iLzP805,uQrM333,bHgO153,tFqU27,uFbA911,uRaO9,cVmB701,oGcQ143,yKcB355,oUoI583,iKfW273,rDhP641,oDoJ500,aGaF102,rVtT305,nCzC848,sJnX426,oTaF764,wJfV914,mUoY562,jBnY898,oPwO298,xLtG191,uZzY318,hXsF91,uGaD286,dUlJ226,kIoJ477,uLgJ625,wXhL467,rNuB65,fHvH813,wYpH792,mPfA191,eVrB196,bEqQ592,eXbZ260,uSfR536,tYyL280,rKjJ948,rRaM272,sOhS206,dVcB715,qTyI867,wOzJ583,cGtS123,oXvA471,hWpQ960,qVoL483,zOxA571,uFnL917,cEgO284,sAeE565,jRbM661,aSuJ364,rDnQ139,qPlD875,cSxL227,wGfG320,iFqP724,lDaK93,hHvH288,vQuM382,fNrG936,xAcZ842,wFmP401,iVyQ418,jOfX344,pIqV415,mIdT916,qVaZ975,gAbK837,nBrX977,vFsP982,cRjY3,rUfF135,lZqH430,oLkL612,aIsE574,qOsE255,cUkL619,kQvE485,mBwK96,hWvN297,rFxS478,hGtO432,jZoW370,iXxA739,qQcA233,wLrS409,aBnX295,zWiY404,tQzY994,hPbT51,eRiA483,eBcF648,rKtK883,oOlU266,bPeT591,dNjX405,nYoY642,lRtA131,iKsH37,fReR710,bOoP479,pQmN564,vLvE12,eBjI662,sNgR726,zNoM628,pWgZ360,lYsZ293,gHbH274,zPhD127,sWpH158,wOhS88,vSaV957,oCuJ866,hSnI881,rIkK713,lVyK224,sSnW326,sEpW336,zPiG111,xVlO169,yZnS702,eXbL428,fHvL878,qMdO443,nHcF476,xDhK339,cWiF658,pCnK857,xWkV539,kMqB138,vAgV320,jTqB504,tGxY44,fNmA752,bXcB632,tAmW546,oQtQ835,yKaN677,gCfH611,vKbR613,wIgK267,dKtS246,jIcR726,rLcO21,xHaT268,eWmA547,hKyH776,xSzY109,gCnZ261,xNgK58,mTzD333,bZfF759,aYvZ475,fDiE380,aUkR495,dQsC881,tNbT746,sJiA840,lKgP760,pXjD945,zQdT33,pIsP793,pGjD858,dNcE708,nItE94,rJmO344,vFaW507,kLpX893,jQpQ508,zJiU95,eJqU442,oTqE32,gPmQ83,dHcD52,yEiC775,jDaZ290,pOcE659,rCqN306,gBsH757,iOzZ508,uNjY188,fVdR262,nRgP130,kKlW317,aTbT78,oEkV500,wEyL959,rEzS156,cDnU259,dQwW200,jTrU701,jZkY314,kBmK584,xDzO159,eTlJ112,sWuD660,wIeU685,yYfZ964,wXcN883,pQfV4,iVaM50,cEhH329,yWeA650,aJrQ192,cUfE46,xVeA440,lFoR629,gCgM197,vWeY990,jCvB201,hDsZ776,nPpU60,pPeQ495,vHhB972,sCqU754,vDtU704,yRnZ896,uZbQ201,aEaH429,uTrQ724,sRkW581,gAnO884,eDqN694,eFvF420,cOgV336,sGaH347,dGxB722,uThU729,jIfH810,jHhL365,sYmG535,aVtI926,eUhA812,gCvN191,eJwK579,cKpE766,sSeJ164,cScO108,yXyW696,uNqC676,pVbU831,pTyS854,jQdV910,iEdU57,pThO565,gKwP717,bZnJ244,oBrY487,gVyU843,vSvH371,yLqW13,hEhB109,lFnE159,zPdI799,iJhI851,eTuV513,qEjZ998,mJqY47,zVoQ61,aPrW413,zFpS831,sFlO715,rTcL279,aWtB526,mFjG76,kRuC321,tWmD495,vDdH467,uVzG864,rTlD372,qIgC59,qOmG375,oMaW215,rLxO834,eJrV469,aTaM458,qDbG440,kCyI272,qUsB156,qHzR113,eTbB338,oRrI573,vZbI991,aPoD802,eUlQ651,cMvI670,hDmO645,vQnN919,fAwX397,pZhH193,lMuY335,cYhJ341,eMlV762,nDlE202,oXgG260,yJiC412,rUaF321,bOiM996,kTfQ478,yGjA720,gXwX696,vMrP421,cWlQ564,dIjH303,cLeY132,aSrU739,kKqL97,gAuZ469,tDwC10,bJcU579,eLaX854,fTtH911,hWlJ280,xKbR731,sUiT275,lHdL925,kWbC104,cJjK632,aMzK453,iAwT145,jGvI940,nChM928,dGwW994,nXuO7,bTeX403,tLlN941,yXhD167,xAiO159,dAxP409,zKeW582,iBiL349,yBmA286,fEvD910,iIqF937,tXtE58,jXfY786,kCeA266,zKfI857,pCxO92,iLcG821,uQrN134,dFjX98,wQiB321,uHuF203,pRzX130,dPwA91,oXeU770,wGaQ832,sZwP89,xNtM751,rCkP997,oIeT294,yOxP297,aNsW606,tVhS883,fUgE405,pJnU308,sXcK128,mHvN737,bGqM971,rUtF565,lScD281,eFxZ98,zIpD993,aRnV86,cOfC466,bZnW564,fIrI142,yDfV592,bCtI151,qDjR264,nPtX279,fSeH892,rLbS22,gBuU279,qNhE258,pJmB560,mYcE721,wNaJ218,eTeN427,cEnK634,oQxV921,gWgK325</stuans>
+<correct>aeroplane,ant,apple,banana,basin,beetle,carrot,cloud,cockroach,dinosaur,donut,door,egg,elephant,elevator,fan,fish,fox,garbage,goat,gummy,ham,hamster,hanger,igloo,innard,jaguar,jam,jumper,kangeroo,keep,kimchi,lamp,leek,lion,mango,monkey,nachos,newt,orange,owl,pear,penguin,quail,aBnX295,aEaH429,aGaF102,aGeK401,aIdR679,aIsE574,aJqZ17,aJrQ192,aMkZ333,aMzK453,aNsW606,aPoD802,aPrW413,aRnV86,aSrU739,aSuJ364,aTaM458,aTbO966,aTbT78,aUkR495,aVtI926,aWtB526,aXmZ855,aYvZ475,bCtI151,bEqQ592,bGqM971,bHgO153,bJcU579,bOiM996,bOoP479,bPeT591,bTeX403,bXcB632,bZfF759,bZnJ244,bZnW564,cAeN195,cDnU259,cEgO284,cEhH329,cEnK634,cGtS123,cJjK632,cKpE766,cLeY132,cMaW943,cMvI670,cNlH131,cOfC466,cOgA336,cOgV336,cQjE457,cRjY3,cScO108,cSxL227,cUfE46,cUkL619,cUxV65,cVmB701,cWiF658,cWlQ564,cYhJ341,dAxP409,dFjU746,dFjX98,dGwW994,dGxB722,dHcD52,dIjH303,dKkS285,dKtS246,dNcE708,dNjX405,dPwA91,dQsC881,dQwW200,dSgA244,dUlJ226,dVcB715,dWkX968,eBcF648,eBjI662,eDqN694,eEwC553,eFvF420,eFxZ98,eJqU442,eJrV469,eJwK579,eLaX854,eMlV762,eOsR422,ePtK115,eRiA483,eTbB338,eTeN427,eTlJ112,eTuV513,eUhA812,eUlQ651,eVdF177,eVrB196,eWmA547,eXbL428,eXbZ260,fAwX397,fDiE380,fEvD910,fExS590,fFaT657,fHvH813,fHvL878,fIrI142,fNmA752,fNrG936,fQyZ791,fReR710,fSeH892,fTtH911,fUgE405,fVdR262,fXzU62,gAbK837,gAnO884,gAuZ469,gBsH757,gBuU279,gCfH611,gCgM197,gCkR802,gCnZ261,gCvN191,gFjJ203,gHbH274,gKwP717,gNqP615,gPmQ83,gRoW570,gVyU843,gWgK325,gXwX696,gYuI361,hDmO645,hDsZ776,hEhB109,hEkX373,hGtO432,hHvH288,hKyH776,hKyM613,hPbT51,hPtO722,hSnI881,hUdY836,hUzH278,hVsT472,hWlJ280,hWpQ960,hWvN297,hXsF91,iAwT145,iBiL349,iEdU57,iFqP724,iIqF937,iJhI851,iKfW273,iKsH37,iKuC151,iLcG821,iLzP805,iOzZ508,iVaM50,iVkZ787,iVyQ418,iXxA739,jBnY898,jCvB201,jDaZ290,jGvI940,jHhL365,jIcR726,jIfH810,jOfX344,jQdV910,jQpQ508,jRbM661,jTqB504,jTrU701,jWkS55,jXfY786,jZkY314,jZoW370,kBmK584,kCeA266,kCyI272,kHsN220,kIoJ477,kKlW317,kKoR43,kKqL97,kLpX893,kMqB138,kOdR658,kQvE485,kRuC321,kTfQ478,kWbC104,lAyS476,lDaK93,lEyC960,lFnE159,lFoR629,lHdL925,lKgP760,lLtK602,lMuY335,lRlP26,lRtA131,lScD281,lTnS64,lVfH988,lVyK224,lWxU53,lYsZ293,lZqH430,mBwK96,mEhG497,mEtX223,mFjG76,mHvN737,mIdT916,mJqY47,mKbJ14,mOaR162,mPfA191,mTvR446,mTzD333,mUoY562,mYcE721,nBrX977,nChM928,nCzC848,nDlE202,nHcF476,nItE94,nJrH2,nMsM875,nPpU60,nPtX279,nRgP130,nXuO7,nYoY642,oBrY487,oCuJ866,oCuS364,oDoJ500,oEkV500,oGcQ143,oIeT294,oKgN698,oLkL612,oMaW215,oOlU266,oPwO298,oQtQ835,oQxV921,oRrI573,oSpX526,oTaF764,oTqE32,oUoI583,oWwF4,oXeU770,oXgG260,oXvA471,oZwC845,p,pAfK338,pCnK857,pCxO92,pGjD858,pIqV415,pIsP793,pJmB560,pJnU308,pLjF613,pOcE659,pPeQ495,pQfV4,pQmN564,pRzX130,pThO565,pTyS854,pVbU831,pWgZ360,pXjD945,pZhH193,qDbG440,qDjR264,qEjZ998,qHpJ294,qHzR113,qIgC59,qMdO443,qNhE258,qOmG375,qOsE255,qPlD875,qQcA233,qTyI867,qUsB156,qVaZ975,qVoL483,qZeJ43,rCkP997,rCqN306,rCxB766,rDhP641,rDnQ139,rEzS156,rFeM285,rFxS478,rIkK713,rJmO344,rKjJ948,rKtK883,rLbS22,rLcO21,rLxO834,rMaR886,rNuB65,rQeG749,rRaM272,rTcL279,rTlD372,rUaF321,rUfF135,rUtF565,rVcA926,rVtT305,rWhB737,rYjN166,rYsJ539,sAeE565,sCqU754,sCxD14,sEpW336,sFlO715,sGaH347,sHxK787,sJiA840,sJnX426,sNgR726,sOhS206,sRkW581,sSeJ164,sSnW326,sUiT275,sWpH158,sWuD660,sXcK128,sXzX982,sYmG535,sZcM205,sZkP243,sZwP89,t,tAmW546,tDwC10,tFqU27,tGxY44,tJuR573,tLaB218,tLlN941,tNbT746,tQzY994,tSvF291,tVhS883,tVoL77,tWmD495,tXtE58,tYyL280,uFbA911,uFnL917,uGaD286,uGsJ754,uHuF203,uLgJ625,uMfC466,uNjY188,uNqC676,uQrM333,uQrN134,uRaO9,uSfR536,uThU729,uTrQ724,uVzG864,uZbQ201,uZzY318,vAgV320,vDdH467,vDtU704,vFaW507,vFhC604,vFsP982,vHhB972,vKbR613,vLvE12,vLvW455,vMrP421,vQnN919,vQuM382,vSaV957,vSvH371,vWeY990,vZbI991,wEyL959,wFmP401,wGaQ832,wGfG320,wGiZ578,wIeU685,wIgK267,wJfV914,wLrS409,wNaJ218,wOhS88,wOzJ583,wQiB321,wSsG361,wUjC252,wXcN883,wXhL467,wYpH792,xAcZ842,xAiO159,xDhK339,xDzO159,xEeG147,xHaT268,xKbR731,xLjZ812,xLtG191,xNgK58,xNtM751,xRmO234,xRyD162,xSzY109,xVeA440,xVlO169,xWgB442,xWjO114,xWkV539,xZfZ774,yBmA286,yCoC222,yDfV592,yEiC775,yGjA720,yJiC412,yKaN677,yKcB355,yLcJ287,yLqW13,yNuT380,yOxP297,yRnZ896,yTdX740,yWeA650,yXhD167,yXyW696,yYfZ964,yZiE37,yZnS702,z,zFpS831,zIpD993,zJiU95,zKeW582,zKfI857,zNoM628,zOxA571,zPdI799,zPhD127,zPiG111,zPwY307,zQdT33,zRkW105,zVoQ61,zWiY404</correct>
+<time_taken>691.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >7</id><querystr><![CDATA[while w1; variable v1; Select v1 such that Modifies(w1,v1);]]></querystr>
+<stuans>apple,nPtX279,carrot,door,egg,fSeH892,fish,oQxV921,gummy,cEnK634,ham,innard,jam,pear,cockroach,kimchi,dinosaur,leek,jaguar,banana,mango,nachos,keep,aeroplane,cloud,elevator,fan,garbage,hanger,igloo,wNaJ218,jumper,ant,fox,goat,hamster,kangeroo,eTeN427,dKkS285,fIrI142</stuans>
+<correct>aeroplane,ant,apple,banana,carrot,cloud,cockroach,dinosaur,door,egg,elevator,fan,fish,fox,garbage,goat,gummy,ham,hamster,hanger,igloo,innard,jaguar,jam,jumper,kangeroo,keep,kimchi,leek,mango,nachos,pear,cEnK634,dKkS285,eTeN427,fIrI142,fSeH892,nPtX279,oQxV921,wNaJ218</correct>
+<time_taken>113.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >8</id><querystr><![CDATA[if i1; variable v1; Select v1 such that Modifies(i1,v1);]]></querystr>
+<stuans>cloud,carrot,kimchi,pear,leek,mango,nachos,keep,aeroplane,ham,door,elevator,fan,garbage,hanger,igloo,jumper,lamp</stuans>
+<correct>aeroplane,carrot,cloud,door,elevator,fan,garbage,ham,hanger,igloo,jumper,keep,kimchi,lamp,leek,mango,nachos,pear</correct>
+<time_taken>90.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >9</id><querystr><![CDATA[call c1; variable v1; Select v1 such that Modifies(c1,v1);]]></querystr>
+<stuans>apple,cAeN195,eEwC553,banana,dSgA244,tSvF291,vLvW455,carrot,sHxK787,fish,donut,door,fQyZ791,penguin,yTdX740,yCoC222,oSpX526,egg,gCkR802,gummy,tVoL77,zPwY307,newt,oKgN698,ham,innard,jam,pear,dFjU746,cockroach,kimchi,lLtK602,lAyS476,dinosaur,mTvR446,leek,uGsJ754,xZfZ774,jaguar,mango,wSsG361,oWwF4,mEtX223,nJrH2,aMkZ333,nachos,hEkX373,keep,orange,aeroplane,qZeJ43,kKoR43,xEeG147,basin,aXmZ855,gFjJ203,cloud,eOsR422,mOaR162,z,rWhB737,zRkW105,cQjE457,elevator,nMsM875,monkey,qHpJ294,oCuS364,kOdR658,fan,rYjN166,lTnS64,garbage,lWxU53,hanger,mEhG497,gRoW570,igloo,fXzU62,yLcJ287,lion,mKbJ14,jWkS55,xWjO114,cNlH131,jumper,lamp,vFhC604,ant,fox,xRyD162,hKyM613,beetle,kHsN220,rVcA926,pAfK338,gNqP615,elephant,goat,yZiE37,hamster,kangeroo,cUxV65,rQeG749,gYuI361,owl,eVdF177,rMaR886,quail,tJuR573,xWgB442,hUzH278,fExS590,rFeM285,cOgA336,rCxB766,hPtO722,fFaT657,p,sZkP243,ePtK115,t,dKkS285,tLaB218,pLjF613,oZwC845,yNuT380,uMfC466,aGeK401,sZcM205,lEyC960,iKuC151,wGiZ578,hVsT472,hUdY836,dWkX968,xRmO234,iVkZ787,lVfH988,aTbO966,sXzX982,rYsJ539,xLjZ812,aJqZ17,sCxD14,wUjC252,cMaW943,aIdR679,lRlP26,iLzP805,uQrM333,bHgO153,tFqU27,uFbA911,uRaO9,cVmB701,oGcQ143,yKcB355,oUoI583,iKfW273,rDhP641,oDoJ500,aGaF102,rVtT305,nCzC848,sJnX426,oTaF764,wJfV914,mUoY562,jBnY898,oPwO298,xLtG191,uZzY318,hXsF91,uGaD286,dUlJ226,kIoJ477,uLgJ625,wXhL467,rNuB65,fHvH813,wYpH792,mPfA191,eVrB196,bEqQ592,eXbZ260,uSfR536,tYyL280,rKjJ948,rRaM272,sOhS206,dVcB715,qTyI867,wOzJ583,cGtS123,oXvA471,hWpQ960,qVoL483,zOxA571,uFnL917,cEgO284,sAeE565,jRbM661,aSuJ364,rDnQ139,qPlD875,cSxL227,wGfG320,iFqP724,lDaK93,hHvH288,vQuM382,fNrG936,xAcZ842,wFmP401,iVyQ418,jOfX344,pIqV415,mIdT916,qVaZ975,gAbK837,nBrX977,vFsP982,cRjY3,rUfF135,lZqH430,oLkL612,aIsE574,qOsE255,cUkL619,kQvE485,mBwK96,hWvN297,rFxS478,hGtO432,jZoW370,iXxA739,qQcA233,wLrS409,aBnX295,zWiY404,tQzY994,hPbT51,eRiA483,eBcF648,rKtK883,oOlU266,bPeT591,dNjX405,nYoY642,lRtA131,iKsH37,fReR710,bOoP479,pQmN564,vLvE12,eBjI662,sNgR726,zNoM628,pWgZ360,lYsZ293,gHbH274,zPhD127,sWpH158,wOhS88,vSaV957,oCuJ866,hSnI881,rIkK713,lVyK224,sSnW326,sEpW336,zPiG111,xVlO169,yZnS702,eXbL428,fHvL878,qMdO443,nHcF476,xDhK339,cWiF658,pCnK857,xWkV539,kMqB138,vAgV320,jTqB504,tGxY44,fNmA752,bXcB632,tAmW546,oQtQ835,yKaN677,gCfH611,vKbR613,wIgK267,dKtS246,jIcR726,rLcO21,xHaT268,eWmA547,hKyH776,xSzY109,gCnZ261,xNgK58,mTzD333,bZfF759,aYvZ475,fDiE380,aUkR495,dQsC881,tNbT746,sJiA840,lKgP760,pXjD945,zQdT33,pIsP793,pGjD858,dNcE708,nItE94,rJmO344,vFaW507,kLpX893,jQpQ508,zJiU95,eJqU442,oTqE32,gPmQ83,dHcD52,yEiC775,jDaZ290,pOcE659,rCqN306,gBsH757,iOzZ508,uNjY188,fVdR262,nRgP130,kKlW317,aTbT78,oEkV500,wEyL959,rEzS156,cDnU259,dQwW200,jTrU701,jZkY314,kBmK584,xDzO159,eTlJ112,sWuD660,wIeU685,yYfZ964,wXcN883,pQfV4,iVaM50,cEhH329,yWeA650,aJrQ192,cUfE46,xVeA440,lFoR629,gCgM197,vWeY990,jCvB201,hDsZ776,nPpU60,pPeQ495,vHhB972,sCqU754,vDtU704,yRnZ896,uZbQ201,aEaH429,uTrQ724,sRkW581,gAnO884,eDqN694,eFvF420,cOgV336,sGaH347,dGxB722,uThU729,jIfH810,jHhL365,sYmG535,aVtI926,eUhA812,gCvN191,eJwK579,cKpE766,sSeJ164,cScO108,yXyW696,uNqC676,pVbU831,pTyS854,jQdV910,iEdU57,pThO565,gKwP717,bZnJ244,oBrY487,gVyU843,vSvH371,yLqW13,hEhB109,lFnE159,zPdI799,iJhI851,eTuV513,qEjZ998,mJqY47,zVoQ61,aPrW413,zFpS831,sFlO715,rTcL279,aWtB526,mFjG76,kRuC321,tWmD495,vDdH467,uVzG864,rTlD372,qIgC59,qOmG375,oMaW215,rLxO834,eJrV469,aTaM458,qDbG440,kCyI272,qUsB156,qHzR113,eTbB338,oRrI573,vZbI991,aPoD802,eUlQ651,cMvI670,hDmO645,vQnN919,fAwX397,pZhH193,lMuY335,cYhJ341,eMlV762,nDlE202,oXgG260,yJiC412,rUaF321,bOiM996,kTfQ478,yGjA720,gXwX696,vMrP421,cWlQ564,dIjH303,cLeY132,aSrU739,kKqL97,gAuZ469,tDwC10,bJcU579,eLaX854,fTtH911,hWlJ280,xKbR731,sUiT275,lHdL925,kWbC104,cJjK632,aMzK453,iAwT145,jGvI940,nChM928,dGwW994,nXuO7,bTeX403,tLlN941,yXhD167,xAiO159,dAxP409,zKeW582,iBiL349,yBmA286,fEvD910,iIqF937,tXtE58,jXfY786,kCeA266,zKfI857,pCxO92,iLcG821,uQrN134,dFjX98,wQiB321,uHuF203,pRzX130,dPwA91,oXeU770,wGaQ832,sZwP89,xNtM751,rCkP997,oIeT294,yOxP297,aNsW606,tVhS883,fUgE405,pJnU308,sXcK128,mHvN737,bGqM971,rUtF565,lScD281,eFxZ98,zIpD993,aRnV86,cOfC466,bZnW564,fIrI142,yDfV592,bCtI151,qDjR264,nPtX279,fSeH892,rLbS22,gBuU279,qNhE258,pJmB560,mYcE721,wNaJ218,eTeN427,cEnK634,oQxV921,gWgK325</stuans>
+<correct>aeroplane,ant,apple,banana,basin,beetle,carrot,cloud,cockroach,dinosaur,donut,door,egg,elephant,elevator,fan,fish,fox,garbage,goat,gummy,ham,hamster,hanger,igloo,innard,jaguar,jam,jumper,kangeroo,keep,kimchi,lamp,leek,lion,mango,monkey,nachos,newt,orange,owl,pear,penguin,quail,aBnX295,aEaH429,aGaF102,aGeK401,aIdR679,aIsE574,aJqZ17,aJrQ192,aMkZ333,aMzK453,aNsW606,aPoD802,aPrW413,aRnV86,aSrU739,aSuJ364,aTaM458,aTbO966,aTbT78,aUkR495,aVtI926,aWtB526,aXmZ855,aYvZ475,bCtI151,bEqQ592,bGqM971,bHgO153,bJcU579,bOiM996,bOoP479,bPeT591,bTeX403,bXcB632,bZfF759,bZnJ244,bZnW564,cAeN195,cDnU259,cEgO284,cEhH329,cEnK634,cGtS123,cJjK632,cKpE766,cLeY132,cMaW943,cMvI670,cNlH131,cOfC466,cOgA336,cOgV336,cQjE457,cRjY3,cScO108,cSxL227,cUfE46,cUkL619,cUxV65,cVmB701,cWiF658,cWlQ564,cYhJ341,dAxP409,dFjU746,dFjX98,dGwW994,dGxB722,dHcD52,dIjH303,dKkS285,dKtS246,dNcE708,dNjX405,dPwA91,dQsC881,dQwW200,dSgA244,dUlJ226,dVcB715,dWkX968,eBcF648,eBjI662,eDqN694,eEwC553,eFvF420,eFxZ98,eJqU442,eJrV469,eJwK579,eLaX854,eMlV762,eOsR422,ePtK115,eRiA483,eTbB338,eTeN427,eTlJ112,eTuV513,eUhA812,eUlQ651,eVdF177,eVrB196,eWmA547,eXbL428,eXbZ260,fAwX397,fDiE380,fEvD910,fExS590,fFaT657,fHvH813,fHvL878,fIrI142,fNmA752,fNrG936,fQyZ791,fReR710,fSeH892,fTtH911,fUgE405,fVdR262,fXzU62,gAbK837,gAnO884,gAuZ469,gBsH757,gBuU279,gCfH611,gCgM197,gCkR802,gCnZ261,gCvN191,gFjJ203,gHbH274,gKwP717,gNqP615,gPmQ83,gRoW570,gVyU843,gWgK325,gXwX696,gYuI361,hDmO645,hDsZ776,hEhB109,hEkX373,hGtO432,hHvH288,hKyH776,hKyM613,hPbT51,hPtO722,hSnI881,hUdY836,hUzH278,hVsT472,hWlJ280,hWpQ960,hWvN297,hXsF91,iAwT145,iBiL349,iEdU57,iFqP724,iIqF937,iJhI851,iKfW273,iKsH37,iKuC151,iLcG821,iLzP805,iOzZ508,iVaM50,iVkZ787,iVyQ418,iXxA739,jBnY898,jCvB201,jDaZ290,jGvI940,jHhL365,jIcR726,jIfH810,jOfX344,jQdV910,jQpQ508,jRbM661,jTqB504,jTrU701,jWkS55,jXfY786,jZkY314,jZoW370,kBmK584,kCeA266,kCyI272,kHsN220,kIoJ477,kKlW317,kKoR43,kKqL97,kLpX893,kMqB138,kOdR658,kQvE485,kRuC321,kTfQ478,kWbC104,lAyS476,lDaK93,lEyC960,lFnE159,lFoR629,lHdL925,lKgP760,lLtK602,lMuY335,lRlP26,lRtA131,lScD281,lTnS64,lVfH988,lVyK224,lWxU53,lYsZ293,lZqH430,mBwK96,mEhG497,mEtX223,mFjG76,mHvN737,mIdT916,mJqY47,mKbJ14,mOaR162,mPfA191,mTvR446,mTzD333,mUoY562,mYcE721,nBrX977,nChM928,nCzC848,nDlE202,nHcF476,nItE94,nJrH2,nMsM875,nPpU60,nPtX279,nRgP130,nXuO7,nYoY642,oBrY487,oCuJ866,oCuS364,oDoJ500,oEkV500,oGcQ143,oIeT294,oKgN698,oLkL612,oMaW215,oOlU266,oPwO298,oQtQ835,oQxV921,oRrI573,oSpX526,oTaF764,oTqE32,oUoI583,oWwF4,oXeU770,oXgG260,oXvA471,oZwC845,p,pAfK338,pCnK857,pCxO92,pGjD858,pIqV415,pIsP793,pJmB560,pJnU308,pLjF613,pOcE659,pPeQ495,pQfV4,pQmN564,pRzX130,pThO565,pTyS854,pVbU831,pWgZ360,pXjD945,pZhH193,qDbG440,qDjR264,qEjZ998,qHpJ294,qHzR113,qIgC59,qMdO443,qNhE258,qOmG375,qOsE255,qPlD875,qQcA233,qTyI867,qUsB156,qVaZ975,qVoL483,qZeJ43,rCkP997,rCqN306,rCxB766,rDhP641,rDnQ139,rEzS156,rFeM285,rFxS478,rIkK713,rJmO344,rKjJ948,rKtK883,rLbS22,rLcO21,rLxO834,rMaR886,rNuB65,rQeG749,rRaM272,rTcL279,rTlD372,rUaF321,rUfF135,rUtF565,rVcA926,rVtT305,rWhB737,rYjN166,rYsJ539,sAeE565,sCqU754,sCxD14,sEpW336,sFlO715,sGaH347,sHxK787,sJiA840,sJnX426,sNgR726,sOhS206,sRkW581,sSeJ164,sSnW326,sUiT275,sWpH158,sWuD660,sXcK128,sXzX982,sYmG535,sZcM205,sZkP243,sZwP89,t,tAmW546,tDwC10,tFqU27,tGxY44,tJuR573,tLaB218,tLlN941,tNbT746,tQzY994,tSvF291,tVhS883,tVoL77,tWmD495,tXtE58,tYyL280,uFbA911,uFnL917,uGaD286,uGsJ754,uHuF203,uLgJ625,uMfC466,uNjY188,uNqC676,uQrM333,uQrN134,uRaO9,uSfR536,uThU729,uTrQ724,uVzG864,uZbQ201,uZzY318,vAgV320,vDdH467,vDtU704,vFaW507,vFhC604,vFsP982,vHhB972,vKbR613,vLvE12,vLvW455,vMrP421,vQnN919,vQuM382,vSaV957,vSvH371,vWeY990,vZbI991,wEyL959,wFmP401,wGaQ832,wGfG320,wGiZ578,wIeU685,wIgK267,wJfV914,wLrS409,wNaJ218,wOhS88,wOzJ583,wQiB321,wSsG361,wUjC252,wXcN883,wXhL467,wYpH792,xAcZ842,xAiO159,xDhK339,xDzO159,xEeG147,xHaT268,xKbR731,xLjZ812,xLtG191,xNgK58,xNtM751,xRmO234,xRyD162,xSzY109,xVeA440,xVlO169,xWgB442,xWjO114,xWkV539,xZfZ774,yBmA286,yCoC222,yDfV592,yEiC775,yGjA720,yJiC412,yKaN677,yKcB355,yLcJ287,yLqW13,yNuT380,yOxP297,yRnZ896,yTdX740,yWeA650,yXhD167,yXyW696,yYfZ964,yZiE37,yZnS702,z,zFpS831,zIpD993,zJiU95,zKeW582,zKfI857,zNoM628,zOxA571,zPdI799,zPhD127,zPiG111,zPwY307,zQdT33,zRkW105,zVoQ61,zWiY404</correct>
+<time_taken>1240.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >10</id><querystr><![CDATA[procedure p1; variable v1; Select v1 such that Modifies(p1,v1);]]></querystr>
+<stuans>apple,cAeN195,eEwC553,banana,dSgA244,tSvF291,vLvW455,carrot,sHxK787,fish,donut,door,fQyZ791,penguin,yTdX740,yCoC222,oSpX526,egg,gCkR802,gummy,tVoL77,zPwY307,newt,oKgN698,ham,innard,jam,pear,dFjU746,cockroach,kimchi,lLtK602,lAyS476,dinosaur,mTvR446,leek,uGsJ754,xZfZ774,jaguar,mango,wSsG361,oWwF4,mEtX223,nJrH2,aMkZ333,nachos,hEkX373,keep,orange,aeroplane,qZeJ43,kKoR43,xEeG147,basin,aXmZ855,gFjJ203,cloud,eOsR422,mOaR162,z,rWhB737,zRkW105,cQjE457,elevator,nMsM875,monkey,qHpJ294,oCuS364,kOdR658,fan,rYjN166,lTnS64,garbage,lWxU53,hanger,mEhG497,gRoW570,igloo,fXzU62,yLcJ287,lion,mKbJ14,jWkS55,xWjO114,cNlH131,jumper,lamp,vFhC604,ant,fox,xRyD162,hKyM613,beetle,kHsN220,rVcA926,pAfK338,gNqP615,elephant,goat,yZiE37,hamster,kangeroo,cUxV65,rQeG749,gYuI361,owl,eVdF177,rMaR886,quail,tJuR573,xWgB442,hUzH278,fExS590,rFeM285,cOgA336,rCxB766,hPtO722,fFaT657,p,sZkP243,ePtK115,t,dKkS285,tLaB218,pLjF613,oZwC845,yNuT380,uMfC466,aGeK401,sZcM205,lEyC960,iKuC151,wGiZ578,hVsT472,hUdY836,dWkX968,xRmO234,iVkZ787,lVfH988,aTbO966,sXzX982,rYsJ539,xLjZ812,aJqZ17,sCxD14,wUjC252,cMaW943,aIdR679,lRlP26,iLzP805,uQrM333,bHgO153,tFqU27,uFbA911,uRaO9,cVmB701,oGcQ143,yKcB355,oUoI583,iKfW273,rDhP641,oDoJ500,aGaF102,rVtT305,nCzC848,sJnX426,oTaF764,wJfV914,mUoY562,jBnY898,oPwO298,xLtG191,uZzY318,hXsF91,uGaD286,dUlJ226,kIoJ477,uLgJ625,wXhL467,rNuB65,fHvH813,wYpH792,mPfA191,eVrB196,bEqQ592,eXbZ260,uSfR536,tYyL280,rKjJ948,rRaM272,sOhS206,dVcB715,qTyI867,wOzJ583,cGtS123,oXvA471,hWpQ960,qVoL483,zOxA571,uFnL917,cEgO284,sAeE565,jRbM661,aSuJ364,rDnQ139,qPlD875,cSxL227,wGfG320,iFqP724,lDaK93,hHvH288,vQuM382,fNrG936,xAcZ842,wFmP401,iVyQ418,jOfX344,pIqV415,mIdT916,qVaZ975,gAbK837,nBrX977,vFsP982,cRjY3,rUfF135,lZqH430,oLkL612,aIsE574,qOsE255,cUkL619,kQvE485,mBwK96,hWvN297,rFxS478,hGtO432,jZoW370,iXxA739,qQcA233,wLrS409,aBnX295,zWiY404,tQzY994,hPbT51,eRiA483,eBcF648,rKtK883,oOlU266,bPeT591,dNjX405,nYoY642,lRtA131,iKsH37,fReR710,bOoP479,pQmN564,vLvE12,eBjI662,sNgR726,zNoM628,pWgZ360,lYsZ293,gHbH274,zPhD127,sWpH158,wOhS88,vSaV957,oCuJ866,hSnI881,rIkK713,lVyK224,sSnW326,sEpW336,zPiG111,xVlO169,yZnS702,eXbL428,fHvL878,qMdO443,nHcF476,xDhK339,cWiF658,pCnK857,xWkV539,kMqB138,vAgV320,jTqB504,tGxY44,fNmA752,bXcB632,tAmW546,oQtQ835,yKaN677,gCfH611,vKbR613,wIgK267,dKtS246,jIcR726,rLcO21,xHaT268,eWmA547,hKyH776,xSzY109,gCnZ261,xNgK58,mTzD333,bZfF759,aYvZ475,fDiE380,aUkR495,dQsC881,tNbT746,sJiA840,lKgP760,pXjD945,zQdT33,pIsP793,pGjD858,dNcE708,nItE94,rJmO344,vFaW507,kLpX893,jQpQ508,zJiU95,eJqU442,oTqE32,gPmQ83,dHcD52,yEiC775,jDaZ290,pOcE659,rCqN306,gBsH757,iOzZ508,uNjY188,fVdR262,nRgP130,kKlW317,aTbT78,oEkV500,wEyL959,rEzS156,cDnU259,dQwW200,jTrU701,jZkY314,kBmK584,xDzO159,eTlJ112,sWuD660,wIeU685,yYfZ964,wXcN883,pQfV4,iVaM50,cEhH329,yWeA650,aJrQ192,cUfE46,xVeA440,lFoR629,gCgM197,vWeY990,jCvB201,hDsZ776,nPpU60,pPeQ495,vHhB972,sCqU754,vDtU704,yRnZ896,uZbQ201,aEaH429,uTrQ724,sRkW581,gAnO884,eDqN694,eFvF420,cOgV336,sGaH347,dGxB722,uThU729,jIfH810,jHhL365,sYmG535,aVtI926,eUhA812,gCvN191,eJwK579,cKpE766,sSeJ164,cScO108,yXyW696,uNqC676,pVbU831,pTyS854,jQdV910,iEdU57,pThO565,gKwP717,bZnJ244,oBrY487,gVyU843,vSvH371,yLqW13,hEhB109,lFnE159,zPdI799,iJhI851,eTuV513,qEjZ998,mJqY47,zVoQ61,aPrW413,zFpS831,sFlO715,rTcL279,aWtB526,mFjG76,kRuC321,tWmD495,vDdH467,uVzG864,rTlD372,qIgC59,qOmG375,oMaW215,rLxO834,eJrV469,aTaM458,qDbG440,kCyI272,qUsB156,qHzR113,eTbB338,oRrI573,vZbI991,aPoD802,eUlQ651,cMvI670,hDmO645,vQnN919,fAwX397,pZhH193,lMuY335,cYhJ341,eMlV762,nDlE202,oXgG260,yJiC412,rUaF321,bOiM996,kTfQ478,yGjA720,gXwX696,vMrP421,cWlQ564,dIjH303,cLeY132,aSrU739,kKqL97,gAuZ469,tDwC10,bJcU579,eLaX854,fTtH911,hWlJ280,xKbR731,sUiT275,lHdL925,kWbC104,cJjK632,aMzK453,iAwT145,jGvI940,nChM928,dGwW994,nXuO7,bTeX403,tLlN941,yXhD167,xAiO159,dAxP409,zKeW582,iBiL349,yBmA286,fEvD910,iIqF937,tXtE58,jXfY786,kCeA266,zKfI857,pCxO92,iLcG821,uQrN134,dFjX98,wQiB321,uHuF203,pRzX130,dPwA91,oXeU770,wGaQ832,sZwP89,xNtM751,rCkP997,oIeT294,yOxP297,aNsW606,tVhS883,fUgE405,pJnU308,sXcK128,mHvN737,bGqM971,rUtF565,lScD281,eFxZ98,zIpD993,aRnV86,cOfC466,bZnW564,fIrI142,yDfV592,bCtI151,qDjR264,nPtX279,fSeH892,rLbS22,gBuU279,qNhE258,pJmB560,mYcE721,wNaJ218,eTeN427,cEnK634,oQxV921,gWgK325</stuans>
+<correct>aeroplane,ant,apple,banana,basin,beetle,carrot,cloud,cockroach,dinosaur,donut,door,egg,elephant,elevator,fan,fish,fox,garbage,goat,gummy,ham,hamster,hanger,igloo,innard,jaguar,jam,jumper,kangeroo,keep,kimchi,lamp,leek,lion,mango,monkey,nachos,newt,orange,owl,pear,penguin,quail,aBnX295,aEaH429,aGaF102,aGeK401,aIdR679,aIsE574,aJqZ17,aJrQ192,aMkZ333,aMzK453,aNsW606,aPoD802,aPrW413,aRnV86,aSrU739,aSuJ364,aTaM458,aTbO966,aTbT78,aUkR495,aVtI926,aWtB526,aXmZ855,aYvZ475,bCtI151,bEqQ592,bGqM971,bHgO153,bJcU579,bOiM996,bOoP479,bPeT591,bTeX403,bXcB632,bZfF759,bZnJ244,bZnW564,cAeN195,cDnU259,cEgO284,cEhH329,cEnK634,cGtS123,cJjK632,cKpE766,cLeY132,cMaW943,cMvI670,cNlH131,cOfC466,cOgA336,cOgV336,cQjE457,cRjY3,cScO108,cSxL227,cUfE46,cUkL619,cUxV65,cVmB701,cWiF658,cWlQ564,cYhJ341,dAxP409,dFjU746,dFjX98,dGwW994,dGxB722,dHcD52,dIjH303,dKkS285,dKtS246,dNcE708,dNjX405,dPwA91,dQsC881,dQwW200,dSgA244,dUlJ226,dVcB715,dWkX968,eBcF648,eBjI662,eDqN694,eEwC553,eFvF420,eFxZ98,eJqU442,eJrV469,eJwK579,eLaX854,eMlV762,eOsR422,ePtK115,eRiA483,eTbB338,eTeN427,eTlJ112,eTuV513,eUhA812,eUlQ651,eVdF177,eVrB196,eWmA547,eXbL428,eXbZ260,fAwX397,fDiE380,fEvD910,fExS590,fFaT657,fHvH813,fHvL878,fIrI142,fNmA752,fNrG936,fQyZ791,fReR710,fSeH892,fTtH911,fUgE405,fVdR262,fXzU62,gAbK837,gAnO884,gAuZ469,gBsH757,gBuU279,gCfH611,gCgM197,gCkR802,gCnZ261,gCvN191,gFjJ203,gHbH274,gKwP717,gNqP615,gPmQ83,gRoW570,gVyU843,gWgK325,gXwX696,gYuI361,hDmO645,hDsZ776,hEhB109,hEkX373,hGtO432,hHvH288,hKyH776,hKyM613,hPbT51,hPtO722,hSnI881,hUdY836,hUzH278,hVsT472,hWlJ280,hWpQ960,hWvN297,hXsF91,iAwT145,iBiL349,iEdU57,iFqP724,iIqF937,iJhI851,iKfW273,iKsH37,iKuC151,iLcG821,iLzP805,iOzZ508,iVaM50,iVkZ787,iVyQ418,iXxA739,jBnY898,jCvB201,jDaZ290,jGvI940,jHhL365,jIcR726,jIfH810,jOfX344,jQdV910,jQpQ508,jRbM661,jTqB504,jTrU701,jWkS55,jXfY786,jZkY314,jZoW370,kBmK584,kCeA266,kCyI272,kHsN220,kIoJ477,kKlW317,kKoR43,kKqL97,kLpX893,kMqB138,kOdR658,kQvE485,kRuC321,kTfQ478,kWbC104,lAyS476,lDaK93,lEyC960,lFnE159,lFoR629,lHdL925,lKgP760,lLtK602,lMuY335,lRlP26,lRtA131,lScD281,lTnS64,lVfH988,lVyK224,lWxU53,lYsZ293,lZqH430,mBwK96,mEhG497,mEtX223,mFjG76,mHvN737,mIdT916,mJqY47,mKbJ14,mOaR162,mPfA191,mTvR446,mTzD333,mUoY562,mYcE721,nBrX977,nChM928,nCzC848,nDlE202,nHcF476,nItE94,nJrH2,nMsM875,nPpU60,nPtX279,nRgP130,nXuO7,nYoY642,oBrY487,oCuJ866,oCuS364,oDoJ500,oEkV500,oGcQ143,oIeT294,oKgN698,oLkL612,oMaW215,oOlU266,oPwO298,oQtQ835,oQxV921,oRrI573,oSpX526,oTaF764,oTqE32,oUoI583,oWwF4,oXeU770,oXgG260,oXvA471,oZwC845,p,pAfK338,pCnK857,pCxO92,pGjD858,pIqV415,pIsP793,pJmB560,pJnU308,pLjF613,pOcE659,pPeQ495,pQfV4,pQmN564,pRzX130,pThO565,pTyS854,pVbU831,pWgZ360,pXjD945,pZhH193,qDbG440,qDjR264,qEjZ998,qHpJ294,qHzR113,qIgC59,qMdO443,qNhE258,qOmG375,qOsE255,qPlD875,qQcA233,qTyI867,qUsB156,qVaZ975,qVoL483,qZeJ43,rCkP997,rCqN306,rCxB766,rDhP641,rDnQ139,rEzS156,rFeM285,rFxS478,rIkK713,rJmO344,rKjJ948,rKtK883,rLbS22,rLcO21,rLxO834,rMaR886,rNuB65,rQeG749,rRaM272,rTcL279,rTlD372,rUaF321,rUfF135,rUtF565,rVcA926,rVtT305,rWhB737,rYjN166,rYsJ539,sAeE565,sCqU754,sCxD14,sEpW336,sFlO715,sGaH347,sHxK787,sJiA840,sJnX426,sNgR726,sOhS206,sRkW581,sSeJ164,sSnW326,sUiT275,sWpH158,sWuD660,sXcK128,sXzX982,sYmG535,sZcM205,sZkP243,sZwP89,t,tAmW546,tDwC10,tFqU27,tGxY44,tJuR573,tLaB218,tLlN941,tNbT746,tQzY994,tSvF291,tVhS883,tVoL77,tWmD495,tXtE58,tYyL280,uFbA911,uFnL917,uGaD286,uGsJ754,uHuF203,uLgJ625,uMfC466,uNjY188,uNqC676,uQrM333,uQrN134,uRaO9,uSfR536,uThU729,uTrQ724,uVzG864,uZbQ201,uZzY318,vAgV320,vDdH467,vDtU704,vFaW507,vFhC604,vFsP982,vHhB972,vKbR613,vLvE12,vLvW455,vMrP421,vQnN919,vQuM382,vSaV957,vSvH371,vWeY990,vZbI991,wEyL959,wFmP401,wGaQ832,wGfG320,wGiZ578,wIeU685,wIgK267,wJfV914,wLrS409,wNaJ218,wOhS88,wOzJ583,wQiB321,wSsG361,wUjC252,wXcN883,wXhL467,wYpH792,xAcZ842,xAiO159,xDhK339,xDzO159,xEeG147,xHaT268,xKbR731,xLjZ812,xLtG191,xNgK58,xNtM751,xRmO234,xRyD162,xSzY109,xVeA440,xVlO169,xWgB442,xWjO114,xWkV539,xZfZ774,yBmA286,yCoC222,yDfV592,yEiC775,yGjA720,yJiC412,yKaN677,yKcB355,yLcJ287,yLqW13,yNuT380,yOxP297,yRnZ896,yTdX740,yWeA650,yXhD167,yXyW696,yYfZ964,yZiE37,yZnS702,z,zFpS831,zIpD993,zJiU95,zKeW582,zKfI857,zNoM628,zOxA571,zPdI799,zPhD127,zPiG111,zPwY307,zQdT33,zRkW105,zVoQ61,zWiY404</correct>
+<time_taken>1168.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >1</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"apple");]]></querystr>
+<stuans>1,27,121</stuans>
+<correct>1,121,27</correct>
+<time_taken>98.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >2</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"banana");]]></querystr>
+<stuans>2,35</stuans>
+<correct>2,35</correct>
+<time_taken>97.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >3</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"carrot");]]></querystr>
+<stuans>18,3,20,39</stuans>
+<correct>18,20,3,39</correct>
+<time_taken>102.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >4</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"donut");]]></querystr>
+<stuans>4</stuans>
+<correct>4</correct>
+<time_taken>102.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >5</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"egg");]]></querystr>
+<stuans>5,14</stuans>
+<correct>14,5</correct>
+<time_taken>102.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >6</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"fish");]]></querystr>
+<stuans>6,16,57</stuans>
+<correct>16,57,6</correct>
+<time_taken>104.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >7</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"gummy");]]></querystr>
+<stuans>8</stuans>
+<correct>8</correct>
+<time_taken>107.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >8</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"ham");]]></querystr>
+<stuans>10,37,42,43</stuans>
+<correct>10,37,42,43</correct>
+<time_taken>130.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >9</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"innard");]]></querystr>
+<stuans>11</stuans>
+<correct>11</correct>
+<time_taken>114.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >10</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"jam");]]></querystr>
+<stuans>12,38</stuans>
+<correct>12,38</correct>
+<time_taken>100.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >11</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"kimchi");]]></querystr>
+<stuans>19,21,24</stuans>
+<correct>19,21,24</correct>
+<time_taken>111.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >12</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"leek");]]></querystr>
+<stuans>25,26,46</stuans>
+<correct>25,26,46</correct>
+<time_taken>107.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >13</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"mango");]]></querystr>
+<stuans>31,52,33,412,643</stuans>
+<correct>31,33,52,412,643</correct>
+<time_taken>104.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >14</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"nachos");]]></querystr>
+<stuans>32,34</stuans>
+<correct>32,34</correct>
+<time_taken>124.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >15</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"orange");]]></querystr>
+<stuans>44,45,217,239</stuans>
+<correct>44,45,217,239</correct>
+<time_taken>116.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >16</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"pear");]]></querystr>
+<stuans>122,49,50,54</stuans>
+<correct>122,49,50,54</correct>
+<time_taken>135.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >17</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"aeroplane");]]></querystr>
+<stuans>58,80,81,118,119</stuans>
+<correct>118,119,58,80,81</correct>
+<time_taken>130.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >18</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"basin");]]></querystr>
+<stuans>59</stuans>
+<correct>59</correct>
+<time_taken>112.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >19</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"cloud");]]></querystr>
+<stuans>62</stuans>
+<correct>62</correct>
+<time_taken>114.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >20</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"door");]]></querystr>
+<stuans>63</stuans>
+<correct>63</correct>
+<time_taken>107.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >21</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"elevator");]]></querystr>
+<stuans>65</stuans>
+<correct>65</correct>
+<time_taken>112.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >22</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"fan");]]></querystr>
+<stuans>66,72</stuans>
+<correct>66,72</correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >23</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"garbage");]]></querystr>
+<stuans>68</stuans>
+<correct>68</correct>
+<time_taken>112.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >24</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"hanger");]]></querystr>
+<stuans>69,79</stuans>
+<correct>69,79</correct>
+<time_taken>124.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >25</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"igloo");]]></querystr>
+<stuans>71,73</stuans>
+<correct>71,73</correct>
+<time_taken>129.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >26</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"jumper");]]></querystr>
+<stuans>75</stuans>
+<correct>75</correct>
+<time_taken>113.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >27</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"keep");]]></querystr>
+<stuans>77,78</stuans>
+<correct>77,78</correct>
+<time_taken>111.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >28</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"ant");]]></querystr>
+<stuans>83,114,129,387</stuans>
+<correct>114,129,83,387</correct>
+<time_taken>127.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >29</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"beetle");]]></querystr>
+<stuans>84</stuans>
+<correct>84</correct>
+<time_taken>139.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >30</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"cockroach");]]></querystr>
+<stuans>85,101</stuans>
+<correct>101,85</correct>
+<time_taken>132.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >31</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"dinosaur");]]></querystr>
+<stuans>103,86,124</stuans>
+<correct>103,124,86</correct>
+<time_taken>124.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >32</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"elephant");]]></querystr>
+<stuans>87,126</stuans>
+<correct>126,87</correct>
+<time_taken>150.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >33</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"fox");]]></querystr>
+<stuans>88,105</stuans>
+<correct>105,88</correct>
+<time_taken>124.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >34</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"goat");]]></querystr>
+<stuans>89,107</stuans>
+<correct>107,89</correct>
+<time_taken>117.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >35</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"hamster");]]></querystr>
+<stuans>90,109</stuans>
+<correct>109,90</correct>
+<time_taken>119.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >36</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"jaguar");]]></querystr>
+<stuans>91,110</stuans>
+<correct>110,91</correct>
+<time_taken>123.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >37</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"kangeroo");]]></querystr>
+<stuans>92,112</stuans>
+<correct>112,92</correct>
+<time_taken>121.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >38</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"lion");]]></querystr>
+<stuans>93</stuans>
+<correct>93</correct>
+<time_taken>121.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >39</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"monkey");]]></querystr>
+<stuans>94</stuans>
+<correct>94</correct>
+<time_taken>125.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >40</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"newt");]]></querystr>
+<stuans>95</stuans>
+<correct>95</correct>
+<time_taken>142.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >41</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"owl");]]></querystr>
+<stuans>96,587</stuans>
+<correct>96,587</correct>
+<time_taken>114.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >42</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"penguin");]]></querystr>
+<stuans>97</stuans>
+<correct>97</correct>
+<time_taken>126.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies assignment" >43</id><querystr><![CDATA[assign a1; Select a1 such that Modifies(a1,"quail");]]></querystr>
+<stuans>98</stuans>
+<correct>98</correct>
+<time_taken>121.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >44</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"apple");]]></querystr>
+<stuans>7,9</stuans>
+<correct>7,9</correct>
+<time_taken>132.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >45</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"banana");]]></querystr>
+<stuans>29</stuans>
+<correct>29</correct>
+<time_taken>124.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >46</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"carrot");]]></querystr>
+<stuans>7,9,29</stuans>
+<correct>29,7,9</correct>
+<time_taken>126.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >47</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"donut");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>145.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >48</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"egg");]]></querystr>
+<stuans>7,9,13</stuans>
+<correct>13,7,9</correct>
+<time_taken>130.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >49</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"fish");]]></querystr>
+<stuans>7,9,15,51,55</stuans>
+<correct>15,51,55,7,9</correct>
+<time_taken>132.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >50</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"gummy");]]></querystr>
+<stuans>7</stuans>
+<correct>7</correct>
+<time_taken>126.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >51</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"ham");]]></querystr>
+<stuans>7,9,29,36</stuans>
+<correct>29,36,7,9</correct>
+<time_taken>128.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >52</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"innard");]]></querystr>
+<stuans>7,9</stuans>
+<correct>7,9</correct>
+<time_taken>125.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >53</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"jam");]]></querystr>
+<stuans>7,9,29,36</stuans>
+<correct>29,36,7,9</correct>
+<time_taken>134.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >54</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"kimchi");]]></querystr>
+<stuans>23,7,9</stuans>
+<correct>23,7,9</correct>
+<time_taken>140.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >55</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"leek");]]></querystr>
+<stuans>7,9</stuans>
+<correct>7,9</correct>
+<time_taken>132.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >56</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"mango");]]></querystr>
+<stuans>29,51,637</stuans>
+<correct>29,51,637</correct>
+<time_taken>132.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >57</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"nachos");]]></querystr>
+<stuans>29</stuans>
+<correct>29</correct>
+<time_taken>132.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >58</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"orange");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>140.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >59</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"pear");]]></querystr>
+<stuans>51</stuans>
+<correct>51</correct>
+<time_taken>149.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >60</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"aeroplane");]]></querystr>
+<stuans>111,60,102,104,99,100,106,108,113,115,116</stuans>
+<correct>100,102,104,106,108,111,113,115,116,60,99</correct>
+<time_taken>137.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >61</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"basin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>132.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >62</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"cloud");]]></querystr>
+<stuans>60</stuans>
+<correct>60</correct>
+<time_taken>142.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >63</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"door");]]></querystr>
+<stuans>60</stuans>
+<correct>60</correct>
+<time_taken>132.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >64</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"elevator");]]></querystr>
+<stuans>60</stuans>
+<correct>60</correct>
+<time_taken>141.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >65</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"fan");]]></querystr>
+<stuans>60</stuans>
+<correct>60</correct>
+<time_taken>135.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >66</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"garbage");]]></querystr>
+<stuans>60</stuans>
+<correct>60</correct>
+<time_taken>135.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >67</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"hanger");]]></querystr>
+<stuans>60</stuans>
+<correct>60</correct>
+<time_taken>138.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >68</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"igloo");]]></querystr>
+<stuans>60</stuans>
+<correct>60</correct>
+<time_taken>138.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >69</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"jumper");]]></querystr>
+<stuans>60,74</stuans>
+<correct>60,74</correct>
+<time_taken>140.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >70</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"keep");]]></querystr>
+<stuans>60,74,76</stuans>
+<correct>60,74,76</correct>
+<time_taken>133.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >71</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"ant");]]></querystr>
+<stuans>102,104,99,100,106,108,111,113</stuans>
+<correct>100,102,104,106,108,111,113,99</correct>
+<time_taken>137.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >72</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"beetle");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>139.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >73</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"cockroach");]]></querystr>
+<stuans>99,100</stuans>
+<correct>100,99</correct>
+<time_taken>143.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >74</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"dinosaur");]]></querystr>
+<stuans>102,99,100</stuans>
+<correct>100,102,99</correct>
+<time_taken>140.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >75</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"elephant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>141.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >76</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"fox");]]></querystr>
+<stuans>102,104,99,100</stuans>
+<correct>100,102,104,99</correct>
+<time_taken>140.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >77</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"goat");]]></querystr>
+<stuans>102,104,99,100,106</stuans>
+<correct>100,102,104,106,99</correct>
+<time_taken>143.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >78</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"hamster");]]></querystr>
+<stuans>102,104,99,100,106,108</stuans>
+<correct>100,102,104,106,108,99</correct>
+<time_taken>161.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >79</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"jaguar");]]></querystr>
+<stuans>102,104,99,100,106,108</stuans>
+<correct>100,102,104,106,108,99</correct>
+<time_taken>143.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >80</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"kangeroo");]]></querystr>
+<stuans>102,104,99,100,106,108,111</stuans>
+<correct>100,102,104,106,108,111,99</correct>
+<time_taken>152.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >81</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"lion");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>142.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >82</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"monkey");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>144.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >83</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"newt");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>141.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >84</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"owl");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>142.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >85</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"penguin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>146.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies while" >86</id><querystr><![CDATA[while w1; Select w1 such that Modifies(w1,"quail");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>143.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >87</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"apple");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>146.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >88</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"banana");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>149.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >89</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"carrot");]]></querystr>
+<stuans>17</stuans>
+<correct>17</correct>
+<time_taken>152.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >90</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"donut");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>146.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >91</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"egg");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>148.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >92</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"fish");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>151.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >93</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"gummy");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>145.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >94</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"ham");]]></querystr>
+<stuans>41</stuans>
+<correct>41</correct>
+<time_taken>148.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >95</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"innard");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>149.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >96</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"jam");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>149.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >97</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"kimchi");]]></querystr>
+<stuans>17,22</stuans>
+<correct>17,22</correct>
+<time_taken>153.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >98</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"leek");]]></querystr>
+<stuans>22</stuans>
+<correct>22</correct>
+<time_taken>148.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >99</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"mango");]]></querystr>
+<stuans>30</stuans>
+<correct>30</correct>
+<time_taken>150.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >100</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"nachos");]]></querystr>
+<stuans>30</stuans>
+<correct>30</correct>
+<time_taken>163.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >101</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"orange");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>152.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >102</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"pear");]]></querystr>
+<stuans>48</stuans>
+<correct>48</correct>
+<time_taken>154.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >103</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"aeroplane");]]></querystr>
+<stuans>61,64,117</stuans>
+<correct>117,61,64</correct>
+<time_taken>157.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >104</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"basin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>154.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >105</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"cloud");]]></querystr>
+<stuans>61</stuans>
+<correct>61</correct>
+<time_taken>154.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >106</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"door");]]></querystr>
+<stuans>61</stuans>
+<correct>61</correct>
+<time_taken>150.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >107</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"elevator");]]></querystr>
+<stuans>61,64</stuans>
+<correct>61,64</correct>
+<time_taken>163.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >108</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"fan");]]></querystr>
+<stuans>61,67,64,70</stuans>
+<correct>61,64,67,70</correct>
+<time_taken>157.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >109</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"garbage");]]></querystr>
+<stuans>61,67,64</stuans>
+<correct>61,64,67</correct>
+<time_taken>182.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >110</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"hanger");]]></querystr>
+<stuans>61,67,64</stuans>
+<correct>61,64,67</correct>
+<time_taken>170.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >111</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"igloo");]]></querystr>
+<stuans>61,67,64,70</stuans>
+<correct>61,64,67,70</correct>
+<time_taken>159.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >112</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"jumper");]]></querystr>
+<stuans>61,67,64,70</stuans>
+<correct>61,64,67,70</correct>
+<time_taken>166.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >113</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"keep");]]></querystr>
+<stuans>61,67,64,70</stuans>
+<correct>61,64,67,70</correct>
+<time_taken>163.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >114</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"ant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>158.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >115</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"beetle");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>160.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >116</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"cockroach");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>165.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >117</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"dinosaur");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>160.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >118</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"elephant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>166.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >119</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"fox");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>158.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >120</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"goat");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>164.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >121</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"hamster");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>166.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >122</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"jaguar");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>184.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >123</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"kangeroo");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>168.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >124</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"lion");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>169.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >125</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"monkey");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>162.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >126</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"newt");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>163.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >127</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"owl");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>162.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >128</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"penguin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>166.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies if" >129</id><querystr><![CDATA[if i1; Select i1 such that Modifies(i1,"quail");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>224.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >130</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"apple");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,28,40,53,386</correct>
+<time_taken>201.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >131</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"banana");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>179.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >132</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"carrot");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>177.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >133</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"donut");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>179.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >134</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"egg");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>175.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >135</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"fish");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>195.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >386</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"gummy");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>181.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >137</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"ham");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>176.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >138</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"innard");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>183.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >139</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"jam");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>184.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >140</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"kimchi");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>185.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >141</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"leek");]]></querystr>
+<stuans>125,127,28,120,40,128,135,53,56,123,134,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53,56</correct>
+<time_taken>184.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >142</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"mango");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>181.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >143</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"nachos");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>180.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >144</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"orange");]]></querystr>
+<stuans>125,127,28,120,40,128,135,53,56,123,134,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53,56</correct>
+<time_taken>183.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >145</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"pear");]]></querystr>
+<stuans>125,127,28,120,40,128,135,53,56,123,134,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53,56</correct>
+<time_taken>189.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >146</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"aeroplane");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>225.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >147</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"basin");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>203.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >148</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"cloud");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>194.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >149</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"door");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>191.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >150</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"elevator");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>195.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >151</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"fan");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>186.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >152</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"garbage");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>195.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >153</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"hanger");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>192.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >154</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"igloo");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>192.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >155</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"jumper");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>196.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >156</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"keep");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>202.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >157</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"ant");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,134,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,47,53,56</correct>
+<time_taken>193.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >158</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"beetle");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>193.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >159</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"cockroach");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>194.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >160</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"dinosaur");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>204.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >161</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"elephant");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>223.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >162</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"fox");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>200.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >163</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"goat");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>195.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >164</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"hamster");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>220.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >165</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"jaguar");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>198.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >166</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"kangeroo");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>217.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >167</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"lion");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>197.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >168</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"monkey");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>200.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >169</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"newt");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>215.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >170</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"owl");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>202.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >171</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"penguin");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>216.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies call" >172</id><querystr><![CDATA[call c1; Select c1 such that Modifies(c1,"quail");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>209.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >173</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"apple");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Goneril,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Goneril,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>193.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >174</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"banana");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>192.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >175</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"carrot");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>225.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >176</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"donut");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>198.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >177</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"egg");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>189.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >178</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"fish");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>195.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >179</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"gummy");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>195.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >180</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"ham");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>198.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >181</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"innard");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>219.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >182</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"jam");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>197.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >183</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"kimchi");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>201.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >184</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"leek");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>208.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >185</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"mango");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>206.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >186</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"nachos");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>200.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >187</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"orange");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>206.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >188</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"pear");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>207.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >189</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"aeroplane");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>210.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >190</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"basin");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>203.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >191</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"cloud");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>205.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >192</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"door");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>206.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >193</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"elevator");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>212.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >194</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"fan");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>206.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >195</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"garbage");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>210.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >196</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"hanger");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>210.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >197</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"igloo");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>206.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >198</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"jumper");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>227.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >199</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"keep");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>218.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >200</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"ant");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>213.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >201</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"beetle");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>224.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >202</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"cockroach");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>224.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >203</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"dinosaur");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,Illidan,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,Illidan,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>215.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >204</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"elephant");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>216.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >205</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"fox");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>211.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >206</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"goat");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>218.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >207</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"hamster");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>220.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >208</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"jaguar");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>216.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >209</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"kangeroo");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>221.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >210</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"lion");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>214.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >211</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"monkey");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>214.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >212</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"newt");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>217.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >213</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"owl");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>233.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >214</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"penguin");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>222.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Modifies="1" Typed="1" comment="check Modifies procedure" >215</id><querystr><![CDATA[procedure p1; Select p1 such that Modifies(p1,"quail");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>216.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >1</id><querystr><![CDATA[assign a1; variable v1;  Select a1 such that Uses(a1,v1);]]></querystr>
+<stuans>122,124,138,18,500,448,19,235,82,2,307,360,464,3,139,479,213,43,297,465,365,5,11,315,515,585,118,32,534,14,190,140,146,21,539,430,457,558,24,435,454,31,33,112,419,284,34,403,438,37,186,75,38,555,69,107,491,142,161,73,194,357,39,434,554,294,413,42,638,183,62,44,453,254,63,211,45,295,397,49,50,71,191,52,262,54,119,566,137,517,57,248,59,65,461,78,126,542,651,157,444,343,544,66,68,72,77,540,561,79,147,366,81,105,109,470,143,310,110,218,394,121,410,475,494,129,136,141,238,381,144,568,145,148,345,149,281,150,346,151,152,348,405,153,154,233,155,362,546,156,300,361,545,158,159,160,162,437,163,380,164,468,165,166,167,168,169,359,376,451,170,463,171,172,173,466,174,175,176,525,177,509,178,567,179,511,595,180,488,181,182,239,184,185,187,556,188,469,189,224,192,356,373,572,193,458,195,196,627,212,197,198,199,415,200,201,202,203,204,519,205,439,206,207,283,586,208,591,209,384,210,214,215,216,230,217,219,420,441,587,220,551,221,222,223,333,225,278,226,227,228,229,231,232,234,236,237,240,241,260,399,242,265,243,266,244,245,264,246,269,247,249,421,391,250,271,251,272,389,252,253,255,285,256,382,257,452,258,279,259,261,426,263,267,473,268,270,273,274,275,276,277,335,280,344,401,282,286,287,288,289,367,414,290,291,308,292,293,296,298,533,299,301,302,506,303,442,304,428,449,503,305,306,363,309,311,589,312,516,313,314,316,584,317,353,318,319,407,320,321,526,322,383,323,324,325,326,639,327,328,486,329,330,331,332,334,336,337,536,338,339,340,549,341,342,507,583,347,529,349,350,371,351,510,352,354,375,355,372,358,364,368,565,369,370,374,377,378,379,385,387,388,390,392,393,521,543,395,396,447,398,400,484,402,446,404,406,408,409,411,489,412,496,416,417,418,422,423,440,424,578,425,427,588,429,431,450,432,433,456,436,443,505,581,445,455,459,460,462,467,471,490,472,474,493,476,477,492,478,497,480,523,481,482,483,520,485,487,495,498,499,501,502,504,537,508,512,513,557,514,579,518,522,524,527,528,530,553,531,550,532,535,538,541,562,547,548,569,552,559,560,563,564,570,593,571,590,573,596,574,575,576,577,592,580,582,594,597,598,599,600,601,602,603,604,605,606,607,608,609,610,611,612,613,614,615,616,617,618,619,620,621,622,623,624,625,626,628,629,630,631,632,633,634,635,636,640,641,642,643,645,646,647,649,650,652</stuans>
+<correct>105,107,109,11,110,112,118,119,121,122,124,126,129,137,14,18,19,2,21,24,3,31,32,33,34,37,38,39,42,43,44,45,49,5,50,52,54,57,59,62,63,65,66,68,69,71,72,73,75,77,78,79,81,82,136,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270,271,272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,307,308,309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325,326,327,328,329,330,331,332,333,334,335,336,337,338,339,340,341,342,343,344,345,346,347,348,349,350,351,352,353,354,355,356,357,358,359,360,361,362,363,364,365,366,367,368,369,370,371,372,373,374,375,376,377,378,379,380,381,382,383,384,385,387,388,389,390,391,392,393,394,395,396,397,398,399,400,401,402,403,404,405,406,407,408,409,410,411,412,413,414,415,416,417,418,419,420,421,422,423,424,425,426,427,428,429,430,431,432,433,434,435,436,437,438,439,440,441,442,443,444,445,446,447,448,449,450,451,452,453,454,455,456,457,458,459,460,461,462,463,464,465,466,467,468,469,470,471,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,497,498,499,500,501,502,503,504,505,506,507,508,509,510,511,512,513,514,515,516,517,518,519,520,521,522,523,524,525,526,527,528,529,530,531,532,533,534,535,536,537,538,539,540,541,542,543,544,545,546,547,548,549,550,551,552,553,554,555,556,557,558,559,560,561,562,563,564,565,566,567,568,569,570,571,572,573,574,575,576,577,578,579,580,581,582,583,584,585,586,587,588,589,590,591,592,593,594,595,596,597,598,599,600,601,602,603,604,605,606,607,608,609,610,611,612,613,614,615,616,617,618,619,620,621,622,623,624,625,626,627,628,629,630,631,632,633,634,635,636,638,639,640,641,642,643,645,646,647,649,650,651,652</correct>
+<time_taken>617.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >2</id><querystr><![CDATA[while w1; variable v1; Select w1 such that Uses(w1,v1);]]></querystr>
+<stuans>102,104,7,23,9,115,13,116,36,15,51,637,29,55,60,74,76,99,100,106,108,111,113,644,648</stuans>
+<correct>100,102,104,106,108,111,113,115,116,13,15,23,29,36,51,55,60,7,74,76,9,99,637,644,648</correct>
+<time_taken>244.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >3</id><querystr><![CDATA[if i1; variable v1; Select i1 such that Uses(i1,v1);]]></querystr>
+<stuans>17,70,22,41,30,48,64,61,67,117,131</stuans>
+<correct>117,131,17,22,30,41,48,61,64,67,70</correct>
+<time_taken>234.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >4</id><querystr><![CDATA[call c1; variable v1; Select c1 such that Uses(c1,v1);]]></querystr>
+<stuans>125,127,28,128,135,53,120,40,56,47,123,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,28,40,47,53,56,386</correct>
+<time_taken>333.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >5</id><querystr><![CDATA[procedure p1; variable v1; Select p1 such that Uses(p1,v1);]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Goneril,Henry,Illidan,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Goneril,Henry,Illidan,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>339.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >6</id><querystr><![CDATA[assign a1; variable v1;  Select v1 such that Uses(a1,v1);]]></querystr>
+<stuans>apple,nPtX279,banana,eJwK579,carrot,sYmG535,donut,fSeH892,fish,ham,kimchi,dinosaur,leek,d,mango,nachos,keep,orange,c,s,pear,cockroach,hHvH288,door,egg,aeroplane,u,basin,r,cloud,n,z,fan,elevator,fXzU62,wNaJ218,igloo,garbage,goat,beetle,ant,k,tGxY44,kangeroo,i,elephant,f,hamster,w,b,x,e,j,v,dKkS285,t,p,h,q,l,y,a,g,o,eVdF177,m,iXxA739,oQtQ835,xNgk58,cKpE766,oQxV921,eTeN427,fIrI142,gBuU279,cEnK634,pJnU308</stuans>
+<correct>aeroplane,ant,apple,banana,basin,beetle,carrot,cloud,cockroach,dinosaur,donut,door,egg,elephant,elevator,fan,fish,garbage,goat,ham,hamster,igloo,kangeroo,keep,kimchi,leek,mango,nachos,orange,pear,a,b,c,cEnK634,cKpE766,d,dKkS285,e,eJwK579,eTeN427,eVdF177,f,fIrI142,fSeH892,fXzU62,g,gBuU279,h,hHvH288,i,iXxA739,j,k,l,m,n,nPtX279,o,oQtQ835,oQxV921,p,pJnU308,q,r,s,sYmG535,t,tGxY44,u,v,w,wNaJ218,x,xNgk58,y,z</correct>
+<time_taken>328.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >7</id><querystr><![CDATA[while w1; variable v1; Select v1 such that Uses(w1,v1);]]></querystr>
+<stuans>apple,uLgJ625,nPtX279,banana,carrot,rLbS22,donut,rUtF565,fSeH892,fish,oQxV921,gummy,cEnK634,ham,jam,pear,cockroach,kimchi,dinosaur,leek,mango,nachos,keep,door,egg,aeroplane,basin,cloud,elevator,fan,garbage,hanger,igloo,wNaJ218,jumper,pJnU308,ant,fox,beetle,goat,hamster,kangeroo,eTeN427,p,dKkS285,fIrI142,gBuU279</stuans>
+<correct>aeroplane,ant,apple,banana,basin,beetle,carrot,cloud,cockroach,dinosaur,donut,door,egg,elevator,fan,fish,fox,garbage,goat,gummy,ham,hamster,hanger,igloo,jam,jumper,kangeroo,keep,kimchi,leek,mango,nachos,pear,cEnK634,dKkS285,eTeN427,fIrI142,fSeH892,gBuU279,nPtX279,oQxV921,p,pJnU308,rLbS22,rUtF565,uLgJ625,wNaJ218</correct>
+<time_taken>256.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >8</id><querystr><![CDATA[if i1; variable v1; Select v1 such that Uses(i1,v1);]]></querystr>
+<stuans>banana,carrot,donut,fish,ham,jam,kimchi,leek,mango,orange,aeroplane,basin,cloud,door,elevator,fan,garbage,hanger,igloo,jumper,keep,ant,hamster,kangeroo</stuans>
+<correct>aeroplane,ant,banana,basin,carrot,cloud,donut,door,elevator,fan,fish,garbage,ham,hamster,hanger,igloo,jam,jumper,kangeroo,keep,kimchi,leek,mango,orange</correct>
+<time_taken>239.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >9</id><querystr><![CDATA[call c1; variable v1; Select v1 such that Uses(c1,v1);]]></querystr>
+<stuans>apple,nPtX279,banana,carrot,hHvH288,door,egg,donut,fSeH892,fish,gummy,q,ham,jam,pear,cockroach,kimchi,dinosaur,leek,d,mango,nachos,keep,orange,c,s,aeroplane,u,basin,r,cloud,n,z,elevator,fan,garbage,hanger,fXzU62,wNaJ218,igloo,jumper,ant,k,fox,beetle,elephant,f,goat,hamster,tGxY44,kangeroo,i,w,b,x,e,j,v,dKkS285,t,p,h,l,y,a,g,o,eVdF177,m,oQtQ835,xNgk58,iXxA739,sYmG535,eJwK579,cKpE766,rUtF565,uLgJ625,fIrI142,rLbS22,gBuU279,eTeN427,cEnK634,pJnU308,oQxV921</stuans>
+<correct>aeroplane,ant,apple,banana,basin,beetle,carrot,cloud,cockroach,dinosaur,donut,door,egg,elephant,elevator,fan,fish,fox,garbage,goat,gummy,ham,hamster,hanger,igloo,jam,jumper,kangeroo,keep,kimchi,leek,mango,nachos,orange,pear,a,b,c,cEnK634,cKpE766,d,dKkS285,e,eJwK579,eTeN427,eVdF177,f,fIrI142,fSeH892,fXzU62,g,gBuU279,h,hHvH288,i,iXxA739,j,k,l,m,n,nPtX279,o,oQtQ835,oQxV921,p,pJnU308,q,r,rLbS22,rUtF565,s,sYmG535,t,tGxY44,u,uLgJ625,v,w,wNaJ218,x,xNgk58,y,z</correct>
+<time_taken>385.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >10</id><querystr><![CDATA[procedure p1; variable v1; Select v1 such that Uses(p1,v1);]]></querystr>
+<stuans>apple,nPtX279,banana,carrot,hHvH288,door,egg,donut,fSeH892,fish,gummy,q,ham,jam,pear,cockroach,kimchi,dinosaur,leek,d,mango,nachos,keep,orange,c,s,aeroplane,u,basin,r,cloud,n,z,elevator,fan,garbage,hanger,fXzU62,wNaJ218,igloo,jumper,ant,k,fox,beetle,elephant,f,goat,hamster,tGxY44,kangeroo,i,w,b,x,e,j,v,dKkS285,t,p,h,l,y,a,g,o,eVdF177,m,oQtQ835,xNgk58,iXxA739,sYmG535,eJwK579,cKpE766,rUtF565,uLgJ625,fIrI142,rLbS22,gBuU279,eTeN427,cEnK634,pJnU308,oQxV921</stuans>
+<correct>aeroplane,ant,apple,banana,basin,beetle,carrot,cloud,cockroach,dinosaur,donut,door,egg,elephant,elevator,fan,fish,fox,garbage,goat,gummy,ham,hamster,hanger,igloo,jam,jumper,kangeroo,keep,kimchi,leek,mango,nachos,orange,pear,a,b,c,cEnK634,cKpE766,d,dKkS285,e,eJwK579,eTeN427,eVdF177,f,fIrI142,fSeH892,fXzU62,g,gBuU279,h,hHvH288,i,iXxA739,j,k,l,m,n,nPtX279,o,oQtQ835,oQxV921,p,pJnU308,q,r,rLbS22,rUtF565,s,sYmG535,t,tGxY44,u,uLgJ625,v,w,wNaJ218,x,xNgk58,y,z</correct>
+<time_taken>384.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >1</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"apple");]]></querystr>
+<stuans>2,44</stuans>
+<correct>2,44</correct>
+<time_taken>235.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >2</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"banana");]]></querystr>
+<stuans>3,39,50</stuans>
+<correct>3,39,50</correct>
+<time_taken>235.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >3</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"carrot");]]></querystr>
+<stuans>19,21,42,43,45</stuans>
+<correct>19,21,42,43,45</correct>
+<time_taken>230.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >4</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"donut");]]></querystr>
+<stuans>5,24,50</stuans>
+<correct>5,24,50</correct>
+<time_taken>235.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >5</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"egg");]]></querystr>
+<stuans>54,59,124</stuans>
+<correct>54,59,124</correct>
+<time_taken>233.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >6</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"fish");]]></querystr>
+<stuans>18,19,21,387,38,54,57,126,129</stuans>
+<correct>126,129,387,18,19,21,38,54,57</correct>
+<time_taken>240.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >7</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"gummy");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>251.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >8</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"ham");]]></querystr>
+<stuans>11,54,14,50,38,42,43,45,122</stuans>
+<correct>11,122,14,38,42,43,45,50,54</correct>
+<time_taken>237.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >9</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"innard");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>240.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >10</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"jam");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>232.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >11</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"kimchi");]]></querystr>
+<stuans>24,38,45</stuans>
+<correct>24,38,45</correct>
+<time_taken>240.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >12</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"leek");]]></querystr>
+<stuans>31,33,45</stuans>
+<correct>31,33,45</correct>
+<time_taken>240.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >13</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"mango");]]></querystr>
+<stuans>152,32,262,54,57,34,37,193,214,289,638</stuans>
+<correct>32,34,37,54,57,152,193,214,262,289,638</correct>
+<time_taken>241.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >14</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"nachos");]]></querystr>
+<stuans>37</stuans>
+<correct>37</correct>
+<time_taken>241.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >15</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"orange");]]></querystr>
+<stuans>45,230,49,222,50,262</stuans>
+<correct>45,49,50222,230,262</correct>
+<time_taken>255.000000</time_taken>
+<failed>
+<missing>50222</missing>
+<additional>222,50</additional>
+<summary>
+<expected>5</expected>
+<matched>4</matched>
+<missing>1</missing>
+<additional>2</additional>
+</summary>
+</failed>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >16</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"pear");]]></querystr>
+<stuans>262,52,121,289</stuans>
+<correct>121,52,262,289</correct>
+<time_taken>234.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >17</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"aeroplane");]]></querystr>
+<stuans>62,63,81,69,73</stuans>
+<correct>62,63,69,73,81</correct>
+<time_taken>245.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >18</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"basin");]]></querystr>
+<stuans>62,63,69,73</stuans>
+<correct>62,63,69,73</correct>
+<time_taken>233.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >19</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"cloud");]]></querystr>
+<stuans>65,66,69,73,75,77,122,82</stuans>
+<correct>122,65,66,69,73,75,77,82</correct>
+<time_taken>239.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >20</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"door");]]></querystr>
+<stuans>65,66,69,73</stuans>
+<correct>65,66,69,73</correct>
+<time_taken>239.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >21</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"elevator");]]></querystr>
+<stuans>69,73</stuans>
+<correct>69,73</correct>
+<time_taken>247.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >22</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"fan");]]></querystr>
+<stuans>68,69,73,71</stuans>
+<correct>68,69,71,73</correct>
+<time_taken>236.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >23</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"garbage");]]></querystr>
+<stuans>75,77</stuans>
+<correct>75,77</correct>
+<time_taken>252.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >24</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"hanger");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>277.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >25</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"igloo");]]></querystr>
+<stuans>72</stuans>
+<correct>72</correct>
+<time_taken>246.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >26</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"jumper");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>241.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >27</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"keep");]]></querystr>
+<stuans>78,79</stuans>
+<correct>78,79</correct>
+<time_taken>247.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >28</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"ant");]]></querystr>
+<stuans>118</stuans>
+<correct>118</correct>
+<time_taken>252.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >29</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"beetle");]]></querystr>
+<stuans>110,112</stuans>
+<correct>110,112</correct>
+<time_taken>272.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >30</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"cockroach");]]></querystr>
+<stuans>105</stuans>
+<correct>105</correct>
+<time_taken>253.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >31</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"dinosaur");]]></querystr>
+<stuans>107</stuans>
+<correct>107</correct>
+<time_taken>255.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >32</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"elephant");]]></querystr>
+<stuans>129,387</stuans>
+<correct>129,387</correct>
+<time_taken>252.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >33</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"fox");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>243.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >34</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"goat");]]></querystr>
+<stuans>109,129</stuans>
+<correct>109,129</correct>
+<time_taken>258.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >35</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"hamster");]]></querystr>
+<stuans>129</stuans>
+<correct>129</correct>
+<time_taken>285.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >36</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"jaguar");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>290.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >37</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"kangeroo");]]></querystr>
+<stuans>119</stuans>
+<correct>119</correct>
+<time_taken>286.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >38</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"lion");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>258.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >39</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"monkey");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>293.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >40</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"newt");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>253.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >41</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"owl");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>256.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >42</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"penguin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>280.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses assignment" >43</id><querystr><![CDATA[assign a1; Select a1 such that Uses(a1,"quail");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>267.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >44</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"apple");]]></querystr>
+<stuans>7</stuans>
+<correct>7</correct>
+<time_taken>289.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >45</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"banana");]]></querystr>
+<stuans>29,36</stuans>
+<correct>29,36</correct>
+<time_taken>334.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >46</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"carrot");]]></querystr>
+<stuans>7,9,29</stuans>
+<correct>29,7,9</correct>
+<time_taken>311.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >47</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"donut");]]></querystr>
+<stuans>23,7,9</stuans>
+<correct>23,7,9</correct>
+<time_taken>280.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >48</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"egg");]]></querystr>
+<stuans>51</stuans>
+<correct>51</correct>
+<time_taken>278.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >49</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"fish");]]></querystr>
+<stuans>7,9,29,36,51,55</stuans>
+<correct>29,36,51,55,7,9</correct>
+<time_taken>296.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >50</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"gummy");]]></querystr>
+<stuans>7,9</stuans>
+<correct>7,9</correct>
+<time_taken>255.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >51</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"ham");]]></querystr>
+<stuans>7,9,13,36,29,51</stuans>
+<correct>13,29,36,51,7,9</correct>
+<time_taken>258.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >52</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"innard");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>265.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >53</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"jam");]]></querystr>
+<stuans>23,7,9,15</stuans>
+<correct>15,23,7,9</correct>
+<time_taken>266.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >54</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"kimchi");]]></querystr>
+<stuans>23,7,9,29,36</stuans>
+<correct>23,29,36,7,9</correct>
+<time_taken>278.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >55</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"leek");]]></querystr>
+<stuans>29,51</stuans>
+<correct>29,51</correct>
+<time_taken>261.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >56</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"mango");]]></querystr>
+<stuans>29,36,51,637,55</stuans>
+<correct>29,36,51,55,637</correct>
+<time_taken>291.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >57</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"nachos");]]></querystr>
+<stuans>29,36</stuans>
+<correct>29,36</correct>
+<time_taken>257.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >58</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"orange");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>251.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >59</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"pear");]]></querystr>
+<stuans>51</stuans>
+<correct>51</correct>
+<time_taken>284.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >60</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"aeroplane");]]></querystr>
+<stuans>111,60,102,104,99,100,106,108,113,115,116</stuans>
+<correct>100,102,104,106,108,111,113,115,116,60,99</correct>
+<time_taken>264.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >61</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"basin");]]></querystr>
+<stuans>60</stuans>
+<correct>60</correct>
+<time_taken>261.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >62</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"cloud");]]></querystr>
+<stuans>60,74,76</stuans>
+<correct>60,74,76</correct>
+<time_taken>256.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >63</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"door");]]></querystr>
+<stuans>60</stuans>
+<correct>60</correct>
+<time_taken>277.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >64</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"elevator");]]></querystr>
+<stuans>60</stuans>
+<correct>60</correct>
+<time_taken>271.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >65</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"fan");]]></querystr>
+<stuans>60</stuans>
+<correct>60</correct>
+<time_taken>264.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >66</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"garbage");]]></querystr>
+<stuans>60,74,76</stuans>
+<correct>60,74,76</correct>
+<time_taken>299.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >67</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"hanger");]]></querystr>
+<stuans>60</stuans>
+<correct>60</correct>
+<time_taken>268.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >68</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"igloo");]]></querystr>
+<stuans>60,74</stuans>
+<correct>60,74</correct>
+<time_taken>268.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >69</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"jumper");]]></querystr>
+<stuans>60,74,76</stuans>
+<correct>60,74,76</correct>
+<time_taken>291.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >70</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"keep");]]></querystr>
+<stuans>60</stuans>
+<correct>60</correct>
+<time_taken>265.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >71</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"ant");]]></querystr>
+<stuans>102,104,99,100,106,108,111,113,115,116</stuans>
+<correct>100,102,104,106,108,111,113,115,116,99</correct>
+<time_taken>271.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >72</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"beetle");]]></querystr>
+<stuans>102,104,99,100,106,108,111</stuans>
+<correct>100,102,104,106,108,111,99</correct>
+<time_taken>266.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >73</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"cockroach");]]></querystr>
+<stuans>102,104,99,100</stuans>
+<correct>100,102,104,99</correct>
+<time_taken>268.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >74</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"dinosaur");]]></querystr>
+<stuans>102,104,99,100,106</stuans>
+<correct>100,102,104,106,99</correct>
+<time_taken>258.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >75</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"elephant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>270.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >76</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"fox");]]></querystr>
+<stuans>102,104,99,100,106</stuans>
+<correct>100,102,104,106,99</correct>
+<time_taken>258.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >77</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"goat");]]></querystr>
+<stuans>102,104,99,100,106,108</stuans>
+<correct>100,102,104,106,108,99</correct>
+<time_taken>271.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >78</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"hamster");]]></querystr>
+<stuans>102,104,99,100,106,108,111,113,115,116</stuans>
+<correct>100,102,104,106,108,111,113,115,116,99</correct>
+<time_taken>263.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >79</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"jaguar");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>264.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >80</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"kangeroo");]]></querystr>
+<stuans>102,104,99,100,106,108,111,113,115,116</stuans>
+<correct>100,102,104,106,108,111,113,115,116,99</correct>
+<time_taken>262.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >81</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"lion");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>257.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >82</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"monkey");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>261.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >83</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"newt");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>266.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >84</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"owl");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>271.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >85</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"penguin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>296.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses while" >86</id><querystr><![CDATA[while w1; Select w1 such that Uses(w1,"quail");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>278.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >87</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"apple");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>273.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >88</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"banana");]]></querystr>
+<stuans>41,48</stuans>
+<correct>41,48</correct>
+<time_taken>299.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >89</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"carrot");]]></querystr>
+<stuans>17,22,41,30</stuans>
+<correct>17,22,30,41</correct>
+<time_taken>275.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >90</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"donut");]]></querystr>
+<stuans>22,48</stuans>
+<correct>22,48</correct>
+<time_taken>276.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >91</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"egg");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>260.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >92</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"fish");]]></querystr>
+<stuans>17</stuans>
+<correct>17</correct>
+<time_taken>282.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >93</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"gummy");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>271.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >94</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"ham");]]></querystr>
+<stuans>17,41,48</stuans>
+<correct>17,41,48</correct>
+<time_taken>269.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >95</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"innard");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>272.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >96</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"jam");]]></querystr>
+<stuans>22</stuans>
+<correct>22</correct>
+<time_taken>260.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >97</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"kimchi");]]></querystr>
+<stuans>22</stuans>
+<correct>22</correct>
+<time_taken>261.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >98</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"leek");]]></querystr>
+<stuans>30,48</stuans>
+<correct>30,48</correct>
+<time_taken>264.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >99</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"mango");]]></querystr>
+<stuans>30</stuans>
+<correct>30</correct>
+<time_taken>274.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >100</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"nachos");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>277.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >101</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"orange");]]></querystr>
+<stuans>48</stuans>
+<correct>48</correct>
+<time_taken>277.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >102</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"pear");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>257.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >103</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"aeroplane");]]></querystr>
+<stuans>61,67,64,70</stuans>
+<correct>61,64,67,70</correct>
+<time_taken>278.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >104</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"basin");]]></querystr>
+<stuans>61,67,64,70</stuans>
+<correct>61,64,67,70</correct>
+<time_taken>268.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >105</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"cloud");]]></querystr>
+<stuans>61,67,64,70</stuans>
+<correct>61,64,67,70</correct>
+<time_taken>263.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >106</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"door");]]></querystr>
+<stuans>61,67,64,70</stuans>
+<correct>61,64,67,70</correct>
+<time_taken>270.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >107</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"elevator");]]></querystr>
+<stuans>61,67,64,70</stuans>
+<correct>61,64,67,70</correct>
+<time_taken>283.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >108</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"fan");]]></querystr>
+<stuans>61,67,64,70</stuans>
+<correct>61,64,67,70</correct>
+<time_taken>270.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >109</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"garbage");]]></querystr>
+<stuans>61,67,64,70</stuans>
+<correct>61,64,67,70</correct>
+<time_taken>266.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >110</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"hanger");]]></querystr>
+<stuans>61,67,64,70</stuans>
+<correct>61,64,67,70</correct>
+<time_taken>284.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >111</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"igloo");]]></querystr>
+<stuans>61,67,64,70</stuans>
+<correct>61,64,67,70</correct>
+<time_taken>270.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >112</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"jumper");]]></querystr>
+<stuans>61,67,64,70</stuans>
+<correct>61,64,67,70</correct>
+<time_taken>266.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >113</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"keep");]]></querystr>
+<stuans>61,67,64,70</stuans>
+<correct>61,64,67,70</correct>
+<time_taken>275.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >114</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"ant");]]></querystr>
+<stuans>117</stuans>
+<correct>117</correct>
+<time_taken>283.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >115</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"beetle");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>268.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >116</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"cockroach");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>275.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >117</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"dinosaur");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>279.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >118</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"elephant");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>285.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >119</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"fox");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>284.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >120</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"goat");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>265.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >121</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"hamster");]]></querystr>
+<stuans>117</stuans>
+<correct>117</correct>
+<time_taken>289.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >122</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"jaguar");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>268.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >123</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"kangeroo");]]></querystr>
+<stuans>117,131</stuans>
+<correct>117,131</correct>
+<time_taken>280.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >124</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"lion");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>268.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >125</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"monkey");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>267.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >126</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"newt");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>283.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >127</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"owl");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>279.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >128</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"penguin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>286.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses if" >129</id><querystr><![CDATA[if i1; Select i1 such that Uses(i1,"quail");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>266.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >130</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"apple");]]></querystr>
+<stuans>125,127,28,120,40,128,135,53,56,123,134,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53,56</correct>
+<time_taken>298.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >131</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"banana");]]></querystr>
+<stuans>125,127,28,120,40,128,135,53,56,123,134,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53,56</correct>
+<time_taken>349.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >132</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"carrot");]]></querystr>
+<stuans>125,127,28,120,40,128,135,53,56,123,134,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53,56</correct>
+<time_taken>315.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >133</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"donut");]]></querystr>
+<stuans>125,127,28,120,40,128,135,53,56,123,134,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53,56</correct>
+<time_taken>307.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >134</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"egg");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,53,56,47</correct>
+<time_taken>288.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >135</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"fish");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,134,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53,56,47</correct>
+<time_taken>290.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >386</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"gummy");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>298.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >137</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"ham");]]></querystr>
+<stuans>125,127,28,120,40,128,135,53,56,123,134,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53,56</correct>
+<time_taken>279.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >138</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"innard");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>269.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >139</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"jam");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>291.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >140</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"kimchi");]]></querystr>
+<stuans>125,127,28,120,40,128,135,53,56,123,134,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53,56</correct>
+<time_taken>301.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >141</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"leek");]]></querystr>
+<stuans>125,127,28,120,40,128,135,53,56,123,134,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53,56</correct>
+<time_taken>287.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >142</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"mango");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>293.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >143</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"nachos");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>284.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >144</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"orange");]]></querystr>
+<stuans>125,127,28,120,40,128,135,53,56,123,134,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53,56</correct>
+<time_taken>285.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >145</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"pear");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>294.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >146</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"aeroplane");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>297.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >147</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"basin");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>295.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >148</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"cloud");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>288.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >149</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"door");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>288.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >150</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"elevator");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>342.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >151</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"fan");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>310.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >152</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"garbage");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>311.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >153</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"hanger");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>314.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >154</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"igloo");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>295.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >155</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"jumper");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>290.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >156</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"keep");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,386</stuans>
+<correct>120,123,125,127,128,130,134,135,386,28,40,47,53,56</correct>
+<time_taken>289.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >157</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"ant");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>284.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >158</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"beetle");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>297.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >159</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"cockroach");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>311.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >160</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"dinosaur");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>322.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >161</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"elephant");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,134,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,47,53,56</correct>
+<time_taken>311.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >162</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"fox");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>303.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >163</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"goat");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,134,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,47,53,56</correct>
+<time_taken>318.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >164</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"hamster");]]></querystr>
+<stuans>125,127,28,120,40,123,47,135,53,56,128,134,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,47,53,56</correct>
+<time_taken>299.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >165</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"jaguar");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>286.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >166</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"kangeroo");]]></querystr>
+<stuans>125,127,28,120,40,128,134,135,53,123,386</stuans>
+<correct>120,123,125,127,128,134,135,386,28,40,53</correct>
+<time_taken>292.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >167</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"lion");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>292.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >168</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"monkey");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>286.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >169</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"newt");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>298.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >170</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"owl");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>309.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >171</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"penguin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>328.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses call" >172</id><querystr><![CDATA[call c1; Select c1 such that Uses(c1,"quail");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>347.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >173</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"apple");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>304.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >174</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"banana");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>303.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >175</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"carrot");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>290.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >176</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"donut");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>312.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >177</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"egg");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,Illidan,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,Illidan,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>333.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >178</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"fish");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>295.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >179</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"gummy");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>290.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >180</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"ham");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>303.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >181</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"innard");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>286.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >182</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"jam");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>299.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >183</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"kimchi");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>285.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >184</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"leek");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>285.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >185</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"mango");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>295.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >186</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"nachos");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>304.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >187</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"orange");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>290.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >188</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"pear");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Goneril,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Goneril,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>283.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >189</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"aeroplane");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>291.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >190</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"basin");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>302.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >191</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"cloud");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>290.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >192</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"door");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>287.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >193</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"elevator");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>315.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >194</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"fan");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>309.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >195</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"garbage");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>325.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >196</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"hanger");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>311.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >197</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"igloo");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>296.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >198</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"jumper");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>308.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >199</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"keep");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>302.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >200</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"ant");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>331.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >201</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"beetle");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>343.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >202</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"cockroach");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>340.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >203</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"dinosaur");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>304.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >204</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"elephant");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>318.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >205</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"fox");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>311.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >206</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"goat");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>333.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >207</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"hamster");]]></querystr>
+<stuans>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
+<time_taken>313.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >208</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"jaguar");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>310.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >209</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"kangeroo");]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>318.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >210</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"lion");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>316.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >211</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"monkey");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>348.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >212</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"newt");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>296.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >213</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"owl");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>300.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >214</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"penguin");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>352.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Uses="1" Typed="1" comment="check Uses procedure" >215</id><querystr><![CDATA[procedure p1; Select p1 such that Uses(p1,"quail");]]></querystr>
+<stuans></stuans>
+<correct></correct>
+<time_taken>304.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>32.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>45.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" Test for mixture of such that and pattern">
@@ -9,28 +9,28 @@
 <id Pattern="1" modifies="1" comment="Which is the assignment that modifies c?" >1</id><querystr><![CDATA[assign a; Select a such that Modifies(a,"c") pattern a("c",_);]]></querystr>
 <stuans>2,3,6,7</stuans>
 <correct>2,3,6,7</correct>
-<time_taken>72.000000</time_taken>
+<time_taken>71.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Pattern="1" uses="1" comment="Which is the assignment that modifies c and uses a?" >2</id><querystr><![CDATA[assign a; Select a such that Uses(a,"a") pattern a("c",_);]]></querystr>
 <stuans>2</stuans>
 <correct>2</correct>
-<time_taken>76.000000</time_taken>
+<time_taken>73.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id pattern="1" Follows="1" comment="Which is the assignment that modifies c and followed by other statements?" >3</id><querystr><![CDATA[assign a; Select a such that Follows(a,_) pattern a("c",_);]]></querystr>
 <stuans>2,3</stuans>
 <correct>2,3</correct>
-<time_taken>75.000000</time_taken>
+<time_taken>74.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id pattern="1" parent="1" comment="Which is the assignment that modifies c and nested in a container?" >4</id><querystr><![CDATA[assign a; Select a such that Parent(_,a) pattern a("c",_);]]></querystr>
 <stuans>2,3,6,7</stuans>
 <correct>2,3,6,7</correct>
-<time_taken>101.000000</time_taken>
+<time_taken>79.000000</time_taken>
 <passed/>
 </query>
 </category>

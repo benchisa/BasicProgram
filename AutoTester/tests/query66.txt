@@ -1,0 +1,67 @@
+15
+cat: Test Case for Contains unKnown,unKnown
+1 - Contains, Typed :: contains(ASSIGNMENT,VARIABLE)
+assign a; variable v;
+Select <a,v> such that Contains(a,v);
+1 apple,10 ham,101 cockroach,103 dinosaur,105 cockroach,105 fox,107 goat,109 goat,109 hamster,11 innard,110 jaguar,112 kangeroo,114 ant,118 aeroplane,118 ant,119 aeroplane,119 kangeroo,12 jam,121 apple,121 pear,122 pear,124 dinosaur,126 elephant,129 ant,132 lamp,133 lamp,137 ant,14 egg,14 ham,16 fish,18 carrot,19 kimchi,2 banana,20 carrot,21 kimchi,24 kimchi,25 leek,26 leek,27 apple,3 banana,3 carrot,31 mango,32 nachos,33 mango,34 nachos,35 banana,37 ham,38 jam,39 carrot,4 donut,42 ham,43 ham,44 orange,45 orange,46 leek,49 orange,49 pear,5 egg,50 pear,52 mango,52 pear,54 pear,57 fish,58 aeroplane,59 basin,6 fish,62 cloud,63 door,65 elevator,66 fan,68 fan,68 garbage,69 hanger,71 fan,71 igloo,72 fan,72 igloo,73 igloo,75 jumper,77 keep,78 keep,79 hanger,79 keep,8 gummy,80 aeroplane,81 aeroplane,82 lamp,83 ant,84 beetle,85 cockroach,86 dinosaur,87 elephant,88 fox,89 goat,90 hamster,91 jaguar,92 kangeroo,93 lion,94 monkey,95 newt,96 owl,97 penguin,98 quail
+5000
+5 - contains, Typed :: contains(IF,VARIABLE)
+variable v; if i;
+Select <i,v> such that Contains(i,v);
+117 hamster,131 kangeroo,17 ham,22 carrot,30 carrot,41 banana,48 leek,61 aeroplane,64 door,67 fan,70 hanger
+5000
+7 - contains, Typed :: contains(WHILE,VARIABLE)
+variable v;while w;
+Select <w,v> such that Contains(w,v);
+100 beetle,102 cockroach,104 dinosaur,106 fox,108 goat,111 hamster,113 kangeroo,115 ant,116 aeroplane,13 ham,15 jam,23 jam,29 leek,36 banana,51 leek,55 mango,60 basin,7 apple,74 igloo,76 jumper,9 gummy,99 ant
+5000
+31 - contains, Typed :: contains(STATEMENT,VARIABLE)
+variable v;stmt s;
+Select <s,v> such that Contains(s,v);
+1 apple,10 ham,100 beetle,101 cockroach,102 cockroach,103 dinosaur,104 dinosaur,105 fox,105 cockroach,106 fox,107 goat,108 goat,109 hamster,109 goat,11 innard,110 jaguar,111 hamster,112 kangeroo,113 kangeroo,114 ant,115 ant,116 aeroplane,117 hamster,118 aeroplane,118 ant,119 aeroplane,119 kangeroo,12 jam,121 apple,121 pear,122 pear,124 dinosaur,126 elephant,129 ant,13 ham,131 kangeroo,132 lamp,133 lamp,137 ant,14 egg,14 ham,15 jam,16 fish,17 ham,18 carrot,19 kimchi,2 banana,20 carrot,21 kimchi,22 carrot,23 jam,24 kimchi,25 leek,26 leek,27 apple,29 leek,3 carrot,3 banana,30 carrot,31 mango,32 nachos,33 mango,34 nachos,35 banana,36 banana,37 ham,38 jam,39 carrot,4 donut,41 banana,42 ham,43 ham,44 orange,45 orange,46 leek,48 leek,49 pear,49 orange,5 egg,50 pear,51 leek,52 mango,52 pear,54 pear,55 mango,57 fish,58 aeroplane,59 basin,6 fish,60 basin,61 aeroplane,62 cloud,63 door,64 door,65 elevator,66 fan,67 fan,68 garbage,68 fan,69 hanger,7 apple,70 hanger,71 igloo,71 fan,72 igloo,72 fan,73 igloo,74 igloo,75 jumper,76 jumper,77 keep,78 keep,79 hanger,79 keep,8 gummy,80 aeroplane,81 aeroplane,82 lamp,83 ant,84 beetle,85 cockroach,86 dinosaur,87 elephant,88 fox,89 goat,9 gummy,90 hamster,91 jaguar,92 kangeroo,93 lion,94 monkey,95 newt,96 owl,97 penguin,98 quail,99 ant
+5000
+6 - contains, Typed :: contains(IF,STMT_LST)
+stmtLst sl; if i;
+Select <i,sl> such that Contains(i,sl);
+117 118,117 119,131 132,131 133,17 18,17 20,22 23,22 26,30 31,30 33,41 42,41 43,48 49,48 50,61 62,61 63,64 65,64 66,67 68,67 69,70 71,70 73
+5000
+8 - contains, Typed :: contains(WHILE,STMT_LST)
+stmtLst sl;while w;
+Select <w,sl> such that Contains(w,sl);
+100 101,102 103,104 105,106 107,108 109,111 112,113 114,115 116,116 117,13 14,15 16,23 24,29 30,36 37,51 52,55 56,60 61,7 8,74 75,76 77,9 10,99 100
+5000
+9 - contains, Typed :: contains(PROCEDURE,STMT_LST)
+stmtLst sl;procedure p;
+Select <p,sl> such that Contains(p,sl);
+Alice 1,Bob 29,Charlie 44,Danny 51,Eliza 58,Fred 83,Goneril 121,Henry 122,Illidan 124,James 125,Kingsley 127,Lucas 129,Merril 131,Nancy 135,Oppi 136
+5000
+32 - contains, Typed :: contains(STATEMENT,STMT_LIST)
+stmtLst sl;stmt s;
+Select <s,sl> such that Contains(s,sl);
+100 101,102 103,104 105,106 107,108 109,111 112,113 114,115 116,116 117,117 118,117 119,13 14,131 132,131 133,15 16,17 18,17 20,22 23,22 26,23 24,29 30,30 31,30 33,36 37,41 42,41 43,48 49,48 50,51 52,55 56,60 61,61 62,61 63,64 65,64 66,67 68,67 69,7 8,70 71,70 73,74 75,76 77,9 10,99 100
+5000
+26 - contains, Typed :: contains(STMT_LIST,STATEMENT)
+stmtLst sl;stmt s;
+Select <sl,s> such that Contains(sl,s);
+1 1,1 2,1 28,1 3,1 4,1 5,1 6,1 7,10 10,10 11,10 12,10 13,10 15,10 17,10 22,10 27,100 100,101 101,101 102,103 103,103 104,105 105,105 106,107 107,107 108,107 120,109 109,109 110,109 111,112 112,112 113,114 114,114 115,116 116,117 117,118 118,119 119,121 121,122 122,122 123,124 124,125 125,125 126,127 127,127 128,129 129,129 130,131 131,131 134,132 132,133 133,135 135,136 136,136 137,14 14,16 16,18 18,18 19,20 20,20 21,23 23,23 25,24 24,26 26,29 29,29 40,29 41,30 30,30 35,30 36,30 39,31 31,31 32,33 33,33 34,37 37,37 38,42 42,43 43,44 44,44 45,44 46,44 47,44 48,49 49,50 50,51 51,52 52,52 53,52 54,52 55,56 56,56 57,58 58,58 59,58 60,58 82,61 61,62 62,63 63,63 64,63 81,65 65,66 66,66 67,66 80,68 68,69 69,69 70,69 79,71 71,71 72,73 73,73 74,73 78,75 75,75 76,77 77,8 8,8 9,83 83,83 84,83 85,83 86,83 87,83 88,83 89,83 90,83 91,83 92,83 93,83 94,83 95,83 96,83 97,83 98,83 99
+5000
+27 - contains, Typed :: contains(STMT_LIST,ASSIGNMENT) 
+stmtLst sl;assign a;
+Select <sl,a> such that Contains(sl,a);
+1 1,1 2,1 3,1 4,1 5,1 6,10 10,10 11,10 12,10 27,101 101,103 103,105 105,107 107,109 109,109 110,112 112,114 114,118 118,119 119,121 121,122 122,124 124,125 126,129 129,132 132,133 133,136 137,14 14,16 16,18 18,18 19,20 20,20 21,23 25,24 24,26 26,30 35,30 39,31 31,31 32,33 33,33 34,37 37,37 38,42 42,43 43,44 44,44 45,44 46,49 49,50 50,52 52,52 54,56 57,58 58,58 59,58 82,62 62,63 63,63 81,65 65,66 66,66 80,68 68,69 69,69 79,71 71,71 72,73 73,73 78,75 75,77 77,8 8,83 83,83 84,83 85,83 86,83 87,83 88,83 89,83 90,83 91,83 92,83 93,83 94,83 95,83 96,83 97,83 98
+5000
+28 - contains, Typed :: contains(STMT_LIST,WHILE)
+stmtLst sl;while w;
+Select <sl,w> such that Contains(sl,w);
+1 7,10 13,10 15,100 100,101 102,103 104,105 106,107 108,109 111,112 113,114 115,116 116,23 23,29 29,30 36,51 51,52 55,58 60,73 74,75 76,8 9,83 99
+5000
+29 - contains, Typed :: contains(STMT_LIST,IF)
+stmtLst sl; if i;
+Select <sl,i> such that Contains(sl,i);
+10 17,10 22,117 117,131 131,29 41,30 30,44 48,61 61,63 64,66 67,69 70
+5000
+30 - contains, Typed :: contains(STMT_LIST,CALL)
+stmtLst sl;call c;
+Select <sl,c> such that Contains(sl,c);
+1 28,107 120,122 123,125 125,127 127,127 128,129 130,131 134,135 135,136 136,29 40,44 47,52 53,56 56
+5000

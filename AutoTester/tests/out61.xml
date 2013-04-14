@@ -1,0 +1,451 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>CS3202</name><parsing_time_taken>2296.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" Test Case for Contains* Known,Known">
+<query>
+<id Contains="1" Typed="1" comment="contains*(ASSIGNMENT,VARIABLE)" >1</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(38,"fish");]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>75.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(ASSIGNMENT,PLUS)" >2</id><querystr><![CDATA[plus pls; Select BOOLEAN such that Contains*(37,pls);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>73.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(ASSIGNMENT,MINUS)" >3</id><querystr><![CDATA[minus min; Select BOOLEAN such that Contains*(38,min);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>61.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(ASSIGNMENT,MULTIPLY)" >4</id><querystr><![CDATA[times tm; Select BOOLEAN such that Contains*(33,tm);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>67.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(ASSIGNMENT,CONSTANT)" >5</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(34,"12");]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>59.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(IF,ASSIGNMENT)" >8</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(41,42);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>59.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(IF,WHILE)" >9</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(70,74);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>59.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(IF,IF)" >10</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(61,67);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>63.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(IF,CALL)" >11</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(48,47);]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>61.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(IF,VARIABLE)" >12</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(22,"jam");]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>62.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(IF,PLUS)" >13</id><querystr><![CDATA[plus pls; Select BOOLEAN such that Contains*(22,pls);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>67.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(IF,MINUS)" >14</id><querystr><![CDATA[minus min; Select BOOLEAN such that Contains*(64,min);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>71.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(IF,MULTIPLY)" >15</id><querystr><![CDATA[times tm; Select BOOLEAN such that Contains*(61,tm);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>69.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(IF,CONSTANT)" >16</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(30,"9");]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>70.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(WHILE,STATEMENT)" >18</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(9,15);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>70.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(WHILE,ASSIGNMENT)" >19</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(9,16);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>69.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(WHILE,WHILE)" >20</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(9,13);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>64.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(WHILE,IF)" >21</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(9,17);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>69.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(WHILE,CALL)" >22</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(51,56);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>68.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(WHILE,VARIABLE)" >23</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(51,"mango");]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>71.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(WHILE,PLUS)" >24</id><querystr><![CDATA[plus pls; Select BOOLEAN such that Contains*(51,pls);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>72.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(WHILE,MINUS)" >25</id><querystr><![CDATA[minus min Select BOOLEAN such that Contains*(51,min);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>79.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(WHILE,MULTIPLY)" >26</id><querystr><![CDATA[times tm; Select BOOLEAN such that Contains*(51,tm);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>75.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(WHILE,CONSTANT)" >27</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(7,"4");]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>77.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(PROCEDURE,STATEMENT)" >29</id><querystr><![CDATA[ Select BOOLEAN such that Contains*("Bob",31);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>83.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(PROCEDURE,ASSIGNMENT)" >30</id><querystr><![CDATA[ Select BOOLEAN such that Contains*("Bob",32);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>78.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(PROCEDURE,WHILE)" >31</id><querystr><![CDATA[ Select BOOLEAN such that Contains*("Bob",36);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>80.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(PROCEDURE,IF)" >32</id><querystr><![CDATA[ Select BOOLEAN such that Contains*("Bob",41);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>81.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(PROCEDURE,CALL)" >33</id><querystr><![CDATA[ Select BOOLEAN such that Contains*("Bob",40);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>77.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(PROCEDURE,VARIABLE)" >34</id><querystr><![CDATA[ Select BOOLEAN such that Contains*("Bob","banana");]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>88.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(PROCEDURE,PLUS)" >35</id><querystr><![CDATA[plus pls; Select BOOLEAN such that Contains*("Bob",pls);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>85.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(PROCEDURE,MINUS)" >36</id><querystr><![CDATA[minus min; Select BOOLEAN such that Contains*("Bob",min);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>88.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(PROCEDURE,MULTIPLY)" >37</id><querystr><![CDATA[times tm; Select BOOLEAN such that Contains*("Bob",tm);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>89.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(PROCEDURE,CONSTANT)" >38</id><querystr><![CDATA[ Select BOOLEAN such that Contains*("Bob","13");]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>84.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(STATEMENT,STATEMENT)" >51</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(51,57);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>83.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(STATEMENT,ASSIGNMENT)" >52</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(60,62);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>80.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(STATEMENT,WHILE)" >53</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(70,74);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>79.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(STATEMENT,IF)" >54</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(67,70);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>83.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(STATEMENT,CALL)" >55</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(51,56);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>80.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(STATEMENT,VARIABLE)" >56</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(51,"mango");]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>85.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(STATEMENT,PLUS)" >57</id><querystr><![CDATA[plus pls; Select BOOLEAN such that Contains*(61,pls);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(STATEMENT,MINUS)" >58</id><querystr><![CDATA[minus min; Select BOOLEAN such that Contains*(61,min);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(STATEMENT,MULTIPLY)" >59</id><querystr><![CDATA[times tm; Select BOOLEAN such that Contains*(61,tm);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>100.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(STATEMENT,CONSTANT)" >60</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(61,"103");]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>94.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(PLUS,VARIABLE)" >61</id><querystr><![CDATA[plus pls; Select BOOLEAN such that Contains*(pls,"orange");]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(PLUS,CONSTANT)" >62</id><querystr><![CDATA[plus pls; Select BOOLEAN such that Contains*(pls,"8");]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>96.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(PLUS,MULTIPLY)" >63</id><querystr><![CDATA[plus pls; times tm; Select BOOLEAN such that Contains*(pls,tm);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(PLUS,MINUS)" >64</id><querystr><![CDATA[plus pls; minus min; Select BOOLEAN such that Contains*(pls,min);]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>106.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(PLUS,PLUS)" >65</id><querystr><![CDATA[plus pls1,pls2; Select BOOLEAN such that Contains*(pls1,pls2);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>110.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(MINUS,VARIABLE)" >66</id><querystr><![CDATA[minus min; Select BOOLEAN such that Contains*(min,"kimchi");]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>117.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(MINUS,CONSTANT)" >67</id><querystr><![CDATA[minus min; Select BOOLEAN such that Contains*(min,"9");]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>100.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(MINUS,MULTIPLY)" >68</id><querystr><![CDATA[minus min; times tm; Select BOOLEAN such that Contains*(min,tm);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>106.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(MINUS,PLUS)" >70</id><querystr><![CDATA[minus min; plus pls; Select BOOLEAN such that Contains*(min,pls);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>109.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(MULTIPLY,VARIABLE)" >71</id><querystr><![CDATA[times tm; Select BOOLEAN such that Contains*(tm,"egg");]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>102.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(MULTIPLY,CONSTANT)" >72</id><querystr><![CDATA[times tm; Select BOOLEAN such that Contains*(tm,"8");]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>100.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(MULTIPLY,MULTIPLY)" >73</id><querystr><![CDATA[times tm1,tm2; Select BOOLEAN such that Contains*(tm1,tm2);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>100.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(MULTIPLY,MINUS)" >74</id><querystr><![CDATA[times tm; minus min; Select BOOLEAN such that Contains*(tm,min);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>108.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(MULTIPLY,PLUS)" >75</id><querystr><![CDATA[times tm; plus pls; Select BOOLEAN such that Contains*(tm,pls);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>104.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(CALL,ASSIGNMENT)" >76</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(125,126);]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>91.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(CONSTANT,VARIABLE)" >77</id><querystr><![CDATA[ Select BOOLEAN such that Contains*("999","lamp");]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>93.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(VARIABLE,STATEMENT)" >78</id><querystr><![CDATA[ Select BOOLEAN such that Contains*("lamp",132);]]></querystr>
+<stuans>false</stuans>
+<correct>false</correct>
+<time_taken>97.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(IF,STMT_LIST)" >6</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(41,42);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>91.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id Contains="1" Typed="1" comment="contains*(IF,STATEMENT)" >7</id><querystr><![CDATA[ Select BOOLEAN such that Contains*(41,42);]]></querystr>
+<stuans>true</stuans>
+<correct>true</correct>
+<time_taken>89.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

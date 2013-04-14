@@ -1,0 +1,147 @@
+15
+cat: Test Case for Contains (Known,Unknown) and (Unknown,Known)
+1 - Contains, Typed :: contains(ASSIGNMENT,VARIABLE)
+variable v;
+Select v such that Contains(1,v);
+apple
+5000
+2 - contains, Typed :: contains(ASSIGNMENT,PLUS)
+plus pl; assign a;
+Select a such that Contains(a,pl);
+11,110,112,18,19,2,21,24,44,5,50,54,59,63,78,81,82
+5000
+3 - contains, Typed :: contains(ASSIGNMENT,MINUS)
+minus min;assign a;
+Select a such that Contains(a,min);
+107,57,65,75,122,45
+5000
+4 - contains, Typed :: contains(ASSIGNMENT,MULTIPLY)
+times tm;assign a;
+Select a such that Contains(a,tm);
+124,126,129,137,31,32,33,34,37,38,39,42,43,62,66,69,73,77
+5000
+5 - contains, Typed :: contains(IF,VARIABLE)
+variable v;
+Select v such that Contains(30,v);
+carrot
+5000
+7 - contains, Typed :: contains(WHILE,VARIABLE)
+while w;
+Select w such that Contains(w,"banana");
+36
+5000
+11 - contains, Typed :: contains(PLUS,CONSTANT)
+plus pls; constant c;
+Select c such that Contains(pls,c);
+1,2,4,6,8,14,101,103
+5000
+12 - contains, Typed :: contains(PLUS,VARIABLE)
+plus pls; variable v;
+Select v such that Contains(pls,v);
+aeroplane,apple,basin,beetle,carrot,cloud,donut,egg,fish,ham,keep,kimchi,leek,nachos
+5000
+16 - contains, Typed :: contains(MULTIPLY,CONSTANT)
+times tm;constant c;
+Select c such that Contains(tm,c);
+10,11,12,13,2,9
+5000
+17 - contains, Typed :: contains(MULTIPLY,VARIABLE)
+times tm;variable v;
+Select v such that Contains(tm,v);
+aeroplane,banana,basin,carrot,cloud,door,egg,elephant,elevator,fan,fish,garbage,goat,ham,hamster,kimchi,leek,mango,orange
+5000
+21 - contains, Typed :: contains(MINUS,CONSTANT)
+minus min; constant c;
+Select c such that Contains(min,c);
+1,9
+5000
+22 - contains, Typed :: contains(MINUS,VARIABLE)
+minus min; variable v;
+Select v such that Contains(min,v);
+cloud,dinosaur,door,fish,garbage,ham,mango
+5000
+31 - contains, Typed :: contains(STATEMENT,VARIABLE)
+stmt s;
+Select s such that Contains(s,"cockroach");
+101,102,105,85
+5000
+33 - contains, Typed :: contains(STATEMENT,PLUS)
+plus pls; stmt s;
+Select s such that Contains(s,pls);
+11,110,112,18,19,2,21,24,44,5,50,54,59,63,78,81,82
+5000
+34 - contains, Typed :: contains(STATEMENT,MINUS)
+minus min; stmt s;
+Select s such that Contains(s,min);
+107,122,45,57,65,75
+5000
+35 - contains, Typed :: contains(STATEMENT,MULTIPLY)
+times tm; stmt s;
+Select s such that Contains(s,tm);
+124,126,129,137,31,32,33,34,37,38,39,42,43,62,66,69,73,77
+5000
+6 - contains, Typed :: contains(IF,STMT_LST)
+stmtLst sl;
+Select sl such that Contains(30,sl);
+31,33
+5000
+8 - contains, Typed :: contains(WHILE,STMT_LST)
+stmtLst sl;
+Select sl such that Contains(36,sl);
+37
+5000
+9 - contains, Typed :: contains(PROCEDURE,STMT_LST)
+stmtLst sl;
+Select sl such that Contains("Goneril",sl);
+121
+5000
+32 - contains, Typed :: contains(STATEMENT,STMT_LIST)
+stmtLst sl;
+Select sl such that Contains(99,sl);
+100
+5000
+26 - contains, Typed :: contains(STMT_LIST,STATEMENT)
+stmtLst sl;
+Select sl such that Contains(sl,29);
+29
+5000
+27 - contains, Typed :: contains(STMT_LIST,ASSIGNMENT) 
+stmtLst sl;
+Select sl such that Contains(sl,31);
+31
+5000
+28 - contains, Typed :: contains(STMT_LIST,WHILE)
+stmtLst sl;
+Select sl such that Contains(sl,100);
+100
+5000
+29 - contains, Typed :: contains(STMT_LIST,IF)
+stmtLst sl;
+Select sl such that Contains(sl,30);
+30
+5000
+30 - contains, Typed :: contains(STMT_LIST,CALL)
+stmtLst sl;
+Select sl such that Contains(sl,120);
+107
+5000
+36 - Contains, Typed :: contains(ASSIGNMENT,VARIABLE)
+assign a;
+Select a such that Contains(a,"apple");
+1,121,27
+5000
+37 - contains, Typed :: contains(IF,VARIABLE)
+if i;
+Select i such that Contains(i,"carrot");
+22,30
+5000
+38 - contains, Typed :: contains(WHILE,VARIABLE)
+variable v;
+Select v such that Contains(36,v);
+banana
+5000
+39 - contains, Typed :: contains(STATEMENT,VARIABLE)
+variable v;
+Select v such that Contains(101,v);
+cockroach
+5000

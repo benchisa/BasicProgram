@@ -1,5 +1,95 @@
 100
 cat: Follows Queries
+97 - Follows, Typed :: check follows
+call c; stmt s;
+Select <c,s> such that Follows(c,s);
+125 126,127 128,136 137,40 41,47 48,53 54,56 57
+5000
+98 - Follows, Typed :: check follows
+call c; stmt s;
+Select <c,s> such that Follows*(c,s);
+125 126,127 128,136 137,40 41,47 48,53 54,53 55,56 57
+5000
+99 - Follows, Typed :: check follows
+call c; assign a;
+Select <c,a> such that Follows(c,a);
+136 137,125 126
+5000
+100 - Follows, Typed :: check follows
+call c; assign a;
+Select <c,a> such that Follows*(c,a);
+136 137,125 126
+5000
+101 - Follows, Typed :: check follows
+call c; while w;
+Select <c,w> such that Follows(c,w);
+53 55
+5000
+102 - Follows, Typed :: check follows
+call c; while w;
+Select <c,w> such that Follows*(c,w);
+53 55
+5000
+103 - Follows, Typed :: check follows
+call c; if i;
+Select <c,i> such that Follows(c,i);
+40 41,47 48
+5000
+104 - Follows, Typed :: check follows
+call c; if i;
+Select <c,i> such that Follows*(c,i);
+40 41,47 48
+5000
+105 - Follows, Typed :: check follows
+call c1,c2;
+Select <c1,c2> such that Follows(c1,c2);
+127 128
+5000
+106 - Follows, Typed :: check follows
+call c1,c2;
+Select <c1,c2> such that Follows*(c1,c2);
+127 128
+5000
+107 - Follows, Typed :: check follows
+call c; stmt s;
+Select <s,c> such that Follows(s,c);
+108 120,122 123,127 128,129 130,131 134,29 40,46 47,52 53,7 28
+5000
+108 - Follows, Typed :: check follows
+call c; stmt s;
+Select <s,c> such that Follows*(s,c);
+1 28,107 120,108 120,122 123,127 128,129 130,131 134,2 28,29 40,3 28,4 28,44 47,45 47,46 47,5 28,52 53,6 28,7 28
+5000
+109 - Follows, Typed :: check follows
+call c; assign a;
+Select <a,c> such that Follows(a,c);
+122 123,129 130,46 47,52 53
+5000
+110 - Follows, Typed :: check follows
+call c; assign a;
+Select <a,c> such that Follows*(a,c);
+1 28,107 120,122 123,129 130,2 28,3 28,4 28,44 47,45 47,46 47,5 28,52 53,6 28
+5000
+111 - Follows, Typed :: check follows
+call c; while w;
+Select <w,c> such that Follows(w,c);
+108 120,29 40,7 28
+5000
+112 - Follows, Typed :: check follows
+call c; while w;
+Select <w,c> such that Follows*(w,c);
+108 120,29 40,7 28
+5000
+113 - Follows, Typed :: check follows
+call c; if i;
+Select <i,c> such that Follows(i,c);
+131 134
+5000
+114 - Follows, Typed :: check follows
+call c; if i;
+Select <i,c> such that Follows*(i,c);
+131 134
+5000
 1 - Follows, Typed :: check follows
 stmt s1;
 Select s1 such that Follows(s1,1);

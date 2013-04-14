@@ -1,138 +1,127 @@
-100
-cat: valid contains(KNOWN,KNOWN) queries
-1 - contains, Typed :: contains(ASSIGNMENT,VARIABLE)
+15
+cat: Test Case for Contains Known,Known
+1 - Contains, Typed :: contains(ASSIGNMENT,VARIABLE)
 
 Select BOOLEAN such that Contains(1,"apple");
+true
 5000
 2 - contains, Typed :: contains(ASSIGNMENT,PLUS)
 plus pl;
 Select BOOLEAN such that Contains(2,pl);
+true
 5000
 3 - contains, Typed :: contains(ASSIGNMENT,MINUS)
 minus min;
-Select BOOLEAN such that Contains(38,min);
+Select BOOLEAN such that Contains(57,min);
+true
 5000
 4 - contains, Typed :: contains(ASSIGNMENT,MULTIPLY)
 times tm;
 Select BOOLEAN such that Contains(31,tm);
+true
 5000
 5 - contains, Typed :: contains(IF,VARIABLE)
 
 Select BOOLEAN such that Contains(30,"carrot");
-5000
-6 - contains, Typed :: contains(IF,STMT_LST)
-
-Select BOOLEAN such that Contains(30,31);
+true
 5000
 7 - contains, Typed :: contains(WHILE,VARIABLE)
 
 Select BOOLEAN such that Contains(36,"banana");
-5000
-8 - contains, Typed :: contains(WHILE,STMT_LST)
-
-Select BOOLEAN such that Contains(36,37);
-5000
-9 - contains, Typed :: contains(PROCEDURE,STMT_LST)
-
-Select BOOLEAN such that Contains("Goneril",121);
+true
 5000
 11 - contains, Typed :: contains(PLUS,CONSTANT)
 plus pls;
 Select BOOLEAN such that Contains(pls,"1");
+true
 5000
 12 - contains, Typed :: contains(PLUS,VARIABLE)
 plus pls;
 Select BOOLEAN such that Contains(pls,"apple");
+true
 5000
 13 - contains, Typed :: contains(PLUS,PLUS)
 plus pls1,pls2;
 Select BOOLEAN such that Contains(pls1,pls2);
+true
 5000
 14 - contains, Typed :: contains(PLUS,MINUS)
 plus pls; minus min;
 Select BOOLEAN such that Contains(pls,min);
+false
 5000
 15 - contains, Typed :: contains(PLUS,MULTIPLY)
 plus pls; times tm;
 Select BOOLEAN such that Contains(pls,tm);
+true
 5000
 16 - contains, Typed :: contains(MULTIPLY,CONSTANT)
 times tm;
 Select BOOLEAN such that Contains(tm,"9");
+true
 5000
 17 - contains, Typed :: contains(MULTIPLY,VARIABLE)
 times tm;
 Select BOOLEAN such that Contains(tm,"leek");
+true
 5000
 18 - contains, Typed :: contains(MULTIPLY,PLUS)
 times tm; plus pls;
 Select BOOLEAN such that Contains(tm,pls);
+true
 5000
 19 - contains, Typed :: contains(MULTIPLY,MINUS)
 times tm; minus min;
 Select BOOLEAN such that Contains(tm,min);
+true
 5000
 20 - contains, Typed :: contains(MULTIPLY,MULTIPLY)
 times tm1,tm2;
 Select BOOLEAN such that Contains(tm1,tm2);
+true
 5000
 21 - contains, Typed :: contains(MINUS,CONSTANT)
 minus min;
 Select BOOLEAN such that Contains(min,"9");
+true
 5000
 22 - contains, Typed :: contains(MINUS,VARIABLE)
 minus min;
 Select BOOLEAN such that Contains(min,"ham");
+true
 5000
 23 - contains, Typed :: contains(MINUS,PLUS)
 plus pls;minus min;
 Select BOOLEAN such that Contains(min,pls);
+true
 5000
 24 - contains, Typed :: contains(MINUS,MINUS)
 minus min1,min2;
 Select BOOLEAN such that Contains(min1,min2);
+false
 5000
 25 - contains, Typed :: contains(MINUS,MULTIPLY)
 minus min; times tm;
 Select BOOLEAN such that Contains(min,tm);
-5000
-26 - contains, Typed :: contains(STMT_LIST,STATEMENT)
-
-Select BOOLEAN such that Contains();
-5000
-27 - contains, Typed :: contains(STMT_LIST,ASSIGNMENT) 
-
-Select BOOLEAN such that Contains();
-5000
-28 - contains, Typed :: contains(STMT_LIST,WHILE)
-
-Select BOOLEAN such that Contains();
-5000
-29 - contains, Typed :: contains(STMT_LIST,IF)
-
-Select BOOLEAN such that Contains();
-5000
-30 - contains, Typed :: contains(STMT_LIST,CALL)
-
-Select BOOLEAN such that Contains();
+true
 5000
 31 - contains, Typed :: contains(STATEMENT,VARIABLE)
 
-Select BOOLEAN such that Contains();
-5000
-32 - contains, Typed :: contains(STATEMENT,STMT_LIST)
-
-Select BOOLEAN such that Contains();
+Select BOOLEAN such that Contains(101,"cockroach");
+true
 5000
 33 - contains, Typed :: contains(STATEMENT,PLUS)
-
-Select BOOLEAN such that Contains();
+plus pls;
+Select BOOLEAN such that Contains(82,pls);
+true
 5000
 34 - contains, Typed :: contains(STATEMENT,MINUS)
-
-Select BOOLEAN such that Contains();
+minus min;
+Select BOOLEAN such that Contains(65,min);
+true
 5000
 35 - contains, Typed :: contains(STATEMENT,MULTIPLY)
-
-Select BOOLEAN such that Contains();
+times tm;
+Select BOOLEAN such that Contains(43,tm);
+true
 5000

@@ -1,0 +1,178 @@
+<?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
+<test_results>
+<info>
+<name>CS3202</name><parsing_time_taken>2119.000000</parsing_time_taken>
+</info>
+<queries>
+<category name=" complex queries">
+<query>
+<id all="1" Typed="1" comment="1 set of interrelated 7 such that pattern clauses, single select" >1</id><querystr><![CDATA[assign a1,a2,a3; variable v1,v2; while w1;  Select a1 such that Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2);]]></querystr>
+<stuans>37</stuans>
+<correct>37</correct>
+<time_taken>864.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="1 set of interrelated 7 such that pattern clauses, single select" >2</id><querystr><![CDATA[assign a1,a2,a3; variable v1,v2; while w1;  Select w1 such that Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2);]]></querystr>
+<stuans>36</stuans>
+<correct>36</correct>
+<time_taken>881.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="1 set of interrelated 7 such that pattern clauses, single select" >3</id><querystr><![CDATA[assign a1,a2,a3; variable v1,v2; while w1;  Select a2 such that Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2);]]></querystr>
+<stuans>38</stuans>
+<correct>38</correct>
+<time_taken>849.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="1 set of interrelated 7 such that pattern clauses, single select" >4</id><querystr><![CDATA[assign a1,a2,a3; variable v1,v2; while w1;  Select a2 such that Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2);]]></querystr>
+<stuans>38</stuans>
+<correct>38</correct>
+<time_taken>870.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="1 set of interrelated 7 such that pattern clauses, single select" >4</id><querystr><![CDATA[assign a1,a2,a3; variable v1,v2; while w1;  Select v2 such that Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2);]]></querystr>
+<stuans>jam</stuans>
+<correct>jam</correct>
+<time_taken>855.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="1 set of interrelated 7 such that pattern clauses, single select" >4</id><querystr><![CDATA[assign a1,a2,a3; variable v1,v2; while w1;  Select a3 such that Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2);]]></querystr>
+<stuans>31,32,33,34,37</stuans>
+<correct>31,32,33,34,37</correct>
+<time_taken>869.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="1 set of interrelated 10 such that pattern clauses, single select" >5</id><querystr><![CDATA[assign a1,a2,a3; variable v1,v2; while w1; procedure p1; Select v1  such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);]]></querystr>
+<stuans>fish,ham,kimchi</stuans>
+<correct>fish,ham,kimchi</correct>
+<time_taken>993.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="1 set of interrelated 10 such that pattern clauses, single select" >5</id><querystr><![CDATA[assign a1,a2,a3; variable v1,v2; while w1; procedure p1; Select p1  such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);]]></querystr>
+<stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
+<correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
+<time_taken>940.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="1 set of interrelated 10 such that pattern clauses, 2-tuple select" >6</id><querystr><![CDATA[assign a1,a2,a3; variable v1,v2; while w1; procedure p1; Select a1  such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);]]></querystr>
+<stuans>37</stuans>
+<correct>37</correct>
+<time_taken>965.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="1 set of interrelated 10 such that pattern clauses, 2-tuple select" >6</id><querystr><![CDATA[assign a1,a2,a3; variable v1,v2; while w1; procedure p1; Select <a1,p1>  such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);]]></querystr>
+<stuans>37 Alice,37 Nancy,37 Bob,37 Danny,37 James,37 Kingsley,37 Fred,37 Merril,37 Henry,37 Oppi</stuans>
+<correct>37 Alice,37 Bob,37 Danny,37 Fred,37 Henry,37 James,37 Kingsley,37 Merril,37 Nancy,37 Oppi</correct>
+<time_taken>946.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="1 set of interrelated 10 such that pattern clauses, single select" >7</id><querystr><![CDATA[assign a1,a2,a3,a4; variable v1,v2; while w1; procedure p1; Select a4 such that Next*(38,a4) and Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);]]></querystr>
+<stuans>31,32,33,34,35,37,38,39,42,43</stuans>
+<correct>31,32,33,34,35,37,38,39,42,43</correct>
+<time_taken>978.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="1 set of interrelated 10 such that pattern clauses, 2-tuple select" >8</id><querystr><![CDATA[assign a1,a2,a3,a4; variable v1,v2; while w1; procedure p1; Select a4 such that Next*(38,a4) and Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);]]></querystr>
+<stuans>31,32,33,34,35,37,38,39,42,43</stuans>
+<correct>31,32,33,34,35,37,38,39,42,43</correct>
+<time_taken>956.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="1 set of interrelated 10 such that pattern clauses, 2-tuple select" >8</id><querystr><![CDATA[assign a1,a2,a3,a4; variable v1,v2; while w1; procedure p1; Select <p1,a4> such that Next*(38,a4) and Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);]]></querystr>
+<stuans>Alice 31,James 32,Alice 37,Alice 32,James 38,Fred 43,Henry 38,Alice 33,Alice 34,Danny 39,Alice 35,Alice 38,Danny 37,Henry 35,Alice 39,Alice 42,Henry 31,Alice 43,Fred 32,Bob 31,Bob 32,Fred 38,Henry 42,Bob 33,Kingsley 33,Nancy 42,Bob 34,Bob 35,Henry 43,Kingsley 32,Merril 33,Bob 37,James 34,Bob 38,Danny 42,James 33,Bob 39,Bob 42,Bob 43,Danny 31,Fred 31,Henry 34,Danny 32,James 43,Danny 33,Danny 34,Henry 32,Danny 35,Danny 38,James 35,Danny 43,Kingsley 34,Fred 33,Fred 34,Fred 35,Fred 37,Fred 39,Fred 42,Henry 39,Henry 33,Henry 37,James 31,James 37,James 39,James 42,Kingsley 31,Kingsley 35,Kingsley 37,Kingsley 38,Nancy 32,Kingsley 39,Kingsley 42,Kingsley 43,Merril 31,Merril 32,Merril 34,Merril 35,Merril 37,Merril 38,Merril 39,Merril 42,Merril 43,Oppi 35,Nancy 31,Nancy 33,Nancy 34,Nancy 35,Nancy 37,Nancy 38,Nancy 39,Nancy 43,Oppi 31,Oppi 32,Oppi 33,Oppi 34,Oppi 37,Oppi 38,Oppi 39,Oppi 42,Oppi 43</stuans>
+<correct>Bob 31,Bob 32,Bob 33,Bob 34,Bob 35,Bob 37,Bob 38,Bob 39,Bob 42,Bob 43,Alice 31,Alice 32,Alice 33,Alice 34,Alice 35,Alice 37,Alice 38,Alice 39,Alice 42,Alice 43,Danny 31,Danny 32,Danny 33,Danny 34,Danny 35,Danny 37,Danny 38,Danny 39,Danny 42,Danny 43,Fred 31,Fred 32,Fred 33,Fred 34,Fred 35,Fred 37,Fred 38,Fred 39,Fred 42,Fred 43,Henry 31,Henry 32,Henry 33,Henry 34,Henry 35,Henry 37,Henry 38,Henry 39,Henry 42,Henry 43,James 31,James 32,James 33,James 34,James 35,James 37,James 38,James 39,James 42,James 43,Kingsley 31,Kingsley 32,Kingsley 33,Kingsley 34,Kingsley 35,Kingsley 37,Kingsley 38,Kingsley 39,Kingsley 42,Kingsley 43,Merril 31,Merril 32,Merril 33,Merril 34,Merril 35,Merril 37,Merril 38,Merril 39,Merril 42,Merril 43,Nancy 31,Nancy 32,Nancy 33,Nancy 34,Nancy 35,Nancy 37,Nancy 38,Nancy 39,Nancy 42,Nancy 43,Oppi 31,Oppi 32,Oppi 33,Oppi 34,Oppi 35,Oppi 37,Oppi 38,Oppi 39,Oppi 42,Oppi 43</correct>
+<time_taken>982.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="2 set of interrelated 10 such that pattern clauses, single select" >9</id><querystr><![CDATA[assign a1,a2,a3,a4; variable v1,v2; while w1; procedure p1; Select a4 such that Next*(44,a4) and Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);]]></querystr>
+<stuans>45,46,49,50</stuans>
+<correct>45,46,49,50</correct>
+<time_taken>955.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="2 set of interrelated 10 such that pattern clauses, 2-tuple select" >10</id><querystr><![CDATA[assign a1,a2,a3,a4; variable v1,v2; while w1; procedure p1; Select <p1,a4> such that Next*(44,a4) and Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);]]></querystr>
+<stuans>Alice 45,Merril 49,Danny 49,Alice 46,Kingsley 50,Alice 49,Alice 50,Bob 49,Kingsley 46,Bob 45,Fred 45,Bob 46,Danny 45,Henry 50,Merril 50,Bob 50,Danny 46,Danny 50,James 50,Fred 46,Fred 49,Fred 50,James 46,Henry 45,Henry 46,Merril 46,Henry 49,James 45,James 49,Kingsley 45,Kingsley 49,Merril 45,Nancy 45,Nancy 46,Nancy 49,Nancy 50,Oppi 45,Oppi 46,Oppi 49,Oppi 50</stuans>
+<correct>Bob 45,Bob 46,Bob 49,Bob 50,Alice 45,Alice 46,Alice 49,Alice 50,Danny 45,Danny 46,Danny 49,Danny 50,Fred 45,Fred 46,Fred 49,Fred 50,Henry 45,Henry 46,Henry 49,Henry 50,James 45,James 46,James 49,James 50,Kingsley 45,Kingsley 46,Kingsley 49,Kingsley 50,Merril 45,Merril 46,Merril 49,Merril 50,Nancy 45,Nancy 46,Nancy 49,Nancy 50,Oppi 45,Oppi 46,Oppi 49,Oppi 50</correct>
+<time_taken>1084.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="2 set of interrelated 13 such that pattern clauses, many-tuple select" >11</id><querystr><![CDATA[assign a1,a2,a3,a4; variable v1,v2,v3,v4; while w1; procedure p1; Select <a1,a2,a3,a4> such that Next*(44,a4) and Uses(a4,v3) pattern a4(_,_"orange"_) such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);]]></querystr>
+<stuans>37 38 37 45,37 38 37 49,37 38 37 50</stuans>
+<correct>37 38 37 45,37 38 37 49,37 38 37 50</correct>
+<time_taken>1135.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="3 set of interrelated 15 such that pattern clauses, single select" >12</id><querystr><![CDATA[stmt s1,s2,s3; assign a1,a2,a3,a4,a7; variable v1,v2,v3,v4; while w1; procedure p1; Select s1 such that Follows(s1,s2) and Parent(s3,s2) pattern a7("fan",_) such that Next*(44,a4) and Uses(a4,v3) pattern a4(_,_"orange"_) such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);]]></querystr>
+<stuans>69,75,74,10,31,11,66,67,15,70,105,8,12,37,13,18,20,17,23,22,71,33,53,30,52,54,35,101,114,36,56,63,107,73,64,103,109,110,112,108</stuans>
+<correct>10,101,103,105,107,108,109,11,110,112,114,12,13,15,17,18,20,22,23,30,31,33,35,36,37,52,53,54,56,63,64,66,67,69,70,71,73,74,75,8</correct>
+<time_taken>1157.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="3 set of interrelated 15 such that pattern clauses, single select" >13</id><querystr><![CDATA[stmt s1,s2,s3; assign a1,a2,a3,a4,a7; variable v1,v2,v3,v4; while w1; procedure p1; Select a4 such that Follows(s1,s2) and Parent(s3,s2) pattern a7("fan",_) such that Next*(44,a4) and Uses(a4,v3) pattern a4(_,_"orange"_) such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);]]></querystr>
+<stuans>45,49,50</stuans>
+<correct>45,49,50</correct>
+<time_taken>1149.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="3 set of interrelated 15 such that pattern clauses, single select" >14</id><querystr><![CDATA[stmt s1,s2,s3; assign a1,a2,a3,a4,a7; variable v1,v2,v3,v4; while w1; procedure p1; Select a2 such that Follows(s1,s2) and Parent(s3,s2) pattern a7("fan",_) such that Next*(44,a4) and Uses(a4,v3) pattern a4(_,_"orange"_) such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);]]></querystr>
+<stuans>38</stuans>
+<correct>38</correct>
+<time_taken>1102.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="3 set of interrelated 15 such that pattern clauses, many-tuple select" >15</id><querystr><![CDATA[stmt s1,s2,s3; assign a1,a2,a3,a4,a7; variable v1,v2,v3,v4; while w1; procedure p1; Select <s1,a4,a2> such that Follows(s1,s2) and Parent(s3,s2) pattern a7("fan",_) such that Next*(44,a4) and Uses(a4,v3) pattern a4(_,_"orange"_) such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);]]></querystr>
+<stuans>69 45 38,69 49 38,75 45 38,69 50 38,31 50 38,35 49 38,74 49 38,75 49 38,74 45 38,75 50 38,110 49 38,17 49 38,74 50 38,10 45 38,10 49 38,67 49 38,10 50 38,8 45 38,8 50 38,13 45 38,31 45 38,66 49 38,31 49 38,11 45 38,12 49 38,18 45 38,37 49 38,11 49 38,11 50 38,13 50 38,66 45 38,70 49 38,66 50 38,18 50 38,67 45 38,15 45 38,22 49 38,67 50 38,15 49 38,71 45 38,15 50 38,70 45 38,70 50 38,105 45 38,12 45 38,105 49 38,105 50 38,33 45 38,71 49 38,20 50 38,8 49 38,12 50 38,37 45 38,64 45 38,37 50 38,13 49 38,18 49 38,20 45 38,22 50 38,20 49 38,17 45 38,17 50 38,23 45 38,23 49 38,23 50 38,22 45 38,71 50 38,33 49 38,33 50 38,53 45 38,53 49 38,53 50 38,30 45 38,30 49 38,30 50 38,52 45 38,52 49 38,52 50 38,54 45 38,54 49 38,54 50 38,35 45 38,35 50 38,101 45 38,101 49 38,101 50 38,114 45 38,114 49 38,109 49 38,114 50 38,36 45 38,36 49 38,36 50 38,56 45 38,56 49 38,56 50 38,63 45 38,63 49 38,63 50 38,107 45 38,107 49 38,107 50 38,73 45 38,73 49 38,73 50 38,64 49 38,64 50 38,103 45 38,103 49 38,103 50 38,109 45 38,109 50 38,110 45 38,110 50 38,112 45 38,112 49 38,112 50 38,108 45 38,108 49 38,108 50 38</stuans>
+<correct>10 45 38,10 49 38,10 50 38,101 45 38,101 49 38,101 50 38,103 45 38,103 49 38,103 50 38,105 45 38,105 49 38,105 50 38,107 45 38,107 49 38,107 50 38,108 45 38,108 49 38,108 50 38,109 45 38,109 49 38,109 50 38,11 45 38,11 49 38,11 50 38,110 45 38,110 49 38,110 50 38,112 45 38,112 49 38,112 50 38,114 45 38,114 49 38,114 50 38,12 45 38,12 49 38,12 50 38,13 45 38,13 49 38,13 50 38,15 45 38,15 49 38,15 50 38,17 45 38,17 49 38,17 50 38,18 45 38,18 49 38,18 50 38,20 45 38,20 49 38,20 50 38,22 45 38,22 49 38,22 50 38,23 45 38,23 49 38,23 50 38,30 45 38,30 49 38,30 50 38,31 45 38,31 49 38,31 50 38,33 45 38,33 49 38,33 50 38,35 45 38,35 49 38,35 50 38,36 45 38,36 49 38,36 50 38,37 45 38,37 49 38,37 50 38,52 45 38,52 49 38,52 50 38,53 45 38,53 49 38,53 50 38,54 45 38,54 49 38,54 50 38,56 45 38,56 49 38,56 50 38,63 45 38,63 49 38,63 50 38,64 45 38,64 49 38,64 50 38,66 45 38,66 49 38,66 50 38,67 45 38,67 49 38,67 50 38,69 45 38,69 49 38,69 50 38,70 45 38,70 49 38,70 50 38,71 45 38,71 49 38,71 50 38,73 45 38,73 49 38,73 50 38,74 45 38,74 49 38,74 50 38,75 45 38,75 49 38,75 50 38,8 45 38,8 49 38,8 50 38</correct>
+<time_taken>1113.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="4 set of interrelated 20 such that pattern clauses, many-tuple select" >16</id><querystr><![CDATA[stmt s1,s2,s3,s4,s5; assign a1,a2,a3,a4,a5,a6,a7,a8; variable v1,v2,v3,v4; while w1,w2,w3; if i1; procedure p1; Select w3 such that Parent*(i1,s5) and Modifies(a8,v4) and Follows*(s5,a8) pattern a8("nachos","mango*10") such that Next*(s4,a7) and Follows*(a5,a6) and Parent*(w3,a5) and Uses(w3,v3) and Follows(s1,s2) and Parent(s3,s2) pattern a7("fan",_) such that Next*(44,a4) and Uses(a4,v3) pattern a4(_,_"orange"_) such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);]]></querystr>
+<stuans>7,9,29,36,51</stuans>
+<correct>29,36,51,7,9</correct>
+<time_taken>1446.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="4 set of interrelated 20 such that pattern clauses, many-tuple select" >17</id><querystr><![CDATA[stmt s1,s2,s3,s4,s5; assign a1,a2,a3,a4,a5,a6,a7,a8; variable v1,v2,v3,v4; while w1,w2,w3; if i1; procedure p1; Select a4 such that Parent*(i1,s5) and Modifies(a8,v4) and Follows*(s5,a8) pattern a8("nachos","mango*10") such that Next*(s4,a7) and Follows*(a5,a6) and Parent*(w3,a5) and Uses(w3,v3) and Follows(s1,s2) and Parent(s3,s2) pattern a7("fan",_) such that Next*(44,a4) and Uses(a4,v3) pattern a4(_,_"orange"_) such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);]]></querystr>
+<stuans>45,50</stuans>
+<correct>45,50</correct>
+<time_taken>1605.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="5 set of interrelated 22 such that pattern clauses, many-tuple select" >18</id><querystr><![CDATA[stmt s1,s2,s3,s4,s5; assign a1,a2,a3,a4,a5,a6,a7,a8; variable v1,v2,v3,v4; while w1,w2,w3; if i1; procedure p1; Select a8 such that Parent*(i1,s5) and Modifies(a8,v4) and Follows*(s5,a8) pattern a8("nachos","mango*10") such that Next*(s4,a7) and Follows*(a5,a6) and Parent*(w3,a5) and Uses(w3,v3) and Follows(s1,s2) and Parent(s3,s2) pattern a7("fan",_) such that Next*(44,a4) and Uses(a4,v3) pattern a4(_,_"orange"_) such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);]]></querystr>
+<stuans>32</stuans>
+<correct>32</correct>
+<time_taken>1520.000000</time_taken>
+<passed/>
+</query>
+<query>
+<id all="1" Typed="1" comment="5 set of interrelated 22 such that pattern clauses, many-tuple select" >18</id><querystr><![CDATA[stmt s1,s2,s3,s4,s5; assign a1,a2,a3,a4,a5,a6,a7,a8; variable v1,v2,v3,v4; while w1,w2,w3; if i1; procedure p1; Select <i1,s4,a4,v2,a2> such that Parent*(i1,s5) and Modifies(a8,v4) and Follows*(s5,a8) pattern a8("nachos","mango*10") such that Next*(s4,a7) and Follows*(a5,a6) and Parent*(w3,a5) and Uses(w3,v3) and Follows(s1,s2) and Parent(s3,s2) pattern a7("fan",_) such that Next*(44,a4) and Uses(a4,v3) pattern a4(_,_"orange"_) such that Modifies(p1,v1) and Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) and Follows*(a3,a2);]]></querystr>
+<stuans>30 58 45 jam 38,30 75 50 jam 38,30 58 50 jam 38,30 60 45 jam 38,30 69 50 jam 38,30 59 45 jam 38,30 74 45 jam 38,30 79 45 jam 38,30 59 50 jam 38,30 61 45 jam 38,30 79 50 jam 38,30 81 45 jam 38,30 60 50 jam 38,30 61 50 jam 38,30 67 45 jam 38,30 67 50 jam 38,30 80 45 jam 38,30 80 50 jam 38,30 62 45 jam 38,30 63 45 jam 38,30 71 45 jam 38,30 73 50 jam 38,30 62 50 jam 38,30 63 50 jam 38,30 64 45 jam 38,30 69 45 jam 38,30 64 50 jam 38,30 65 50 jam 38,30 65 45 jam 38,30 78 45 jam 38,30 78 50 jam 38,30 66 45 jam 38,30 66 50 jam 38,30 68 45 jam 38,30 68 50 jam 38,30 76 45 jam 38,30 70 50 jam 38,30 76 50 jam 38,30 75 45 jam 38,30 70 45 jam 38,30 71 50 jam 38,30 72 45 jam 38,30 72 50 jam 38,30 73 45 jam 38,30 74 50 jam 38,30 77 45 jam 38,30 77 50 jam 38,30 81 50 jam 38</stuans>
+<correct>30 58 45 jam 38,30 58 50 jam 38,30 59 45 jam 38,30 59 50 jam 38,30 60 45 jam 38,30 60 50 jam 38,30 61 45 jam 38,30 61 50 jam 38,30 62 45 jam 38,30 62 50 jam 38,30 63 45 jam 38,30 63 50 jam 38,30 64 45 jam 38,30 64 50 jam 38,30 65 45 jam 38,30 65 50 jam 38,30 66 45 jam 38,30 66 50 jam 38,30 67 45 jam 38,30 67 50 jam 38,30 68 45 jam 38,30 68 50 jam 38,30 69 45 jam 38,30 69 50 jam 38,30 70 45 jam 38,30 70 50 jam 38,30 71 45 jam 38,30 71 50 jam 38,30 72 45 jam 38,30 72 50 jam 38,30 73 45 jam 38,30 73 50 jam 38,30 74 45 jam 38,30 74 50 jam 38,30 75 45 jam 38,30 75 50 jam 38,30 76 45 jam 38,30 76 50 jam 38,30 77 45 jam 38,30 77 50 jam 38,30 78 45 jam 38,30 78 50 jam 38,30 79 45 jam 38,30 79 50 jam 38,30 80 45 jam 38,30 80 50 jam 38,30 81 45 jam 38,30 81 50 jam 38</correct>
+<time_taken>1539.000000</time_taken>
+<passed/>
+</query>
+</category>
+</queries>
+</test_results>

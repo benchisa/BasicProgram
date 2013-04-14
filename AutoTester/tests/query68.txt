@@ -1,0 +1,162 @@
+15
+cat: Test Case for Sibling unKnown,unKnown
+1 - Sibling, Typed :: Sibling(ASSIGNMENT,ASSIGNMENT)
+assign a1,a2;
+Select <a1,a2> such that Sibling(a1,a2);
+1 2,1 3,1 4,1 5,1 6,10 11,10 12,10 27,109 110,11 10,11 12,11 27,110 109,12 10,12 11,12 27,18 19,19 18,2 1,2 3,2 4,2 5,2 6,20 21,21 20,27 10,27 11,27 12,3 1,3 2,3 4,3 5,3 6,31 32,32 31,33 34,34 33,35 39,37 38,38 37,39 35,4 1,4 2,4 3,4 5,4 6,44 45,44 46,45 44,45 46,46 44,46 45,5 1,5 2,5 3,5 4,5 6,52 54,54 52,58 59,58 82,59 58,59 82,6 1,6 2,6 3,6 4,6 5,63 81,66 80,69 79,71 72,72 71,73 78,78 73,79 69,80 66,81 63,82 58,82 59,83 84,83 85,83 86,83 87,83 88,83 89,83 90,83 91,83 92,83 93,83 94,83 95,83 96,83 97,83 98,84 83,84 85,84 86,84 87,84 88,84 89,84 90,84 91,84 92,84 93,84 94,84 95,84 96,84 97,84 98,85 83,85 84,85 86,85 87,85 88,85 89,85 90,85 91,85 92,85 93,85 94,85 95,85 96,85 97,85 98,86 83,86 84,86 85,86 87,86 88,86 89,86 90,86 91,86 92,86 93,86 94,86 95,86 96,86 97,86 98,87 83,87 84,87 85,87 86,87 88,87 89,87 90,87 91,87 92,87 93,87 94,87 95,87 96,87 97,87 98,88 83,88 84,88 85,88 86,88 87,88 89,88 90,88 91,88 92,88 93,88 94,88 95,88 96,88 97,88 98,89 83,89 84,89 85,89 86,89 87,89 88,89 90,89 91,89 92,89 93,89 94,89 95,89 96,89 97,89 98,90 83,90 84,90 85,90 86,90 87,90 88,90 89,90 91,90 92,90 93,90 94,90 95,90 96,90 97,90 98,91 83,91 84,91 85,91 86,91 87,91 88,91 89,91 90,91 92,91 93,91 94,91 95,91 96,91 97,91 98,92 83,92 84,92 85,92 86,92 87,92 88,92 89,92 90,92 91,92 93,92 94,92 95,92 96,92 97,92 98,93 83,93 84,93 85,93 86,93 87,93 88,93 89,93 90,93 91,93 92,93 94,93 95,93 96,93 97,93 98,94 83,94 84,94 85,94 86,94 87,94 88,94 89,94 90,94 91,94 92,94 93,94 95,94 96,94 97,94 98,95 83,95 84,95 85,95 86,95 87,95 88,95 89,95 90,95 91,95 92,95 93,95 94,95 96,95 97,95 98,96 83,96 84,96 85,96 86,96 87,96 88,96 89,96 90,96 91,96 92,96 93,96 94,96 95,96 97,96 98,97 83,97 84,97 85,97 86,97 87,97 88,97 89,97 90,97 91,97 92,97 93,97 94,97 95,97 96,97 98,98 83,98 84,98 85,98 86,98 87,98 88,98 89,98 90,98 91,98 92,98 93,98 94,98 95,98 96,98 97
+5000
+2 - Sibling, Typed :: Sibling(ASSIGNMENT,WHILE)
+assign a; while w;
+Select <a,w> such that Sibling(a,w);
+1 7,10 13,10 15,101 102,103 104,105 106,107 108,109 111,11 13,11 15,110 111,112 113,114 115,12 13,12 15,2 7,25 23,27 13,27 15,3 7,35 36,39 36,4 7,5 7,52 55,54 55,58 60,59 60,6 7,73 74,75 76,78 74,8 9,82 60,83 99,84 99,85 99,86 99,87 99,88 99,89 99,90 99,91 99,92 99,93 99,94 99,95 99,96 99,97 99,98 99
+5000
+3 - Sibling, Typed :: Sibling(ASSIGNMENT,IF)
+assign a; if i;
+Select <a,i> such that Sibling(a,i);
+10 17,10 22,11 17,11 22,12 17,12 22,27 17,27 22,35 30,39 30,44 48,45 48,46 48,63 64,66 67,69 70,79 70,80 67,81 64
+5000
+4 - Sibling, Typed :: Sibling(ASSIGNMENT,STATEMENT)
+assign a; stmt s;
+Select <a,s> such that Sibling(a,s);
+1 2,1 28,1 3,1 4,1 5,1 6,1 7,10 11,10 12,10 13,10 15,10 17,10 22,10 27,101 102,103 104,105 106,107 108,107 120,109 110,109 111,11 10,11 12,11 13,11 15,11 17,11 22,11 27,110 109,110 111,112 113,114 115,12 10,12 11,12 13,12 15,12 17,12 22,12 27,122 123,126 125,129 130,137 136,18 19,19 18,2 1,2 28,2 3,2 4,2 5,2 6,2 7,20 21,21 20,25 23,27 10,27 11,27 12,27 13,27 15,27 17,27 22,3 1,3 2,3 28,3 4,3 5,3 6,3 7,31 32,32 31,33 34,34 33,35 30,35 36,35 39,37 38,38 37,39 30,39 35,39 36,4 1,4 2,4 28,4 3,4 5,4 6,4 7,44 45,44 46,44 47,44 48,45 44,45 46,45 47,45 48,46 44,46 45,46 47,46 48,5 1,5 2,5 28,5 3,5 4,5 6,5 7,52 53,52 54,52 55,54 52,54 53,54 55,57 56,58 59,58 60,58 82,59 58,59 60,59 82,6 1,6 2,6 28,6 3,6 4,6 5,6 7,63 64,63 81,66 67,66 80,69 70,69 79,71 72,72 71,73 74,73 78,75 76,78 73,78 74,79 69,79 70,8 9,80 66,80 67,81 63,81 64,82 58,82 59,82 60,83 84,83 85,83 86,83 87,83 88,83 89,83 90,83 91,83 92,83 93,83 94,83 95,83 96,83 97,83 98,83 99,84 83,84 85,84 86,84 87,84 88,84 89,84 90,84 91,84 92,84 93,84 94,84 95,84 96,84 97,84 98,84 99,85 83,85 84,85 86,85 87,85 88,85 89,85 90,85 91,85 92,85 93,85 94,85 95,85 96,85 97,85 98,85 99,86 83,86 84,86 85,86 87,86 88,86 89,86 90,86 91,86 92,86 93,86 94,86 95,86 96,86 97,86 98,86 99,87 83,87 84,87 85,87 86,87 88,87 89,87 90,87 91,87 92,87 93,87 94,87 95,87 96,87 97,87 98,87 99,88 83,88 84,88 85,88 86,88 87,88 89,88 90,88 91,88 92,88 93,88 94,88 95,88 96,88 97,88 98,88 99,89 83,89 84,89 85,89 86,89 87,89 88,89 90,89 91,89 92,89 93,89 94,89 95,89 96,89 97,89 98,89 99,90 83,90 84,90 85,90 86,90 87,90 88,90 89,90 91,90 92,90 93,90 94,90 95,90 96,90 97,90 98,90 99,91 83,91 84,91 85,91 86,91 87,91 88,91 89,91 90,91 92,91 93,91 94,91 95,91 96,91 97,91 98,91 99,92 83,92 84,92 85,92 86,92 87,92 88,92 89,92 90,92 91,92 93,92 94,92 95,92 96,92 97,92 98,92 99,93 83,93 84,93 85,93 86,93 87,93 88,93 89,93 90,93 91,93 92,93 94,93 95,93 96,93 97,93 98,93 99,94 83,94 84,94 85,94 86,94 87,94 88,94 89,94 90,94 91,94 92,94 93,94 95,94 96,94 97,94 98,94 99,95 83,95 84,95 85,95 86,95 87,95 88,95 89,95 90,95 91,95 92,95 93,95 94,95 96,95 97,95 98,95 99,96 83,96 84,96 85,96 86,96 87,96 88,96 89,96 90,96 91,96 92,96 93,96 94,96 95,96 97,96 98,96 99,97 83,97 84,97 85,97 86,97 87,97 88,97 89,97 90,97 91,97 92,97 93,97 94,97 95,97 96,97 98,97 99,98 83,98 84,98 85,98 86,98 87,98 88,98 89,98 90,98 91,98 92,98 93,98 94,98 95,98 96,98 97,98 99
+5000
+5 - Sibling, Typed :: Sibling(ASSIGNMENT,CALL)
+assign a; call c;
+Select <a,c> such that Sibling(a,c);
+1 28,107 120,122 123,126 125,129 130,137 136,2 28,3 28,4 28,44 47,45 47,46 47,5 28,52 53,54 53,57 56,6 28
+5000
+6 - Sibling, Typed :: Sibling(IF,ASSIGNMENT)
+if i; assign a;
+Select <i,a> such that Sibling(i,a);
+17 10,17 11,17 12,17 27,22 10,22 11,22 12,22 27,30 35,30 39,48 44,48 45,48 46,64 63,64 81,67 66,67 80,70 69,70 79
+5000
+7 - Sibling, Typed :: Sibling(IF,WHILE)
+if i; while w;
+Select <i,w> such that Sibling(i,w);
+17 13,17 15,22 13,22 15,30 36,41 29
+5000
+8 - Sibling, Typed :: Sibling(IF,IF)
+if i1,i2;
+Select <i1,i2> such that Sibling(i1,i2);
+17 22,22 17
+5000
+9 - Sibling, Typed :: Sibling(IF,STATEMENT)
+if i; stmt s;
+Select <i,s> such that Sibling(i,s);
+131 134,17 10,17 11,17 12,17 13,17 15,17 22,17 27,22 10,22 11,22 12,22 13,22 15,22 17,22 27,30 35,30 36,30 39,41 29,41 40,48 44,48 45,48 46,48 47,64 63,64 81,67 66,67 80,70 69,70 79
+5000
+10 - Sibling, Typed :: Sibling(IF,CALL)
+if i; call c;
+Select <i,c> such that Sibling(i,c);
+131 134,41 40,48 47
+5000
+11 - Sibling, Typed :: Sibling(WHILE,ASSIGNMENT)
+while w; assign a;
+Select <w,a> such that Sibling(w,a);
+102 101,104 103,106 105,108 107,111 109,111 110,113 112,115 114,13 10,13 11,13 12,13 27,15 10,15 11,15 12,15 27,23 25,36 35,36 39,55 52,55 54,60 58,60 59,60 82,7 1,7 2,7 3,7 4,7 5,7 6,74 73,74 78,76 75,9 8,99 83,99 84,99 85,99 86,99 87,99 88,99 89,99 90,99 91,99 92,99 93,99 94,99 95,99 96,99 97,99 98
+5000
+12 - Sibling, Typed :: Sibling(WHILE,WHILE)
+while w1,w2;
+Select <w1,w2> such that Sibling(w1,w2);
+13 15,15 13
+5000
+13 - Sibling, Typed :: Sibling(WHILE,IF)
+while w;if i;
+Select <w,i> such that Sibling(w,i);
+13 17,13 22,15 17,15 22,29 41,36 30
+5000
+14 - Sibling, Typed :: Sibling(WHILE,STATEMENT)
+while w;stmt s;
+Select <w,s> such that Sibling(w,s);
+102 101,104 103,106 105,108 107,108 120,111 109,111 110,113 112,115 114,13 10,13 11,13 12,13 15,13 17,13 22,13 27,15 10,15 11,15 12,15 13,15 17,15 22,15 27,23 25,29 40,29 41,36 30,36 35,36 39,55 52,55 53,55 54,60 58,60 59,60 82,7 1,7 2,7 28,7 3,7 4,7 5,7 6,74 73,74 78,76 75,9 8,99 83,99 84,99 85,99 86,99 87,99 88,99 89,99 90,99 91,99 92,99 93,99 94,99 95,99 96,99 97,99 98
+5000
+15 - Sibling, Typed :: Sibling(WHILE,CALL)
+while w;call c;
+Select <w,c> such that Sibling(w,c);
+108 120,29 40,55 53,7 28
+5000
+20 - Sibling, Typed :: Sibling(STATEMENT,ASSIGNMENT)
+stmt s; assign a;
+Select <s,a> such that Sibling(s,a);
+1 2,1 3,1 4,1 5,1 6,10 11,10 12,10 27,102 101,104 103,106 105,108 107,109 110,11 10,11 12,11 27,110 109,111 109,111 110,113 112,115 114,12 10,12 11,12 27,120 107,123 122,125 126,13 10,13 11,13 12,13 27,130 129,136 137,15 10,15 11,15 12,15 27,17 10,17 11,17 12,17 27,18 19,19 18,2 1,2 3,2 4,2 5,2 6,20 21,21 20,22 10,22 11,22 12,22 27,23 25,27 10,27 11,27 12,28 1,28 2,28 3,28 4,28 5,28 6,3 1,3 2,3 4,3 5,3 6,30 35,30 39,31 32,32 31,33 34,34 33,35 39,36 35,36 39,37 38,38 37,39 35,4 1,4 2,4 3,4 5,4 6,44 45,44 46,45 44,45 46,46 44,46 45,47 44,47 45,47 46,48 44,48 45,48 46,5 1,5 2,5 3,5 4,5 6,52 54,53 52,53 54,54 52,55 52,55 54,56 57,58 59,58 82,59 58,59 82,6 1,6 2,6 3,6 4,6 5,60 58,60 59,60 82,63 81,64 63,64 81,66 80,67 66,67 80,69 79,7 1,7 2,7 3,7 4,7 5,7 6,70 69,70 79,71 72,72 71,73 78,74 73,74 78,76 75,78 73,79 69,80 66,81 63,82 58,82 59,83 84,83 85,83 86,83 87,83 88,83 89,83 90,83 91,83 92,83 93,83 94,83 95,83 96,83 97,83 98,84 83,84 85,84 86,84 87,84 88,84 89,84 90,84 91,84 92,84 93,84 94,84 95,84 96,84 97,84 98,85 83,85 84,85 86,85 87,85 88,85 89,85 90,85 91,85 92,85 93,85 94,85 95,85 96,85 97,85 98,86 83,86 84,86 85,86 87,86 88,86 89,86 90,86 91,86 92,86 93,86 94,86 95,86 96,86 97,86 98,87 83,87 84,87 85,87 86,87 88,87 89,87 90,87 91,87 92,87 93,87 94,87 95,87 96,87 97,87 98,88 83,88 84,88 85,88 86,88 87,88 89,88 90,88 91,88 92,88 93,88 94,88 95,88 96,88 97,88 98,89 83,89 84,89 85,89 86,89 87,89 88,89 90,89 91,89 92,89 93,89 94,89 95,89 96,89 97,89 98,9 8,90 83,90 84,90 85,90 86,90 87,90 88,90 89,90 91,90 92,90 93,90 94,90 95,90 96,90 97,90 98,91 83,91 84,91 85,91 86,91 87,91 88,91 89,91 90,91 92,91 93,91 94,91 95,91 96,91 97,91 98,92 83,92 84,92 85,92 86,92 87,92 88,92 89,92 90,92 91,92 93,92 94,92 95,92 96,92 97,92 98,93 83,93 84,93 85,93 86,93 87,93 88,93 89,93 90,93 91,93 92,93 94,93 95,93 96,93 97,93 98,94 83,94 84,94 85,94 86,94 87,94 88,94 89,94 90,94 91,94 92,94 93,94 95,94 96,94 97,94 98,95 83,95 84,95 85,95 86,95 87,95 88,95 89,95 90,95 91,95 92,95 93,95 94,95 96,95 97,95 98,96 83,96 84,96 85,96 86,96 87,96 88,96 89,96 90,96 91,96 92,96 93,96 94,96 95,96 97,96 98,97 83,97 84,97 85,97 86,97 87,97 88,97 89,97 90,97 91,97 92,97 93,97 94,97 95,97 96,97 98,98 83,98 84,98 85,98 86,98 87,98 88,98 89,98 90,98 91,98 92,98 93,98 94,98 95,98 96,98 97,99 83,99 84,99 85,99 86,99 87,99 88,99 89,99 90,99 91,99 92,99 93,99 94,99 95,99 96,99 97,99 98
+5000
+21 - Sibling, Typed :: Sibling(STATEMENT,WHILE)
+stmt s;while w;
+Select <s,w> such that Sibling(s,w);
+1 7,10 13,10 15,101 102,103 104,105 106,107 108,109 111,11 13,11 15,110 111,112 113,114 115,12 13,12 15,120 108,13 15,15 13,17 13,17 15,2 7,22 13,22 15,25 23,27 13,27 15,28 7,3 7,30 36,35 36,39 36,4 7,40 29,41 29,5 7,52 55,53 55,54 55,58 60,59 60,6 7,73 74,75 76,78 74,8 9,82 60,83 99,84 99,85 99,86 99,87 99,88 99,89 99,90 99,91 99,92 99,93 99,94 99,95 99,96 99,97 99,98 99
+5000
+22 - Sibling, Typed :: Sibling(STATEMENT,IF)
+stmt s; if i;
+Select <s,i> such that Sibling(s,i);
+10 17,10 22,11 17,11 22,12 17,12 22,13 17,13 22,134 131,15 17,15 22,17 22,22 17,27 17,27 22,29 41,35 30,36 30,39 30,40 41,44 48,45 48,46 48,47 48,63 64,66 67,69 70,79 70,80 67,81 64
+5000
+23 - Sibling, Typed :: Sibling(STATEMENT,STATEMENT)
+stmt s1,s2;
+Select <s1,s2> such that Sibling(s1,s2);
+1 2,1 28,1 3,1 4,1 5,1 6,1 7,10 11,10 12,10 13,10 15,10 17,10 22,10 27,101 102,102 101,103 104,104 103,105 106,106 105,107 108,107 120,108 107,108 120,109 110,109 111,11 10,11 12,11 13,11 15,11 17,11 22,11 27,110 109,110 111,111 109,111 110,112 113,113 112,114 115,115 114,12 10,12 11,12 13,12 15,12 17,12 22,12 27,120 107,120 108,122 123,123 122,125 126,126 125,127 128,128 127,129 130,13 10,13 11,13 12,13 15,13 17,13 22,13 27,130 129,131 134,134 131,136 137,137 136,15 10,15 11,15 12,15 13,15 17,15 22,15 27,17 10,17 11,17 12,17 13,17 15,17 22,17 27,18 19,19 18,2 1,2 28,2 3,2 4,2 5,2 6,2 7,20 21,21 20,22 10,22 11,22 12,22 13,22 15,22 17,22 27,23 25,25 23,27 10,27 11,27 12,27 13,27 15,27 17,27 22,28 1,28 2,28 3,28 4,28 5,28 6,28 7,29 40,29 41,3 1,3 2,3 28,3 4,3 5,3 6,3 7,30 35,30 36,30 39,31 32,32 31,33 34,34 33,35 30,35 36,35 39,36 30,36 35,36 39,37 38,38 37,39 30,39 35,39 36,4 1,4 2,4 28,4 3,4 5,4 6,4 7,40 29,40 41,41 29,41 40,44 45,44 46,44 47,44 48,45 44,45 46,45 47,45 48,46 44,46 45,46 47,46 48,47 44,47 45,47 46,47 48,48 44,48 45,48 46,48 47,5 1,5 2,5 28,5 3,5 4,5 6,5 7,52 53,52 54,52 55,53 52,53 54,53 55,54 52,54 53,54 55,55 52,55 53,55 54,56 57,57 56,58 59,58 60,58 82,59 58,59 60,59 82,6 1,6 2,6 28,6 3,6 4,6 5,6 7,60 58,60 59,60 82,63 64,63 81,64 63,64 81,66 67,66 80,67 66,67 80,69 70,69 79,7 1,7 2,7 28,7 3,7 4,7 5,7 6,70 69,70 79,71 72,72 71,73 74,73 78,74 73,74 78,75 76,76 75,78 73,78 74,79 69,79 70,8 9,80 66,80 67,81 63,81 64,82 58,82 59,82 60,83 84,83 85,83 86,83 87,83 88,83 89,83 90,83 91,83 92,83 93,83 94,83 95,83 96,83 97,83 98,83 99,84 83,84 85,84 86,84 87,84 88,84 89,84 90,84 91,84 92,84 93,84 94,84 95,84 96,84 97,84 98,84 99,85 83,85 84,85 86,85 87,85 88,85 89,85 90,85 91,85 92,85 93,85 94,85 95,85 96,85 97,85 98,85 99,86 83,86 84,86 85,86 87,86 88,86 89,86 90,86 91,86 92,86 93,86 94,86 95,86 96,86 97,86 98,86 99,87 83,87 84,87 85,87 86,87 88,87 89,87 90,87 91,87 92,87 93,87 94,87 95,87 96,87 97,87 98,87 99,88 83,88 84,88 85,88 86,88 87,88 89,88 90,88 91,88 92,88 93,88 94,88 95,88 96,88 97,88 98,88 99,89 83,89 84,89 85,89 86,89 87,89 88,89 90,89 91,89 92,89 93,89 94,89 95,89 96,89 97,89 98,89 99,9 8,90 83,90 84,90 85,90 86,90 87,90 88,90 89,90 91,90 92,90 93,90 94,90 95,90 96,90 97,90 98,90 99,91 83,91 84,91 85,91 86,91 87,91 88,91 89,91 90,91 92,91 93,91 94,91 95,91 96,91 97,91 98,91 99,92 83,92 84,92 85,92 86,92 87,92 88,92 89,92 90,92 91,92 93,92 94,92 95,92 96,92 97,92 98,92 99,93 83,93 84,93 85,93 86,93 87,93 88,93 89,93 90,93 91,93 92,93 94,93 95,93 96,93 97,93 98,93 99,94 83,94 84,94 85,94 86,94 87,94 88,94 89,94 90,94 91,94 92,94 93,94 95,94 96,94 97,94 98,94 99,95 83,95 84,95 85,95 86,95 87,95 88,95 89,95 90,95 91,95 92,95 93,95 94,95 96,95 97,95 98,95 99,96 83,96 84,96 85,96 86,96 87,96 88,96 89,96 90,96 91,96 92,96 93,96 94,96 95,96 97,96 98,96 99,97 83,97 84,97 85,97 86,97 87,97 88,97 89,97 90,97 91,97 92,97 93,97 94,97 95,97 96,97 98,97 99,98 83,98 84,98 85,98 86,98 87,98 88,98 89,98 90,98 91,98 92,98 93,98 94,98 95,98 96,98 97,98 99,99 83,99 84,99 85,99 86,99 87,99 88,99 89,99 90,99 91,99 92,99 93,99 94,99 95,99 96,99 97,99 98
+5000
+24 - Sibling, Typed :: Sibling(STATEMENT,CALL)
+stmt s;call c;
+Select <s,c> such that Sibling(s,c);
+1 28,107 120,108 120,122 123,126 125,127 128,128 127,129 130,131 134,137 136,2 28,29 40,3 28,4 28,41 40,44 47,45 47,46 47,48 47,5 28,52 53,54 53,55 53,57 56,6 28,7 28
+5000
+25 - Sibling, Typed :: Sibling(CALL,ASSIGNMENT)
+call c;assign a;
+Select <c,a> such that Sibling(c,a);
+120 107,123 122,125 126,130 129,136 137,28 1,28 2,28 3,28 4,28 5,28 6,47 44,47 45,47 46,53 52,53 54,56 57
+5000
+26 - Sibling, Typed :: Sibling(CALL,WHILE)
+call c; while w;
+Select <c,w> such that Sibling(c,w);
+120 108,28 7,40 29,53 55
+5000
+27 - Sibling, Typed :: Sibling(CALL,IF)
+call c; if i;
+Select <c,i> such that Sibling(c,i);
+134 131,40 41,47 48
+5000
+28 - Sibling, Typed :: Sibling(CALL,STATEMENT)
+call c;stmt s;
+Select <c,s> such that Sibling(c,s);
+120 107,120 108,123 122,125 126,127 128,128 127,130 129,134 131,136 137,28 1,28 2,28 3,28 4,28 5,28 6,28 7,40 29,40 41,47 44,47 45,47 46,47 48,53 52,53 54,53 55,56 57
+5000
+2 - Sibling, Typed :: Sibling(CALL,CALL)
+call c1,c2;
+Select <c1,c2> such that Sibling(c1,c2);
+127 128,128 127
+5000
+32 - Sibling, Typed :: Sibling(CONSTANT,VARIABLE)
+constant c; variable v;
+Select <c,v> such that Sibling(c,v);
+0 ant,0 apple,0 banana,0 carrot,0 cockroach,0 gummy,0 jam,0 leek,1 aeroplane,1 ant,1 apple,1 beetle,1 dinosaur,1 donut,1 ham,10 lion,10 mango,100 aeroplane,101 egg,103 keep,104 aeroplane,11 leek,11 monkey,12 newt,13 mango,13 owl,14 apple,14 penguin,15 quail,2 banana,2 cloud,2 cockroach,2 donut,2 egg,3 dinosaur,3 fish,4 elephant,4 ham,5 fish,5 fox,6 fish,6 goat,7 hamster,7 leek,8 apple,8 jaguar,8 nachos,888 lamp,9 ham,9 kangeroo,9 leek,999 lamp
+5000
+33 - Sibling, Typed :: Sibling(CONSTANT,CONSTANT)
+constant c1,c2;
+Select <c1,c2> such that Sibling(c1,c2);
+12 13
+5000
+37 - Sibling, Typed :: Sibling(VARIABLE,VARIABLE)
+variable v1,v2;
+Select <v1,v2> such that Sibling(v1,v2);
+aeroplane ant,aeroplane basin,aeroplane kangeroo,apple pear,carrot banana,carrot fish,cloud cloud,cloud garbage,door cloud,egg ham,elephant fish,fan cloud,fan igloo,fish fish,fish mango,fox cockroach,garbage fan,ham carrot,ham egg,hamster goat,hanger keep,igloo fan,kimchi donut,kimchi fish,kimchi ham,mango egg,mango pear,orange carrot,orange ham,pear orange
+5000
+38 - Sibling, Typed :: Sibling(VARIABLE,CONSTANT)
+constant c;variable v;
+Select <v,c> such that Sibling(v,c);
+aeroplane 1,aeroplane 100,aeroplane 104,ant 0,ant 1,apple 0,apple 1,apple 14,apple 8,banana 0,banana 2,beetle 1,carrot 0,cloud 2,cockroach 0,cockroach 2,dinosaur 1,dinosaur 3,donut 1,donut 2,egg 101,egg 2,elephant 4,fish 3,fish 5,fish 6,fox 5,goat 6,gummy 0,ham 1,ham 4,ham 9,hamster 7,jaguar 8,jam 0,kangeroo 9,keep 103,lamp 888,lamp 999,leek 0,leek 11,leek 7,leek 9,lion 10,mango 10,mango 13,monkey 11,nachos 8,newt 12,owl 13,penguin 14,quail 15
+5000
+18 - Sibling, Typed :: Sibling(STMT_LIST,VARIABLE)
+stmtLst sl;variable v;
+Select <sl,v> such that Sibling(sl,v);
+10 gummy,100 ant,101 beetle,103 cockroach,105 dinosaur,107 fox,109 goat,112 hamster,114 kangeroo,116 ant,117 aeroplane,118 hamster,119 hamster,132 kangeroo,133 kangeroo,14 ham,16 jam,18 ham,20 ham,23 carrot,24 jam,26 carrot,30 leek,31 carrot,33 carrot,37 banana,42 banana,43 banana,49 leek,50 leek,52 leek,56 mango,61 basin,62 aeroplane,63 aeroplane,65 door,66 door,68 fan,69 fan,71 hanger,73 hanger,75 igloo,77 jumper,8 apple
+5000
+16 - Sibling, Typed :: Sibling(PROCEDURE,PROCEDURE)
+procedure p1,p2;
+Select <p1,p2> such that Sibling(p1,p2);
+Alice Bob,Alice Charlie,Alice Danny,Alice Eliza,Alice Fred,Alice Goneril,Alice Henry,Alice Illidan,Alice James,Alice Kingsley,Alice Lucas,Alice Merril,Alice Nancy,Bob Charlie,Bob Danny,Bob Eliza,Bob Fred,Bob Goneril,Bob Henry,Bob Illidan,Bob James,Bob Kingsley,Bob Lucas,Bob Merril,Bob Nancy,Charlie Bob,Charlie Danny,Charlie Eliza,Charlie Fred,Charlie Goneril,Charlie Henry,Charlie Illidan,Charlie James,Charlie Kingsley,Charlie Lucas,Charlie Merril,Charlie Nancy,Danny Bob,Danny Charlie,Danny Eliza,Danny Fred,Danny Goneril,Danny Henry,Danny Illidan,Danny James,Danny Kingsley,Danny Lucas,Danny Merril,Danny Nancy,Eliza Bob,Eliza Charlie,Eliza Danny,Eliza Fred,Eliza Goneril,Eliza Henry,Eliza Illidan,Eliza James,Eliza Kingsley,Eliza Lucas,Eliza Merril,Eliza Nancy,Fred Bob,Fred Charlie,Fred Danny,Fred Eliza,Fred Goneril,Fred Henry,Fred Illidan,Fred James,Fred Kingsley,Fred Lucas,Fred Merril,Fred Nancy,Goneril Bob,Goneril Charlie,Goneril Danny,Goneril Eliza,Goneril Fred,Goneril Henry,Goneril Illidan,Goneril James,Goneril Kingsley,Goneril Lucas,Goneril Merril,Goneril Nancy,Henry Bob,Henry Charlie,Henry Danny,Henry Eliza,Henry Fred,Henry Goneril,Henry Illidan,Henry James,Henry Kingsley,Henry Lucas,Henry Merril,Henry Nancy,Illidan Bob,Illidan Charlie,Illidan Danny,Illidan Eliza,Illidan Fred,Illidan Goneril,Illidan Henry,Illidan James,Illidan Kingsley,Illidan Lucas,Illidan Merril,Illidan Nancy,James Bob,James Charlie,James Danny,James Eliza,James Fred,James Goneril,James Henry,James Illidan,James Kingsley,James Lucas,James Merril,James Nancy,Kingsley Bob,Kingsley Charlie,Kingsley Danny,Kingsley Eliza,Kingsley Fred,Kingsley Goneril,Kingsley Henry,Kingsley Illidan,Kingsley James,Kingsley Lucas,Kingsley Merril,Kingsley Nancy,Lucas Bob,Lucas Charlie,Lucas Danny,Lucas Eliza,Lucas Fred,Lucas Goneril,Lucas Henry,Lucas Illidan,Lucas James,Lucas Kingsley,Lucas Merril,Lucas Nancy,Merril Bob,Merril Charlie,Merril Danny,Merril Eliza,Merril Fred,Merril Goneril,Merril Henry,Merril Illidan,Merril James,Merril Kingsley,Merril Lucas,Merril Nancy,Nancy Bob,Nancy Charlie,Nancy Danny,Nancy Eliza,Nancy Fred,Nancy Goneril,Nancy Henry,Nancy Illidan,Nancy James,Nancy Kingsley,Nancy Lucas,Nancy Merril,Bob Oppi,Charlie Oppi,Danny Oppi,Eliza Oppi,Fred Oppi,Goneril Oppi,Henry Oppi,Illidan Oppi,James Oppi,Kingsley Oppi,Lucas Oppi,Merril Oppi,Nancy Oppi,Oppi Bob,Oppi Charlie,Oppi Danny,Oppi Eliza,Oppi Fred,Oppi Goneril,Oppi Henry,Oppi Illidan,Oppi James,Oppi Kingsley,Oppi Lucas,Oppi Merril,Oppi Nancy,Alice Oppi,Bob Alice,Charlie Alice,Danny Alice,Eliza Alice,Fred Alice,Goneril Alice,Henry Alice,Illidan Alice,James Alice,Kingsley Alice,Lucas Alice,Merril Alice,Nancy Alice,Oppi Alice
+5000
+17 - Sibling, Typed :: Sibling(STMT_LIST,STMT_LIST)
+stmtLst sl1,sl2;
+Select <sl1,sl2> such that Sibling(sl1,sl2);
+118 119,119 118,132 133,133 132,18 20,20 18,23 26,26 23,31 33,33 31,42 43,43 42,49 50,50 49,62 63,63 62,65 66,66 65,68 69,69 68,71 73,73 71
+5000

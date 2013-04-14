@@ -1,0 +1,749 @@
+procedure Alice{
+1.	apple = 0;
+2.	banana = apple+1;
+3.	carrot = banana;
+4.	donut = 1;
+5.	egg = donut+2;
+6.	fish = 3;
+7.	while apple{
+8.		gummy = 0;
+9.		while gummy{
+10.			ham = 1;
+11.			innard = ham+4;
+12.			jam = 0;
+13.			while ham{
+14.				egg = ham;
+			}
+15.			while jam{
+16.				fish = 5;
+			}
+17.			if ham then{
+18.				carrot = fish + 6;
+19.				kimchi = carrot + fish;
+			} else {
+20.				carrot = 0;
+21.				kimchi = carrot + fish;
+			}
+22.			if carrot then{
+23.				while jam{
+24.					kimchi = kimchi + donut;
+				}
+25.				leek = 7;
+			} else {
+26.				leek = 0;
+			}
+27.			apple = 8;
+		}
+	}			
+28.	call Bob;
+}
+
+procedure Bob{
+29.	while leek{
+30.		if carrot then{
+31.			mango = leek*9;
+32.			nachos = mango*10;
+		} else{
+33.			mango = leek*11*12;
+34.			nachos = mango*(12*13);
+		}
+35.		banana = 0;
+36.		while banana{
+37.			ham = (mango * 13)*(nachos + 8);
+38.			jam = (ham - 9)*(kimchi *fish);
+		}
+39.		carrot = banana * 2;
+	}
+40.	call Fred;
+41.	if banana then{
+42.		ham = ham*carrot;
+	} else {
+43.		ham = ham*carrot;
+	}
+}
+
+procedure Charlie{
+44.	orange = apple + 14;
+45.	orange = orange*carrot+leek-kimchi*ham;
+46.	leek = 0;
+47.	call Lucas;
+48.	if leek then{
+49.		pear = orange;
+	} else{
+50.		pear = orange*ham*banana+donut;
+	}
+}
+
+procedure Danny{
+51.	while leek{
+52.		mango = pear;
+53.		call Alice;
+54.		pear = ham+egg+fish+mango*egg;
+55.		while mango{
+56.			call Charlie;
+57.			fish = fish-mango;
+		}
+	}	
+}
+
+procedure Eliza{
+58.	aeroplane = 100;
+59.	basin = 101 + egg;
+60.	while basin{
+61.		if aeroplane then{
+62.			cloud = aeroplane * basin;
+		}
+		else{
+63.			door = aeroplane + basin;
+64.			if door then{
+65.				elevator = door - cloud;
+			}
+			else{
+66.				fan = door*cloud;
+67.				if fan then{
+68.					garbage = fan;
+				}
+				else{
+69.					hanger = fan*cloud*door*elevator*basin*aeroplane;
+70.					if hanger then{
+71.						igloo = fan;
+72.						fan = igloo;
+					}
+					else{
+73.						igloo = fan*cloud*door*elevator*basin*aeroplane;
+74.						while igloo{
+75.							jumper = cloud-garbage;
+76.							while jumper{
+77.								keep = cloud*garbage;
+							}
+						}
+78.						keep = keep + 103;
+					}
+79.					hanger = keep;
+				}
+80.				aeroplane = 104;
+			}
+81.			aeroplane = aeroplane + 1;
+		}
+	}
+82.	lamp = cloud + 2;
+}
+
+procedure Fred{
+83.	ant = 0;
+84.	beetle = 1;
+85.	cockroach = 2;
+86.	dinosaur = 3;
+87.	elephant = 4;
+88.	fox = 5;
+89.	goat = 6;
+90.	hamster = 7;
+91.	jaguar = 8;
+92.	kangeroo = 9;
+93.	lion = 10;
+94.	monkey = 11;
+95.	newt = 12;
+96.	owl = 13;
+97.	penguin = 14;
+98.	quail = 15;
+99.	while ant{
+100.	while beetle{
+101.		cockroach = 0;
+102.		while cockroach{
+103.			dinosaur = 1;
+104.			while dinosaur{
+105.				fox = cockroach;
+106.				while fox{
+107.					goat = dinosaur -1;
+108.					while goat{
+109.						hamster = goat;
+110.						jaguar = beetle+1;
+111.						while hamster{
+112.							kangeroo = beetle+1;
+113.							while kangeroo{
+114.								ant = 1;
+115.								while ant{
+116.									while aeroplane{
+117.										if hamster then{
+118.											aeroplane = ant;
+											}
+											else{
+119.											aeroplane = kangeroo;
+											}
+										}
+									}
+								}
+							}
+						}
+120.					call Kingsley;
+					}
+				}
+			}
+		}
+	}
+}
+
+procedure Goneril{
+121.	apple = pear;
+}
+
+procedure Henry{
+122.	pear = cloud + cloud - ham;
+123.	call James;
+
+}
+
+procedure Illidan{
+124.	dinosaur = egg*2;
+}
+
+procedure James{
+125.	call Oppi;
+126.	elephant = fish*fish;
+}
+
+procedure Kingsley{
+127.	call Henry;
+128.	call Merril;
+}
+
+procedure Lucas{
+129.	ant = elephant*fish*hamster*goat;
+130.	call Eliza;
+}
+
+procedure Merril{
+131.	if kangeroo then{
+132.		lamp = 999;
+		} else{
+133.		lamp = 888;
+		}
+134.	call Nancy;
+}
+
+procedure Nancy{
+135.	call Danny;
+136.	rFeM285 = w+88;
+137.	eEwC553 = k+487;
+138.	hPtO722 = b+148;
+139.	fFaT657 = b+478;
+140.	rVcA926 = f+834;
+141.	gNqP615 = j+774;
+142.	sZkP243 = v+370;
+143.	t = v+605;
+144.	aMkZ333 = r+606;
+145.	cQjE457 = t+90;
+146.	rMaR886 = r+332;
+147.	hUzH278 = f+366;
+148.	pLjF613 = b+913;
+149.	oZwC845 = w+442;
+150.	sZcM205 = j+292;
+151.	mOaR162 = b+587;
+152.	lTnS64 = v+438*mango;
+153.	cUxV65 = s+545;
+154.	lEyC960 = p+347;
+155.	cNlH131 = t+445;
+156.	wGiZ578 = i+256;
+157.	dWkX968 = r+48;
+158.	iVkZ787 = h+276;
+159.	tLaB218 = n+488;
+160.	lVfH988 = z+280;
+161.	sXzX982 = q+555;
+162.	xLjZ812 = l+912;
+163.	aJqZ17 = q+164;
+164.	sCxD14 = d+99;
+165.	cMaW943 = c+144;
+166.	lRlP26 = d+857;
+167.	uQrM333 = l+157;
+168.	tFqU27 = i+40;
+169.	uRaO9 = a+705;
+170.	cVmB701 = g+277;
+171.	xRmO234 = p+345;
+172.	oGcQ143 = o+534;
+173.	iKfW273 = b+720;
+174.	nCzC848 = p+944;
+175.	sJnX426 = z+432;
+176.	oTaF764 = o+251;
+177.	wJfV914 = c+539;
+178.	mUoY562 = n+632;
+179.	oPwO298 = q+887;
+180.	t = d+8;
+181.	xLtG191 = c+229;
+182.	hXsF91 = q+495;
+183.	kIoJ477 = a+436;
+184.	wXhL467 = o+50;
+185.	wYpH792 = p+840;
+186.	bEqQ592 = n+274;
+187.	eXbZ260 = o+640;
+188.	tYyL280 = c+47;
+189.	dVcB715 = h+950;
+190.	qTyI867 = k+400;
+191.	wOzJ583 = n+509;
+192.	rYjN166 = r+232;
+193.	rDhP641 = mango-u+81;
+194.	cGtS123 = d+465;
+195.	hWpQ960 = m+762;
+196.	qVoL483 = q+491;
+197.	uFnL917 = m+240;
+198.	sAeE565 = p+367;
+199.	aSuJ364 = l+398;
+200.	rDnQ139 = x+14;
+201.	yZiE37 = i+479;
+202.	uSfR536 = h+466;
+203.	cSxL227 = m+353;
+204.	iFqP724 = c+363;
+205.	lDaK93 = e+396;
+206.	xEeG147 = a+759;
+207.	hHvH288 = s+977;
+208.	fNrG936 = r+158;
+209.	xAcZ842 = z+330;
+210.	jWkS55 = w+315;
+211.	iVyQ418 = a+745;
+212.	pIqV415 = r+292;
+213.	mIdT916 = j+760;
+214.	qVaZ975 = (mango+838)-h+836;
+215.	gAbK837 = n+603;
+216.	vFsP982 = q+846;
+217.	orange = c+181;
+218.	rUfF135 = w+314;
+219.	oLkL612 = l+386;
+220.	qOsE255 = w+113;
+221.	cUkL619 = a+497;
+222.	hWvN297 = orange+250;
+223.	rFxS478 = c+335;
+224.	aTbO966 = l+420;
+225.	jZoW370 = i+767;
+226.	yNuT380 = t+437;
+227.	wLrS409 = k+196;
+228.	aBnX295 = f+193;
+229.	zWiY404 = v+990;
+230.	xWjO114 = m+776*orange;
+231.	tQzY994 = a+586;
+232.	eRiA483 = r+715;
+233.	rKtK883 = y+610;
+234.	bPeT591 = b+109;
+235.	dNjX405 = x+563;
+236.	nYoY642 = x+876;
+237.	lRtA131 = n+117;
+238.	pQmN564 = o+36;
+239.	orange = j+761;
+240.	eBjI662 = w+156;
+241.	sNgR726 = u+523;
+242.	zNoM628 = n+215;
+243.	lYsZ293 = j+538;
+244.	gHbH274 = b+28;
+245.	zPhD127 = x+264;
+246.	wOhS88 = r+439;
+247.	oCuJ866 = j+242;
+248.	hSnI881 = g+472;
+249.	lVyK224 = l+867;
+250.	sEpW336 = e+708;
+251.	zPiG111 = k+608;
+252.	eVdF177 = p+479;
+253.	gCkR802 = a+675;
+254.	yZnS702 = l+602;
+255.	eXbL428 = s+189;
+256.	fHvL878 = q+971;
+257.	qMdO443 = h+264;
+258.	xDhK339 = r+410;
+259.	hEkX373 = z+640;
+260.	kHsN220 = t+757;
+261.	pCnK857 = v+893;
+262.	vAgV320 = (pear-mango)+(orange-1111)*(fXzU62+62)+334
+263.	tGxY44 = b+897;
+264.	fNmA752 = n+396;
+265.	tAmW546 = l+788;
+266.	oQtQ835 = m+763;
+267.	yKaN677 = z+684;
+268.	vKbR613 = d+635;
+269.	wIgK267 = u+596;
+270.	dKtS246 = z+525;
+271.	z = c+662;
+272.	aIdR679 = z+117;
+273.	fXzU62 = p+664+hHvH288;
+274.	jIcR726 = r+209;
+275.	xHaT268 = t+607;
+276.	hKyH776 = t+269;
+277.	uGsJ754 = s+543;
+278.	uFbA911 = n+379;
+279.	xSzY109 = s+802;
+280.	xNgK58 = z+794;
+281.	fExS590 = t+800;
+282.	bXcB632 = x+133;
+283.	fQyZ791 = q+950;
+284.	mTzD333 = y+631;
+285.	bZfF759 = g+283;
+286.	aYvZ475 = p+19;
+287.	aUkR495 = e+708;
+288.	uGaD286 = p+964;
+289.	wSsG361 = t*(pear+8383)-(mango-pear)*8383+227;
+290.	dQsC881 = k+709;
+291.	tNbT746 = v+615;
+292.	sJiA840 = r+983;
+293.	lKgP760 = r+336;
+294.	cWiF658 = b+23;
+295.	zQdT33 = x+966;
+296.	pGjD858 = p+196;
+297.	dNcE708 = k+985;
+298.	nItE94 = a+762;
+299.	rJmO344 = h+996;
+300.	fDiE380 = h+673;
+301.	vFaW507 = k+71;
+302.	kLpX893 = u+869;
+303.	hGtO432 = d+232;
+304.	jQpQ508 = u+818;
+305.	eOsR422 = t+911;
+306.	zJiU95 = z+131;
+307.	eJqU442 = ((eVdF177-tGxY44)*(oQtQ835+xNgk58))*((t-z)*(u+k));
+308.	xVlO169 = c+517;
+309.	oTqE32 = d+522;
+310.	gPmQ83 = f+95;
+311.	iKuC151 = f+218;
+312.	jDaZ290 = s+422;
+313.	hUdY836 = p+741;
+314.	gBsH757 = j+126;
+315.	uNjY188 = y+118;
+316.	nRgP130 = u+115;
+317.	nJrH2 = z+453;
+318.	kKlW317 = q+388;
+319.	wEyL959 = r+775;
+320.	cDnU259 = a+810;
+321.	jZkY314 = a+941;
+322.	kBmK584 = a+818;
+323.	xWgB442 = y+878;
+324.	xDzO159 = x+261;
+325.	sWuD660 = v+656;
+326.	yYfZ964 = r+670;
+327.	pQfV4 = q+524;
+328.	cEhH329 = q+422;
+329.	dHcD52 = g+574;
+330.	yWeA650 = g+700;
+331.	pAfK338 = a+546;
+332.	cUfE46 = q+42;
+333.	iOzZ508 = v+752;
+334.	hVsT472 = w+925;
+335.	pOcE659 = s+185;
+336.	qZeJ43 = r+738;
+337.	xVeA440 = m+275;
+338.	fVdR262 = o+614;
+339.	lFoR629 = x+748;
+340.	rEzS156 = z+107;
+341.	dQwW200 = r+283;
+342.	gCgM197 = l+327;
+343.	vWeY990 = x+359;
+344.	jCvB201 = p+711;
+345.	hDsZ776 = r+232;
+346.	nPpU60 = u+299;
+347.	pIsP793 = q+387;
+348.	iVaM50 = l+377;
+349.	rKjJ948 = t+984;
+350.	lZqH430 = a+263;
+351.	vHhB972 = u+902;
+352.	xZfZ774 = k+493;
+353.	fHvH813 = m+924;
+354.	eTlJ112 = g+719;
+355.	sCqU754 = m+985;
+356.	vDtU704 = j+833;
+357.	yRnZ896 = z+269;
+358.	uZbQ201 = j+560;
+359.	lWxU53 = n+465;
+360.	tVoL77 = a+561;
+361.	sRkW581 = x+510;
+362.	gAnO884 = j+462;
+363.	rQeG749 = s+17;
+364.	cOgA336 = r+564;
+365.	eDqN694 = i+333;
+366.	yTdX740 = z+897;
+367.	eFvF420 = x+61;
+368.	wGfG320 = c+782;
+369.	iXxA739 = c+326;
+370.	sGaH347 = p+957;
+371.	dGxB722 = p+824;
+372.	jIfH810 = iXxA739+64;
+373.	iXxA739 = d+619;
+374.	sYmG535 = d+599-iXxA739;
+375.	eJwK579 = d+751;
+376.	cKpE766 = sYmG535+349;
+377.	dSgA244 = f+424;
+378.	iXxA739 = n+74;
+379.	zPwY307 = y+622;
+380.	cScO108 = b+113;
+381.	jOfX344 = b+610-u+t*(315+iXxA739-eJwK579+sYmG535);
+382.	yXyW696 = r+225-cKpE766;
+383.	uNqC676 = a+790;
+384.	pTyS854 = r+976;
+385.	jQdV910 = u+218;
+}
+
+procedure Oppi{
+386.	call Kingsley;
+387.	ant = elephant*fish;
+388.	lLtK602 = u+963;
+389.	iEdU57 = s+701;
+390.	pThO565 = f+872;
+391.	bZnJ244 = a+871;
+392.	oBrY487 = t+450;
+393.	vSvH371 = x+818;
+394.	yLqW13 = z+109;
+395.	lFnE159 = q+480;
+396.	iJhI851 = r+568;
+397.	eTuV513 = r+447;
+398.	qEjZ998 = w+365;
+399.	mJqY47 = t+779;
+400.	oXvA471 = l+482;
+401.	zVoQ61 = y+827;
+402.	zFpS831 = o+376;
+403.	qPlD875 = q+604;
+404.	sFlO715 = d+312;
+405.	rTcL279 = h+40;
+406.	pXjD945 = v+874;
+407.	aWtB526 = b+773;
+408.	pPeQ495 = n+394;
+409.	mFjG76 = l+760;
+410.	kRuC321 = j+997;
+411.	vDdH467 = o+686;
+412.	mango = h+113;
+413.	uVzG864 = l+175;
+414.	rTlD372 = i+971;
+415.	qIgC59 = p+177;
+416.	qOmG375 = o+11;
+417.	aGeK401 = p+795;
+418.	rRaM272 = q+104;
+419.	cRjY3 = v+749;
+420.	aIsE574 = f+292;
+421.	rLxO834 = h+910;
+422.	kQvE485 = q+100;
+423.	aTaM458 = i+305;
+424.	qDbG440 = u+800;
+425.	qUsB156 = x+161;
+426.	eTbB338 = t+330;
+427.	gKwP717 = k+5;
+428.	oRrI573 = o+734;
+429.	aPoD802 = u+679;
+430.	xWkV539 = j+284;
+431.	yLcJ287 = w+744;
+432.	cMvI670 = y+817;
+433.	iKsH37 = d+579;
+434.	tSvF291 = c+822;
+435.	qQcA233 = l+763;
+436.	rYsJ539 = u+988;
+437.	sSeJ164 = w+438;
+438.	sHxK787 = a+667;
+439.	oSpX526 = i+614;
+440.	nBrX977 = b+702;
+441.	aEaH429 = i+782;
+442.	hDmO645 = y+647;
+443.	vQnN919 = z+545;
+444.	fAwX397 = b+276;
+445.	kCyI272 = n+442;
+446.	eUlQ651 = i+430;
+447.	kMqB138 = d+157;
+448.	pZhH193 = u+685;
+449.	vZbI991 = f+573;
+450.	fReR710 = y+931;
+451.	oKgN698 = j+800;
+452.	lMuY335 = l+166;
+453.	cYhJ341 = a+413;
+454.	eBcF648 = g+684;
+455.	wFmP401 = l+195;
+456.	wIeU685 = u+747;
+457.	zPdI799 = h+749;
+458.	gCnZ261 = u+387;
+459.	eMlV762 = i+863;
+460.	rCqN306 = z+174;
+461.	nDlE202 = d+552;
+462.	oXgG260 = l+468;
+463.	jTrU701 = j+480;
+464.	yJiC412 = a+239;
+465.	oEkV500 = h+885;
+466.	rUaF321 = e+426;
+467.	eVrB196 = t+291;
+468.	dUlJ226 = u+615;
+469.	vFhC604 = o+258;
+470.	rWhB737 = k+542;
+471.	rCxB766 = c+135;
+472.	bOiM996 = a+51;
+473.	yEiC775 = c+255;
+474.	kTfQ478 = j+2;
+475.	sOhS206 = y+832;
+476.	gXwX696 = w+668;
+477.	xRyD162 = h+834;
+478.	cWlQ564 = a+766;
+479.	mBwK96 = l+378;
+480.	dIjH303 = j+58;
+481.	gVyU843 = g+724;
+482.	cLeY132 = n+849;
+483.	aSrU739 = n+571;
+484.	oDoJ500 = y+690;
+485.	kKqL97 = i+163;
+486.	yKcB355 = h+392;
+487.	gYuI361 = n+599;
+488.	uTrQ724 = a+920;
+489.	gCfH611 = v+468;
+490.	cAeN195 = x+397;
+491.	tDwC10 = i+212;
+492.	bJcU579 = e+14;
+493.	rNuB65 = r+445;
+494.	oWwF4 = v+254;
+495.	aTbT78 = r+363;
+496.	eLaX854 = l+826;
+497.	fTtH911 = f+356;
+498.	xKbR731 = e+142;
+499.	dFjU746 = g+687;
+500.	aJrQ192 = x+764;
+501.	sUiT275 = x+24;
+502.	aVtI926 = c+138;
+503.	lHdL925 = r+21;
+504.	oCuS364 = j+57;
+505.	kWbC104 = a+852;
+506.	aMzK453 = e+326;
+507.	iAwT145 = q+981;
+508.	mKbJ14 = a+802;
+509.	mEhG497 = m+511;
+510.	wUjC252 = k+785;
+511.	hPbT51 = j+251;
+512.	hKyM613 = q+180;
+513.	eWmA547 = v+890;
+514.	hWlJ280 = x+22;
+515.	mEtX223 = k+864;
+516.	jHhL365 = e+659;
+517.	nChM928 = e+99;
+518.	uMfC466 = z+971;
+519.	nXuO7 = s+777;
+520.	vMrP421 = r+150;
+521.	zRkW105 = p+875;
+522.	gFjJ203 = t+952;
+523.	eUhA812 = s+599;
+524.	cJjK632 = d+304;
+525.	bOoP479 = z+461;
+526.	wXcN883 = n+154;
+527.	tJuR573 = s+865;
+528.	gRoW570 = s+6;
+529.	bTeX403 = v+868;
+530.	jGvI940 = l+259;
+531.	kOdR658 = m+262;
+532.	jTqB504 = t+142;
+533.	tLlN941 = n+616;
+534.	yXhD167 = x+943;
+535.	cEgO284 = f+335;
+536.	xAiO159 = t+982;
+537.	vLvE12 = o+727;
+538.	vLvW455 = h+100;
+539.	yCoC222 = s+406;
+540.	pWgZ360 = s+782;
+541.	dAxP409 = d+915;
+542.	oOlU266 = n+105;
+543.	nHcF476 = x+657;
+544.	uZzY318 = o+340;
+545.	zKeW582 = i+377;
+546.	yBmA286 = p+476;
+547.	kKoR43 = v+506;
+548.	fEvD910 = o+974;
+549.	aGaF102 = o+707;
+550.	tXtE58 = b+990;
+551.	jXfY786 = t+943;
+552.	zKfI857 = t+775;
+553.	vQuM382 = l+77;
+554.	iLcG821 = c+457;
+555.	dFjX98 = v+280;
+556.	wQiB321 = s+719;
+557.	uHuF203 = t+621;
+558.	yGjA720 = b+986;
+559.	dPwA91 = u+726;
+560.	aPrW413 = s+633;
+561.	oXeU770 = q+945;
+562.	sSnW326 = c+524;
+563.	gAuZ469 = n+947;
+564.	iBiL349 = p+624;
+565.	jBnY898 = p+861;
+566.	kCeA266 = z+459;
+567.	iIqF937 = q+346;
+568.	rVtT305 = h+709;
+569.	wGaQ832 = v+208;
+570.	oUoI583 = w+251;
+571.	pCxO92 = t+70;
+572.	sZwP89 = a+905;
+573.	xNtM751 = f+6;
+574.	aXmZ855 = n+133;
+575.	rCkP997 = t+103;
+576.	oIeT294 = e+446;
+577.	gCvN191 = o+282;
+578.	yOxP297 = j+338;
+579.	dGwW994 = d+149;
+580.	uThU729 = n+840;
+581.	oMaW215 = w+604;
+582.	tVhS883 = z+261;
+583.	vSaV957 = h+691;
+584.	qHzR113 = w+427;
+585.	rIkK713 = d+875;
+586.	bHgO153 = g+837;
+587.	owl = v+182;
+588.	fUgE405 = h+271;
+589.	sXcK128 = t+10;
+590.	lAyS476 = v+499;
+591.	p = a+173;
+592.	pVbU831 = k+871;
+593.	iLzP805 = r+438;
+594.	mHvN737 = z+807;
+595.	rLcO21 = n+750;
+596.	pRzX130 = b+355;
+597.	mPfA191 = z+230;
+598.	bGqM971 = e+826;
+599.	uQrN134 = t+299;
+600.	rUtF565 = y+536;
+601.	sWpH158 = j+611;
+602.	hEhB109 = o+330;
+603.	uLgJ625 = b+556;
+604.	lScD281 = a+772;
+605.	eJrV469 = a+267;
+606.	jRbM661 = a+117;
+607.	eFxZ98 = z+117;
+608.	zIpD993 = e+663;
+609.	cOgV336 = v+617;
+610.	mTvR446 = l+456;
+611.	aRnV86 = z+601;
+612.	tWmD495 = d+433;
+613.	aNsW606 = s+376;
+614.	cOfC466 = g+533;
+615.	nMsM875 = b+704;
+616.	ePtK115 = g+81;
+617.	bZnW564 = i+881;
+618.	zOxA571 = l+292;
+619.	fIrI142 = c+629;
+620.	yDfV592 = g+589;
+621.	bCtI151 = a+767;
+622.	qDjR264 = z+556;
+623.	nPtX279 = m+119;
+624.	fSeH892 = t+680;
+625.	rLbS22 = b+821;
+626.	gBuU279 = c+568;
+627.	qNhE258 = t+134;
+628.	pJmB560 = u+524;
+629.	mYcE721 = y+58;
+630.	wNaJ218 = p+449;
+631.	eTeN427 = g+359;
+632.	cEnK634 = g+976;
+633.	pJnU308 = l+128;
+634.	qHpJ294 = b+812;
+635.	oQxV921 = l+842;
+636.	gWgK325 = y+273;
+637.	while rLbS22{
+638.		dKkS285 = p+343-mango;
+639.		wNaJ218 = dKkS285 - oQxV921;
+640.		oQxV921 = eTeN427;
+641.		eTeN427 = nPtX279;
+642.		nPtX279 = wNaJ218;
+643.		mango = 135+eTeN427;
+		}
+644.	while uLgJ625{
+645.		fSeH892 = fIrI142+1;
+646.		fIrI142 = gBuU279*cEnK634;
+647.		cEnK634 = pJnU308-1+oQxV921;
+648.		while rUtF565{
+649.			oQxV921 = fIrI142;
+650.			fIrI142 = fSeH892;
+651.			fSeH892 = cEnK634;
+652.			cEnK634 = oQxV921;
+			}
+		}
+}

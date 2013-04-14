@@ -1,0 +1,477 @@
+15
+cat: Test Case for Contains* (Known,unKnown) and (unKnown,Known)
+1 - Contains, Typed :: contains*(ASSIGNMENT,VARIABLE)
+assign a;
+Select a such that Contains*(a,"fish");
+126,129,137,18,19,21,38,54,57,16,6
+5000
+2 - Contains, Typed :: contains*(ASSIGNMENT,PLUS)
+plus pls;assign a;
+Select a such that Contains*(a,pls);
+11,110,112,122,18,19,2,21,24,37,44,45,5,50,54,59,63,78,81,82
+5000
+3 - Contains, Typed :: contains*(ASSIGNMENT,MINUS)
+minus min;assign a;
+Select a such that Contains*(a,min);
+107,122,38,45,57,65,75
+5000
+4 - Contains, Typed :: contains*(ASSIGNMENT,MULTIPLY)
+times tm;assign a;
+Select a such that Contains*(a,tm);
+124,126,129,137,31,32,33,34,37,38,39,42,43,45,50,54,62,66,69,73,77
+5000
+5 - Contains, Typed :: contains*(ASSIGNMENT,CONSTANT)
+assign a;
+Select a such that Contains*(a,"12");
+33,95,34
+5000
+8 - Contains, Typed :: contains*(IF,ASSIGNMENT)
+if i;
+Select i such that Contains*(i,42);
+41
+5000
+9 - Contains, Typed :: contains*(IF,WHILE)
+if i;
+Select i such that Contains*(i,74);
+61,64,67,70
+5000
+10 - Contains, Typed :: contains*(IF,IF)
+if i;
+Select i such that Contains*(i,67);
+61,64
+5000
+11 - Contains, Typed :: contains*(IF,CALL)
+if i;
+Select i such that Contains*(i,65);
+61,64
+5000
+12 - Contains, Typed :: contains*(IF,VARIABLE)
+if i;
+Select i such that Contains*(i,"jam");
+22
+5000
+13 - Contains, Typed :: contains*(IF,PLUS)
+plus pls;if i;
+Select i such that Contains*(i,pls);
+17,48,61,70,22,67,64
+5000
+14 - Contains, Typed :: contains*(IF,MINUS)
+minus min;if i;
+Select i such that Contains*(i,min);
+64,61,67,70
+5000
+15 - Contains, Typed :: contains*(IF,MULTIPLY)
+times tm;if i;
+Select i such that Contains*(i,tm);
+30,41,48,61,64,67,70
+5000
+16 - Contains, Typed :: contains*(IF,CONSTANT)
+if i;
+Select i such that Contains*(i,"9");
+30
+5000
+18 - Contains, Typed :: contains*(WHILE,STATEMENT)
+while w;
+Select w such that Contains*(w,15);
+7,9
+5000
+19 - Contains, Typed :: contains*(WHILE,ASSIGNMENT)
+while w;
+Select w such that Contains*(w,16);
+15,7,9
+5000
+20 - Contains, Typed :: contains*(WHILE,WHILE)
+while w;
+Select w such that Contains*(w,13);
+7,9
+5000
+21 - Contains, Typed :: contains*(WHILE,IF)
+while w;
+Select w such that Contains*(w,17);
+7,9
+5000
+22 - Contains, Typed :: contains*(WHILE,CALL)
+while w;
+Select w such that Contains*(w,56);
+51,55
+5000
+23 - Contains, Typed :: contains*(WHILE,VARIABLE)
+while w;
+Select w such that Contains*(w,"mango");
+29,36,51,55
+5000
+24 - Contains, Typed :: contains*(WHILE,PLUS)
+plus pls;while w;
+Select w such that Contains*(w,pls);
+108,111,23,36,51,9,7,29,60,106,104,102,100,99
+5000
+25 - Contains, Typed :: contains*(WHILE,MINUS)
+minus min;while w;
+Select w such that Contains*(w,min);
+106,104,102,100,99,74,60,55,51,36,29
+5000
+26 - Contains, Typed :: contains*(WHILE,MULTIPLY)
+times tm;while w;
+Select w such that Contains*(w,tm);
+29,36,51,76,60,74
+5000
+27 - Contains, Typed :: contains*(WHILE,CONSTANT)
+while w;
+Select w such that Contains*(w,"4");
+9,7
+5000
+29 - Contains, Typed :: contains*(PROCEDURE,STATEMENT)
+procedure p;
+Select p such that Contains*(p,31);
+Bob
+5000
+30 - Contains, Typed :: contains*(PROCEDURE,ASSIGNMENT)
+procedure p;
+Select p such that Contains*(p,32);
+Bob
+5000
+31 - Contains, Typed :: contains*(PROCEDURE,WHILE)
+procedure p;
+Select p such that Contains*(p,36);
+Bob
+5000
+32 - Contains, Typed :: contains*(PROCEDURE,IF)
+procedure p;
+Select p such that Contains*(p,41);
+Bob
+5000
+33 - Contains, Typed :: contains*(PROCEDURE,CALL)
+procedure p;
+Select p such that Contains*(p,40);
+Bob
+5000
+34 - Contains, Typed :: contains*(PROCEDURE,VARIABLE)
+procedure p;
+Select p such that Contains*(p,"banana");
+Alice,Bob,Charlie
+5000
+35 - Contains, Typed :: contains*(PROCEDURE,PLUS)
+plus pls;procedure p;
+Select p such that Contains*(p,pls);
+Alice,Bob,Charlie,Danny,Eliza,Fred,Henry
+5000
+36 - Contains, Typed :: contains*(PROCEDURE,MINUS)
+minus min;procedure p;
+Select p such that Contains*(p,min);
+Bob,Charlie,Danny,Eliza,Fred,Henry
+5000
+37 - Contains, Typed :: contains*(PROCEDURE,MULTIPLY)
+times tm;procedure p;
+Select p such that Contains*(p,tm);
+Bob,Charlie,Danny,Eliza,Illidan,James,Lucas,Oppi
+5000
+38 - Contains, Typed :: contains*(PROCEDURE,CONSTANT)
+procedure p;
+Select p such that Contains*(p,"13");
+Bob,Fred
+5000
+51 - Contains, Typed :: contains*(STATEMENT,STATEMENT)
+stmt s;
+Select s such that Contains*(s,57);
+51,55
+5000
+52 - Contains, Typed :: contains*(STATEMENT,ASSIGNMENT)
+stmt s;
+Select s such that Contains*(s,62);
+60,61
+5000
+53 - Contains, Typed :: contains*(STATEMENT,WHILE)
+stmt s;
+Select s such that Contains*(s,74);
+60,61,64,67,70
+5000
+54 - Contains, Typed :: contains*(STATEMENT,IF)
+stmt s;
+Select s such that Contains*(s,70);
+60,61,64,67
+5000
+55 - Contains, Typed :: contains*(STATEMENT,CALL)
+stmt s;
+Select s such that Contains*(s,56);
+51,55
+5000
+56 - Contains, Typed :: contains*(STATEMENT,VARIABLE)
+stmt s;
+Select s such that Contains*(s,"mango");
+29,30,32,34,36,37,51,54,55,57,31,33,52
+5000
+57 - Contains, Typed :: contains*(STATEMENT,PLUS)
+plus pls;stmt s;
+Select s such that Contains*(s,pls);
+2,5,7,9,11,17,18,19,21,22,23,24,29,36,37,44,45,48,50,51,54,59,60,61,63,64,67,70,78,81,82,108,106,104,102,100,99,110,111,112,122
+5000
+58 - Contains, Typed :: contains*(STATEMENT,MINUS)
+minus min;stmt s;
+Select s such that Contains*(s,min);
+100,102,104,106,107,122,29,36,38,45,51,55,57,60,61,64,65,67,70,74,75,99
+5000
+59 - Contains, Typed :: contains*(STATEMENT,MULTIPLY)
+times tm;stmt s;
+Select s such that Contains*(s,tm);
+124,126,129,137,29,30,31,32,33,34,36,37,38,39,41,42,43,45,48,50,51,54,60,61,62,64,66,67,69,70,73,74,76,77
+5000
+60 - Contains, Typed :: contains*(STATEMENT,CONSTANT)
+stmt s;
+Select s such that Contains*(s,"103");
+60,61,64,67,70,78
+5000
+7 - Contains, Typed :: contains*(IF,STATEMENT)
+if i;
+Select i such that Contains*(i,42);
+41
+5000
+40 - Contains, Typed :: contains*(STMT_LIST,STATEMENT)
+stmtLst sl;
+Select sl such that Contains*(sl,31);
+29,30,31
+5000
+41 - Contains, Typed :: contains*(STMT_LIST,ASSIGNMENT)
+stmtLst sl;
+Select sl such that Contains*(sl,119);
+83,119,117,116,114,112,109,107,105,103,101,100
+5000
+42 - Contains, Typed :: contains*(STMT_LIST,WHILE)
+stmtLst sl;
+Select sl such that Contains*(sl,36);
+29,30
+5000
+43 - Contains, Typed :: contains*(STMT_LIST,IF)
+stmtLst sl;
+Select sl such that Contains*(sl,30);
+29,30
+5000
+44 - Contains, Typed :: contains*(STMT_LIST,CALL)
+stmtLst sl;
+Select sl such that Contains*(sl,56);
+51,52,56
+5000
+45 - Contains, Typed :: contains*(STMT_LIST,VARIABLE)
+stmtLst sl;
+Select sl such that Contains*(sl,"fish");
+1,10,121,124,125,129,136,18,20,29,30,37,51,52,56,8
+5000
+46 - Contains, Typed :: contains*(STMT_LIST,PLUS)
+plus pls;stmtLst sl;
+Select sl such that Contains*(sl,pls);
+1,10,100,101,103,105,107,109,112,121,122,124,18,20,23,24,26,29,30,37,44,50,51,52,58,61,63,66,69,73,8,83
+5000
+47 - Contains, Typed :: contains*(STMT_LIST,MINUS)
+minus min;stmtLst sl;
+Select sl such that Contains*(sl,min);
+100,101,103,105,107,122,29,30,37,44,51,52,56,58,61,63,65,66,69,73,75,83
+500
+48 - Contains, Typed :: contains*(STMT_LIST,MULTIPLY)
+times tm;stmtLst sl;
+Select sl such that Contains*(sl,tm);
+124,125,129,136,29,30,31,33,37,42,43,44,50,51,52,58,61,62,63,66,69,73,75,77
+5000
+49 - Contains, Typed :: contains*(STMT_LIST,CONSTANT)
+stmtLst sl;
+Select sl such that Contains*(sl,"13");
+29,30,33,83,37
+5000
+1 - Contains, Typed :: contains*(ASSIGNMENT,VARIABLE)
+variable v;
+Select v such that Contains*(38,v);
+fish,ham,kimchi,jam
+5000
+5 - Contains, Typed :: contains*(ASSIGNMENT,CONSTANT)
+constant c;
+Select c such that Contains*(34,c);
+12,13
+5000
+8 - Contains, Typed :: contains*(IF,ASSIGNMENT)
+assign a;
+Select a such that Contains*(41,a);
+42,43
+5000
+9 - Contains, Typed :: contains*(IF,WHILE)
+while w;
+Select w such that Contains*(70,w);
+74,76
+5000
+10 - Contains, Typed :: contains*(IF,IF)
+if i;
+Select i such that Contains*(61,i);
+64,67,70
+5000
+11 - Contains, Typed :: contains*(IF,CALL)
+call c;
+Select c such that Contains*(48,c);
+
+5000
+12 - Contains, Typed :: contains*(IF,VARIABLE)
+variable v;
+Select v such that Contains*(22,v);
+carrot,donut,jam,kimchi,leek
+5000
+16 - Contains, Typed :: contains*(IF,CONSTANT)
+constant c;
+Select c such that Contains*(30,c);
+10,11,12,13,9
+5000
+18 - Contains, Typed :: contains*(WHILE,STATEMENT)
+stmt s;
+Select s such that Contains*(9,s);
+10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27
+5000
+19 - Contains, Typed :: contains*(WHILE,ASSIGNMENT)
+assign a;
+Select a such that Contains*(9,a);
+10,11,12,14,16,18,19,20,21,24,25,26,27
+5000
+20 - Contains, Typed :: contains*(WHILE,WHILE)
+while w;
+Select w such that Contains*(9,w);
+13,15,23
+5000
+21 - Contains, Typed :: contains*(WHILE,IF)
+if i;
+Select i such that Contains*(9,i);
+17,22
+5000
+22 - Contains, Typed :: contains*(WHILE,CALL)
+call c;
+Select c such that Contains*(51,c);
+53,56
+5000
+23 - Contains, Typed :: contains*(WHILE,VARIABLE)
+variable v;
+Select v such that Contains*(51,v);
+egg,fish,ham,leek,mango,pear
+5000
+27 - Contains, Typed :: contains*(WHILE,CONSTANT)
+constant c;
+Select c such that Contains*(7,c);
+0,1,4,5,6,7,8
+5000
+29 - Contains, Typed :: contains*(PROCEDURE,STATEMENT)
+stmt s;
+Select s such that Contains*("Bob",s);
+29,30,31,32,33,34,35,36,37,38,39,40,41,42,43
+5000
+30 - Contains, Typed :: contains*(PROCEDURE,ASSIGNMENT)
+assign a;
+Select a such that Contains*("Bob",a);
+31,32,33,34,35,37,38,39,42,43
+5000
+31 - Contains, Typed :: contains*(PROCEDURE,WHILE)
+while w;
+Select w such that Contains*("Bob",w);
+29,36
+5000
+32 - Contains, Typed :: contains*(PROCEDURE,IF)
+if i;
+Select i such that Contains*("Bob",i);
+30,41
+5000
+33 - Contains, Typed :: contains*(PROCEDURE,CALL)
+call c;
+Select c such that Contains*("Bob",c);
+40
+5000
+34 - Contains, Typed :: contains*(PROCEDURE,VARIABLE)
+variable v;
+Select v such that Contains*("Bob",v);
+banana,carrot,fish,ham,kimchi,leek,mango,nachos,jam
+5000
+38 - Contains, Typed :: contains*(PROCEDURE,CONSTANT)
+constant c;
+Select c such that Contains*("Bob",c);
+0,10,11,12,13,2,8,9
+5000
+51 - Contains, Typed :: contains*(STATEMENT,STATEMENT)
+stmt s;
+Select s such that Contains*(51,s);
+52,53,54,55,56,57
+5000
+52 - Contains, Typed :: contains*(STATEMENT,ASSIGNMENT)
+assign a;
+Select a such that Contains*(60,a);
+62,63,65,66,68,69,71,72,73,75,77,78,79,80,81
+5000
+53 - Contains, Typed :: contains*(STATEMENT,WHILE)
+while w;
+Select w such that Contains*(70,w);
+74,76
+5000
+54 - Contains, Typed :: contains*(STATEMENT,IF)
+if i;
+Select i such that Contains*(67,i);
+70
+5000
+55 - Contains, Typed :: contains*(STATEMENT,CALL)
+call c;
+Select c such that Contains*(51,c);
+53,56
+5000
+56 - Contains, Typed :: contains*(STATEMENT,VARIABLE)
+variable v;
+Select v such that Contains*(51,v);
+egg,fish,ham,leek,mango,pear
+5000
+60 - Contains, Typed :: contains*(STATEMENT,CONSTANT)
+constant c;
+Select c such that Contains*(61,c);
+1,103,104
+5000
+61 - Contains, Typed :: contains*(PLUS,VARIABLE)
+plus pls; variable v;
+Select v such that Contains*(pls,v);
+aeroplane,apple,banana,basin,beetle,carrot,cloud,donut,egg,fish,ham,keep,kimchi,leek,mango,nachos,orange
+5000
+62 - Contains, Typed :: contains*(PLUS,CONSTANT)
+plus pls; constant c;
+Select c such that Contains*(pls,c);
+1,101,103,14,2,4,6,8
+5000
+66 - Contains, Typed :: contains*(MINUS,VARIABLE)
+minus min; variable v;
+Select v such that Contains*(min,v);
+carrot,cloud,dinosaur,door,fish,garbage,ham,kimchi,leek,mango,orange
+5000
+67 - Contains, Typed :: contains*(MINUS,CONSTANT)
+minus min;constant c;
+Select c such that Contains*(min,c);
+1,9
+5000
+71 - Contains, Typed :: contains*(MULTIPLY,VARIABLE)
+times tm;variable v;
+Select v such that Contains*(tm,v);
+aeroplane,banana,basin,carrot,cloud,donut,door,egg,elephant,elevator,fan,fish,garbage,goat,ham,hamster,kimchi,leek,mango,nachos,orange
+5000
+72 - Contains, Typed :: contains*(MULTIPLY,CONSTANT)
+times tm;constant c;
+Select c such that Contains*(tm,c);
+10,11,12,13,2,8,9
+5000
+6 - Contains, Typed :: contains*(IF,STMT_LIST)
+stmtLst sl;
+Select sl such that Contains*(41,sl);
+42,43
+5000
+7 - Contains, Typed :: contains*(IF,STATEMENT)
+stmt s;
+Select s such that Contains*(41,s);
+42,43
+5000
+17 - Contains, Typed :: contains*(WHILE,STMT_LIST)
+stmtLst sl;
+Select sl such that Contains*(9,sl);
+10,14,16,18,20,23,24,26
+5000
+28 - Contains, Typed :: contains*(PROCEDURE,STMT_LIST)
+stmtLst sl;
+Select sl such that Contains*("Bob",sl);
+29,30,31,33,37,42,43
+5000
+50 - Contains, Typed :: contains*(STATEMENT,STMT_LIST)
+stmtLst sl;
+Select sl such that Contains*(51,sl);
+52,56
+5000

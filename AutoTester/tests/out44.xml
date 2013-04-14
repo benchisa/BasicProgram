@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>2733.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>1910.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" Uses Queries">
@@ -9,70 +9,70 @@
 <id Uses="1" Typed="1" comment="check Uses assignment" >1</id><querystr><![CDATA[assign a1; variable v1;  Select a1 such that Uses(a1,v1);]]></querystr>
 <stuans>122,124,18,19,82,2,3,43,5,11,118,32,14,21,24,31,33,112,34,37,38,69,75,107,39,73,42,62,44,63,45,49,50,71,52,54,119,137,57,59,65,78,126,66,68,72,77,79,81,105,109,110,121,129</stuans>
 <correct>105,107,109,11,110,112,118,119,121,122,124,126,129,137,14,18,19,2,21,24,3,31,32,33,34,37,38,39,42,43,44,45,49,5,50,52,54,57,59,62,63,65,66,68,69,71,72,73,75,77,78,79,81,82</correct>
-<time_taken>107.000000</time_taken>
+<time_taken>82.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Uses="1" Typed="1" comment="check Uses while" >2</id><querystr><![CDATA[while w1; variable v1; Select w1 such that Uses(w1,v1);]]></querystr>
-<stuans>23,102,104,7,9,115,13,116,36,15,51,29,55,60,74,76,99,100,106,108,111,113</stuans>
+<stuans>102,104,7,23,9,115,13,116,36,15,51,29,55,60,74,76,99,100,106,108,111,113</stuans>
 <correct>100,102,104,106,108,111,113,115,116,13,15,23,29,36,51,55,60,7,74,76,9,99</correct>
-<time_taken>90.000000</time_taken>
+<time_taken>78.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Uses="1" Typed="1" comment="check Uses if" >3</id><querystr><![CDATA[if i1; variable v1; Select i1 such that Uses(i1,v1);]]></querystr>
 <stuans>17,70,22,41,30,48,64,61,67,117,131</stuans>
 <correct>117,131,17,22,30,41,48,61,64,67,70</correct>
-<time_taken>80.000000</time_taken>
+<time_taken>69.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Uses="1" Typed="1" comment="check Uses call" >4</id><querystr><![CDATA[call c1; variable v1; Select c1 such that Uses(c1,v1);]]></querystr>
 <stuans>125,127,28,128,135,53,120,40,56,47,123,130,134,136</stuans>
 <correct>120,123,125,127,128,130,134,135,136,28,40,47,53,56</correct>
-<time_taken>117.000000</time_taken>
+<time_taken>107.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Uses="1" Typed="1" comment="check Uses procedure" >5</id><querystr><![CDATA[procedure p1; variable v1; Select p1 such that Uses(p1,v1);]]></querystr>
 <stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Goneril,Henry,Illidan,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Goneril,Henry,Illidan,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
-<time_taken>119.000000</time_taken>
+<time_taken>104.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Uses="1" Typed="1" comment="check Uses assignment" >6</id><querystr><![CDATA[assign a1; variable v1;  Select v1 such that Uses(a1,v1);]]></querystr>
 <stuans>apple,banana,carrot,donut,fish,ham,kimchi,dinosaur,leek,mango,nachos,keep,orange,pear,cockroach,door,egg,aeroplane,basin,cloud,fan,elevator,igloo,garbage,goat,beetle,ant,kangeroo,elephant,hamster</stuans>
 <correct>aeroplane,ant,apple,banana,basin,beetle,carrot,cloud,cockroach,dinosaur,donut,door,egg,elephant,elevator,fan,fish,garbage,goat,ham,hamster,igloo,kangeroo,keep,kimchi,leek,mango,nachos,orange,pear</correct>
-<time_taken>92.000000</time_taken>
+<time_taken>78.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Uses="1" Typed="1" comment="check Uses while" >7</id><querystr><![CDATA[while w1; variable v1; Select v1 such that Uses(w1,v1);]]></querystr>
 <stuans>apple,banana,carrot,donut,fish,gummy,ham,jam,pear,cockroach,kimchi,dinosaur,leek,mango,nachos,keep,door,egg,aeroplane,basin,cloud,elevator,fan,garbage,hanger,igloo,jumper,ant,fox,beetle,goat,hamster,kangeroo</stuans>
 <correct>aeroplane,ant,apple,banana,basin,beetle,carrot,cloud,cockroach,dinosaur,donut,door,egg,elevator,fan,fish,fox,garbage,goat,gummy,ham,hamster,hanger,igloo,jam,jumper,kangeroo,keep,kimchi,leek,mango,nachos,pear</correct>
-<time_taken>95.000000</time_taken>
+<time_taken>83.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Uses="1" Typed="1" comment="check Uses if" >8</id><querystr><![CDATA[if i1; variable v1; Select v1 such that Uses(i1,v1);]]></querystr>
 <stuans>banana,carrot,donut,fish,ham,jam,kimchi,leek,mango,orange,aeroplane,basin,cloud,door,elevator,fan,garbage,hanger,igloo,jumper,keep,ant,hamster,kangeroo</stuans>
 <correct>aeroplane,ant,banana,basin,carrot,cloud,donut,door,elevator,fan,fish,garbage,ham,hamster,hanger,igloo,jam,jumper,kangeroo,keep,kimchi,leek,mango,orange</correct>
-<time_taken>80.000000</time_taken>
+<time_taken>78.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Uses="1" Typed="1" comment="check Uses call" >9</id><querystr><![CDATA[call c1; variable v1; Select v1 such that Uses(c1,v1);]]></querystr>
-<stuans>apple,banana,carrot,donut,fish,door,egg,gummy,ham,jam,pear,cockroach,kimchi,dinosaur,leek,mango,nachos,keep,orange,aeroplane,basin,cloud,elevator,fan,garbage,hanger,igloo,jumper,ant,fox,beetle,elephant,goat,hamster,kangeroo</stuans>
+<stuans>apple,banana,carrot,door,egg,donut,fish,gummy,ham,jam,pear,cockroach,kimchi,dinosaur,leek,mango,nachos,keep,orange,aeroplane,basin,cloud,elevator,fan,garbage,hanger,igloo,jumper,ant,fox,beetle,elephant,goat,hamster,kangeroo</stuans>
 <correct>aeroplane,ant,apple,banana,basin,beetle,carrot,cloud,cockroach,dinosaur,donut,door,egg,elephant,elevator,fan,fish,fox,garbage,goat,gummy,ham,hamster,hanger,igloo,jam,jumper,kangeroo,keep,kimchi,leek,mango,nachos,orange,pear</correct>
-<time_taken>131.000000</time_taken>
+<time_taken>118.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Uses="1" Typed="1" comment="check Uses procedure" >10</id><querystr><![CDATA[procedure p1; variable v1; Select v1 such that Uses(p1,v1);]]></querystr>
-<stuans>apple,banana,carrot,donut,fish,door,egg,gummy,ham,jam,pear,cockroach,kimchi,dinosaur,leek,mango,nachos,keep,orange,aeroplane,basin,cloud,elevator,fan,garbage,hanger,igloo,jumper,ant,fox,beetle,elephant,goat,hamster,kangeroo</stuans>
+<stuans>apple,banana,carrot,door,egg,donut,fish,gummy,ham,jam,pear,cockroach,kimchi,dinosaur,leek,mango,nachos,keep,orange,aeroplane,basin,cloud,elevator,fan,garbage,hanger,igloo,jumper,ant,fox,beetle,elephant,goat,hamster,kangeroo</stuans>
 <correct>aeroplane,ant,apple,banana,basin,beetle,carrot,cloud,cockroach,dinosaur,donut,door,egg,elephant,elevator,fan,fish,fox,garbage,goat,gummy,ham,hamster,hanger,igloo,jam,jumper,kangeroo,keep,kimchi,leek,mango,nachos,orange,pear</correct>
-<time_taken>137.000000</time_taken>
+<time_taken>125.000000</time_taken>
 <passed/>
 </query>
 </category>
