@@ -50,9 +50,9 @@ procedure zebra{
 35.	meat=1;
 36.	banana=meat+10;
 37.	if meat then{
-38.	carrot=banana+22;}
-else{
-39.	carrot=banana;}
+38.		carrot=banana+22;}
+	else{
+39.		carrot=banana;}
 40.	apple=1;
 41.	kimchi=apple+10;
 42.	call extra;

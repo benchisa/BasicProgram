@@ -1,0 +1,332 @@
+15
+cat: Complex Simple
+1 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Alice");
+Danny
+5000
+2 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Bob");
+Alice
+5000
+3 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Charlie");
+Danny
+5000
+4 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Danny");
+Nancy
+5000
+5 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Eliza");
+Lucas
+5000
+6 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Fred");
+Bob
+5000
+7 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Goneril");
+
+5000
+8 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Henry");
+Kingsley
+5000
+9 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Illidan");
+
+5000
+10 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"James");
+Henry
+5000
+11 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Kingsley");
+Fred,Oppi
+5000
+12 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Lucas");
+Charlie
+5000
+13 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Merril");
+Kingsley
+5000
+14 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Nancy");
+Merril
+5000
+15 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls(p1,"Oppi");
+James
+5000
+16 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Alice");
+Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi
+5000
+17 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Bob");
+Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi
+5000
+18 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Charlie");
+Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi
+5000
+19 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Danny");
+Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi
+5000
+20 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Eliza");
+Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi
+5000
+21 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Fred");
+Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi
+5000
+22 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Goneril");
+
+5000
+23 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Henry");
+Alice,Bob,Danny,Henry,Fred,James,Kingsley,Merril,Nancy,Oppi
+5000
+24 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Illidan");
+
+5000
+25 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"James");
+Alice,Bob,Danny,Fred,James,Henry,Kingsley,Merril,Nancy,Oppi
+5000
+26 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Kingsley");
+Alice,Bob,Danny,Fred,Henry,Kingsley,James,Merril,Nancy,Oppi
+5000
+27 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Lucas");
+Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi
+5000
+28 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Merril");
+Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi
+5000
+29 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Nancy");
+Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi
+5000
+30 - Calls, Typed :: Check call
+procedure p1;
+Select p1 such that Calls*(p1,"Oppi");
+Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi
+5000
+31 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Alice",p2);
+Bob
+5000
+32 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Bob",p2);
+Fred
+5000
+33 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Charlie",p2);
+Lucas
+5000
+34 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Danny",p2);
+Alice,Charlie
+5000
+35 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Eliza",p2);
+
+5000
+36 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Fred",p2);
+Kingsley
+5000
+37 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Goneril",p2);
+
+5000
+38 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Henry",p2);
+James
+5000
+39 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Illidan",p2);
+
+5000
+40 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("James",p2);
+Oppi
+5000
+41 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Kingsley",p2);
+Henry,Merril
+5000
+42 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Lucas",p2);
+Eliza
+5000
+43 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Merril",p2);
+Nancy
+5000
+44 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Nancy",p2);
+Danny
+5000
+45 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls("Oppi",p2);
+Kingsley
+5000
+46 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Alice",p2);
+Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi
+5000
+47 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Bob",p2);
+Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi
+5000
+48 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Charlie",p2);
+Eliza,Lucas
+5000
+49 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Danny",p2);
+Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi
+5000
+50 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Eliza",p2);
+
+5000
+51 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Fred",p2);
+Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi
+5000
+52 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Goneril",p2);
+
+5000
+53 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Henry",p2);
+Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi
+5000
+54 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Illidan",p2);
+
+5000
+55 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("James",p2);
+Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi
+5000
+56 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Kingsley",p2);
+Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi
+5000
+57 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Lucas",p2);
+Eliza
+5000
+58 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Merril",p2);
+Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Nancy,Merril,Oppi
+5000
+59 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Nancy",p2);
+Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi
+5000
+60 - Calls, Typed :: Check call
+procedure p2;
+Select p2 such that Calls*("Oppi",p2);
+Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi
+5000
+61 - Calls, Typed :: Check call loops (callception)
+procedure p1,p2;
+Select p1 such that Calls(p1,p2);
+Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi
+5000
+62 - Calls, Typed :: Check call loops (callception)
+procedure p1,p2;
+Select p2 such that Calls(p1,p2);
+Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi
+5000
+63 - Calls, Typed :: Check call loops (callception)
+procedure p1;
+Select p1 such that Calls(p1,p1);
+
+5000
+64 - Calls, Typed :: Check call loops (callception)
+procedure p1,p2;
+Select p1 such that Calls*(p1,p2);
+Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi
+5000
+65 - Calls, Typed :: Check call loops (callception)
+procedure p1,p2;
+Select p2 such that Calls*(p1,p2);
+Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi
+5000
+66 - Calls, Typed :: Check call loops (callception)
+procedure p1;
+Select p1 such that Calls*(p1,p1);
+Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi
+5000

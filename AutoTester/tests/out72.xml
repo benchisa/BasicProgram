@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>11715.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>11058.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" Complex Simple">
@@ -9,77 +9,77 @@
 <id Calls="1" Typed="1" comment="Check call" >1</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Alice");]]></querystr>
 <stuans>Danny</stuans>
 <correct>Danny</correct>
-<time_taken>58.000000</time_taken>
+<time_taken>57.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >2</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Bob");]]></querystr>
 <stuans>Alice</stuans>
 <correct>Alice</correct>
-<time_taken>61.000000</time_taken>
+<time_taken>59.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >3</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Charlie");]]></querystr>
 <stuans>Danny</stuans>
 <correct>Danny</correct>
-<time_taken>64.000000</time_taken>
+<time_taken>63.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >4</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Danny");]]></querystr>
 <stuans>Nancy</stuans>
 <correct>Nancy</correct>
-<time_taken>65.000000</time_taken>
+<time_taken>61.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >5</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Eliza");]]></querystr>
 <stuans>Lucas</stuans>
 <correct>Lucas</correct>
-<time_taken>64.000000</time_taken>
+<time_taken>61.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >6</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Fred");]]></querystr>
 <stuans>Bob</stuans>
 <correct>Bob</correct>
-<time_taken>65.000000</time_taken>
+<time_taken>66.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >7</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Goneril");]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>75.000000</time_taken>
+<time_taken>65.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >8</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Henry");]]></querystr>
 <stuans>Kingsley</stuans>
 <correct>Kingsley</correct>
-<time_taken>85.000000</time_taken>
+<time_taken>65.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >9</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Illidan");]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>80.000000</time_taken>
+<time_taken>68.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >10</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"James");]]></querystr>
 <stuans>Henry</stuans>
 <correct>Henry</correct>
-<time_taken>70.000000</time_taken>
+<time_taken>66.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >11</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Kingsley");]]></querystr>
 <stuans>Fred,Oppi</stuans>
 <correct>Fred,Oppi</correct>
-<time_taken>72.000000</time_taken>
+<time_taken>70.000000</time_taken>
 <passed/>
 </query>
 <query>
@@ -93,119 +93,119 @@
 <id Calls="1" Typed="1" comment="Check call" >13</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Merril");]]></querystr>
 <stuans>Kingsley</stuans>
 <correct>Kingsley</correct>
-<time_taken>73.000000</time_taken>
+<time_taken>69.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >14</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Nancy");]]></querystr>
 <stuans>Merril</stuans>
 <correct>Merril</correct>
-<time_taken>76.000000</time_taken>
+<time_taken>69.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >15</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,"Oppi");]]></querystr>
 <stuans>James</stuans>
 <correct>James</correct>
-<time_taken>81.000000</time_taken>
+<time_taken>72.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >16</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Alice");]]></querystr>
 <stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
-<time_taken>97.000000</time_taken>
+<time_taken>71.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >17</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Bob");]]></querystr>
 <stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
-<time_taken>84.000000</time_taken>
+<time_taken>72.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >18</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Charlie");]]></querystr>
 <stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
-<time_taken>91.000000</time_taken>
+<time_taken>75.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >19</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Danny");]]></querystr>
 <stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
-<time_taken>98.000000</time_taken>
+<time_taken>73.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >20</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Eliza");]]></querystr>
 <stuans>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
-<time_taken>94.000000</time_taken>
+<time_taken>78.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >21</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Fred");]]></querystr>
 <stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
-<time_taken>94.000000</time_taken>
+<time_taken>76.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >22</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Goneril");]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>93.000000</time_taken>
+<time_taken>75.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >23</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Henry");]]></querystr>
 <stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Danny,Henry,Fred,James,Kingsley,Merril,Nancy,Oppi</correct>
-<time_taken>95.000000</time_taken>
+<time_taken>78.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >24</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Illidan");]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>83.000000</time_taken>
+<time_taken>78.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >25</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"James");]]></querystr>
 <stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Danny,Fred,James,Henry,Kingsley,Merril,Nancy,Oppi</correct>
-<time_taken>87.000000</time_taken>
+<time_taken>78.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >26</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Kingsley");]]></querystr>
 <stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Danny,Fred,Henry,Kingsley,James,Merril,Nancy,Oppi</correct>
-<time_taken>91.000000</time_taken>
+<time_taken>84.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >27</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Lucas");]]></querystr>
 <stuans>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
-<time_taken>85.000000</time_taken>
+<time_taken>82.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >28</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Merril");]]></querystr>
 <stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
-<time_taken>89.000000</time_taken>
+<time_taken>79.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >29</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,"Nancy");]]></querystr>
 <stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
-<time_taken>81.000000</time_taken>
+<time_taken>80.000000</time_taken>
 <passed/>
 </query>
 <query>
@@ -219,21 +219,21 @@
 <id Calls="1" Typed="1" comment="Check call" >31</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Alice",p2);]]></querystr>
 <stuans>Bob</stuans>
 <correct>Bob</correct>
-<time_taken>90.000000</time_taken>
+<time_taken>78.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >32</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Bob",p2);]]></querystr>
 <stuans>Fred</stuans>
 <correct>Fred</correct>
-<time_taken>102.000000</time_taken>
+<time_taken>80.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >33</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Charlie",p2);]]></querystr>
 <stuans>Lucas</stuans>
 <correct>Lucas</correct>
-<time_taken>89.000000</time_taken>
+<time_taken>86.000000</time_taken>
 <passed/>
 </query>
 <query>
@@ -247,56 +247,56 @@
 <id Calls="1" Typed="1" comment="Check call" >35</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Eliza",p2);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>86.000000</time_taken>
+<time_taken>83.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >36</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Fred",p2);]]></querystr>
 <stuans>Kingsley</stuans>
 <correct>Kingsley</correct>
-<time_taken>106.000000</time_taken>
+<time_taken>81.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >37</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Goneril",p2);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>109.000000</time_taken>
+<time_taken>88.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >38</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Henry",p2);]]></querystr>
 <stuans>James</stuans>
 <correct>James</correct>
-<time_taken>92.000000</time_taken>
+<time_taken>88.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >39</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Illidan",p2);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>90.000000</time_taken>
+<time_taken>87.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >40</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("James",p2);]]></querystr>
 <stuans>Oppi</stuans>
 <correct>Oppi</correct>
-<time_taken>90.000000</time_taken>
+<time_taken>88.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >41</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Kingsley",p2);]]></querystr>
 <stuans>Henry,Merril</stuans>
 <correct>Henry,Merril</correct>
-<time_taken>93.000000</time_taken>
+<time_taken>92.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >42</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Lucas",p2);]]></querystr>
 <stuans>Eliza</stuans>
 <correct>Eliza</correct>
-<time_taken>86.000000</time_taken>
+<time_taken>85.000000</time_taken>
 <passed/>
 </query>
 <query>
@@ -310,161 +310,161 @@
 <id Calls="1" Typed="1" comment="Check call" >44</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Nancy",p2);]]></querystr>
 <stuans>Danny</stuans>
 <correct>Danny</correct>
-<time_taken>88.000000</time_taken>
+<time_taken>85.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >45</id><querystr><![CDATA[procedure p2; Select p2 such that Calls("Oppi",p2);]]></querystr>
 <stuans>Kingsley</stuans>
 <correct>Kingsley</correct>
-<time_taken>93.000000</time_taken>
+<time_taken>87.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >46</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Alice",p2);]]></querystr>
 <stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
-<time_taken>98.000000</time_taken>
+<time_taken>93.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >47</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Bob",p2);]]></querystr>
 <stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
-<time_taken>95.000000</time_taken>
+<time_taken>89.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >48</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Charlie",p2);]]></querystr>
 <stuans>Eliza,Lucas</stuans>
 <correct>Eliza,Lucas</correct>
-<time_taken>105.000000</time_taken>
+<time_taken>93.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >49</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Danny",p2);]]></querystr>
 <stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
-<time_taken>104.000000</time_taken>
+<time_taken>92.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >50</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Eliza",p2);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>94.000000</time_taken>
+<time_taken>90.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >51</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Fred",p2);]]></querystr>
 <stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
-<time_taken>101.000000</time_taken>
+<time_taken>94.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >52</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Goneril",p2);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>100.000000</time_taken>
+<time_taken>96.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >53</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Henry",p2);]]></querystr>
 <stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
-<time_taken>99.000000</time_taken>
+<time_taken>98.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >54</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Illidan",p2);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>96.000000</time_taken>
+<time_taken>92.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >55</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("James",p2);]]></querystr>
 <stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
-<time_taken>100.000000</time_taken>
+<time_taken>97.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >56</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Kingsley",p2);]]></querystr>
 <stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
-<time_taken>110.000000</time_taken>
+<time_taken>104.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >57</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Lucas",p2);]]></querystr>
 <stuans>Eliza</stuans>
 <correct>Eliza</correct>
-<time_taken>95.000000</time_taken>
+<time_taken>97.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >58</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Merril",p2);]]></querystr>
 <stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Nancy,Merril,Oppi</correct>
-<time_taken>101.000000</time_taken>
+<time_taken>98.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >59</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Nancy",p2);]]></querystr>
 <stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
-<time_taken>101.000000</time_taken>
+<time_taken>99.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call" >60</id><querystr><![CDATA[procedure p2; Select p2 such that Calls*("Oppi",p2);]]></querystr>
 <stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
-<time_taken>103.000000</time_taken>
+<time_taken>100.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call loops (callception)" >61</id><querystr><![CDATA[procedure p1,p2; Select p1 such that Calls(p1,p2);]]></querystr>
 <stuans>James,Kingsley,Alice,Bob,Charlie,Danny,Fred,Henry,Lucas,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
-<time_taken>98.000000</time_taken>
+<time_taken>97.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call loops (callception)" >62</id><querystr><![CDATA[procedure p1,p2; Select p2 such that Calls(p1,p2);]]></querystr>
 <stuans>Henry,Lucas,Merril,Alice,Bob,Charlie,Oppi,Danny,Fred,Kingsley,James,Eliza,Nancy</stuans>
 <correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
-<time_taken>99.000000</time_taken>
+<time_taken>97.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call loops (callception)" >63</id><querystr><![CDATA[procedure p1; Select p1 such that Calls(p1,p1);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>97.000000</time_taken>
+<time_taken>99.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call loops (callception)" >64</id><querystr><![CDATA[procedure p1,p2; Select p1 such that Calls*(p1,p2);]]></querystr>
 <stuans>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Charlie,Danny,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
-<time_taken>131.000000</time_taken>
+<time_taken>309.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call loops (callception)" >65</id><querystr><![CDATA[procedure p1,p2; Select p2 such that Calls*(p1,p2);]]></querystr>
 <stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Henry,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
-<time_taken>135.000000</time_taken>
+<time_taken>582.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Calls="1" Typed="1" comment="Check call loops (callception)" >66</id><querystr><![CDATA[procedure p1; Select p1 such that Calls*(p1,p1);]]></querystr>
 <stuans>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Danny,Fred,Henry,James,Kingsley,Merril,Nancy,Oppi</correct>
-<time_taken>124.000000</time_taken>
+<time_taken>164.000000</time_taken>
 <passed/>
 </query>
 </category>

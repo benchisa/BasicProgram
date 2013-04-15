@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>2046.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>2020.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" Test Case for Sibling (Known,unknown) and (Unknown,Known)">
@@ -9,7 +9,7 @@
 <id Sibling="1" Typed="1" comment="Sibling(STMT_LIST,VARIABLE)" >18</id><querystr><![CDATA[stmtLst sl; Select sl such that Sibling(sl,"ham");]]></querystr>
 <stuans>14,18,20</stuans>
 <correct>14,18,20</correct>
-<time_taken>89.000000</time_taken>
+<time_taken>67.000000</time_taken>
 <passed/>
 </query>
 <query>
@@ -23,98 +23,98 @@
 <id Sibling="1" Typed="1" comment="Sibling(PLUS,VARIABLE)" >42</id><querystr><![CDATA[variable v; plus pls; Select v such that Sibling(pls,v);]]></querystr>
 <stuans>basin,banana,carrot,door,egg,fish,innard,kimchi,pear,orange,keep,aeroplane,lamp,jaguar,kangeroo,ham</stuans>
 <correct>aeroplane,banana,basin,carrot,door,egg,fish,ham,innard,jaguar,kangeroo,keep,kimchi,lamp,orange,pear</correct>
-<time_taken>78.000000</time_taken>
+<time_taken>73.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(PLUS,CONSTANT)" >43</id><querystr><![CDATA[constant c; plus pls; Select c such that Sibling(pls,c);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>76.000000</time_taken>
+<time_taken>72.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(ASSIGNMENT,ASSIGNMENT)" >1</id><querystr><![CDATA[assign a; Select a such that Sibling(a,110);]]></querystr>
 <stuans>109</stuans>
 <correct>109</correct>
-<time_taken>67.000000</time_taken>
+<time_taken>68.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(ASSIGNMENT,WHILE)" >2</id><querystr><![CDATA[assign a; Select a such that Sibling(a,99);]]></querystr>
 <stuans>98,94,95,97,90,91,96,92,93,89,88,87,86,85,84,83</stuans>
 <correct>83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98</correct>
-<time_taken>69.000000</time_taken>
+<time_taken>70.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(ASSIGNMENT,IF)" >3</id><querystr><![CDATA[assign a; Select a such that Sibling(a,48);]]></querystr>
 <stuans>46,44,45</stuans>
 <correct>44,45,46</correct>
-<time_taken>69.000000</time_taken>
+<time_taken>66.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(ASSIGNMENT,STATEMENT)" >4</id><querystr><![CDATA[assign a; Select a such that Sibling(a,49);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>69.000000</time_taken>
+<time_taken>80.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(ASSIGNMENT,CALL)" >5</id><querystr><![CDATA[assign a; Select a such that Sibling(a,53);]]></querystr>
 <stuans>52,54</stuans>
 <correct>52,54</correct>
-<time_taken>71.000000</time_taken>
+<time_taken>76.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(IF,ASSIGNMENT)" >6</id><querystr><![CDATA[if i; Select i such that Sibling(i,44);]]></querystr>
 <stuans>48</stuans>
 <correct>48</correct>
-<time_taken>71.000000</time_taken>
+<time_taken>69.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(IF,WHILE)" >7</id><querystr><![CDATA[if i; Select i such that Sibling(i,15);]]></querystr>
 <stuans>17,22</stuans>
 <correct>17,22</correct>
-<time_taken>69.000000</time_taken>
+<time_taken>68.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(IF,IF)" >8</id><querystr><![CDATA[if i; Select i such that Sibling(i,22);]]></querystr>
 <stuans>17</stuans>
 <correct>17</correct>
-<time_taken>72.000000</time_taken>
+<time_taken>71.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(IF,STATEMENT)" >9</id><querystr><![CDATA[if i; Select i such that Sibling(i,27);]]></querystr>
 <stuans>22,17</stuans>
 <correct>17,22</correct>
-<time_taken>74.000000</time_taken>
+<time_taken>76.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(IF,CALL)" >10</id><querystr><![CDATA[if i; Select i such that Sibling(i,40);]]></querystr>
 <stuans>41</stuans>
 <correct>41</correct>
-<time_taken>73.000000</time_taken>
+<time_taken>70.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(WHILE,ASSIGNMENT)" >11</id><querystr><![CDATA[while w; Select w such that Sibling(w,40);]]></querystr>
 <stuans>29</stuans>
 <correct>29</correct>
-<time_taken>70.000000</time_taken>
+<time_taken>71.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(WHILE,WHILE)" >12</id><querystr><![CDATA[while w; Select w such that Sibling(w,15);]]></querystr>
 <stuans>13</stuans>
 <correct>13</correct>
-<time_taken>72.000000</time_taken>
+<time_taken>74.000000</time_taken>
 <passed/>
 </query>
 <query>
@@ -128,105 +128,105 @@
 <id Sibling="1" Typed="1" comment="Sibling(WHILE,STATEMENT)" >14</id><querystr><![CDATA[while w; Select w such that Sibling(w,27);]]></querystr>
 <stuans>15,13</stuans>
 <correct>13,15</correct>
-<time_taken>68.000000</time_taken>
+<time_taken>70.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(WHILE,CALL)" >15</id><querystr><![CDATA[while w; Select w such that Sibling(w,28);]]></querystr>
 <stuans>7</stuans>
 <correct>7</correct>
-<time_taken>71.000000</time_taken>
+<time_taken>70.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(PROCEDURE,PROCEDURE)" >16</id><querystr><![CDATA[procedure p; Select p such that Sibling(p,"Henry");]]></querystr>
 <stuans>Alice,Bob,Charlie,Danny,Fred,Eliza,Goneril,Illidan,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
 <correct>Alice,Bob,Charlie,Danny,Eliza,Fred,Goneril,Illidan,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
-<time_taken>74.000000</time_taken>
+<time_taken>78.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(STATEMENT,ASSIGNMENT)" >20</id><querystr><![CDATA[stmt s; Select s such that Sibling(s,6);]]></querystr>
 <stuans>4,5,1,2,3,7,28</stuans>
 <correct>1,2,28,3,4,5,7</correct>
-<time_taken>78.000000</time_taken>
+<time_taken>72.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(STATEMENT,WHILE)" >21</id><querystr><![CDATA[stmt s; Select s such that Sibling(s,15);]]></querystr>
 <stuans>12,13,10,11,17,27,22</stuans>
 <correct>10,11,12,13,17,22,27</correct>
-<time_taken>72.000000</time_taken>
+<time_taken>74.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(STATEMENT,IF)" >22</id><querystr><![CDATA[stmt s; Select s such that Sibling(s,17);]]></querystr>
 <stuans>15,27,12,13,10,11,22</stuans>
 <correct>10,11,12,13,15,22,27</correct>
-<time_taken>77.000000</time_taken>
+<time_taken>72.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(STATEMENT,STATEMENT)" >23</id><querystr><![CDATA[stmt s; Select s such that Sibling(s,35);]]></querystr>
 <stuans>30,36,39</stuans>
 <correct>30,36,39</correct>
-<time_taken>80.000000</time_taken>
+<time_taken>73.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(STATEMENT,CALL)" >24</id><querystr><![CDATA[stmt s; Select s such that Sibling(s,40);]]></querystr>
 <stuans>29,41</stuans>
 <correct>29,41</correct>
-<time_taken>74.000000</time_taken>
+<time_taken>76.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CALL,ASSIGNMENT)" >25</id><querystr><![CDATA[call c; Select c such that Sibling(c,46);]]></querystr>
 <stuans>47</stuans>
 <correct>47</correct>
-<time_taken>80.000000</time_taken>
+<time_taken>73.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CALL,WHILE)" >26</id><querystr><![CDATA[call c; Select c such that Sibling(c,55);]]></querystr>
 <stuans>53</stuans>
 <correct>53</correct>
-<time_taken>83.000000</time_taken>
+<time_taken>74.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CALL,IF)" >27</id><querystr><![CDATA[call c; Select c such that Sibling(c,48);]]></querystr>
 <stuans>47</stuans>
 <correct>47</correct>
-<time_taken>81.000000</time_taken>
+<time_taken>76.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CALL,STATEMENT)" >28</id><querystr><![CDATA[call c; Select c such that Sibling(c,44);]]></querystr>
 <stuans>47</stuans>
 <correct>47</correct>
-<time_taken>82.000000</time_taken>
+<time_taken>76.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CALL,CALL)" >2</id><querystr><![CDATA[call c; Select c such that Sibling(c,128);]]></querystr>
 <stuans>127</stuans>
 <correct>127</correct>
-<time_taken>80.000000</time_taken>
+<time_taken>79.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CONSTANT,PLUS)" >29</id><querystr><![CDATA[plus pls;constant c; Select c such that Sibling(c,pls);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>94.000000</time_taken>
+<time_taken>84.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CONSTANT,MINUS)" >30</id><querystr><![CDATA[minus min;constant c; Select c such that Sibling(c,min);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>90.000000</time_taken>
+<time_taken>88.000000</time_taken>
 <passed/>
 </query>
 <query>
@@ -240,105 +240,105 @@
 <id Sibling="1" Typed="1" comment="Sibling(CONSTANT,VARIABLE)" >32</id><querystr><![CDATA[constant c; Select c such that Sibling(c,"leek");]]></querystr>
 <stuans>7,0,9,11</stuans>
 <correct>0,11,7,9</correct>
-<time_taken>88.000000</time_taken>
+<time_taken>83.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CONSTANT,CONSTANT)" >33</id><querystr><![CDATA[constant c; Select c such that Sibling(c,"12");]]></querystr>
 <stuans>13</stuans>
 <correct>13</correct>
-<time_taken>81.000000</time_taken>
+<time_taken>82.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(VARIABLE,PLUS)" >34</id><querystr><![CDATA[plus pls;variable v; Select v such that Sibling(v,pls);]]></querystr>
 <stuans>basin,banana,carrot,door,egg,fish,innard,kimchi,pear,orange,keep,aeroplane,lamp,jaguar,kangeroo,ham</stuans>
 <correct>aeroplane,banana,basin,carrot,door,egg,fish,ham,innard,jaguar,kangeroo,keep,kimchi,lamp,orange,pear</correct>
-<time_taken>99.000000</time_taken>
+<time_taken>95.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(VARIABLE,MINUS)" >35</id><querystr><![CDATA[minus min;variable v; Select v such that Sibling(v,min);]]></querystr>
 <stuans>orange,fish,elevator,jumper,goat,pear</stuans>
 <correct>elevator,fish,goat,jumper,orange,pear</correct>
-<time_taken>99.000000</time_taken>
+<time_taken>90.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(VARIABLE,MULTIPLY)" >36</id><querystr><![CDATA[times tm;variable v; Select v such that Sibling(v,tm);]]></querystr>
 <stuans>leek,mango,nachos,keep,ham,jam,cloud,banana,carrot,donut,fan,hanger,aeroplane,basin,elevator,door,igloo,dinosaur,elephant,ant,goat,hamster</stuans>
 <correct>aeroplane,ant,banana,basin,carrot,cloud,dinosaur,donut,door,elephant,elevator,fan,goat,ham,hamster,hanger,igloo,jam,keep,leek,mango,nachos</correct>
-<time_taken>102.000000</time_taken>
+<time_taken>94.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(VARIABLE,VARIABLE)" >37</id><querystr><![CDATA[variable v; Select v such that Sibling(v,"ham");]]></querystr>
 <stuans>egg,carrot,kimchi,orange</stuans>
 <correct>carrot,egg,kimchi,orange</correct>
-<time_taken>94.000000</time_taken>
+<time_taken>87.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(VARIABLE,CONSTANT)" >38</id><querystr><![CDATA[variable v; Select v such that Sibling(v,"9");]]></querystr>
 <stuans>leek,ham,kangeroo</stuans>
 <correct>ham,kangeroo,leek</correct>
-<time_taken>89.000000</time_taken>
+<time_taken>86.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(ASSIGNMENT,ASSIGNMENT)" >1</id><querystr><![CDATA[assign a; Select a such that Sibling(123,a);]]></querystr>
 <stuans>122</stuans>
 <correct>122</correct>
-<time_taken>90.000000</time_taken>
+<time_taken>82.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(ASSIGNMENT,WHILE)" >2</id><querystr><![CDATA[while w; Select w such that Sibling(98,w);]]></querystr>
 <stuans>99</stuans>
 <correct>99</correct>
-<time_taken>89.000000</time_taken>
+<time_taken>86.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(ASSIGNMENT,IF)" >3</id><querystr><![CDATA[if i; Select i such that Sibling(44,i);]]></querystr>
 <stuans>48</stuans>
 <correct>48</correct>
-<time_taken>85.000000</time_taken>
+<time_taken>86.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(ASSIGNMENT,STATEMENT)" >4</id><querystr><![CDATA[stmt s; Select s such that Sibling(44,s);]]></querystr>
 <stuans>45,46,47,48</stuans>
 <correct>45,46,47,48</correct>
-<time_taken>85.000000</time_taken>
+<time_taken>86.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(ASSIGNMENT,CALL)" >5</id><querystr><![CDATA[call c; Select c such that Sibling(54,c);]]></querystr>
 <stuans>53</stuans>
 <correct>53</correct>
-<time_taken>86.000000</time_taken>
+<time_taken>88.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(IF,ASSIGNMENT)" >6</id><querystr><![CDATA[assign a; Select a such that Sibling(48,a);]]></querystr>
 <stuans>46,44,45</stuans>
 <correct>44,45,46</correct>
-<time_taken>85.000000</time_taken>
+<time_taken>86.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(IF,WHILE)" >7</id><querystr><![CDATA[while w; Select w such that Sibling(17,w);]]></querystr>
 <stuans>15,13</stuans>
 <correct>13,15</correct>
-<time_taken>82.000000</time_taken>
+<time_taken>86.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(IF,IF)" >8</id><querystr><![CDATA[if i; Select i such that Sibling(17,i);]]></querystr>
 <stuans>22</stuans>
 <correct>22</correct>
-<time_taken>86.000000</time_taken>
+<time_taken>88.000000</time_taken>
 <passed/>
 </query>
 <query>
@@ -352,84 +352,84 @@
 <id Sibling="1" Typed="1" comment="Sibling(IF,CALL)" >10</id><querystr><![CDATA[call c; Select c such that Sibling(41,c);]]></querystr>
 <stuans>40</stuans>
 <correct>40</correct>
-<time_taken>88.000000</time_taken>
+<time_taken>102.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(WHILE,ASSIGNMENT)" >11</id><querystr><![CDATA[assign a; Select a such that Sibling(36,a);]]></querystr>
 <stuans>39,35</stuans>
 <correct>35,39</correct>
-<time_taken>84.000000</time_taken>
+<time_taken>101.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(WHILE,WHILE)" >12</id><querystr><![CDATA[while w; Select w such that Sibling(13,w);]]></querystr>
 <stuans>15</stuans>
 <correct>15</correct>
-<time_taken>84.000000</time_taken>
+<time_taken>103.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(WHILE,IF)" >13</id><querystr><![CDATA[if i; Select i such that Sibling(13,i);]]></querystr>
 <stuans>17,22</stuans>
 <correct>17,22</correct>
-<time_taken>84.000000</time_taken>
+<time_taken>103.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(WHILE,STATEMENT)" >14</id><querystr><![CDATA[stmt s; Select s such that Sibling(16,s);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>86.000000</time_taken>
+<time_taken>100.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(WHILE,CALL)" >15</id><querystr><![CDATA[call c; Select c such that Sibling(7,c);]]></querystr>
 <stuans>28</stuans>
 <correct>28</correct>
-<time_taken>87.000000</time_taken>
+<time_taken>101.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(PROCEDURE,PROCEDURE)" >16</id><querystr><![CDATA[procedure p; Select p such that Sibling("Alice",p);]]></querystr>
 <stuans>Bob,Charlie,Danny,Fred,Eliza,Goneril,Henry,Illidan,James,Kingsley,Lucas,Merril,Nancy,Oppi</stuans>
 <correct>Bob,Charlie,Danny,Eliza,Fred,Goneril,Henry,Illidan,James,Kingsley,Lucas,Merril,Nancy,Oppi</correct>
-<time_taken>95.000000</time_taken>
+<time_taken>105.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(STATEMENT,ASSIGNMENT)" >20</id><querystr><![CDATA[assign a; Select a such that Sibling(1,a);]]></querystr>
 <stuans>2,3,4,5,6</stuans>
 <correct>2,3,4,5,6</correct>
-<time_taken>92.000000</time_taken>
+<time_taken>90.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(STATEMENT,WHILE)" >21</id><querystr><![CDATA[while w; Select w such that Sibling(22,w);]]></querystr>
 <stuans>15,13</stuans>
 <correct>13,15</correct>
-<time_taken>90.000000</time_taken>
+<time_taken>94.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(STATEMENT,IF)" >22</id><querystr><![CDATA[if i; Select i such that Sibling(22,i);]]></querystr>
 <stuans>17</stuans>
 <correct>17</correct>
-<time_taken>88.000000</time_taken>
+<time_taken>94.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(STATEMENT,STATEMENT)" >23</id><querystr><![CDATA[stmt s; Select s such that Sibling(30,s);]]></querystr>
 <stuans>35,36,39</stuans>
 <correct>35,36,39</correct>
-<time_taken>89.000000</time_taken>
+<time_taken>93.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(STATEMENT,CALL)" >24</id><querystr><![CDATA[call c; Select c such that Sibling(29,c);]]></querystr>
 <stuans>40</stuans>
 <correct>40</correct>
-<time_taken>89.000000</time_taken>
+<time_taken>95.000000</time_taken>
 <passed/>
 </query>
 <query>
@@ -443,84 +443,84 @@
 <id Sibling="1" Typed="1" comment="Sibling(CALL,WHILE)" >26</id><querystr><![CDATA[while w; Select w such that Sibling(53,w);]]></querystr>
 <stuans>55</stuans>
 <correct>55</correct>
-<time_taken>90.000000</time_taken>
+<time_taken>96.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CALL,IF)" >27</id><querystr><![CDATA[if i; Select i such that Sibling(47,i);]]></querystr>
 <stuans>48</stuans>
 <correct>48</correct>
-<time_taken>90.000000</time_taken>
+<time_taken>98.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CALL,STATEMENT)" >28</id><querystr><![CDATA[stmt s; Select s such that Sibling(47,s);]]></querystr>
 <stuans>48,46,44,45</stuans>
 <correct>44,45,46,48</correct>
-<time_taken>94.000000</time_taken>
+<time_taken>97.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CALL,CALL)" >2</id><querystr><![CDATA[call c; Select c such that Sibling(127,c);]]></querystr>
 <stuans>128</stuans>
 <correct>128</correct>
-<time_taken>91.000000</time_taken>
+<time_taken>98.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CONSTANT,VARIABLE)" >32</id><querystr><![CDATA[variable v; Select v such that Sibling("11",v);]]></querystr>
 <stuans>leek,monkey</stuans>
 <correct>leek,monkey</correct>
-<time_taken>97.000000</time_taken>
+<time_taken>98.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CONSTANT,CONSTANT)" >33</id><querystr><![CDATA[constant c; Select c such that Sibling("13",c);]]></querystr>
 <stuans>12</stuans>
 <correct>12</correct>
-<time_taken>98.000000</time_taken>
+<time_taken>101.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(VARIABLE,VARIABLE)" >37</id><querystr><![CDATA[variable v; Select v such that Sibling("orange",v);]]></querystr>
 <stuans>carrot,pear,ham</stuans>
 <correct>carrot,ham,pear</correct>
-<time_taken>102.000000</time_taken>
+<time_taken>114.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(VARIABLE,CONSTANT)" >38</id><querystr><![CDATA[constant c; Select c such that Sibling("ham",c);]]></querystr>
 <stuans>1,4,9</stuans>
 <correct>1,4,9</correct>
-<time_taken>102.000000</time_taken>
+<time_taken>104.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(MINUS,VARIABLE)" >47</id><querystr><![CDATA[minus min;variable v; Select v such that Sibling(min,v);]]></querystr>
 <stuans>orange,fish,elevator,jumper,goat,pear</stuans>
 <correct>elevator,fish,goat,jumper,orange,pear</correct>
-<time_taken>108.000000</time_taken>
+<time_taken>106.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(MINUS,CONSTANT)" >48</id><querystr><![CDATA[minus min;constant c; Select c such that Sibling(min,c);]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>105.000000</time_taken>
+<time_taken>223.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(MULTIPLY,VARIABLE)" >52</id><querystr><![CDATA[times tm;variable v; Select v such that Sibling(tm,v);]]></querystr>
 <stuans>leek,mango,nachos,keep,ham,jam,cloud,banana,carrot,donut,fan,hanger,aeroplane,basin,elevator,door,igloo,dinosaur,elephant,ant,goat,hamster</stuans>
 <correct>aeroplane,ant,banana,basin,carrot,cloud,dinosaur,donut,door,elephant,elevator,fan,goat,ham,hamster,hanger,igloo,jam,keep,leek,mango,nachos</correct>
-<time_taken>105.000000</time_taken>
+<time_taken>125.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(MULTIPLY,CONSTANT)" >53</id><querystr><![CDATA[times tm;constant c; Select c such that Sibling(tm,c);]]></querystr>
 <stuans>12</stuans>
 <correct>12</correct>
-<time_taken>106.000000</time_taken>
+<time_taken>124.000000</time_taken>
 <passed/>
 </query>
 </category>
