@@ -214,7 +214,7 @@ write-output "Done running $testing`n`n`n";
 
 
 $k = 0;
-while($k -le  8)
+while($k -le  9)
 {
 
 $args_autoTester = @($autoTester_relative_path+"tests\simple40.txt "+$autoTester_relative_path+"tests\query6"+$k+".txt "+$autoTester_relative_path+"tests\out6"+$k+".xml");
@@ -236,24 +236,6 @@ write-output "Done running $testing`n`n`n";
 }
 
 $k = $k + 1;
-}
-
-$args_autoTester = @($autoTester_relative_path+"tests\simple60.txt "+$autoTester_relative_path+"tests\query69.txt "+$autoTester_relative_path+"tests\out69.xml");
-$file = get-variable ("out_$testing") -valueOnly;
-$exe = get-variable ("exe_$testing") -valueOnly;
-$cmd_args = get-variable ("args_$testing") -valueOnly;
-
-foreach ($arg in $cmd_args)
-{
-$run_cmd = $solution_path+$exe+" " +$cmd_args+" > "+$file;
-$run_arg = $cmd_args+" > "+$file;
-write-output "Running: $run_cmd `n";
-invoke-expression $run_cmd;
-write-output "Output: `n---`n";
-get-content $file;
-
-write-output "---------`n";
-write-output "Done running $testing`n`n`n";
 }
 
 $args_autoTester = @($autoTester_relative_path+"tests\simple60.txt "+$autoTester_relative_path+"tests\query70.txt "+$autoTester_relative_path+"tests\out70.xml");
@@ -293,6 +275,24 @@ write-output "Done running $testing`n`n`n";
 }
 
 $args_autoTester = @($autoTester_relative_path+"tests\simple60.txt "+$autoTester_relative_path+"tests\query72.txt "+$autoTester_relative_path+"tests\out72.xml");
+$file = get-variable ("out_$testing") -valueOnly;
+$exe = get-variable ("exe_$testing") -valueOnly;
+$cmd_args = get-variable ("args_$testing") -valueOnly;
+
+foreach ($arg in $cmd_args)
+{
+$run_cmd = $solution_path+$exe+" " +$cmd_args+" > "+$file;
+$run_arg = $cmd_args+" > "+$file;
+write-output "Running: $run_cmd `n";
+invoke-expression $run_cmd;
+write-output "Output: `n---`n";
+get-content $file;
+
+write-output "---------`n";
+write-output "Done running $testing`n`n`n";
+}
+
+$args_autoTester = @($autoTester_relative_path+"tests\simple60.txt "+$autoTester_relative_path+"tests\query73.txt "+$autoTester_relative_path+"tests\out73.xml");
 $file = get-variable ("out_$testing") -valueOnly;
 $exe = get-variable ("exe_$testing") -valueOnly;
 $cmd_args = get-variable ("args_$testing") -valueOnly;
