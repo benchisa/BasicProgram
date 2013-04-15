@@ -391,10 +391,14 @@ RELATION_LIST EvaluateSibling::getSiblingUnknown(TYPE type1,TYPE type2){
 	}
 	if(Helper::isStatement(type1)&&Helper::isStatement(type2)){//2. sibling(stmt/a/w/if/call,stmt/a/w/if/call)
 		//get sequential sibling from Follows*
-		returnList = EvaluateFollows::getFollowsStarResult(STATEMENT,STATEMENT);
-
+		returnList = EvaluateFollows::getFollowsStarResult(type1,type2);
+		RELATION_LIST tempList;
+		if(type1!=type2){
+			tempList = EvaluateFollows::getFollowsStarResult(type2,type1);
+		}else{
+			tempList = returnList;
+		}
 		//insert reversed sibling list
-		RELATION_LIST tempList = returnList;
 		for(RELATION_LIST::iterator itr=tempList.begin();itr!=tempList.end();itr++){
 			returnList.push_back(pair<int,int>(itr->second,itr->first));
 		}
