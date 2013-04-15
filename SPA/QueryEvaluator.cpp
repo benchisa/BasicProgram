@@ -20,7 +20,12 @@ bool QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrPa
 	this->qrTable = qrTable;
 	this->qrParam = qrParam;
 	this->rawData = new FINALRAW;
+	//create a static suchthat clause
+	SuchThatClause::pkb = pkb;
+	SuchThatClause::qrTable=qrTable;
+	SuchThatClause::extractor = extractor;
 
+	//-------------------------------------start to evaluate query-----------------
 	bool nonEmptyResult;
 
 	//set the result node
@@ -127,28 +132,7 @@ IntermediateResultTable * QueryEvaluator::evaluateClause(IntermediateResultTable
 	return resultTable;
 }
 RELATION_LIST * QueryEvaluator::getSuchThatResult(QTREE* suchThatTree){
-	SuchThatClause suchThatClause(pkb, qrTable,extractor);
-	QTREE* firstRel = suchThatTree->getFirstDescendant()->getFirstDescendant();
-	QTREE* secondRel =firstRel->getRightSibling();
-	TYPE relationType = suchThatTree->getFirstDescendant()->getType();
-
-	if(needCache&&firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR){
-		CACHE::iterator cacheItr = cache.find(relationType);
-
-		if(cacheItr!=cache.end()){ //find the stored cache
-			return new RELATION_LIST(cacheItr->second);
-		}else{//no cache stored
-			RELATION_LIST * tmpList;
-			tmpList = suchThatClause.evaluateSuchThatTree(suchThatTree);
-			if(tmpList==NULL||tmpList->size()==0){
-				return NULL;
-			}
-			cache[relationType]=*tmpList;
-
-			return tmpList;
-		}
-	}
-	return suchThatClause.evaluateSuchThatTree(suchThatTree);
+	return SuchThatClause::evaluateSuchThatTree(suchThatTree);
 }
 bool QueryEvaluator::executeSuchThat(IntermediateResultTable * resultTable, QTREE* suchThatTree){
 	QTREE* firstRel;
@@ -161,7 +145,9 @@ bool QueryEvaluator::executeSuchThat(IntermediateResultTable * resultTable, QTRE
 	firstRel = suchThatTree->getFirstDescendant()->getFirstDescendant();
 	secondRel = firstRel->getRightSibling();
 	TYPE relationType = suchThatTree->getFirstDescendant()->getType();
-	needCache =(firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&((relationType==NEXT)|| (relationType==NEXTST)|| (relationType==AFFECTS)|| (relationType==AFFECTST)||(relationType==FOLLOWST));
+
+	//set need cache flag
+	needCache =(firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&((relationType==NEXT)|| (relationType==NEXTST)|| (relationType==AFFECTS)|| (relationType==AFFECTST));
 
 	firstQrVar = firstRel->getData();
 	secondQrVar = secondRel->getData();
