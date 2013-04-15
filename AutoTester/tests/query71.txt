@@ -1248,7 +1248,7 @@ Select a1 such that Uses(a1,"nachos");
 15 - Uses, Typed :: check Uses assignment
 assign a1;
 Select a1 such that Uses(a1,"orange");
-45,49,50222,230,262
+45,49,50,222,230,262
 5000
 16 - Uses, Typed :: check Uses assignment
 assign a1;

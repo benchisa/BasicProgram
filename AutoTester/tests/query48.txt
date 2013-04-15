@@ -13,17 +13,17 @@ Select <c,s> such that Follows*(c,s);
 99 - Follows, Typed :: check follows
 call c; assign a;
 Select <c,a> such that Follows(c,a);
-136 137,125 126
+136 137,125 126,53 54,56 57
 5000
 100 - Follows, Typed :: check follows
 call c; assign a;
 Select <c,a> such that Follows*(c,a);
-136 137,125 126
+136 137,125 126,53 54,56 57
 5000
 101 - Follows, Typed :: check follows
 call c; while w;
 Select <c,w> such that Follows(c,w);
-53 55
+
 5000
 102 - Follows, Typed :: check follows
 call c; while w;
