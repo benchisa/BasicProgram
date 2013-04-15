@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>741.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>1055.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" complex queries">
@@ -9,168 +9,168 @@
 <id Follows="1" Typed="1" comment="Which statement follows after a statement?" >22</id><querystr><![CDATA[stmt s1, s2; Select s1 such that Follows(s1, s2);]]></querystr>
 <stuans>1,2,3,10,16,31,14,15,5,6,12,18,17,24,26,28,29,30,32</stuans>
 <correct>1,10,12,14,15,16,17,18,2,24,26,28,29,3,30,31,32,5,6</correct>
-<time_taken>65.000000</time_taken>
+<time_taken>75.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="2 sets of interrelated such that clauses, single select" >1</id><querystr><![CDATA[procedure p1,p2;stmt s1,s2,s3,s4; variable v1,v2; if i1; Select v2 such that Uses(s1,v1) and Modifies(s1,"Romeo") and Follows(s3,s4) and Parent*(i1,s4) and Modifies(s3,v2) and Follows*(s3,27);]]></querystr>
 <stuans>Y1,b,c,x,Romeo,x1</stuans>
 <correct>Romeo,Y1,b,c,x,x1</correct>
-<time_taken>139.000000</time_taken>
+<time_taken>166.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="2 sets of interrelated such that clauses, two tuple select" >2</id><querystr><![CDATA[procedure p1,p2;stmt s1,s2,s3,s4; variable v1,v2; if i1; Select <s3,v2> such that Uses(s1,v1) and Modifies(s1,"Romeo") and Follows(s3,s4) and Parent*(i1,s4) and Modifies(s3,v2) and Follows*(s3,27);]]></querystr>
 <stuans>26 b,26 c,26 x,26 Romeo,26 Y1,26 x1</stuans>
 <correct>26 Romeo,26 Y1,26 b,26 c,26 x,26 x1</correct>
-<time_taken>136.000000</time_taken>
+<time_taken>170.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="2 sets of interrelated such that clauses, many tuple select" >3</id><querystr><![CDATA[procedure p1,p2;stmt s1,s2,s3,s4; variable v1,v2; if i1; Select <s3,s4,v1,v2> such that Uses(s1,v1) and Modifies(s1,"Romeo") and Follows(s3,s4) and Parent*(i1,s4) and Modifies(s3,v2) and Follows*(s3,27);]]></querystr>
 <stuans>26 27 width b,26 27 c Romeo,26 27 a Romeo,26 27 delta b,26 27 c x,26 27 c b,26 27 x b,26 27 j1k Romeo,26 27 left b,26 27 tmp c,26 27 right b,26 27 k x1,26 27 Romeo b,26 27 a c,26 27 l b,26 27 width Romeo,26 27 j1k b,26 27 a b,26 27 beta b,26 27 tmp b,26 27 I b,26 27 k b,26 27 chArlie b,26 27 right x1,26 27 width c,26 27 c c,26 27 chArlie Romeo,26 27 x c,26 27 left c,26 27 tmp Romeo,26 27 right c,26 27 Romeo c,26 27 k Romeo,26 27 delta Romeo,26 27 beta Y1,26 27 l c,26 27 j1k c,26 27 delta c,26 27 beta c,26 27 I c,26 27 k c,26 27 chArlie c,26 27 a x1,26 27 width x,26 27 x x,26 27 I x,26 27 left x,26 27 Romeo x,26 27 I Romeo,26 27 right x,26 27 tmp x1,26 27 l x,26 27 beta Romeo,26 27 j1k x,26 27 beta x,26 27 left Romeo,26 27 delta x,26 27 a x,26 27 tmp x,26 27 k x,26 27 chArlie x,26 27 x Romeo,26 27 right Romeo,26 27 Romeo Romeo,26 27 l Romeo,26 27 width Y1,26 27 right Y1,26 27 c Y1,26 27 x Y1,26 27 left Y1,26 27 Romeo Y1,26 27 l Y1,26 27 j1k Y1,26 27 delta Y1,26 27 a Y1,26 27 tmp Y1,26 27 I Y1,26 27 k Y1,26 27 chArlie Y1,26 27 width x1,26 27 c x1,26 27 x x1,26 27 left x1,26 27 Romeo x1,26 27 l x1,26 27 j1k x1,26 27 delta x1,26 27 beta x1,26 27 I x1,26 27 chArlie x1</stuans>
 <correct>26 27 I Romeo,26 27 I Y1,26 27 I b,26 27 I c,26 27 I x,26 27 I x1,26 27 Romeo Romeo,26 27 Romeo Y1,26 27 Romeo b,26 27 Romeo c,26 27 Romeo x,26 27 Romeo x1,26 27 a Romeo,26 27 a Y1,26 27 a b,26 27 a c,26 27 a x,26 27 a x1,26 27 beta Romeo,26 27 beta Y1,26 27 beta b,26 27 beta c,26 27 beta x,26 27 beta x1,26 27 c Romeo,26 27 c Y1,26 27 c b,26 27 c c,26 27 c x,26 27 c x1,26 27 chArlie Romeo,26 27 chArlie Y1,26 27 chArlie b,26 27 chArlie c,26 27 chArlie x,26 27 chArlie x1,26 27 delta Romeo,26 27 delta Y1,26 27 delta b,26 27 delta c,26 27 delta x,26 27 delta x1,26 27 j1k Romeo,26 27 j1k Y1,26 27 j1k b,26 27 j1k c,26 27 j1k x,26 27 j1k x1,26 27 k Romeo,26 27 k Y1,26 27 k b,26 27 k c,26 27 k x,26 27 k x1,26 27 l Romeo,26 27 l Y1,26 27 l b,26 27 l c,26 27 l x,26 27 l x1,26 27 left Romeo,26 27 left Y1,26 27 left b,26 27 left c,26 27 left x,26 27 left x1,26 27 right Romeo,26 27 right Y1,26 27 right b,26 27 right c,26 27 right x,26 27 right x1,26 27 tmp Romeo,26 27 tmp Y1,26 27 tmp b,26 27 tmp c,26 27 tmp x,26 27 tmp x1,26 27 width Romeo,26 27 width Y1,26 27 width b,26 27 width c,26 27 width x,26 27 width x1,26 27 x Romeo,26 27 x Y1,26 27 x b,26 27 x c,26 27 x x,26 27 x x1</correct>
-<time_taken>170.000000</time_taken>
+<time_taken>220.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="3 sets of interrelated such that clauses, single select" >4</id><querystr><![CDATA[procedure p1,p2;stmt s1,s2,s3,s4; variable v1,v2; if i1; Select v1 such that Calls(p1,p2) and Uses(s1,v1) and Modifies(s1,"Romeo") and Follows(s3,s4) and Parent*(i1,s4) and Modifies(s3,v2) and Follows*(s3,27);]]></querystr>
 <stuans>width,c,x,left,right,Romeo,l,j1k,delta,a,beta,tmp,I,k,chArlie</stuans>
 <correct>I,Romeo,a,beta,c,chArlie,delta,j1k,k,l,left,right,tmp,width,x</correct>
-<time_taken>151.000000</time_taken>
+<time_taken>192.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="3 sets of interrelated such that clauses, two tuple select" >5</id><querystr><![CDATA[procedure p1,p2;stmt s1,s2,s3,s4; variable v1,v2; if i1; Select <v1,v2> such that Calls(p1,p2) and Uses(s1,v1) and Modifies(s1,"Romeo") and Follows(s3,s4) and Parent*(i1,s4) and Modifies(s3,v2) and Follows*(s3,27);]]></querystr>
 <stuans>x b,width Y1,beta x,chArlie Y1,width b,width c,left x,width x,Romeo c,width Romeo,c Y1,Romeo Y1,l x,width x1,l c,c b,delta b,c c,x x,left b,c x,c Romeo,x x1,c x1,j1k b,x Y1,x c,l Y1,x Romeo,delta x1,left Y1,a Y1,beta c,left c,delta Y1,left Romeo,left x1,delta c,right Y1,Romeo x,right b,right c,right x,right Romeo,a Romeo,j1k Romeo,right x1,l x1,tmp Romeo,Romeo b,Romeo Romeo,Romeo x1,l b,j1k c,l Romeo,j1k Y1,j1k x,a c,j1k x1,delta x,delta Romeo,a b,a x,a x1,beta Y1,beta b,beta Romeo,beta x1,tmp Y1,tmp b,tmp c,tmp x,tmp x1,I Y1,I b,I c,I x,I Romeo,I x1,chArlie x1,k Y1,k b,k c,k x,k Romeo,k x1,chArlie b,chArlie c,chArlie x,chArlie Romeo</stuans>
 <correct>I Romeo,I Y1,I b,I c,I x,I x1,Romeo Romeo,Romeo Y1,Romeo b,Romeo c,Romeo x,Romeo x1,a Romeo,a Y1,a b,a c,a x,a x1,beta Romeo,beta Y1,beta b,beta c,beta x,beta x1,c Romeo,c Y1,c b,c c,c x,c x1,chArlie Romeo,chArlie Y1,chArlie b,chArlie c,chArlie x,chArlie x1,delta Romeo,delta Y1,delta b,delta c,delta x,delta x1,j1k Romeo,j1k Y1,j1k b,j1k c,j1k x,j1k x1,k Romeo,k Y1,k b,k c,k x,k x1,l Romeo,l Y1,l b,l c,l x,l x1,left Romeo,left Y1,left b,left c,left x,left x1,right Romeo,right Y1,right b,right c,right x,right x1,tmp Romeo,tmp Y1,tmp b,tmp c,tmp x,tmp x1,width Romeo,width Y1,width b,width c,width x,width x1,x Romeo,x Y1,x b,x c,x x,x x1</correct>
-<time_taken>169.000000</time_taken>
+<time_taken>248.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="3 sets of interrelated such that clauses, many tuple select" >6</id><querystr><![CDATA[procedure p1,p2;stmt s1,s2,s3,s4; variable v1,v2; if i1; Select <p1,v1,v2> such that Calls(p1,p2) and Uses(s1,v1) and Modifies(s1,"Romeo") and Follows(s3,s4) and Parent*(i1,s4) and Modifies(s3,v2) and Follows*(s3,27);]]></querystr>
 <stuans>ABC width Y1,ABC k Y1,ABC j1k b,ABC left Romeo,ABC right x1,Second width Y1,ABC c b,Second x b,ABC j1k c,ABC c c,ABC x x,ABC l c,ABC width b,ABC a x,ABC Romeo b,ABC width x1,ABC width c,ABC Romeo x1,ABC delta x,ABC c Y1,ABC width x,ABC width Romeo,ABC a Y1,ABC right Y1,ABC c x,ABC c Romeo,ABC c x1,ABC x Y1,Second j1k x,ABC x b,ABC beta x,ABC x c,Second chArlie Y1,ABC left Y1,Second a x1,ABC x Romeo,ABC x x1,ABC delta Romeo,ABC j1k x1,ABC left b,ABC right Romeo,ABC right b,ABC left c,ABC j1k Romeo,ABC left x,ABC left x1,Second a Y1,ABC right c,Second l Y1,Second tmp b,ABC right x,ABC delta Y1,ABC delta x1,ABC Romeo Y1,ABC beta Y1,ABC Romeo c,ABC Romeo x,ABC Romeo Romeo,ABC delta b,ABC l Y1,Second tmp x,ABC a c,ABC l b,ABC l x,Second a x,ABC l Romeo,Second l b,ABC chArlie x1,ABC l x1,ABC j1k Y1,ABC j1k x,ABC delta c,ABC a b,ABC a Romeo,Second right Romeo,ABC a x1,ABC beta b,ABC beta c,ABC beta Romeo,ABC beta x1,ABC tmp Y1,ABC tmp b,ABC tmp c,ABC tmp x,ABC tmp Romeo,ABC tmp x1,ABC I Y1,Second left Y1,ABC I b,ABC I c,ABC I x,ABC I Romeo,ABC I x1,ABC k b,ABC k c,Second right x,ABC k x,ABC k Romeo,Second chArlie x1,ABC k x1,ABC chArlie Y1,ABC chArlie b,ABC chArlie c,ABC chArlie x,ABC chArlie Romeo,Second width b,Second width c,Second width x,Second j1k Romeo,Second width Romeo,Second width x1,Second c Y1,Second c b,Second c c,Second c x,Second c Romeo,Second delta Y1,Second c x1,Second x Y1,Second x c,Second x x,Second x Romeo,Second x x1,Second left b,Second right Y1,Second tmp c,Second left c,Second left x,Second left Romeo,Second left x1,Second right b,Second right c,Second I x,Second right x1,Second Romeo Y1,Second Romeo b,Second Romeo c,Second Romeo x,Second Romeo Romeo,Second Romeo x1,Second l c,Second l x,Second l Romeo,Second l x1,Second beta c,Second j1k Y1,Second j1k b,Second j1k c,Second j1k x1,Second delta b,Second delta c,Second delta x,Second delta Romeo,Second delta x1,Second a b,Second a c,Second a Romeo,Second beta Y1,Second beta b,Second beta x,Second beta Romeo,Second beta x1,Second tmp Y1,Second tmp Romeo,Second tmp x1,Second I Y1,Second I b,Second I c,Second I Romeo,Second I x1,Second k Y1,Second k b,Second k c,Second k x,Second k Romeo,Second k x1,Second chArlie b,Second chArlie c,Second chArlie x,Second chArlie Romeo</stuans>
 <correct>ABC I Romeo,ABC I Y1,ABC I b,ABC I c,ABC I x,ABC I x1,ABC Romeo Romeo,ABC Romeo Y1,ABC Romeo b,ABC Romeo c,ABC Romeo x,ABC Romeo x1,ABC a Romeo,ABC a Y1,ABC a b,ABC a c,ABC a x,ABC a x1,ABC beta Romeo,ABC beta Y1,ABC beta b,ABC beta c,ABC beta x,ABC beta x1,ABC c Romeo,ABC c Y1,ABC c b,ABC c c,ABC c x,ABC c x1,ABC chArlie Romeo,ABC chArlie Y1,ABC chArlie b,ABC chArlie c,ABC chArlie x,ABC chArlie x1,ABC delta Romeo,ABC delta Y1,ABC delta b,ABC delta c,ABC delta x,ABC delta x1,ABC j1k Romeo,ABC j1k Y1,ABC j1k b,ABC j1k c,ABC j1k x,ABC j1k x1,ABC k Romeo,ABC k Y1,ABC k b,ABC k c,ABC k x,ABC k x1,ABC l Romeo,ABC l Y1,ABC l b,ABC l c,ABC l x,ABC l x1,ABC left Romeo,ABC left Y1,ABC left b,ABC left c,ABC left x,ABC left x1,ABC right Romeo,ABC right Y1,ABC right b,ABC right c,ABC right x,ABC right x1,ABC tmp Romeo,ABC tmp Y1,ABC tmp b,ABC tmp c,ABC tmp x,ABC tmp x1,ABC width Romeo,ABC width Y1,ABC width b,ABC width c,ABC width x,ABC width x1,ABC x Romeo,ABC x Y1,ABC x b,ABC x c,ABC x x,ABC x x1,Second I Romeo,Second I Y1,Second I b,Second I c,Second I x,Second I x1,Second Romeo Romeo,Second Romeo Y1,Second Romeo b,Second Romeo c,Second Romeo x,Second Romeo x1,Second a Romeo,Second a Y1,Second a b,Second a c,Second a x,Second a x1,Second beta Romeo,Second beta Y1,Second beta b,Second beta c,Second beta x,Second beta x1,Second c Romeo,Second c Y1,Second c b,Second c c,Second c x,Second c x1,Second chArlie Romeo,Second chArlie Y1,Second chArlie b,Second chArlie c,Second chArlie x,Second chArlie x1,Second delta Romeo,Second delta Y1,Second delta b,Second delta c,Second delta x,Second delta x1,Second j1k Romeo,Second j1k Y1,Second j1k b,Second j1k c,Second j1k x,Second j1k x1,Second k Romeo,Second k Y1,Second k b,Second k c,Second k x,Second k x1,Second l Romeo,Second l Y1,Second l b,Second l c,Second l x,Second l x1,Second left Romeo,Second left Y1,Second left b,Second left c,Second left x,Second left x1,Second right Romeo,Second right Y1,Second right b,Second right c,Second right x,Second right x1,Second tmp Romeo,Second tmp Y1,Second tmp b,Second tmp c,Second tmp x,Second tmp x1,Second width Romeo,Second width Y1,Second width b,Second width c,Second width x,Second width x1,Second x Romeo,Second x Y1,Second x b,Second x c,Second x x,Second x x1</correct>
-<time_taken>197.000000</time_taken>
+<time_taken>262.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="1 set of interrelated 9 such that clauses, single select" >7</id><querystr><![CDATA[assign a1,a2;stmt s1,s2,s3;while w1,w2;variable v1;call c1; Select s1 such that Modifies(33,v1) and Parent(s1,33) and Parent*(s2,s1) and Uses(s2,v1) and Follows(s3,a2) and Parent(w2,a2) and Parent*(w1,c1) and Follows*(c1,a2);]]></querystr>
 <stuans>31</stuans>
 <correct>31</correct>
-<time_taken>159.000000</time_taken>
+<time_taken>233.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="1 set of interrelated 9 such that clauses, single select" >8</id><querystr><![CDATA[assign a1,a2;stmt s1,s2,s3;while w1,w2;variable v1;call c1; Select s2 such that Modifies(33,v1) and Parent(s1,33) and Parent*(s2,s1) and Uses(s2,v1) and Follows(s3,a2) and Parent(w2,a2) and Parent*(w1,c1) and Follows*(c1,a2);]]></querystr>
 <stuans>27,25,23</stuans>
 <correct>23,25,27</correct>
-<time_taken>165.000000</time_taken>
+<time_taken>235.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="1 set of interrelated 9 such that clauses, single select" >9</id><querystr><![CDATA[assign a1,a2;stmt s1,s2,s3;while w1,w2;variable v1;call c1; Select s3 such that Modifies(33,v1) and Parent(s1,33) and Parent*(s2,s1) and Uses(s2,v1) and Follows(s3,a2) and Parent(w2,a2) and Parent*(w1,c1) and Follows*(c1,a2);]]></querystr>
 <stuans>18,32</stuans>
 <correct>18,32</correct>
-<time_taken>165.000000</time_taken>
+<time_taken>221.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="1 set of interrelated 9 such that clauses, single select" >10</id><querystr><![CDATA[assign a1,a2;stmt s1,s2,s3;while w1,w2;variable v1;call c1; Select w1 such that Modifies(33,v1) and Parent(s1,33) and Parent*(s2,s1) and Uses(s2,v1) and Follows(s3,a2) and Parent(w2,a2) and Parent*(w1,c1) and Follows*(c1,a2);]]></querystr>
 <stuans>9,17,31</stuans>
 <correct>17,31,9</correct>
-<time_taken>161.000000</time_taken>
+<time_taken>236.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="1 set of interrelated 9 such that clauses, single select" >11</id><querystr><![CDATA[assign a1,a2;stmt s1,s2,s3;while w1,w2;variable v1;call c1; Select w2 such that Modifies(33,v1) and Parent(s1,33) and Parent*(s2,s1) and Uses(s2,v1) and Follows(s3,a2) and Parent(w2,a2) and Parent*(w1,c1) and Follows*(c1,a2);]]></querystr>
 <stuans>17,31</stuans>
 <correct>17,31</correct>
-<time_taken>177.000000</time_taken>
+<time_taken>220.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="1 set of interrelated 9 such that clauses, 2-tuple select" >12</id><querystr><![CDATA[assign a1,a2;stmt s1,s2,s3;while w1,w2;variable v1;call c1; Select <a1,s1> such that Modifies(33,v1) and Parent(s1,33) and Parent*(s2,s1) and Uses(s2,v1) and Follows(s3,a2) and Parent(w2,a2) and Parent*(w1,c1) and Follows*(c1,a2);]]></querystr>
 <stuans>1 31,15 31,16 31,2 31,3 31,6 31,14 31,8 31,10 31,19 31,30 31,20 31,24 31,28 31,29 31,33 31,34 31,37 31</stuans>
 <correct>1 31,10 31,14 31,15 31,16 31,19 31,2 31,20 31,24 31,28 31,29 31,3 31,30 31,33 31,34 31,37 31,6 31,8 31</correct>
-<time_taken>174.000000</time_taken>
+<time_taken>224.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="1 set of interrelated 9 such that clauses, 2-tuple select" >13</id><querystr><![CDATA[assign a1,a2;stmt s1,s2,s3;while w1,w2;variable v1;call c1; Select <a2,s2> such that Modifies(33,v1) and Parent(s1,33) and Parent*(s2,s1) and Uses(s2,v1) and Follows(s3,a2) and Parent(w2,a2) and Parent*(w1,c1) and Follows*(c1,a2);]]></querystr>
 <stuans>19 25,19 27,19 23,33 25,33 27,33 23</stuans>
 <correct>19 23,19 25,19 27,33 23,33 25,33 27</correct>
-<time_taken>176.000000</time_taken>
+<time_taken>238.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="1 set of interrelated 9 such that clauses, 2-tuple select" >14</id><querystr><![CDATA[assign a1,a2;stmt s1,s2,s3;while w1,w2;variable v1;call c1; Select <v1,s3> such that Modifies(33,v1) and Parent(s1,33) and Parent*(s2,s1) and Uses(s2,v1) and Follows(s3,a2) and Parent(w2,a2) and Parent*(w1,c1) and Follows*(c1,a2);]]></querystr>
 <stuans>c 18,c 32</stuans>
 <correct>c 18,c 32</correct>
-<time_taken>178.000000</time_taken>
+<time_taken>268.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="1 set of interrelated 9 such that clauses, 2-tuple select" >15</id><querystr><![CDATA[assign a1,a2;stmt s1,s2,s3;while w1,w2;variable v1;call c1; Select <w2,w1> such that Modifies(33,v1) and Parent(s1,33) and Parent*(s2,s1) and Uses(s2,v1) and Follows(s3,a2) and Parent(w2,a2) and Parent*(w1,c1) and Follows*(c1,a2);]]></querystr>
 <stuans>17 9,17 17,31 31</stuans>
 <correct>17 17,17 9,31 31</correct>
-<time_taken>174.000000</time_taken>
+<time_taken>226.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="1 set of interrelated 9 such that clauses, 2-tuple select" >16</id><querystr><![CDATA[assign a1,a2;stmt s1,s2,s3;while w1,w2;variable v1;call c1; Select <w2,s3> such that Modifies(33,v1) and Parent(s1,33) and Parent*(s2,s1) and Uses(s2,v1) and Follows(s3,a2) and Parent(w2,a2) and Parent*(w1,c1) and Follows*(c1,a2);]]></querystr>
 <stuans>17 18,31 32</stuans>
 <correct>17 18,31 32</correct>
-<time_taken>179.000000</time_taken>
+<time_taken>241.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="1 set of interrelated 9 such that clauses, many-tuple select" >17</id><querystr><![CDATA[assign a1,a2;stmt s1,s2,s3;while w1,w2;variable v1;call c1; Select <a1,w2,v1> such that Modifies(33,v1) and Parent(s1,33) and Parent*(s2,s1) and Uses(s2,v1) and Follows(s3,a2) and Parent(w2,a2) and Parent*(w1,c1) and Follows*(c1,a2);]]></querystr>
 <stuans>1 17 c,14 17 c,2 17 c,1 31 c,28 31 c,3 31 c,2 31 c,3 17 c,6 17 c,6 31 c,8 17 c,34 17 c,8 31 c,10 17 c,28 17 c,10 31 c,15 17 c,24 31 c,14 31 c,15 31 c,16 17 c,16 31 c,19 17 c,24 17 c,19 31 c,20 17 c,20 31 c,29 17 c,29 31 c,30 17 c,30 31 c,33 17 c,33 31 c,34 31 c,37 17 c,37 31 c</stuans>
 <correct>1 17 c,1 31 c,10 17 c,10 31 c,14 17 c,14 31 c,15 17 c,15 31 c,16 17 c,16 31 c,19 17 c,19 31 c,2 17 c,2 31 c,20 17 c,20 31 c,24 17 c,24 31 c,28 17 c,28 31 c,29 17 c,29 31 c,3 17 c,3 31 c,30 17 c,30 31 c,33 17 c,33 31 c,34 17 c,34 31 c,37 17 c,37 31 c,6 17 c,6 31 c,8 17 c,8 31 c</correct>
-<time_taken>191.000000</time_taken>
+<time_taken>253.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="1 set of interrelated 9 such that clauses, many-tuple select" >18</id><querystr><![CDATA[assign a1,a2;stmt s1,s2,s3;while w1,w2;variable v1;call c1; Select <a2,s2,w1,v1> such that Modifies(33,v1) and Parent(s1,33) and Parent*(s2,s1) and Uses(s2,v1) and Follows(s3,a2) and Parent(w2,a2) and Parent*(w1,c1) and Follows*(c1,a2);]]></querystr>
 <stuans>19 27 9 c,19 25 9 c,33 27 31 c,19 23 9 c,33 25 31 c,19 27 17 c,19 25 17 c,33 23 31 c,19 23 17 c</stuans>
 <correct>19 23 17 c,19 23 9 c,19 25 17 c,19 25 9 c,19 27 17 c,19 27 9 c,33 23 31 c,33 25 31 c,33 27 31 c</correct>
-<time_taken>185.000000</time_taken>
+<time_taken>299.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="1 set of interrelated 9 such that clauses, many-tuple select" >19</id><querystr><![CDATA[assign a1,a2;stmt s1,s2,s3;while w1,w2;variable v1;call c1; Select <s3,s2,s1,a1,a2> such that Modifies(33,v1) and Parent(s1,33) and Parent*(s2,s1) and Uses(s2,v1) and Follows(s3,a2) and Parent(w2,a2) and Parent*(w1,c1) and Follows*(c1,a2);]]></querystr>
 <stuans>18 25 31 20 19,18 27 31 1 19,18 27 31 28 19,18 27 31 6 19,18 25 31 28 19,18 27 31 10 19,18 25 31 33 19,18 27 31 2 19,18 25 31 3 19,18 27 31 20 19,32 27 31 6 33,18 27 31 3 19,18 25 31 1 19,18 27 31 8 19,18 27 31 14 19,18 27 31 16 19,18 27 31 15 19,18 27 31 19 19,18 27 31 24 19,32 27 31 2 33,18 27 31 29 19,18 25 31 29 19,18 27 31 30 19,18 23 31 19 19,18 27 31 33 19,18 27 31 34 19,32 25 31 8 33,18 25 31 8 19,18 27 31 37 19,18 23 31 16 19,18 23 31 2 19,18 25 31 2 19,18 23 31 8 19,32 27 31 15 33,18 23 31 3 19,18 25 31 6 19,18 25 31 10 19,18 25 31 14 19,32 27 31 34 33,18 23 31 33 19,18 25 31 15 19,18 25 31 16 19,18 25 31 19 19,18 25 31 37 19,18 25 31 24 19,32 25 31 34 33,18 25 31 30 19,18 25 31 34 19,18 23 31 1 19,18 23 31 15 19,18 23 31 6 19,32 23 31 37 33,18 23 31 10 19,32 27 31 8 33,18 23 31 14 19,18 23 31 20 19,18 23 31 34 19,18 23 31 24 19,18 23 31 28 19,18 23 31 29 19,18 23 31 30 19,18 23 31 37 19,32 27 31 1 33,32 27 31 3 33,32 27 31 10 33,32 27 31 14 33,32 27 31 16 33,32 27 31 30 33,32 27 31 19 33,32 27 31 20 33,32 27 31 24 33,32 27 31 28 33,32 27 31 29 33,32 27 31 33 33,32 27 31 37 33,32 25 31 1 33,32 25 31 2 33,32 25 31 3 33,32 25 31 28 33,32 25 31 6 33,32 25 31 10 33,32 25 31 14 33,32 25 31 15 33,32 25 31 16 33,32 25 31 19 33,32 25 31 20 33,32 25 31 24 33,32 25 31 29 33,32 25 31 30 33,32 25 31 33 33,32 25 31 37 33,32 23 31 1 33,32 23 31 2 33,32 23 31 3 33,32 23 31 6 33,32 23 31 8 33,32 23 31 10 33,32 23 31 14 33,32 23 31 15 33,32 23 31 16 33,32 23 31 19 33,32 23 31 20 33,32 23 31 24 33,32 23 31 28 33,32 23 31 29 33,32 23 31 30 33,32 23 31 33 33,32 23 31 34 33</stuans>
 <correct>18 23 31 1 19,18 23 31 10 19,18 23 31 14 19,18 23 31 15 19,18 23 31 16 19,18 23 31 19 19,18 23 31 2 19,18 23 31 20 19,18 23 31 24 19,18 23 31 28 19,18 23 31 29 19,18 23 31 3 19,18 23 31 30 19,18 23 31 33 19,18 23 31 34 19,18 23 31 37 19,18 23 31 6 19,18 23 31 8 19,18 25 31 1 19,18 25 31 10 19,18 25 31 14 19,18 25 31 15 19,18 25 31 16 19,18 25 31 19 19,18 25 31 2 19,18 25 31 20 19,18 25 31 24 19,18 25 31 28 19,18 25 31 29 19,18 25 31 3 19,18 25 31 30 19,18 25 31 33 19,18 25 31 34 19,18 25 31 37 19,18 25 31 6 19,18 25 31 8 19,18 27 31 1 19,18 27 31 10 19,18 27 31 14 19,18 27 31 15 19,18 27 31 16 19,18 27 31 19 19,18 27 31 2 19,18 27 31 20 19,18 27 31 24 19,18 27 31 28 19,18 27 31 29 19,18 27 31 3 19,18 27 31 30 19,18 27 31 33 19,18 27 31 34 19,18 27 31 37 19,18 27 31 6 19,18 27 31 8 19,32 23 31 1 33,32 23 31 10 33,32 23 31 14 33,32 23 31 15 33,32 23 31 16 33,32 23 31 19 33,32 23 31 2 33,32 23 31 20 33,32 23 31 24 33,32 23 31 28 33,32 23 31 29 33,32 23 31 3 33,32 23 31 30 33,32 23 31 33 33,32 23 31 34 33,32 23 31 37 33,32 23 31 6 33,32 23 31 8 33,32 25 31 1 33,32 25 31 10 33,32 25 31 14 33,32 25 31 15 33,32 25 31 16 33,32 25 31 19 33,32 25 31 2 33,32 25 31 20 33,32 25 31 24 33,32 25 31 28 33,32 25 31 29 33,32 25 31 3 33,32 25 31 30 33,32 25 31 33 33,32 25 31 34 33,32 25 31 37 33,32 25 31 6 33,32 25 31 8 33,32 27 31 1 33,32 27 31 10 33,32 27 31 14 33,32 27 31 15 33,32 27 31 16 33,32 27 31 19 33,32 27 31 2 33,32 27 31 20 33,32 27 31 24 33,32 27 31 28 33,32 27 31 29 33,32 27 31 3 33,32 27 31 30 33,32 27 31 33 33,32 27 31 34 33,32 27 31 37 33,32 27 31 6 33,32 27 31 8 33</correct>
-<time_taken>220.000000</time_taken>
+<time_taken>297.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="1 set of interrelated 9 such that clauses, many-tuple select" >20</id><querystr><![CDATA[assign a1,a2;stmt s1,s2,s3;while w1,w2;variable v1;call c1; Select <w2,s1,w1,s2,a1,s3,a2> such that Modifies(33,v1) and Parent(s1,33) and Parent*(s2,s1) and Uses(s2,v1) and Follows(s3,a2) and Parent(w2,a2) and Parent*(w1,c1) and Follows*(c1,a2);]]></querystr>
 <stuans>17 31 9 25 1 18 19,17 31 9 25 29 18 19,17 31 9 25 16 18 19,17 31 9 27 6 18 19,31 31 31 27 28 32 33,17 31 9 23 19 18 19,17 31 9 25 2 18 19,17 31 9 25 3 18 19,17 31 17 23 3 18 19,17 31 9 25 8 18 19,17 31 9 25 14 18 19,17 31 17 25 30 18 19,17 31 9 23 15 18 19,17 31 9 27 29 18 19,17 31 9 25 6 18 19,17 31 9 25 10 18 19,17 31 9 25 19 18 19,17 31 9 23 24 18 19,17 31 9 25 15 18 19,17 31 17 25 37 18 19,17 31 9 23 6 18 19,17 31 9 25 20 18 19,17 31 9 25 24 18 19,17 31 9 25 33 18 19,17 31 17 27 6 18 19,17 31 9 25 28 18 19,17 31 9 25 30 18 19,31 31 31 27 15 32 33,17 31 17 27 3 18 19,17 31 9 25 34 18 19,17 31 9 27 24 18 19,17 31 9 25 37 18 19,31 31 31 23 6 32 33,17 31 9 27 1 18 19,17 31 9 27 2 18 19,17 31 9 27 37 18 19,17 31 9 27 3 18 19,17 31 9 27 8 18 19,31 31 31 23 37 32 33,17 31 17 25 16 18 19,17 31 9 27 33 18 19,17 31 17 25 19 18 19,17 31 17 25 6 18 19,17 31 9 23 2 18 19,17 31 9 27 10 18 19,17 31 9 27 15 18 19,17 31 9 27 14 18 19,17 31 9 27 19 18 19,17 31 9 27 16 18 19,31 31 31 27 29 32 33,17 31 9 23 1 18 19,17 31 9 23 14 18 19,17 31 17 25 29 18 19,17 31 9 27 20 18 19,17 31 9 27 28 18 19,17 31 9 27 30 18 19,17 31 9 23 37 18 19,17 31 9 27 34 18 19,31 31 31 25 20 32 33,17 31 17 25 15 18 19,17 31 9 23 16 18 19,17 31 9 23 3 18 19,17 31 9 23 8 18 19,17 31 9 23 10 18 19,17 31 9 23 20 18 19,17 31 9 23 28 18 19,17 31 9 23 29 18 19,17 31 17 25 10 18 19,31 31 31 27 19 32 33,17 31 9 23 30 18 19,17 31 9 23 33 18 19,17 31 17 25 2 18 19,17 31 17 25 3 18 19,17 31 9 23 34 18 19,17 31 17 25 1 18 19,17 31 17 25 8 18 19,17 31 17 25 14 18 19,17 31 17 25 20 18 19,17 31 17 25 24 18 19,17 31 17 25 28 18 19,17 31 17 25 33 18 19,17 31 17 25 34 18 19,17 31 17 27 1 18 19,17 31 17 27 2 18 19,17 31 17 27 8 18 19,17 31 17 27 10 18 19,17 31 17 23 29 18 19,17 31 17 27 14 18 19,31 31 31 25 1 32 33,17 31 17 27 15 18 19,17 31 17 27 16 18 19,17 31 17 27 19 18 19,17 31 17 27 20 18 19,17 31 17 27 24 18 19,17 31 17 27 28 18 19,17 31 17 27 29 18 19,17 31 17 27 30 18 19,17 31 17 27 33 18 19,17 31 17 27 34 18 19,17 31 17 27 37 18 19,17 31 17 23 1 18 19,17 31 17 23 2 18 19,17 31 17 23 6 18 19,17 31 17 23 20 18 19,17 31 17 23 8 18 19,17 31 17 23 10 18 19,17 31 17 23 14 18 19,17 31 17 23 15 18 19,17 31 17 23 16 18 19,17 31 17 23 19 18 19,17 31 17 23 24 18 19,17 31 17 23 28 18 19,17 31 17 23 30 18 19,17 31 17 23 33 18 19,17 31 17 23 34 18 19,17 31 17 23 37 18 19,31 31 31 25 2 32 33,31 31 31 25 3 32 33,31 31 31 25 6 32 33,31 31 31 25 8 32 33,31 31 31 25 10 32 33,31 31 31 25 14 32 33,31 31 31 25 15 32 33,31 31 31 25 16 32 33,31 31 31 25 19 32 33,31 31 31 25 24 32 33,31 31 31 25 28 32 33,31 31 31 25 29 32 33,31 31 31 25 30 32 33,31 31 31 25 33 32 33,31 31 31 25 34 32 33,31 31 31 25 37 32 33,31 31 31 27 1 32 33,31 31 31 27 2 32 33,31 31 31 27 3 32 33,31 31 31 27 6 32 33,31 31 31 27 8 32 33,31 31 31 27 10 32 33,31 31 31 27 14 32 33,31 31 31 27 16 32 33,31 31 31 27 20 32 33,31 31 31 27 24 32 33,31 31 31 27 30 32 33,31 31 31 27 33 32 33,31 31 31 27 34 32 33,31 31 31 27 37 32 33,31 31 31 23 1 32 33,31 31 31 23 2 32 33,31 31 31 23 3 32 33,31 31 31 23 8 32 33,31 31 31 23 10 32 33,31 31 31 23 14 32 33,31 31 31 23 15 32 33,31 31 31 23 16 32 33,31 31 31 23 19 32 33,31 31 31 23 20 32 33,31 31 31 23 24 32 33,31 31 31 23 28 32 33,31 31 31 23 29 32 33,31 31 31 23 30 32 33,31 31 31 23 33 32 33,31 31 31 23 34 32 33</stuans>
 <correct>17 31 17 23 1 18 19,17 31 17 23 10 18 19,17 31 17 23 14 18 19,17 31 17 23 15 18 19,17 31 17 23 16 18 19,17 31 17 23 19 18 19,17 31 17 23 2 18 19,17 31 17 23 20 18 19,17 31 17 23 24 18 19,17 31 17 23 28 18 19,17 31 17 23 29 18 19,17 31 17 23 3 18 19,17 31 17 23 30 18 19,17 31 17 23 33 18 19,17 31 17 23 34 18 19,17 31 17 23 37 18 19,17 31 17 23 6 18 19,17 31 17 23 8 18 19,17 31 17 25 1 18 19,17 31 17 25 10 18 19,17 31 17 25 14 18 19,17 31 17 25 15 18 19,17 31 17 25 16 18 19,17 31 17 25 19 18 19,17 31 17 25 2 18 19,17 31 17 25 20 18 19,17 31 17 25 24 18 19,17 31 17 25 28 18 19,17 31 17 25 29 18 19,17 31 17 25 3 18 19,17 31 17 25 30 18 19,17 31 17 25 33 18 19,17 31 17 25 34 18 19,17 31 17 25 37 18 19,17 31 17 25 6 18 19,17 31 17 25 8 18 19,17 31 17 27 1 18 19,17 31 17 27 10 18 19,17 31 17 27 14 18 19,17 31 17 27 15 18 19,17 31 17 27 16 18 19,17 31 17 27 19 18 19,17 31 17 27 2 18 19,17 31 17 27 20 18 19,17 31 17 27 24 18 19,17 31 17 27 28 18 19,17 31 17 27 29 18 19,17 31 17 27 3 18 19,17 31 17 27 30 18 19,17 31 17 27 33 18 19,17 31 17 27 34 18 19,17 31 17 27 37 18 19,17 31 17 27 6 18 19,17 31 17 27 8 18 19,17 31 9 23 1 18 19,17 31 9 23 10 18 19,17 31 9 23 14 18 19,17 31 9 23 15 18 19,17 31 9 23 16 18 19,17 31 9 23 19 18 19,17 31 9 23 2 18 19,17 31 9 23 20 18 19,17 31 9 23 24 18 19,17 31 9 23 28 18 19,17 31 9 23 29 18 19,17 31 9 23 3 18 19,17 31 9 23 30 18 19,17 31 9 23 33 18 19,17 31 9 23 34 18 19,17 31 9 23 37 18 19,17 31 9 23 6 18 19,17 31 9 23 8 18 19,17 31 9 25 1 18 19,17 31 9 25 10 18 19,17 31 9 25 14 18 19,17 31 9 25 15 18 19,17 31 9 25 16 18 19,17 31 9 25 19 18 19,17 31 9 25 2 18 19,17 31 9 25 20 18 19,17 31 9 25 24 18 19,17 31 9 25 28 18 19,17 31 9 25 29 18 19,17 31 9 25 3 18 19,17 31 9 25 30 18 19,17 31 9 25 33 18 19,17 31 9 25 34 18 19,17 31 9 25 37 18 19,17 31 9 25 6 18 19,17 31 9 25 8 18 19,17 31 9 27 1 18 19,17 31 9 27 10 18 19,17 31 9 27 14 18 19,17 31 9 27 15 18 19,17 31 9 27 16 18 19,17 31 9 27 19 18 19,17 31 9 27 2 18 19,17 31 9 27 20 18 19,17 31 9 27 24 18 19,17 31 9 27 28 18 19,17 31 9 27 29 18 19,17 31 9 27 3 18 19,17 31 9 27 30 18 19,17 31 9 27 33 18 19,17 31 9 27 34 18 19,17 31 9 27 37 18 19,17 31 9 27 6 18 19,17 31 9 27 8 18 19,31 31 31 23 1 32 33,31 31 31 23 10 32 33,31 31 31 23 14 32 33,31 31 31 23 15 32 33,31 31 31 23 16 32 33,31 31 31 23 19 32 33,31 31 31 23 2 32 33,31 31 31 23 20 32 33,31 31 31 23 24 32 33,31 31 31 23 28 32 33,31 31 31 23 29 32 33,31 31 31 23 3 32 33,31 31 31 23 30 32 33,31 31 31 23 33 32 33,31 31 31 23 34 32 33,31 31 31 23 37 32 33,31 31 31 23 6 32 33,31 31 31 23 8 32 33,31 31 31 25 1 32 33,31 31 31 25 10 32 33,31 31 31 25 14 32 33,31 31 31 25 15 32 33,31 31 31 25 16 32 33,31 31 31 25 19 32 33,31 31 31 25 2 32 33,31 31 31 25 20 32 33,31 31 31 25 24 32 33,31 31 31 25 28 32 33,31 31 31 25 29 32 33,31 31 31 25 3 32 33,31 31 31 25 30 32 33,31 31 31 25 33 32 33,31 31 31 25 34 32 33,31 31 31 25 37 32 33,31 31 31 25 6 32 33,31 31 31 25 8 32 33,31 31 31 27 1 32 33,31 31 31 27 10 32 33,31 31 31 27 14 32 33,31 31 31 27 15 32 33,31 31 31 27 16 32 33,31 31 31 27 19 32 33,31 31 31 27 2 32 33,31 31 31 27 20 32 33,31 31 31 27 24 32 33,31 31 31 27 28 32 33,31 31 31 27 29 32 33,31 31 31 27 3 32 33,31 31 31 27 30 32 33,31 31 31 27 33 32 33,31 31 31 27 34 32 33,31 31 31 27 37 32 33,31 31 31 27 6 32 33,31 31 31 27 8 32 33</correct>
-<time_taken>257.000000</time_taken>
+<time_taken>349.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="1 set of interrelated 9 such that clauses, many-tuple select" >21</id><querystr><![CDATA[assign a1,a2;stmt s1,s2,s3;while w1,w2;variable v1;call c1; Select <a1,w2,v1,a2,w1,s1,s2,s3> such that Modifies(33,v1) and Parent(s1,33) and Parent*(s2,s1) and Uses(s2,v1) and Follows(s3,a2) and Parent(w2,a2) and Parent*(w1,c1) and Follows*(c1,a2);]]></querystr>
 <stuans>1 17 c 19 9 31 23 18,3 17 c 19 9 31 23 18,6 17 c 19 17 31 23 18,1 17 c 19 9 31 27 18,3 31 c 33 31 31 25 32,1 17 c 19 17 31 27 18,1 17 c 19 9 31 25 18,10 17 c 19 17 31 23 18,14 17 c 19 17 31 25 18,1 31 c 33 31 31 23 32,1 17 c 19 17 31 25 18,1 17 c 19 17 31 23 18,1 31 c 33 31 31 27 32,3 17 c 19 17 31 25 18,1 31 c 33 31 31 25 32,15 17 c 19 9 31 25 18,2 17 c 19 9 31 27 18,10 17 c 19 9 31 27 18,2 17 c 19 9 31 23 18,2 17 c 19 9 31 25 18,2 17 c 19 17 31 27 18,8 17 c 19 9 31 25 18,6 17 c 19 9 31 27 18,6 31 c 33 31 31 27 32,14 31 c 33 31 31 25 32,2 17 c 19 17 31 25 18,30 17 c 19 9 31 27 18,6 31 c 33 31 31 23 32,8 17 c 19 17 31 25 18,2 17 c 19 17 31 23 18,16 17 c 19 17 31 27 18,2 31 c 33 31 31 27 32,2 31 c 33 31 31 25 32,10 17 c 19 17 31 25 18,2 31 c 33 31 31 23 32,29 17 c 19 17 31 27 18,6 17 c 19 9 31 23 18,6 31 c 33 31 31 25 32,14 17 c 19 17 31 27 18,3 17 c 19 9 31 27 18,19 17 c 19 17 31 27 18,3 17 c 19 9 31 25 18,3 17 c 19 17 31 27 18,3 17 c 19 17 31 23 18,3 31 c 33 31 31 27 32,14 17 c 19 9 31 25 18,3 31 c 33 31 31 23 32,28 17 c 19 17 31 25 18,8 31 c 33 31 31 23 32,6 17 c 19 9 31 25 18,14 31 c 33 31 31 23 32,6 17 c 19 17 31 27 18,6 17 c 19 17 31 25 18,8 17 c 19 9 31 27 18,10 17 c 19 17 31 27 18,8 17 c 19 9 31 23 18,8 17 c 19 17 31 27 18,8 17 c 19 17 31 23 18,14 31 c 33 31 31 27 32,28 17 c 19 17 31 27 18,8 31 c 33 31 31 27 32,8 31 c 33 31 31 25 32,10 17 c 19 9 31 25 18,15 17 c 19 9 31 23 18,10 17 c 19 9 31 23 18,10 31 c 33 31 31 27 32,10 31 c 33 31 31 23 32,10 31 c 33 31 31 25 32,14 17 c 19 9 31 27 18,29 31 c 33 31 31 23 32,14 17 c 19 9 31 23 18,14 17 c 19 17 31 23 18,15 17 c 19 9 31 27 18,15 17 c 19 17 31 27 18,15 17 c 19 17 31 25 18,15 17 c 19 17 31 23 18,15 31 c 33 31 31 27 32,15 31 c 33 31 31 25 32,15 31 c 33 31 31 23 32,16 17 c 19 9 31 27 18,16 17 c 19 9 31 25 18,16 17 c 19 9 31 23 18,16 17 c 19 17 31 25 18,16 17 c 19 17 31 23 18,16 31 c 33 31 31 27 32,16 31 c 33 31 31 25 32,34 17 c 19 9 31 25 18,16 31 c 33 31 31 23 32,19 17 c 19 9 31 27 18,19 17 c 19 9 31 25 18,19 17 c 19 9 31 23 18,19 17 c 19 17 31 25 18,24 31 c 33 31 31 25 32,19 17 c 19 17 31 23 18,29 17 c 19 17 31 23 18,29 31 c 33 31 31 25 32,19 31 c 33 31 31 27 32,19 31 c 33 31 31 25 32,19 31 c 33 31 31 23 32,20 31 c 33 31 31 25 32,20 17 c 19 9 31 27 18,20 17 c 19 9 31 25 18,20 17 c 19 9 31 23 18,20 17 c 19 17 31 27 18,34 17 c 19 9 31 23 18,20 17 c 19 17 31 25 18,20 17 c 19 17 31 23 18,20 31 c 33 31 31 27 32,28 17 c 19 17 31 23 18,20 31 c 33 31 31 23 32,34 17 c 19 17 31 25 18,24 17 c 19 9 31 27 18,24 17 c 19 9 31 25 18,24 17 c 19 9 31 23 18,24 17 c 19 17 31 27 18,24 17 c 19 17 31 25 18,24 17 c 19 17 31 23 18,24 31 c 33 31 31 27 32,24 31 c 33 31 31 23 32,28 17 c 19 9 31 27 18,28 17 c 19 9 31 25 18,28 17 c 19 9 31 23 18,28 31 c 33 31 31 27 32,28 31 c 33 31 31 25 32,28 31 c 33 31 31 23 32,29 17 c 19 9 31 27 18,29 17 c 19 9 31 25 18,29 17 c 19 9 31 23 18,37 31 c 33 31 31 23 32,29 17 c 19 17 31 25 18,29 31 c 33 31 31 27 32,30 17 c 19 9 31 25 18,30 17 c 19 9 31 23 18,30 17 c 19 17 31 27 18,30 17 c 19 17 31 25 18,30 17 c 19 17 31 23 18,30 31 c 33 31 31 27 32,30 31 c 33 31 31 25 32,30 31 c 33 31 31 23 32,33 17 c 19 9 31 27 18,33 31 c 33 31 31 25 32,33 17 c 19 9 31 25 18,33 17 c 19 9 31 23 18,33 17 c 19 17 31 27 18,33 17 c 19 17 31 25 18,33 17 c 19 17 31 23 18,33 31 c 33 31 31 27 32,33 31 c 33 31 31 23 32,34 17 c 19 9 31 27 18,34 17 c 19 17 31 27 18,34 17 c 19 17 31 23 18,34 31 c 33 31 31 27 32,34 31 c 33 31 31 25 32,34 31 c 33 31 31 23 32,37 17 c 19 9 31 27 18,37 17 c 19 9 31 25 18,37 17 c 19 9 31 23 18,37 17 c 19 17 31 27 18,37 17 c 19 17 31 25 18,37 17 c 19 17 31 23 18,37 31 c 33 31 31 27 32,37 31 c 33 31 31 25 32</stuans>
 <correct>1 17 c 19 17 31 23 18,1 17 c 19 17 31 25 18,1 17 c 19 17 31 27 18,1 17 c 19 9 31 23 18,1 17 c 19 9 31 25 18,1 17 c 19 9 31 27 18,1 31 c 33 31 31 23 32,1 31 c 33 31 31 25 32,1 31 c 33 31 31 27 32,10 17 c 19 17 31 23 18,10 17 c 19 17 31 25 18,10 17 c 19 17 31 27 18,10 17 c 19 9 31 23 18,10 17 c 19 9 31 25 18,10 17 c 19 9 31 27 18,10 31 c 33 31 31 23 32,10 31 c 33 31 31 25 32,10 31 c 33 31 31 27 32,14 17 c 19 17 31 23 18,14 17 c 19 17 31 25 18,14 17 c 19 17 31 27 18,14 17 c 19 9 31 23 18,14 17 c 19 9 31 25 18,14 17 c 19 9 31 27 18,14 31 c 33 31 31 23 32,14 31 c 33 31 31 25 32,14 31 c 33 31 31 27 32,15 17 c 19 17 31 23 18,15 17 c 19 17 31 25 18,15 17 c 19 17 31 27 18,15 17 c 19 9 31 23 18,15 17 c 19 9 31 25 18,15 17 c 19 9 31 27 18,15 31 c 33 31 31 23 32,15 31 c 33 31 31 25 32,15 31 c 33 31 31 27 32,16 17 c 19 17 31 23 18,16 17 c 19 17 31 25 18,16 17 c 19 17 31 27 18,16 17 c 19 9 31 23 18,16 17 c 19 9 31 25 18,16 17 c 19 9 31 27 18,16 31 c 33 31 31 23 32,16 31 c 33 31 31 25 32,16 31 c 33 31 31 27 32,19 17 c 19 17 31 23 18,19 17 c 19 17 31 25 18,19 17 c 19 17 31 27 18,19 17 c 19 9 31 23 18,19 17 c 19 9 31 25 18,19 17 c 19 9 31 27 18,19 31 c 33 31 31 23 32,19 31 c 33 31 31 25 32,19 31 c 33 31 31 27 32,2 17 c 19 17 31 23 18,2 17 c 19 17 31 25 18,2 17 c 19 17 31 27 18,2 17 c 19 9 31 23 18,2 17 c 19 9 31 25 18,2 17 c 19 9 31 27 18,2 31 c 33 31 31 23 32,2 31 c 33 31 31 25 32,2 31 c 33 31 31 27 32,20 17 c 19 17 31 23 18,20 17 c 19 17 31 25 18,20 17 c 19 17 31 27 18,20 17 c 19 9 31 23 18,20 17 c 19 9 31 25 18,20 17 c 19 9 31 27 18,20 31 c 33 31 31 23 32,20 31 c 33 31 31 25 32,20 31 c 33 31 31 27 32,24 17 c 19 17 31 23 18,24 17 c 19 17 31 25 18,24 17 c 19 17 31 27 18,24 17 c 19 9 31 23 18,24 17 c 19 9 31 25 18,24 17 c 19 9 31 27 18,24 31 c 33 31 31 23 32,24 31 c 33 31 31 25 32,24 31 c 33 31 31 27 32,28 17 c 19 17 31 23 18,28 17 c 19 17 31 25 18,28 17 c 19 17 31 27 18,28 17 c 19 9 31 23 18,28 17 c 19 9 31 25 18,28 17 c 19 9 31 27 18,28 31 c 33 31 31 23 32,28 31 c 33 31 31 25 32,28 31 c 33 31 31 27 32,29 17 c 19 17 31 23 18,29 17 c 19 17 31 25 18,29 17 c 19 17 31 27 18,29 17 c 19 9 31 23 18,29 17 c 19 9 31 25 18,29 17 c 19 9 31 27 18,29 31 c 33 31 31 23 32,29 31 c 33 31 31 25 32,29 31 c 33 31 31 27 32,3 17 c 19 17 31 23 18,3 17 c 19 17 31 25 18,3 17 c 19 17 31 27 18,3 17 c 19 9 31 23 18,3 17 c 19 9 31 25 18,3 17 c 19 9 31 27 18,3 31 c 33 31 31 23 32,3 31 c 33 31 31 25 32,3 31 c 33 31 31 27 32,30 17 c 19 17 31 23 18,30 17 c 19 17 31 25 18,30 17 c 19 17 31 27 18,30 17 c 19 9 31 23 18,30 17 c 19 9 31 25 18,30 17 c 19 9 31 27 18,30 31 c 33 31 31 23 32,30 31 c 33 31 31 25 32,30 31 c 33 31 31 27 32,33 17 c 19 17 31 23 18,33 17 c 19 17 31 25 18,33 17 c 19 17 31 27 18,33 17 c 19 9 31 23 18,33 17 c 19 9 31 25 18,33 17 c 19 9 31 27 18,33 31 c 33 31 31 23 32,33 31 c 33 31 31 25 32,33 31 c 33 31 31 27 32,34 17 c 19 17 31 23 18,34 17 c 19 17 31 25 18,34 17 c 19 17 31 27 18,34 17 c 19 9 31 23 18,34 17 c 19 9 31 25 18,34 17 c 19 9 31 27 18,34 31 c 33 31 31 23 32,34 31 c 33 31 31 25 32,34 31 c 33 31 31 27 32,37 17 c 19 17 31 23 18,37 17 c 19 17 31 25 18,37 17 c 19 17 31 27 18,37 17 c 19 9 31 23 18,37 17 c 19 9 31 25 18,37 17 c 19 9 31 27 18,37 31 c 33 31 31 23 32,37 31 c 33 31 31 25 32,37 31 c 33 31 31 27 32,6 17 c 19 17 31 23 18,6 17 c 19 17 31 25 18,6 17 c 19 17 31 27 18,6 17 c 19 9 31 23 18,6 17 c 19 9 31 25 18,6 17 c 19 9 31 27 18,6 31 c 33 31 31 23 32,6 31 c 33 31 31 25 32,6 31 c 33 31 31 27 32,8 17 c 19 17 31 23 18,8 17 c 19 17 31 25 18,8 17 c 19 17 31 27 18,8 17 c 19 9 31 23 18,8 17 c 19 9 31 25 18,8 17 c 19 9 31 27 18,8 31 c 33 31 31 23 32,8 31 c 33 31 31 25 32,8 31 c 33 31 31 27 32</correct>
-<time_taken>273.000000</time_taken>
+<time_taken>382.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="1 set of interrelated 9 such that clauses, many-tuple select" >23</id><querystr><![CDATA[assign a1,a2;stmt s1,s2,s3;while w1,w2;variable v1;call c1; Select a2 such that Modifies(33,v1) and Parent(s1,33) and Parent*(s2,s1) and Uses(s2,v1) and Follows(s3,a2) and Parent(w2,a2) and Parent*(w1,c1) and Follows*(c1,a2) and Affects*(a2,a2) and Next*(a2,a2);]]></querystr>
 <stuans>19,33</stuans>
 <correct>19,33</correct>
-<time_taken>266.000000</time_taken>
+<time_taken>370.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id all="1" Typed="1" comment="1 set of interrelated 9 such that clauses, many-tuple select" >24</id><querystr><![CDATA[assign a1,a2,a3;stmt s1,s2,s3;while w1,w2;variable v1,v2;call c1; Select a2 such that Affects(a1,a2) and Affects*(a2,a3) and Next(s1,s2) and Next*(s2,a3) and Modifies(a3,v1) and Uses(a3,v2) and Modifies(s2,v1);]]></querystr>
 <stuans>33,10,19</stuans>
 <correct>10,19,33</correct>
-<time_taken>269.000000</time_taken>
+<time_taken>368.000000</time_taken>
 <passed/>
 </query>
 </category>

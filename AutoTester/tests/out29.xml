@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>174.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>228.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" such that with calls affects">
@@ -9,56 +9,56 @@
 <id calls="1" with="1" comment="calls (known,unknown) with" >16</id><querystr><![CDATA[procedure p1,p2; call c; Select p2   such that  Calls ( "xylo" , p2 ) with p1.procName = c.procName;]]></querystr>
 <stuans>yello</stuans>
 <correct>yello</correct>
-<time_taken>150.000000</time_taken>
+<time_taken>115.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id calls="1" with="1" comment="calls* (known,unknown) with" >17</id><querystr><![CDATA[procedure p1,p2; call c; Select p2   such that  Calls* ( "xylo" , p2 ) with p2.procName = c.procName;]]></querystr>
 <stuans>extra,yello,zebra</stuans>
 <correct>yello,zebra,extra</correct>
-<time_taken>100.000000</time_taken>
+<time_taken>114.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id calls="1" with="1" comment="calls (unknown,known) with" >18</id><querystr><![CDATA[procedure p1,p2;  Select p1   such that  Calls ( p1 , "zebra" ) with p2.procName = "zebra";]]></querystr>
 <stuans>yello</stuans>
 <correct>yello</correct>
-<time_taken>91.000000</time_taken>
+<time_taken>117.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id calls="1" with="1" comment="calls* (unknown,known) with" >19</id><querystr><![CDATA[procedure p1,p2;  Select p1   such that  Calls* ( p1 , "zebra" ) with p1.procName = "zebra";]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>91.000000</time_taken>
+<time_taken>117.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id calls="1" with="1" comment="calls (unknown,unknown) with" >20</id><querystr><![CDATA[procedure p1,p2; variable v1; Select p1   such that  Calls ( p1 , p2 ) with p1.procName = p2.procName;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>86.000000</time_taken>
+<time_taken>114.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id calls="1" with="1" comment="calls* (unknown,unknown) with" >21</id><querystr><![CDATA[procedure p1,p2; variable v1; Select p1   such that  Calls* ( p1 , p2 ) with p1.procName = p2.procName;]]></querystr>
 <stuans></stuans>
 <correct></correct>
-<time_taken>98.000000</time_taken>
+<time_taken>121.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id calls="1" with="1" comment="calls (known,known) with" >37</id><querystr><![CDATA[procedure p; Select BOOLEAN   such that  Calls ( "xylo" , "yello" ) with p . procName = "xylo"   ;]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>106.000000</time_taken>
+<time_taken>136.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id calls="1" with="1" comment="calls* (known,known) with" >38</id><querystr><![CDATA[procedure p; Select BOOLEAN   such that  Calls* ( "xylo" , "yello" ) with p . procName = "xylo"   ;]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>106.000000</time_taken>
+<time_taken>145.000000</time_taken>
 <passed/>
 </query>
 </category>

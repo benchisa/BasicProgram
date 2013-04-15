@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>2057.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>2819.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" Test Case for Sibling Known,Known">
@@ -9,357 +9,357 @@
 <id Sibling="1" Typed="1" comment="Sibling(ASSIGNMENT,ASSIGNMENT)" >1</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(109,110);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>52.000000</time_taken>
+<time_taken>67.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(ASSIGNMENT,WHILE)" >2</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(98,99);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>135.000000</time_taken>
+<time_taken>74.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(ASSIGNMENT,IF)" >3</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(44,48);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>58.000000</time_taken>
+<time_taken>71.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(ASSIGNMENT,STATEMENT)" >4</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(44,49);]]></querystr>
 <stuans>false</stuans>
 <correct>false</correct>
-<time_taken>63.000000</time_taken>
+<time_taken>73.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(ASSIGNMENT,CALL)" >5</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(54,53);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>58.000000</time_taken>
+<time_taken>73.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(IF,ASSIGNMENT)" >6</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(48,44);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>61.000000</time_taken>
+<time_taken>76.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(IF,WHILE)" >7</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(17,15);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>60.000000</time_taken>
+<time_taken>80.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(IF,IF)" >8</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(17,22);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>65.000000</time_taken>
+<time_taken>82.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(IF,STATEMENT)" >9</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(17,27);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>60.000000</time_taken>
+<time_taken>74.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(IF,CALL)" >10</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(41,40);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>63.000000</time_taken>
+<time_taken>75.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(WHILE,ASSIGNMENT)" >11</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(36,39);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>61.000000</time_taken>
+<time_taken>79.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(WHILE,WHILE)" >12</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(13,15);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>62.000000</time_taken>
+<time_taken>96.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(WHILE,IF)" >13</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(13,17);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>63.000000</time_taken>
+<time_taken>78.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(WHILE,STATEMENT)" >14</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(15,27);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>69.000000</time_taken>
+<time_taken>80.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(WHILE,CALL)" >15</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(7,28);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>65.000000</time_taken>
+<time_taken>85.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(PROCEDURE,PROCEDURE)" >16</id><querystr><![CDATA[ Select BOOLEAN such that Sibling("Alice","Henry");]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>81.000000</time_taken>
+<time_taken>104.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(STATEMENT,ASSIGNMENT)" >20</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(1,6);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>68.000000</time_taken>
+<time_taken>89.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(STATEMENT,WHILE)" >21</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(17,15);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>68.000000</time_taken>
+<time_taken>86.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(STATEMENT,IF)" >22</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(22,17);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>68.000000</time_taken>
+<time_taken>82.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(STATEMENT,STATEMENT)" >23</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(30,35);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>65.000000</time_taken>
+<time_taken>96.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(STATEMENT,CALL)" >24</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(29,40);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>67.000000</time_taken>
+<time_taken>95.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CALL,ASSIGNMENT)" >25</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(47,46);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>68.000000</time_taken>
+<time_taken>92.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CALL,WHILE)" >26</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(53,55);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>68.000000</time_taken>
+<time_taken>82.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CALL,IF)" >27</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(47,48);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>68.000000</time_taken>
+<time_taken>81.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CALL,STATEMENT)" >28</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(47,44);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>69.000000</time_taken>
+<time_taken>83.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CALL,CALL)" >54</id><querystr><![CDATA[ Select BOOLEAN such that Sibling(127,128);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>72.000000</time_taken>
+<time_taken>86.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CONSTANT,PLUS)" >29</id><querystr><![CDATA[plus pls; Select BOOLEAN such that Sibling("8",pls);]]></querystr>
 <stuans>false</stuans>
 <correct>false</correct>
-<time_taken>78.000000</time_taken>
+<time_taken>98.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CONSTANT,MINUS)" >30</id><querystr><![CDATA[minus min; Select BOOLEAN such that Sibling("9",min);]]></querystr>
 <stuans>false</stuans>
 <correct>false</correct>
-<time_taken>78.000000</time_taken>
+<time_taken>102.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CONSTANT,MULTIPLY)" >31</id><querystr><![CDATA[times tm; Select BOOLEAN such that Sibling("12",tm);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>72.000000</time_taken>
+<time_taken>97.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CONSTANT,VARIABLE)" >32</id><querystr><![CDATA[ Select BOOLEAN such that Sibling("11","leek");]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>74.000000</time_taken>
+<time_taken>99.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(CONSTANT,CONSTANT)" >33</id><querystr><![CDATA[ Select BOOLEAN such that Sibling("13","8");]]></querystr>
 <stuans>false</stuans>
 <correct>false</correct>
-<time_taken>74.000000</time_taken>
+<time_taken>93.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(VARIABLE,PLUS)" >34</id><querystr><![CDATA[plus pls; Select BOOLEAN such that Sibling("egg",pls);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>84.000000</time_taken>
+<time_taken>113.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(VARIABLE,MINUS)" >35</id><querystr><![CDATA[minus min; Select BOOLEAN such that Sibling("egg",min);]]></querystr>
 <stuans>false</stuans>
 <correct>false</correct>
-<time_taken>84.000000</time_taken>
+<time_taken>112.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(VARIABLE,MULTIPLY)" >36</id><querystr><![CDATA[times tm; Select BOOLEAN such that Sibling("banana",tm);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>93.000000</time_taken>
+<time_taken>120.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(VARIABLE,VARIABLE)" >37</id><querystr><![CDATA[ Select BOOLEAN such that Sibling("orange","ham");]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>90.000000</time_taken>
+<time_taken>116.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(VARIABLE,CONSTANT)" >38</id><querystr><![CDATA[ Select BOOLEAN such that Sibling("ham","9");]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>79.000000</time_taken>
+<time_taken>111.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(PLUS,PLUS)" >39</id><querystr><![CDATA[plus pls1,pls2; Select BOOLEAN such that Sibling(pls1,pls2);]]></querystr>
 <stuans>false</stuans>
 <correct>false</correct>
-<time_taken>96.000000</time_taken>
+<time_taken>119.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(PLUS,MINUS)" >40</id><querystr><![CDATA[plus pls;minus min; Select BOOLEAN such that Sibling(pls,min);]]></querystr>
 <stuans>false</stuans>
 <correct>false</correct>
-<time_taken>92.000000</time_taken>
+<time_taken>143.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(PLUS,MULTIPLY)" >41</id><querystr><![CDATA[plus pls; times tm; Select BOOLEAN such that Sibling(pls,tm);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>92.000000</time_taken>
+<time_taken>128.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(PLUS,VARIABLE)" >42</id><querystr><![CDATA[plus pls; Select BOOLEAN such that Sibling(pls,"egg");]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>91.000000</time_taken>
+<time_taken>118.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(PLUS,CONSTANT)" >43</id><querystr><![CDATA[plus pls; Select BOOLEAN such that Sibling(pls,"8");]]></querystr>
 <stuans>false</stuans>
 <correct>false</correct>
-<time_taken>87.000000</time_taken>
+<time_taken>137.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(MINUS,PLUS)" >44</id><querystr><![CDATA[plus pls;minus min; Select BOOLEAN such that Sibling(min,pls);]]></querystr>
 <stuans>false</stuans>
 <correct>false</correct>
-<time_taken>96.000000</time_taken>
+<time_taken>132.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(MINUS,MINUS)" >45</id><querystr><![CDATA[minus min1,min2; Select BOOLEAN such that Sibling(min1,min2);]]></querystr>
 <stuans>false</stuans>
 <correct>false</correct>
-<time_taken>99.000000</time_taken>
+<time_taken>120.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(MINUS,MULTIPLY)" >46</id><querystr><![CDATA[minus min; times tm; Select BOOLEAN such that Sibling(min,tm);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>93.000000</time_taken>
+<time_taken>115.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(MINUS,VARIABLE)" >47</id><querystr><![CDATA[minus min; Select BOOLEAN such that Sibling(min,"egg");]]></querystr>
 <stuans>false</stuans>
 <correct>false</correct>
-<time_taken>95.000000</time_taken>
+<time_taken>114.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(MINUS,CONSTANT)" >48</id><querystr><![CDATA[minus min; Select BOOLEAN such that Sibling(min,"9");]]></querystr>
 <stuans>false</stuans>
 <correct>false</correct>
-<time_taken>89.000000</time_taken>
+<time_taken>127.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(MULTIPLY,PLUS)" >49</id><querystr><![CDATA[times tm; plus pls; Select BOOLEAN such that Sibling(tm,pls);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>92.000000</time_taken>
+<time_taken>137.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(MULTIPLY,MINUS)" >50</id><querystr><![CDATA[times tm; minus min; Select BOOLEAN such that Sibling(tm,min);]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>93.000000</time_taken>
+<time_taken>129.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(MULTIPLY,MULTIPLY)" >51</id><querystr><![CDATA[times tm1,tm2; Select BOOLEAN such that Sibling(tm1,tm2);]]></querystr>
 <stuans>false</stuans>
 <correct>false</correct>
-<time_taken>91.000000</time_taken>
+<time_taken>123.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(MULTIPLY,VARIABLE)" >52</id><querystr><![CDATA[times tm; Select BOOLEAN such that Sibling(tm,"banana");]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>91.000000</time_taken>
+<time_taken>123.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id Sibling="1" Typed="1" comment="Sibling(MULTIPLY,CONSTANT)" >53</id><querystr><![CDATA[times tm; Select BOOLEAN such that Sibling(tm,"12");]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>88.000000</time_taken>
+<time_taken>112.000000</time_taken>
 <passed/>
 </query>
 </category>

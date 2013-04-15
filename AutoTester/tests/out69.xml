@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>1828.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>2492.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" Test Case for Sibling unKnown,unKnown">
@@ -9,111 +9,84 @@
 <id All="1" Typed="1" comment="Combo" >1</id><querystr><![CDATA[assign a; if i; while w; Select i such that Sibling(a,i);]]></querystr>
 <stuans>17,70,22,48,64,67,30</stuans>
 <correct>17,22,30,48,64,67,70</correct>
-<time_taken>114.000000</time_taken>
+<time_taken>164.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id All="1" Typed="1" comment="Combo" >1</id><querystr><![CDATA[assign a; if i; while w; Select i such that Contains*(i,w);]]></querystr>
 <stuans>22,61,67,64,70</stuans>
 <correct>22,61,64,67,70</correct>
-<time_taken>99.000000</time_taken>
+<time_taken>124.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id All="1" Typed="1" comment="Combo" >1</id><querystr><![CDATA[assign a; if i; while w; Select i such that Sibling(a,i) and Contains*(i,w);]]></querystr>
-<stuans></stuans>
+<stuans>22,64,67,70</stuans>
 <correct>22,64,67,70</correct>
-<time_taken>115.000000</time_taken>
-<failed>
-<missing>22,64,67,70</missing>
-<additional></additional>
-<summary>
-<expected>4</expected>
-<matched>0</matched>
-<missing>4</missing>
-<additional>0</additional>
-</summary>
-</failed>
+<time_taken>477.000000</time_taken>
+<passed/>
 </query>
 <query>
 <id All="1" Typed="1" comment="Combo" >2</id><querystr><![CDATA[assign a; if i; while w; call c; procedure p; Select c such that Sibling(i,c);]]></querystr>
 <stuans>134,40,47</stuans>
 <correct>134,40,47</correct>
-<time_taken>109.000000</time_taken>
+<time_taken>135.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id All="1" Typed="1" comment="Combo" >2</id><querystr><![CDATA[assign a; if i; while w; call c; procedure p; Select c such that Contains*(p,c);]]></querystr>
 <stuans>125,127,28,120,40,123,47,135,53,56,128,130,134,136</stuans>
 <correct>120,123,125,127,128,130,134,135,136,28,40,47,53,56</correct>
-<time_taken>75.000000</time_taken>
+<time_taken>96.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id All="1" Typed="1" comment="Combo" >2</id><querystr><![CDATA[assign a; if i; while w; call c; procedure p; Select c such that Sibling(i,c) and Contains*(p,c);]]></querystr>
-<stuans></stuans>
+<stuans>134,40,47</stuans>
 <correct>40,134,47</correct>
-<time_taken>114.000000</time_taken>
-<failed>
-<missing>134,40,47</missing>
-<additional></additional>
-<summary>
-<expected>3</expected>
-<matched>0</matched>
-<missing>3</missing>
-<additional>0</additional>
-</summary>
-</failed>
+<time_taken>152.000000</time_taken>
+<passed/>
 </query>
 <query>
 <id All="1" Typed="1" comment="Combo" >3</id><querystr><![CDATA[assign a;stmtLst sl; Select a such that Contains*(a,"12") and Contains(30,sl);]]></querystr>
 <stuans>33,34,95</stuans>
 <correct>33,95,34</correct>
-<time_taken>72.000000</time_taken>
+<time_taken>121.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id All="1" Typed="1" comment="Combo" >4</id><querystr><![CDATA[assign a;times tm; Select a such that Contains*(a,"12");]]></querystr>
 <stuans>33,34,95</stuans>
 <correct>33,34,95</correct>
-<time_taken>68.000000</time_taken>
+<time_taken>84.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id All="1" Typed="1" comment="Combo" >4</id><querystr><![CDATA[assign a;times tm; Select a such that Contains(a,tm);]]></querystr>
 <stuans>31,32,33,34,37,38,69,39,73,42,62,43,126,66,77,124,129,137</stuans>
 <correct>124,126,129,137,31,32,33,34,37,38,39,42,43,62,66,69,73,77</correct>
-<time_taken>77.000000</time_taken>
+<time_taken>95.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id All="1" Typed="1" comment="Combo" >4</id><querystr><![CDATA[assign a;times tm; Select a such that Contains*(a,"12") and Contains(a,tm);]]></querystr>
-<stuans>33,34,95</stuans>
+<stuans>33,34</stuans>
 <correct>33,34</correct>
-<time_taken>79.000000</time_taken>
-<failed>
-<missing></missing>
-<additional>95</additional>
-<summary>
-<expected>2</expected>
-<matched>2</matched>
-<missing>0</missing>
-<additional>1</additional>
-</summary>
-</failed>
+<time_taken>91.000000</time_taken>
+<passed/>
 </query>
 <query>
 <id All="1" Typed="1" comment="Combo" >5</id><querystr><![CDATA[assign a,a1,a2;stmt s1,s2,s3;while w,w1,w2;variable v1; Select w2 such that Uses(w2,v1) and Modifies(s2,v1) and Parent*(w1,s1) and Parent(s1,a2) and Follows*(11,a2) and Follows*(s2,s3) and Modifies(s2,"cockroach") and Parent*(w2,s3) and Sibling(a,w2);]]></querystr>
 <stuans>99</stuans>
 <correct>99</correct>
-<time_taken>554.000000</time_taken>
+<time_taken>750.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id All="1" Typed="1" comment="Combo" >6</id><querystr><![CDATA[assign a1,a2,a3; variable v1,v2; while w1; stmtLst sl; Select a3 such that Parent(w1,a1) and Follows(a1,a2) pattern a2("jam",_) and a2(_,_"ham"_) such that Uses(a2,v1) and Modifies(a2,v2) and Affects*(a3,a2) with a2.stmt#=38 and v1.varName="ham" and Contains(sl,a3);]]></querystr>
 <stuans>31,32,33,34,37</stuans>
 <correct>31,32,33,34,37</correct>
-<time_taken>861.000000</time_taken>
+<time_taken>1139.000000</time_taken>
 <passed/>
 </query>
 </category>

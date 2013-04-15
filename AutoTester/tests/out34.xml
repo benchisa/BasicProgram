@@ -1,7 +1,7 @@
 <?xml-stylesheet type="text/xsl" href="analysis.xsl"?>
 <test_results>
 <info>
-<name>CS3202</name><parsing_time_taken>188.000000</parsing_time_taken>
+<name>CS3202</name><parsing_time_taken>237.000000</parsing_time_taken>
 </info>
 <queries>
 <category name=" Test for such that and affects modifies uses parent">
@@ -9,224 +9,224 @@
 <id modifies="1" affects="1" comment="affects (known,known) and modifies (known,unknown)" >49</id><querystr><![CDATA[assign a1,a2;variable v1; Select BOOLEAN   such that  Affects (13 ,18 ) and Modifies (18 , v1 ) ;]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>89.000000</time_taken>
+<time_taken>91.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" affectsstar="1" comment="affects* (known,known) and modifies (known,unknown)" >50</id><querystr><![CDATA[assign a1,a2;variable v1; Select BOOLEAN   such that  Affects* (13 ,18 ) and Modifies (18 , v1 ) ;]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>81.000000</time_taken>
+<time_taken>98.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" affects="1" comment="affects (known,unknown) and modifies (unknown,unknown)" >51</id><querystr><![CDATA[assign a1,a2;variable v1; Select a2   such that  Affects (27 , a2 ) and Modifies ( a2 , v1 ) ;]]></querystr>
 <stuans>30</stuans>
 <correct>30</correct>
-<time_taken>86.000000</time_taken>
+<time_taken>118.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" affectsstar="1" comment="affects* (known,unknown) and modifies (unknown,unknown)" >52</id><querystr><![CDATA[assign a1,a2;variable v1; Select a2   such that  Affects* (27 , a2 ) and Modifies ( a2 , v1 ) ;]]></querystr>
 <stuans>30</stuans>
 <correct>30</correct>
-<time_taken>86.000000</time_taken>
+<time_taken>106.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" affects="1" comment="affects (unknown,known) and modifies (unknown,unknown)" >53</id><querystr><![CDATA[assign a1,a2;variable v1; Select a1   such that  Affects ( a1 ,18 ) and Modifies ( a1 , v1 ) ;]]></querystr>
 <stuans>13,15,19</stuans>
 <correct>13,15,19</correct>
-<time_taken>87.000000</time_taken>
+<time_taken>118.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" affectsstar="1" comment="affects* (unknown,known) and modifies (unknown,unknown)" >54</id><querystr><![CDATA[assign a1,a2;variable v1; Select a1   such that  Affects* ( a1 ,18 ) and Modifies ( a1 , v1 ) ;]]></querystr>
 <stuans>13,15,19,6</stuans>
 <correct>13,15,19,6</correct>
-<time_taken>95.000000</time_taken>
+<time_taken>120.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" affects="1" comment="affects (unknown,unknown) and modifies (unknown,unknown)" >55</id><querystr><![CDATA[assign a1,a2;variable v1; Select a1   such that  Affects ( a1 , a2 ) and Modifies ( a2 , v1 ) ;]]></querystr>
 <stuans>1,47,19,3,20,43,6,11,13,15,27,30,34,35,39,42,45,46</stuans>
 <correct>1,11,13,15,19,20,27,3,30,34,35,39,42,43,45,46,47,6</correct>
-<time_taken>125.000000</time_taken>
+<time_taken>162.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" affectsstar="1" comment="affects* (unknown,unknown) and modifies (unknown,unknown)" >56</id><querystr><![CDATA[assign a1,a2;variable v1; Select a1   such that  Affects* ( a1 , a2 ) and Modifies ( a2 , v1 ) ;]]></querystr>
 <stuans>1,47,19,3,20,43,6,11,13,15,27,30,34,35,39,42,45,46</stuans>
 <correct>1,11,13,15,19,20,27,3,30,34,35,39,42,43,45,46,47,6</correct>
-<time_taken>150.000000</time_taken>
+<time_taken>178.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" affects="1" comment="affects (unknown,unknown) and modifies (unknown,unknown)" >57</id><querystr><![CDATA[assign a1,a2;variable v1; Select a2   such that  Affects ( a1 , a2 ) and Modifies ( a2 , v1 ) ;]]></querystr>
 <stuans>18,2,3,4,22,23,7,13,17,30,35,37,38,40,43,45,46,47</stuans>
 <correct>13,17,18,2,22,23,3,30,35,37,38,4,40,43,45,46,47,7</correct>
-<time_taken>98.000000</time_taken>
+<time_taken>124.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" affectsstar="1" comment="affects* (unknown,unknown) and modifies (unknown,unknown)" >58</id><querystr><![CDATA[assign a1,a2;variable v1; Select a2   such that  Affects* ( a1 , a2 ) and Modifies ( a2 , v1 ) ;]]></querystr>
 <stuans>18,2,3,4,22,23,7,13,17,30,35,37,38,40,43,45,46,47</stuans>
 <correct>13,17,18,2,22,23,3,30,35,37,38,4,40,43,45,46,47,7</correct>
-<time_taken>98.000000</time_taken>
+<time_taken>133.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" affects="1" comment="affects (unknown,unknown) and modifies (unknown,unknown)" >59</id><querystr><![CDATA[assign a1,a2;variable v1; Select a1   such that  Affects ( a1 , a1 ) and Modifies ( a2 , v1 ) ;]]></querystr>
 <stuans>30</stuans>
 <correct>30</correct>
-<time_taken>91.000000</time_taken>
+<time_taken>127.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id modifies="1" affectsstar="1" comment="affects* (unknown,unknown) and modifies (unknown,unknown)" >60</id><querystr><![CDATA[assign a1,a2;variable v1; Select a1   such that  Affects* ( a1 , a1 ) and Modifies ( a2 , v1 ) ;]]></querystr>
 <stuans>30,45,46,47</stuans>
 <correct>30,45,46,47</correct>
-<time_taken>94.000000</time_taken>
+<time_taken>128.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affects="1" uses="1" comment="affects (known,known) and uses (unknown,unknown)" >146</id><querystr><![CDATA[variable v1; Select BOOLEAN   such that  Affects (13 ,18 ) and Uses (18 , v1 ) ;]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>87.000000</time_taken>
+<time_taken>94.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affectsstar="1" uses="1" comment="affects* (known,known) and uses (unknown,unknown)" >147</id><querystr><![CDATA[variable v1; Select BOOLEAN   such that  Affects* (13 ,18 ) and Uses (13 , v1 ) ;]]></querystr>
 <stuans>true</stuans>
 <correct>true</correct>
-<time_taken>89.000000</time_taken>
+<time_taken>104.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affects="1" uses="1" comment="affects (known,unknown) and uses (unknown,unknown)" >148</id><querystr><![CDATA[assign a1,a2;variable v1; Select a2   such that  Affects (13 , a2 ) and Uses (13 , v1 ) ;]]></querystr>
 <stuans>18</stuans>
 <correct>18</correct>
-<time_taken>91.000000</time_taken>
+<time_taken>120.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affectsstar="1" uses="1" comment="affects* (known,unknown) and uses (unknown,unknown)" >149</id><querystr><![CDATA[assign a1,a2;variable v1; Select a2   such that  Affects* (13 , a2 ) and Uses ( a2 , v1 ) ;]]></querystr>
 <stuans>18</stuans>
 <correct>18</correct>
-<time_taken>92.000000</time_taken>
+<time_taken>120.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affects="1" uses="1" comment="affects (unknown,known) and uses (unknown,unknown)" >150</id><querystr><![CDATA[assign a1,a2;variable v1; Select a1   such that  Affects ( a1 ,18 ) and Uses ( a1 , v1 ) ;]]></querystr>
 <stuans>13,19</stuans>
 <correct>13,19</correct>
-<time_taken>103.000000</time_taken>
+<time_taken>131.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affectsstar="1" uses="1" comment="affects* (unknown,known) and uses (unknown,unknown)" >151</id><querystr><![CDATA[assign a1,a2;variable v1; Select a1   such that  Affects* ( a1 ,18 ) and Uses ( a1 , v1 ) ;]]></querystr>
 <stuans>13,19</stuans>
 <correct>13,19</correct>
-<time_taken>101.000000</time_taken>
+<time_taken>132.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affects="1" uses="1" comment="affects (unknown,unknown) and uses (unknown,unknown)" >152</id><querystr><![CDATA[assign a1,a2;variable v1; Select a1   such that  Affects ( a1 , a2 ) and Uses ( a1 , v1 ) ;]]></querystr>
 <stuans>19,3,46,47,13,35,30,43,45</stuans>
 <correct>13,19,3,30,35,43,45,46,47</correct>
-<time_taken>98.000000</time_taken>
+<time_taken>129.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affectsstar="1" uses="1" comment="affects* (unknown,unknown) and uses (unknown,unknown)" >153</id><querystr><![CDATA[assign a1,a2;variable v1; Select a1   such that  Affects* ( a1 , a2 ) and Uses ( a1 , v1 ) ;]]></querystr>
 <stuans>19,3,46,47,13,35,30,43,45</stuans>
 <correct>13,19,3,30,35,43,45,46,47</correct>
-<time_taken>101.000000</time_taken>
+<time_taken>137.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affects="1" uses="1" comment="affects (unknown,unknown) and uses (unknown,unknown)" >154</id><querystr><![CDATA[assign a1,a2;variable v1; Select a2   such that  Affects ( a1 , a2 ) and Uses ( a2 , v1 ) ;]]></querystr>
 <stuans>18,2,3,4,22,23,7,13,17,30,35,37,38,40,43,45,46,47</stuans>
 <correct>13,17,18,2,22,23,3,30,35,37,38,4,40,43,45,46,47,7</correct>
-<time_taken>103.000000</time_taken>
+<time_taken>132.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affectsstar="1" uses="1" comment="affects* (unknown,unknown) and uses (unknown,unknown)" >155</id><querystr><![CDATA[assign a1,a2;variable v1; Select a2   such that  Affects* ( a1 , a2 ) and Uses ( a2 , v1 ) ;]]></querystr>
 <stuans>18,2,3,4,22,23,7,13,17,30,35,37,38,40,43,45,46,47</stuans>
 <correct>13,17,18,2,22,23,3,30,35,37,38,4,40,43,45,46,47,7</correct>
-<time_taken>108.000000</time_taken>
+<time_taken>131.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affects="1" uses="1" comment="affects (unknown,unknown) and uses (unknown,unknown)" >156</id><querystr><![CDATA[assign a1,a2;variable v1; Select a1   such that  Affects ( a1 , a1 ) and Uses ( a1 , v1 ) ;]]></querystr>
 <stuans>30</stuans>
 <correct>30</correct>
-<time_taken>97.000000</time_taken>
+<time_taken>128.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affectsstar="1" uses="1" comment="affects* (unknown,unknown) and uses (unknown,unknown)" >157</id><querystr><![CDATA[assign a1,a2;variable v1; Select a1   such that  Affects* ( a1 , a1 ) and Uses ( a1 , v1 ) ;]]></querystr>
 <stuans>30,45,46,47</stuans>
 <correct>30,45,46,47</correct>
-<time_taken>100.000000</time_taken>
+<time_taken>130.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affects="1" parentstar="1" comment="affects (known,known) and parent* (unknown,unknown)" >195</id><querystr><![CDATA[assign a1,a2; Select BOOLEAN   such that  Affects (13 ,18 ) and Parent* (18 , a1 ) ;]]></querystr>
 <stuans>false</stuans>
 <correct>false</correct>
-<time_taken>91.000000</time_taken>
+<time_taken>113.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affectstar="1" parentstar="1" comment="affects* (known,known) and parent* (unknown,unknown)" >196</id><querystr><![CDATA[assign a1,a2; Select BOOLEAN   such that  Affects* (13 ,18 ) and Parent* (18 , a1 ) ;]]></querystr>
 <stuans>false</stuans>
 <correct>false</correct>
-<time_taken>98.000000</time_taken>
+<time_taken>119.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affects="1" parentstar="1" comment="affects (known,unknown) and parent* (unknown,unknown)" >197</id><querystr><![CDATA[stmt s1; assign a2; Select a2   such that  Affects (13 , a2 ) and Parent* ( s1 , a2 ) ;]]></querystr>
 <stuans>18</stuans>
 <correct>18</correct>
-<time_taken>101.000000</time_taken>
+<time_taken>128.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affectsstar="1" parentstar="1" comment="affects* (known,unknown) and parent* (unknown,unknown)" >198</id><querystr><![CDATA[stmt s1; assign a2; Select a2   such that  Affects* (13 , a2 ) and Parent* ( s1 , a2 ) ;]]></querystr>
 <stuans>18</stuans>
 <correct>18</correct>
-<time_taken>100.000000</time_taken>
+<time_taken>132.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affects="1" parentstar="1" comment="affects (unknown,known) and parent* (unknown,unknown)" >199</id><querystr><![CDATA[stmt s1; assign a2; Select s1   such that  Affects ( a2 ,18 ) and Parent* ( s1 , a2 ) ;]]></querystr>
 <stuans>12,10,9,14</stuans>
 <correct>10,12,14,9</correct>
-<time_taken>104.000000</time_taken>
+<time_taken>142.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affectsstar="1" parentstar="1" comment="affects* (unknown,known) and parent* (unknown,unknown)" >200</id><querystr><![CDATA[stmt s1; assign a2; Select s1   such that  Affects* ( a2 ,18 ) and Parent* ( s1 , a2 ) ;]]></querystr>
 <stuans>12,10,9,14</stuans>
 <correct>10,12,14,9</correct>
-<time_taken>108.000000</time_taken>
+<time_taken>135.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affects="1" parentstar="1" comment="affects (unknown,unknown) and parent* (unknown,unknown)" >201</id><querystr><![CDATA[stmt s1; assign a2; Select s1   such that  Affects ( a2 , a2 ) and Parent* ( s1 , a2 ) ;]]></querystr>
 <stuans>29</stuans>
 <correct>29</correct>
-<time_taken>108.000000</time_taken>
+<time_taken>128.000000</time_taken>
 <passed/>
 </query>
 <query>
 <id affectsstar="1" parentstar="1" comment="affects* (unknown,unknown) and parent* (unknown,unknown)" >202</id><querystr><![CDATA[stmt s1; assign a2; Select s1   such that  Affects* ( a2 , a2 ) and Parent* ( s1 , a2 ) ;]]></querystr>
 <stuans>29,44</stuans>
 <correct>29,44</correct>
-<time_taken>108.000000</time_taken>
+<time_taken>136.000000</time_taken>
 <passed/>
 </query>
 </category>
