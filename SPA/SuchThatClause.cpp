@@ -165,12 +165,22 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 				}
 			}
 			if(relType==CONTAINS){
-				if(extractor->getIsContainResult(firstRel->getType(),firstRel->getData(),secondRel->getType(),secondRel->getData())){
+				TYPE firstType = firstRel->getType();
+				TYPE secondType = secondRel->getType();
+				if(Helper::isStatement(firstType)) firstType = STATEMENT;
+				if(Helper::isStatement(secondType)) secondType = STATEMENT;
+
+				if(extractor->getIsContainResult(firstType,firstRel->getData(),secondType,secondRel->getData())){
 					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
 				}
 			}
 			if(relType==CONTAINST){
-				if(extractor->getIsContainStarResult(firstRel->getType(),firstRel->getData(),secondRel->getType(),secondRel->getData())){
+				TYPE firstType = firstRel->getType();
+				TYPE secondType = secondRel->getType();
+				if(Helper::isStatement(firstType)) firstType = STATEMENT;
+				if(Helper::isStatement(secondType)) secondType = STATEMENT;
+
+				if(extractor->getIsContainStarResult(firstType,firstRel->getData(),secondType,secondRel->getData())){
 					relList->push_back(pair<int,int>(firstRel->getData(),secondRel->getData()));
 				}
 			}
@@ -291,6 +301,7 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 				}else{
 					unknownValue = 0;
 				}
+				if(Helper::isStatement(firstType)) firstType =STATEMENT;
 				tmpList = extractor->getContainResult(firstType,firstRel->getData(),secondType,unknownValue);
 				//iterateAndStore(relList,tmpList);
 				relList = new RELATION_LIST(tmpList);
@@ -301,6 +312,8 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 				}else{
 					unknownValue = 0;
 				}
+
+				if(Helper::isStatement(firstType)) firstType =STATEMENT;
 				tmpList = extractor->getContainStarResult(firstType,firstRel->getData(),secondType,unknownValue);
 				//iterateAndStore(relList,tmpList);
 				relList = new RELATION_LIST(tmpList);
@@ -418,6 +431,7 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 				}else{
 					unknownValue = 0;
 				}
+				if(Helper::isStatement(secondType)) secondType =STATEMENT;
 				tmpList = extractor->getContainResult(firstType,unknownValue,secondType,secondRel->getData());
 				//iterateAndStore(relList,tmpList);
 				relList = new RELATION_LIST(tmpList);
@@ -428,6 +442,7 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 				}else{
 					unknownValue = 0;
 				}
+				if(Helper::isStatement(secondType)) secondType =STATEMENT;
 				tmpList = extractor->getContainStarResult(firstType,unknownValue,secondType,secondRel->getData());
 				//iterateAndStore(relList,tmpList);
 				relList = new RELATION_LIST(tmpList);
