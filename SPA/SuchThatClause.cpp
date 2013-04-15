@@ -621,12 +621,12 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 				}
 				if(relType==AFFECTST){
 					//check if cache exsit
-					CACHE::iterator cacheItr = cache.find(AFFECTS);
+					CACHE::iterator cacheItr = cache.find(AFFECTST);
 					if(cacheItr!=cache.end()){ //find the stored cache
 						tmpList = cacheItr->second;
 					}else{//no cache stored
 						tmpList = extractor->getAffectStarResult(0,0);
-						if(tmpList.size()!=0)	cache[AFFECTS]=tmpList;
+						if(tmpList.size()!=0)	cache[AFFECTST]=tmpList;
 					}
 					//filter result
 				
