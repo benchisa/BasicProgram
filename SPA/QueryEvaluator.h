@@ -38,8 +38,7 @@ private:
 	DATA_LIST * resultVarList;
 	bool needCache;
 
-	typedef hash_map<TYPE,RELATION_LIST> CACHE;
-	CACHE cache;
+	
 
 	IntermediateResultTable * computeIntermediateResult(QTREE* relationTree);
 	IntermediateResultTable * evaluateClause(IntermediateResultTable * resultTable, QTREE* clause);

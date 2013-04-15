@@ -8,19 +8,22 @@
 class SuchThatClause
 {
 public:
-	SuchThatClause(PKB* pkb,QUERYTABLE* qrTable,DesignExtractor * extractor);
+	SuchThatClause(void);
 	~SuchThatClause(void);
-
-	RELATION_LIST* evaluateSuchThatTree(QTREE* suchThatTree);
+	
+	
+	static PKB* pkb;
+	static QUERYTABLE* qrTable;
+	static DesignExtractor * extractor;
+	static RELATION_LIST* evaluateSuchThatTree(QTREE* suchThatTree);
 	
 private:
-	PKB * pkb;
-	DesignExtractor * extractor;
-	QTREE * suchThatTree;
-	QUERYTABLE* qrTable;
-	RELATION_LIST * evaluateSuchThat();
-	void iterateAndStore(RELATION_LIST *result, RELATION_LIST list);
-	void filterResult(RELATION_LIST * result,RELATION_LIST list,TYPE cond1,TYPE cond2);
+	
+	static CACHE cache;
+	static QTREE * suchThatTree;
+	static RELATION_LIST * evaluateSuchThat();
+	static void iterateAndStore(RELATION_LIST *result, RELATION_LIST list);
+	static void filterResult(RELATION_LIST * result,RELATION_LIST list,TYPE cond1,TYPE cond2);
 
 };
 

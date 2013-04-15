@@ -1,16 +1,17 @@
 #include "SuchThatClause.h"
 
 
-SuchThatClause::SuchThatClause(PKB* pkb,QUERYTABLE* qrTable,DesignExtractor * extractor)
+PKB* SuchThatClause::pkb =NULL;
+QUERYTABLE* SuchThatClause::qrTable=NULL;
+DesignExtractor * SuchThatClause::extractor=NULL;
+QTREE * SuchThatClause::suchThatTree =NULL;
+CACHE SuchThatClause::cache;
+SuchThatClause::SuchThatClause(void)
 {
-	this->pkb = pkb;
-	this->qrTable = qrTable;
-	this->extractor = extractor;
+
 }
 
-
-SuchThatClause::~SuchThatClause(void)
-{
+SuchThatClause::~SuchThatClause(void){
 }
 
 
@@ -54,7 +55,7 @@ void SuchThatClause::filterResult(RELATION_LIST * result,RELATION_LIST list,TYPE
 		}
 }
 RELATION_LIST * SuchThatClause::evaluateSuchThatTree(QTREE* suchThatTree){
-	this->suchThatTree = suchThatTree;
+	SuchThatClause::suchThatTree = suchThatTree;
 	
 
 	return SuchThatClause::evaluateSuchThat();
@@ -504,6 +505,7 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
 						relList = NULL;
 					}else{
+						
 						tmpList = extractor->getFollowsStarResult(firstType,secondType);
 						//filterResult(relList,tmpList,firstType,secondType);
 						relList = new RELATION_LIST(tmpList);
@@ -526,12 +528,28 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
 						relList = NULL;
 					}else{
-						tmpList = extractor->getNextResult(0,0);
+						//check if cache exsit
+						CACHE::iterator cacheItr = cache.find(NEXT);
+						if(cacheItr!=cache.end()){ //find the stored cache
+							tmpList = cacheItr->second;
+						}else{//no cache stored
+							tmpList = extractor->getNextResult(0,0);
+							if(tmpList.size()!=0)	cache[NEXT]=tmpList;
+						}
+						//filter result
 						filterResult(relList,tmpList,firstType,secondType);
 					}
 				}
 				if(relType==NEXTST){
-					tmpList = extractor->getNextStarResult(0,0);
+					//check if cache exsit
+					CACHE::iterator cacheItr = cache.find(NEXTST);
+					if(cacheItr!=cache.end()){ //find the stored cache
+						tmpList = cacheItr->second;
+					}else{//no cache stored
+						tmpList = extractor->getNextStarResult(0,0);
+						if(tmpList.size()!=0)	cache[NEXTST]=tmpList;
+					}
+					//filter result
 					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
 						for(RELATION_LIST::iterator tmpItr = tmpList.begin();tmpItr!=tmpList.end();tmpItr++){
 							if(tmpItr->first==tmpItr->second) relList->push_back(pair<int,int>(tmpItr->first,tmpItr->second));
@@ -581,7 +599,15 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 					}
 				}
 				if(relType==AFFECTS){
-					tmpList = extractor->getAffectResult(0,0);
+					//check if cache exsit
+					CACHE::iterator cacheItr = cache.find(AFFECTS);
+					if(cacheItr!=cache.end()){ //find the stored cache
+						tmpList = cacheItr->second;
+					}else{//no cache stored
+						tmpList = extractor->getAffectResult(0,0);
+						if(tmpList.size()!=0)	cache[AFFECTS]=tmpList;
+					}
+					//filter result
 
 					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
 						for(RELATION_LIST::iterator tmpItr = tmpList.begin();tmpItr!=tmpList.end();tmpItr++){
@@ -594,7 +620,16 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 					
 				}
 				if(relType==AFFECTST){
-					tmpList = extractor->getAffectStarResult(0,0);
+					//check if cache exsit
+					CACHE::iterator cacheItr = cache.find(AFFECTS);
+					if(cacheItr!=cache.end()){ //find the stored cache
+						tmpList = cacheItr->second;
+					}else{//no cache stored
+						tmpList = extractor->getAffectStarResult(0,0);
+						if(tmpList.size()!=0)	cache[AFFECTS]=tmpList;
+					}
+					//filter result
+				
 					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
 						for(RELATION_LIST::iterator tmpItr = tmpList.begin();tmpItr!=tmpList.end();tmpItr++){
 							if(tmpItr->first==tmpItr->second) relList->push_back(pair<int,int>(tmpItr->first,tmpItr->second));
@@ -641,7 +676,7 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 					//iterateAndStore(relList,tmpList);
 					relList = new RELATION_LIST(tmpList);
 				}
-
+				
 		}
 
 	
