@@ -199,7 +199,7 @@ public:
 	void printAll(vector<pair<TOKEN, PROG_LINE>> tmp){
 		int i = 0;
 		for(i = 0; i < tmp.size(); i++){
-			cout << "index: " << i << ", prog_line: " << tmp.at(i).second << ",token " << i << ": " << tmp.at(i).first + "\n";
+			//cout << "index: " << i << ", prog_line: " << tmp.at(i).second << ",token " << i << ": " << tmp.at(i).first + "\n";
 		}
 	}
 };

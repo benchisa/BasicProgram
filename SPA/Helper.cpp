@@ -38,11 +38,9 @@ PREFIXEXPR Helper::convertExprToPrefix(EXPRESSION expr){
 
 		// If it is a left parentheses or the stack is empty or higher precendence
 		if(itr->first == STRING){
-			//cout << "Pushing: " << itr->second << " to operands\n";
 			operands.push(itr->second);
 		}
 		else if(itr->second == "(" || operators.empty() || isHigherPrecedence(operators,itr->second)){
-			//cout << "Pushing: " << itr->first << " to operators\n";
 			operators.push(*itr);
 		}
 		else if(itr->second == ")"){
@@ -277,7 +275,6 @@ vector<pair<TYPE, TOKEN>> Helper::tokenize(EXPRESSION expr){
 	// format the tokens for easy process
 	for (rxItr; rxItr != rxend; ++rxItr)
 	{
-		//cout << "rxItr: " << rxItr->str() << "\n";
 		if(rxItr->str() == "+"){
 			tPair.first = PLUS;
 			tPair.second = "1";
@@ -302,7 +299,7 @@ vector<pair<TYPE, TOKEN>> Helper::tokenize(EXPRESSION expr){
 			tPair.first = STRING;
 			tPair.second = rxItr->str();
 		}
-		//cout << tPair.first << ", " << tPair.second << "\n";
+
 		res.push_back(tPair);
 	}
 	return res;
@@ -329,7 +326,6 @@ EXPRESSION Helper::formExpression(stack<pair<TYPE, TOKEN>>& operators, stack<OPE
 	operands.pop();
 
 	OPERAND resExpr = op.append(" " + left + " " + right);
-	//cout << "Expression: " << resExpr << "\n";
 
 	return resExpr;
 }

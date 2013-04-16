@@ -809,26 +809,26 @@ vector<TYPE> GrammarTable::getSiblingValNodes(TYPE left){
 }
 
 void GrammarTable::printAllEnt(){
-	cout<<"====================All Entities======================"<<endl;
+/*	cout<<"====================All Entities======================"<<endl;
 	for(int i=0;i<13; i++){
 		cout<<"ENTITY NAME: " << eTable[i].entName<<endl;
 		cout<<"ENTITY TYPE: " << eTable[i].type<<endl;
-	}
+	}*/
 }
 
 void GrammarTable::printAllRel(){	
-	cout<<"====================All Relationships======================"<<endl;
+	/*cout<<"====================All Relationships======================"<<endl;
 	for(int i=0;i<14; i++){
 		cout<<"REL NAME: " << rTable[i].relName<<endl;
 		cout<<"REL TYPE: " << rTable[i].type<<endl;
 		cout<<"NUM ARG: " << rTable[i].numArg<<endl;
 		cout<<"ARG1: " << rTable[i].arg1<<endl;
 		cout<<"ARG2: " << rTable[i].arg2<<endl;
-	}
+	}*/
 }
 
 void GrammarTable::printAllPatt(){	
-	cout<<"====================All Patterns======================"<<endl;
+	/*cout<<"====================All Patterns======================"<<endl;
 	for(int i=0;i<3; i++){
 		cout<<"PATT NAME: " << pTable[i].pattName<<endl;
 		cout<<"PATT TYPE: " << pTable[i].type<<endl;
@@ -836,51 +836,51 @@ void GrammarTable::printAllPatt(){
 		cout<<"ARG1: " << pTable[i].arg1<<endl;
 		cout<<"ARG2: " << pTable[i].arg2<<endl;
 		cout<<"ARG3: " << pTable[i].arg3<<endl;		
-	}
+	}*/
 }
 
 void GrammarTable::printAllAttr(){
-	cout<<"====================All ATTRIBUTES======================"<<endl;
+	/*cout<<"====================All ATTRIBUTES======================"<<endl;
 	for(int i=0;i<9; i++){
 		cout<<"ENTITY TYPE: " << atTable[i].type<<endl;
 		cout<<"ATTRIBUTE: " << atTable[i].attr<<endl;
-	}
+	}*/
 }
 
 void GrammarTable::printAllArg(){
-	cout<<"====================All Arguments======================"<<endl;
+/*	cout<<"====================All Arguments======================"<<endl;
 	for(int i=0;i<10; i++){
 		cout<<"TYPE: " << aTable[i].type<<endl;
 		for(int j=0;j<aTable[i].arg1.size();j++)
 			cout<<"ARG1: " << aTable[i].arg1.at(j)<<endl;
 		for(int j=0;j<aTable[i].arg2.size();j++)
 			cout<<"ARG2: " << aTable[i].arg2.at(j)<<endl;
-	}
+	}*/
 }
 
 void GrammarTable::printAllContainsValNodes(){
-	cout<<"====================All VALID CONTAINS======================"<<endl;
+	/*cout<<"====================All VALID CONTAINS======================"<<endl;
 	for(int i=0;i<12; i++){
 		for (int j=0;j<containsValTable[i].right.size();j++){
 			cout<<"Contains( " << containsValTable[i].left << " , " << containsValTable[i].right[j] <<" )"<<endl;
 		}
-	}
+	}*/
 }
 
 void GrammarTable::printAllContainSTInvNodes(){
-	cout<<"====================All VALID CONTAINS======================"<<endl;
+/*	cout<<"====================All VALID CONTAINS======================"<<endl;
 	for(int i=0;i<12; i++){
 		for (int j=0;j<containSTInvTable[i].right.size();j++){
 			cout<<"Contains( " << containSTInvTable[i].left << " , " << containSTInvTable[i].right[j] <<" )"<<endl;
 		}
-	}
+	}*/
 }
 
 void GrammarTable::printAllSiblingValNodes(){
-	cout<<"====================All VALID CONTAINS======================"<<endl;
+	/*cout<<"====================All VALID CONTAINS======================"<<endl;
 	for(int i=0;i<12; i++){
 		for (int j=0;j<siblingValTable[i].right.size();j++){
 			cout<<"Contains( " << siblingValTable[i].left << " , " << siblingValTable[i].right[j] <<" )"<<endl;
 		}
-	}
+	}*/
 }
