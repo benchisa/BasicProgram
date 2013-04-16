@@ -20,18 +20,18 @@ void  QueryPKBTest::tearDown()
 CPPUNIT_TEST_SUITE_REGISTRATION(  QueryPKBTest );
 
 void QueryPKBTest::testSampleInput1(){
-	SPAController spa;
+/*	SPAController spa;
 
 	spa.enterProgram(SampleSimpleSources::sampleSource5);
 	
 
 	FINAL_RESULT result =spa.getQueryResult(SampleQueries::sampleQuery51);
 	FINAL_RESULT::iterator itr;
-
-	cout<<"\n Final result is:";
-	for(itr = result.begin();itr!=result.end();itr++){
+	*/
+//	cout<<"\n Final result is:";
+/*	for(itr = result.begin();itr!=result.end();itr++){
 		cout<< *itr <<" "  ;
-	}
+	}*/
 /*	//create PKB
 	PKB *pkb = SamplePKB::pkb5();
 

@@ -18,7 +18,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION( QueryPreprocessorTest );
 
 
 void QueryPreprocessorTest::testCorrectPreProcessing(){
-	
+	/*
 	string qr;
 	hash_map<TYPE,int>* qVarTable;
 	hash_map<TYPE,int>::const_iterator qVarIter;
