@@ -76,9 +76,6 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 	firstRel = currentNode->getFirstDescendant();
 	secondRel = firstRel->getRightSibling();
 
-		//cout << "reltype: " << relType << "\n";
-		//cout << "firstrel: " << firstRel->getType() << "\n";
-		//cout << "secondrel: " << secondRel->getData() << "\n";
 
 	//both rel vars are known, QUERYVAR: unknown declared in query; Any: underscore "_"
 	if((firstRel->getType()!=QUERYVAR&&firstRel->getType()!=ANY)&&(secondRel->getType()!=QUERYVAR&&secondRel->getType()!=ANY)){
@@ -230,8 +227,6 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 			//modifies, no need to narrow down
 
 			if(relType==MODIFIES){
-				//cout<<"First Rel: "<< firstRel->getType();
-				//cout<<"First Data: "<<firstRel->getData();
 				tmpList = extractor->getModifiesResult(firstRel->getType(),firstRel->getData(),0);
 				//iterateAndStore(relList,tmpList);
 				relList = new RELATION_LIST(tmpList);
@@ -359,16 +354,12 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 			}
 			//modifies, narrow down
 			if(relType==MODIFIES){
-			//	cout<<"First Rel: "<< firstType;
-			//	cout<<"Second Data: "<<secondRel->getData();
 				tmpList = extractor->getModifiesResult(firstType,0,secondRel->getData());
 				//iterateAndStore(relList,tmpList);
 				relList = new RELATION_LIST(tmpList);
 			}
 			//uses, narrow down
 			if(relType==USES){
-				//cout<<"First Rel: "<< firstType;
-				//cout<<"Second Data: "<<secondRel->getData();
 				tmpList = extractor->getUsesResult(firstType,0,secondRel->getData());
 				//iterateAndStore(relList,tmpList);
 				relList = new RELATION_LIST(tmpList);
@@ -459,8 +450,6 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 					QUERYTABLE::iterator itr;
 					itr = qrTable->find(firstRel->getData());
 					firstType = itr->second;
-
-				//	cout<<"firstType: "<<firstType;
 				}else{
 					firstType = firstRel->getType();
 				}
@@ -470,15 +459,12 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 					QUERYTABLE::iterator itr;
 					itr = qrTable->find(secondRel->getData());
 					secondType = itr->second;
-				//	cout<<"secondType: "<<secondType;
 				}else{
 					secondType = secondRel->getType();
 				}
 
 				//parent, narrow down both
 				if(relType == PARENT){
-					//cout<<"firstType: "<<firstType;
-					//cout<<"secondType: "<<secondType;
 					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
 						relList = NULL;
 					}else{
@@ -489,8 +475,6 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 				}
 				//parent*, narrow down both
 				if(relType == PARENTST){
-					//cout<<"firstType: "<<firstType;
-					//cout<<"secondType: "<<secondType;
 					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&(firstRel->getData()==secondRel->getData())){
 						relList = NULL;
 					}else{
@@ -502,8 +486,6 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 				}
 				//follow, narrow down both
 				if(relType==FOLLOWS){
-					//cout<<"firstType: "<<firstType;
-					//cout<<"secondType: "<<secondType;
 					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
 						relList = NULL;
 					}else{
@@ -515,8 +497,6 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 				}
 				//follow* narrow down both
 				if(relType==FOLLOWST){
-					//cout<<"firstType: "<<firstType;
-					//cout<<"secondType: "<<secondType;
 					if((firstRel->getType()==QUERYVAR&&secondRel->getType()==QUERYVAR)&&firstRel->getData()==secondRel->getData()){
 						relList = NULL;
 					}else{
@@ -694,9 +674,7 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 				
 		}
 
-	
 
-		//cout<<relList;
 		return relList;
 
 }

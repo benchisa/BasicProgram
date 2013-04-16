@@ -41,16 +41,7 @@ QueryPreprocessor::QueryPreprocessor(PKB* pkb){
 	with_cl			= "with\\s+("+attrCompare+")(\\s+and\\s+("+attrCompare+"))"+optional;
 	pattern_cl		= "pattern\\s+"+synonym+"\\s*\\(\\s*.*?\\s*,\\s*.*?\\)(\\s+and\\s+"+synonym+"\\s*\\(\\s*.*?\\s*,\\s*.*?\\))"+optional;
 	
-	/*
-	cout<<"result_cl==============="<<endl;
-	cout<<result_cl<<endl;
-	cout<<"suchthat_cl==============="<<endl;
-	cout<<suchthat_cl<<endl;
-	cout<<"with_cl==============="<<endl;
-	cout<<with_cl<<endl;
-	cout<<"pattern_cl==============="<<endl;
-	cout<<pattern_cl<<endl;
-	*/
+	
 }
 
 QueryPreprocessor::~QueryPreprocessor(void){
@@ -131,10 +122,6 @@ bool QueryPreprocessor::validate(){
 	bool conditionOK = false;
 
 	for(int i=0;i<(*tokens).size();i++){
-		currToken = (*tokens).at(i);
-
-		//cout<<"i= "<< i<< endl;
-		//cout<<currToken<<endl;
 
 
 		if (regex_match(currToken,regex(declare))){		
