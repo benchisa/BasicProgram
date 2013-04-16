@@ -72,12 +72,12 @@
   <ItemGroup>
     <ClCompile Include="ASTTest.cpp" />
     <ClCompile Include="CFGTest.cpp" />
+    <ClCompile Include="ContainsTest.cpp" />
     <ClCompile Include="FollowsTest.cpp" />
     <ClCompile Include="ModifiesTest.cpp" />
     <ClCompile Include="NextTest.cpp" />
     <ClCompile Include="ParentTest.cpp" />
     <ClCompile Include="ParserTest.cpp" />
-    <ClCompile Include="PatternTest.cpp" />
     <ClCompile Include="PKBTest.cpp" />
     <ClCompile Include="ProcedureTest.cpp" />
     <ClCompile Include="ProcTableTest.cpp" />
@@ -90,6 +90,7 @@
   <ItemGroup>
     <ClInclude Include="ASTTest.h" />
     <ClInclude Include="CFGTest.h" />
+    <ClInclude Include="ContainsTest.h" />
     <ClInclude Include="FollowsTest.h" />
     <ClInclude Include="ModifiesTest.h" />
     <ClInclude Include="NextTest.h" />

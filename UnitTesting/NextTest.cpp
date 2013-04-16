@@ -37,7 +37,6 @@ void NextTest::testIsNext(){
 	p.startParse();
 	PKB *pkb = p.getPKB();
 	DesignExtractor *de = new DesignExtractor(pkb);
-	de->createCFG();
 
 	//isNextResult, isNextResultStar
 	CPPUNIT_ASSERT(de->isNextResult(16,15));
