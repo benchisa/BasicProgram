@@ -1,13 +1,13 @@
 #set the path to the main project and to the CPP testing and autoTester
-$solution_path = "D:\Work\YearThree\SEM2\CS3202-master\CS3202\";
+$solution_path = "C:\Users\Xi\Documents\GitHub\BasicProgram\";
 
 #all the other paths are relative to the $solution_path
 $cppunit_relative_path = "UnitTesting\";
 $integration_relative_path = "IntegrationTesting\";
 $autoTester_relative_path = "AutoTester\";
-$exe_cppunit = "Debug\UnitTesting.exe";
-$exe_integration = "Debug\IntegrationTesting.exe";
-$exe_autoTester = "Debug\AutoTester.exe";
+$exe_cppunit = "Release\UnitTesting.exe";
+$exe_integration = "Release\IntegrationTesting.exe";
+$exe_autoTester = "Release\AutoTester.exe";
 
 #output filenames
 $out_cppunit = $solution_path +"cppunit.out";
