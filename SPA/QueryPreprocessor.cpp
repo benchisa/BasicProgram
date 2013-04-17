@@ -123,7 +123,11 @@ bool QueryPreprocessor::validate(){
 
 	for(int i=0;i<(*tokens).size();i++){
 
+		
+		currToken = (*tokens).at(i);
 
+    //cout<<"i= "<< i<< endl;
+    //cout<<currToken<<endl;
 		if (regex_match(currToken,regex(declare))){		
 			if (!verifyDeclaration(currToken)){
 				return false;
