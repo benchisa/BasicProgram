@@ -238,9 +238,11 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 			}
 			//uses, now need to narrow down
 			if(relType==USES){
-				tmpList = extractor->getUsesResult(firstRel->getType(),firstRel->getData(),0);
-				//iterateAndStore(relList,tmpList);
-				relList = new RELATION_LIST(tmpList);
+				if(firstRel->getData()<=pkb->getMaxStatementNum()&&firstRel->getData()>0){
+					tmpList = extractor->getUsesResult(firstRel->getType(),firstRel->getData(),0);
+					//iterateAndStore(relList,tmpList);
+					relList = new RELATION_LIST(tmpList);
+				}
 			}
 			if(relType==NEXT){
 				tmpList = extractor->getNextResult(firstRel->getData(),0);
