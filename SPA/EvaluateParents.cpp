@@ -23,6 +23,8 @@ PARENT_LIST EvaluateParents::getParentResult(TYPE type1, TYPE type2)
 
 PARENT_LIST EvaluateParents::getParentStarResult(TYPE type1, TYPE type2)
 {	
+	
+
 	PARENT_LIST result, parentLst, tmpLst;
 	PARENT_LIST::iterator parentItr;
 	AST_LIST::iterator astItr_t1, astItr_t2;
@@ -30,6 +32,9 @@ PARENT_LIST EvaluateParents::getParentStarResult(TYPE type1, TYPE type2)
 	PROC_LIST *procLst = pkb->getAllProc();
 	PROG_LINE startProgLine = procLst->begin()->getStartProgLine();
 	PROG_LINE endProgLine = pkb->getMaxProgLine();
+
+	if(type2 == CONSTANT || type2 == VARIABLE)
+		return result;
 
 	// iterate from 1....n
 	for(int i = startProgLine; i <= endProgLine; i++){

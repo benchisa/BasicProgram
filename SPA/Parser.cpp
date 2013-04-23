@@ -6,7 +6,6 @@ using namespace std;
 
 Parser::Parser(void)
 {
-
 }
 
 Parser::~Parser(void)
@@ -512,6 +511,7 @@ bool Parser::stmt_assign(){
 		//cout << "curVarIndex: " << curVarIndex << ", prevToken: " << prevToken << "\n";
 		//cout << "insert modifies: " << pkb->getProcedure(curProcIndex)->getProcName() << ", " << prevToken << "\n";
 		pkb->insertModifies(PROCEDURE, curProcIndex, curVarIndex);
+		//cout << "insert Modifies for procedure: " <<pkb->getProcedure(curProcIndex)->getProcName() << ", " << prevToken << "\n";
 		pkb->insertModifies(ASSIGNMENT, stmt_num, curVarIndex);
 
 		if(!containerIndex.empty())
@@ -670,10 +670,11 @@ bool Parser::factor(){
 				}
 				// remove open bracket from operands stack
 				if(!operators.empty()) operators.pop();
+
+				return true;
 			}
 		}
 	}
-	
 }
 
 bool Parser::openBracket(){

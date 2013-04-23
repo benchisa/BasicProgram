@@ -307,12 +307,12 @@ void QueryPreprocessor::setQTree(){
 	}		
 	joinClauses();
 
-	//oneClause with wildcard
-	for (int k= 0; k<oneConstantClauses.size(); k++){
-		currNode = clauses.at(oneConstantClauses.at(k));
+	//one constant one wildcard
+	for (int k= 0; k<oneWildConstantClauses.size(); k++){
+		currNode = clauses.at(oneWildConstantClauses.at(k));
 		if (currNode!=NULL){
 			arrangeClauseByRel(currNode);
-			clauses.at(oneConstantClauses.at(k)) = NULL;
+			clauses.at(oneWildConstantClauses.at(k)) = NULL;
 		}
 	}
 
@@ -1605,7 +1605,7 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 					prevArgWild = true;
 				}
 				if (prevArgConstant){
-					oneConstantClauses.push_back(clauseCount);
+					oneWildConstantClauses.push_back(clauseCount);
 				}
 				else if(firstArg){				
 					firstArg = false;
@@ -1649,6 +1649,9 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 			}
 			if (prevArgConstant){
 				twoConstantClauses.push_back(clauseCount);
+			}
+			else if (prevArgWild){
+				oneWildConstantClauses.push_back(clauseCount);
 			}
 			else{
 				//the first arg NOT constant or
@@ -2442,6 +2445,7 @@ void QueryPreprocessor::cleanUp(){
 	wildClauses.clear();
 	oneConstantClauses.clear();
 	twoConstantClauses.clear();
+	oneWildConstantClauses.clear();
 	flagGroups.clear();
 	//exprPieces.clear();
 	sorted_qVarTable.clear();
