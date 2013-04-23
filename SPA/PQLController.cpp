@@ -16,15 +16,18 @@ FINAL_RESULT PQLController::getQueryResult(QUERY newQuery){
 	FINAL_RESULT returnResult;
 	
 	//set Query to preprocessor
-	queryProcessor->setQuery(newQuery);	
+	queryProcessor->setQuery(newQuery);
+	//cout << "the query: " << newQuery << endl;	
 	//process query & evaluate the result
 	if(queryProcessor->preProcess()==true){
 		//get query tree and query table from preprocessor, pass them to query evaluator
-
+		
+	//	cout << "the query is parsed!" << endl;
 		if(queryEval->evaluate(queryProcessor->getQTree(),queryProcessor->getQVarTable(),queryProcessor->getParamTable())){
 			
 			//call formatter
 			queryFormatter->setQrTable(queryProcessor->getQVarTable());
+			//cout << "the formatter is OK" << endl;	
 			returnResult= queryFormatter->formatString(queryEval->getRawResult(),queryEval->getSelectedVars());	
 			
 
@@ -33,6 +36,7 @@ FINAL_RESULT PQLController::getQueryResult(QUERY newQuery){
 			//returnResult.push_back("");
 		}
 
+		//cout << "returnResult: " << returnResult.size() << "\n";
 	}else if(queryProcessor->getSelectBool()==true){
 		returnResult.push_back("false");
 		
