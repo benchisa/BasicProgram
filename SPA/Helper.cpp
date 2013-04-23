@@ -174,6 +174,31 @@ DATA_LIST * Helper::getAllConstants(){
 
 // Computational Methods
 void Helper::computeTypeOnly(list<pair<int, int>> &result, list<pair<int, int>> &tmpLst, TYPE type1, TYPE type2){
+
+	if(!tmpLst.empty()){
+		
+			    RELATION_LIST::iterator itr = tmpLst.begin();
+				while(itr!=tmpLst.end()){
+					//bool firstCond = cond1==ANY||cond1==STATEMENT||cond1==STMT_LIST||cond1==PROGLINE||extractor->isStatementTypeOf(cond1,itr->first);
+					//bool secondCond = cond2==ANY||cond2 ==STATEMENT||cond2==STMT_LIST||cond2==PROGLINE||extractor->isStatementTypeOf(cond2,itr->second);
+					bool firstCond= true;
+					bool secondCond= true;
+
+					if(type1==ASSIGNMENT||type1==WHILE||type1==CALL||type1==IF){
+						if(!Helper::isStatementTypeOf(type1,itr->first))
+							firstCond = false;
+					}
+					if(type2==ASSIGNMENT||type2==WHILE||type2==CALL||type2==IF){
+						if(!Helper::isStatementTypeOf(type2,itr->second))
+							firstCond = false;
+					}
+
+					if(firstCond&&secondCond){
+						result.push_back(*itr);
+					}
+					itr++;
+				}	
+		}/*
 		PARENT_LIST::iterator tmpItr;
 		AST_LIST *astLst_t1, *astLst_t2;
 		AST_LIST::iterator astItr_t1, astItr_t2;
@@ -234,7 +259,7 @@ void Helper::computeTypeOnly(list<pair<int, int>> &result, list<pair<int, int>> 
 				}
 				tmpItr++;
 			}
-		}
+		}*/
 	}
 
 void Helper::iterateAndStore(list<pair<int, int>> &result, list<pair<int, int>> tmpLst, int v1){
