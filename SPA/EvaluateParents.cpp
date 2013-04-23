@@ -177,7 +177,7 @@ void EvaluateParents::computeParent(PARENT_LIST &result,PARENT_LIST tmpLst, TYPE
 
 		if(!tmpLst.empty()){
 			// Check TYPE for WHILE or ASSIGNMENT
-			if(type == WHILE || type == ASSIGNMENT || type == IF){
+			if(type == WHILE || type == ASSIGNMENT || type == IF || type == CALL){
 				tmpItr = tmpLst.begin(); // should have only 1 pair
 				// Deciding which is empty
 
