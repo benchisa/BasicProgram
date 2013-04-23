@@ -230,11 +230,11 @@ RELATION_LIST * SuchThatClause::evaluateSuchThat(){
 			//modifies, no need to narrow down
 
 			if(relType==MODIFIES){
-				//cout<<"First Rel: "<< firstRel->getType();
-				//cout<<"First Data: "<<firstRel->getData();
-				tmpList = extractor->getModifiesResult(firstRel->getType(),firstRel->getData(),0);
-				//iterateAndStore(relList,tmpList);
-				relList = new RELATION_LIST(tmpList);
+				if(firstRel->getData()<=pkb->getMaxStatementNum()&&firstRel->getData()>0){
+					tmpList = extractor->getModifiesResult(firstRel->getType(),firstRel->getData(),0);
+					//iterateAndStore(relList,tmpList);
+					relList = new RELATION_LIST(tmpList);
+				}
 			}
 			//uses, now need to narrow down
 			if(relType==USES){
