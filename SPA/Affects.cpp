@@ -24,16 +24,7 @@ bool Affects::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 		//check if both of them are assignment statement  
 		if (pkb->isInSameProc(stmt1, stmt2))
 		{			
-			if (stmt1==stmt2)
-			{
-				MODIFIES_LIST m_list=pkb->getModifies(ASSIGNMENT, stmt1, 0);
-				MODIFIES_LIST::iterator m_itr=m_list.begin();
-
-				if (pkb->isUses(ASSIGNMENT, stmt2, m_itr->second))
-				{  
-					return true;
-				}
-			}
+			
 			//if there is a path between them
 			if (EvaluateNext::isNextStarResult(stmt1, stmt2))
 			{		
