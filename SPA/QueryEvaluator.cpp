@@ -15,7 +15,7 @@ QueryEvaluator::~QueryEvaluator(void){
 }	
 
 bool QueryEvaluator::evaluate(QTREE* qrTree,QUERYTABLE* qrTable,QUERYPARAM* qrParam){
-
+	//cout<<"enter evaluator!\n";
 	this->qrTree = qrTree;
 	this->qrTable = qrTable;
 	this->qrParam = qrParam;

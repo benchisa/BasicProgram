@@ -1,4 +1,5 @@
 #include "EvaluateCalls.h"
+#include "EvaluateParents.h"
 
 PKB * EvaluateCalls::pkb = NULL;
 
@@ -339,4 +340,55 @@ void EvaluateCalls::insertProcModifiesUses()
 			}		
 		}		
 	}
+	 
+	DATA_LIST* callerStmt=pkb->getAllCallerStmt();
+	DATA_LIST::iterator d_itr;
+	for (d_itr=callerStmt->begin(); d_itr!=callerStmt->end(); d_itr++)
+	{
+		//get parent list for while
+		PARENT_LIST plist=EvaluateParents::getParentStarResult(WHILE, 0, *d_itr);
+
+		//get parent list for if
+		PARENT_LIST plist2=EvaluateParents::getParentStarResult(IF, 0, *d_itr);
+		PARENT_LIST::iterator p_itr;
+		
+		
+		//get modifies variable list for callee
+		string callee=pkb->getCalleeName(*d_itr);
+		
+		int calleeIndex=pkb->getProcIndex(callee);
+		MODIFIES_LIST m_list=pkb->getModifies(PROCEDURE,calleeIndex,0);
+		USES_LIST u_list=pkb->getUses(PROCEDURE,calleeIndex,0);
+		MODIFIES_LIST::iterator m_itr;
+		USES_LIST::iterator u_itr;
+
+		//loop while and insert all the variable
+		for (p_itr=plist.begin(); p_itr!=plist.end(); p_itr++)
+		{
+			for (m_itr=m_list.begin(); m_itr!=m_list.end(); m_itr++)
+			{
+				pkb->insertModifies(WHILE, p_itr->first, m_itr->second);
+			}
+			for (u_itr=u_list.begin(); u_itr!=u_list.end(); u_itr++)
+			{
+				pkb->insertUses(WHILE,p_itr->first, u_itr->second);
+			}
+		}
+
+		//loop if and insert all variables
+		for (p_itr=plist2.begin(); p_itr!=plist2.end(); p_itr++)
+		{
+			for (m_itr=m_list.begin(); m_itr!=m_list.end(); m_itr++)
+			{
+				pkb->insertModifies(IF, p_itr->first, m_itr->second);
+			}
+			for (u_itr=u_list.begin(); u_itr!=u_list.end(); u_itr++)
+			{
+				pkb->insertUses(IF,p_itr->first, u_itr->second);
+			}
+		}
+			
+
+	}
+	
 }

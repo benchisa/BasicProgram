@@ -41,7 +41,16 @@ QueryPreprocessor::QueryPreprocessor(PKB* pkb){
 	with_cl			= "with\\s+("+attrCompare+")(\\s+and\\s+("+attrCompare+"))"+optional;
 	pattern_cl		= "pattern\\s+"+synonym+"\\s*\\(\\s*.*?\\s*,\\s*.*?\\)(\\s+and\\s+"+synonym+"\\s*\\(\\s*.*?\\s*,\\s*.*?\\))"+optional;
 	
-	
+	/*
+	cout<<"result_cl==============="<<endl;
+	cout<<result_cl<<endl;
+	cout<<"suchthat_cl==============="<<endl;
+	cout<<suchthat_cl<<endl;
+	cout<<"with_cl==============="<<endl;
+	cout<<with_cl<<endl;
+	cout<<"pattern_cl==============="<<endl;
+	cout<<pattern_cl<<endl;
+	*/
 }
 
 QueryPreprocessor::~QueryPreprocessor(void){
@@ -122,6 +131,10 @@ bool QueryPreprocessor::validate(){
 	bool conditionOK = false;
 
 	for(int i=0;i<(*tokens).size();i++){
+		currToken = (*tokens).at(i);
+
+		//cout<<"i= "<< i<< endl;
+		//cout<<currToken<<endl;
 
 
 		if (regex_match(currToken,regex(declare))){		
@@ -292,6 +305,17 @@ void QueryPreprocessor::setQTree(){
 			clauses.at(wildClauses.at(i)) = NULL;
 		}
 	}		
+	joinClauses();
+
+	//one constant one wildcard
+	for (int k= 0; k<oneWildConstantClauses.size(); k++){
+		currNode = clauses.at(oneWildConstantClauses.at(k));
+		if (currNode!=NULL){
+			arrangeClauseByRel(currNode);
+			clauses.at(oneWildConstantClauses.at(k)) = NULL;
+		}
+	}
+
 	joinClauses();
 
 	//insert the clauses participating in results
@@ -1321,10 +1345,12 @@ bool QueryPreprocessor::verifyDeclaration(TOKEN token){
 	TOKEN currToken;
 	qVar newVar;
 
-	declarations = tokenize(token,designEnt+or+synonym);
+	declarations = tokenize(token,designEnt+"\\s+"+or+synonym);
 	for(int i=0;i<declarations.size();i++){
 		currToken = declarations.at(i);
-		if (regex_match(currToken,regex(designEnt))){
+		if (regex_match(currToken,regex(designEnt+"\\s+"))){
+			currToken.erase(currToken.end());	
+			currToken.resize(currToken.size()-1);
 			//expect declaration type
 			if (grammarTable.isEntExists(currToken)){
 				entType = grammarTable.getEntType(currToken);
@@ -1579,7 +1605,7 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 					prevArgWild = true;
 				}
 				if (prevArgConstant){
-					oneConstantClauses.push_back(clauseCount);
+					oneWildConstantClauses.push_back(clauseCount);
 				}
 				else if(firstArg){				
 					firstArg = false;
@@ -1624,6 +1650,9 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 			if (prevArgConstant){
 				twoConstantClauses.push_back(clauseCount);
 			}
+			else if (prevArgWild){
+				oneWildConstantClauses.push_back(clauseCount);
+			}
 			else{
 				//the first arg NOT constant or
 				//this is the first arg
@@ -1633,9 +1662,11 @@ bool QueryPreprocessor::processSuchThat(TOKEN token){
 				}
 				else{
 					oneConstantClauses.push_back(clauseCount);
-					int t = getQVarIndex(syn[0]);
-					if(std::find(trackProbes.begin(),trackProbes.end(),t)==trackProbes.end()){
-						trackProbes.push_back(t);
+					if (!syn.empty()){
+						int t = getQVarIndex(syn[0]);
+						if(std::find(trackProbes.begin(),trackProbes.end(),t)==trackProbes.end()){
+							trackProbes.push_back(t);
+						}
 					}
 				}
 			}
@@ -2414,6 +2445,7 @@ void QueryPreprocessor::cleanUp(){
 	wildClauses.clear();
 	oneConstantClauses.clear();
 	twoConstantClauses.clear();
+	oneWildConstantClauses.clear();
 	flagGroups.clear();
 	//exprPieces.clear();
 	sorted_qVarTable.clear();

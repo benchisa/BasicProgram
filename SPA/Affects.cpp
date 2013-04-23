@@ -24,6 +24,7 @@ bool Affects::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 		//check if both of them are assignment statement  
 		if (pkb->isInSameProc(stmt1, stmt2))
 		{			
+			
 			//if there is a path between them
 			if (EvaluateNext::isNextStarResult(stmt1, stmt2))
 			{		
@@ -37,6 +38,8 @@ bool Affects::getIsAffectResult(STATEMENT_NUM stmt1, STATEMENT_NUM stmt2)
 				//check if stmt 2 use the variable modified by stmt1
 				if (pkb->isUses(ASSIGNMENT, stmt2, m_itr->second))
 				{  
+
+					
 					modVarUsed=true;
 					modVar=m_itr->second;
 				}
@@ -466,7 +469,7 @@ unsigned __stdcall Affects::computeGetAffect(void * pParam)
 		USES_LIST u_list=pkb->getUses(ASSIGNMENT, 0, modVar);
 			
 		USES_LIST::const_iterator u_itr=u_list.cbegin();
-	        USES_LIST::const_iterator u_end=u_list.cend();
+	    USES_LIST::const_iterator u_end=u_list.cend();
 
 		//check one by one if isaffect
 		 		
@@ -476,11 +479,13 @@ unsigned __stdcall Affects::computeGetAffect(void * pParam)
 							
 		    if ( Affects::getIsAffectResult(i, u_itr->first))
 		    {
-			EnterCriticalSection(&CriticalSection);
-			answer->push_back(make_pair(i, u_itr->first));
-			LeaveCriticalSection(&CriticalSection);
+
+
+				EnterCriticalSection(&CriticalSection);
+				answer->push_back(make_pair(i, u_itr->first));
+				LeaveCriticalSection(&CriticalSection);
 								
-      		   } 
+      		  } 
   
 							
 		}
@@ -515,8 +520,9 @@ unsigned __stdcall Affects::computeGetAffectStar(void * pParam)
 				a_end=root.cend();
 				for (a_itr; a_itr!=a_end; a_itr++)
 				{
+					
 					pair<int,int> temp_pair=make_pair(i, a_itr->second);
-					AFFECT_LIST::const_iterator findIter = find(answer->begin(), answer->end(), temp_pair);
+					AFFECT_LIST::const_iterator findIter = find(answer->cbegin(), answer->cend(), temp_pair);
 					if (findIter==answer->cend())
 					{
 						EnterCriticalSection(&CriticalSection2);
@@ -524,6 +530,7 @@ unsigned __stdcall Affects::computeGetAffectStar(void * pParam)
 						LeaveCriticalSection(&CriticalSection2);
 						stacks.push(Affects::getAffectResult(a_itr->second,0));
 					}
+					
 							
 				}
 			}

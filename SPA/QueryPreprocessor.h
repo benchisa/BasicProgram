@@ -90,6 +90,7 @@ private:
 	vector<int> wildClauses; //keeps the clause numbers of the clauses that has two wilds "_"
 	vector<int> twoConstantClauses; //keeps the clause numbers of the clauses that has two constants
 	vector<int> oneConstantClauses;
+	vector<int> oneWildConstantClauses;
 	vector<int> flagGroups;
 	vector<int> trackProbes;
 	vector<qVarPair> sorted_qVarTable;

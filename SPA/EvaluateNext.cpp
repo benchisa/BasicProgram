@@ -31,11 +31,22 @@ void EvaluateNext::createCFG(){
 
 
 NEXT_LIST EvaluateNext::getNextResult(PROG_LINE p1, PROG_LINE p2){
-	return cfg->getNext(p1, p2);
+	int size = pkb->getMaxProgLine();
+	NEXT_LIST result;
+	if(p1 > size || p2 > size || p1 < 0 || p2 < 0)
+	{
+		return result;
+	}else
+		return cfg->getNext(p1, p2);
 }
 
 bool EvaluateNext::isNextResult(PROG_LINE p1, PROG_LINE p2){
-	return cfg->isNext(p1, p2);
+	int size = pkb->getMaxProgLine();
+
+	if(p1 > size || p2 > size || p1 < 0 || p2 < 0)
+		return false;
+	else
+		return cfg->isNext(p1, p2);
 }
 
 bool EvaluateNext::isNextStarResult(PROG_LINE p1, PROG_LINE p2)

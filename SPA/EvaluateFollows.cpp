@@ -27,12 +27,13 @@ FOLLOWS_LIST EvaluateFollows::getFollowsStarResult(TYPE type1, TYPE type2){
 	PROG_LINE startProgLine = procLst->begin()->getStartProgLine();
 	PROG_LINE endProgLine = pkb->getMaxProgLine();
 
+
 	// iterate from 1....n
 	for(int i = startProgLine; i <= endProgLine; i++){
 		tmpLst = getFollowsStar(i, 0);
-
 		if(!tmpLst.empty()){
 			followItr = tmpLst.begin();
+			
 			while(followItr !=  tmpLst.end()){
 				followLst.push_back(*followItr);
 				followItr++;
@@ -138,6 +139,7 @@ void EvaluateFollows::computeFollows(FOLLOWS_LIST &result, FOLLOWS_LIST tmp, TYP
 					while(astItr!=astLst->end())
 					{	
 						if(pkb->getType(*astItr) == type){		
+							//cout << "Test: " << followItr->first << "\n";
 							result.push_back(*followItr);
 
 						}
