@@ -522,22 +522,12 @@ unsigned __stdcall Affects::computeGetAffectStar(void * pParam)
 				{
 					
 					pair<int,int> temp_pair=make_pair(i, a_itr->second);
-					EnterCriticalSection(&CriticalSection2);
-					AFFECT_LIST::const_iterator findIter = find(answer->begin(), answer->end(), temp_pair);
-					bool test=false;
+					AFFECT_LIST::const_iterator findIter = find(answer->cbegin(), answer->cend(), temp_pair);
 					if (findIter==answer->cend())
-					{
-							test=true;
-					}
-
-					LeaveCriticalSection(&CriticalSection2);
-
-					if (test)
 					{
 						EnterCriticalSection(&CriticalSection2);
 						answer->push_back(temp_pair);
 						LeaveCriticalSection(&CriticalSection2);
-
 						stacks.push(Affects::getAffectResult(a_itr->second,0));
 					}
 					
