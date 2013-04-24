@@ -190,9 +190,22 @@ void Helper::computeTypeOnly(list<pair<int, int>> &result, list<pair<int, int>> 
 					}
 					if(type2==ASSIGNMENT||type2==WHILE||type2==CALL||type2==IF){
 						if(!Helper::isStatementTypeOf(type2,itr->second))
-							firstCond = false;
+							secondCond = false;
 					}
-
+					if(type1==STMT_LIST){
+						AST_LIST * nodeList = pkb->getASTBy(itr->first);
+						firstCond=false;
+						for(AST_LIST::iterator itr = nodeList->begin();itr!=nodeList->end();itr++){
+							if((*itr)->getRootType()==STMT_LIST) firstCond=true;
+						}
+					}
+					if(type2==STMT_LIST){
+						AST_LIST * nodeList = pkb->getASTBy(itr->second);
+						secondCond = false;
+						for(AST_LIST::iterator itr = nodeList->begin();itr!=nodeList->end();itr++){
+							if((*itr)->getRootType()==STMT_LIST) secondCond=true;
+						}
+					}
 					if(firstCond&&secondCond){
 						result.push_back(*itr);
 					}

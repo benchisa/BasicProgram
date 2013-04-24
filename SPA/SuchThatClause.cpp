@@ -44,7 +44,7 @@ void SuchThatClause::filterResult(RELATION_LIST * result,RELATION_LIST list,TYPE
 					}
 					if(cond2==ASSIGNMENT||cond2==WHILE||cond2==CALL||cond2==IF){
 						if(!extractor->isStatementTypeOf(cond2,itr->second))
-							firstCond = false;
+							secondCond = false;
 					}
 
 					if(firstCond&&secondCond){
